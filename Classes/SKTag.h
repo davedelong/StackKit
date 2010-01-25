@@ -1,5 +1,5 @@
 //
-//  SKObject.h
+//  SKTag.h
 //  StackKit
 //
 //  Created by Dave DeLong on 1/25/10.
@@ -7,15 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SKObject.h"
 
-@class SKSite;
+@interface SKTag : SKObject {
 
-@interface SKObject : NSObject {
-	__weak SKSite * site;
 }
-
-- (id) initWithSite:(SKSite *)aSite;
-
-- (SKSite *) site;
 
 @end

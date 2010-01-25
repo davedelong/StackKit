@@ -7,20 +7,15 @@
 //
 
 #import "SKObject.h"
-
+#import "SKSite.h"
 
 @implementation SKObject
 
 - (id) initWithSite:(SKSite *)aSite {
 	if (self = [super init]) {
-		site = [aSite retain];
+		site = aSite;
 	}
 	return self;
-}
-
-- (void) dealloc {
-	[site release];
-	[super dealloc];
 }
 
 - (SKSite *) site {

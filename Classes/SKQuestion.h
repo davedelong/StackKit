@@ -1,5 +1,5 @@
 //
-//  SKObject.h
+//  SKQuestion.h
 //  StackKit
 //
 //  Created by Dave DeLong on 1/25/10.
@@ -7,15 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SKPost.h"
 
-@class SKSite;
 
-@interface SKObject : NSObject {
-	__weak SKSite * site;
+@interface SKQuestion : SKPost {
+	NSSet * tags;
 }
 
-- (id) initWithSite:(SKSite *)aSite;
-
-- (SKSite *) site;
+@property (readonly) NSSet * tags;
 
 @end

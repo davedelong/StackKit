@@ -1,5 +1,5 @@
 //
-//  SKObject.h
+//  SKComment.h
 //  StackKit
 //
 //  Created by Dave DeLong on 1/25/10.
@@ -7,15 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SKPost.h"
 
-@class SKSite;
+@class SKAnswer;
 
-@interface SKObject : NSObject {
-	__weak SKSite * site;
+@interface SKComment : SKPost {
+	SKAnswer * answer;
 }
 
-- (id) initWithSite:(SKSite *)aSite;
-
-- (SKSite *) site;
+@property (readonly) SKAnswer * answer;
 
 @end

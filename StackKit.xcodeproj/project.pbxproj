@@ -7,13 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55A2E4DE110E35F10038E510 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4DC110E35F10038E510 /* SKObject.h */; };
+		55A2E4DE110E35F10038E510 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4DC110E35F10038E510 /* SKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4DF110E35F10038E510 /* SKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4DD110E35F10038E510 /* SKObject.m */; };
-		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; };
+		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4E3110E36550038E510 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4E1110E36550038E510 /* SKSite.m */; };
+		55A2E4F9110E3A0B0038E510 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
+		55A2E513110E41FD0038E510 /* SKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E511110E41FD0038E510 /* SKUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2E514110E41FD0038E510 /* SKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E512110E41FD0038E510 /* SKUser.m */; };
+		55A2E51D110E424C0038E510 /* SKQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E51B110E424C0038E510 /* SKQuestion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2E51E110E424C0038E510 /* SKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E51C110E424C0038E510 /* SKQuestion.m */; };
+		55A2E521110E425E0038E510 /* SKAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E51F110E425E0038E510 /* SKAnswer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2E522110E425E0038E510 /* SKAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E520110E425E0038E510 /* SKAnswer.m */; };
+		55A2E525110E426E0038E510 /* SKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E523110E426E0038E510 /* SKComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2E526110E426E0038E510 /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E524110E426E0038E510 /* SKComment.m */; };
+		55A2E529110E42E70038E510 /* SKPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E527110E42E70038E510 /* SKPost.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2E52A110E42E70038E510 /* SKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E528110E42E70038E510 /* SKPost.m */; };
+		55A2E539110E442E0038E510 /* SKTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E537110E442E0038E510 /* SKTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2E53A110E442E0038E510 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E538110E442E0038E510 /* SKTag.m */; };
+		55A2E551110E4FE00038E510 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E550110E4FE00038E510 /* StackKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E55A110E513E0038E510 /* SKSite+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E578110E53A10038E510 /* SKObject+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		55A2E5CD110E5EE00038E510 /* SKUserTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E5CB110E5EE00038E510 /* SKUserTest.h */; };
+		55A2E5CF110E5EE80038E510 /* SKUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E5CC110E5EE00038E510 /* SKUserTest.m */; };
+		55A2E60A110E623C0038E510 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E5FD110E623C0038E510 /* JSON.h */; };
+		55A2E60B110E623C0038E510 /* SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E5FE110E623C0038E510 /* SKJSON.h */; };
+		55A2E60C110E623C0038E510 /* SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E5FF110E623C0038E510 /* SKJSON.m */; };
+		55A2E60D110E623C0038E510 /* NSObject+SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E600110E623C0038E510 /* NSObject+SKJSON.h */; };
+		55A2E60E110E623C0038E510 /* NSObject+SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E601110E623C0038E510 /* NSObject+SKJSON.m */; };
+		55A2E60F110E623C0038E510 /* NSString+SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E602110E623C0038E510 /* NSString+SKJSON.h */; };
+		55A2E610110E623C0038E510 /* NSString+SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E603110E623C0038E510 /* NSString+SKJSON.m */; };
+		55A2E611110E623C0038E510 /* SKJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E604110E623C0038E510 /* SKJsonBase.h */; };
+		55A2E612110E623C0038E510 /* SKJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E605110E623C0038E510 /* SKJsonBase.m */; };
+		55A2E613110E623C0038E510 /* SKJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E606110E623C0038E510 /* SKJsonParser.h */; };
+		55A2E614110E623C0038E510 /* SKJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E607110E623C0038E510 /* SKJsonParser.m */; };
+		55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E608110E623C0038E510 /* SKJsonWriter.h */; };
+		55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E609110E623C0038E510 /* SKJsonWriter.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55A2E4FC110E3A100038E510 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* StackKit */;
+			remoteInfo = StackKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -25,12 +66,52 @@
 		55A2E4DD110E35F10038E510 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
 		55A2E4E1110E36550038E510 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
+		55A2E4F4110E3A050038E510 /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Unit Tests.octest"; path = "build/Debug/Unit Tests.octest"; sourceTree = "<group>"; };
+		55A2E4F5110E3A050038E510 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
+		55A2E511110E41FD0038E510 /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
+		55A2E512110E41FD0038E510 /* SKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUser.m; sourceTree = "<group>"; };
+		55A2E51B110E424C0038E510 /* SKQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestion.h; sourceTree = "<group>"; };
+		55A2E51C110E424C0038E510 /* SKQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestion.m; sourceTree = "<group>"; };
+		55A2E51F110E425E0038E510 /* SKAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAnswer.h; sourceTree = "<group>"; };
+		55A2E520110E425E0038E510 /* SKAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnswer.m; sourceTree = "<group>"; };
+		55A2E523110E426E0038E510 /* SKComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKComment.h; sourceTree = "<group>"; };
+		55A2E524110E426E0038E510 /* SKComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKComment.m; sourceTree = "<group>"; };
+		55A2E527110E42E70038E510 /* SKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPost.h; sourceTree = "<group>"; };
+		55A2E528110E42E70038E510 /* SKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPost.m; sourceTree = "<group>"; };
+		55A2E537110E442E0038E510 /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
+		55A2E538110E442E0038E510 /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
+		55A2E550110E4FE00038E510 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
+		55A2E55A110E513E0038E510 /* SKSite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Private.h"; sourceTree = "<group>"; };
+		55A2E578110E53A10038E510 /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
+		55A2E5CB110E5EE00038E510 /* SKUserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserTest.h; sourceTree = "<group>"; };
+		55A2E5CC110E5EE00038E510 /* SKUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserTest.m; sourceTree = "<group>"; };
+		55A2E5FD110E623C0038E510 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		55A2E5FE110E623C0038E510 /* SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJSON.h; sourceTree = "<group>"; };
+		55A2E5FF110E623C0038E510 /* SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJSON.m; sourceTree = "<group>"; };
+		55A2E600110E623C0038E510 /* NSObject+SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SKJSON.h"; sourceTree = "<group>"; };
+		55A2E601110E623C0038E510 /* NSObject+SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SKJSON.m"; sourceTree = "<group>"; };
+		55A2E602110E623C0038E510 /* NSString+SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SKJSON.h"; sourceTree = "<group>"; };
+		55A2E603110E623C0038E510 /* NSString+SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SKJSON.m"; sourceTree = "<group>"; };
+		55A2E604110E623C0038E510 /* SKJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonBase.h; sourceTree = "<group>"; };
+		55A2E605110E623C0038E510 /* SKJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonBase.m; sourceTree = "<group>"; };
+		55A2E606110E623C0038E510 /* SKJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonParser.h; sourceTree = "<group>"; };
+		55A2E607110E623C0038E510 /* SKJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonParser.m; sourceTree = "<group>"; };
+		55A2E608110E623C0038E510 /* SKJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonWriter.h; sourceTree = "<group>"; };
+		55A2E609110E623C0038E510 /* SKJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonWriter.m; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* StackKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StackKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		55A2E4F1110E3A050038E510 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A2E4F9110E3A0B0038E510 /* StackKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DC2EF560486A6940098B216 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC2EF5B0486A6940098B216 /* StackKit.framework */,
+				55A2E4F4110E3A050038E510 /* Unit Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				08FB77AEFE84172EC02AAC07 /* Classes */,
+				55A2E507110E400A0038E510 /* Unit Tests */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				089C1665FE841158C02AAC07 /* Resources */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
@@ -76,6 +159,7 @@
 			children = (
 				8DC2EF5A0486A6940098B216 /* Info.plist */,
 				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
+				55A2E4F5110E3A050038E510 /* Unit Tests-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -83,10 +167,19 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				55A2E550110E4FE00038E510 /* StackKit.h */,
 				55A2E4DC110E35F10038E510 /* SKObject.h */,
 				55A2E4DD110E35F10038E510 /* SKObject.m */,
+				55A2E578110E53A10038E510 /* SKObject+Private.h */,
 				55A2E4E0110E36550038E510 /* SKSite.h */,
 				55A2E4E1110E36550038E510 /* SKSite.m */,
+				55A2E55A110E513E0038E510 /* SKSite+Private.h */,
+				55A2E511110E41FD0038E510 /* SKUser.h */,
+				55A2E512110E41FD0038E510 /* SKUser.m */,
+				55A2E537110E442E0038E510 /* SKTag.h */,
+				55A2E538110E442E0038E510 /* SKTag.m */,
+				55A2E52B110E44030038E510 /* Posts */,
+				55A2E59B110E5C7E0038E510 /* JSON */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -117,6 +210,50 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		55A2E507110E400A0038E510 /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				55A2E5CB110E5EE00038E510 /* SKUserTest.h */,
+				55A2E5CC110E5EE00038E510 /* SKUserTest.m */,
+			);
+			path = "Unit Tests";
+			sourceTree = "<group>";
+		};
+		55A2E52B110E44030038E510 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				55A2E527110E42E70038E510 /* SKPost.h */,
+				55A2E528110E42E70038E510 /* SKPost.m */,
+				55A2E51B110E424C0038E510 /* SKQuestion.h */,
+				55A2E51C110E424C0038E510 /* SKQuestion.m */,
+				55A2E51F110E425E0038E510 /* SKAnswer.h */,
+				55A2E520110E425E0038E510 /* SKAnswer.m */,
+				55A2E523110E426E0038E510 /* SKComment.h */,
+				55A2E524110E426E0038E510 /* SKComment.m */,
+			);
+			name = Posts;
+			sourceTree = "<group>";
+		};
+		55A2E59B110E5C7E0038E510 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				55A2E5FD110E623C0038E510 /* JSON.h */,
+				55A2E5FE110E623C0038E510 /* SKJSON.h */,
+				55A2E5FF110E623C0038E510 /* SKJSON.m */,
+				55A2E600110E623C0038E510 /* NSObject+SKJSON.h */,
+				55A2E601110E623C0038E510 /* NSObject+SKJSON.m */,
+				55A2E602110E623C0038E510 /* NSString+SKJSON.h */,
+				55A2E603110E623C0038E510 /* NSString+SKJSON.m */,
+				55A2E604110E623C0038E510 /* SKJsonBase.h */,
+				55A2E605110E623C0038E510 /* SKJsonBase.m */,
+				55A2E606110E623C0038E510 /* SKJsonParser.h */,
+				55A2E607110E623C0038E510 /* SKJsonParser.m */,
+				55A2E608110E623C0038E510 /* SKJsonWriter.h */,
+				55A2E609110E623C0038E510 /* SKJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -126,12 +263,48 @@
 			files = (
 				55A2E4DE110E35F10038E510 /* SKObject.h in Headers */,
 				55A2E4E2110E36550038E510 /* SKSite.h in Headers */,
+				55A2E513110E41FD0038E510 /* SKUser.h in Headers */,
+				55A2E51D110E424C0038E510 /* SKQuestion.h in Headers */,
+				55A2E521110E425E0038E510 /* SKAnswer.h in Headers */,
+				55A2E525110E426E0038E510 /* SKComment.h in Headers */,
+				55A2E529110E42E70038E510 /* SKPost.h in Headers */,
+				55A2E539110E442E0038E510 /* SKTag.h in Headers */,
+				55A2E551110E4FE00038E510 /* StackKit.h in Headers */,
+				55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */,
+				55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */,
+				55A2E5CD110E5EE00038E510 /* SKUserTest.h in Headers */,
+				55A2E60A110E623C0038E510 /* JSON.h in Headers */,
+				55A2E60B110E623C0038E510 /* SKJSON.h in Headers */,
+				55A2E60D110E623C0038E510 /* NSObject+SKJSON.h in Headers */,
+				55A2E60F110E623C0038E510 /* NSString+SKJSON.h in Headers */,
+				55A2E611110E623C0038E510 /* SKJsonBase.h in Headers */,
+				55A2E613110E623C0038E510 /* SKJsonParser.h in Headers */,
+				55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		55A2E4F3110E3A050038E510 /* Unit Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55A2E4F8110E3A060038E510 /* Build configuration list for PBXNativeTarget "Unit Tests" */;
+			buildPhases = (
+				55A2E4EF110E3A050038E510 /* Resources */,
+				55A2E4F0110E3A050038E510 /* Sources */,
+				55A2E4F1110E3A050038E510 /* Frameworks */,
+				55A2E4F2110E3A050038E510 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55A2E4FD110E3A100038E510 /* PBXTargetDependency */,
+			);
+			name = "Unit Tests";
+			productName = "Unit Tests";
+			productReference = 55A2E4F4110E3A050038E510 /* Unit Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8DC2EF4F0486A6940098B216 /* StackKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "StackKit" */;
@@ -165,11 +338,19 @@
 			projectRoot = "";
 			targets = (
 				8DC2EF4F0486A6940098B216 /* StackKit */,
+				55A2E4F3110E3A050038E510 /* Unit Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		55A2E4EF110E3A050038E510 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DC2EF520486A6940098B216 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -180,17 +361,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		55A2E4F2110E3A050038E510 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		55A2E4F0110E3A050038E510 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A2E5CF110E5EE80038E510 /* SKUserTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DC2EF540486A6940098B216 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				55A2E4DF110E35F10038E510 /* SKObject.m in Sources */,
 				55A2E4E3110E36550038E510 /* SKSite.m in Sources */,
+				55A2E514110E41FD0038E510 /* SKUser.m in Sources */,
+				55A2E51E110E424C0038E510 /* SKQuestion.m in Sources */,
+				55A2E522110E425E0038E510 /* SKAnswer.m in Sources */,
+				55A2E526110E426E0038E510 /* SKComment.m in Sources */,
+				55A2E52A110E42E70038E510 /* SKPost.m in Sources */,
+				55A2E53A110E442E0038E510 /* SKTag.m in Sources */,
+				55A2E60C110E623C0038E510 /* SKJSON.m in Sources */,
+				55A2E60E110E623C0038E510 /* NSObject+SKJSON.m in Sources */,
+				55A2E610110E623C0038E510 /* NSString+SKJSON.m in Sources */,
+				55A2E612110E623C0038E510 /* SKJsonBase.m in Sources */,
+				55A2E614110E623C0038E510 /* SKJsonParser.m in Sources */,
+				55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55A2E4FD110E3A100038E510 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DC2EF4F0486A6940098B216 /* StackKit */;
+			targetProxy = 55A2E4FC110E3A100038E510 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
@@ -269,6 +494,60 @@
 			};
 			name = Release;
 		};
+		55A2E4F6110E3A060038E510 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Unit Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		55A2E4F7110E3A060038E510 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Unit Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Tests";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -286,6 +565,15 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55A2E4F8110E3A060038E510 /* Build configuration list for PBXNativeTarget "Unit Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A2E4F6110E3A060038E510 /* Debug */,
+				55A2E4F7110E3A060038E510 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
