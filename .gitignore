@@ -1,0 +1,4 @@
+build
+**/*.modev3
+**/*.perspectivev3
+**/*.pbxuser
