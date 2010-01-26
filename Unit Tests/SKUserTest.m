@@ -12,7 +12,7 @@
 
 @implementation SKUserTest
 
-- (void) test00_testFlair {
+- (void) testFlair {
 	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
 	
 	SKUser * user = [site userWithID:@"115730"];
@@ -25,7 +25,7 @@
 	[site release];
 }
 
-- (void) test01_testFlair {
+- (void) testMetaFlair {
 	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://meta.stackoverflow.com"]];
 	
 	SKUser * user = [site userWithID:@"135683"];
