@@ -3,7 +3,7 @@
 //  StackKit
 //
 //  Created by Alex Rozanski on 26/01/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Alex Rozanski. http://perspx.com
 //
 
 #import "SKBadge.h"
@@ -14,5 +14,6 @@
 @synthesize name, description;
 @synthesize badgeType;
 @synthesize badgeCount;
+@synthesize badgeLevel;
 
 @end

@@ -11,4 +11,7 @@
 
 @implementation SKTag
 
+@synthesize name;
+@synthesize numberOfTaggedQuestions;
+
 @end

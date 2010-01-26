@@ -10,7 +10,12 @@
 #import "SKObject.h"
 
 @interface SKTag : SKObject {
-
+	NSString *name;
+	
+	NSUInteger numberOfTaggedQuestions;
 }
+
+@property (readonly) NSString *name;
+@property (readonly) NSUInteger numberOfTaggedQuestions;
 
 @end

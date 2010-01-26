@@ -15,11 +15,19 @@ typedef enum {
 	SKBadgeTypeTag
 } SKBadgeType;
 
+//Enumeration for badge "levels" – bronze, silver or gold
+typedef enum {
+	SKBadgeLevelBronze,
+	SKBadgeLevelSilver,
+	SKBadgeLevelGold
+} SKBadgeLevel;
+
 
 @interface SKBadge : SKObject {
 	NSString *name;
 	NSString *description;
 	NSInteger badgeType;
+	NSInteger badgeLevel;
 	
 	NSInteger badgeCount;
 }
@@ -27,6 +35,7 @@ typedef enum {
 @property (readonly) NSString *name;
 @property (readonly) NSString *description;
 @property (readonly) NSInteger badgeType;
+@property (readonly) NSInteger badgeLevel;
 
 @property (readonly) NSInteger badgeCount;
 
