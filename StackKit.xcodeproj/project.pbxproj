@@ -48,6 +48,8 @@
 		55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */; };
 		55A2E6BE110EB2170038E510 /* StackKit_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E6BD110EB2170038E510 /* StackKit_Internal.h */; };
 		55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E70E110EBAA60038E510 /* SKQuestionTest.h */; };
+		55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */; };
+		55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -111,6 +113,8 @@
 		55A2E6BD110EB2170038E510 /* StackKit_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Internal.h; sourceTree = "<group>"; };
 		55A2E70E110EBAA60038E510 /* SKQuestionTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestionTest.h; sourceTree = "<group>"; };
 		55A2E70F110EBAA60038E510 /* SKQuestionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestionTest.m; sourceTree = "<group>"; };
+		55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+SKAdditions.h"; sourceTree = "<group>"; };
+		55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SKAdditions.m"; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* StackKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StackKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -194,6 +198,8 @@
 				55A2E538110E442E0038E510 /* SKTag.m */,
 				55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */,
 				55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */,
+				55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */,
+				55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */,
 				55A2E52B110E44030038E510 /* Posts */,
 				55A2E59B110E5C7E0038E510 /* JSON */,
 			);
@@ -304,6 +310,7 @@
 				55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */,
 				55A2E6BE110EB2170038E510 /* StackKit_Internal.h in Headers */,
 				55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */,
+				55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +437,7 @@
 				55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */,
 				55A2E68C110EA8940038E510 /* SKQAPost.m in Sources */,
 				55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */,
+				55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

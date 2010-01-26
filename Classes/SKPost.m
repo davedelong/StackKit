@@ -53,10 +53,10 @@
 
 - (void) loadJSON:(NSDictionary *)jsonDictionary {
 	if ([jsonDictionary objectForKey:@"CreatedDate"] != nil) {
-		
+		creationDate = [[NSDate dateWithJSONString:[jsonDictionary objectForKey:@"CreatedDate"]] retain];
 	}
 	if ([jsonDictionary objectForKey:@"LastEditDate"] != nil) {
-		
+		modifiedDate = [[NSDate dateWithJSONString:[jsonDictionary objectForKey:@"LastEditDate"]] retain];
 	}
 }
 
