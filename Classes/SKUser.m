@@ -10,6 +10,8 @@
 
 @interface SKUser ()
 
+- (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID;
+
 - (void) loadFlair;
 - (void) loadFavorites;
 - (void) loadBadges;
@@ -24,13 +26,28 @@
 @synthesize favorites;
 @synthesize badges;
 
-- (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID {
-	SKUser * cachedUser = [[aSite cachedUsers] objectForKey:anID];
+#pragma mark -
+#pragma mark Init/Dealloc
+
+//Convenience initializer
++ (id)userWithSite:(SKSite*)aSite userID:(NSString*)anID
+{
+	//Check if the user has already been cached
+	id cachedUser = [[aSite cachedUsers] objectForKey:anID];
 	if (cachedUser != nil) {
-		[self release];
-		return [cachedUser retain];
+		return cachedUser;
 	}
 	
+	//If not create a new user
+	id newUser = [[[self class] alloc] initWithSite:aSite userID:anID];
+	[aSite cacheUser:newUser];
+	[newUser release];
+	
+	return newUser;
+}
+
+//Private initializer
+- (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID {	
 	if (self = [super initWithSite:aSite]) {
 		userID = [anID copy];
 		
@@ -38,8 +55,6 @@
 		favorites = [[NSMutableSet alloc] init];
 		badges = [[NSMutableSet alloc] init];
 	}
-	
-	[aSite cacheUser:self];
 	
 	return self;
 }
@@ -53,6 +68,9 @@
 	
 	[super dealloc];
 }
+
+#pragma mark -
+#pragma mark Custom Accessors
 
 - (NSString *) displayName {
 	if (_flairLoaded == NO) {

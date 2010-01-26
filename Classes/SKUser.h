@@ -34,6 +34,6 @@
 @property (readonly) NSSet * favorites;
 @property (readonly) NSSet * badges;
 
-- (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID;
++ (id)userWithSite:(SKSite*)aSite userID:(NSString*)anID;
 
 @end

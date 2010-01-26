@@ -54,7 +54,7 @@
 }
 
 - (SKUser *) userWithID:(NSString *)aUserID {
-	return [[[SKUser alloc] initWithSite:self userID:aUserID] autorelease];
+	return [SKUser userWithSite:self userID:aUserID];
 }
 
 @end
