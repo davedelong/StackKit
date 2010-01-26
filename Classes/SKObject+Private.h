@@ -12,5 +12,6 @@
 @interface SKObject ()
 
 - (void) loadJSON:(NSDictionary *)jsonDictionary;
+- (id) jsonObjectAtURL:(NSURL *)aURL;
 
 @end

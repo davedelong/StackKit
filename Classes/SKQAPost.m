@@ -52,19 +52,12 @@
 - (void) loadVotes {
 	NSString * path = [NSString stringWithFormat:@"/posts/%@/vote-counts", [self postID]];
 	NSURL * url = [NSURL URLWithString:path relativeToURL:[[self site] siteURL]];
-	NSURLRequest * req = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:[[self site] timeoutInterval]];
 	
-	NSURLResponse * resp = nil;
-	NSError * error = nil;
-	NSData * data = [NSURLConnection sendSynchronousRequest:req returningResponse:&resp error:&error];
-	if (error != nil) {
-		NSLog(@"Error loading votes: %@", error);
+	NSDictionary * json = [self jsonObjectAtURL:url];
+	if (json == nil) {
+		NSLog(@"Error loading votes");
 		return;
 	}
-	
-	NSString * jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	NSDictionary * json = [jsonString JSONValue];
-	[jsonString release];
 	
 	[self loadJSON:json];
 	_votesLoaded = YES;

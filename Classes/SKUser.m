@@ -98,23 +98,14 @@
 - (void) loadFlair {
 	NSString * flairPath = [NSString stringWithFormat:@"/users/flair/%@.json", [self userID]];
 	NSURL * flairURL = [NSURL URLWithString:flairPath relativeToURL:[[self site] siteURL]];
-	NSURLRequest * flairRequest = [NSURLRequest requestWithURL:flairURL];
 	
-	NSURLResponse * flairResponse = nil;
-	NSError * flairError = nil;
-	NSData * flairData = [NSURLConnection sendSynchronousRequest:flairRequest returningResponse:&flairResponse error:&flairError];
-	if (flairError != nil) {
-		NSLog(@"Error retrieving flair: %@", flairError);
-		return;
-	}
-	NSString * jsonString = [[NSString alloc] initWithData:flairData encoding:NSUTF8StringEncoding];
-	NSDictionary * jsonDictionary = [jsonString JSONValue];
-	if (jsonDictionary == nil) {
+	NSDictionary * flair = [self jsonObjectAtURL:flairURL];
+	if (flair == nil) {
 		NSLog(@"Error parsing flair");
 		return;
 	}
 	
-	[self loadJSON:jsonDictionary];
+	[self loadJSON:flair];
 	
 	//don't set the flag until the end
 	//that way if we error, we'll try to reload later
@@ -124,18 +115,8 @@
 - (void) loadFavorites {
 	NSString * favPath = [NSString stringWithFormat:@"/api/userfavorites.json?userid=%@&page=0&pagesize=100", [self userID]];
 	NSURL * favURL = [NSURL URLWithString:favPath relativeToURL:[[self site] siteURL]];
-	NSURLRequest * favRequest = [NSURLRequest requestWithURL:favURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:[[self site] timeoutInterval]];
-	NSLog(@"request: %@", favRequest);
-
-	NSURLResponse * favResponse = nil;
-	NSError * favError = nil;
-	NSData * favData = [NSURLConnection sendSynchronousRequest:favRequest returningResponse:&favResponse error:&favError];
-	if (favError != nil) {
-		NSLog(@"Error retrieving favorites: %@", favError);
-		return;
-	}
-	NSString * jsonString = [[NSString alloc] initWithData:favData encoding:NSUTF8StringEncoding];
-	NSArray * jsonArray = [jsonString JSONValue];
+	
+	NSArray * jsonArray = [self jsonObjectAtURL:favURL];
 	if (jsonArray == nil) {
 		NSLog(@"Error parsing favorites");
 		return;
