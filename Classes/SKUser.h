@@ -21,6 +21,9 @@
 	
 	BOOL _favoritesLoaded;
 	NSMutableSet * favorites;
+	
+	BOOL _badgesLoaded;
+	NSMutableSet * badges;
 }
 
 @property (readonly) NSString * userID;
@@ -29,6 +32,7 @@
 @property (readonly) NSUInteger reputation;
 
 @property (readonly) NSSet * favorites;
+@property (readonly) NSSet * badges;
 
 - (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID;
 

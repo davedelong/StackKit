@@ -12,6 +12,7 @@
 
 - (void) loadFlair;
 - (void) loadFavorites;
+- (void) loadBadges;
 
 @end
 
@@ -21,6 +22,7 @@
 @synthesize userID;
 @synthesize displayName, profileURL, reputation;
 @synthesize favorites;
+@synthesize badges;
 
 - (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID {
 	SKUser * cachedUser = [[aSite cachedUsers] objectForKey:anID];
@@ -34,6 +36,7 @@
 		
 		_flairLoaded = NO;
 		favorites = [[NSMutableSet alloc] init];
+		badges = [[NSMutableSet alloc] init];
 	}
 	
 	[aSite cacheUser:self];
@@ -46,6 +49,8 @@
 	[profileURL release];
 	[displayName release];
 	[favorites release];
+	[badges release];
+	
 	[super dealloc];
 }
 
@@ -75,6 +80,14 @@
 		[self loadFavorites];
 	}
 	return favorites;
+}
+
+- (NSSet*)badges {
+	if(_badgesLoaded == NO) {
+		[self loadBadges];
+	}
+	
+	return badges;
 }
 
 #pragma mark -
@@ -130,6 +143,13 @@
 	
 	_favoritesLoaded = YES;
 	
+}
+
+- (void) loadBadges
+{
+	//Skeleton method as no API available (yet)
+	
+	_badgesLoaded = YES;
 }
 
 @end
