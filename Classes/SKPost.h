@@ -12,13 +12,18 @@
 @class SKUser;
 
 @interface SKPost : SKObject {
-	NSString * postID;
-	NSDate * timestamp;
+	NSNumber * postID;
+	NSDate * creationDate;
+	NSDate * modifiedDate;
 	SKUser * author;
 }
 
-@property (readonly) NSString * postID;
-@property (readonly) NSDate * timestamp;
+@property (readonly) NSNumber * postID;
+@property (readonly) NSDate * creationDate;
+@property (readonly) NSDate * modifiedDate;
 @property (readonly) SKUser * author;
+
+- (id) initWithSite:(SKSite *)aSite json:(NSDictionary *)json;
+- (id) initWithSite:(SKSite *)aSite postID:(NSNumber *)anID;
 
 @end

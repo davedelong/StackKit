@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SKPost.h"
+#import "SKQAPost.h"
 
 @class SKQuestion;
 
-@interface SKAnswer : SKPost {
+@interface SKAnswer : SKQAPost {
 	SKQuestion * question;
 	NSArray * comments;
 }

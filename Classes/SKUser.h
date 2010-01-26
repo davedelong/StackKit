@@ -12,16 +12,23 @@
 @class SKSite;
 
 @interface SKUser : SKObject {
+	
+	BOOL _flairLoaded;
 	NSString * userID;
 	NSString * displayName;
 	NSURL * profileURL;
 	NSUInteger reputation;
+	
+	BOOL _favoritesLoaded;
+	NSMutableSet * favorites;
 }
 
 @property (readonly) NSString * userID;
 @property (readonly) NSString * displayName;
 @property (readonly) NSURL * profileURL;
 @property (readonly) NSUInteger reputation;
+
+@property (readonly) NSSet * favorites;
 
 - (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID;
 

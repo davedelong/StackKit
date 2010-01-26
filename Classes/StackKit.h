@@ -11,6 +11,7 @@
 #import "SKUser.h"
 #import "SKTag.h"
 #import "SKPost.h"
+#import "SKQAPost.h"
 #import "SKQuestion.h"
 #import "SKAnswer.h"
 #import "SKComment.h"

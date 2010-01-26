@@ -6,8 +6,7 @@
 //  Copyright 2010 Home. All rights reserved.
 //
 
-#import "SKObject.h"
-#import "SKSite.h"
+#import "StackKit_Internal.h"
 
 @implementation SKObject
 
@@ -20,6 +19,10 @@
 
 - (SKSite *) site {
 	return [[site retain] autorelease];
+}
+
+- (void) loadJSON:(NSDictionary *)jsonDictionary {
+	return;
 }
 
 @end

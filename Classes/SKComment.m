@@ -6,8 +6,7 @@
 //  Copyright 2010 Home. All rights reserved.
 //
 
-#import "SKComment.h"
-#import "SKAnswer.h"
+#import "StackKit_Internal.h"
 
 @implementation SKComment
 

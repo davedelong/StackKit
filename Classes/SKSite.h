@@ -17,6 +17,8 @@
 	NSMutableDictionary * cachedPosts;
 	NSMutableDictionary * cachedUsers;
 	NSMutableDictionary * cachedTags;
+	
+	NSTimeInterval timeoutInterval;
 }
 
 @property (readonly) NSURL * siteURL;
@@ -24,6 +26,8 @@
 @property (readonly) NSDictionary * cachedUsers;
 @property (readonly) NSDictionary * cachedPosts;
 @property (readonly) NSDictionary * cachedTags;
+
+@property NSTimeInterval timeoutInterval;
 
 - (id) initWithURL:(NSURL *)aURL;
 

@@ -6,14 +6,13 @@
 //  Copyright 2010 Home. All rights reserved.
 //
 
-#import "SKSite.h"
-#import "SKSite+Private.h"
-#import "SKUser.h"
+#import "StackKit_Internal.h"
 
 @implementation SKSite
 
 @synthesize siteURL;
 @synthesize cachedPosts, cachedUsers, cachedTags;
+@synthesize timeoutInterval;
 
 - (id) initWithURL:(NSURL *)aURL {
 	if (self = [super initWithSite:nil]) {
@@ -22,6 +21,8 @@
 		cachedPosts = [[NSMutableDictionary alloc] init];
 		cachedUsers = [[NSMutableDictionary alloc] init];
 		cachedTags = [[NSMutableDictionary alloc] init];
+		
+		timeoutInterval = 60.0;
 	}
 	return self;
 }
