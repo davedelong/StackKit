@@ -52,6 +52,8 @@
 		55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+		D25F172C110F675D009E11E5 /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = D25F172A110F675D009E11E5 /* SKBadge.h */; };
+		D25F172D110F675D009E11E5 /* SKBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D25F172B110F675D009E11E5 /* SKBadge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +61,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* StackKit */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = StackKit;
 		};
 /* End PBXContainerItemProxy section */
@@ -74,7 +76,7 @@
 		55A2E4DD110E35F10038E510 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
 		55A2E4E1110E36550038E510 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
-		55A2E4F4110E3A050038E510 /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Unit Tests.octest"; path = "build/Debug/Unit Tests.octest"; sourceTree = "<group>"; };
+		55A2E4F4110E3A050038E510 /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A2E4F5110E3A050038E510 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		55A2E511110E41FD0038E510 /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
 		55A2E512110E41FD0038E510 /* SKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUser.m; sourceTree = "<group>"; };
@@ -117,6 +119,8 @@
 		55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SKAdditions.m"; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* StackKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StackKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25F172A110F675D009E11E5 /* SKBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadge.h; sourceTree = "<group>"; };
+		D25F172B110F675D009E11E5 /* SKBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadge.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +200,8 @@
 				55A2E512110E41FD0038E510 /* SKUser.m */,
 				55A2E537110E442E0038E510 /* SKTag.h */,
 				55A2E538110E442E0038E510 /* SKTag.m */,
+				D25F172A110F675D009E11E5 /* SKBadge.h */,
+				D25F172B110F675D009E11E5 /* SKBadge.m */,
 				55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */,
 				55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */,
 				55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */,
@@ -311,6 +317,7 @@
 				55A2E6BE110EB2170038E510 /* StackKit_Internal.h in Headers */,
 				55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */,
 				55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */,
+				D25F172C110F675D009E11E5 /* SKBadge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +445,7 @@
 				55A2E68C110EA8940038E510 /* SKQAPost.m in Sources */,
 				55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */,
 				55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */,
+				D25F172D110F675D009E11E5 /* SKBadge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
