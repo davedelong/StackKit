@@ -45,4 +45,16 @@
 	[site release];
 }
 
+- (void)testLatestQuestionFromRSS {
+	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
+	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
+	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
+	[tagRSS parse];
+	
+	STAssertNotNil([[[tagRSS questions] objectAtIndex:0] title],@"The title for the latest question is nil.");
+	
+	[tagRSS release];
+	[site release];
+}
+
 @end
