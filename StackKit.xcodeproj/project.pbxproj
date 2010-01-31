@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DC1097911149F16001A5691 /* SKRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC1097611149F16001A5691 /* SKRSS.h */; };
+		4DC1097A11149F16001A5691 /* SKRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1097711149F16001A5691 /* SKRSS.m */; };
+		4DC109831114B108001A5691 /* SKTagRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC109811114B108001A5691 /* SKTagRSS.h */; };
+		4DC109841114B108001A5691 /* SKTagRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC109821114B108001A5691 /* SKTagRSS.m */; };
+		4DC10A2011154935001A5691 /* SKTagRSSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC109E411153726001A5691 /* SKTagRSSTest.m */; };
 		55A2E4DE110E35F10038E510 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4DC110E35F10038E510 /* SKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4DF110E35F10038E510 /* SKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4DD110E35F10038E510 /* SKObject.m */; };
 		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,6 +77,12 @@
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* StackKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Prefix.pch; sourceTree = "<group>"; };
+		4DC1097611149F16001A5691 /* SKRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKRSS.h; path = Classes/SKRSS.h; sourceTree = "<group>"; };
+		4DC1097711149F16001A5691 /* SKRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKRSS.m; path = Classes/SKRSS.m; sourceTree = "<group>"; };
+		4DC109811114B108001A5691 /* SKTagRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKTagRSS.h; path = Classes/SKTagRSS.h; sourceTree = "<group>"; };
+		4DC109821114B108001A5691 /* SKTagRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKTagRSS.m; path = Classes/SKTagRSS.m; sourceTree = "<group>"; };
+		4DC109E311153726001A5691 /* SKTagRSSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagRSSTest.h; sourceTree = "<group>"; };
+		4DC109E411153726001A5691 /* SKTagRSSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagRSSTest.m; sourceTree = "<group>"; };
 		55A2E4DC110E35F10038E510 /* SKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObject.h; sourceTree = "<group>"; };
 		55A2E4DD110E35F10038E510 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
@@ -208,6 +219,7 @@
 				55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */,
 				55A2E52B110E44030038E510 /* Posts */,
 				55A2E59B110E5C7E0038E510 /* JSON */,
+				4DC1095111149E92001A5691 /* RSS */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -238,6 +250,18 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		4DC1095111149E92001A5691 /* RSS */ = {
+			isa = PBXGroup;
+			children = (
+				4DC1097611149F16001A5691 /* SKRSS.h */,
+				4DC1097711149F16001A5691 /* SKRSS.m */,
+				4DC109811114B108001A5691 /* SKTagRSS.h */,
+				4DC109821114B108001A5691 /* SKTagRSS.m */,
+			);
+			name = RSS;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		55A2E507110E400A0038E510 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +269,8 @@
 				55A2E5CC110E5EE00038E510 /* SKUserTest.m */,
 				55A2E70E110EBAA60038E510 /* SKQuestionTest.h */,
 				55A2E70F110EBAA60038E510 /* SKQuestionTest.m */,
+				4DC109E311153726001A5691 /* SKTagRSSTest.h */,
+				4DC109E411153726001A5691 /* SKTagRSSTest.m */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -318,6 +344,8 @@
 				55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */,
 				55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */,
 				D25F172C110F675D009E11E5 /* SKBadge.h in Headers */,
+				4DC1097911149F16001A5691 /* SKRSS.h in Headers */,
+				4DC109831114B108001A5691 /* SKTagRSS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A2E5CF110E5EE80038E510 /* SKUserTest.m in Sources */,
+				4DC10A2011154935001A5691 /* SKTagRSSTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +475,8 @@
 				55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */,
 				55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */,
 				D25F172D110F675D009E11E5 /* SKBadge.m in Sources */,
+				4DC1097A11149F16001A5691 /* SKRSS.m in Sources */,
+				4DC109841114B108001A5691 /* SKTagRSS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
