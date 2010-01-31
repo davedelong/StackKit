@@ -1,0 +1,48 @@
+//
+//  SKTagRSSTest.m
+//  StackKit
+//
+//  Created by Mark Suman on 1/30/10.
+//  Copyright 2010 Apple Inc. All rights reserved.
+//
+
+#import "SKTagRSSTest.h"
+#import <StackKit/StackKit.h>
+
+@implementation SKTagRSSTest
+
+- (void)setUp {
+	
+}
+
+- (void)tearDown {
+	
+}
+
+- (void)testFetchTagRSS {
+	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
+	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
+	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
+
+	STAssertNotNil(tagRSS, @"Error retrieving rss feed for %@",[tag name]);
+
+	[tagRSS release];
+	[site release];
+}
+
+- (void)testParseQuestions {
+	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
+	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
+	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
+	
+	// Call parse so it actually creates the SKQuestion objects from the RSS xml
+	[tagRSS parse];
+	
+	STAssertNotNil(tagRSS, @"Error retrieving rss feed for %@",[tag name]);
+	STAssertTrue([[tagRSS questions] count]>0,@"No questions were retrieved for the tag \"%@\"",[tag name]);
+
+	[tagRSS release];
+	[site release];
+}
+
+@end
