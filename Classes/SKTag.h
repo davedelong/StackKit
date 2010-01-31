@@ -18,4 +18,6 @@
 @property (readonly) NSString *name;
 @property (readonly) NSUInteger numberOfTaggedQuestions;
 
++ (id)tagWithSite:(SKSite *)aSite name:(NSString *)aName;
+
 @end
