@@ -10,6 +10,7 @@
 #import "SKSite.h"
 #import "SKUser.h"
 #import "SKTag.h"
+#import "SKBadge.h"
 #import "SKPost.h"
 #import "SKQAPost.h"
 #import "SKQuestion.h"
