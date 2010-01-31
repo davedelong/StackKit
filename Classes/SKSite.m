@@ -46,7 +46,7 @@
 }
 
 - (void) cacheTag:(SKTag *)newTag {
-	
+	[cachedTags setObject:newTag forKey:[newTag name]];
 }
 
 - (void) cachePost:(SKPost *)newPost {
