@@ -61,4 +61,10 @@ NSString * SKSiteAPIKey = @"key";
 	return [SKUser userWithSite:self userID:aUserID];
 }
 
+- (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
+	[fetchRequest setSite:self];
+	NSArray * results = [fetchRequest executeWithError:error];
+	return results;
+}
+
 @end

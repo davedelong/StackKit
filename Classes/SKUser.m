@@ -24,24 +24,23 @@ NSString * SKUserDownVotes = @"DownVotes";
 NSString * SKUserIsModerator = @"IsModerator";
 NSString * SKUserAcceptRate = @"AcceptRate";
 
-
-@interface SKUser ()
-
-- (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID;
-
-- (void) loadFlair;
-- (void) loadFavorites;
-- (void) loadBadges;
-
-@end
-
-
 @implementation SKUser
 
 @synthesize userID;
-@synthesize displayName, profileURL, reputation;
-@synthesize favorites;
-@synthesize badges;
+@synthesize reputation;
+@synthesize creationDate;
+@synthesize displayName;
+@synthesize emailHash;
+@synthesize age;
+@synthesize lastAccessDate;
+@synthesize websiteURL;
+@synthesize location;
+@synthesize aboutMe;
+@synthesize views;
+@synthesize upVotes;
+@synthesize downVotes;
+@synthesize moderator;
+@synthesize acceptRate;
 
 #pragma mark Official SO api:
 
@@ -69,145 +68,40 @@ NSString * SKUserAcceptRate = @"AcceptRate";
 #pragma mark -
 #pragma mark Init/Dealloc
 
-//Convenience initializer
-+ (id)userWithSite:(SKSite*)aSite userID:(NSString*)anID
-{
-	//Check if the user has already been cached
-	id cachedUser = [[aSite cachedUsers] objectForKey:anID];
-	if (cachedUser != nil) {
-		return cachedUser;
-	}
-	
-	//If not create a new user
-	id newUser = [[[self class] alloc] initWithSite:aSite userID:anID];
-	[aSite cacheUser:newUser];
-	[newUser release];
-	
-	return newUser;
-}
-
-//Private initializer
-- (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID {	
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite]) {
-		userID = [anID copy];
+		userID = [[dictionary objectForKey:SKUserID] retain];
+		displayName = [[dictionary objectForKey:SKUserDisplayName] retain];
+		emailHash = [[dictionary objectForKey:SKUserEmailHash] retain];
+		websiteURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKUserWebsiteURL]];
+		location = [[dictionary objectForKey:SKUserLocation] retain];
+		aboutMe = [[dictionary objectForKey:SKUserAboutMe] retain];
 		
-		_flairLoaded = NO;
-		favorites = [[NSMutableSet alloc] init];
-		badges = [[NSMutableSet alloc] init];
+		creationDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserCreationDate] doubleValue]];
+		lastAccessDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserLastAccessDate] doubleValue]];
+		
+		reputation = [[dictionary objectForKey:SKUserReputation] integerValue];
+		age = [[dictionary objectForKey:SKUserAge] integerValue];
+		views = [[dictionary objectForKey:SKUserViews] integerValue];
+		upVotes = [[dictionary objectForKey:SKUserUpVotes] integerValue];
+		downVotes = [[dictionary objectForKey:SKUserDownVotes] integerValue];
+		moderator = [[dictionary objectForKey:SKUserIsModerator] boolValue];
+		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] floatValue];
 	}
-	
 	return self;
 }
 
 - (void) dealloc {
 	[userID release];
-	[profileURL release];
+	[creationDate release];
 	[displayName release];
-	[favorites release];
-	[badges release];
+	[emailHash release];
+	[lastAccessDate release];
+	[websiteURL release];
+	[location release];
+	[aboutMe release];
 	
 	[super dealloc];
-}
-
-#pragma mark -
-#pragma mark Custom Accessors
-
-- (NSString *) displayName {
-	if (_flairLoaded == NO) {
-		[self loadFlair];
-	}
-	return displayName;
-}
-
-- (NSURL *) profileURL {
-	if (_flairLoaded == NO) {
-		[self loadFlair];
-	}
-	return profileURL;
-}
-
-- (NSUInteger) reputation {
-	if (_flairLoaded == NO) {
-		[self loadFlair];
-	}
-	return reputation;	
-}
-
-- (NSSet *) favorites {
-	if (_favoritesLoaded == NO) {
-		[self loadFavorites];
-	}
-	return favorites;
-}
-
-- (NSSet*)badges {
-	if(_badgesLoaded == NO) {
-		[self loadBadges];
-	}
-	
-	return badges;
-}
-
-#pragma mark -
-#pragma mark Private Methods
-
-- (void) loadJSON:(NSDictionary *)jsonDictionary {
-	if ([jsonDictionary objectForKey:@"profileUrl"] != nil) {
-		profileURL = [[NSURL alloc] initWithString:[jsonDictionary objectForKey:@"profileUrl"]];
-	}
-	if ([jsonDictionary objectForKey:@"displayName"] != nil) {
-		displayName = [[jsonDictionary objectForKey:@"displayName"] retain];
-	}
-	if ([jsonDictionary objectForKey:@"reputation"] != nil) {
-		//we need a number formatter, because reputation comes back as a string
-		NSNumberFormatter * f = [NSNumberFormatter basicFormatter];
-		NSNumber * n = [f numberFromString:[jsonDictionary objectForKey:@"reputation"]];
-		reputation = [n unsignedIntegerValue];
-	}
-}
-
-- (void) loadFlair {
-	NSString * flairPath = [NSString stringWithFormat:@"/users/flair/%@.json", [self userID]];
-	NSURL * flairURL = [NSURL URLWithString:flairPath relativeToURL:[[self site] apiURL]];
-	
-	NSDictionary * flair = [self jsonObjectAtURL:flairURL];
-	if (flair == nil) {
-		NSLog(@"Error parsing flair");
-		return;
-	}
-	
-	[self loadJSON:flair];
-	
-	//don't set the flag until the end
-	//that way if we error, we'll try to reload later
-	_flairLoaded = YES;
-}
-
-- (void) loadFavorites {
-	NSString * favPath = [NSString stringWithFormat:@"/api/userfavorites.json?userid=%@&page=0&pagesize=100", [self userID]];
-	NSURL * favURL = [NSURL URLWithString:favPath relativeToURL:[[self site] apiURL]];
-	
-	NSArray * jsonArray = [self jsonObjectAtURL:favURL];
-	if (jsonArray == nil) {
-		NSLog(@"Error parsing favorites");
-		return;
-	}
-	
-	for (NSDictionary * jsonFavorite in jsonArray) {
-		SKQuestion * favorite = [[SKQuestion alloc] initWithSite:[self site] json:jsonFavorite];
-		[favorites addObject:favorite];
-		[favorite release];
-	}
-	
-	_favoritesLoaded = YES;
-	
-}
-
-- (void) loadBadges
-{
-	//Skeleton method as no API available (yet)
-	
-	_badgesLoaded = YES;
 }
 
 @end

@@ -23,43 +23,13 @@
 	
 	NSURL * requestURL = [request apiCallWithError:nil];
 	STAssertEqualObjects([requestURL absoluteString], expected, @"request did not generate appropriate URL");
+	
+	NSArray * results = [site executeFetchRequest:request error:nil];
+	STAssertTrue([results count] == 1, @"request should return 1 object");
+	
+	SKUser * davedelong = [results objectAtIndex:0];
+	STAssertEqualObjects([davedelong displayName], @"Dave DeLong", @"incorrect user displayName");
+	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"incorrect user id");
 }
-
-/**
-- (void) testFlair {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
-	
-	SKUser * user = [site userWithID:@"115730"];
-	
-	STAssertNotNil(user, @"Error retrieving user");
-	STAssertEqualObjects(@"Dave DeLong", [user displayName], @"Unexpected user name");
-	STAssertTrue([user reputation] >= 12250, @"Unexpected user reputation");
-	STAssertEqualObjects([NSURL URLWithString:@"http://stackoverflow.com/users/115730/dave-delong"], [user profileURL], @"Unexpected profile url");
-	
-	[site release];
-}
-
-- (void) testMetaFlair {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
-	
-	SKUser * user = [site userWithID:@"135683"];
-	
-	STAssertNotNil(user, @"Error retrieving user");
-	STAssertEqualObjects(@"Dave DeLong", [user displayName], @"Unexpected user name");
-	STAssertTrue([user reputation] == 135, @"Unexpected user reputation");
-	STAssertEqualObjects([NSURL URLWithString:@"http://meta.stackoverflow.com/users/135683/dave-delong"], [user profileURL], @"Unexpected profile url");
-	
-	[site release];
-}
-
-- (void) testFavorites {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
-	
-	SKUser * user = [site userWithID:@"115730"];
-	NSSet * favorites = [user favorites];
-	
-	NSLog(@"Favorites: %@", favorites);
-}
-**/
  
 @end

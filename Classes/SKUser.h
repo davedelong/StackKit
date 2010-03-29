@@ -29,27 +29,37 @@ extern NSString * SKUserAcceptRate;
 
 @interface SKUser : SKObject {
 	
-	BOOL _flairLoaded;
-	NSString * userID;
-	NSString * displayName;
-	NSURL * profileURL;
+	NSNumber * userID;
 	NSUInteger reputation;
-	
-	BOOL _favoritesLoaded;
-	NSMutableSet * favorites;
-	
-	BOOL _badgesLoaded;
-	NSMutableSet * badges;
+	NSDate * creationDate;
+	NSString * displayName;
+	NSString * emailHash;
+	NSUInteger age;
+	NSDate * lastAccessDate;
+	NSURL * websiteURL;
+	NSString * location;
+	NSString * aboutMe;
+	NSUInteger views;
+	NSUInteger upVotes;
+	NSUInteger downVotes;
+	BOOL moderator;
+	float acceptRate;
 }
 
-@property (readonly) NSString * userID;
-@property (readonly) NSString * displayName;
-@property (readonly) NSURL * profileURL;
+@property (readonly) NSNumber * userID;
 @property (readonly) NSUInteger reputation;
-
-@property (readonly) NSSet * favorites;
-@property (readonly) NSSet * badges;
-
-+ (id)userWithSite:(SKSite*)aSite userID:(NSString*)anID;
+@property (readonly) NSDate * creationDate;
+@property (readonly) NSString * displayName;
+@property (readonly) NSString * emailHash;
+@property (readonly) NSUInteger age;
+@property (readonly) NSDate * lastAccessDate;
+@property (readonly) NSURL * websiteURL;
+@property (readonly) NSString * location;
+@property (readonly) NSString * aboutMe;
+@property (readonly) NSUInteger views;
+@property (readonly) NSUInteger upVotes;
+@property (readonly) NSUInteger downVotes;
+@property (readonly, getter=isModerator) BOOL moderator;
+@property (readonly) float acceptRate;
 
 @end

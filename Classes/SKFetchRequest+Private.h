@@ -10,6 +10,8 @@
 
 @interface SKFetchRequest (Private)
 
-- (NSURL *) apiCall;
+- (NSString *) entityDataKey;
+- (NSURL *) apiCallWithError:(NSError **)error;
+- (NSArray *) executeWithError:(NSError **)error;
 
 @end

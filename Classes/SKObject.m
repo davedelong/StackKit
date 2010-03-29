@@ -18,6 +18,12 @@
 	return self;
 }
 
+- (void) setSite:(SKSite *)newSite {
+	if (newSite != site) {
+		site = newSite;
+	}
+}
+
 - (void) loadJSON:(NSDictionary *)jsonDictionary {
 	return;
 }
@@ -55,6 +61,15 @@
 		*error = [NSError errorWithDomain:@"stackkit" code:0 userInfo:nil];
 	}
 	
+	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	return nil;
+}
+
++ (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	return [[[self alloc] initWithSite:aSite dictionaryRepresentation:dictionary] autorelease];
+}
+
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
 	return nil;
 }

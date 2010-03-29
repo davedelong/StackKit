@@ -12,6 +12,7 @@
 extern NSString * SKSiteAPIKey;
 
 @class SKUser;
+@class SKFetchRequest;
 
 @interface SKSite : SKObject {
 	NSString * apiKey;
@@ -36,5 +37,6 @@ extern NSString * SKSiteAPIKey;
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
 - (SKUser *) userWithID:(NSString *)aUserID;
+- (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
 
 @end
