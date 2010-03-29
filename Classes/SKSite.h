@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 
+extern NSString * SKSiteAPIKey;
+
 @class SKUser;
 
 @interface SKSite : SKObject {

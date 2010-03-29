@@ -18,7 +18,7 @@
 - (void)tearDown {
 	
 }
-
+/**
 - (void)testFetchTagRSS {
 	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
 	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
@@ -56,5 +56,5 @@
 	[tagRSS release];
 	[site release];
 }
-
+**/
 @end

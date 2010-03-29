@@ -9,16 +9,13 @@
 #import "StackKit_Internal.h"
 
 @implementation SKObject
+@synthesize site;
 
 - (id) initWithSite:(SKSite *)aSite {
 	if (self = [super init]) {
 		site = aSite;
 	}
 	return self;
-}
-
-- (SKSite *) site {
-	return [[site retain] autorelease];
 }
 
 - (void) loadJSON:(NSDictionary *)jsonDictionary {
@@ -41,6 +38,24 @@
 	[jsonString release];
 	
 	return jsonValue;
+}
+
++ (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query {
+	NSString * queryString = [query queryString];
+	if (queryString != nil) {
+		path = [NSString stringWithFormat:@"%@?%@", path, queryString];
+	}
+	NSURL * relativeURL = [NSURL URLWithString:path relativeToURL:base];
+	
+	return [relativeURL absoluteURL];
+}
+
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
+	if (error != nil) {
+		*error = [NSError errorWithDomain:@"stackkit" code:0 userInfo:nil];
+	}
+	
+	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
 }
 
 @end

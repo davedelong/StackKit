@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 
+@class SKFetchRequest;
+
 @interface SKObject ()
 
 - (void) loadJSON:(NSDictionary *)jsonDictionary;
 - (id) jsonObjectAtURL:(NSURL *)aURL;
+
++ (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query;
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error;
 
 @end

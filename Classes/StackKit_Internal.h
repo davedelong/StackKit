@@ -13,4 +13,6 @@
 
 #import "NSNumberFormatter+SKAdditions.h"
 #import "NSDate+SKAdditions.h"
+#import "NSPredicate+SKAdditions.h"
+#import "NSDictionary+SKAdditions.h"
 #import "JSON.h"

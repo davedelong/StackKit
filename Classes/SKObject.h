@@ -14,8 +14,8 @@
 	__weak SKSite * site;
 }
 
-- (id) initWithSite:(SKSite *)aSite;
+@property (readonly) SKSite * site;
 
-- (SKSite *) site;
+- (id) initWithSite:(SKSite *)aSite;
 
 @end

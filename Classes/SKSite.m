@@ -8,6 +8,8 @@
 
 #import "StackKit_Internal.h"
 
+NSString * SKSiteAPIKey = @"key";
+
 @implementation SKSite
 
 @synthesize apiKey;

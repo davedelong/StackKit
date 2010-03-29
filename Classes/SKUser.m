@@ -8,6 +8,23 @@
 
 #import "StackKit_Internal.h"
 
+NSString * SKUserID = @"Id";
+NSString * SKUserReputation = @"Reputation";
+NSString * SKUserCreationDate = @"CreationDate";
+NSString * SKUserDisplayName = @"DisplayName";
+NSString * SKUserEmailHash = @"EmailHash";
+NSString * SKUserAge = @"Age";
+NSString * SKUserLastAccessDate = @"LastAccessDate";
+NSString * SKUserWebsiteURL = @"WebsiteUrl";
+NSString * SKUserLocation = @"Location";
+NSString * SKUserAboutMe = @"AboutMe";
+NSString * SKUserViews = @"Views";
+NSString * SKUserUpVotes = @"UpVotes";
+NSString * SKUserDownVotes = @"DownVotes";
+NSString * SKUserIsModerator = @"IsModerator";
+NSString * SKUserAcceptRate = @"AcceptRate";
+
+
 @interface SKUser ()
 
 - (id) initWithSite:(SKSite *)aSite userID:(NSString *)anID;
@@ -25,6 +42,29 @@
 @synthesize displayName, profileURL, reputation;
 @synthesize favorites;
 @synthesize badges;
+
+#pragma mark Official SO api:
+
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
+	NSURL * baseURL = [[request site] apiURL];
+	NSString * apiKey = [[request site] apiKey];
+	
+	NSMutableString * relativeString = [NSMutableString stringWithString:@"/users"];
+	NSPredicate * predicate = [request predicate];
+	if (predicate != nil) {
+		//look for a "Id = [NSNumber]" predicate
+		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		if (userID != nil) {
+			[relativeString appendFormat:@"/%@", userID];
+		}
+	}
+	NSMutableDictionary * query = [NSMutableDictionary dictionary];
+	[query setObject:apiKey forKey:SKSiteAPIKey];
+	
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
+	
+	return apiCall;
+}
 
 #pragma mark -
 #pragma mark Init/Dealloc

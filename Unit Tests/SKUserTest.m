@@ -12,6 +12,19 @@
 
 @implementation SKUserTest
 
+- (void) testUserAPICall {
+	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	
+	NSString * expected = [NSString stringWithFormat:@"http://api.stackoverflow.com/users/115730?key=%@", [site apiKey]];
+	
+	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
+	[request setEntity:[SKUser class]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, @"115730"]];
+	
+	NSURL * requestURL = [request apiCallWithError:nil];
+	STAssertEqualObjects([requestURL absoluteString], expected, @"request did not generate appropriate URL");
+}
+
 - (void) testFlair {
 	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
 	

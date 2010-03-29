@@ -9,6 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 
+extern NSString * SKUserID;
+extern NSString * SKUserReputation;
+extern NSString * SKUserCreationDate;
+extern NSString * SKUserDisplayName;
+extern NSString * SKUserEmailHash;
+extern NSString * SKUserAge;
+extern NSString * SKUserLastAccessDate;
+extern NSString * SKUserWebsiteURL;
+extern NSString * SKUserLocation;
+extern NSString * SKUserAboutMe;
+extern NSString * SKUserViews;
+extern NSString * SKUserUpVotes;
+extern NSString * SKUserDownVotes;
+extern NSString * SKUserIsModerator;
+extern NSString * SKUserAcceptRate;
+
 @class SKSite;
 
 @interface SKUser : SKObject {

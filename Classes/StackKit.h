@@ -18,3 +18,4 @@
 #import "SKComment.h"
 #import "SKRSS.h"
 #import "SKTagRSS.h"
+#import "SKFetchRequest.h"
