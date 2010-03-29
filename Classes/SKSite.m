@@ -58,7 +58,15 @@ NSString * SKSiteAPIKey = @"key";
 }
 
 - (SKUser *) userWithID:(NSString *)aUserID {
-	return [SKUser userWithSite:self userID:aUserID];
+	SKFetchRequest * request = [[SKFetchRequest alloc] init];
+	[request setEntity:[SKUser class]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, aUserID]];
+	NSError * error = nil;
+	NSArray * matches = [self executeFetchRequest:request error:&error];
+	[request release];
+	if (error != nil) { return nil; }
+	if ([matches count] != 1) { return nil; }
+	return [matches objectAtIndex:0];
 }
 
 - (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {

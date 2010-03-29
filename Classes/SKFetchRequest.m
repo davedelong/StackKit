@@ -68,6 +68,9 @@
 		[objects addObject:object];
 	}
 	
+	//TODO: filter the matches based on [self predicate]
+	//TODO: sort the matches based on [self sortDescriptors]
+	
 	return objects;
 }
 

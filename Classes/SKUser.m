@@ -104,4 +104,9 @@ NSString * SKUserAcceptRate = @"AcceptRate";
 	[super dealloc];
 }
 
+- (BOOL) isEqual:(id)object {
+	if ([object isKindOfClass:[self class]] == NO) { return NO; }
+	return ([[self userID] isEqual:[object userID]]);
+}
+
 @end

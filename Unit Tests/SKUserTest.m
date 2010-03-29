@@ -30,6 +30,9 @@
 	SKUser * davedelong = [results objectAtIndex:0];
 	STAssertEqualObjects([davedelong displayName], @"Dave DeLong", @"incorrect user displayName");
 	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"incorrect user id");
+	
+	SKUser * test = [site userWithID:@"115730"];
+	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 }
  
 @end
