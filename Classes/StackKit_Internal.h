@@ -10,6 +10,7 @@
 
 #import "SKObject+Private.h"
 #import "SKSite+Private.h"
+#import "SKFetchRequest+Private.h"
 
 #import "NSNumberFormatter+SKAdditions.h"
 #import "NSDate+SKAdditions.h"
