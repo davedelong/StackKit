@@ -13,7 +13,7 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
 	
 	NSString * expected = [NSString stringWithFormat:@"http://api.stackoverflow.com/users/115730?key=%@", [site apiKey]];
 	
@@ -26,7 +26,7 @@
 }
 
 - (void) testFlair {
-	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
 	
 	SKUser * user = [site userWithID:@"115730"];
 	
@@ -39,7 +39,7 @@
 }
 
 - (void) testMetaFlair {
-	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://meta.stackoverflow.com"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
 	
 	SKUser * user = [site userWithID:@"135683"];
 	
@@ -52,7 +52,7 @@
 }
 
 - (void) testFavorites {
-	SKSite * site = [[SKSite alloc] initWithURL:[NSURL URLWithString:@"http://stackoverflow.com"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
 	
 	SKUser * user = [site userWithID:@"115730"];
 	NSSet * favorites = [user favorites];
