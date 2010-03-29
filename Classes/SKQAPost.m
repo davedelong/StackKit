@@ -51,7 +51,7 @@
 
 - (void) loadVotes {
 	NSString * path = [NSString stringWithFormat:@"/posts/%@/vote-counts", [self postID]];
-	NSURL * url = [NSURL URLWithString:path relativeToURL:[[self site] siteURL]];
+	NSURL * url = [NSURL URLWithString:path relativeToURL:[[self site] apiURL]];
 	
 	NSDictionary * json = [self jsonObjectAtURL:url];
 	if (json == nil) {

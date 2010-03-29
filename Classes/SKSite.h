@@ -12,7 +12,8 @@
 @class SKUser;
 
 @interface SKSite : SKObject {
-	NSURL * siteURL;
+	NSString * apiKey;
+	NSURL * apiURL;
 	
 	NSMutableDictionary * cachedPosts;
 	NSMutableDictionary * cachedUsers;
@@ -21,11 +22,12 @@
 	NSTimeInterval timeoutInterval;
 }
 
-@property (readonly) NSURL * siteURL;
+@property (readonly) NSURL * apiURL;
 
 @property (readonly) NSDictionary * cachedUsers;
 @property (readonly) NSDictionary * cachedPosts;
 @property (readonly) NSDictionary * cachedTags;
+@property (readonly) NSString * apiKey;
 
 @property NSTimeInterval timeoutInterval;
 

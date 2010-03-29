@@ -10,13 +10,15 @@
 
 @implementation SKSite
 
-@synthesize siteURL;
+@synthesize apiKey;
+@synthesize apiURL;
 @synthesize cachedPosts, cachedUsers, cachedTags;
 @synthesize timeoutInterval;
 
 - (id) initWithURL:(NSURL *)aURL {
 	if (self = [super initWithSite:nil]) {
-		siteURL = [aURL retain];
+		apiKey = @"knockknock";
+		apiURL = [aURL retain];
 		
 		cachedPosts = [[NSMutableDictionary alloc] init];
 		cachedUsers = [[NSMutableDictionary alloc] init];
@@ -28,7 +30,7 @@
 }
 
 - (void) dealloc {
-	[siteURL release];
+	[apiURL release];
 	
 	[cachedPosts release];
 	[cachedUsers release];

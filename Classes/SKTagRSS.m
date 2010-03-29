@@ -19,7 +19,7 @@
 }
 
 - (id) initWithSite:(SKSite *)aSite tag:(SKTag *)aTag {
-	NSURL * u = [[[aSite siteURL] 
+	NSURL * u = [[[aSite apiURL] 
 				URLByAppendingPathComponent:@"feeds/tag"] 
 				URLByAppendingPathComponent:[aTag name]];
 	

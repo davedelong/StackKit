@@ -128,7 +128,7 @@
 
 - (void) loadFlair {
 	NSString * flairPath = [NSString stringWithFormat:@"/users/flair/%@.json", [self userID]];
-	NSURL * flairURL = [NSURL URLWithString:flairPath relativeToURL:[[self site] siteURL]];
+	NSURL * flairURL = [NSURL URLWithString:flairPath relativeToURL:[[self site] apiURL]];
 	
 	NSDictionary * flair = [self jsonObjectAtURL:flairURL];
 	if (flair == nil) {
@@ -145,7 +145,7 @@
 
 - (void) loadFavorites {
 	NSString * favPath = [NSString stringWithFormat:@"/api/userfavorites.json?userid=%@&page=0&pagesize=100", [self userID]];
-	NSURL * favURL = [NSURL URLWithString:favPath relativeToURL:[[self site] siteURL]];
+	NSURL * favURL = [NSURL URLWithString:favPath relativeToURL:[[self site] apiURL]];
 	
 	NSArray * jsonArray = [self jsonObjectAtURL:favURL];
 	if (jsonArray == nil) {
