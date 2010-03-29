@@ -17,10 +17,10 @@ NSString * SKSiteAPIKey = @"key";
 @synthesize cachedPosts, cachedUsers, cachedTags;
 @synthesize timeoutInterval;
 
-- (id) initWithURL:(NSURL *)aURL {
+- (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key {
 	if (self = [super initWithSite:nil]) {
-		apiKey = @"knockknock";
 		apiURL = [aURL retain];
+		apiKey = [key copy];
 		
 		cachedPosts = [[NSMutableDictionary alloc] init];
 		cachedUsers = [[NSMutableDictionary alloc] init];
