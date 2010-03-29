@@ -56,6 +56,7 @@
 	}
 	
 	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	return nil;
 }
 
 @end

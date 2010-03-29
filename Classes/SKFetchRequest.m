@@ -5,10 +5,7 @@
 //  Created by Dave DeLong on 3/29/10.
 //  Copyright 2010 Home. All rights reserved.
 //
-#import "StackKit.h"
-#import "SKFetchRequest.h"
-#import "SKObject.h"
-#import "SKObject+Private.h"
+#import "StackKit_Internal.h"
 
 @implementation SKFetchRequest
 @synthesize entity;
@@ -31,13 +28,9 @@
 - (NSURL *) apiCallWithError:(NSError **)error {
 	if ([self site] == nil) { return nil; }
 	
-	//this is the base
-	NSURL * apiURL = [[self site] apiURL];
 	Class fetchEntity = [self entity];
 	
-	NSURL * apiCall = [(SKObject *)fetchEntity apiCallForFetchRequest:self error:error];
-	
-	return apiCall;
+	return [fetchEntity apiCallForFetchRequest:self error:error];
 }
 
 @end
