@@ -31,7 +31,7 @@
 
 @property NSTimeInterval timeoutInterval;
 
-- (id) initWithURL:(NSURL *)aURL;
+- (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
 - (SKUser *) userWithID:(NSString *)aUserID;
 
