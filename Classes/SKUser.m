@@ -8,7 +8,7 @@
 
 #import "StackKit_Internal.h"
 
-NSString * SKUserID = @"Id";
+NSString * SKUserID = @"UserId";
 NSString * SKUserReputation = @"Reputation";
 NSString * SKUserCreationDate = @"CreationDate";
 NSString * SKUserDisplayName = @"DisplayName";
@@ -23,6 +23,11 @@ NSString * SKUserUpVotes = @"UpVotes";
 NSString * SKUserDownVotes = @"DownVotes";
 NSString * SKUserIsModerator = @"IsModerator";
 NSString * SKUserAcceptRate = @"AcceptRate";
+
+//used internally
+NSUInteger SKUserDefaultPageSize = 35;
+NSString * SKUserPage = @"page";
+NSString * SKUserPageSize = @"pagesize";
 
 @implementation SKUser
 
@@ -57,8 +62,56 @@ NSString * SKUserAcceptRate = @"AcceptRate";
 			[relativeString appendFormat:@"/%@", userID];
 		}
 	}
+	NSArray * sortDescriptors = [request sortDescriptors];
+	
+	if (sortDescriptors != nil) {
+		//we have to look for sortDescriptors for SKUserReputation, SKUserCreationDate, and SKUserDisplayName
+		//however, we can only use *one* of those.  we'll use the first one that we find
+		NSArray * sortableStuff = [NSArray arrayWithObjects:SKUserReputation, SKUserCreationDate, SKUserDisplayName, nil];
+		for (NSSortDescriptor * sort in sortDescriptors) {
+			if ([sortableStuff containsObject:[sort key]]) {
+				if ([[sort key] isEqual:SKUserReputation]) {
+					[relativeString appendString:@"/reputation"];
+				} else if ([[sort key] isEqual:SKUserDisplayName]) {
+					[relativeString appendString:@"/name"];
+				} else if ([[sort key] isEqual:SKUserCreationDate] && [sort ascending] == YES) {
+					//oldest first
+					[relativeString appendString:@"/oldest"];
+				} else if ([[sort key] isEqual:SKUserCreationDate] && [sort ascending] == NO) {
+					//newest first
+					[relativeString appendString:@"/newest"];
+				}
+				
+				break;
+			}
+		}
+	}
+	
 	NSMutableDictionary * query = [NSMutableDictionary dictionary];
 	[query setObject:apiKey forKey:SKSiteAPIKey];
+	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
+		/** three use cases:
+		 fetchOffset + fetchLimit =>
+			pagesize = fetchlimit
+			page = floor(offset / pagesize)
+		 
+		 fetchOffset =>
+			pagesize = defaultPageSize [35]
+			page = floor(offset / pagesize)
+		 
+		 fetchLimit =>
+			pagesize = fetchlimit
+			page = 1
+		 
+		 NOTE: this might not always return exact matches, but it should be ok as long as the fetchLimit doesn't change too wildly
+		 **/
+		
+		NSUInteger pagesize = ([request fetchLimit] > 0 ? [request fetchLimit] : SKUserDefaultPageSize);
+		NSUInteger page = ([request fetchOffset] > 0 ? floor([request fetchOffset]/pagesize) : 1);
+		
+		[query setObject:[NSNumber numberWithUnsignedInteger:pagesize] forKey:SKUserPageSize];
+		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKUserPage];
+	}
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
 	

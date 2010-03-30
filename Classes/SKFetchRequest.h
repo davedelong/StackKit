@@ -12,15 +12,15 @@
 @interface SKFetchRequest : SKObject {
 	Class entity;
 	NSArray * sortDescriptors;
-	NSNumber * fetchLimit;
-	NSNumber * fetchOffset;
+	NSUInteger fetchLimit;
+	NSUInteger fetchOffset;
 	NSPredicate * predicate;
 }
 
 @property Class entity;
 @property (retain) NSArray * sortDescriptors;
-@property (retain) NSNumber * fetchLimit;
-@property (retain) NSNumber * fetchOffset;
+@property NSUInteger fetchLimit;
+@property NSUInteger fetchOffset;
 @property (retain) NSPredicate * predicate;
 
 @end

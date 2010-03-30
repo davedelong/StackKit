@@ -74,4 +74,11 @@
 	return objects;
 }
 
+- (void) setFetchLimit:(NSUInteger)newLimit {
+	if (newLimit > SKPageSizeLimitMax) {
+		newLimit = SKPageSizeLimitMax;
+	}
+	fetchLimit = newLimit;
+}
+
 @end
