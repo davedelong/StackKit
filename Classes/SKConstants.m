@@ -8,6 +8,8 @@
 
 #import "SKConstants.h"
 
+NSString * SKAPIKey = @"knockknock";
+
 NSUInteger SKPageSizeLimitMax = 1000;
 
 NSString * SKErrorDomain = @"com.github.davedelong.stackkit";

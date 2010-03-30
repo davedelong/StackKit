@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * SKAPIKey;
+
 extern NSUInteger SKPageSizeLimitMax;
 
 #pragma mark -

@@ -13,7 +13,7 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"knockknock"];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:SKAPIKey];
 	
 	NSString * expected = [NSString stringWithFormat:@"http://api.stackoverflow.com/users/115730?key=%@", [site apiKey]];
 	
@@ -33,6 +33,41 @@
 	
 	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
 	STAssertEqualObjects(davedelong, test, @"user does not match itself");
+	
+	[site release];
 }
  
+
+- (void) testOldestUsers {
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:SKAPIKey];
+	
+	SKFetchRequest * request = [[SKFetchRequest alloc] init];
+	[request setEntity:[SKUser class]];
+	[request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SKUserCreationDate ascending:YES]]];
+	[request setFetchLimit:10];
+	
+	NSError * error = nil;
+	NSArray * users = [site executeFetchRequest:request error:&error];
+	[request release];
+	
+	NSArray * oldest = [NSArray arrayWithObjects:@"Community",
+						@"Jarrod Dixon",
+						@"Jeff Atwood",
+						@"Geoff Dalgas",
+						@"Joel Spolsky",
+						@"Jon Galloway",
+						@"Eggs McLaren",
+						@"Kevin Dente",
+						@"Sneakers O'Toole",
+						@"Chris Jester-Young",
+						nil];
+	
+	NSArray * returnedDisplayNames = [users valueForKey:SKUserDisplayName];
+	STAssertEqualObjects(returnedDisplayNames, oldest, @"oldest users do not match");
+	STAssertTrue([users count] == 10, @"only 10 users should've been fetched");
+	
+	STAssertNil(error, @"error should be nil");
+	
+	[site release];
+}
 @end
