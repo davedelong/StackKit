@@ -9,3 +9,8 @@
 #import "SKConstants.h"
 
 NSUInteger SKPageSizeLimitMax = 1000;
+
+NSString * SKErrorDomain = @"com.github.davedelong.stackkit";
+
+NSUInteger SKErrorCodeNotImplemented = 1;
+NSUInteger SKErrorCodeInvalidEntity = 2;

@@ -32,7 +32,7 @@
 	if ([[[self class] validFetchEntities] containsObject:fetchEntity] == NO) {
 		//invalid entity
 		if (error != nil) {
-			*error = [NSError errorWithDomain:@"stackkit" code:0 userInfo:nil];
+			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil];
 		}
 		return nil;
 	}

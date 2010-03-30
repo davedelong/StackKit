@@ -9,3 +9,11 @@
 #import <Foundation/Foundation.h>
 
 extern NSUInteger SKPageSizeLimitMax;
+
+#pragma mark -
+#pragma mark Error Constants
+extern NSString * SKErrorDomain;
+
+#pragma mark Error codes
+extern NSUInteger SKErrorCodeNotImplemented;
+extern NSUInteger SKErrorCodeInvalidEntity;
