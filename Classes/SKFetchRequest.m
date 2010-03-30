@@ -77,7 +77,8 @@
 		[objects sortUsingDescriptors:[self sortDescriptors]];
 	}
 	
-	return objects;
+	[pool release];
+	return [objects autorelease];
 	
 errorCleanup:
 	[pool release];
