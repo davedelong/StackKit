@@ -8,6 +8,7 @@
 
 #import "NSPredicate_SKAdditionsTest.h"
 #import <StackKit/StackKit.h>
+#import "NSPredicate+SKAdditions.h"
 
 @implementation NSPredicate_SKAdditionsTest
 

@@ -8,7 +8,7 @@
 
 #import "SKUserTest.h"
 #import <StackKit/StackKit.h>
-
+#import "SKFetchRequest+Private.h"
 
 @implementation SKUserTest
 
