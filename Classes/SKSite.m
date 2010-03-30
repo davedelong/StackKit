@@ -17,6 +17,10 @@ NSString * SKSiteAPIKey = @"key";
 @synthesize cachedPosts, cachedUsers, cachedTags;
 @synthesize timeoutInterval;
 
+- (id) initWithAPIURL:(NSURL *)aURL {
+	return [self initWithAPIURL:aURL APIKey:SKAPIKey];
+}
+
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key {
 	if (self = [super initWithSite:nil]) {
 		apiURL = [aURL retain];

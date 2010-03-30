@@ -20,7 +20,7 @@
 }
 /**
  - (void)testFetchTagRSS {
- SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:SKAPIKey];
+ SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
 	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
 
@@ -31,7 +31,7 @@
 }
 
  - (void)testParseQuestions {
- SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:SKAPIKey];
+ SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
 	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
 	
@@ -46,7 +46,7 @@
 }
 
  - (void)testLatestQuestionFromRSS {
- SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:SKAPIKey];
+ SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
 	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
 	[tagRSS parse];

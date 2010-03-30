@@ -13,7 +13,7 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:SKAPIKey];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 	
 	NSString * expected = [NSString stringWithFormat:@"http://api.stackoverflow.com/users/115730?key=%@", [site apiKey]];
 	
@@ -39,7 +39,7 @@
  
 
 - (void) testOldestUsers {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:SKAPIKey];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
