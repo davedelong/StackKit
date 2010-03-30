@@ -47,8 +47,6 @@ NSString * SKUserPageSize = @"pagesize";
 @synthesize moderator;
 @synthesize acceptRate;
 
-#pragma mark Official SO api:
-
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
 	NSURL * baseURL = [[request site] apiURL];
 	NSString * apiKey = [[request site] apiKey];
@@ -92,16 +90,16 @@ NSString * SKUserPageSize = @"pagesize";
 	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
 		/** three use cases:
 		 fetchOffset + fetchLimit =>
-			pagesize = fetchlimit
-			page = floor(offset / pagesize)
+		 pagesize = fetchlimit
+		 page = floor(offset / pagesize)
 		 
 		 fetchOffset =>
-			pagesize = defaultPageSize [35]
-			page = floor(offset / pagesize)
+		 pagesize = defaultPageSize [35]
+		 page = floor(offset / pagesize)
 		 
 		 fetchLimit =>
-			pagesize = fetchlimit
-			page = 1
+		 pagesize = fetchlimit
+		 page = 1
 		 
 		 NOTE: this might not always return exact matches, but it should be ok as long as the fetchLimit doesn't change too wildly
 		 **/
@@ -116,6 +114,25 @@ NSString * SKUserPageSize = @"pagesize";
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
 	
 	return apiCall;
+}
+
++ (NSDictionary *) APIAttributeToPropertyMapping {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			@"userID", SKUserID,
+			@"displayName", SKUserDisplayName,
+			@"emailHash", SKUserEmailHash,
+			@"websiteURL", SKUserWebsiteURL,
+			@"location", SKUserLocation,
+			@"aboutMe", SKUserAboutMe,
+			@"creationDate", SKUserCreationDate,
+			@"lastAccessDate", SKUserLastAccessDate,
+			@"reputation", SKUserReputation,
+			@"age", SKUserAge,
+			@"upVotes", SKUserUpVotes,
+			@"downVotes", SKUserDownVotes,
+			@"moderator", SKUserIsModerator,
+			@"acceptRate", SKUserAcceptRate,
+			nil];
 }
 
 #pragma mark -
@@ -160,6 +177,16 @@ NSString * SKUserPageSize = @"pagesize";
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
 	return ([[self userID] isEqual:[object userID]]);
+}
+
+#pragma mark KVC Compliance
+
+- (id) valueForUndefinedKey:(NSString *)key {
+	NSString * newKey = [[[self class] APIAttributeToPropertyMapping] objectForKey:key];
+	if (newKey != nil) {
+		return [self valueForKey:newKey];
+	}
+	return [super valueForUndefinedKey:key];
 }
 
 @end

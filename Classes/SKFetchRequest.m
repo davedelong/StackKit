@@ -41,14 +41,15 @@
 }
 
 - (NSArray *) executeWithError:(NSError **)error {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	NSURL * fetchURL = [self apiCallWithError:error];
-	if (error != nil && *error != nil) { return nil; }
-	if (fetchURL == nil) { return nil; }
+	if (error != nil && *error != nil) { goto errorCleanup; }
+	if (fetchURL == nil) { goto errorCleanup; }
 	
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:fetchURL];
 	NSURLResponse * response = nil;
 	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:error];
-	if (error != nil && *error != nil) { return nil; }
+	if (error != nil && *error != nil) { goto errorCleanup; }
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSDictionary * responseObjects = [responseString JSONValue];
@@ -56,7 +57,7 @@
 	assert([[responseObjects allKeys] count] == 1);
 	id dataObject = [responseObjects objectForKey:[[responseObjects allKeys] objectAtIndex:0]];
 	
-	NSMutableArray * objects = [NSMutableArray array];	
+	NSMutableArray * objects = [[NSMutableArray alloc] init];	
 	
 	if ([dataObject isKindOfClass:[NSArray class]]) {
 		for (NSDictionary * dataDictionary in dataObject) {
@@ -68,10 +69,19 @@
 		[objects addObject:object];
 	}
 	
-	//TODO: filter the matches based on [self predicate]
-	//TODO: sort the matches based on [self sortDescriptors]
+	if (predicate != nil) {
+		[objects filterUsingPredicate:predicate];
+	}
+	
+	if ([self sortDescriptors] != nil) {
+		[objects sortUsingDescriptors:[self sortDescriptors]];
+	}
 	
 	return objects;
+	
+errorCleanup:
+	[pool release];
+	return nil;
 }
 
 - (void) setFetchLimit:(NSUInteger)newLimit {

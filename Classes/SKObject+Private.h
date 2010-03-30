@@ -15,13 +15,12 @@
 @interface SKObject ()
 
 - (void) setSite:(SKSite *)newSite;
-- (void) loadJSON:(NSDictionary *)jsonDictionary;
-- (id) jsonObjectAtURL:(NSURL *)aURL;
 
 + (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
 
 + (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query;
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error;
++ (NSDictionary *) APIAttributeToPropertyMapping;
 
 @end

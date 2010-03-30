@@ -57,7 +57,7 @@ NSString * SKSiteAPIKey = @"key";
 	[cachedPosts setObject:newPost forKey:[newPost postID]];
 }
 
-- (SKUser *) userWithID:(NSString *)aUserID {
+- (SKUser *) userWithID:(NSNumber *)aUserID {
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, aUserID]];

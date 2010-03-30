@@ -36,7 +36,7 @@ extern NSString * SKSiteAPIKey;
 
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
-- (SKUser *) userWithID:(NSString *)aUserID;
+- (SKUser *) userWithID:(NSNumber *)aUserID;
 - (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
 
 @end

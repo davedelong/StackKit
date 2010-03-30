@@ -22,7 +22,6 @@
 	
 	if (self = [super initWithSite:aSite]) {
 		postID = [anID copy];
-		[self loadJSON:json];
 	}
 	[aSite cachePost:self];
 	return self;

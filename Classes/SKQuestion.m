@@ -27,23 +27,4 @@
 	return self;
 }
 
-#pragma mark -
-#pragma mark Private Methods
-
-- (void) loadJSON:(NSDictionary *)jsonDictionary {
-	[super loadJSON:jsonDictionary];
-	
-	if ([jsonDictionary objectForKey:@"title"] != nil) {
-		title = [[jsonDictionary objectForKey:@"title"] copy];
-	}
-	
-	if ([jsonDictionary objectForKey:@"FavCount"] != nil) {
-		favoritedCount = [[jsonDictionary objectForKey:@"FavCount"] unsignedIntegerValue];
-	}
-	
-	if ([jsonDictionary objectForKey:@"ViewCount"] != nil) {
-		viewCount = [[jsonDictionary objectForKey:@"ViewCount"] unsignedIntegerValue];
-	}
-}
-
 @end

@@ -19,7 +19,7 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, @"115730"]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
 	
 	NSURL * requestURL = [request apiCallWithError:nil];
 	STAssertEqualObjects([requestURL absoluteString], expected, @"request did not generate appropriate URL");
@@ -31,7 +31,7 @@
 	STAssertEqualObjects([davedelong displayName], @"Dave DeLong", @"incorrect user displayName");
 	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"incorrect user id");
 	
-	SKUser * test = [site userWithID:@"115730"];
+	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
 	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 }
  
