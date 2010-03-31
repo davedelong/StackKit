@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * SKAPIKey;
+extern NSString * SKAPIVersion;
 
 extern NSUInteger SKPageSizeLimitMax;
 

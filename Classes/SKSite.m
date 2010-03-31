@@ -23,7 +23,7 @@ NSString * SKSiteAPIKey = @"key";
 
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key {
 	if (self = [super initWithSite:nil]) {
-		apiURL = [aURL retain];
+		apiURL = [[aURL URLByAppendingPathComponent:SKAPIVersion] retain];
 		apiKey = [key copy];
 		
 		cachedPosts = [[NSMutableDictionary alloc] init];

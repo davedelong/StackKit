@@ -9,6 +9,7 @@
 #import "SKConstants.h"
 
 NSString * SKAPIKey = @"knockknock";
+NSString * SKAPIVersion = @"0.5";
 
 NSUInteger SKPageSizeLimitMax = 100;
 

@@ -13,9 +13,9 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com/0.5"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 	
-	NSString * expected = [NSString stringWithFormat:@"http://api.stackoverflow.com/0.5/users/115730?key=%@", [site apiKey]];
+	NSString * expected = [NSString stringWithFormat:@"http://api.stackoverflow.com/%@/users/115730?key=%@", SKAPIVersion, [site apiKey]];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
 	[request setEntity:[SKUser class]];
@@ -34,12 +34,14 @@
 	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
 	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 	
+	STAssertEquals([davedelong acceptRate], 100.0f, @"accept rate does not match");
+	
 	[site release];
 }
  
 
 - (void) testOldestUsers {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com/0.5"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
