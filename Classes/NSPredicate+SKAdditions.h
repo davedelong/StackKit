@@ -11,6 +11,7 @@
 
 @interface NSPredicate (SKAdditions)
 
+- (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left;
 - (id) constantValueForLeftExpression:(NSExpression *)left;
 
 @end

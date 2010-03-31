@@ -11,24 +11,32 @@
 
 @implementation NSPredicate (SKAdditions)
 
-- (id) constantValueForLeftExpression:(NSExpression *)left {
+- (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left {
 	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
 		NSArray * subPredicates = [compound subpredicates];
 		for (NSPredicate * subPredicate in subPredicates) {
-			id value = [subPredicate constantValueForLeftExpression:left];
-			if (value != nil) {
-				return value;
+			NSPredicate * match = [subPredicate subPredicateForLeftExpression:left];
+			if (match != nil) {
+				return match;
 			}
 		}
 	} else if ([self isKindOfClass:[NSComparisonPredicate class]]) {
 		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
 		NSExpression * leftExpression = [comparison leftExpression];
-		if ([leftExpression isEqual:left] && [[comparison rightExpression] expressionType] == NSConstantValueExpressionType) {
-			return [[comparison rightExpression] constantValue];
+		if ([leftExpression isEqual:left]) {
+			return self;
 		}
 	}
 	return nil;
+}
+
+- (id) constantValueForLeftExpression:(NSExpression *)left {
+	NSComparisonPredicate * comparison = (NSComparisonPredicate *)[self subPredicateForLeftExpression:left];
+	if (comparison == nil) { return nil; }
+	if ([[comparison rightExpression] expressionType] != NSConstantValueExpressionType) { return nil; }
+	
+	return [[comparison rightExpression] constantValue];
 }
 
 @end

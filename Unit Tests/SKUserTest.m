@@ -72,4 +72,23 @@
 	
 	[site release];
 }
+
+- (void) testUserFilter {
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	
+	SKFetchRequest * request = [[SKFetchRequest alloc] init];
+	[request setEntity:[SKUser class]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKUserDisplayName, @"DeLong"]];
+	
+	NSError * error = nil;
+	NSArray * matches = [site executeFetchRequest:request error:&error];
+	[request release];
+	STAssertNil(error, @"error should be nil");
+	STAssertTrue([matches count] == 1, @"matches should only have 1 object");
+	
+	SKUser * davedelong = [matches objectAtIndex:0];
+	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"non-matching user id");
+	
+	[site release];
+}
 @end

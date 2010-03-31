@@ -53,6 +53,8 @@ NSString * SKUserPageSize = @"pagesize";
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
 	NSURL * baseURL = [[request site] apiURL];
 	NSString * apiKey = [[request site] apiKey];
+	NSMutableDictionary * query = [NSMutableDictionary dictionary];
+	[query setObject:apiKey forKey:SKSiteAPIKey];
 	
 	NSMutableString * relativeString = [NSMutableString stringWithString:@"/users"];
 	NSPredicate * predicate = [request predicate];
@@ -61,8 +63,11 @@ NSString * SKUserPageSize = @"pagesize";
 	if (predicate != nil) {
 		//look for a "UserId = [NSNumber]" predicate
 		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
 		if (userID != nil && [userID isKindOfClass:[NSNumber class]]) {
 			[relativeString appendFormat:@"/%@", userID];
+		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
+			[query setObject:displayNameFilter forKey:@"filter"];
 		}
 	} else if (sortDescriptors != nil) {
 		//we have to use an elseif here because /users/{id}/reputation is not a valid endpoint
@@ -91,8 +96,6 @@ NSString * SKUserPageSize = @"pagesize";
 		}
 	}
 	
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:apiKey forKey:SKSiteAPIKey];
 	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
 		/** three use cases:
 		 fetchOffset + fetchLimit =>
