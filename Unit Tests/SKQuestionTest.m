@@ -12,7 +12,7 @@
 @implementation SKQuestionTest
 
 - (void) testQuestion {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com/0.5"]];
 	
 	SKQuestion * q = [[SKQuestion alloc] initWithSite:site postID:[NSNumber numberWithUnsignedInteger:1283419]];
 	

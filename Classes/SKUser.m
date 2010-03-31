@@ -8,21 +8,24 @@
 
 #import "StackKit_Internal.h"
 
-NSString * SKUserID = @"UserId";
-NSString * SKUserReputation = @"Reputation";
-NSString * SKUserCreationDate = @"CreationDate";
-NSString * SKUserDisplayName = @"DisplayName";
-NSString * SKUserEmailHash = @"EmailHash";
-NSString * SKUserAge = @"Age";
-NSString * SKUserLastAccessDate = @"LastAccessDate";
-NSString * SKUserWebsiteURL = @"WebsiteUrl";
-NSString * SKUserLocation = @"Location";
-NSString * SKUserAboutMe = @"AboutMe";
-NSString * SKUserViews = @"Views";
-NSString * SKUserUpVotes = @"UpVotes";
-NSString * SKUserDownVotes = @"DownVotes";
-NSString * SKUserIsModerator = @"IsModerator";
-NSString * SKUserAcceptRate = @"AcceptRate";
+NSString * SKUserID = @"user_id";
+NSString * SKUserReputation = @"reputation";
+NSString * SKUserCreationDate = @"creation_date";
+NSString * SKUserDisplayName = @"display_name";
+NSString * SKUserEmailHash = @"email_hash";
+NSString * SKUserAge = @"age";
+NSString * SKUserLastAccessDate = @"last_access_date";
+NSString * SKUserWebsiteURL = @"website_url";
+NSString * SKUserLocation = @"location";
+NSString * SKUserAboutMe = @"about_me";
+NSString * SKUserViews = @"view_count";
+NSString * SKUserUpVotes = @"up_vote_count";
+NSString * SKUserDownVotes = @"down_vote_count";
+NSString * SKUserIsModerator = @"is_moderator";
+NSString * SKUserAcceptRate = @"accept_rate";
+
+NSString * SKUserQuestionCount = @"question_count";
+NSString * SKUserAnswerCount = @"answer_count";
 
 //used internally
 NSUInteger SKUserDefaultPageSize = 35;
@@ -53,33 +56,36 @@ NSString * SKUserPageSize = @"pagesize";
 	
 	NSMutableString * relativeString = [NSMutableString stringWithString:@"/users"];
 	NSPredicate * predicate = [request predicate];
-	if (predicate != nil) {
-		//look for a "Id = [NSNumber]" predicate
-		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-		if (userID != nil) {
-			[relativeString appendFormat:@"/%@", userID];
-		}
-	}
 	NSArray * sortDescriptors = [request sortDescriptors];
 	
-	if (sortDescriptors != nil) {
+	if (predicate != nil) {
+		//look for a "UserId = [NSNumber]" predicate
+		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		if (userID != nil && [userID isKindOfClass:[NSNumber class]]) {
+			[relativeString appendFormat:@"/%@", userID];
+		}
+	} else if (sortDescriptors != nil) {
+		//we have to use an elseif here because /users/{id}/reputation is not a valid endpoint
+		//so we'll prioritize looking for a specific user over looking for users sorted by {sortDescriptor}
+		
 		//we have to look for sortDescriptors for SKUserReputation, SKUserCreationDate, and SKUserDisplayName
 		//however, we can only use *one* of those.  we'll use the first one that we find
-		NSArray * sortableStuff = [NSArray arrayWithObjects:SKUserReputation, SKUserCreationDate, SKUserDisplayName, nil];
+		//we also have to translate them, in case they're using @"reputation" instead of SKUserReputation
 		for (NSSortDescriptor * sort in sortDescriptors) {
-			if ([sortableStuff containsObject:[sort key]]) {
-				if ([[sort key] isEqual:SKUserReputation]) {
-					[relativeString appendString:@"/reputation"];
-				} else if ([[sort key] isEqual:SKUserDisplayName]) {
-					[relativeString appendString:@"/name"];
-				} else if ([[sort key] isEqual:SKUserCreationDate] && [sort ascending] == YES) {
-					//oldest first
-					[relativeString appendString:@"/oldest"];
-				} else if ([[sort key] isEqual:SKUserCreationDate] && [sort ascending] == NO) {
-					//newest first
-					[relativeString appendString:@"/newest"];
-				}
-				
+			NSString * key = [[self class] keyForKey:[sort key]];
+			if ([key isEqual:[[self class] keyForKey:SKUserReputation]]) {
+				[relativeString appendString:@"/reputation"];
+				break;
+			} else if ([key isEqual:[[self class] keyForKey:SKUserDisplayName]]) {
+				[relativeString appendString:@"/name"];
+				break;
+			} else if ([key isEqual:[[self class] keyForKey:SKUserCreationDate]] && [sort ascending] == YES) {
+				//oldest first
+				[relativeString appendString:@"/oldest"];
+				break;
+			} else if ([key isEqual:[[self class] keyForKey:SKUserCreationDate]] && [sort ascending] == NO) {
+				//newest first
+				[relativeString appendString:@"/newest"];
 				break;
 			}
 		}
@@ -117,22 +123,26 @@ NSString * SKUserPageSize = @"pagesize";
 }
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			@"userID", SKUserID,
-			@"displayName", SKUserDisplayName,
-			@"emailHash", SKUserEmailHash,
-			@"websiteURL", SKUserWebsiteURL,
-			@"location", SKUserLocation,
-			@"aboutMe", SKUserAboutMe,
-			@"creationDate", SKUserCreationDate,
-			@"lastAccessDate", SKUserLastAccessDate,
-			@"reputation", SKUserReputation,
-			@"age", SKUserAge,
-			@"upVotes", SKUserUpVotes,
-			@"downVotes", SKUserDownVotes,
-			@"moderator", SKUserIsModerator,
-			@"acceptRate", SKUserAcceptRate,
-			nil];
+	static NSDictionary * _kSKUserMappings = nil;
+	if (_kSKUserMappings == nil) {
+		_kSKUserMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
+							@"userID", SKUserID,
+							@"displayName", SKUserDisplayName,
+							@"emailHash", SKUserEmailHash,
+							@"websiteURL", SKUserWebsiteURL,
+							@"location", SKUserLocation,
+							@"aboutMe", SKUserAboutMe,
+							@"creationDate", SKUserCreationDate,
+							@"lastAccessDate", SKUserLastAccessDate,
+							@"reputation", SKUserReputation,
+							@"age", SKUserAge,
+							@"upVotes", SKUserUpVotes,
+							@"downVotes", SKUserDownVotes,
+							@"moderator", SKUserIsModerator,
+							@"acceptRate", SKUserAcceptRate,
+							nil];
+	}
+	return _kSKUserMappings;
 }
 
 #pragma mark -
@@ -177,16 +187,6 @@ NSString * SKUserPageSize = @"pagesize";
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
 	return ([[self userID] isEqual:[object userID]]);
-}
-
-#pragma mark KVC Compliance
-
-- (id) valueForUndefinedKey:(NSString *)key {
-	NSString * newKey = [[[self class] APIAttributeToPropertyMapping] objectForKey:key];
-	if (newKey != nil) {
-		return [self valueForKey:newKey];
-	}
-	return [super valueForUndefinedKey:key];
 }
 
 @end

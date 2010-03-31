@@ -29,7 +29,7 @@
 	if (queryString != nil) {
 		path = [NSString stringWithFormat:@"%@?%@", path, queryString];
 	}
-	NSURL * relativeURL = [NSURL URLWithString:path relativeToURL:base];
+	NSURL * relativeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", base, path]];
 	
 	return [relativeURL absoluteURL];
 }
@@ -55,6 +55,24 @@
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
 	return nil;
+}
+
++ (NSString *) keyForKey:(NSString *)key {
+	NSDictionary * mappings = [self APIAttributeToPropertyMapping];
+	if ([mappings objectForKey:key] != nil) {
+		return [mappings objectForKey:key];
+	}
+	return key;
+}
+
+#pragma mark KVC Compliance
+
+- (id) valueForUndefinedKey:(NSString *)key {
+	NSString * newKey = [[self class] keyForKey:key];
+	if (newKey != nil) {
+		return [self valueForKey:newKey];
+	}
+	return [super valueForUndefinedKey:key];
 }
 
 @end
