@@ -10,7 +10,7 @@
 
 NSString * SKAPIKey = @"knockknock";
 
-NSUInteger SKPageSizeLimitMax = 1000;
+NSUInteger SKPageSizeLimitMax = 100;
 
 NSString * SKErrorDomain = @"com.github.davedelong.stackkit";
 
