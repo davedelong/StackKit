@@ -21,7 +21,7 @@ NSString * SKUserAboutMe = @"about_me";
 NSString * SKUserViews = @"view_count";
 NSString * SKUserUpVotes = @"up_vote_count";
 NSString * SKUserDownVotes = @"down_vote_count";
-NSString * SKUserIsModerator = @"is_moderator";
+NSString * SKUserType = @"user_type";
 NSString * SKUserAcceptRate = @"accept_rate";
 
 NSString * SKUserQuestionCount = @"question_count";
@@ -31,6 +31,9 @@ NSString * SKUserAnswerCount = @"answer_count";
 NSUInteger SKUserDefaultPageSize = 35;
 NSString * SKUserPage = @"page";
 NSString * SKUserPageSize = @"pagesize";
+
+NSString * SKUserTypeModerator = @"moderator";
+NSString * SKUserTypeRegistered = @"registered";
 
 @implementation SKUser
 
@@ -47,7 +50,7 @@ NSString * SKUserPageSize = @"pagesize";
 @synthesize views;
 @synthesize upVotes;
 @synthesize downVotes;
-@synthesize moderator;
+@synthesize userType;
 @synthesize acceptRate;
 
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
@@ -141,7 +144,7 @@ NSString * SKUserPageSize = @"pagesize";
 							@"age", SKUserAge,
 							@"upVotes", SKUserUpVotes,
 							@"downVotes", SKUserDownVotes,
-							@"moderator", SKUserIsModerator,
+							@"userType", SKUserType,
 							@"acceptRate", SKUserAcceptRate,
 							nil];
 	}
@@ -168,8 +171,12 @@ NSString * SKUserPageSize = @"pagesize";
 		views = [[dictionary objectForKey:SKUserViews] integerValue];
 		upVotes = [[dictionary objectForKey:SKUserUpVotes] integerValue];
 		downVotes = [[dictionary objectForKey:SKUserDownVotes] integerValue];
-		moderator = [[dictionary objectForKey:SKUserIsModerator] boolValue];
 		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] floatValue];
+		
+		userType = SKUserAccountTypeRegistered;
+		if ([[dictionary objectForKey:SKUserType] isEqual:SKUserTypeModerator]) {
+			userType = SKUserAccountTypeModerator;
+		}
 	}
 	return self;
 }

@@ -22,8 +22,13 @@ extern NSString * SKUserAboutMe;
 extern NSString * SKUserViews;
 extern NSString * SKUserUpVotes;
 extern NSString * SKUserDownVotes;
-extern NSString * SKUserIsModerator;
+extern NSString * SKUserType;
 extern NSString * SKUserAcceptRate;
+
+typedef enum {
+	SKUserAccountTypeRegistered = 0,
+	SKUserAccountTypeModerator = 1
+} SKUserAccountType;
 
 @class SKSite;
 
@@ -42,6 +47,7 @@ extern NSString * SKUserAcceptRate;
 	NSUInteger views;
 	NSUInteger upVotes;
 	NSUInteger downVotes;
+	SKUserAccountType userType;
 	BOOL moderator;
 	float acceptRate;
 }
@@ -59,7 +65,7 @@ extern NSString * SKUserAcceptRate;
 @property (readonly) NSUInteger views;
 @property (readonly) NSUInteger upVotes;
 @property (readonly) NSUInteger downVotes;
-@property (readonly, getter=isModerator) BOOL moderator;
+@property (readonly) SKUserAccountType userType;
 @property (readonly) float acceptRate;
 
 @end
