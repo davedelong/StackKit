@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4DC1097911149F16001A5691 /* SKRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC1097611149F16001A5691 /* SKRSS.h */; };
+		4DC1097911149F16001A5691 /* SKRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC1097611149F16001A5691 /* SKRSS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4DC1097A11149F16001A5691 /* SKRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1097711149F16001A5691 /* SKRSS.m */; };
-		4DC109831114B108001A5691 /* SKTagRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC109811114B108001A5691 /* SKTagRSS.h */; };
+		4DC109831114B108001A5691 /* SKTagRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC109811114B108001A5691 /* SKTagRSS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4DC109841114B108001A5691 /* SKTagRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC109821114B108001A5691 /* SKTagRSS.m */; };
 		4DC10A2011154935001A5691 /* SKTagRSSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC109E411153726001A5691 /* SKTagRSSTest.m */; };
 		55A2E4DE110E35F10038E510 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4DC110E35F10038E510 /* SKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,11 +63,11 @@
 		55FA956C11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA956B11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.m */; };
 		55FA95D911614245003A9CD7 /* NSDictionary+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA95D711614245003A9CD7 /* NSDictionary+SKAdditions.h */; };
 		55FA95DA11614245003A9CD7 /* NSDictionary+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */; };
-		55FA969B11616A65003A9CD7 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA969911616A65003A9CD7 /* SKConstants.h */; };
+		55FA969B11616A65003A9CD7 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA969911616A65003A9CD7 /* SKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FA969C11616A65003A9CD7 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA969A11616A65003A9CD7 /* SKConstants.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
-		D25F172C110F675D009E11E5 /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = D25F172A110F675D009E11E5 /* SKBadge.h */; };
+		D25F172C110F675D009E11E5 /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = D25F172A110F675D009E11E5 /* SKBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D25F172D110F675D009E11E5 /* SKBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D25F172B110F675D009E11E5 /* SKBadge.m */; };
 /* End PBXBuildFile section */
 
@@ -559,7 +559,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = StackKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = StackKit;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -577,7 +577,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = StackKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = StackKit;
 				WRAPPER_EXTENSION = framework;
 			};
