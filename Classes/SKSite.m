@@ -14,8 +14,11 @@ NSString * SKSiteAPIKey = @"key";
 
 @synthesize apiKey;
 @synthesize apiURL;
-@synthesize cachedPosts, cachedUsers, cachedTags;
+@synthesize cachedPosts, cachedUsers, cachedTags, cachedBadges;
 @synthesize timeoutInterval;
+
+#pragma mark -
+#pragma mark Init/Dealloc
 
 - (id) initWithAPIURL:(NSURL *)aURL {
 	return [self initWithAPIURL:aURL APIKey:SKAPIKey];
@@ -45,9 +48,15 @@ NSString * SKSiteAPIKey = @"key";
 	[super dealloc];
 }
 
+#pragma mark -
+#pragma mark Accessors
+
 - (SKSite *) site {
 	return [[self retain] autorelease];
 }
+
+#pragma mark -
+#pragma mark Object Caching
 
 - (void) cacheUser:(SKUser *)newUser {
 	[cachedUsers setObject:newUser forKey:[newUser userID]];
@@ -60,6 +69,13 @@ NSString * SKSiteAPIKey = @"key";
 - (void) cachePost:(SKPost *)newPost {
 	[cachedPosts setObject:newPost forKey:[newPost postID]];
 }
+
+- (void) cacheBadge:(SKBadge *)newBadge {
+	[cachedBadges setObject:newBadge forKey:[newBadge badgeID]];
+}
+
+#pragma mark -
+#pragma mark Fetch Requests
 
 - (SKUser *) userWithID:(NSNumber *)aUserID {
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];

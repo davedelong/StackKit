@@ -21,6 +21,7 @@ extern NSString * SKSiteAPIKey;
 	NSMutableDictionary * cachedPosts;
 	NSMutableDictionary * cachedUsers;
 	NSMutableDictionary * cachedTags;
+	NSMutableDictionary * cachedBadges;
 	
 	NSTimeInterval timeoutInterval;
 }
@@ -30,6 +31,7 @@ extern NSString * SKSiteAPIKey;
 @property (readonly) NSDictionary * cachedUsers;
 @property (readonly) NSDictionary * cachedPosts;
 @property (readonly) NSDictionary * cachedTags;
+@property (readonly) NSDictionary * cachedBadges;
 @property (readonly) NSString * apiKey;
 
 @property NSTimeInterval timeoutInterval;

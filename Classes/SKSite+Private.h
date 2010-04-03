@@ -17,5 +17,6 @@
 - (void) cacheUser:(SKUser *)newUser;
 - (void) cacheTag:(SKTag *)newTag;
 - (void) cachePost:(SKPost *)newPost;
+- (void) cacheBadge:(SKBadge *)newBadge;
 
 @end
