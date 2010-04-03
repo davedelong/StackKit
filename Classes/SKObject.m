@@ -11,6 +11,9 @@
 @implementation SKObject
 @synthesize site;
 
+#pragma mark -
+#pragma mark Init/Dealloc
+
 - (id) initWithSite:(SKSite *)aSite {
 	if (self = [super init]) {
 		site = aSite;
@@ -24,14 +27,16 @@
 	}
 }
 
-+ (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query {
-	NSString * queryString = [query queryString];
-	if (queryString != nil) {
-		path = [NSString stringWithFormat:@"%@?%@", path, queryString];
-	}
-	NSURL * relativeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", base, path]];
-	
-	return [relativeURL absoluteURL];
+#pragma mark -
+#pragma mark Fetch Requests
+
++ (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	return [[[self alloc] initWithSite:aSite dictionaryRepresentation:dictionary] autorelease];
+}
+
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	return nil;
 }
 
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
@@ -43,13 +48,14 @@
 	return nil;
 }
 
-+ (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
-	return [[[self alloc] initWithSite:aSite dictionaryRepresentation:dictionary] autorelease];
-}
-
-- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
-	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
-	return nil;
++ (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query {
+	NSString * queryString = [query queryString];
+	if (queryString != nil) {
+		path = [NSString stringWithFormat:@"%@?%@", path, queryString];
+	}
+	NSURL * relativeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", base, path]];
+	
+	return [relativeURL absoluteURL];
 }
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
@@ -65,6 +71,7 @@
 	return key;
 }
 
+#pragma mark -
 #pragma mark KVC Compliance
 
 - (id) valueForUndefinedKey:(NSString *)key {
