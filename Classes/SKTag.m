@@ -33,9 +33,8 @@
 	//If not create a new tag
 	id newTag = [[[self class] alloc] initWithSite:aSite name:aName];
 	[aSite cacheTag:newTag];
-	[newTag release];
 	
-	return newTag;
+	return [newTag autorelease];
 }
 
 //Private initializer
