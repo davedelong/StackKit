@@ -22,6 +22,6 @@
 + (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query;
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error;
 + (NSDictionary *) APIAttributeToPropertyMapping;
-+ (NSString *) keyForKey:(NSString *)key;
++ (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;
 
 @end

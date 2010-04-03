@@ -57,7 +57,7 @@
 	return nil;
 }
 
-+ (NSString *) keyForKey:(NSString *)key {
++ (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key {
 	NSDictionary * mappings = [self APIAttributeToPropertyMapping];
 	if ([mappings objectForKey:key] != nil) {
 		return [mappings objectForKey:key];
@@ -68,7 +68,7 @@
 #pragma mark KVC Compliance
 
 - (id) valueForUndefinedKey:(NSString *)key {
-	NSString * newKey = [[self class] keyForKey:key];
+	NSString * newKey = [[self class] propertyKeyFromAPIAttributeKey:key];
 	if (newKey != nil) {
 		return [self valueForKey:newKey];
 	}

@@ -53,104 +53,6 @@ NSString * SKUserTypeRegistered = @"registered";
 @synthesize userType;
 @synthesize acceptRate;
 
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
-	NSURL * baseURL = [[request site] apiURL];
-	NSString * apiKey = [[request site] apiKey];
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:apiKey forKey:SKSiteAPIKey];
-	
-	NSMutableString * relativeString = [NSMutableString stringWithString:@"/users"];
-	NSPredicate * predicate = [request predicate];
-	NSArray * sortDescriptors = [request sortDescriptors];
-	
-	if (predicate != nil) {
-		//look for a "UserId = [NSNumber]" predicate
-		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
-		if (userID != nil && [userID isKindOfClass:[NSNumber class]]) {
-			[relativeString appendFormat:@"/%@", userID];
-		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
-			[query setObject:displayNameFilter forKey:@"filter"];
-		}
-	} else if (sortDescriptors != nil) {
-		//we have to use an elseif here because /users/{id}/reputation is not a valid endpoint
-		//so we'll prioritize looking for a specific user over looking for users sorted by {sortDescriptor}
-		
-		//we have to look for sortDescriptors for SKUserReputation, SKUserCreationDate, and SKUserDisplayName
-		//however, we can only use *one* of those.  we'll use the first one that we find
-		//we also have to translate them, in case they're using @"reputation" instead of SKUserReputation
-		for (NSSortDescriptor * sort in sortDescriptors) {
-			NSString * key = [[self class] keyForKey:[sort key]];
-			if ([key isEqual:[[self class] keyForKey:SKUserReputation]]) {
-				[relativeString appendString:@"/reputation"];
-				break;
-			} else if ([key isEqual:[[self class] keyForKey:SKUserDisplayName]]) {
-				[relativeString appendString:@"/name"];
-				break;
-			} else if ([key isEqual:[[self class] keyForKey:SKUserCreationDate]] && [sort ascending] == YES) {
-				//oldest first
-				[relativeString appendString:@"/oldest"];
-				break;
-			} else if ([key isEqual:[[self class] keyForKey:SKUserCreationDate]] && [sort ascending] == NO) {
-				//newest first
-				[relativeString appendString:@"/newest"];
-				break;
-			}
-		}
-	}
-	
-	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
-		/** three use cases:
-		 fetchOffset + fetchLimit =>
-		 pagesize = fetchlimit
-		 page = floor(offset / pagesize)
-		 
-		 fetchOffset =>
-		 pagesize = defaultPageSize [35]
-		 page = floor(offset / pagesize)
-		 
-		 fetchLimit =>
-		 pagesize = fetchlimit
-		 page = 1
-		 
-		 NOTE: this might not always return exact matches, but it should be ok as long as the fetchLimit doesn't change too wildly
-		 **/
-		
-		NSUInteger pagesize = ([request fetchLimit] > 0 ? [request fetchLimit] : SKUserDefaultPageSize);
-		NSUInteger page = ([request fetchOffset] > 0 ? floor([request fetchOffset]/pagesize) : 1);
-		
-		[query setObject:[NSNumber numberWithUnsignedInteger:pagesize] forKey:SKUserPageSize];
-		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKUserPage];
-	}
-	
-	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
-	
-	return apiCall;
-}
-
-+ (NSDictionary *) APIAttributeToPropertyMapping {
-	static NSDictionary * _kSKUserMappings = nil;
-	if (_kSKUserMappings == nil) {
-		_kSKUserMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"userID", SKUserID,
-							@"displayName", SKUserDisplayName,
-							@"emailHash", SKUserEmailHash,
-							@"websiteURL", SKUserWebsiteURL,
-							@"location", SKUserLocation,
-							@"aboutMe", SKUserAboutMe,
-							@"creationDate", SKUserCreationDate,
-							@"lastAccessDate", SKUserLastAccessDate,
-							@"reputation", SKUserReputation,
-							@"age", SKUserAge,
-							@"upVotes", SKUserUpVotes,
-							@"downVotes", SKUserDownVotes,
-							@"userType", SKUserType,
-							@"acceptRate", SKUserAcceptRate,
-							nil];
-	}
-	return _kSKUserMappings;
-}
-
 #pragma mark -
 #pragma mark Init/Dealloc
 
@@ -192,6 +94,107 @@ NSString * SKUserTypeRegistered = @"registered";
 	[aboutMe release];
 	
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark Fetch Requests
+
++ (NSDictionary *) APIAttributeToPropertyMapping {
+	static NSDictionary * _kSKUserMappings = nil;
+	if (_kSKUserMappings == nil) {
+		_kSKUserMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
+							@"userID", SKUserID,
+							@"displayName", SKUserDisplayName,
+							@"emailHash", SKUserEmailHash,
+							@"websiteURL", SKUserWebsiteURL,
+							@"location", SKUserLocation,
+							@"aboutMe", SKUserAboutMe,
+							@"creationDate", SKUserCreationDate,
+							@"lastAccessDate", SKUserLastAccessDate,
+							@"reputation", SKUserReputation,
+							@"age", SKUserAge,
+							@"upVotes", SKUserUpVotes,
+							@"downVotes", SKUserDownVotes,
+							@"userType", SKUserType,
+							@"acceptRate", SKUserAcceptRate,
+							nil];
+	}
+	return _kSKUserMappings;
+}
+
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
+	NSURL * baseURL = [[request site] apiURL];
+	NSString * apiKey = [[request site] apiKey];
+	NSMutableDictionary * query = [NSMutableDictionary dictionary];
+	[query setObject:apiKey forKey:SKSiteAPIKey];
+	
+	NSMutableString * relativeString = [NSMutableString stringWithString:@"/users"];
+	NSPredicate * predicate = [request predicate];
+	NSArray * sortDescriptors = [request sortDescriptors];
+	
+	if (predicate != nil) {
+		//look for a "UserId = [NSNumber]" predicate
+		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
+		if (userID != nil && [userID isKindOfClass:[NSNumber class]]) {
+			[relativeString appendFormat:@"/%@", userID];
+		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
+			[query setObject:displayNameFilter forKey:@"filter"];
+		}
+	} else if (sortDescriptors != nil) {
+		//we have to use an elseif here because /users/{id}/reputation is not a valid endpoint
+		//so we'll prioritize looking for a specific user over looking for users sorted by {sortDescriptor}
+		
+		//we have to look for sortDescriptors for SKUserReputation, SKUserCreationDate, and SKUserDisplayName
+		//however, we can only use *one* of those.  we'll use the first one that we find
+		//we also have to translate them, in case they're using @"reputation" instead of SKUserReputation
+		for (NSSortDescriptor * sort in sortDescriptors) {
+			NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sort key]];
+			if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserReputation]]) {
+				[relativeString appendString:@"/reputation"];
+				break;
+			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserDisplayName]]) {
+				[relativeString appendString:@"/name"];
+				break;
+			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]] && [sort ascending] == YES) {
+				//oldest first
+				[relativeString appendString:@"/oldest"];
+				break;
+			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]] && [sort ascending] == NO) {
+				//newest first
+				[relativeString appendString:@"/newest"];
+				break;
+			}
+		}
+	}
+	
+	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
+		/** three use cases:
+		 fetchOffset + fetchLimit =>
+		 pagesize = fetchlimit
+		 page = floor(offset / pagesize)
+		 
+		 fetchOffset =>
+		 pagesize = defaultPageSize [35]
+		 page = floor(offset / pagesize)
+		 
+		 fetchLimit =>
+		 pagesize = fetchlimit
+		 page = 1
+		 
+		 NOTE: this might not always return exact matches, but it should be ok as long as the fetchLimit doesn't change too wildly
+		 **/
+		
+		NSUInteger pagesize = ([request fetchLimit] > 0 ? [request fetchLimit] : SKUserDefaultPageSize);
+		NSUInteger page = ([request fetchOffset] > 0 ? floor([request fetchOffset]/pagesize) : 1);
+		
+		[query setObject:[NSNumber numberWithUnsignedInteger:pagesize] forKey:SKUserPageSize];
+		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKUserPage];
+	}
+	
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
+	
+	return apiCall;
 }
 
 - (BOOL) isEqual:(id)object {
