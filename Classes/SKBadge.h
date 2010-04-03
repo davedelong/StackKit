@@ -26,17 +26,21 @@ typedef enum {
 @interface SKBadge : SKObject {
 	NSString *name;
 	NSString *description;
+	NSString *badgeID;
 	NSInteger badgeType;
 	NSInteger badgeLevel;
 	
-	NSInteger badgeCount;
+	NSInteger numberOfBadgesAwarded;
 }
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *description;
+@property (readonly) NSString *badgeID;
 @property (readonly) NSInteger badgeType;
 @property (readonly) NSInteger badgeLevel;
 
-@property (readonly) NSInteger badgeCount;
+@property (readonly) NSInteger numberOfBadgesAwarded;
+
++ (id)badgeWithSite:(SKSite *)aSite badgeID:(NSString *)theID;
 
 @end
