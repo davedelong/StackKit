@@ -32,6 +32,7 @@ NSString * SKSiteAPIKey = @"key";
 		cachedPosts = [[NSMutableDictionary alloc] init];
 		cachedUsers = [[NSMutableDictionary alloc] init];
 		cachedTags = [[NSMutableDictionary alloc] init];
+		cachedBadges = [[NSMutableDictionary alloc] init];
 		
 		timeoutInterval = 60.0;
 	}
@@ -44,6 +45,7 @@ NSString * SKSiteAPIKey = @"key";
 	[cachedPosts release];
 	[cachedUsers release];
 	[cachedTags release];
+	[cachedBadges release];
 	
 	[super dealloc];
 }
