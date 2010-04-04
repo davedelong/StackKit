@@ -15,9 +15,10 @@
 	if ([[self allKeys] count] == 0) { return nil; }
 	NSMutableArray * queryArray = [NSMutableArray array];
 	for (NSString * key in self) {
+		NSString * value = [[self objectForKey:key] description];
 		[queryArray addObject:[NSString stringWithFormat:@"%@=%@",
 							   [key stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
-							   [[[self objectForKey:key] description] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+							   [value stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
 	}
 	
 	return [queryArray componentsJoinedByString:@"&"];

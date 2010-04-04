@@ -29,8 +29,6 @@ NSString * SKUserAnswerCount = @"answer_count";
 
 //used internally
 NSUInteger SKUserDefaultPageSize = 35;
-NSString * SKUserPage = @"page";
-NSString * SKUserPageSize = @"pagesize";
 
 NSString * SKUserTypeModerator = @"moderator";
 NSString * SKUserTypeRegistered = @"registered";
@@ -123,6 +121,18 @@ NSString * SKUserTypeRegistered = @"registered";
 }
 
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
+	/**
+	 endpoints returning user objects:
+	 /users/{id}
+	 /users/reputation
+	 /users/newest
+	 /users/oldest
+	 /users/name
+	 
+	 while there are other endpoints that have these same (or similar) prefixes,
+	 only endpoints that return SKUser objects are constructed here
+	 
+	 **/
 	NSURL * baseURL = [[request site] apiURL];
 	NSString * apiKey = [[request site] apiKey];
 	NSMutableDictionary * query = [NSMutableDictionary dictionary];
@@ -188,8 +198,8 @@ NSString * SKUserTypeRegistered = @"registered";
 		NSUInteger pagesize = ([request fetchLimit] > 0 ? [request fetchLimit] : SKUserDefaultPageSize);
 		NSUInteger page = ([request fetchOffset] > 0 ? floor([request fetchOffset]/pagesize) : 1);
 		
-		[query setObject:[NSNumber numberWithUnsignedInteger:pagesize] forKey:SKUserPageSize];
-		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKUserPage];
+		[query setObject:[NSNumber numberWithUnsignedInteger:pagesize] forKey:SKPageSizeKey];
+		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];
 	}
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];

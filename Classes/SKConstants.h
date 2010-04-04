@@ -12,6 +12,8 @@ extern NSString * SKAPIKey;
 extern NSString * SKAPIVersion;
 
 extern NSUInteger SKPageSizeLimitMax;
+extern NSString * SKPageKey;
+extern NSString * SKPageSizeKey;
 
 #pragma mark -
 #pragma mark Error Constants

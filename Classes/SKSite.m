@@ -40,6 +40,7 @@ NSString * SKSiteAPIKey = @"key";
 
 - (void) dealloc {
 	[apiURL release];
+	[apiKey release];
 	
 	[cachedPosts release];
 	[cachedUsers release];
