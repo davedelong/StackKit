@@ -12,6 +12,25 @@ extern NSString * SKAPIKey;
 extern NSString * SKAPIVersion;
 
 extern NSUInteger SKPageSizeLimitMax;
+extern NSString * SKPageKey;
+extern NSString * SKPageSizeKey;
+
+#pragma mark -
+#pragma mark Statistics Keys
+extern NSString * SKStatsTotalQuestions;
+extern NSString * SKStatsTotalUnansweredQuestions;
+extern NSString * SKStatsTotalAnswers;
+extern NSString * SKStatsTotalComments;
+extern NSString * SKStatsTotalVotes;
+extern NSString * SKStatsTotalBadges;
+extern NSString * SKStatsTotalUsers;
+extern NSString * SKStatsQuestionsPerMinute;
+extern NSString * SKStatsAnswersPerMinutes;
+extern NSString * SKStatsBadgesPerMinute;
+
+extern NSString * SKStatsAPIInfo;
+extern NSString * SKStatsAPIInfoVersion;
+extern NSString * SKStatsAPIInfoRevision;
 
 #pragma mark -
 #pragma mark Error Constants
