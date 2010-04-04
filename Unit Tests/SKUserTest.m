@@ -34,7 +34,7 @@
 	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
 	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 	
-	STAssertEquals([davedelong acceptRate], 100.0f, @"accept rate does not match");
+	STAssertEquals([davedelong acceptRate], 93.0f, @"accept rate does not match");
 	
 	[site release];
 }

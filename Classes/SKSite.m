@@ -96,4 +96,26 @@ NSString * SKSiteAPIKey = @"key";
 	return results;
 }
 
+- (NSDictionary *) statistics {
+	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self apiKey] forKey:SKSiteAPIKey];
+	NSString * statsPath = [NSString stringWithFormat:@"stats?%@", [queryDictionary queryString]];
+	
+	NSString * statsCall = [[[self apiURL] absoluteString] stringByAppendingPathComponent:statsPath];
+	
+	NSURL * statsURL = [NSURL URLWithString:statsCall];
+	
+	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[statsURL absoluteURL]];
+	NSURLResponse * response = nil;
+	
+	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:nil];
+	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+	
+	NSDictionary * statistics = [responseString JSONValue];
+	
+	assert([statistics isKindOfClass:[NSDictionary class]]);
+	assert([[statistics allKeys] count] == 1);
+	
+	return [statistics objectForKey:@"stats"];
+}
+
 @end

@@ -42,4 +42,6 @@ extern NSString * SKSiteAPIKey;
 - (SKUser *) userWithID:(NSNumber *)aUserID;
 - (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
 
+- (NSDictionary *) statistics;
+
 @end
