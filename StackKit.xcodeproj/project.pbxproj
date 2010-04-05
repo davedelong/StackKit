@@ -59,6 +59,7 @@
 		55C23A0A11690348009064EE /* SKSiteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A0711690333009064EE /* SKSiteTest.m */; };
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
+		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
 		55FA955E116132E3003A9CD7 /* SKFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA955C116132E3003A9CD7 /* SKFetchRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FA955F116132E3003A9CD7 /* SKFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA955D116132E3003A9CD7 /* SKFetchRequest.m */; };
 		55FA95611161345C003A9CD7 /* SKFetchRequest+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */; };
@@ -148,6 +149,8 @@
 		55C23A8411693FE1009064EE /* SKBadgeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadgeTest.m; sourceTree = "<group>"; };
 		55C23A8611694041009064EE /* SKTestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTestConstants.h; sourceTree = "<group>"; };
 		55C23C9111699C40009064EE /* SKTestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTestConstants.m; sourceTree = "<group>"; };
+		55C23E58116A9BA9009064EE /* SKTagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagTest.h; sourceTree = "<group>"; };
+		55C23E59116A9BA9009064EE /* SKTagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagTest.m; sourceTree = "<group>"; };
 		55FA955C116132E3003A9CD7 /* SKFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequest.h; sourceTree = "<group>"; };
 		55FA955D116132E3003A9CD7 /* SKFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFetchRequest.m; sourceTree = "<group>"; };
 		55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKFetchRequest+Private.h"; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 				55C23A0711690333009064EE /* SKSiteTest.m */,
 				55C23A8311693FE1009064EE /* SKBadgeTest.h */,
 				55C23A8411693FE1009064EE /* SKBadgeTest.m */,
+				55C23E58116A9BA9009064EE /* SKTagTest.h */,
+				55C23E59116A9BA9009064EE /* SKTagTest.m */,
 				55A2E70E110EBAA60038E510 /* SKQuestionTest.h */,
 				55A2E70F110EBAA60038E510 /* SKQuestionTest.m */,
 				4DC109E311153726001A5691 /* SKTagRSSTest.h */,
@@ -572,6 +577,7 @@
 				55C23A0A11690348009064EE /* SKSiteTest.m in Sources */,
 				55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */,
 				55C23C9211699C40009064EE /* SKTestConstants.m in Sources */,
+				55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@
 
 - (id) initWithSite:(SKSite *)aSite {
 	if (self = [super initWithSite:aSite]) {
-		fetchLimit = SKPageSizeLimitMax;
+		fetchLimit = 0;
 		fetchOffset = 0;
 	}
 	return self;

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 
+extern NSString * SKTagName;
+extern NSString * SKTagCount;
+
 @interface SKTag : SKObject {
 	NSString *name;
 	
@@ -17,7 +20,5 @@
 
 @property (readonly) NSString *name;
 @property (readonly) NSUInteger numberOfTaggedQuestions;
-
-+ (id)tagWithSite:(SKSite *)aSite name:(NSString *)aName;
 
 @end

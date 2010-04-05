@@ -69,5 +69,6 @@ typedef enum {
 @property (readonly) float acceptRate;
 
 - (NSArray *) badges;
+- (NSArray *) tags;
 
 @end

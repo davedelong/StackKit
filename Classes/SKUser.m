@@ -226,4 +226,15 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	return badges;
 }
 
+- (NSArray *) tags {
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKTag class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
+	
+	NSArray * tags = [[self site] executeFetchRequest:r error:nil];
+	[r release];
+	
+	return tags;
+}
+
 @end
