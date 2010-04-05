@@ -91,8 +91,10 @@
 		[objects filterUsingPredicate:predicate];
 	}
 	
-	if ([self sortDescriptors] != nil) {
-		[objects sortUsingDescriptors:[self sortDescriptors]];
+	//we also need to remove any unnecessary sort descriptors
+	NSArray * sortDescriptors = [[self entity] updatedSortDescriptorsForFetchRequest:self];
+	if (sortDescriptors != nil && [sortDescriptors count] > 0) {
+		[objects sortUsingDescriptors:sortDescriptors];
 	}
 	
 	[pool release];

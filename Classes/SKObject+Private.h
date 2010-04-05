@@ -27,5 +27,6 @@
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error;
 + (NSDictionary *) APIAttributeToPropertyMapping;
 + (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request;
++ (NSArray *) updatedSortDescriptorsForFetchRequest:(SKFetchRequest *)request;
 
 @end
