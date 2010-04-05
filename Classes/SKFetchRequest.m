@@ -14,6 +14,18 @@
 @synthesize fetchOffset;
 @synthesize predicate;
 
+- (id) initWithSite:(SKSite *)aSite {
+	if (self = [super initWithSite:aSite]) {
+		fetchLimit = SKPageSizeLimitMax;
+		fetchOffset = 0;
+	}
+	return self;
+}
+
+- (id) init {
+	return [self initWithSite:nil];
+}
+
 + (NSArray *) validFetchEntities {
 	return [NSArray arrayWithObjects:
 			[SKUser class], 
