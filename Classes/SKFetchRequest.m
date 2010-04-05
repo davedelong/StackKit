@@ -86,7 +86,6 @@
 	//but applying that predicate directly would empty the array, since SKBadges don't have an SKUserID ivar
 	//and adding it/overriding the valueForKey: would be really complicated
 	NSPredicate * updatedPredicate = [[self entity] updatedPredicateForFetchRequest:self];
-	
 	if (updatedPredicate != nil) {
 		[objects filterUsingPredicate:updatedPredicate];
 	}
