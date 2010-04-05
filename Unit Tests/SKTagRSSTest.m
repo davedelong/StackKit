@@ -21,18 +21,17 @@
 }
 /**
  - (void)testFetchTagRSS {
- SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+ SKSite * site = [SKSite stackoverflowSite];
 	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
 	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
 
 	STAssertNotNil(tagRSS, @"Error retrieving rss feed for %@",[tag name]);
 
 	[tagRSS release];
-	[site release];
 }
 
  - (void)testParseQuestions {
- SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+ SKSite * site = [SKSite stackoverflowSite];
 	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
 	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
 	
@@ -43,11 +42,10 @@
 	STAssertTrue([[tagRSS questions] count]>0,@"No questions were retrieved for the tag \"%@\"",[tag name]);
 
 	[tagRSS release];
-	[site release];
 }
 
  - (void)testLatestQuestionFromRSS {
- SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+ SKSite * site = [SKSite stackoverflowSite];
 	SKTag * tag = [SKTag tagWithSite:site name:@"iphone"];
 	SKTagRSS * tagRSS = [[SKTagRSS alloc] initWithSite:site tag:tag];
 	[tagRSS parse];
@@ -55,7 +53,6 @@
 	STAssertNotNil([[[tagRSS questions] objectAtIndex:0] title],@"The title for the latest question is nil.");
 	
 	[tagRSS release];
-	[site release];
 }
 **/
 @end

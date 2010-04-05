@@ -13,7 +13,7 @@
 @implementation SKBadgeTest
 
 - (void) testBadgesByName {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
@@ -75,12 +75,10 @@
 	STAssertEqualObjects(actualNames, expectedNames, @"expected names should match");
 	
 	STAssertTrue([badges count] == 44, @"there should be 44 badges");
-	
-	[site release];
 }
 
 - (void) testBadgesByTag {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
@@ -98,7 +96,7 @@
 }
 
 - (void) testBadgesForUser {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
@@ -117,12 +115,10 @@
 	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
 	STAssertTrue(badgeCount[SKBadgeColorSilver] == 18, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
 	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
-	
-	[site release];
 }
 
 - (void) testUserBadges {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKUser class]];
@@ -147,8 +143,6 @@
 	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
 	STAssertTrue(badgeCount[SKBadgeColorSilver] == 18, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
 	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
-	
-	[site release];
 }
 
 @end

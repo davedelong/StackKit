@@ -13,7 +13,7 @@
 @implementation SKQuestionTest
 
 - (void) testQuestion {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKQuestion * q = [[SKQuestion alloc] initWithSite:site postID:[NSNumber numberWithUnsignedInteger:1283419]];
 	
@@ -25,7 +25,6 @@
 	STAssertTrue([q downVotes] == 0, @"Unexpected downvote count");
 	
 	[q release];
-	[site release];
 }
 
 @end

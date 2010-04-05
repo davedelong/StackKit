@@ -42,7 +42,7 @@
  
 
 - (void) testOldestUsers {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -70,12 +70,10 @@
 	STAssertTrue([users count] == 10, @"only 10 users should've been fetched");
 	
 	STAssertNil(error, @"error should be nil");
-	
-	[site release];
 }
 
 - (void) testUserFilter {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -89,7 +87,5 @@
 	
 	SKUser * davedelong = [matches objectAtIndex:0];
 	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"non-matching user id");
-	
-	[site release];
 }
 @end

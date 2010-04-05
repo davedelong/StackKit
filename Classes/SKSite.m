@@ -17,6 +17,10 @@ NSString * SKSiteAPIKey = @"key";
 @synthesize cachedPosts, cachedUsers, cachedTags, cachedBadges;
 @synthesize timeoutInterval;
 
++ (id) stackoverflowSite {
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]] autorelease];
+}
+
 #pragma mark -
 #pragma mark Init/Dealloc
 

@@ -36,6 +36,8 @@ extern NSString * SKSiteAPIKey;
 
 @property NSTimeInterval timeoutInterval;
 
++ (id) stackoverflowSite;
+
 - (id) initWithAPIURL:(NSURL *)aURL;
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
