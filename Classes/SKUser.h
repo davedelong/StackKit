@@ -68,4 +68,6 @@ typedef enum {
 @property (readonly) SKUserType_t userType;
 @property (readonly) float acceptRate;
 
+- (NSArray *) badges;
+
 @end

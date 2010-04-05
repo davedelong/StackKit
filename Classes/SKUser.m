@@ -148,6 +148,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
 		if (userID != nil && ([userID isKindOfClass:[NSNumber class]] || [userID isKindOfClass:[NSString class]])) {
 			[relativeString appendFormat:@"/%@", userID];
+			NSLog(@"relativeString: %@", relativeString);
 		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
 			[query setObject:displayNameFilter forKey:@"filter"];
 		}
@@ -204,12 +205,25 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
 	
+	NSLog(@"apiCall: %@", apiCall);
+	
 	return apiCall;
 }
 
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
 	return ([[self userID] isEqual:[object userID]]);
+}
+
+- (NSArray *) badges {
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKBadge class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
+	
+	NSArray * badges = [[self site] executeFetchRequest:r error:nil];
+	[r release];
+	
+	return badges;
 }
 
 @end

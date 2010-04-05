@@ -117,6 +117,38 @@
 	STAssertTrue(badgeCount[SKBadgeColorBronze] == 29, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
 	STAssertTrue(badgeCount[SKBadgeColorSilver] == 17, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
 	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
+	
+	[site release];
+}
+
+- (void) testUserBadges {
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKUser class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
+	NSArray * matches = [site executeFetchRequest:r error:nil];
+	[r release];
+	
+	STAssertTrue([matches count] == 1, @"wrong number of users");
+	
+	SKUser * davedelong = [matches objectAtIndex:0];
+	
+	NSArray * badges = [davedelong badges];
+	
+	STAssertTrue ([matches count] > 0, @"not enough badges");
+	int badgeCount[3] = {0, 0, 0};
+	
+	for (SKBadge * badge in badges) {
+		SKBadgeColor_t color = [badge badgeColor];
+		badgeCount[color] += [badge numberOfBadgesAwarded];
+	}
+	
+	STAssertTrue(badgeCount[SKBadgeColorBronze] == 29, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
+	STAssertTrue(badgeCount[SKBadgeColorSilver] == 17, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
+	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
+	
+	[site release];
 }
 
 @end
