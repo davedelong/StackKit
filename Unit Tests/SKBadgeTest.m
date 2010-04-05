@@ -115,7 +115,7 @@
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
-	STAssertTrue(badgeCount[SKBadgeColorSilver] == 17, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
+	STAssertTrue(badgeCount[SKBadgeColorSilver] == 18, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
 	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
 	
 	[site release];
@@ -145,7 +145,7 @@
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
-	STAssertTrue(badgeCount[SKBadgeColorSilver] == 17, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
+	STAssertTrue(badgeCount[SKBadgeColorSilver] == 18, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
 	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
 	
 	[site release];
