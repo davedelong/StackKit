@@ -85,16 +85,16 @@
 	//for example, we can request SKBadges where SKUserID = value,
 	//but applying that predicate directly would empty the array, since SKBadges don't have an SKUserID ivar
 	//and adding it/overriding the valueForKey: would be really complicated
-	predicate = [[self entity] updatedPredicateForFetchRequest:self];
+	NSPredicate * updatedPredicate = [[self entity] updatedPredicateForFetchRequest:self];
 	
-	if (predicate != nil) {
-		[objects filterUsingPredicate:predicate];
+	if (updatedPredicate != nil) {
+		[objects filterUsingPredicate:updatedPredicate];
 	}
 	
 	//we also need to remove any unnecessary sort descriptors
-	NSArray * sortDescriptors = [[self entity] updatedSortDescriptorsForFetchRequest:self];
-	if (sortDescriptors != nil && [sortDescriptors count] > 0) {
-		[objects sortUsingDescriptors:sortDescriptors];
+	NSArray * updatedSortDescriptors = [[self entity] updatedSortDescriptorsForFetchRequest:self];
+	if (updatedSortDescriptors != nil && [updatedSortDescriptors count] > 0) {
+		[objects sortUsingDescriptors:updatedSortDescriptors];
 	}
 	
 	[pool release];
