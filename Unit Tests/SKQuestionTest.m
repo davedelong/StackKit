@@ -7,12 +7,13 @@
 //
 
 #import "SKQuestionTest.h"
+#import "SKTestConstants.h"
 #import <StackKit/StackKit.h>
 
 @implementation SKQuestionTest
 
 - (void) testQuestion {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
 	
 	SKQuestion * q = [[SKQuestion alloc] initWithSite:site postID:[NSNumber numberWithUnsignedInteger:1283419]];
 	

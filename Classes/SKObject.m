@@ -71,6 +71,10 @@
 	return key;
 }
 
++ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
+	return [request predicate];
+}
+
 #pragma mark -
 #pragma mark KVC Compliance
 

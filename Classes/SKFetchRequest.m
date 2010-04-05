@@ -69,6 +69,12 @@
 		[objects addObject:object];
 	}
 	
+	//the class might need to remove certain components of the predice
+	//for example, we can request SKBadges where SKUserID = value,
+	//but applying that predicate directly would empty the array, since SKBadges don't have an SKUserID ivar
+	//and adding it/overriding the valueForKey: would be really complicated
+	predicate = [[self entity] updatedPredicateForFetchRequest:self];
+	
 	if (predicate != nil) {
 		[objects filterUsingPredicate:predicate];
 	}

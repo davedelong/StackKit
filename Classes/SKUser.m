@@ -30,8 +30,8 @@ NSString * SKUserAnswerCount = @"answer_count";
 //used internally
 NSUInteger SKUserDefaultPageSize = 35;
 
-NSString * SKUserTypeModerator = @"moderator";
-NSString * SKUserTypeRegistered = @"registered";
+NSString * SKUserAccountTypeModerator = @"moderator";
+NSString * SKUserAccountTypeRegistered = @"registered";
 
 @implementation SKUser
 
@@ -73,9 +73,9 @@ NSString * SKUserTypeRegistered = @"registered";
 		downVotes = [[dictionary objectForKey:SKUserDownVotes] integerValue];
 		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] floatValue];
 		
-		userType = SKUserAccountTypeRegistered;
-		if ([[dictionary objectForKey:SKUserType] isEqual:SKUserTypeModerator]) {
-			userType = SKUserAccountTypeModerator;
+		userType = SKUserTypeRegistered;
+		if ([[dictionary objectForKey:SKUserType] isEqual:SKUserAccountTypeModerator]) {
+			userType = SKUserTypeModerator;
 		}
 	}
 	return self;
@@ -146,7 +146,7 @@ NSString * SKUserTypeRegistered = @"registered";
 		//look for a "UserId = [NSNumber]" predicate
 		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
 		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
-		if (userID != nil && [userID isKindOfClass:[NSNumber class]]) {
+		if (userID != nil && ([userID isKindOfClass:[NSNumber class]] || [userID isKindOfClass:[NSString class]])) {
 			[relativeString appendFormat:@"/%@", userID];
 		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
 			[query setObject:displayNameFilter forKey:@"filter"];

@@ -19,9 +19,13 @@
 + (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
 
+#pragma mark Class methods implemented by SKObject
 + (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query;
++ (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;
+
+#pragma mark Class methods that should be overriden by subclasses
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error;
 + (NSDictionary *) APIAttributeToPropertyMapping;
-+ (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;
++ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request;
 
 @end

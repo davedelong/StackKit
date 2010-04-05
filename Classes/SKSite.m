@@ -115,7 +115,9 @@ NSString * SKSiteAPIKey = @"key";
 	assert([statistics isKindOfClass:[NSDictionary class]]);
 	assert([[statistics allKeys] count] == 1);
 	
-	return [statistics objectForKey:@"stats"];
+	NSLog(@"%@", statistics);
+	
+	return [[statistics objectForKey:@"statistics"] objectAtIndex:0];
 }
 
 @end

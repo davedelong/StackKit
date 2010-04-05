@@ -13,5 +13,6 @@
 
 - (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left;
 - (id) constantValueForLeftExpression:(NSExpression *)left;
+- (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left;
 
 @end
