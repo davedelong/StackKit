@@ -26,9 +26,9 @@ extern NSString * SKUserType;
 extern NSString * SKUserAcceptRate;
 
 typedef enum {
-	SKUserAccountTypeRegistered = 0,
-	SKUserAccountTypeModerator = 1
-} SKUserAccountType;
+	SKUserTypeRegistered = 0,
+	SKUserTypeModerator = 1
+} SKUserType_t;
 
 @class SKSite;
 
@@ -47,7 +47,7 @@ typedef enum {
 	NSUInteger views;
 	NSUInteger upVotes;
 	NSUInteger downVotes;
-	SKUserAccountType userType;
+	SKUserType_t userType;
 	BOOL moderator;
 	float acceptRate;
 }
@@ -65,7 +65,10 @@ typedef enum {
 @property (readonly) NSUInteger views;
 @property (readonly) NSUInteger upVotes;
 @property (readonly) NSUInteger downVotes;
-@property (readonly) SKUserAccountType userType;
+@property (readonly) SKUserType_t userType;
 @property (readonly) float acceptRate;
+
+- (NSArray *) badges;
+- (NSArray *) tags;
 
 @end

@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 
+typedef enum {
+	SKPostTypeQuestion = 0,
+	SKPostTypeAnswer = 1
+} SKPostType_t;
+
 @class SKUser;
 
 @interface SKPost : SKObject {

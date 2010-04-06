@@ -71,6 +71,14 @@
 	return key;
 }
 
++ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
+	return [request predicate];
+}
+
++ (NSArray *) updatedSortDescriptorsForFetchRequest:(SKFetchRequest *)request {
+	return [request sortDescriptors];
+}
+
 #pragma mark -
 #pragma mark KVC Compliance
 

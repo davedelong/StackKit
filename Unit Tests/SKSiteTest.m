@@ -7,19 +7,20 @@
 //
 
 #import "SKSiteTest.h"
+#import "SKTestConstants.h"
 #import <StackKit/StackKit.h>
 
 @implementation SKSiteTest
 
 - (void) testStatistics {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	NSDictionary * stats = [site statistics];
 	
+	NSLog(@"%@", stats);
+	
 	NSString * apiVersion = [[stats objectForKey:SKStatsAPIInfo] objectForKey:SKStatsAPIInfoVersion];
 	STAssertEqualObjects(apiVersion, SKAPIVersion, @"API versions do not match!");
-	
-	[site release];
 }
 
 @end

@@ -15,6 +15,9 @@ extern NSUInteger SKPageSizeLimitMax;
 extern NSString * SKPageKey;
 extern NSString * SKPageSizeKey;
 
+extern NSString * SKSortKey;
+extern NSString * SKSortOrderKey;
+
 #pragma mark -
 #pragma mark Statistics Keys
 extern NSString * SKStatsTotalQuestions;
@@ -39,3 +42,4 @@ extern NSString * SKErrorDomain;
 #pragma mark Error codes
 extern NSUInteger SKErrorCodeNotImplemented;
 extern NSUInteger SKErrorCodeInvalidEntity;
+extern NSUInteger SKErrorCodeInvalidPredicate;

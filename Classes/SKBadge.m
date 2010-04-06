@@ -8,49 +8,124 @@
 
 #import "StackKit_Internal.h"
 
-@interface SKBadge ()
+NSString * SKBadgeID = @"badge_id";
+NSString * SKBadgeColor = @"rank";
+NSString * SKBadgeName = @"name";
+NSString * SKBadgeDescription = @"description";
+NSString * SKBadgeAwardCount = @"award_count";
+NSString * SKBadgeTagBased = @"tag_based";
 
-- (id)initWithSite:(SKSite*)aSite badgeID:(NSString*)theID;
-
-@end
+NSString * SKBadgeRankGold = @"gold";
+NSString * SKBadgeRankSilver = @"silver";
+NSString * SKBadgeRankBronze = @"bronze";
 
 @implementation SKBadge
 
-@synthesize name, description;
+@synthesize badgeName;
+@synthesize badgeDescription;
 @synthesize badgeID;
-@synthesize badgeType;
-@synthesize badgeLevel;
+@synthesize badgeColor;
 @synthesize numberOfBadgesAwarded;
+@synthesize tagBased;
 
-+ (id)badgeWithSite:(SKSite*)aSite badgeID:(NSString*)theID
-{
-	//Check if the badge has already been cached
-	id cachedBadge = [[aSite cachedBadges] objectForKey:theID];
-	if (cachedBadge != nil) {
-		return cachedBadge;
+#pragma mark SKObject methods:
+
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	if (self = [super initWithSite:aSite]) {
+		badgeID = [[dictionary objectForKey:SKBadgeID] retain];
+		badgeDescription = [[dictionary objectForKey:SKBadgeDescription] retain];
+		badgeName = [[dictionary objectForKey:SKBadgeName] retain];
+		
+		numberOfBadgesAwarded = [[dictionary objectForKey:SKBadgeAwardCount] integerValue];
+		
+		badgeColor = SKBadgeColorBronze;
+		if ([[dictionary objectForKey:SKBadgeColor] isEqual:SKBadgeRankGold]) {
+			badgeColor = SKBadgeColorGold;
+		} else if ([[dictionary objectForKey:SKBadgeColor] isEqual:SKBadgeRankSilver]) {
+			badgeColor = SKBadgeColorSilver;
+		}
+		
+		tagBased = [[dictionary objectForKey:SKBadgeTagBased] boolValue];
 	}
-	
-	//If not create a new tag
-	id newBadge = [[[self class] alloc] initWithSite:aSite badgeID:theID];
-	[aSite cacheBadge:newBadge];
-	
-	return [newBadge autorelease];
+	return self;
 }
 
-//Private initializer
-- (id)initWithSite:(SKSite*)aSite badgeID:(NSString*)theID
-{
-	if(self = [super initWithSite:aSite]) {
-		badgeID = [theID copy];
++ (NSDictionary *) APIAttributeToPropertyMapping {
+	static NSDictionary * _kSKBadgeMappings = nil;
+	if (_kSKBadgeMappings == nil) {
+		_kSKBadgeMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
+							 @"badgeName", SKBadgeName,
+							 @"badgeDescription", SKBadgeDescription,
+							 @"badgeID", SKBadgeID,
+							 @"badgeColor", SKBadgeColor,
+							 @"numberOfBadgesAwarded", SKBadgeAwardCount,
+							 @"tagBased", SKBadgeTagBased,
+							 @"userID", SKUserID,
+							 nil];
+	}
+	return _kSKBadgeMappings;
+}
+
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
+	/**
+	 Possible badge endpoints:
+	 
+	 /users/{id}/badges
+	 /badges/tags
+	 /badges/name
+	 
+	 **/
+	
+	NSMutableString * relativeString = [NSMutableString string];
+	
+	NSPredicate * p = [request predicate];
+	id badgesForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+	NSNumber * badgesByTag = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeTagBased]];
+	
+	if (p != nil && badgesForUser != nil) {
+		//retrieve badges for a specific user
+		
+		NSNumber * userID = nil;
+		if ([badgesForUser isKindOfClass:[SKUser class]]) {
+			userID = [badgesForUser userID];
+		} else if ([badgesForUser isKindOfClass:[NSNumber class]]) {
+			userID = badgesForUser;
+		} else {
+			userID = [NSNumber numberWithInt:[[badgesForUser description] intValue]];
+		}
+		
+		[relativeString appendFormat:@"/users/%@/badges", userID];
+	} else if (p != nil && [badgesByTag boolValue] == YES) {
+		//retrieve tag badges
+		[relativeString appendString:@"/badges/tags"];
+	} else {
+		//default to retrieving badges by name
+		[relativeString appendString:@"/badges/name"];
 	}
 	
-	return self;
+	NSMutableDictionary * query = [NSMutableDictionary dictionary];
+	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
+	
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
+	
+	return apiCall;
+}
+
++ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
+	return [[request predicate] predicateByRemovingSubPredicateWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+}
+
+#pragma mark SKBadge-specific methods
+
+- (BOOL) isEqual:(id)object {
+	if ([object isKindOfClass:[self class]] == NO) { return NO; }
+	return ([[self badgeID] isEqual:[object badgeID]]);
 }
 
 - (void)dealloc
 {
-	[name release];
-	[description release];
+	[badgeName release];
+	[badgeDescription release];
 	[badgeID release];
 	
 	[super dealloc];

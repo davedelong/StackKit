@@ -7,15 +7,16 @@
 //
 
 #import "SKUserTest.h"
+#import "SKTestConstants.h"
 #import <StackKit/StackKit.h>
 #import "SKFetchRequest+Private.h"
 
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
 	
-	NSString * expected = [NSString stringWithFormat:@"http://api.stackoverflow.com/%@/users/115730?key=%@", SKAPIVersion, [site apiKey]];
+	NSString * expected = [NSString stringWithFormat:@"%@/%@/users/115730?key=%@", SKTestAPISite, SKAPIVersion, [site apiKey]];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
 	[request setEntity:[SKUser class]];
@@ -34,14 +35,14 @@
 	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
 	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 	
-	STAssertEquals([davedelong acceptRate], 93.0f, @"accept rate does not match");
+	STAssertEquals([davedelong acceptRate], 100.0f, @"accept rate does not match");
 	
 	[site release];
 }
  
 
 - (void) testOldestUsers {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -69,12 +70,10 @@
 	STAssertTrue([users count] == 10, @"only 10 users should've been fetched");
 	
 	STAssertNil(error, @"error should be nil");
-	
-	[site release];
 }
 
 - (void) testUserFilter {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -88,7 +87,5 @@
 	
 	SKUser * davedelong = [matches objectAtIndex:0];
 	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"non-matching user id");
-	
-	[site release];
 }
 @end

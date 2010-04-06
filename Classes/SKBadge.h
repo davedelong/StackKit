@@ -9,38 +9,38 @@
 #import <Cocoa/Cocoa.h>
 #import "SKObject.h"
 
-//Enumeration for general badges or tag-based badges
-typedef enum {
-	SKBadgeTypeGeneral,
-	SKBadgeTypeTag
-} SKBadgeType;
-
 //Enumeration for badge "levels" – bronze, silver or gold
 typedef enum {
-	SKBadgeLevelBronze,
-	SKBadgeLevelSilver,
-	SKBadgeLevelGold
-} SKBadgeLevel;
+	SKBadgeColorBronze = 0,
+	SKBadgeColorSilver = 1,
+	SKBadgeColorGold = 2
+} SKBadgeColor_t;
 
+extern NSString * SKBadgeID;
+extern NSString * SKBadgeColor;
+extern NSString * SKBadgeName;
+extern NSString * SKBadgeDescription;
+extern NSString * SKBadgeAwardCount;
+extern NSString * SKBadgeTagBased;
 
 @interface SKBadge : SKObject {
-	NSString *name;
-	NSString *description;
-	NSString *badgeID;
-	NSInteger badgeType;
-	NSInteger badgeLevel;
+	NSNumber * badgeID;
 	
+	NSString * badgeName;
+	NSString * badgeDescription;
+	
+	SKBadgeColor_t badgeColor;
+	
+	BOOL tagBased;
 	NSInteger numberOfBadgesAwarded;
 }
 
-@property (readonly) NSString *name;
-@property (readonly) NSString *description;
-@property (readonly) NSString *badgeID;
-@property (readonly) NSInteger badgeType;
-@property (readonly) NSInteger badgeLevel;
+@property (readonly) NSNumber *badgeID;
+@property (readonly) NSString *badgeName;
+@property (readonly) NSString *badgeDescription;
+@property (readonly) SKBadgeColor_t badgeColor;
 
 @property (readonly) NSInteger numberOfBadgesAwarded;
-
-+ (id)badgeWithSite:(SKSite *)aSite badgeID:(NSString *)theID;
+@property (readonly, getter=isTagBased) BOOL tagBased;
 
 @end

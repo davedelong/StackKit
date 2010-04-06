@@ -14,9 +14,22 @@
 @synthesize fetchOffset;
 @synthesize predicate;
 
+- (id) initWithSite:(SKSite *)aSite {
+	if (self = [super initWithSite:aSite]) {
+		fetchLimit = 0;
+		fetchOffset = 0;
+	}
+	return self;
+}
+
+- (id) init {
+	return [self initWithSite:nil];
+}
+
 + (NSArray *) validFetchEntities {
 	return [NSArray arrayWithObjects:
-			[SKUser class], 
+			[SKUser class],
+			[SKUserActivity class],
 			[SKTag class], 
 			[SKBadge class], 
 			[SKQuestion class], 
@@ -69,12 +82,19 @@
 		[objects addObject:object];
 	}
 	
-	if (predicate != nil) {
-		[objects filterUsingPredicate:predicate];
+	//the class might need to remove certain components of the predice
+	//for example, we can request SKBadges where SKUserID = value,
+	//but applying that predicate directly would empty the array, since SKBadges don't have an SKUserID ivar
+	//and adding it/overriding the valueForKey: would be really complicated
+	NSPredicate * updatedPredicate = [[self entity] updatedPredicateForFetchRequest:self];
+	if (updatedPredicate != nil) {
+		[objects filterUsingPredicate:updatedPredicate];
 	}
 	
-	if ([self sortDescriptors] != nil) {
-		[objects sortUsingDescriptors:[self sortDescriptors]];
+	//we also need to remove any unnecessary sort descriptors
+	NSArray * updatedSortDescriptors = [[self entity] updatedSortDescriptorsForFetchRequest:self];
+	if (updatedSortDescriptors != nil && [updatedSortDescriptors count] > 0) {
+		[objects sortUsingDescriptors:updatedSortDescriptors];
 	}
 	
 	[pool release];

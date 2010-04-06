@@ -39,4 +39,34 @@
 	return [[comparison rightExpression] constantValue];
 }
 
+- (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left {
+	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
+		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
+		NSMutableArray * newSubpredicates = [NSMutableArray array];
+		NSArray * currentSubpredicates = [compound subpredicates];
+		
+		for (NSPredicate * subPredicate in currentSubpredicates) {
+			NSPredicate * newVersion = [subPredicate predicateByRemovingSubPredicateWithLeftExpression:left];
+			if (newVersion != nil) {
+				[newSubpredicates addObject:newVersion];
+			}
+		}
+		
+		if ([newSubpredicates count] > 0) {
+			NSCompoundPredicate * newCompound = [[NSCompoundPredicate alloc] initWithType:[compound compoundPredicateType] subpredicates:newSubpredicates];
+			return [newCompound autorelease];
+		} else {
+			return nil;
+		}
+	} else if ([self isKindOfClass:[NSComparisonPredicate class]]) {
+		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
+		NSExpression * leftExpression = [comparison leftExpression];
+		if ([leftExpression isEqual:left]) {
+			return nil;
+		}
+		return comparison;
+	}
+	return nil;
+}
+
 @end
