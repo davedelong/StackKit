@@ -60,7 +60,6 @@
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
 		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
-		55C2410E116ADF71009064EE /* SKUserActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C2410C116ADF71009064EE /* SKUserActivity.h */; };
 		55C2410F116ADF71009064EE /* SKUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2410D116ADF71009064EE /* SKUserActivity.m */; };
 		55C24146116AF72E009064EE /* SKUserActivityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C24145116AF72E009064EE /* SKUserActivityTest.m */; };
 		55FA955E116132E3003A9CD7 /* SKFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA955C116132E3003A9CD7 /* SKFetchRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +76,7 @@
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		D25F172C110F675D009E11E5 /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = D25F172A110F675D009E11E5 /* SKBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D25F172D110F675D009E11E5 /* SKBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D25F172B110F675D009E11E5 /* SKBadge.m */; };
+		D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C2410C116ADF71009064EE /* SKUserActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,8 +407,8 @@
 			children = (
 				55A2E511110E41FD0038E510 /* SKUser.h */,
 				55A2E512110E41FD0038E510 /* SKUser.m */,
-				55C2410C116ADF71009064EE /* SKUserActivity.h */,
 				55C2410D116ADF71009064EE /* SKUserActivity.m */,
+				55C2410C116ADF71009064EE /* SKUserActivity.h */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -480,7 +480,7 @@
 				55FA95D911614245003A9CD7 /* NSDictionary+SKAdditions.h in Headers */,
 				55FA969B11616A65003A9CD7 /* SKConstants.h in Headers */,
 				55C23A0811690333009064EE /* SKSiteTest.h in Headers */,
-				55C2410E116ADF71009064EE /* SKUserActivity.h in Headers */,
+				D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
