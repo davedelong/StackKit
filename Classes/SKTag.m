@@ -61,10 +61,11 @@ NSUInteger SKTagDefaultPageSize = 70;
 		//we'll sort by "recent" by default, since there's no convenient way to specify that in a sort descriptor (yet)
 		NSString * sort = @"recent";
 		for (NSSortDescriptor * sortDescriptor in [request sortDescriptors]) {
-			if ([[sortDescriptor key] isEqual:SKTagName]) {
+			NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sortDescriptor key]];
+			if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKTagName]]) {
 				sort = @"name";
 				break;
-			} else if ([[sortDescriptor key] isEqual:SKTagCount]) {
+			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKTagCount]]) {
 				sort = @"popular";
 				break;
 			}

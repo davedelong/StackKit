@@ -7,10 +7,14 @@
 //
 
 #import "SKObject.h"
+#import "SKFetchRequest.h"
+
 #import "SKSite.h"
 #import "SKUser.h"
 #import "SKTag.h"
 #import "SKBadge.h"
+#import "SKUserActivity.h"
+
 #import "SKPost.h"
 #import "SKQAPost.h"
 #import "SKQuestion.h"
@@ -18,6 +22,5 @@
 #import "SKComment.h"
 #import "SKRSS.h"
 #import "SKTagRSS.h"
-#import "SKFetchRequest.h"
 
 #import "SKConstants.h"

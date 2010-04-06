@@ -53,6 +53,8 @@
 	NSArray * users = [site executeFetchRequest:request error:&error];
 	[request release];
 	
+	NSLog(@"%@", users);
+	
 	NSArray * oldest = [NSArray arrayWithObjects:@"Community",
 						@"Jarrod Dixon",
 						@"Jeff Atwood",

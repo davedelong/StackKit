@@ -28,7 +28,8 @@
 
 + (NSArray *) validFetchEntities {
 	return [NSArray arrayWithObjects:
-			[SKUser class], 
+			[SKUser class],
+			[SKUserActivity class],
 			[SKTag class], 
 			[SKBadge class], 
 			[SKQuestion class], 

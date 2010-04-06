@@ -15,6 +15,9 @@ NSUInteger SKPageSizeLimitMax = 100;
 NSString * SKPageKey = @"page";
 NSString * SKPageSizeKey = @"pagesize";
 
+NSString * SKSortKey = @"sort";
+NSString * SKSortOrderKey = @"order";
+
 #pragma mark -
 #pragma mark Statistics Keys
 NSString * SKStatsTotalQuestions = @"total_questions";
@@ -39,3 +42,4 @@ NSString * SKErrorDomain = @"com.github.davedelong.stackkit";
 #pragma mark Error codes
 NSUInteger SKErrorCodeNotImplemented = 1;
 NSUInteger SKErrorCodeInvalidEntity = 2;
+NSUInteger SKErrorCodeInvalidPredicate = 3;

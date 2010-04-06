@@ -59,7 +59,9 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		userID = [[dictionary objectForKey:SKUserID] retain];
 		displayName = [[dictionary objectForKey:SKUserDisplayName] retain];
 		emailHash = [[dictionary objectForKey:SKUserEmailHash] retain];
-		websiteURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKUserWebsiteURL]];
+		if ([dictionary objectForKey:SKUserWebsiteURL] != nil) {
+			websiteURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKUserWebsiteURL]];
+		}
 		location = [[dictionary objectForKey:SKUserLocation] retain];
 		aboutMe = [[dictionary objectForKey:SKUserAboutMe] retain];
 		
@@ -124,10 +126,9 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	/**
 	 endpoints returning user objects:
 	 /users/{id}
-	 /users/reputation
-	 /users/newest
-	 /users/oldest
-	 /users/name
+	 /users/?sort=reputation
+	 /users/?sort=newest
+	 /users/?sort=name
 	 
 	 while there are other endpoints that have these same (or similar) prefixes,
 	 only endpoints that return SKUser objects are constructed here
@@ -148,7 +149,6 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
 		if (userID != nil && ([userID isKindOfClass:[NSNumber class]] || [userID isKindOfClass:[NSString class]])) {
 			[relativeString appendFormat:@"/%@", userID];
-			NSLog(@"relativeString: %@", relativeString);
 		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
 			[query setObject:displayNameFilter forKey:@"filter"];
 		}
@@ -159,24 +159,34 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		//we have to look for sortDescriptors for SKUserReputation, SKUserCreationDate, and SKUserDisplayName
 		//however, we can only use *one* of those.  we'll use the first one that we find
 		//we also have to translate them, in case they're using @"reputation" instead of SKUserReputation
-		for (NSSortDescriptor * sort in sortDescriptors) {
-			NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sort key]];
+		
+		NSString * sort = @"reputation";
+		NSString * order = @"asc";
+		NSSortDescriptor * mainDescriptor = nil;
+		
+		for (NSSortDescriptor * sortDescriptor in sortDescriptors) {
+			NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sortDescriptor key]];
 			if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserReputation]]) {
-				[relativeString appendString:@"/reputation"];
+				sort = @"reputation";
+				mainDescriptor = sortDescriptor;
 				break;
 			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserDisplayName]]) {
-				[relativeString appendString:@"/name"];
+				sort = @"name";
+				mainDescriptor = sortDescriptor;
 				break;
-			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]] && [sort ascending] == YES) {
-				//oldest first
-				[relativeString appendString:@"/oldest"];
-				break;
-			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]] && [sort ascending] == NO) {
-				//newest first
-				[relativeString appendString:@"/newest"];
+			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]]) {
+				sort = @"newest";
+				mainDescriptor = sortDescriptor;
 				break;
 			}
 		}
+		
+		if (mainDescriptor != nil) {
+			order = ([mainDescriptor ascending] == YES ? @"asc" : @"desc");
+		}
+		
+		[query setObject:sort forKey:SKSortKey];
+		[query setObject:order forKey:SKSortOrderKey];
 	}
 	
 	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
