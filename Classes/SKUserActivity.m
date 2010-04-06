@@ -51,13 +51,14 @@ NSString * SKPostAnswer = @"answer";
 	static NSDictionary * _kSKUserActivityMappings = nil;
 	if (_kSKUserActivityMappings == nil) {
 		_kSKUserActivityMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
-									@"badgeName", SKBadgeName,
-									@"badgeDescription", SKBadgeDescription,
-									@"badgeID", SKBadgeID,
-									@"badgeColor", SKBadgeColor,
-									@"numberOfBadgesAwarded", SKBadgeAwardCount,
-									@"tagBased", SKBadgeTagBased,
-									@"userID", SKUserID,
+									@"type", SKUserActivityType,
+									@"postID", SKUserActivityPostID,
+									@"postType", SKUserActivityPostType,
+									@"commentID", SKUserActivityCommentID,
+									@"action", SKUserActivityAction,
+									@"creationDate", SKUserActivityCreationDate,
+									@"activityDescription", SKUserActivityDescription,
+									@"activityDetail", SKUserActivityDetail,
 									nil];
 	}
 	return _kSKUserActivityMappings;
@@ -101,6 +102,9 @@ NSString * SKPostAnswer = @"answer";
 	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
 	
 	//TODO: handle the fromdate and todate query parameters via the predicate
+	/**
+	 this will involve retrieving the appropriate subpredicates and determining whether they're "from" or "to" based on the subpredicate operator
+	 **/
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
 	
