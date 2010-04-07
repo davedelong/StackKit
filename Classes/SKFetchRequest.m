@@ -41,16 +41,44 @@
 - (NSURL *) apiCallWithError:(NSError **)error {
 	if ([self site] == nil) { return nil; }
 	
+	NSInteger errorCode = -1;
+	NSDictionary * errorUserInfo = nil;
+	
 	Class fetchEntity = [self entity];
 	if ([[[self class] validFetchEntities] containsObject:fetchEntity] == NO) {
 		//invalid entity
-		if (error != nil) {
-			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil];
-		}
-		return nil;
+		errorCode = SKErrorCodeInvalidEntity;
+		//TODO: fill in the userinfo
+		goto errorExit;
 	}
 	
+	//evalutate the predicate.  we're only going to allow a single level of compounding
+	NSPredicate * p = [self predicate];
+	if ([p isKindOfClass:[NSCompoundPredicate class]]) {
+		//compound predicates can't have compound subpredicates
+		if ([(NSCompoundPredicate *)p compoundPredicateType] != NSAndPredicateType) {
+			errorCode = SKErrorCodeInvalidPredicate;
+			//TODO: fill in the userinfo
+			goto errorExit;
+		}
+		for (NSPredicate * subp in [(NSCompoundPredicate *)p subpredicates]) {
+			if ([subp isKindOfClass:[NSCompoundPredicate class]]) {
+				errorCode = SKErrorCodeInvalidPredicate;
+				//TODO: fill in the userinfo
+				goto errorExit;
+			}
+		}
+	}
+	
+	//TODO: evaluate the sort descriptors
+	
 	return [fetchEntity apiCallForFetchRequest:self error:error];
+	
+errorExit:
+	if (error != nil && errorCode >= 0) {
+		*error = [NSError errorWithDomain:SKErrorDomain code:errorCode userInfo:errorUserInfo];
+	}
+	return nil;
 }
 
 - (NSArray *) executeWithError:(NSError **)error {
