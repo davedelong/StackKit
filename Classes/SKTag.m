@@ -38,9 +38,9 @@ NSUInteger SKTagDefaultPageSize = 70;
 	 Valid endpoints:
 	 
 	 /tags (defaults to /tags/popular)
-	 /tags/popular (sort by count descending)
-	 /tags/name (sort by name ascending)
-	 /tags/recent (sort by something magical)
+	 /tags?sort=popular (sort by count descending)
+	 /tags?sort=name (sort by name ascending)
+	 /tags?sort=recent (sort by something magical)
 	 /users/{id}/tags - tags in which user {id} has participated
 	 
 	 **/
@@ -49,7 +49,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 	
 	NSPredicate * predicate = [request predicate];
 	id tagsForUser = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-	if (predicate != nil && tagsForUser != nil) {
+	if (tagsForUser != nil) {
 		NSNumber * userID = nil;
 		if ([tagsForUser isKindOfClass:[NSNumber class]]) {
 			userID = tagsForUser;
@@ -58,19 +58,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 		}
 		[relativeString appendFormat:@"/users/%@/tags", userID];
 	} else {
-		//we'll sort by "recent" by default, since there's no convenient way to specify that in a sort descriptor (yet)
-		NSString * sort = @"recent";
-		for (NSSortDescriptor * sortDescriptor in [request sortDescriptors]) {
-			NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sortDescriptor key]];
-			if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKTagName]]) {
-				sort = @"name";
-				break;
-			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKTagCount]]) {
-				sort = @"popular";
-				break;
-			}
-		}
-		[relativeString appendFormat:@"/tags/%@", sort];
+		[relativeString appendString:@"/tags"];
 	}
 	
 	NSMutableDictionary * query = [NSMutableDictionary dictionary];
@@ -83,6 +71,20 @@ NSUInteger SKTagDefaultPageSize = 70;
 		[query setObject:[NSNumber numberWithUnsignedInteger:pagesize] forKey:SKPageSizeKey];
 		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];
 	}
+	
+	//Add sorting to the query
+	NSString * sort = @"recent";
+	for (NSSortDescriptor * sortDescriptor in [request sortDescriptors]) {
+		NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sortDescriptor key]];
+		if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKTagName]]) {
+			sort = @"name";
+			break;
+		} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKTagCount]]) {
+			sort = @"popular";
+			break;
+		}
+	}
+	[query setObject:sort forKey:SKSortKey];
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
 	
