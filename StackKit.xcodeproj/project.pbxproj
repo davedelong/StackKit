@@ -407,8 +407,8 @@
 			children = (
 				55A2E511110E41FD0038E510 /* SKUser.h */,
 				55A2E512110E41FD0038E510 /* SKUser.m */,
-				55C2410D116ADF71009064EE /* SKUserActivity.m */,
 				55C2410C116ADF71009064EE /* SKUserActivity.h */,
+				55C2410D116ADF71009064EE /* SKUserActivity.m */,
 			);
 			name = User;
 			sourceTree = "<group>";

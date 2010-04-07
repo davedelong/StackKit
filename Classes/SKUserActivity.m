@@ -36,6 +36,9 @@ NSString * SKUserActivityTimelineTypeAccepted = @"accepted";
 NSString * SKPostQuestion = @"question";
 NSString * SKPostAnswer = @"answer";
 
+NSString * SKUserActivityFromDateKey = @"fromdate";
+NSString * SKUserActivityToDateKey = @"todate";
+
 @implementation SKUserActivity
 
 @synthesize type;
@@ -101,12 +104,48 @@ NSString * SKPostAnswer = @"answer";
 	NSMutableDictionary * query = [NSMutableDictionary dictionary];
 	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
 	
-	//TODO: handle the fromdate and todate query parameters via the predicate
-	/**
-	 this will involve retrieving the appropriate subpredicates and determining whether they're "from" or "to" based on the subpredicate operator
-	 **/
+	NSArray * datePredicates = [[request predicate] subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];
+	if ([datePredicates count] > 0) {
+		//find the first predicate with either > or >= as the operator.  this is our fromdate
+		NSComparisonPredicate * fromdatePredicate = nil;
+		for (NSComparisonPredicate * predicate in datePredicates) {
+			if ([predicate predicateOperatorType] == NSGreaterThanPredicateOperatorType || 
+				[predicate predicateOperatorType] == NSGreaterThanOrEqualToPredicateOperatorType) {
+				fromdatePredicate = predicate;
+				break;
+			}
+		}
+		if (fromdatePredicate != nil && [[fromdatePredicate rightExpression] expressionType] == NSConstantValueExpressionType) {
+			//we have a fromdate!
+			id constantValue = [[fromdatePredicate rightExpression] constantValue];
+			if ([constantValue isKindOfClass:[NSDate class]]) {
+				NSTimeInterval fromDate = [(NSDate *)constantValue timeIntervalSince1970];
+				[query setObject:[NSNumber numberWithDouble:fromDate] forKey:SKUserActivityFromDateKey];
+			}
+		}
+		
+		//find the first predicate with either < or <= as the operator.  this is our todate
+		NSComparisonPredicate * todatePredicate = nil;
+		for (NSComparisonPredicate * predicate in datePredicates) {
+			if ([predicate predicateOperatorType] == NSLessThanPredicateOperatorType ||
+				[predicate predicateOperatorType] == NSLessThanOrEqualToPredicateOperatorType) {
+				todatePredicate = predicate;
+				break;
+			}
+		}
+		if (todatePredicate != nil && [[todatePredicate rightExpression] expressionType] == NSConstantValueExpressionType) {
+			//we have a todate!
+			id constantValue = [[todatePredicate rightExpression] constantValue];
+			if ([constantValue isKindOfClass:[NSDate class]]) {
+				NSTimeInterval toDate = [(NSDate *)constantValue timeIntervalSince1970];
+				[query setObject:[NSNumber numberWithDouble:toDate] forKey:SKUserActivityToDateKey];
+			}
+		}
+	}
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
+	
+	NSLog(@"%@", apiCall);
 	
 	return apiCall;
 }

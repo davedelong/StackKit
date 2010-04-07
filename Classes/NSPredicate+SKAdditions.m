@@ -11,22 +11,31 @@
 
 @implementation NSPredicate (SKAdditions)
 
-- (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left {
+- (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left {
 	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
 		NSArray * subPredicates = [compound subpredicates];
+		
+		NSMutableArray * matches = [NSMutableArray array];
 		for (NSPredicate * subPredicate in subPredicates) {
-			NSPredicate * match = [subPredicate subPredicateForLeftExpression:left];
-			if (match != nil) {
-				return match;
-			}
+			NSArray * subPredicateMatches = [subPredicate subPredicatesWithLeftExpression:left];
+			[matches addObjectsFromArray:subPredicateMatches];
 		}
+		return matches;
 	} else if ([self isKindOfClass:[NSComparisonPredicate class]]) {
 		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
 		NSExpression * leftExpression = [comparison leftExpression];
 		if ([leftExpression isEqual:left]) {
-			return self;
+			return [NSArray arrayWithObject:self];
 		}
+	}
+	return nil;
+}
+
+- (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left {
+	NSArray * matches = [self subPredicatesWithLeftExpression:left];
+	if ([matches count] > 0) {
+		return [matches objectAtIndex:0];
 	}
 	return nil;
 }

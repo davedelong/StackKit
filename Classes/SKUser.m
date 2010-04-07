@@ -56,6 +56,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite]) {
+		NSLog(@"%@", dictionary);
 		userID = [[dictionary objectForKey:SKUserID] retain];
 		displayName = [[dictionary objectForKey:SKUserDisplayName] retain];
 		emailHash = [[dictionary objectForKey:SKUserEmailHash] retain];
