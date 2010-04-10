@@ -21,28 +21,28 @@ NSString * SKBadgeRankBronze = @"bronze";
 
 @implementation SKBadge
 
-@synthesize badgeName;
-@synthesize badgeDescription;
-@synthesize badgeID;
-@synthesize badgeColor;
-@synthesize numberOfBadgesAwarded;
+@synthesize name;
+@synthesize description;
+@synthesize ID;
+@synthesize rank;
+@synthesize numberAwarded;
 @synthesize tagBased;
 
 #pragma mark SKObject methods:
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite]) {
-		badgeID = [[dictionary objectForKey:SKBadgeID] retain];
-		badgeDescription = [[dictionary objectForKey:SKBadgeDescription] retain];
-		badgeName = [[dictionary objectForKey:SKBadgeName] retain];
+		ID = [[dictionary objectForKey:SKBadgeID] retain];
+		description = [[dictionary objectForKey:SKBadgeDescription] retain];
+		name = [[dictionary objectForKey:SKBadgeName] retain];
 		
-		numberOfBadgesAwarded = [[dictionary objectForKey:SKBadgeAwardCount] integerValue];
+		numberAwarded = [[dictionary objectForKey:SKBadgeAwardCount] integerValue];
 		
-		badgeColor = SKBadgeColorBronze;
+		rank = SKBadgeColorBronze;
 		if ([[dictionary objectForKey:SKBadgeColor] isEqual:SKBadgeRankGold]) {
-			badgeColor = SKBadgeColorGold;
+			rank = SKBadgeColorGold;
 		} else if ([[dictionary objectForKey:SKBadgeColor] isEqual:SKBadgeRankSilver]) {
-			badgeColor = SKBadgeColorSilver;
+			rank = SKBadgeColorSilver;
 		}
 		
 		tagBased = [[dictionary objectForKey:SKBadgeTagBased] boolValue];
@@ -54,11 +54,11 @@ NSString * SKBadgeRankBronze = @"bronze";
 	static NSDictionary * _kSKBadgeMappings = nil;
 	if (_kSKBadgeMappings == nil) {
 		_kSKBadgeMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
-							 @"badgeName", SKBadgeName,
-							 @"badgeDescription", SKBadgeDescription,
-							 @"badgeID", SKBadgeID,
-							 @"badgeColor", SKBadgeColor,
-							 @"numberOfBadgesAwarded", SKBadgeAwardCount,
+							 @"name", SKBadgeName,
+							 @"description", SKBadgeDescription,
+							 @"ID", SKBadgeID,
+							 @"rank", SKBadgeColor,
+							 @"numberAwarded", SKBadgeAwardCount,
 							 @"tagBased", SKBadgeTagBased,
 							 @"userID", SKUserID,
 							 nil];
@@ -119,14 +119,14 @@ NSString * SKBadgeRankBronze = @"bronze";
 
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
-	return ([[self badgeID] isEqual:[object badgeID]]);
+	return ([[self ID] isEqual:[object ID]]);
 }
 
 - (void)dealloc
 {
-	[badgeName release];
-	[badgeDescription release];
-	[badgeID release];
+	[name release];
+	[description release];
+	[ID release];
 	
 	[super dealloc];
 }

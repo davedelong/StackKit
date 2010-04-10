@@ -14,7 +14,7 @@ typedef enum {
 	SKBadgeColorBronze = 0,
 	SKBadgeColorSilver = 1,
 	SKBadgeColorGold = 2
-} SKBadgeColor_t;
+} SKBadgeRank;
 
 extern NSString * SKBadgeID;
 extern NSString * SKBadgeColor;
@@ -24,23 +24,23 @@ extern NSString * SKBadgeAwardCount;
 extern NSString * SKBadgeTagBased;
 
 @interface SKBadge : SKObject {
-	NSNumber * badgeID;
+	NSNumber *ID;
 	
-	NSString * badgeName;
-	NSString * badgeDescription;
+	NSString *name;
+	NSString *description;
 	
-	SKBadgeColor_t badgeColor;
+	SKBadgeRank rank;
 	
 	BOOL tagBased;
-	NSInteger numberOfBadgesAwarded;
+	NSInteger numberAwarded;
 }
 
-@property (readonly) NSNumber *badgeID;
-@property (readonly) NSString *badgeName;
-@property (readonly) NSString *badgeDescription;
-@property (readonly) SKBadgeColor_t badgeColor;
+@property (readonly) NSNumber *ID;
+@property (readonly) NSString *name;
+@property (readonly) NSString *description;
+@property (readonly) SKBadgeRank rank;
 
-@property (readonly) NSInteger numberOfBadgesAwarded;
+@property (readonly) NSInteger numberAwarded;
 @property (readonly, getter=isTagBased) BOOL tagBased;
 
 @end

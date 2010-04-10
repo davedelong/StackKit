@@ -108,8 +108,8 @@
 	int badgeCount[3] = {0, 0, 0};
 	
 	for (SKBadge * badge in badges) {
-		SKBadgeColor_t color = [badge badgeColor];
-		badgeCount[color] += [badge numberOfBadgesAwarded];
+		SKBadgeRank color = [badge rank];
+		badgeCount[color] += [badge numberAwarded];
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
@@ -136,8 +136,8 @@
 	int badgeCount[3] = {0, 0, 0};
 	
 	for (SKBadge * badge in badges) {
-		SKBadgeColor_t color = [badge badgeColor];
-		badgeCount[color] += [badge numberOfBadgesAwarded];
+		SKBadgeRank color = [badge rank];
+		badgeCount[color] += [badge numberAwarded];
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
