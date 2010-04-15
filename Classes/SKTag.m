@@ -73,9 +73,11 @@ NSUInteger SKTagDefaultPageSize = 70;
 	}
 	
 	//Add sorting to the query
-	NSString * sort = @"recent";
+	NSString * sort = @"activity";
+	NSSortDescriptor * mainDescriptor = nil;
 	for (NSSortDescriptor * sortDescriptor in [request sortDescriptors]) {
 		NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sortDescriptor key]];
+		mainDescriptor = sortDescriptor;
 		if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKTagName]]) {
 			sort = @"name";
 			break;
@@ -84,11 +86,12 @@ NSUInteger SKTagDefaultPageSize = 70;
 			break;
 		}
 	}
+	NSString * order = ([mainDescriptor ascending] ? @"asc" : @"desc");
+	
 	[query setObject:sort forKey:SKSortKey];
+	[query setObject:order forKey:SKSortOrderKey];
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
-	
-	NSLog(@"api: %@", apiCall);
 	
 	return apiCall;
 }

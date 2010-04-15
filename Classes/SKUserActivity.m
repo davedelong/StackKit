@@ -145,8 +145,6 @@ NSString * SKUserActivityToDateKey = @"todate";
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
 	
-	NSLog(@"%@", apiCall);
-	
 	return apiCall;
 }
 

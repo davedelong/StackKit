@@ -17,8 +17,6 @@
 	
 	NSDictionary * stats = [site statistics];
 	
-	NSLog(@"%@", stats);
-	
 	NSString * apiVersion = [[stats objectForKey:SKStatsAPIInfo] objectForKey:SKStatsAPIInfoVersion];
 	STAssertEqualObjects(apiVersion, SKAPIVersion, @"API versions do not match!");
 }

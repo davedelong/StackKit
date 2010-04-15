@@ -8,8 +8,8 @@
 
 #import "SKConstants.h"
 
-NSString * SKAPIKey = @"knockknock";
-NSString * SKAPIVersion = @"0.5";
+NSString * SKAPIKey = @"speakfriendandenter";
+NSString * SKAPIVersion = @"0.6";
 
 NSUInteger SKPageSizeLimitMax = 100;
 NSString * SKPageKey = @"page";
@@ -43,3 +43,10 @@ NSString * SKErrorDomain = @"com.github.davedelong.stackkit";
 NSUInteger SKErrorCodeNotImplemented = 1;
 NSUInteger SKErrorCodeInvalidEntity = 2;
 NSUInteger SKErrorCodeInvalidPredicate = 3;
+
+NSInteger SKErrorCodeNotFound = 404;
+NSInteger SKErrorCodeInternalServerError = 500;
+NSInteger SKErrorCodeInvalidApplicationPublicKey = 4000;
+NSInteger SKErrorCodeInvalidPageSize = 4001;
+NSInteger SKErrorCodeInvalidSort = 4002;
+NSInteger SKErrorCodeInvalidOrder = 4003;
