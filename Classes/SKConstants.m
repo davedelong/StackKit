@@ -43,3 +43,10 @@ NSString * SKErrorDomain = @"com.github.davedelong.stackkit";
 NSUInteger SKErrorCodeNotImplemented = 1;
 NSUInteger SKErrorCodeInvalidEntity = 2;
 NSUInteger SKErrorCodeInvalidPredicate = 3;
+
+NSInteger SKErrorCodeNotFound = 404;
+NSInteger SKErrorCodeInternalServerError = 500;
+NSInteger SKErrorCodeInvalidApplicationPublicKey = 4000;
+NSInteger SKErrorCodeInvalidPageSize = 4001;
+NSInteger SKErrorCodeInvalidSort = 4002;
+NSInteger SKErrorCodeInvalidOrder = 4003;

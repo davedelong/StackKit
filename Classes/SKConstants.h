@@ -43,3 +43,10 @@ extern NSString * SKErrorDomain;
 extern NSUInteger SKErrorCodeNotImplemented;
 extern NSUInteger SKErrorCodeInvalidEntity;
 extern NSUInteger SKErrorCodeInvalidPredicate;
+
+extern NSInteger SKErrorCodeNotFound;
+extern NSInteger SKErrorCodeInternalServerError;
+extern NSInteger SKErrorCodeInvalidApplicationPublicKey;
+extern NSInteger SKErrorCodeInvalidPageSize;
+extern NSInteger SKErrorCodeInvalidSort;
+extern NSInteger SKErrorCodeInvalidOrder;

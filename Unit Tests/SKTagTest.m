@@ -21,7 +21,7 @@
 	NSArray * recent = [site executeFetchRequest:r error:&error];
 	[r release];
 	
-	STAssertNil(error, @"error should be nil");
+	STAssertNil(error, @"error should be nil: %@", error);
 	
 	/**
 	 There's really no way we can verify that these are accurate results without more information returned by the SO API
@@ -40,7 +40,7 @@
 	NSArray * popular = [site executeFetchRequest:r error:&error];
 	[r release];
 	
-	STAssertNil(error, @"error should be nil");
+	STAssertNil(error, @"error should be nil: %@", error);
 	
 	NSUInteger previousCount = UINT_MAX;
 	for (SKTag * tag in popular) {
@@ -60,7 +60,7 @@
 	NSArray * popular = [site executeFetchRequest:r error:&error];
 	[r release];
 	
-	STAssertNil(error, @"error should be nil");
+	STAssertTrue(error == nil, @"error should be nil: %@", error);
 	
 	NSString * previousName = nil;
 	for (SKTag * tag in popular) {
@@ -82,7 +82,7 @@
 	NSArray * userTags = [site executeFetchRequest:r error:&error];
 	[r release];
 	
-	STAssertNil(error, @"error should be nil");
+	STAssertNil(error, @"error should be nil: %@", error);
 	
 	//even though user #115730 has been active in more than 70 tags, only 70 are returned at a time (by default, max is 100)
 	STAssertTrue([userTags count] == 70, @"incorrect number of badges (%ld)", [userTags count]);

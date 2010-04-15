@@ -14,6 +14,10 @@
 @synthesize fetchOffset;
 @synthesize predicate;
 
+NSString * SKErrorResponseKey = @"error";
+NSString * SKErrorCodeKey = @"code";
+NSString * SKErrorMessageKey = @"message";
+
 - (id) initWithSite:(SKSite *)aSite {
 	if (self = [super initWithSite:aSite]) {
 		fetchLimit = 0;
@@ -24,6 +28,12 @@
 
 - (id) init {
 	return [self initWithSite:nil];
+}
+
+- (void) dealloc {
+	[sortDescriptors release];
+	[predicate release];
+	[super dealloc];
 }
 
 + (NSArray *) validFetchEntities {
@@ -48,7 +58,9 @@
 	if ([[[self class] validFetchEntities] containsObject:fetchEntity] == NO) {
 		//invalid entity
 		errorCode = SKErrorCodeInvalidEntity;
-		//TODO: fill in the userinfo
+		
+		NSString * errorMessage = [NSString stringWithFormat:@"%@ is not a valid fetch entity", fetchEntity];
+		errorUserInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
 		goto errorExit;
 	}
 	
@@ -58,13 +70,15 @@
 		//compound predicates can't have compound subpredicates
 		if ([(NSCompoundPredicate *)p compoundPredicateType] != NSAndPredicateType) {
 			errorCode = SKErrorCodeInvalidPredicate;
-			//TODO: fill in the userinfo
+			NSString * errorMessage = @"Fetch predicates may only be simple comparison predicates or an AND of simple comparison predicates";
+			errorUserInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
 			goto errorExit;
 		}
 		for (NSPredicate * subp in [(NSCompoundPredicate *)p subpredicates]) {
 			if ([subp isKindOfClass:[NSCompoundPredicate class]]) {
 				errorCode = SKErrorCodeInvalidPredicate;
-				//TODO: fill in the userinfo
+				NSString * errorMessage = @"Fetch predicates may only be simple comparison predicates or an AND of simple comparison predicates";
+				errorUserInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
 				goto errorExit;
 			}
 		}
@@ -85,22 +99,48 @@ errorExit:
 
 - (NSArray *) executeWithError:(NSError **)error {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	NSMutableArray * objects = nil;
 	NSURL * fetchURL = [self apiCallWithError:error];
-	if (error != nil && *error != nil) { goto errorCleanup; }
-	if (fetchURL == nil) { goto errorCleanup; }
+	
+	NSLog(@"fetching from: %@", fetchURL);
+	
+	if (error != nil && *error != nil) {
+		[*error retain]; //retain the error so it's not destroyed when the pool is drained
+		goto cleanup;
+	}
+	if (fetchURL == nil) { goto cleanup; }
 	
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:fetchURL];
 	NSURLResponse * response = nil;
 	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:error];
-	if (error != nil && *error != nil) { goto errorCleanup; }
+	if (error != nil && *error != nil) {
+		[*error retain];
+		goto cleanup;
+	}
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSDictionary * responseObjects = [responseString JSONValue];
 	assert([responseObjects isKindOfClass:[NSDictionary class]]);
 	assert([[responseObjects allKeys] count] == 1);
+	
+	//check for an error in the response
+	NSDictionary * errorDictionary = [responseObjects objectForKey:SKErrorResponseKey];
+	if (errorDictionary != nil) {
+		//there was an error responding to the request
+		NSNumber * errorCode = [errorDictionary objectForKey:SKErrorCodeKey];
+		NSString * errorMessage = [errorDictionary objectForKey:SKErrorMessageKey];
+		
+		if (error != nil) {
+			NSDictionary * userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
+			userInfo = nil;
+			*error = [[NSError alloc] initWithDomain:SKErrorDomain code:[errorCode integerValue] userInfo:userInfo];
+			goto cleanup;
+		}
+	}
+	
 	id dataObject = [responseObjects objectForKey:[[responseObjects allKeys] objectAtIndex:0]];
 	
-	NSMutableArray * objects = [[NSMutableArray alloc] init];	
+	objects = [[NSMutableArray alloc] init];	
 	
 	if ([dataObject isKindOfClass:[NSArray class]]) {
 		for (NSDictionary * dataDictionary in dataObject) {
@@ -127,12 +167,12 @@ errorExit:
 		[objects sortUsingDescriptors:updatedSortDescriptors];
 	}
 	
+cleanup:
 	[pool release];
+	if (error != nil) {
+		[*error autorelease];
+	}
 	return [objects autorelease];
-	
-errorCleanup:
-	[pool release];
-	return nil;
 }
 
 - (void) setFetchLimit:(NSUInteger)newLimit {

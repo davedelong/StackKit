@@ -43,7 +43,7 @@
 	NSArray * activity = [site executeFetchRequest:r error:&error];
 	[r release];
 	
-	STAssertNil(error, @"error should be nil");
+	STAssertNil(error, @"error should be nil: %@", error);
 	
 	NSArray * actualDescriptions = [activity valueForKey:@"activityDescription"];
 	NSArray * expectedDescriptions = [NSArray arrayWithObjects:@"Is it possible to filter an NSArray by class?",

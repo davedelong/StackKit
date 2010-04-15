@@ -117,12 +117,6 @@ NSString * SKBadgeRankBronze = @"bronze";
 
 #pragma mark SKBadge-specific methods
 
-- (id) valueForKey:(NSString *)key {
-	id v = [super valueForKey:key];
-	NSLog(@"%@", v);
-	return v;
-}
-
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
 	return ([[self ID] isEqual:[object ID]]);

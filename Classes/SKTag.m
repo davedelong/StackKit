@@ -88,8 +88,6 @@ NSUInteger SKTagDefaultPageSize = 70;
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
 	
-	NSLog(@"api: %@", apiCall);
-	
 	return apiCall;
 }
 
