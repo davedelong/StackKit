@@ -79,6 +79,10 @@
 	return [request sortDescriptors];
 }
 
++ (NSDictionary *) validSortDescriptorKeys {
+	return [self APIAttributeToPropertyMapping];
+}
+
 #pragma mark -
 #pragma mark KVC Compliance
 

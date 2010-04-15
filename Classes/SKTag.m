@@ -37,10 +37,10 @@ NSUInteger SKTagDefaultPageSize = 70;
 	/**
 	 Valid endpoints:
 	 
-	 /tags (defaults to /tags/popular)
+	 /tags (defaults to /tags?sort=popular)
 	 /tags?sort=popular (sort by count descending)
 	 /tags?sort=name (sort by name ascending)
-	 /tags?sort=recent (sort by something magical)
+	 /tags?sort=activity (sort by when the tag was last used (or something))
 	 /users/{id}/tags - tags in which user {id} has participated
 	 
 	 **/

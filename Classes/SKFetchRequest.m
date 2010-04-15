@@ -48,6 +48,33 @@ NSString * SKErrorMessageKey = @"message";
 			nil];
 }
 
+- (NSPredicate *) cleanPredicateWithError:(NSError **)error {
+	//TODO: clean the predicate.  error if there are non-supported keys, and replace left expressions as appropriate
+	return [self predicate];
+}
+
+- (NSArray *) cleanSortDescriptorsWithError:(NSError **)error {
+	//evaluate the sort descriptors.  error if there are non-supported keys, and replace keys as appropriate
+	NSDictionary * validSortKeys = [[self entity] validSortDescriptorKeys];
+	
+	NSMutableArray * cleaned = [NSMutableArray array];
+	for (NSSortDescriptor * sort in [self sortDescriptors]) {
+		NSString * sortKey = [sort key];
+		NSString * cleanedKey = [validSortKeys objectForKey:sortKey];
+		if (cleanedKey == nil) {
+			NSString * msg = [NSString stringWithFormat:@"%@ is not a valid sort key", sortKey];
+			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]];
+			return nil;
+		}
+		
+		NSSortDescriptor * newDescriptor = [[NSSortDescriptor alloc] initWithKey:cleanedKey ascending:[sort ascending] selector:[sort selector]];
+		[cleaned addObject:newDescriptor];
+		[newDescriptor release];
+	}
+	
+	return cleaned;
+}
+
 - (NSURL *) apiCallWithError:(NSError **)error {
 	if ([self site] == nil) { return nil; }
 	
@@ -84,14 +111,27 @@ NSString * SKErrorMessageKey = @"message";
 		}
 	}
 	
-	//TODO: clean the predicate.  error if there are non-supported keys, and replace left expressions as appropriate
+	NSError * internalError = nil;
+	NSPredicate * cleanedPredicate = [self cleanPredicateWithError:&internalError];
+	if (internalError != nil) {
+		errorCode = [internalError code];
+		errorUserInfo = [internalError userInfo];
+		goto errorExit;
+	}
+	[self setPredicate:cleanedPredicate];
 	
-	//TODO: evaluate the sort descriptors.  error if there are non-supported keys, and replace keys as appropriate
+	NSArray * cleanedSortDescriptors = [self cleanSortDescriptorsWithError:&internalError];
+	if (internalError != nil) {
+		errorCode = [internalError code];
+		errorUserInfo = [internalError userInfo];
+		goto errorExit;
+	}
+	[self setSortDescriptors:cleanedSortDescriptors];
 	
 	return [fetchEntity apiCallForFetchRequest:self error:error];
 	
 errorExit:
-	if (error != nil && errorCode > 0) {
+	if (error != nil && errorCode > 0 && *error == nil) {
 		*error = [NSError errorWithDomain:SKErrorDomain code:errorCode userInfo:errorUserInfo];
 	}
 	return nil;

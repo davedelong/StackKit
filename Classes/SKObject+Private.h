@@ -30,6 +30,6 @@
 + (NSArray *) updatedSortDescriptorsForFetchRequest:(SKFetchRequest *)request;
 
 + (NSDictionary *) validPredicateExpressions;
-+ (NSArray *) validSortDescriptorKeys;
++ (NSDictionary *) validSortDescriptorKeys;
 
 @end
