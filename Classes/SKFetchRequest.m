@@ -41,7 +41,7 @@
 - (NSURL *) apiCallWithError:(NSError **)error {
 	if ([self site] == nil) { return nil; }
 	
-	NSInteger errorCode = -1;
+	NSInteger errorCode = 0;
 	NSDictionary * errorUserInfo = nil;
 	
 	Class fetchEntity = [self entity];
@@ -70,12 +70,14 @@
 		}
 	}
 	
-	//TODO: evaluate the sort descriptors
+	//TODO: clean the predicate.  error if there are non-supported keys, and replace left expressions as appropriate
+	
+	//TODO: evaluate the sort descriptors.  error if there are non-supported keys, and replace keys as appropriate
 	
 	return [fetchEntity apiCallForFetchRequest:self error:error];
 	
 errorExit:
-	if (error != nil && errorCode >= 0) {
+	if (error != nil && errorCode > 0) {
 		*error = [NSError errorWithDomain:SKErrorDomain code:errorCode userInfo:errorUserInfo];
 	}
 	return nil;

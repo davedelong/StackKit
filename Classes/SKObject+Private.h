@@ -29,4 +29,7 @@
 + (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request;
 + (NSArray *) updatedSortDescriptorsForFetchRequest:(SKFetchRequest *)request;
 
++ (NSDictionary *) validPredicateExpressions;
++ (NSArray *) validSortDescriptorKeys;
+
 @end

@@ -87,7 +87,7 @@
 	if (newKey != nil) {
 		return [self valueForKey:newKey];
 	}
-	return [super valueForUndefinedKey:key];
+	return [super valueForKey:key];
 }
 
 @end

@@ -8,8 +8,8 @@
 
 #import "SKConstants.h"
 
-NSString * SKAPIKey = @"knockknock";
-NSString * SKAPIVersion = @"0.5";
+NSString * SKAPIKey = @"speakfriendandenter";
+NSString * SKAPIVersion = @"0.6";
 
 NSUInteger SKPageSizeLimitMax = 100;
 NSString * SKPageKey = @"page";

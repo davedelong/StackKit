@@ -67,7 +67,7 @@
 	
 	NSArray * returnedDisplayNames = [users valueForKey:SKUserDisplayName];
 	STAssertEqualObjects(returnedDisplayNames, oldest, @"oldest users do not match");
-	STAssertTrue([users count] == 10, @"only 10 users should've been fetched");
+	STAssertTrue([users count] == 10, @"only 10 users should've been fetched: %@", users);
 	
 	STAssertNil(error, @"error should be nil");
 }
