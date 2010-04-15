@@ -9,15 +9,15 @@
 #import "StackKit_Internal.h"
 
 NSString * SKBadgeID = @"badge_id";
-NSString * SKBadgeColor = @"rank";
+NSString * SKBadgeRank = @"rank";
 NSString * SKBadgeName = @"name";
 NSString * SKBadgeDescription = @"description";
 NSString * SKBadgeAwardCount = @"award_count";
 NSString * SKBadgeTagBased = @"tag_based";
 
-NSString * SKBadgeRankGold = @"gold";
-NSString * SKBadgeRankSilver = @"silver";
-NSString * SKBadgeRankBronze = @"bronze";
+NSString * SKBadgeRankGoldKey = @"gold";
+NSString * SKBadgeRankSilverKey = @"silver";
+NSString * SKBadgeRankBronzeKey = @"bronze";
 
 @implementation SKBadge
 
@@ -38,11 +38,11 @@ NSString * SKBadgeRankBronze = @"bronze";
 		
 		numberAwarded = [[dictionary objectForKey:SKBadgeAwardCount] integerValue];
 		
-		rank = SKBadgeColorBronze;
-		if ([[dictionary objectForKey:SKBadgeColor] isEqual:SKBadgeRankGold]) {
-			rank = SKBadgeColorGold;
-		} else if ([[dictionary objectForKey:SKBadgeColor] isEqual:SKBadgeRankSilver]) {
-			rank = SKBadgeColorSilver;
+		rank = SKBadgeRankBronze;
+		if ([[dictionary objectForKey:SKBadgeRank] isEqual:SKBadgeRankGoldKey]) {
+			rank = SKBadgeRankGold;
+		} else if ([[dictionary objectForKey:SKBadgeRank] isEqual:SKBadgeRankSilverKey]) {
+			rank = SKBadgeRankSilver;
 		}
 		
 		tagBased = [[dictionary objectForKey:SKBadgeTagBased] boolValue];
@@ -57,7 +57,7 @@ NSString * SKBadgeRankBronze = @"bronze";
 							 @"name", SKBadgeName,
 							 @"description", SKBadgeDescription,
 							 @"ID", SKBadgeID,
-							 @"rank", SKBadgeColor,
+							 @"rank", SKBadgeRank,
 							 @"numberAwarded", SKBadgeAwardCount,
 							 @"tagBased", SKBadgeTagBased,
 							 @"userID", SKUserID,

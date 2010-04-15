@@ -11,13 +11,13 @@
 
 //Enumeration for badge "levels" – bronze, silver or gold
 typedef enum {
-	SKBadgeColorBronze = 0,
-	SKBadgeColorSilver = 1,
-	SKBadgeColorGold = 2
-} SKBadgeRank;
+	SKBadgeRankBronze = 0,
+	SKBadgeRankSilver = 1,
+	SKBadgeRankGold = 2
+} SKBadgeRank_t;
 
 extern NSString * SKBadgeID;
-extern NSString * SKBadgeColor;
+extern NSString * SKBadgeRank;
 extern NSString * SKBadgeName;
 extern NSString * SKBadgeDescription;
 extern NSString * SKBadgeAwardCount;
@@ -29,7 +29,7 @@ extern NSString * SKBadgeTagBased;
 	NSString *name;
 	NSString *description;
 	
-	SKBadgeRank rank;
+	SKBadgeRank_t rank;
 	
 	BOOL tagBased;
 	NSInteger numberAwarded;
@@ -38,7 +38,7 @@ extern NSString * SKBadgeTagBased;
 @property (readonly) NSNumber *ID;
 @property (readonly) NSString *name;
 @property (readonly) NSString *description;
-@property (readonly) SKBadgeRank rank;
+@property (readonly) SKBadgeRank_t rank;
 
 @property (readonly) NSInteger numberAwarded;
 @property (readonly, getter=isTagBased) BOOL tagBased;

@@ -91,7 +91,7 @@
 	STAssertNil(error, @"error should be nil");
 	
 	for (SKBadge * badge in badges) {
-		STAssertTrue([badge isTagBased] == YES, @"badge %@ should be tag-based", [badge badgeName]);
+		STAssertTrue([badge isTagBased] == YES, @"badge %@ should be tag-based", [badge name]);
 	}
 }
 
@@ -108,13 +108,13 @@
 	int badgeCount[3] = {0, 0, 0};
 	
 	for (SKBadge * badge in badges) {
-		SKBadgeRank color = [badge rank];
-		badgeCount[color] += [badge numberAwarded];
+		SKBadgeRank_t rank = [badge rank];
+		badgeCount[rank] += [badge numberAwarded];
 	}
 	
-	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
-	STAssertTrue(badgeCount[SKBadgeColorSilver] == 18, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
-	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
+	STAssertTrue(badgeCount[SKBadgeRankBronze] == 30, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
+	STAssertTrue(badgeCount[SKBadgeRankSilver] == 18, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
+	STAssertTrue(badgeCount[SKBadgeRankGold] == 2, @"gold badge rank does not match (%d)", badgeCount[SKBadgeRankGold]);
 }
 
 - (void) testUserBadges {
@@ -136,13 +136,13 @@
 	int badgeCount[3] = {0, 0, 0};
 	
 	for (SKBadge * badge in badges) {
-		SKBadgeRank color = [badge rank];
-		badgeCount[color] += [badge numberAwarded];
+		SKBadgeRank_t rank = [badge rank];
+		badgeCount[rank] += [badge numberAwarded];
 	}
 	
-	STAssertTrue(badgeCount[SKBadgeColorBronze] == 30, @"bronze badge color does not match (%d)", badgeCount[SKBadgeColorBronze]);
-	STAssertTrue(badgeCount[SKBadgeColorSilver] == 18, @"silver badge color does not match (%d)", badgeCount[SKBadgeColorSilver]);
-	STAssertTrue(badgeCount[SKBadgeColorGold] == 2, @"gold badge color does not match (%d)", badgeCount[SKBadgeColorGold]);
+	STAssertTrue(badgeCount[SKBadgeRankBronze] == 30, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
+	STAssertTrue(badgeCount[SKBadgeRankSilver] == 18, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
+	STAssertTrue(badgeCount[SKBadgeRankGold] == 2, @"gold badge rank does not match (%d)", badgeCount[SKBadgeRankGold]);
 }
 
 @end
