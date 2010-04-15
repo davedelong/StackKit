@@ -175,7 +175,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 				mainDescriptor = sortDescriptor;
 				break;
 			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]]) {
-				sort = @"newest";
+				sort = @"creation";
 				mainDescriptor = sortDescriptor;
 				break;
 			}

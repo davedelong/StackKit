@@ -46,13 +46,13 @@
 	STAssertNil(error, @"error should be nil: %@", error);
 	
 	NSArray * actualDescriptions = [activity valueForKey:@"activityDescription"];
-	NSArray * expectedDescriptions = [NSArray arrayWithObjects:@"Is it possible to filter an NSArray by class?",
+	NSArray * expectedDescriptions = [NSArray arrayWithObjects:/**@"Is it possible to filter an NSArray by class?",
 									  @"Rounded Rect UIButton without the border",
 									  @"The 10.6.3 os x update broke simulated key-presses for Nestopia.",
 									  @"strchr in objective C?",
 									  @"Get currently selected item in Mac UI",
 									  @"UITabBar customization",
-									  @"Class variable defined at @implementation rather than @interface?",
+									  @"Class variable defined at @implementation rather than @interface?",**/
 									  @"MobileMe Connection - Cocoa",
 									  @"Options for Cocoa-based text editor",
 									  nil];

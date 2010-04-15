@@ -132,7 +132,6 @@ errorExit:
 		
 		if (error != nil) {
 			NSDictionary * userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
-			userInfo = nil;
 			*error = [[NSError alloc] initWithDomain:SKErrorDomain code:[errorCode integerValue] userInfo:userInfo];
 			goto cleanup;
 		}

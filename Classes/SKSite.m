@@ -78,7 +78,7 @@ NSString * SKSiteAPIKey = @"key";
 }
 
 - (void) cacheBadge:(SKBadge *)newBadge {
-	[cachedBadges setObject:newBadge forKey:[newBadge badgeID]];
+	[cachedBadges setObject:newBadge forKey:[newBadge ID]];
 }
 
 #pragma mark -

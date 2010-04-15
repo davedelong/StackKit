@@ -91,7 +91,7 @@
 	STAssertNil(error, @"error should be nil");
 	
 	for (SKBadge * badge in badges) {
-		STAssertTrue([badge isTagBased] == YES, @"badge %@ should be tag-based", [badge badgeName]);
+		STAssertTrue([badge isTagBased] == YES, @"badge %@ should be tag-based", [badge name]);
 	}
 }
 
