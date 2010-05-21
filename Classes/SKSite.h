@@ -38,7 +38,6 @@ extern NSString * SKSiteAPIKey;
 
 + (id) stackoverflowSite;
 
-- (id) initWithAPIURL:(NSURL *)aURL;
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
 - (SKUser *) userWithID:(NSNumber *)aUserID;

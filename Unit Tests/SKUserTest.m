@@ -14,7 +14,7 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	NSString * expected = [NSString stringWithFormat:@"%@/%@/users/115730?key=%@", SKTestAPISite, SKAPIVersion, [site apiKey]];
 	
@@ -36,8 +36,6 @@
 	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 	
 	STAssertEquals([davedelong acceptRate], 100.0f, @"accept rate does not match");
-	
-	[site release];
 }
  
 
