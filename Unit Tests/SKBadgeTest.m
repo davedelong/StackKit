@@ -19,7 +19,7 @@
 	[r setEntity:[SKBadge class]];
 
 	NSError * error = nil;
-	NSArray * badges = [site executeFetchRequest:r error:&error];
+	NSArray * badges = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertNil(error, @"error should be nil");
@@ -85,7 +85,7 @@
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgeTagBased, [NSNumber numberWithBool:YES]]];
 	
 	NSError * error = nil;
-	NSArray * badges = [site executeFetchRequest:r error:&error];
+	NSArray * badges = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertNil(error, @"error should be nil");
@@ -102,7 +102,7 @@
 	[r setEntity:[SKBadge class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
 	
-	NSArray * badges = [site executeFetchRequest:r error:nil];
+	NSArray * badges = [site executeSynchronousFetchRequest:r error:nil];
 	[r release];
 	
 	int badgeCount[3] = {0, 0, 0};
@@ -112,7 +112,7 @@
 		badgeCount[rank] += [badge numberAwarded];
 	}
 	
-	STAssertTrue(badgeCount[SKBadgeRankBronze] == 30, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
+	STAssertTrue(badgeCount[SKBadgeRankBronze] == 33, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
 	STAssertTrue(badgeCount[SKBadgeRankSilver] == 18, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
 	STAssertTrue(badgeCount[SKBadgeRankGold] == 2, @"gold badge rank does not match (%d)", badgeCount[SKBadgeRankGold]);
 }
@@ -123,7 +123,7 @@
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKUser class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
-	NSArray * matches = [site executeFetchRequest:r error:nil];
+	NSArray * matches = [site executeSynchronousFetchRequest:r error:nil];
 	[r release];
 	
 	STAssertTrue([matches count] == 1, @"wrong number of users");
@@ -140,7 +140,7 @@
 		badgeCount[rank] += [badge numberAwarded];
 	}
 	
-	STAssertTrue(badgeCount[SKBadgeRankBronze] == 30, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
+	STAssertTrue(badgeCount[SKBadgeRankBronze] == 33, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
 	STAssertTrue(badgeCount[SKBadgeRankSilver] == 18, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
 	STAssertTrue(badgeCount[SKBadgeRankGold] == 2, @"gold badge rank does not match (%d)", badgeCount[SKBadgeRankGold]);
 }

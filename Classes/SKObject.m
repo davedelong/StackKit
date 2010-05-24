@@ -40,9 +40,7 @@
 }
 
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
-	if (error != nil) {
-		*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil];
-	}
+	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
 	
 	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
 	return nil;

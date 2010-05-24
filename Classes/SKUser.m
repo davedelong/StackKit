@@ -122,7 +122,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	return _kSKUserMappings;
 }
 
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 endpoints returning user objects:
 	 /users/{id}
@@ -228,7 +228,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	[r setEntity:[SKBadge class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
 	
-	NSArray * badges = [[self site] executeFetchRequest:r error:nil];
+	NSArray * badges = [[self site] executeSynchronousFetchRequest:r error:nil];
 	[r release];
 	
 	return badges;
@@ -239,7 +239,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	[r setEntity:[SKTag class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
 	
-	NSArray * tags = [[self site] executeFetchRequest:r error:nil];
+	NSArray * tags = [[self site] executeSynchronousFetchRequest:r error:nil];
 	[r release];
 	
 	return tags;

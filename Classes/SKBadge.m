@@ -66,7 +66,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	return _kSKBadgeMappings;
 }
 
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible badge endpoints:
 	 

@@ -8,45 +8,46 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * SKAPIKey;
-extern NSString * SKAPIVersion;
+extern NSString * const SKAPIKey;
+extern NSString * const SKAPIVersion;
 
-extern NSUInteger SKPageSizeLimitMax;
-extern NSString * SKPageKey;
-extern NSString * SKPageSizeKey;
+extern NSUInteger const SKPageSizeLimitMax;
+extern NSString * const SKPageKey;
+extern NSString * const SKPageSizeKey;
 
-extern NSString * SKSortKey;
-extern NSString * SKSortOrderKey;
+extern NSString * const SKSortKey;
+extern NSString * const SKSortOrderKey;
 
 #pragma mark -
 #pragma mark Statistics Keys
-extern NSString * SKStatsTotalQuestions;
-extern NSString * SKStatsTotalUnansweredQuestions;
-extern NSString * SKStatsTotalAnswers;
-extern NSString * SKStatsTotalComments;
-extern NSString * SKStatsTotalVotes;
-extern NSString * SKStatsTotalBadges;
-extern NSString * SKStatsTotalUsers;
-extern NSString * SKStatsQuestionsPerMinute;
-extern NSString * SKStatsAnswersPerMinutes;
-extern NSString * SKStatsBadgesPerMinute;
+extern NSString * const SKStatsTotalQuestions;
+extern NSString * const SKStatsTotalUnansweredQuestions;
+extern NSString * const SKStatsTotalAnswers;
+extern NSString * const SKStatsTotalComments;
+extern NSString * const SKStatsTotalVotes;
+extern NSString * const SKStatsTotalBadges;
+extern NSString * const SKStatsTotalUsers;
+extern NSString * const SKStatsQuestionsPerMinute;
+extern NSString * const SKStatsAnswersPerMinutes;
+extern NSString * const SKStatsBadgesPerMinute;
 
-extern NSString * SKStatsAPIInfo;
-extern NSString * SKStatsAPIInfoVersion;
-extern NSString * SKStatsAPIInfoRevision;
+extern NSString * const SKStatsAPIInfo;
+extern NSString * const SKStatsAPIInfoVersion;
+extern NSString * const SKStatsAPIInfoRevision;
 
 #pragma mark -
 #pragma mark Error Constants
-extern NSString * SKErrorDomain;
+extern NSString * const SKErrorDomain;
+extern NSString * const SKExceptionInvalidDelegate;
 
 #pragma mark Error codes
-extern NSUInteger SKErrorCodeNotImplemented;
-extern NSUInteger SKErrorCodeInvalidEntity;
-extern NSUInteger SKErrorCodeInvalidPredicate;
+extern NSUInteger const SKErrorCodeNotImplemented;
+extern NSUInteger const SKErrorCodeInvalidEntity;
+extern NSUInteger const SKErrorCodeInvalidPredicate;
 
-extern NSInteger SKErrorCodeNotFound;
-extern NSInteger SKErrorCodeInternalServerError;
-extern NSInteger SKErrorCodeInvalidApplicationPublicKey;
-extern NSInteger SKErrorCodeInvalidPageSize;
-extern NSInteger SKErrorCodeInvalidSort;
-extern NSInteger SKErrorCodeInvalidOrder;
+extern NSInteger const SKErrorCodeNotFound;
+extern NSInteger const SKErrorCodeInternalServerError;
+extern NSInteger const SKErrorCodeInvalidApplicationPublicKey;
+extern NSInteger const SKErrorCodeInvalidPageSize;
+extern NSInteger const SKErrorCodeInvalidSort;
+extern NSInteger const SKErrorCodeInvalidOrder;

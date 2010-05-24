@@ -37,6 +37,8 @@ NSString * SKSiteAPIKey = @"key";
 		cachedBadges = [[NSMutableDictionary alloc] init];
 		
 		timeoutInterval = 60.0;
+		requestQueue = [[NSOperationQueue alloc] init];
+		[requestQueue setMaxConcurrentOperationCount:1];
 	}
 	return self;
 }
@@ -49,6 +51,9 @@ NSString * SKSiteAPIKey = @"key";
 	[cachedUsers release];
 	[cachedTags release];
 	[cachedBadges release];
+	
+	[requestQueue cancelAllOperations];
+	[requestQueue release];
 	
 	[super dealloc];
 }
@@ -87,16 +92,32 @@ NSString * SKSiteAPIKey = @"key";
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, aUserID]];
 	NSError * error = nil;
-	NSArray * matches = [self executeFetchRequest:request error:&error];
+	NSArray * matches = [self executeSynchronousFetchRequest:request error:&error];
 	[request release];
 	if (error != nil) { return nil; }
 	if ([matches count] != 1) { return nil; }
 	return [matches objectAtIndex:0];
 }
 
-- (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
 	[fetchRequest setSite:self];
-	return [fetchRequest executeWithError:error];
+	[fetchRequest setDelegate:nil];
+	
+	NSArray * results = [fetchRequest execute];
+	if ([fetchRequest error] && error) {
+		*error = [fetchRequest error];
+	}
+	return results;
+}
+
+- (void) executeFetchRequestAsynchronously:(SKFetchRequest *)fetchRequest {
+	if ([fetchRequest delegate] == nil) {
+		return;
+	}
+	
+	NSInvocationOperation * operation = [[NSInvocationOperation alloc] initWithTarget:fetchRequest selector:@selector(executeAsynchronously) object:nil];
+	[requestQueue addOperation:operation];
+	[operation release];
 }
 
 - (NSDictionary *) statistics {

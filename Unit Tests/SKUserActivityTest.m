@@ -19,7 +19,7 @@
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, @"115730"]];
 	
 	NSError * error = nil;
-	NSArray * activity = [site executeFetchRequest:r error:&error];
+	NSArray * activity = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertNil(error, @"error should be nil");
@@ -40,7 +40,7 @@
 	[r setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SKUserActivityCreationDate ascending:YES]]];
 	
 	NSError * error = nil;
-	NSArray * activity = [site executeFetchRequest:r error:&error];
+	NSArray * activity = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);

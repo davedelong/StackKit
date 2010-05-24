@@ -24,6 +24,8 @@ extern NSString * SKSiteAPIKey;
 	NSMutableDictionary * cachedBadges;
 	
 	NSTimeInterval timeoutInterval;
+	
+	NSOperationQueue * requestQueue;
 }
 
 @property (readonly) NSURL * apiURL;
@@ -41,7 +43,9 @@ extern NSString * SKSiteAPIKey;
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
 - (SKUser *) userWithID:(NSNumber *)aUserID;
-- (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
+
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
+- (void) executeFetchRequestAsynchronously:(SKFetchRequest *)fetchRequest;
 
 - (NSDictionary *) statistics;
 
