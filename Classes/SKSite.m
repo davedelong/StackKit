@@ -112,7 +112,10 @@ NSString * SKSiteAPIKey = @"key";
 
 - (void) executeFetchRequestAsynchronously:(SKFetchRequest *)fetchRequest {
 	if ([fetchRequest delegate] == nil) {
-		return;
+		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKFetchRequest.delegate cannot be nil" userInfo:nil];
+	}
+	if ([[fetchRequest delegate] conformsToProtocol:@protocol(SKFetchRequestDelegate)] == NO) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKFetchRequest.delegate must conform to <SKFetchRequestDelegate>" userInfo:nil];
 	}
 	
 	NSInvocationOperation * operation = [[NSInvocationOperation alloc] initWithTarget:fetchRequest selector:@selector(executeAsynchronously) object:nil];
