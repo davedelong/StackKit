@@ -66,47 +66,108 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	return _kSKBadgeMappings;
 }
 
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible badge endpoints:
 	 
+	 /badges (which is the same as /badges/name)
 	 /users/{id}/badges
 	 /badges/tags
-	 /badges/name
+	 /badges/{id}
+	 
+	 Therefore, the only supported predicates are:
+	 
+	 SKUserID = ##
+	 SKBadgeID = ##
+	 SKBadgeTagBased = 1
 	 
 	 **/
 	
-	NSMutableString * relativeString = [NSMutableString string];
 	
 	NSPredicate * p = [request predicate];
-	id badgesForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-	NSNumber * badgesByTag = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeTagBased]];
+	NSString * path = nil;
 	
-	if (p != nil && badgesForUser != nil) {
-		//retrieve badges for a specific user
-		
-		NSNumber * userID = nil;
-		if ([badgesForUser isKindOfClass:[SKUser class]]) {
-			userID = [badgesForUser userID];
-		} else if ([badgesForUser isKindOfClass:[NSNumber class]]) {
-			userID = badgesForUser;
-		} else {
-			userID = [NSNumber numberWithInt:[[badgesForUser description] intValue]];
+	if (p != nil) {
+		//first, make sure that the predicate is an NSComparisonPredicate
+		if ([p isKindOfClass:[NSComparisonPredicate class]] == NO) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
 		}
 		
-		[relativeString appendFormat:@"/users/%@/badges", userID];
-	} else if (p != nil && [badgesByTag boolValue] == YES) {
-		//retrieve tag badges
-		[relativeString appendString:@"/badges/tags"];
+		//next, make sure the operator is ==
+		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
+		if ([comparisonP predicateOperatorType] != NSEqualToPredicateOperatorType) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
+		}
+		
+		//make sure the left expression is a keyPath
+		NSExpression * left = [comparisonP leftExpression];
+		if ([left expressionType] != NSKeyPathExpressionType) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
+		}
+		
+		//make sure the left expression is either SKUserID, SKBadgeTagBased, SKBadgeID
+		NSString * leftKeyPath = [left keyPath];
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKUserID, SKBadgeTagBased, SKBadgeID, nil];
+		if ([validKeyPaths containsObject:leftKeyPath] == NO) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
+		}
+		
+		//make sure the right expression is a constantValue
+		NSExpression * right = [comparisonP rightExpression];
+		if ([right expressionType] != NSConstantValueExpressionType) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
+		}
+		
+		//if the left expression is SKBadgeTagBased, then the right expression must be 1
+		if ([leftKeyPath isEqual:SKBadgeTagBased] && [[right constantValue] intValue] != 1) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
+		}
+		
+		//if we get here, then the predicate is of the proper format
+		NSNumber * badgesByTag = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeTagBased]];
+		id badgesForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		id badgeID = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeID]];
+		
+		if (badgesByTag != nil) {
+			path = @"/badges/tags";
+		} else if (badgesForUser != nil) {
+			NSNumber * userID = nil;
+			if ([badgesForUser isKindOfClass:[SKUser class]]) {
+				userID = [badgesForUser userID];
+			} else if ([badgesForUser isKindOfClass:[NSNumber class]]) {
+				userID = badgesForUser;
+			} else {
+				userID = [NSNumber numberWithInt:[[badgesForUser description] intValue]];
+			}
+			path = [NSString stringWithFormat:@"/users/%@/badges", userID];
+		} else if (badgeID != nil) {
+			if ([badgeID isKindOfClass:[NSNumber class]] == NO) {
+				badgeID = [NSNumber numberWithInt:[[badgeID description] intValue]];
+			}
+			path = [NSString stringWithFormat:@"/badges/%@", badgeID];
+		}
 	} else {
-		//default to retrieving badges by name
-		[relativeString appendString:@"/badges/name"];
+		//there is no predicate
+		//we are requesting either /badges or /badges/name (which are identical)
+		path = @"/badges";
+	}
+	
+	if (path == nil) {
+		//we somehow got a nil path.  not sure why...
+		[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeUnknownError userInfo:nil]];
+		return nil;
 	}
 	
 	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
+	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];	
 	
-	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 	
 	return apiCall;
 }

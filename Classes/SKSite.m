@@ -18,15 +18,13 @@ NSString * SKSiteAPIKey = @"key";
 @synthesize timeoutInterval;
 
 + (id) stackoverflowSite {
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]] autorelease];
+	NSString * key = [NSString stringWithContentsOfFile:@"consumerKey.txt" encoding:NSUTF8StringEncoding error:nil];
+	if (key == nil) { return nil; }
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:key] autorelease];
 }
 
 #pragma mark -
 #pragma mark Init/Dealloc
-
-- (id) initWithAPIURL:(NSURL *)aURL {
-	return [self initWithAPIURL:aURL APIKey:SKAPIKey];
-}
 
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key {
 	if (self = [super initWithSite:nil]) {
@@ -39,6 +37,8 @@ NSString * SKSiteAPIKey = @"key";
 		cachedBadges = [[NSMutableDictionary alloc] init];
 		
 		timeoutInterval = 60.0;
+		requestQueue = [[NSOperationQueue alloc] init];
+		[requestQueue setMaxConcurrentOperationCount:1];
 	}
 	return self;
 }
@@ -52,6 +52,9 @@ NSString * SKSiteAPIKey = @"key";
 	[cachedTags release];
 	[cachedBadges release];
 	
+	[requestQueue cancelAllOperations];
+	[requestQueue release];
+	
 	[super dealloc];
 }
 
@@ -62,6 +65,7 @@ NSString * SKSiteAPIKey = @"key";
 	return [[self retain] autorelease];
 }
 
+/**
 #pragma mark -
 #pragma mark Object Caching
 
@@ -80,6 +84,7 @@ NSString * SKSiteAPIKey = @"key";
 - (void) cacheBadge:(SKBadge *)newBadge {
 	[cachedBadges setObject:newBadge forKey:[newBadge ID]];
 }
+**/
 
 #pragma mark -
 #pragma mark Fetch Requests
@@ -89,16 +94,35 @@ NSString * SKSiteAPIKey = @"key";
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, aUserID]];
 	NSError * error = nil;
-	NSArray * matches = [self executeFetchRequest:request error:&error];
+	NSArray * matches = [self executeSynchronousFetchRequest:request error:&error];
 	[request release];
 	if (error != nil) { return nil; }
 	if ([matches count] != 1) { return nil; }
 	return [matches objectAtIndex:0];
 }
 
-- (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
 	[fetchRequest setSite:self];
-	return [fetchRequest executeWithError:error];
+	[fetchRequest setDelegate:nil];
+	
+	NSArray * results = [fetchRequest execute];
+	if ([fetchRequest error] && error) {
+		*error = [fetchRequest error];
+	}
+	return results;
+}
+
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest {
+	if ([fetchRequest delegate] == nil) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKFetchRequest.delegate cannot be nil" userInfo:nil];
+	}
+	if ([[fetchRequest delegate] conformsToProtocol:@protocol(SKFetchRequestDelegate)] == NO) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKFetchRequest.delegate must conform to <SKFetchRequestDelegate>" userInfo:nil];
+	}
+	
+	NSInvocationOperation * operation = [[NSInvocationOperation alloc] initWithTarget:fetchRequest selector:@selector(executeAsynchronously) object:nil];
+	[requestQueue addOperation:operation];
+	[operation release];
 }
 
 - (NSDictionary *) statistics {

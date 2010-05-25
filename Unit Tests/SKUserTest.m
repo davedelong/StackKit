@@ -14,7 +14,7 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [[SKSite alloc] initWithAPIURL:[NSURL URLWithString:SKTestAPISite]];
+	SKSite * site = [SKSite stackoverflowSite];
 	
 	NSString * expected = [NSString stringWithFormat:@"%@/%@/users/115730?key=%@", SKTestAPISite, SKAPIVersion, [site apiKey]];
 	
@@ -22,10 +22,10 @@
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
 	
-	NSURL * requestURL = [request apiCallWithError:nil];
+	NSURL * requestURL = [request apiCall];
 	STAssertEqualObjects([requestURL absoluteString], expected, @"request did not generate appropriate URL");
 	
-	NSArray * results = [site executeFetchRequest:request error:nil];
+	NSArray * results = [site executeSynchronousFetchRequest:request error:nil];
 	STAssertTrue([results count] == 1, @"request should return 1 object");
 	
 	SKUser * davedelong = [results objectAtIndex:0];
@@ -36,8 +36,6 @@
 	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 	
 	STAssertEquals([davedelong acceptRate], 100.0f, @"accept rate does not match");
-	
-	[site release];
 }
  
 
@@ -50,7 +48,7 @@
 	[request setFetchLimit:10];
 	
 	NSError * error = nil;
-	NSArray * users = [site executeFetchRequest:request error:&error];
+	NSArray * users = [site executeSynchronousFetchRequest:request error:&error];
 	[request release];
 	
 	NSArray * oldest = [NSArray arrayWithObjects:@"Community",
@@ -80,7 +78,7 @@
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKUserDisplayName, @"DeLong"]];
 	
 	NSError * error = nil;
-	NSArray * matches = [site executeFetchRequest:request error:&error];
+	NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
 	[request release];
 	STAssertNil(error, @"error should be nil");
 	STAssertTrue([matches count] == 1, @"matches should only have 1 object");

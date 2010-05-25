@@ -13,6 +13,8 @@
 @synthesize fetchLimit;
 @synthesize fetchOffset;
 @synthesize predicate;
+@synthesize error;
+@synthesize delegate;
 
 NSString * SKErrorResponseKey = @"error";
 NSString * SKErrorCodeKey = @"code";
@@ -33,6 +35,7 @@ NSString * SKErrorMessageKey = @"message";
 - (void) dealloc {
 	[sortDescriptors release];
 	[predicate release];
+	[error release];
 	[super dealloc];
 }
 
@@ -63,7 +66,7 @@ NSString * SKErrorMessageKey = @"message";
 		NSString * cleanedKey = [validSortKeys objectForKey:sortKey];
 		if (cleanedKey == nil) {
 			NSString * msg = [NSString stringWithFormat:@"%@ is not a valid sort key", sortKey];
-			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]];
+			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
 			return nil;
 		}
 		
@@ -75,7 +78,7 @@ NSString * SKErrorMessageKey = @"message";
 	return cleaned;
 }
 
-- (NSURL *) apiCallWithError:(NSError **)error {
+- (NSURL *) apiCall {
 	if ([self site] == nil) { return nil; }
 	
 	NSInteger errorCode = 0;
@@ -128,35 +131,71 @@ NSString * SKErrorMessageKey = @"message";
 	}
 	[self setSortDescriptors:cleanedSortDescriptors];
 	
-	return [fetchEntity apiCallForFetchRequest:self error:error];
+	return [fetchEntity apiCallForFetchRequest:self];
 	
 errorExit:
-	if (error != nil && errorCode > 0 && *error == nil) {
-		*error = [NSError errorWithDomain:SKErrorDomain code:errorCode userInfo:errorUserInfo];
+	if (error == nil && errorCode > 0) {
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:errorCode userInfo:errorUserInfo]];
 	}
 	return nil;
 }
 
-- (NSArray *) executeWithError:(NSError **)error {
+- (void) executeAsynchronously {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	
+	NSArray * results = [self execute];
+	
+	if ([self error] != nil) {
+		//ERROR!
+		if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didFailWithError:)]) {
+			[[self delegate] fetchRequest:self didFailWithError:[self error]];
+		}
+	} else {
+		//OK
+		if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didReturnResults:)]) {
+			[[self delegate] fetchRequest:self didReturnResults:results];
+		}
+	}
+	
+	[pool release];
+}
+
+- (NSArray *) execute {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	NSMutableArray * objects = nil;
-	NSURL * fetchURL = [self apiCallWithError:error];
+	
+	//construct our fetch url
+	NSURL * fetchURL = [self apiCall];
 	
 	NSLog(@"fetching from: %@", fetchURL);
 	
-	if (error != nil && *error != nil) {
-		[*error retain]; //retain the error so it's not destroyed when the pool is drained
+	if (error != nil) {
 		goto cleanup;
 	}
 	if (fetchURL == nil) { goto cleanup; }
 	
+	//signal the delegate
+	if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequestWillBeginExecuting:)]) {
+		[[self delegate] fetchRequestWillBeginExecuting:self];
+	}
+	
+	//execute the GET request
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:fetchURL];
 	NSURLResponse * response = nil;
-	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:error];
-	if (error != nil && *error != nil) {
-		[*error retain];
+	NSError * connectionError = nil;
+	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&connectionError];
+	
+	//signal the delegate
+	if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequestDidFinishExecuting:)]) {
+		[[self delegate] fetchRequestDidFinishExecuting:self];
+	}
+	
+	if (connectionError != nil) {
+		[self setError:connectionError];
 		goto cleanup;
 	}
+	
+	//handle the response
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSDictionary * responseObjects = [responseString JSONValue];
@@ -172,15 +211,17 @@ errorExit:
 		
 		if (error != nil) {
 			NSDictionary * userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
-			*error = [[NSError alloc] initWithDomain:SKErrorDomain code:[errorCode integerValue] userInfo:userInfo];
+			[self setError:[NSError errorWithDomain:SKErrorDomain code:[errorCode integerValue] userInfo:userInfo]];
 			goto cleanup;
 		}
 	}
 	
+	//pull out the data container
 	id dataObject = [responseObjects objectForKey:[[responseObjects allKeys] objectAtIndex:0]];
 	
 	objects = [[NSMutableArray alloc] init];	
 	
+	//parse the response into objects
 	if ([dataObject isKindOfClass:[NSArray class]]) {
 		for (NSDictionary * dataDictionary in dataObject) {
 			SKObject * object = [[self entity] objectWithSite:[self site] dictionaryRepresentation:dataDictionary];
@@ -190,6 +231,8 @@ errorExit:
 		SKObject * object = [[self entity] objectWithSite:[self site] dictionaryRepresentation:dataObject];
 		[objects addObject:object];
 	}
+	
+	//TODO: decide if we still want to do more filtering/sorting after the request
 	
 	//the class might need to remove certain components of the predice
 	//for example, we can request SKBadges where SKUserID = value,
@@ -208,9 +251,6 @@ errorExit:
 	
 cleanup:
 	[pool release];
-	if (error != nil) {
-		[*error autorelease];
-	}
 	return [objects autorelease];
 }
 

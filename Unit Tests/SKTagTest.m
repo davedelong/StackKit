@@ -18,7 +18,7 @@
 	[r setEntity:[SKTag class]];
 
 	NSError * error = nil;
-	NSArray * recent = [site executeFetchRequest:r error:&error];
+	NSArray * recent = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);
@@ -37,7 +37,7 @@
 	[r setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SKTagCount ascending:NO]]];
 	
 	NSError * error = nil;
-	NSArray * popular = [site executeFetchRequest:r error:&error];
+	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);
@@ -57,7 +57,7 @@
 	[r setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SKTagName ascending:YES]]];
 	
 	NSError * error = nil;
-	NSArray * popular = [site executeFetchRequest:r error:&error];
+	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertTrue(error == nil, @"error should be nil: %@", error);
@@ -79,7 +79,7 @@
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
 	
 	NSError * error = nil;
-	NSArray * userTags = [site executeFetchRequest:r error:&error];
+	NSArray * userTags = [site executeSynchronousFetchRequest:r error:&error];
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);

@@ -1,4 +1,5 @@
 build
+consumerKey.txt
 **/*.mode1v3
 **/*.perspectivev3
 **/*.pbxuser

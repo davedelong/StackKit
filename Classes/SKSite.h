@@ -18,31 +18,24 @@ extern NSString * SKSiteAPIKey;
 	NSString * apiKey;
 	NSURL * apiURL;
 	
-	NSMutableDictionary * cachedPosts;
-	NSMutableDictionary * cachedUsers;
-	NSMutableDictionary * cachedTags;
-	NSMutableDictionary * cachedBadges;
-	
 	NSTimeInterval timeoutInterval;
+	
+	NSOperationQueue * requestQueue;
 }
 
 @property (readonly) NSURL * apiURL;
-
-@property (readonly) NSDictionary * cachedUsers;
-@property (readonly) NSDictionary * cachedPosts;
-@property (readonly) NSDictionary * cachedTags;
-@property (readonly) NSDictionary * cachedBadges;
 @property (readonly) NSString * apiKey;
 
 @property NSTimeInterval timeoutInterval;
 
 + (id) stackoverflowSite;
 
-- (id) initWithAPIURL:(NSURL *)aURL;
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
 - (SKUser *) userWithID:(NSNumber *)aUserID;
-- (NSArray *) executeFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
+
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest;
 
 - (NSDictionary *) statistics;
 

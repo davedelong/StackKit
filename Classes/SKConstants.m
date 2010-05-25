@@ -8,45 +8,46 @@
 
 #import "SKConstants.h"
 
-NSString * SKAPIKey = @"0xDEADBEEF";
-NSString * SKAPIVersion = @"0.7";
+NSString * const SKAPIVersion = @"0.8";
 
-NSUInteger SKPageSizeLimitMax = 100;
-NSString * SKPageKey = @"page";
-NSString * SKPageSizeKey = @"pagesize";
+NSUInteger const SKPageSizeLimitMax = 100;
+NSString * const SKPageKey = @"page";
+NSString * const SKPageSizeKey = @"pagesize";
 
-NSString * SKSortKey = @"sort";
-NSString * SKSortOrderKey = @"order";
+NSString * const SKSortKey = @"sort";
+NSString * const SKSortOrderKey = @"order";
 
 #pragma mark -
 #pragma mark Statistics Keys
-NSString * SKStatsTotalQuestions = @"total_questions";
-NSString * SKStatsTotalUnansweredQuestions = @"total_unanswered";
-NSString * SKStatsTotalAnswers = @"total_answers";
-NSString * SKStatsTotalComments = @"total_comments";
-NSString * SKStatsTotalVotes = @"total_votes";
-NSString * SKStatsTotalBadges = @"total_badges";
-NSString * SKStatsTotalUsers = @"total_users";
-NSString * SKStatsQuestionsPerMinute = @"questions_per_minute";
-NSString * SKStatsAnswersPerMinutes = @"answers_per_minute";
-NSString * SKStatsBadgesPerMinute = @"badges_per_minute";
+NSString * const SKStatsTotalQuestions = @"total_questions";
+NSString * const SKStatsTotalUnansweredQuestions = @"total_unanswered";
+NSString * const SKStatsTotalAnswers = @"total_answers";
+NSString * const SKStatsTotalComments = @"total_comments";
+NSString * const SKStatsTotalVotes = @"total_votes";
+NSString * const SKStatsTotalBadges = @"total_badges";
+NSString * const SKStatsTotalUsers = @"total_users";
+NSString * const SKStatsQuestionsPerMinute = @"questions_per_minute";
+NSString * const SKStatsAnswersPerMinutes = @"answers_per_minute";
+NSString * const SKStatsBadgesPerMinute = @"badges_per_minute";
 
-NSString * SKStatsAPIInfo = @"api_version";
-NSString * SKStatsAPIInfoVersion = @"version";
-NSString * SKStatsAPIInfoRevision = @"revision";	
+NSString * const SKStatsAPIInfo = @"api_version";
+NSString * const SKStatsAPIInfoVersion = @"version";
+NSString * const SKStatsAPIInfoRevision = @"revision";	
 
 #pragma mark -
 #pragma mark Error Constants
-NSString * SKErrorDomain = @"com.github.davedelong.stackkit";
+NSString * const SKErrorDomain = @"com.github.davedelong.stackkit";
+NSString * const SKExceptionInvalidDelegate = @"com.github.davedelong.stackkit.skfetchrequest.delegate";
 
 #pragma mark Error codes
-NSUInteger SKErrorCodeNotImplemented = 1;
-NSUInteger SKErrorCodeInvalidEntity = 2;
-NSUInteger SKErrorCodeInvalidPredicate = 3;
+NSUInteger const SKErrorCodeNotImplemented = 1;
+NSUInteger const SKErrorCodeInvalidEntity = 2;
+NSUInteger const SKErrorCodeInvalidPredicate = 3;
+NSUInteger const SKErrorCodeUnknownError = 4;
 
-NSInteger SKErrorCodeNotFound = 404;
-NSInteger SKErrorCodeInternalServerError = 500;
-NSInteger SKErrorCodeInvalidApplicationPublicKey = 4000;
-NSInteger SKErrorCodeInvalidPageSize = 4001;
-NSInteger SKErrorCodeInvalidSort = 4002;
-NSInteger SKErrorCodeInvalidOrder = 4003;
+NSInteger const SKErrorCodeNotFound = 404;
+NSInteger const SKErrorCodeInternalServerError = 500;
+NSInteger const SKErrorCodeInvalidApplicationPublicKey = 4000;
+NSInteger const SKErrorCodeInvalidPageSize = 4001;
+NSInteger const SKErrorCodeInvalidSort = 4002;
+NSInteger const SKErrorCodeInvalidOrder = 4003;
