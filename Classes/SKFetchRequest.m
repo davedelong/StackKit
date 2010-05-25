@@ -163,6 +163,8 @@ errorExit:
 - (NSArray *) execute {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	NSMutableArray * objects = nil;
+	
+	//construct our fetch url
 	NSURL * fetchURL = [self apiCall];
 	
 	NSLog(@"fetching from: %@", fetchURL);
@@ -172,15 +174,18 @@ errorExit:
 	}
 	if (fetchURL == nil) { goto cleanup; }
 	
+	//signal the delegate
 	if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequestWillBeginExecuting:)]) {
 		[[self delegate] fetchRequestWillBeginExecuting:self];
 	}
 	
+	//execute the GET request
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:fetchURL];
 	NSURLResponse * response = nil;
 	NSError * connectionError = nil;
 	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&connectionError];
 	
+	//signal the delegate
 	if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequestDidFinishExecuting:)]) {
 		[[self delegate] fetchRequestDidFinishExecuting:self];
 	}
@@ -189,6 +194,8 @@ errorExit:
 		[self setError:connectionError];
 		goto cleanup;
 	}
+	
+	//handle the response
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSDictionary * responseObjects = [responseString JSONValue];
@@ -209,10 +216,12 @@ errorExit:
 		}
 	}
 	
+	//pull out the data container
 	id dataObject = [responseObjects objectForKey:[[responseObjects allKeys] objectAtIndex:0]];
 	
 	objects = [[NSMutableArray alloc] init];	
 	
+	//parse the response into objects
 	if ([dataObject isKindOfClass:[NSArray class]]) {
 		for (NSDictionary * dataDictionary in dataObject) {
 			SKObject * object = [[self entity] objectWithSite:[self site] dictionaryRepresentation:dataDictionary];
@@ -222,6 +231,8 @@ errorExit:
 		SKObject * object = [[self entity] objectWithSite:[self site] dictionaryRepresentation:dataObject];
 		[objects addObject:object];
 	}
+	
+	//TODO: decide if we still want to do more filtering/sorting after the request
 	
 	//the class might need to remove certain components of the predice
 	//for example, we can request SKBadges where SKUserID = value,

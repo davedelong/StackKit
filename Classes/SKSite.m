@@ -65,6 +65,7 @@ NSString * SKSiteAPIKey = @"key";
 	return [[self retain] autorelease];
 }
 
+/**
 #pragma mark -
 #pragma mark Object Caching
 
@@ -83,6 +84,7 @@ NSString * SKSiteAPIKey = @"key";
 - (void) cacheBadge:(SKBadge *)newBadge {
 	[cachedBadges setObject:newBadge forKey:[newBadge ID]];
 }
+**/
 
 #pragma mark -
 #pragma mark Fetch Requests
@@ -110,7 +112,7 @@ NSString * SKSiteAPIKey = @"key";
 	return results;
 }
 
-- (void) executeFetchRequestAsynchronously:(SKFetchRequest *)fetchRequest {
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest {
 	if ([fetchRequest delegate] == nil) {
 		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKFetchRequest.delegate cannot be nil" userInfo:nil];
 	}

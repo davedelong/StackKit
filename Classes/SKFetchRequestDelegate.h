@@ -16,6 +16,7 @@
 - (void) fetchRequestWillBeginExecuting:(SKFetchRequest *)request;
 - (void) fetchRequestDidFinishExecuting:(SKFetchRequest *)request;
 
+@required
 - (void) fetchRequest:(SKFetchRequest *)request didReturnResults:(NSArray *)results;
 - (void) fetchRequest:(SKFetchRequest *)request didFailWithError:(NSError *)error;
 

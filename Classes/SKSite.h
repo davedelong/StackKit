@@ -18,22 +18,12 @@ extern NSString * SKSiteAPIKey;
 	NSString * apiKey;
 	NSURL * apiURL;
 	
-	NSMutableDictionary * cachedPosts;
-	NSMutableDictionary * cachedUsers;
-	NSMutableDictionary * cachedTags;
-	NSMutableDictionary * cachedBadges;
-	
 	NSTimeInterval timeoutInterval;
 	
 	NSOperationQueue * requestQueue;
 }
 
 @property (readonly) NSURL * apiURL;
-
-@property (readonly) NSDictionary * cachedUsers;
-@property (readonly) NSDictionary * cachedPosts;
-@property (readonly) NSDictionary * cachedTags;
-@property (readonly) NSDictionary * cachedBadges;
 @property (readonly) NSString * apiKey;
 
 @property NSTimeInterval timeoutInterval;
@@ -45,7 +35,7 @@ extern NSString * SKSiteAPIKey;
 - (SKUser *) userWithID:(NSNumber *)aUserID;
 
 - (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
-- (void) executeFetchRequestAsynchronously:(SKFetchRequest *)fetchRequest;
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest;
 
 - (NSDictionary *) statistics;
 
