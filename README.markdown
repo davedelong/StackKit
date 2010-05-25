@@ -20,10 +20,10 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 
 <table>
 	<tr>
-		<td>Endpoint</td>
-		<td>Entity</td>
-		<td>Predicate</td>
-		<td>Description</td>
+		<th>Endpoint</th>
+		<th>Fetch Entity</th>
+		<th>Fetch Predicate</th>
+		<th>Description</th>
 	</tr>
 	<tr>
 		<td>/answers/{id}</td>
@@ -212,6 +212,8 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 		<td>Gets actions the user with 'id' has performed in descending chronological order.</td>
 	</tr>
 </table>
+
+(Note that the predicates listed above may not be the exact predicate required.  However it will be very close to what is expected.  As the feature set evolves, this list will be updated with the correct predicates)
 
 
   [1]: http://stackoverflow.com
