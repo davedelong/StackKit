@@ -43,6 +43,7 @@ NSString * const SKExceptionInvalidDelegate = @"com.github.davedelong.stackkit.s
 NSUInteger const SKErrorCodeNotImplemented = 1;
 NSUInteger const SKErrorCodeInvalidEntity = 2;
 NSUInteger const SKErrorCodeInvalidPredicate = 3;
+NSUInteger const SKErrorCodeUnknownError = 4;
 
 NSInteger const SKErrorCodeNotFound = 404;
 NSInteger const SKErrorCodeInternalServerError = 500;

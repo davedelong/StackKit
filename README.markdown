@@ -58,7 +58,7 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	<tr>
 		<td>/badges/tags</td>
 		<td>SKBadge</td>
-		<td>(none)</td>
+		<td>SKBadgeTagBased = 1</td>
 		<td>Gets all tag-based badges in alphabetical order.</td>
 	</tr>
 	<tr>

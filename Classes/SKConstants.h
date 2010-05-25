@@ -44,6 +44,7 @@ extern NSString * const SKExceptionInvalidDelegate;
 extern NSUInteger const SKErrorCodeNotImplemented;
 extern NSUInteger const SKErrorCodeInvalidEntity;
 extern NSUInteger const SKErrorCodeInvalidPredicate;
+extern NSUInteger const SKErrorCodeUnknownError;
 
 extern NSInteger const SKErrorCodeNotFound;
 extern NSInteger const SKErrorCodeInternalServerError;
