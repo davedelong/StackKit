@@ -137,37 +137,12 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	NSString * path = nil;
 	
 	if (p != nil) {
-		//it must be a comparison predicate
-		if ([p isKindOfClass:[NSComparisonPredicate class]] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
 		
-		//it must have be a == predicate
-		if ([comparisonP predicateOperatorType] != NSEqualToPredicateOperatorType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//the left expression must be a keypath
-		NSExpression * left = [comparisonP leftExpression];
-		if ([left expressionType] != NSKeyPathExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//the left keypath must be SKUserID
-		if ([[left keyPath] isEqual:SKUserID] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//the right expression must be a constantValue
-		NSExpression * right = [comparisonP rightExpression];
-		if ([right expressionType] != NSConstantValueExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;	
+		NSArray * validLeftKeyPaths = [NSArray arrayWithObject:SKUserID];
+		if ([p isComparisonPredicateWithLeftKeyPaths:validLeftKeyPaths 
+											operator:NSEqualToPredicateOperatorType 
+								 rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return invalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		//if we get here, we know the predicate is SKUserID = constantValue

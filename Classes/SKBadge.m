@@ -89,45 +89,12 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	NSString * path = nil;
 	
 	if (p != nil) {
-		//first, make sure that the predicate is an NSComparisonPredicate
-		if ([p isKindOfClass:[NSComparisonPredicate class]] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
 		
-		//next, make sure the operator is ==
-		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
-		if ([comparisonP predicateOperatorType] != NSEqualToPredicateOperatorType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//make sure the left expression is a keyPath
-		NSExpression * left = [comparisonP leftExpression];
-		if ([left expressionType] != NSKeyPathExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//make sure the left expression is either SKBadgeAwardedToUserID, SKBadgeTagBased, SKBadgeID
-		NSString * leftKeyPath = [left keyPath];
 		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKBadgeAwardedToUser, SKBadgeTagBased, SKBadgeID, nil];
-		if ([validKeyPaths containsObject:leftKeyPath] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//make sure the right expression is a constantValue
-		NSExpression * right = [comparisonP rightExpression];
-		if ([right expressionType] != NSConstantValueExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//if the left expression is SKBadgeTagBased, then the right expression must be 1
-		if ([leftKeyPath isEqual:SKBadgeTagBased] && [[right constantValue] intValue] != 1) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
+		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+											operator:NSEqualToPredicateOperatorType 
+								 rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return invalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		//if we get here, then the predicate is of the proper format
@@ -161,8 +128,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	
 	if (path == nil) {
 		//we somehow got a nil path.  not sure why...
-		[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeUnknownError userInfo:nil]];
-		return nil;
+		return invalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
 	NSMutableDictionary * query = [NSMutableDictionary dictionary];

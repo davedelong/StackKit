@@ -11,6 +11,27 @@
 
 @implementation NSPredicate (SKAdditions)
 
+- (BOOL) isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType {
+	if ([self isKindOfClass:[NSComparisonPredicate class]] == NO) { return NO; }
+	NSComparisonPredicate * comp = (NSComparisonPredicate *)self;
+	
+	NSExpression * left = [comp leftExpression];
+	if ([left expressionType] != NSKeyPathExpressionType) { return NO; }
+	
+	NSString * leftKeyPath = [left keyPath];
+	if ([leftKeyPaths containsObject:leftKeyPath] == NO) { return NO; }
+	
+	//pass -1 to ignore operator
+	if (operator >= 0) {
+		if ([comp predicateOperatorType] != operator) { return NO; }
+	}
+	
+	NSExpression * right = [comp rightExpression];
+	if ([right expressionType] != rightType) { return NO; }
+	
+	return YES;
+}
+
 - (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left {
 	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;

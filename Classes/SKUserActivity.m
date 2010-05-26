@@ -75,35 +75,76 @@ NSString * SKUserActivityToDateKey = @"todate";
 	 
 	 **/
 	
-	NSMutableString * relativeString = [NSMutableString string];
+	NSString * path = nil;
+	
+	/**
+	 this can be either a comparison or a compound predicate
+	 if it's a comparison, it must be SKUserID = ##
+	 if it's a compound, it must be an AND compound (OR is not sufficient)
+	 - it must have 1 SKUserID = ## comparison
+	 - it may also have up to 2 SKUserActivityCreationDate comparisons
+	 - it may only have comparison subpredicates
+	 **/
 	
 	NSPredicate * p = [request predicate];
-	id activityForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-	
-	if (p != nil && activityForUser != nil) {
-		//retrieve badges for a specific user
+	if ([p isKindOfClass:[NSComparisonPredicate class]]) {
+		//the predicate must be SKUserID = ##
+		NSArray * validKeyPaths = [NSArray arrayWithObject:SKUserID];
+		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+											operator:NSEqualToPredicateOperatorType 
+								 rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return invalidPredicateErrorForFetchRequest(request, nil);
+		}
+	} else if ([p isKindOfClass:[NSCompoundPredicate class]]) {
+		//TODO: finish the compound predicate
+		NSCompoundPredicate * compoundP = (NSCompoundPredicate *)p;
+		if ([compoundP compoundPredicateType] != NSAndPredicateType) {
+			return invalidPredicateErrorForFetchRequest(request, nil);
+		}
 		
-		NSNumber * userID = nil;
-		if ([activityForUser isKindOfClass:[SKUser class]]) {
-			userID = [activityForUser userID];
-		} else if ([activityForUser isKindOfClass:[NSNumber class]]) {
-			userID = activityForUser;
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKUserID, SKUserActivityCreationDate, nil];
+		for (NSPredicate * subP in [compoundP subpredicates]) {
+			//all the subpredicates must be comparisons with constants values
+			if ([subP isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+												   operator:-1 
+										rightExpressionType:NSConstantValueExpressionType] == NO) {
+				return invalidPredicateErrorForFetchRequest(request, nil);
+			}
+		}
+		NSArray * userIDSubPredicate = [compoundP subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		if ([userIDSubPredicate count] != 1) {
+			//there can only be one
+			return invalidPredicateErrorForFetchRequest(request, nil);
 		} else {
-			userID = [NSNumber numberWithInt:[[activityForUser description] intValue]];
+			//verify it's an SKUserID = ## comparison
 		}
-		
-		[relativeString appendFormat:@"/users/%@/timeline", userID];
+		NSArray * dateSubPredicates = [compoundP subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];
+		if ([dateSubPredicates count] > 2) {
+			//there can't be more than 2
+			return invalidPredicateErrorForFetchRequest(request, nil);
+		} else {
+			//verify it's a legit date comparison
+		}
 	} else {
-		//we can't operate without a predicate or a userID
-		if (error != nil) {
-			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil];
-		}
-		return nil;
+		return invalidPredicateErrorForFetchRequest(request, nil);
 	}
+	
+	id activityForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+	NSNumber * userID = nil;
+	if ([activityForUser isKindOfClass:[SKUser class]]) {
+		userID = [activityForUser userID];
+	} else if ([activityForUser isKindOfClass:[NSNumber class]]) {
+		userID = activityForUser;
+	} else {
+		userID = [NSNumber numberWithInt:[[activityForUser description] intValue]];
+	}
+	
+	path = [NSString stringWithFormat:@"/users/%@/timeline", userID];
 	
 	NSMutableDictionary * query = [NSMutableDictionary dictionary];
 	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
 	
+	/**
 	NSArray * datePredicates = [[request predicate] subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];
 	if ([datePredicates count] > 0) {
 		//find the first predicate with either > or >= as the operator.  this is our fromdate
@@ -142,8 +183,9 @@ NSString * SKUserActivityToDateKey = @"todate";
 			}
 		}
 	}
+	 **/
 	
-	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 	
 	return apiCall;
 }

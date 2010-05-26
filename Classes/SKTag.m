@@ -44,37 +44,12 @@ NSUInteger SKTagDefaultPageSize = 70;
 	NSString * path = nil;
 	NSPredicate * p = [request predicate];
 	if (p != nil) {
-		//it must be a comparison predicate
-		if ([p isKindOfClass:[NSComparisonPredicate class]] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
 		
-		//the operator must be ==
-		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
-		if ([comparisonP predicateOperatorType] != NSEqualToPredicateOperatorType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//the left expression must be a keyPath
-		NSExpression * left = [comparisonP leftExpression];
-		if ([left expressionType] != NSKeyPathExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//the left keypath must be SKTagsParticipatedInByUser
-		if ([[left keyPath] isEqual:SKTagsParticipatedInByUser] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;			
-		}
-		
-		//the right expression must be a constantValue
-		NSExpression * right = [comparisonP rightExpression];
-		if ([right expressionType] != NSConstantValueExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
+		NSArray * validKeyPaths = [NSArray arrayWithObject:SKTagsParticipatedInByUser];
+		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+											operator:NSEqualToPredicateOperatorType 
+								 rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return invalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		//if we get here, we know the predicate is SKTagsParticipatedInByUser = constantValue
