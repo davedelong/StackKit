@@ -280,6 +280,28 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		5506C81E11ADE12800C47C1B /* Q&A */ = {
+			isa = PBXGroup;
+			children = (
+				55A2E689110EA8940038E510 /* SKQAPost.h */,
+				55A2E68A110EA8940038E510 /* SKQAPost.m */,
+				55A2E51B110E424C0038E510 /* SKQuestion.h */,
+				55A2E51C110E424C0038E510 /* SKQuestion.m */,
+				55A2E51F110E425E0038E510 /* SKAnswer.h */,
+				55A2E520110E425E0038E510 /* SKAnswer.m */,
+			);
+			name = "Q&A";
+			sourceTree = "<group>";
+		};
+		5506C81F11ADE13100C47C1B /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				55A2E523110E426E0038E510 /* SKComment.h */,
+				55A2E524110E426E0038E510 /* SKComment.m */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
 		55A2E507110E400A0038E510 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,14 +330,8 @@
 			children = (
 				55A2E527110E42E70038E510 /* SKPost.h */,
 				55A2E528110E42E70038E510 /* SKPost.m */,
-				55A2E689110EA8940038E510 /* SKQAPost.h */,
-				55A2E68A110EA8940038E510 /* SKQAPost.m */,
-				55A2E51B110E424C0038E510 /* SKQuestion.h */,
-				55A2E51C110E424C0038E510 /* SKQuestion.m */,
-				55A2E51F110E425E0038E510 /* SKAnswer.h */,
-				55A2E520110E425E0038E510 /* SKAnswer.m */,
-				55A2E523110E426E0038E510 /* SKComment.h */,
-				55A2E524110E426E0038E510 /* SKComment.m */,
+				5506C81E11ADE12800C47C1B /* Q&A */,
+				5506C81F11ADE13100C47C1B /* Comments */,
 			);
 			name = Posts;
 			sourceTree = "<group>";
