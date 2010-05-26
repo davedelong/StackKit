@@ -15,10 +15,13 @@
 	NSUInteger downVotes;
 	
 	NSUInteger voteCount;
+	
+	NSDate * modifiedDate;
 }
 
 @property (readonly) NSUInteger upVotes;
 @property (readonly) NSUInteger downVotes;
 @property (readonly) NSUInteger voteCount;
+@property (readonly) NSDate * modifiedDate;
 
 @end

@@ -9,12 +9,31 @@
 #import <Foundation/Foundation.h>
 #import "SKPost.h"
 
-@class SKAnswer;
+extern NSString * const SKCommentID;
+extern NSString * const SKCommentInReplyToUser;
+extern NSString * const SKCommentPost;
+extern NSString * const SKCommentScore;
+extern NSString * const SKCommentEditCount;
+
+@class SKPost;
+@class SKUser;
 
 @interface SKComment : SKPost {
-	SKAnswer * answer;
+	NSNumber * commentID;
+	NSNumber * replyToUserID;
+	NSNumber * postID;
+	SKPostType_t postType;
+	NSNumber * score;
+	NSNumber * editCount;
 }
 
-@property (readonly) SKAnswer * answer;
+@property (readonly) NSNumber * commentID;
+@property (readonly) NSNumber * replyToUserID;
+@property (readonly) NSNumber * postID;
+@property (readonly) NSNumber * score;
+@property (readonly) NSNumber * editCount;
+
+- (SKUser *) replyToUser;
+- (SKPost *) post;
 
 @end

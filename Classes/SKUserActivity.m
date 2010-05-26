@@ -123,7 +123,7 @@ NSString * SKUserActivityToDateKey = @"todate";
 			//there can't be more than 2
 			return invalidPredicateErrorForFetchRequest(request, nil);
 		} else {
-			//verify it's a legit date comparison
+			//verify it's a legit date comparison (<=, >=)
 		}
 	} else {
 		return invalidPredicateErrorForFetchRequest(request, nil);

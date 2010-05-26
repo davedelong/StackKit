@@ -11,6 +11,6 @@
 
 @implementation SKQAPost
 
-@synthesize voteCount, upVotes, downVotes;
+@synthesize voteCount, upVotes, downVotes, modifiedDate;
 
 @end

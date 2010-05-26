@@ -8,55 +8,42 @@
 
 #import "StackKit_Internal.h"
 
+NSString * const SKPostCreationDate = @"creation_date";
+NSString * const SKPostOwner = @"owner";
+NSString * const SKPostBody = @"body";
+
 @implementation SKPost
 
-@synthesize postID, creationDate, modifiedDate, author;
+@synthesize creationDate, ownerID, body;
 
-- (id) initWithSite:(SKSite *)aSite json:(NSDictionary *)json {
-	NSNumber * anID = [json objectForKey:@"Id"];
-	SKPost * p = [[aSite cachedPosts] objectForKey:anID];
-	if (p != nil) {
-		[self release];
-		return [p retain];
-	}
-	
-	if (self = [super initWithSite:aSite]) {
-		postID = [anID copy];
-	}
-	[aSite cachePost:self];
-	return self;
++ (NSDictionary *) APIAttributeToPropertyMapping {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			@"ownerID", SKPostOwner,
+			@"creationDate", SKPostCreationDate,
+			nil];
 }
 
-- (id) initWithSite:(SKSite *)aSite postID:(NSNumber *)anID {
-	SKPost * p = [[aSite cachedPosts] objectForKey:anID];
-	if (p != nil) {
-		[self release];
-		return [p retain];
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
+		creationDate = [[dictionary objectForKey:SKPostCreationDate] retain];
+		
+		NSDictionary * ownerDictionary = [dictionary objectForKey:SKPostOwner];
+		ownerID = [[ownerDictionary objectForKey:SKUserID] retain];
+		
+		body = [[dictionary objectForKey:SKPostBody] retain];
 	}
-	
-	if (self = [super initWithSite:aSite]) {
-		postID = [anID copy];
-	}
-	
-	[aSite cachePost:self];
 	return self;
 }
 
 - (void) dealloc {
-	[postID release];
+	[creationDate release];
+	[ownerID release];
+	[body release];
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark Private Methods
-
-- (void) loadJSON:(NSDictionary *)jsonDictionary {
-	if ([jsonDictionary objectForKey:@"CreatedDate"] != nil) {
-		creationDate = [[NSDate dateWithJSONString:[jsonDictionary objectForKey:@"CreatedDate"]] retain];
-	}
-	if ([jsonDictionary objectForKey:@"LastEditDate"] != nil) {
-		modifiedDate = [[NSDate dateWithJSONString:[jsonDictionary objectForKey:@"LastEditDate"]] retain];
-	}
+- (SKUser *)owner {
+	return [[self site] userWithID:[self ownerID]];
 }
 
 @end

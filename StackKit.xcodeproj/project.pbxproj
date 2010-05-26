@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4DC1097911149F16001A5691 /* SKRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC1097611149F16001A5691 /* SKRSS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4DC1097A11149F16001A5691 /* SKRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1097711149F16001A5691 /* SKRSS.m */; };
-		4DC109831114B108001A5691 /* SKTagRSS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC109811114B108001A5691 /* SKTagRSS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4DC109841114B108001A5691 /* SKTagRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC109821114B108001A5691 /* SKTagRSS.m */; };
-		4DC10A2011154935001A5691 /* SKTagRSSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC109E411153726001A5691 /* SKTagRSSTest.m */; };
 		5506C7BE11AB29B700C47C1B /* SKFetchRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */; };
 		5506C7E311ACBEBD00C47C1B /* SKDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */; };
 		5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */; };
@@ -100,12 +95,6 @@
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* StackKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Prefix.pch; sourceTree = "<group>"; };
-		4DC1097611149F16001A5691 /* SKRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKRSS.h; path = Classes/SKRSS.h; sourceTree = "<group>"; };
-		4DC1097711149F16001A5691 /* SKRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKRSS.m; path = Classes/SKRSS.m; sourceTree = "<group>"; };
-		4DC109811114B108001A5691 /* SKTagRSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKTagRSS.h; path = Classes/SKTagRSS.h; sourceTree = "<group>"; };
-		4DC109821114B108001A5691 /* SKTagRSS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKTagRSS.m; path = Classes/SKTagRSS.m; sourceTree = "<group>"; };
-		4DC109E311153726001A5691 /* SKTagRSSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagRSSTest.h; sourceTree = "<group>"; };
-		4DC109E411153726001A5691 /* SKTagRSSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagRSSTest.m; sourceTree = "<group>"; };
 		5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequestDelegate.h; sourceTree = "<group>"; };
 		5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDefinitions.h; sourceTree = "<group>"; };
 		5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDefinitions.m; sourceTree = "<group>"; };
@@ -260,7 +249,6 @@
 				55C23E31116A8FBE009064EE /* Badge */,
 				55C23E30116A8FBB009064EE /* Tag */,
 				55A2E52B110E44030038E510 /* Posts */,
-				4DC1095111149E92001A5691 /* RSS */,
 				55C23E2B116A8F94009064EE /* Categories */,
 			);
 			path = Classes;
@@ -292,18 +280,6 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		4DC1095111149E92001A5691 /* RSS */ = {
-			isa = PBXGroup;
-			children = (
-				4DC1097611149F16001A5691 /* SKRSS.h */,
-				4DC1097711149F16001A5691 /* SKRSS.m */,
-				4DC109811114B108001A5691 /* SKTagRSS.h */,
-				4DC109821114B108001A5691 /* SKTagRSS.m */,
-			);
-			name = RSS;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		55A2E507110E400A0038E510 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,8 +297,6 @@
 				55C23E59116A9BA9009064EE /* SKTagTest.m */,
 				55A2E70E110EBAA60038E510 /* SKQuestionTest.h */,
 				55A2E70F110EBAA60038E510 /* SKQuestionTest.m */,
-				4DC109E311153726001A5691 /* SKTagRSSTest.h */,
-				4DC109E411153726001A5691 /* SKTagRSSTest.m */,
 				55FA956A11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.h */,
 				55FA956B11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.m */,
 			);
@@ -487,8 +461,6 @@
 				55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */,
 				55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */,
 				D25F172C110F675D009E11E5 /* SKBadge.h in Headers */,
-				4DC1097911149F16001A5691 /* SKRSS.h in Headers */,
-				4DC109831114B108001A5691 /* SKTagRSS.h in Headers */,
 				55FA955E116132E3003A9CD7 /* SKFetchRequest.h in Headers */,
 				55FA95611161345C003A9CD7 /* SKFetchRequest+Private.h in Headers */,
 				55FA956411613AD9003A9CD7 /* NSPredicate+SKAdditions.h in Headers */,
@@ -602,7 +574,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A2E5CF110E5EE80038E510 /* SKUserTest.m in Sources */,
-				4DC10A2011154935001A5691 /* SKTagRSSTest.m in Sources */,
 				55FA956C11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.m in Sources */,
 				55C23A0A11690348009064EE /* SKSiteTest.m in Sources */,
 				55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */,
@@ -634,8 +605,6 @@
 				55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */,
 				55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */,
 				D25F172D110F675D009E11E5 /* SKBadge.m in Sources */,
-				4DC1097A11149F16001A5691 /* SKRSS.m in Sources */,
-				4DC109841114B108001A5691 /* SKTagRSS.m in Sources */,
 				55FA955F116132E3003A9CD7 /* SKFetchRequest.m in Sources */,
 				55FA956511613AD9003A9CD7 /* NSPredicate+SKAdditions.m in Sources */,
 				55FA95DA11614245003A9CD7 /* NSDictionary+SKAdditions.m in Sources */,

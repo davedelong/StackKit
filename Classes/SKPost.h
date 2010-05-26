@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 
+extern NSString * const SKPostCreationDate;
+extern NSString * const SKPostOwner;
+extern NSString * const SKPostBody;
+
 typedef enum {
 	SKPostTypeQuestion = 0,
 	SKPostTypeAnswer = 1
@@ -17,18 +21,15 @@ typedef enum {
 @class SKUser;
 
 @interface SKPost : SKObject {
-	NSNumber * postID;
+	NSNumber * ownerID;
 	NSDate * creationDate;
-	NSDate * modifiedDate;
-	SKUser * author;
+	NSString * body;
 }
 
-@property (readonly) NSNumber * postID;
 @property (readonly) NSDate * creationDate;
-@property (readonly) NSDate * modifiedDate;
-@property (readonly) SKUser * author;
+@property (readonly) NSNumber * ownerID;
+@property (readonly) NSString * body;
 
-- (id) initWithSite:(SKSite *)aSite json:(NSDictionary *)json;
-- (id) initWithSite:(SKSite *)aSite postID:(NSNumber *)anID;
+- (SKUser *)owner;
 
 @end
