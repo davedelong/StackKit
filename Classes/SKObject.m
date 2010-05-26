@@ -69,16 +69,13 @@
 	return key;
 }
 
-+ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
-	return [request predicate];
-}
-
-+ (NSArray *) updatedSortDescriptorsForFetchRequest:(SKFetchRequest *)request {
-	return [request sortDescriptors];
-}
-
 + (NSDictionary *) validSortDescriptorKeys {
 	return [self APIAttributeToPropertyMapping];
+}
+
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
+	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
+	return nil;
 }
 
 #pragma mark -

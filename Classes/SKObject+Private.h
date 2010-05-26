@@ -26,10 +26,7 @@
 #pragma mark Class methods that should be overriden by subclasses
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request;
 + (NSDictionary *) APIAttributeToPropertyMapping;
-+ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request;
-+ (NSArray *) updatedSortDescriptorsForFetchRequest:(SKFetchRequest *)request;
 
-+ (NSDictionary *) validPredicateExpressions;
 + (NSDictionary *) validSortDescriptorKeys;
 
 @end

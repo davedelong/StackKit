@@ -14,6 +14,7 @@ NSString * SKBadgeName = @"name";
 NSString * SKBadgeDescription = @"description";
 NSString * SKBadgeAwardCount = @"award_count";
 NSString * SKBadgeTagBased = @"tag_based";
+NSString * SKBadgeAwardedToUser = __SKUserID;
 
 NSString * SKBadgeRankGoldKey = @"gold";
 NSString * SKBadgeRankSilverKey = @"silver";
@@ -77,7 +78,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	 
 	 Therefore, the only supported predicates are:
 	 
-	 SKUserID = ##
+	 SKBadgeAwardedToUser = ##
 	 SKBadgeID = ##
 	 SKBadgeTagBased = 1
 	 
@@ -108,9 +109,9 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 			return nil;
 		}
 		
-		//make sure the left expression is either SKUserID, SKBadgeTagBased, SKBadgeID
+		//make sure the left expression is either SKBadgeAwardedToUserID, SKBadgeTagBased, SKBadgeID
 		NSString * leftKeyPath = [left keyPath];
-		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKUserID, SKBadgeTagBased, SKBadgeID, nil];
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKBadgeAwardedToUser, SKBadgeTagBased, SKBadgeID, nil];
 		if ([validKeyPaths containsObject:leftKeyPath] == NO) {
 			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
 			return nil;
@@ -131,7 +132,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 		
 		//if we get here, then the predicate is of the proper format
 		NSNumber * badgesByTag = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeTagBased]];
-		id badgesForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		id badgesForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeAwardedToUser]];
 		id badgeID = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeID]];
 		
 		if (badgesByTag != nil) {
@@ -170,10 +171,6 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 	
 	return apiCall;
-}
-
-+ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
-	return [[request predicate] predicateByRemovingSubPredicateWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
 }
 
 #pragma mark SKBadge-specific methods

@@ -14,7 +14,6 @@ NSString * SKSiteAPIKey = @"key";
 
 @synthesize apiKey;
 @synthesize apiURL;
-@synthesize cachedPosts, cachedUsers, cachedTags, cachedBadges;
 @synthesize timeoutInterval;
 
 + (id) stackoverflowSite {
@@ -31,11 +30,6 @@ NSString * SKSiteAPIKey = @"key";
 		apiURL = [[aURL URLByAppendingPathComponent:SKAPIVersion] retain];
 		apiKey = [key copy];
 		
-		cachedPosts = [[NSMutableDictionary alloc] init];
-		cachedUsers = [[NSMutableDictionary alloc] init];
-		cachedTags = [[NSMutableDictionary alloc] init];
-		cachedBadges = [[NSMutableDictionary alloc] init];
-		
 		timeoutInterval = 60.0;
 		requestQueue = [[NSOperationQueue alloc] init];
 		[requestQueue setMaxConcurrentOperationCount:1];
@@ -46,11 +40,6 @@ NSString * SKSiteAPIKey = @"key";
 - (void) dealloc {
 	[apiURL release];
 	[apiKey release];
-	
-	[cachedPosts release];
-	[cachedUsers release];
-	[cachedTags release];
-	[cachedBadges release];
 	
 	[requestQueue cancelAllOperations];
 	[requestQueue release];

@@ -22,6 +22,7 @@ extern NSString * SKBadgeName;
 extern NSString * SKBadgeDescription;
 extern NSString * SKBadgeAwardCount;
 extern NSString * SKBadgeTagBased;
+extern NSString * SKBadgeAwardedToUser;
 
 @interface SKBadge : SKObject {
 	NSNumber *ID;

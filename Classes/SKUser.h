@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 
-extern NSString * SKUserID;
+extern NSString * const SKUserID;
+
 extern NSString * SKUserReputation;
 extern NSString * SKUserCreationDate;
 extern NSString * SKUserDisplayName;

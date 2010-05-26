@@ -8,7 +8,7 @@
 
 #import "StackKit_Internal.h"
 
-NSString * SKUserID = @"user_id";
+NSString * const SKUserID = __SKUserID;
 NSString * SKUserReputation = @"reputation";
 NSString * SKUserCreationDate = @"creation_date";
 NSString * SKUserDisplayName = @"display_name";
@@ -125,69 +125,72 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 endpoints returning user objects:
+	 /users
 	 /users/{id}
-	 /users/?sort=reputation
-	 /users/?sort=newest
-	 /users/?sort=name
 	 
-	 while there are other endpoints that have these same (or similar) prefixes,
-	 only endpoints that return SKUser objects are constructed here
+	 This means that *only* predicate that's supported is:
+	 SKUserID = ##
 	 
 	 **/
-	NSURL * baseURL = [[request site] apiURL];
-	NSString * apiKey = [[request site] apiKey];
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:apiKey forKey:SKSiteAPIKey];
 	
-	NSMutableString * relativeString = [NSMutableString stringWithString:@"/users"];
-	NSPredicate * predicate = [request predicate];
-	NSArray * sortDescriptors = [request sortDescriptors];
+	NSPredicate * p = [request predicate];
+	NSString * path = nil;
 	
-	if (predicate != nil) {
-		//look for a "UserId = [NSNumber]" predicate
-		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
-		if (userID != nil && ([userID isKindOfClass:[NSNumber class]] || [userID isKindOfClass:[NSString class]])) {
-			[relativeString appendFormat:@"/%@", userID];
-		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
-			[query setObject:displayNameFilter forKey:@"filter"];
+	if (p != nil) {
+		//it must be a comparison predicate
+		if ([p isKindOfClass:[NSComparisonPredicate class]] == NO) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
 		}
-	} else if (sortDescriptors != nil) {
-		//we have to use an elseif here because /users/{id}/reputation is not a valid endpoint
-		//so we'll prioritize looking for a specific user over looking for users sorted by {sortDescriptor}
+		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
 		
-		//we have to look for sortDescriptors for SKUserReputation, SKUserCreationDate, and SKUserDisplayName
-		//however, we can only use *one* of those.  we'll use the first one that we find
-		//we also have to translate them, in case they're using @"reputation" instead of SKUserReputation
-		
-		NSString * sort = @"reputation";
-		NSString * order = @"asc";
-		NSSortDescriptor * mainDescriptor = nil;
-		
-		for (NSSortDescriptor * sortDescriptor in sortDescriptors) {
-			NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sortDescriptor key]];
-			if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserReputation]]) {
-				sort = @"reputation";
-				mainDescriptor = sortDescriptor;
-				break;
-			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserDisplayName]]) {
-				sort = @"name";
-				mainDescriptor = sortDescriptor;
-				break;
-			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]]) {
-				sort = @"creation";
-				mainDescriptor = sortDescriptor;
-				break;
-			}
+		//it must have be a == predicate
+		if ([comparisonP predicateOperatorType] != NSEqualToPredicateOperatorType) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
 		}
 		
-		if (mainDescriptor != nil) {
-			order = ([mainDescriptor ascending] == YES ? @"asc" : @"desc");
+		//the left expression must be a keypath
+		NSExpression * left = [comparisonP leftExpression];
+		if ([left expressionType] != NSKeyPathExpressionType) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
 		}
 		
-		[query setObject:sort forKey:SKSortKey];
-		[query setObject:order forKey:SKSortOrderKey];
+		//the left keypath must be SKUserID
+		if ([[left keyPath] isEqual:SKUserID] == NO) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;
+		}
+		
+		//the right expression must be a constantValue
+		NSExpression * right = [comparisonP rightExpression];
+		if ([right expressionType] != NSConstantValueExpressionType) {
+			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return nil;	
+		}
+		
+		//if we get here, we know the predicate is SKUserID = constantValue
+		id user = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		NSNumber * userID = nil;
+		if ([user isKindOfClass:[SKUser class]]) {
+			userID = [user userID];
+		} else if ([user isKindOfClass:[NSNumber class]]) {
+			userID = user;
+		} else {
+			userID = [NSNumber numberWithInt:[[user description] intValue]];
+		}
+		path = [NSString stringWithFormat:@"/users/%@", userID];
+	} else {
+		//there is no predicate
+		path = @"/users";
 	}
+	
+	NSURL * baseURL = [[request site] apiURL];
+	NSMutableDictionary * query = [NSMutableDictionary dictionary];
+	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
+	
+	//TODO: sorting
 	
 	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
 		/** three use cases:
@@ -213,7 +216,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];
 	}
 	
-	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:path query:query];
 	
 	return apiCall;
 }

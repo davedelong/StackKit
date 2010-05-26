@@ -11,6 +11,7 @@
 
 extern NSString * SKTagName;
 extern NSString * SKTagCount;
+extern NSString * SKTagsParticipatedInByUser;
 
 @interface SKTag : SKObject {
 	NSString *name;

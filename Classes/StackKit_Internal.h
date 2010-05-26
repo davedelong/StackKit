@@ -7,6 +7,7 @@
 //
 
 #import "StackKit.h"
+#import "SKDefinitions.h"
 
 #import "SKObject+Private.h"
 #import "SKSite+Private.h"
