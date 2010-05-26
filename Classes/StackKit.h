@@ -20,7 +20,5 @@
 #import "SKQuestion.h"
 #import "SKAnswer.h"
 #import "SKComment.h"
-#import "SKRSS.h"
-#import "SKTagRSS.h"
 
 #import "SKConstants.h"

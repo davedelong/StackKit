@@ -17,11 +17,11 @@ NSString * const SKCommentEditCount = @"edit_count";
 
 @implementation SKComment
 
-@synthesize NSNumber * commentID;
-@synthesize NSNumber * replyToUserID;
-@synthesize NSNumber * postID;
-@synthesize NSNumber * score;
-@synthesize NSNumber * editCount;
+@synthesize commentID;
+@synthesize replyToUserID;
+@synthesize postID;
+@synthesize score;
+@synthesize editCount;
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -31,7 +31,7 @@ NSString * const SKCommentEditCount = @"edit_count";
 										@"editCount", SKCommentEditCount,
 										nil];
 	[dictionary addEntriesFromDictionary:[super APIAttributeToPropertyMapping]];
-	return [dictionary ;]
+	return dictionary;
 }
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
@@ -71,6 +71,7 @@ NSString * const SKCommentEditCount = @"edit_count";
 	} else {
 		//TODO: interpret postID as an SKQuestionID
 	}
+	return nil;
 }
 
 @end
