@@ -20,14 +20,66 @@ NSString * const SKCommentEditCount = @"edit_count";
 @synthesize commentID;
 @synthesize replyToUserID;
 @synthesize postID;
+@synthesize postType;
 @synthesize score;
 @synthesize editCount;
+
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
+	/**
+	 valid endpoints:
+	 
+	 /answers/{id}/comments
+	 /comments/{id}
+	 /questions/{id}/comments
+	 /users/{id}/comments
+	 /users/{id}/comments/{toid}
+	 /users/{id}/mentioned
+	 
+	 This means the valid predicates are:
+	 
+	 SKCommentPost = ## AND SKCommentPostType = SKPostTypeQuestion
+	 SKCommentPost = ## AND SKCommentPostType = SKPostTypeAnswer
+	 SKCommentID = ##
+	 SKPostOwner = ##
+	 SKPostOwner = ## AND SKCommentInReplyToUser = ##
+	 SKCommentInReplyToUser = ##
+	 
+	 **/
+	
+	NSString * path = nil;
+	
+	//this *must* have a predicate
+	NSPredicate * p = [request predicate];
+	if (p == nil) {
+		return invalidPredicateErrorForFetchRequest(request, nil);
+	}
+	
+	if ([p isKindOfClass:[NSComparisonPredicate class]]) {
+		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKCommentID, SKPostOwner, SKCommentInReplyToUser, nil];
+		if ([comparisonP isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+													  operator:NSEqualToPredicateOperatorType 
+										   rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return invalidPredicateErrorForFetchRequest(request, nil);
+		}
+		
+		/**
+		 it's one of:
+		 SKCommentID = ##
+		 SKPostOwner = ##
+		 SKCommentInReplyToUser = ##
+		 **/
+	}
+	
+	return nil; //for now
+}
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 										@"commentID", SKCommentID,
 										@"replyToUserID", SKCommentInReplyToUser,
 										@"postID", SKCommentPost,
+										@"postType", SKCommentPostType,
 										@"editCount", SKCommentEditCount,
 										nil];
 	[dictionary addEntriesFromDictionary:[super APIAttributeToPropertyMapping]];

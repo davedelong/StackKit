@@ -30,6 +30,7 @@ extern NSString * const SKCommentEditCount;
 @property (readonly) NSNumber * commentID;
 @property (readonly) NSNumber * replyToUserID;
 @property (readonly) NSNumber * postID;
+@property (readonly) SKPostType_t postType;
 @property (readonly) NSNumber * score;
 @property (readonly) NSNumber * editCount;
 
