@@ -25,7 +25,7 @@ extern NSString * SKBadgeTagBased;
 extern NSString * SKBadgeAwardedToUser;
 
 @interface SKBadge : SKObject {
-	NSNumber *ID;
+	NSNumber *badgeID;
 	
 	NSString *name;
 	NSString *description;
@@ -36,7 +36,7 @@ extern NSString * SKBadgeAwardedToUser;
 	NSInteger numberAwarded;
 }
 
-@property (readonly) NSNumber *ID;
+@property (readonly) NSNumber *badgeID;
 @property (readonly) NSString *name;
 @property (readonly) NSString *description;
 @property (readonly) SKBadgeRank_t rank;

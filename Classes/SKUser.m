@@ -147,14 +147,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		
 		//if we get here, we know the predicate is SKUserID = constantValue
 		id user = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-		NSNumber * userID = nil;
-		if ([user isKindOfClass:[SKUser class]]) {
-			userID = [user userID];
-		} else if ([user isKindOfClass:[NSNumber class]]) {
-			userID = user;
-		} else {
-			userID = [NSNumber numberWithInt:[[user description] intValue]];
-		}
+		NSNumber * userID = SKExtractUserID(user);
 		path = [NSString stringWithFormat:@"/users/%@", userID];
 	} else {
 		//there is no predicate

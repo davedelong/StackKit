@@ -24,7 +24,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 
 @synthesize name;
 @synthesize description;
-@synthesize ID;
+@synthesize badgeID;
 @synthesize rank;
 @synthesize numberAwarded;
 @synthesize tagBased;
@@ -33,7 +33,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite]) {
-		ID = [[dictionary objectForKey:SKBadgeID] retain];
+		badgeID = [[dictionary objectForKey:SKBadgeID] retain];
 		description = [[dictionary objectForKey:SKBadgeDescription] retain];
 		name = [[dictionary objectForKey:SKBadgeName] retain];
 		
@@ -103,21 +103,16 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 		id badgeID = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeID]];
 		
 		if (badgesByTag != nil) {
+			//we can only allow "YES"
+			if ([badgesByTag boolValue] == NO) {
+				return invalidPredicateErrorForFetchRequest(request, nil);
+			}
 			path = @"/badges/tags";
 		} else if (badgesForUser != nil) {
-			NSNumber * userID = nil;
-			if ([badgesForUser isKindOfClass:[SKUser class]]) {
-				userID = [badgesForUser userID];
-			} else if ([badgesForUser isKindOfClass:[NSNumber class]]) {
-				userID = badgesForUser;
-			} else {
-				userID = [NSNumber numberWithInt:[[badgesForUser description] intValue]];
-			}
+			NSNumber * userID = SKExtractUserID(badgesForUser);
 			path = [NSString stringWithFormat:@"/users/%@/badges", userID];
 		} else if (badgeID != nil) {
-			if ([badgeID isKindOfClass:[NSNumber class]] == NO) {
-				badgeID = [NSNumber numberWithInt:[[badgeID description] intValue]];
-			}
+			badgeID = SKExtractBadgeID(badgeID);
 			path = [NSString stringWithFormat:@"/badges/%@", badgeID];
 		}
 	} else {
@@ -143,14 +138,14 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
-	return ([[self ID] isEqual:[object ID]]);
+	return ([[self badgeID] isEqual:[object badgeID]]);
 }
 
 - (void)dealloc
 {
 	[name release];
 	[description release];
-	[ID release];
+	[badgeID release];
 	
 	[super dealloc];
 }

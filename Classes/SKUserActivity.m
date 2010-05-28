@@ -116,28 +116,21 @@ NSString * SKUserActivityToDateKey = @"todate";
 			//there can only be one
 			return invalidPredicateErrorForFetchRequest(request, nil);
 		} else {
-			//verify it's an SKUserID = ## comparison
+			//TODO: verify it's an SKUserID = ## comparison
 		}
 		NSArray * dateSubPredicates = [compoundP subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];
 		if ([dateSubPredicates count] > 2) {
 			//there can't be more than 2
 			return invalidPredicateErrorForFetchRequest(request, nil);
 		} else {
-			//verify it's a legit date comparison (<=, >=)
+			//TODO: verify it's a legit date comparison (<=, >=)
 		}
 	} else {
 		return invalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
 	id activityForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-	NSNumber * userID = nil;
-	if ([activityForUser isKindOfClass:[SKUser class]]) {
-		userID = [activityForUser userID];
-	} else if ([activityForUser isKindOfClass:[NSNumber class]]) {
-		userID = activityForUser;
-	} else {
-		userID = [NSNumber numberWithInt:[[activityForUser description] intValue]];
-	}
+	NSNumber * userID = SKExtractUserID(activityForUser);
 	
 	path = [NSString stringWithFormat:@"/users/%@/timeline", userID];
 	

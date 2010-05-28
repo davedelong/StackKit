@@ -14,8 +14,11 @@
 - (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left;
 - (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left;
 - (id) constantValueForLeftExpression:(NSExpression *)left;
+- (id) constantValueForLeftKeyPath:(NSString *)left;
 - (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left;
 
 - (BOOL) isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType;
+
+- (BOOL) isPredicateWithConstantValueEqualToLeftKeyPath:(NSString *)leftKeyPath;
 
 @end

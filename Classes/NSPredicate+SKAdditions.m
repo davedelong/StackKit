@@ -32,6 +32,12 @@
 	return YES;
 }
 
+- (BOOL) isPredicateWithConstantValueEqualToLeftKeyPath:(NSString *)leftKeyPath {
+	return [self isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:leftKeyPath] 
+											  operator:NSEqualToPredicateOperatorType 
+								   rightExpressionType:NSConstantValueExpressionType];
+}
+
 - (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left {
 	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
@@ -67,6 +73,10 @@
 	if ([[comparison rightExpression] expressionType] != NSConstantValueExpressionType) { return nil; }
 	
 	return [[comparison rightExpression] constantValue];
+}
+
+- (id) constantValueForLeftKeyPath:(NSString *)left {
+	return [self constantValueForLeftExpression:[NSExpression expressionForKeyPath:left]];
 }
 
 - (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left {
