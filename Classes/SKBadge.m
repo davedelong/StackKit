@@ -98,9 +98,9 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 		}
 		
 		//if we get here, then the predicate is of the proper format
-		NSNumber * badgesByTag = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeTagBased]];
-		id badgesForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeAwardedToUser]];
-		id badgeID = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeID]];
+		NSNumber * badgesByTag = [p constantValueForLeftKeyPath:SKBadgeTagBased];
+		id badgesForUser = [p constantValueForLeftKeyPath:SKBadgeAwardedToUser];
+		id badgeID = [p constantValueForLeftKeyPath:SKBadgeID];
 		
 		if (badgesByTag != nil) {
 			//we can only allow "YES"

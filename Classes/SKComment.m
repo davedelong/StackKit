@@ -71,6 +71,19 @@ NSString * const SKCommentEditCount = @"edit_count";
 		 SKPostOwner = ##
 		 SKCommentInReplyToUser = ##
 		 **/
+		id commentID = [comparisonP constantValueForLeftKeyPath:SKCommentID];
+		id postOwner = [comparisonP constantValueForLeftKeyPath:SKPostOwner];
+		id replyTo = [comparisonP constantValueForLeftKeyPath:SKCommentInReplyToUser];
+		
+		if (commentID != nil) {
+			path = [NSString stringWithFormat:@"/comments/%@", SKExtractCommentID(commentID)];
+		} else if (postOwner != nil) {
+			path = [NSString stringWithFormat:@"/users/%@/comments", SKExtractUserID(postOwner)];
+		} else if (replyTo != nil) {
+			path = [NSString stringWithFormat:@"/users/%@/mentioned", SKExtractUserID(replyTo)];
+		} else {
+			return invalidPredicateErrorForFetchRequest(request, nil);
+		}
 		
 	} else if ([p isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compoundP = (NSCompoundPredicate *)p;
@@ -136,7 +149,10 @@ NSString * const SKCommentEditCount = @"edit_count";
 		}
 	}
 	
-	return nil; //for now
+	NSMutableDictionary * query = [NSMutableDictionary dictionary];
+	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];	
+	
+	return [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 }
 
 + (NSDictionary *) APIAttributeToPropertyMapping {

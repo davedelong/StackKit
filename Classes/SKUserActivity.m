@@ -129,7 +129,7 @@ NSString * SKUserActivityToDateKey = @"todate";
 		return invalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
-	id activityForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+	id activityForUser = [p constantValueForLeftKeyPath:SKUserID];
 	NSNumber * userID = SKExtractUserID(activityForUser);
 	
 	path = [NSString stringWithFormat:@"/users/%@/timeline", userID];

@@ -14,5 +14,7 @@ id invalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary *
 
 NSNumber * SKExtractUserID(id value);
 NSNumber * SKExtractBadgeID(id value);
-NSString * SKExtractTagName(id value);
 NSNumber * SKExtractPostID(id value);
+NSNumber * SKExtractCommentID(id value);
+
+NSString * SKExtractTagName(id value);

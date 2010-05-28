@@ -35,6 +35,10 @@ NSNumber * SKExtractPostID(id value) {
 	return SKExtractNumber(value, [SKPost class], @selector(postID));
 }
 
+NSNumber * SKExtractCommentID(id value) {
+	return SKExtractNumber(value, [SKComment class], @selector(commentID));
+}
+
 NSString * SKExtractTagName(id value) {
 	if ([value isKindOfClass:[NSString class]]) {
 		return value;

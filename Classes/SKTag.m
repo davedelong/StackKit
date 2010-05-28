@@ -53,7 +53,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 		}
 		
 		//if we get here, we know the predicate is SKTagsParticipatedInByUser = constantValue
-		id user = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKTagsParticipatedInByUser]];
+		id user = [p constantValueForLeftKeyPath:SKTagsParticipatedInByUser];
 		NSNumber * userID = SKExtractUserID(user);
 		path = [NSString stringWithFormat:@"/users/%@/tags", userID];
 	} else {
