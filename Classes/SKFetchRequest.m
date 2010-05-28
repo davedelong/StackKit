@@ -167,7 +167,7 @@ errorExit:
 	//construct our fetch url
 	NSURL * fetchURL = [self apiCall];
 	
-	NSLog(@"fetching from: %@", fetchURL);
+	SKLog(@"fetching from: %@", fetchURL);
 	
 	if (error != nil) {
 		goto cleanup;

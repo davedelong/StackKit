@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SKFunctions.h"
 
 /**
  There are some cases where constants can have different names but the same value.  For example:
@@ -28,3 +29,14 @@ __SKUserID is #defined below to be @"user_id".
  **/
 
 #define __SKUserID @"user_id"
+
+
+#ifndef SKLog
+#define SKLog(format,...) \
+{ \
+NSString *file = [[NSString alloc] initWithUTF8String:__FILE__]; \
+printf("[%s:%d] ", [[file lastPathComponent] UTF8String], __LINE__); \
+[file release]; \
+SKQLog((format),##__VA_ARGS__); \
+}
+#endif

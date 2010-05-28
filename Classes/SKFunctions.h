@@ -10,6 +10,8 @@
 
 @class SKFetchRequest;
 
+static void SKQLog(NSString *format, ...);
+
 id invalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
 
 NSNumber * SKExtractUserID(id value);
