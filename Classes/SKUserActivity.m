@@ -236,7 +236,7 @@ NSString * SKUserActivityToDateKey = @"todate";
 			activityDetail = [[dictionary objectForKey:SKUserActivityDetail] retain];
 		}
 		
-		creationDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserActivityCreationDate] doubleValue]];
+		creationDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserActivityCreationDate] doubleValue]] retain];
 	}
 	return self;
 }

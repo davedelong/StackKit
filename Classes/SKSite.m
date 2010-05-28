@@ -27,7 +27,8 @@ NSString * SKSiteAPIKey = @"key";
 
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key {
 	if (self = [super initWithSite:nil]) {
-		apiURL = [[aURL URLByAppendingPathComponent:SKAPIVersion] retain];
+		NSString * urlPath = [[aURL path] stringByAppendingPathComponent:SKAPIVersion];
+		apiURL = [[NSURL alloc] initWithString:urlPath relativeToURL:aURL];
 		apiKey = [key copy];
 		
 		timeoutInterval = 60.0;

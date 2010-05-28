@@ -65,8 +65,8 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		location = [[dictionary objectForKey:SKUserLocation] retain];
 		aboutMe = [[dictionary objectForKey:SKUserAboutMe] retain];
 		
-		creationDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserCreationDate] doubleValue]];
-		lastAccessDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserLastAccessDate] doubleValue]];
+		creationDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserCreationDate] doubleValue]] retain];
+		lastAccessDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserLastAccessDate] doubleValue]] retain];
 		
 		reputation = [[dictionary objectForKey:SKUserReputation] integerValue];
 		age = [[dictionary objectForKey:SKUserAge] integerValue];
