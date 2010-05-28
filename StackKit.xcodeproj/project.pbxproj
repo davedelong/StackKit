@@ -105,7 +105,7 @@
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
 		55A2E4E1110E36550038E510 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
 		55A2E4F4110E3A050038E510 /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55A2E4F5110E3A050038E510 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
+		55A2E4F5110E3A050038E510 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit Tests-Info.plist"; path = "Unit Tests/Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		55A2E511110E41FD0038E510 /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
 		55A2E512110E41FD0038E510 /* SKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUser.m; sourceTree = "<group>"; };
 		55A2E51B110E424C0038E510 /* SKQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestion.h; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 		55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SKAdditions.m"; sourceTree = "<group>"; };
 		55FA969911616A65003A9CD7 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
 		55FA969A11616A65003A9CD7 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
-		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Other Sources/Info.plist"; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* StackKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StackKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25F172A110F675D009E11E5 /* SKBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadge.h; sourceTree = "<group>"; };
 		D25F172B110F675D009E11E5 /* SKBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadge.m; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 			children = (
 				32DBCF5E0370ADEE00C91783 /* StackKit_Prefix.pch */,
 			);
-			name = "Other Sources";
+			path = "Other Sources";
 			sourceTree = "<group>";
 		};
 		5506C81E11ADE12800C47C1B /* Q&A */ = {
@@ -666,8 +666,8 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = StackKit_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				GCC_PREFIX_HEADER = "Other Sources/StackKit_Prefix.pch";
+				INFOPLIST_FILE = "Other Sources/Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = StackKit;
 				WRAPPER_EXTENSION = framework;
@@ -684,8 +684,8 @@
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = StackKit_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				GCC_PREFIX_HEADER = "Other Sources/StackKit_Prefix.pch";
+				INFOPLIST_FILE = "Other Sources/Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = StackKit;
 				WRAPPER_EXTENSION = framework;
@@ -698,6 +698,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -711,6 +712,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

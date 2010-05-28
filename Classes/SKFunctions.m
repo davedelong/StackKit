@@ -8,7 +8,7 @@
 
 #import "StackKit_Internal.h"
 
-static void SKQLog(NSString *format, ...) {
+void SKQLog(NSString *format, ...) {
 	if (format == nil) {
 		printf("(null)\n");
 		return;
