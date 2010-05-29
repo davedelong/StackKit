@@ -12,7 +12,7 @@ NSString * const SKCommentID = @"comment_id";
 NSString * const SKCommentInReplyToUser = @"reply_to_user";
 NSString * const SKCommentPost = @"post_id";
 NSString * const SKCommentPostType = @"post_type";
-NSString * const SKCommentScore = @"score";
+NSString * const SKCommentScore = __SKPostScore;
 NSString * const SKCommentEditCount = @"edit_count";
 
 @implementation SKComment
@@ -21,7 +21,6 @@ NSString * const SKCommentEditCount = @"edit_count";
 @synthesize replyToUserID;
 @synthesize postID;
 @synthesize postType;
-@synthesize score;
 @synthesize editCount;
 
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
@@ -171,7 +170,6 @@ NSString * const SKCommentEditCount = @"edit_count";
 	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
 		commentID = [[dictionary objectForKey:SKCommentID] retain];
 		postID = [[dictionary objectForKey:SKCommentPost] retain];
-		score = [[dictionary objectForKey:SKCommentScore] retain];
 		postType = ([[dictionary objectForKey:SKCommentPostType] isEqual:@"question"] ? SKPostTypeQuestion : SKPostTypeAnswer);
 		
 		//these are optional

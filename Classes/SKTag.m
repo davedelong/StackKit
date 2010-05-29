@@ -101,7 +101,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite]) {
 		name = [[dictionary objectForKey:SKTagName] retain];
-		numberOfTaggedQuestions = [[dictionary objectForKey:SKTagCount] unsignedIntegerValue];
+		numberOfTaggedQuestions = [[dictionary objectForKey:SKTagCount] retain];
 	}
 	return self;
 }
@@ -116,7 +116,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 
 - (void) dealloc {
 	[name release];
-	
+	[numberOfTaggedQuestions release];
 	[super dealloc];
 }
 

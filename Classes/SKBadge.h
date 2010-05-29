@@ -33,7 +33,7 @@ extern NSString * SKBadgeAwardedToUser;
 	SKBadgeRank_t rank;
 	
 	BOOL tagBased;
-	NSInteger numberAwarded;
+	NSNumber * numberAwarded;
 }
 
 @property (readonly) NSNumber *badgeID;
@@ -41,7 +41,7 @@ extern NSString * SKBadgeAwardedToUser;
 @property (readonly) NSString *description;
 @property (readonly) SKBadgeRank_t rank;
 
-@property (readonly) NSInteger numberAwarded;
+@property (readonly) NSNumber * numberAwarded;
 @property (readonly, getter=isTagBased) BOOL tagBased;
 
 @end

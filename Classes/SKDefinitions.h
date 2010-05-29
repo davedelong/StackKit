@@ -29,6 +29,7 @@ __SKUserID is #defined below to be @"user_id".
  **/
 
 #define __SKUserID @"user_id"
+#define __SKPostScore @"score"
 
 
 #ifndef SKLog

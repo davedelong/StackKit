@@ -11,10 +11,11 @@
 NSString * const SKPostCreationDate = @"creation_date";
 NSString * const SKPostOwner = @"owner";
 NSString * const SKPostBody = @"body";
+NSString * const SKPostScore = __SKPostScore;
 
 @implementation SKPost
 
-@synthesize creationDate, ownerID, body;
+@synthesize creationDate, ownerID, body, score;
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -31,6 +32,7 @@ NSString * const SKPostBody = @"body";
 		ownerID = [[ownerDictionary objectForKey:SKUserID] retain];
 		
 		body = [[dictionary objectForKey:SKPostBody] retain];
+		score = [[dictionary objectForKey:SKPostScore] retain];
 	}
 	return self;
 }
@@ -39,6 +41,7 @@ NSString * const SKPostBody = @"body";
 	[creationDate release];
 	[ownerID release];
 	[body release];
+	[score release];
 	[super dealloc];
 }
 

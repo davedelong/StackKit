@@ -68,12 +68,12 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		creationDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserCreationDate] doubleValue]] retain];
 		lastAccessDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserLastAccessDate] doubleValue]] retain];
 		
-		reputation = [[dictionary objectForKey:SKUserReputation] integerValue];
-		age = [[dictionary objectForKey:SKUserAge] integerValue];
-		views = [[dictionary objectForKey:SKUserViews] integerValue];
-		upVotes = [[dictionary objectForKey:SKUserUpVotes] integerValue];
-		downVotes = [[dictionary objectForKey:SKUserDownVotes] integerValue];
-		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] floatValue];
+		reputation = [[dictionary objectForKey:SKUserReputation] retain];
+		age = [[dictionary objectForKey:SKUserAge] retain];
+		views = [[dictionary objectForKey:SKUserViews] retain];
+		upVotes = [[dictionary objectForKey:SKUserUpVotes] retain];
+		downVotes = [[dictionary objectForKey:SKUserDownVotes] retain];
+		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] retain];
 		
 		userType = SKUserTypeRegistered;
 		if ([[dictionary objectForKey:SKUserType] isEqual:SKUserAccountTypeModerator]) {
@@ -92,6 +92,12 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	[websiteURL release];
 	[location release];
 	[aboutMe release];
+	[reputation release];
+	[age release];
+	[views release];
+	[upVotes release];
+	[downVotes release];
+	[acceptRate release];
 	
 	[super dealloc];
 }

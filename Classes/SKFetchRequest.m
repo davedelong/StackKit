@@ -6,6 +6,7 @@
 //  Copyright 2010 Home. All rights reserved.
 //
 #import "StackKit_Internal.h"
+#import <objc/runtime.h>
 
 @implementation SKFetchRequest
 @synthesize entity;
@@ -51,13 +52,13 @@ NSString * SKErrorMessageKey = @"message";
 			nil];
 }
 
-- (NSPredicate *) cleanPredicateWithError:(NSError **)error {
-	//TODO: clean the predicate.  error if there are non-supported keys, and replace left expressions as appropriate
+- (NSPredicate *) cleanedPredicate {
+	//TODO: clean the predicate.  replace left expressions as appropriate
 	return [self predicate];
 }
 
-- (NSArray *) cleanSortDescriptorsWithError:(NSError **)error {
-	//evaluate the sort descriptors.  error if there are non-supported keys, and replace keys as appropriate
+- (NSArray *) cleanedSortDescriptors {
+	//evaluate the sort descriptors.  error if there are non-supported keys, comparators, or selectors, and replace keys as appropriate
 	NSDictionary * validSortKeys = [[self entity] validSortDescriptorKeys];
 	
 	NSMutableArray * cleaned = [NSMutableArray array];
@@ -66,6 +67,23 @@ NSString * SKErrorMessageKey = @"message";
 		NSString * cleanedKey = [validSortKeys objectForKey:sortKey];
 		if (cleanedKey == nil) {
 			NSString * msg = [NSString stringWithFormat:@"%@ is not a valid sort key", sortKey];
+			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+			return nil;
+		}
+		
+		//use respondsTo... and perform... so that this will still work on 10.5
+		if ([sort respondsToSelector:@selector(comparator)]) {
+			id comparator = [sort performSelector:@selector(comparator)];
+			if (comparator != nil) {
+				NSString * msg = @"Sort descriptors may not use comparator blocks";
+				[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+				return nil;
+			}
+		}
+		
+		SEL comparisonSelector = [sort selector];
+		if (comparisonSelector == nil || sel_isEqual(comparisonSelector, @selector(compare:)) == NO) {
+			NSString * msg = @"Sort descriptors may only sort using the compare: selector";
 			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
 			return nil;
 		}
@@ -81,63 +99,34 @@ NSString * SKErrorMessageKey = @"message";
 - (NSURL *) apiCall {
 	if ([self site] == nil) { return nil; }
 	
-	NSInteger errorCode = 0;
-	NSDictionary * errorUserInfo = nil;
-	
 	Class fetchEntity = [self entity];
 	if ([[[self class] validFetchEntities] containsObject:fetchEntity] == NO) {
 		//invalid entity
-		errorCode = SKErrorCodeInvalidEntity;
-		
-		NSString * errorMessage = [NSString stringWithFormat:@"%@ is not a valid fetch entity", fetchEntity];
-		errorUserInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
-		goto errorExit;
+		NSString * msg = [NSString stringWithFormat:@"%@ is not a valid fetch entity", fetchEntity];
+		NSDictionary * userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey];
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:userInfo]];
+		return nil;
 	}
 	
-	//evalutate the predicate.  we're only going to allow a single level of compounding
-	NSPredicate * p = [self predicate];
-	if ([p isKindOfClass:[NSCompoundPredicate class]]) {
-		//compound predicates can't have compound subpredicates
-		if ([(NSCompoundPredicate *)p compoundPredicateType] != NSAndPredicateType) {
-			errorCode = SKErrorCodeInvalidPredicate;
-			NSString * errorMessage = @"Fetch predicates may only be simple comparison predicates or an AND of simple comparison predicates";
-			errorUserInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
-			goto errorExit;
+	if ([self predicate] != nil) {
+		NSPredicate * cleanedPredicate = [self cleanedPredicate];
+		if (cleanedPredicate == nil) {
+			//invalid predicate.  error set in cleanedPredicate
+			return nil;
 		}
-		for (NSPredicate * subp in [(NSCompoundPredicate *)p subpredicates]) {
-			if ([subp isKindOfClass:[NSCompoundPredicate class]]) {
-				errorCode = SKErrorCodeInvalidPredicate;
-				NSString * errorMessage = @"Fetch predicates may only be simple comparison predicates or an AND of simple comparison predicates";
-				errorUserInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
-				goto errorExit;
-			}
+		[self setPredicate:cleanedPredicate];
+	}
+	
+	if ([self sortDescriptors] != nil) {
+		NSArray * cleanedSortDescriptors = [self cleanedSortDescriptors];
+		if (cleanedSortDescriptors == nil) {
+			//invalid sorting.  error set in cleanedSortDescriptors
+			return nil;
 		}
+		[self setSortDescriptors:cleanedSortDescriptors];
 	}
-	
-	NSError * internalError = nil;
-	NSPredicate * cleanedPredicate = [self cleanPredicateWithError:&internalError];
-	if (internalError != nil) {
-		errorCode = [internalError code];
-		errorUserInfo = [internalError userInfo];
-		goto errorExit;
-	}
-	[self setPredicate:cleanedPredicate];
-	
-	NSArray * cleanedSortDescriptors = [self cleanSortDescriptorsWithError:&internalError];
-	if (internalError != nil) {
-		errorCode = [internalError code];
-		errorUserInfo = [internalError userInfo];
-		goto errorExit;
-	}
-	[self setSortDescriptors:cleanedSortDescriptors];
 	
 	return [fetchEntity apiCallForFetchRequest:self];
-	
-errorExit:
-	if (error == nil && errorCode > 0) {
-		[self setError:[NSError errorWithDomain:SKErrorDomain code:errorCode userInfo:errorUserInfo]];
-	}
-	return nil;
 }
 
 - (void) executeAsynchronously {
@@ -169,9 +158,7 @@ errorExit:
 	
 	SKLog(@"fetching from: %@", fetchURL);
 	
-	if (error != nil) {
-		goto cleanup;
-	}
+	if ([self error] != nil) { goto cleanup; }
 	if (fetchURL == nil) { goto cleanup; }
 	
 	//signal the delegate
@@ -198,6 +185,7 @@ errorExit:
 	//handle the response
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
+	//TODO: FIX THIS
 	NSDictionary * responseObjects = [responseString JSONValue];
 	assert([responseObjects isKindOfClass:[NSDictionary class]]);
 	assert([[responseObjects allKeys] count] == 1);
@@ -209,11 +197,9 @@ errorExit:
 		NSNumber * errorCode = [errorDictionary objectForKey:SKErrorCodeKey];
 		NSString * errorMessage = [errorDictionary objectForKey:SKErrorMessageKey];
 		
-		if (error != nil) {
-			NSDictionary * userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
-			[self setError:[NSError errorWithDomain:SKErrorDomain code:[errorCode integerValue] userInfo:userInfo]];
-			goto cleanup;
-		}
+		NSDictionary * userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:[errorCode integerValue] userInfo:userInfo]];
+		goto cleanup;
 	}
 	
 	//pull out the data container

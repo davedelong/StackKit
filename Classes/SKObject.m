@@ -42,7 +42,7 @@
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
 	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
 	
-	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
 	return nil;
 }
 
@@ -57,7 +57,7 @@
 }
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
-	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
 	return nil;
 }
 
@@ -83,7 +83,7 @@
 
 - (id) valueForUndefinedKey:(NSString *)key {
 	NSString * newKey = [[self class] propertyKeyFromAPIAttributeKey:key];
-	if (newKey != nil) {
+	if (newKey != nil && [newKey isEqual:key] == NO) {
 		return [self valueForKey:newKey];
 	}
 	return [super valueForKey:key];

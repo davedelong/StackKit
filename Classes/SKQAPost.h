@@ -9,19 +9,33 @@
 #import <Foundation/Foundation.h>
 #import "SKPost.h"
 
+extern NSString * const SKQAPostLockedDate;
+extern NSString * const SKQAPostLastEditDate;
+extern NSString * const SKQAPostLastActivityDate;
+extern NSString * const SKQAPostUpVotes;
+extern NSString * const SKQAPostDownVotes;
+extern NSString * const SKQAPostViewCount;
+extern NSString * const SKQAPostCommunityOwned;
+extern NSString * const SKQAPostTitle;
+
 @interface SKQAPost : SKPost {
-	BOOL _votesLoaded;
-	NSUInteger upVotes;
-	NSUInteger downVotes;
-	
-	NSUInteger voteCount;
-	
-	NSDate * modifiedDate;
+	NSDate * lockedDate;
+	NSDate * lastEditDate;
+	NSDate * lastActivityDate;
+	NSNumber * upVotes;
+	NSNumber * downVotes;
+	NSNumber * viewCount;
+	NSNumber * communityOwned;
+	NSString * title;
 }
 
-@property (readonly) NSUInteger upVotes;
-@property (readonly) NSUInteger downVotes;
-@property (readonly) NSUInteger voteCount;
-@property (readonly) NSDate * modifiedDate;
+@property (readonly) NSDate * lockedDate;
+@property (readonly) NSDate * lastEditDate;
+@property (readonly) NSDate * lastActivityDate;
+@property (readonly) NSNumber * upVotes;
+@property (readonly) NSNumber * downVotes;
+@property (readonly) NSNumber * viewCount;
+@property (readonly) NSNumber * communityOwned;
+@property (readonly) NSString * title;
 
 @end

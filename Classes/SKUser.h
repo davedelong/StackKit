@@ -36,38 +36,37 @@ typedef enum {
 @interface SKUser : SKObject {
 	
 	NSNumber * userID;
-	NSUInteger reputation;
+	NSNumber * reputation;
 	NSDate * creationDate;
 	NSString * displayName;
 	NSString * emailHash;
-	NSUInteger age;
+	NSNumber * age;
 	NSDate * lastAccessDate;
 	NSURL * websiteURL;
 	NSString * location;
 	NSString * aboutMe;
-	NSUInteger views;
-	NSUInteger upVotes;
-	NSUInteger downVotes;
+	NSNumber * views;
+	NSNumber * upVotes;
+	NSNumber * downVotes;
 	SKUserType_t userType;
-	BOOL moderator;
-	float acceptRate;
+	NSNumber * acceptRate;
 }
 
 @property (readonly) NSNumber * userID;
-@property (readonly) NSUInteger reputation;
+@property (readonly) NSNumber * reputation;
 @property (readonly) NSDate * creationDate;
 @property (readonly) NSString * displayName;
 @property (readonly) NSString * emailHash;
-@property (readonly) NSUInteger age;
+@property (readonly) NSNumber * age;
 @property (readonly) NSDate * lastAccessDate;
 @property (readonly) NSURL * websiteURL;
 @property (readonly) NSString * location;
 @property (readonly) NSString * aboutMe;
-@property (readonly) NSUInteger views;
-@property (readonly) NSUInteger upVotes;
-@property (readonly) NSUInteger downVotes;
+@property (readonly) NSNumber * views;
+@property (readonly) NSNumber * upVotes;
+@property (readonly) NSNumber * downVotes;
 @property (readonly) SKUserType_t userType;
-@property (readonly) float acceptRate;
+@property (readonly) NSNumber * acceptRate;
 
 - (NSArray *) badges;
 - (NSArray *) tags;

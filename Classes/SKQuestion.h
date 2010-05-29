@@ -12,15 +12,10 @@
 
 @interface SKQuestion : SKQAPost {
 	NSSet * tags;
-	NSString * title;
 	
 	NSUInteger favoritedCount;
-	NSUInteger viewCount;
 }
 
 @property (readonly) NSSet * tags;
-@property (readonly) NSUInteger favoritedCount;
-@property (readonly) NSUInteger viewCount;
-@property (readonly) NSString * title;
 
 @end

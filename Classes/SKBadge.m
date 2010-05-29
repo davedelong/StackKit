@@ -37,7 +37,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 		description = [[dictionary objectForKey:SKBadgeDescription] retain];
 		name = [[dictionary objectForKey:SKBadgeName] retain];
 		
-		numberAwarded = [[dictionary objectForKey:SKBadgeAwardCount] integerValue];
+		numberAwarded = [[dictionary objectForKey:SKBadgeAwardCount] retain];
 		
 		rank = SKBadgeRankBronze;
 		if ([[dictionary objectForKey:SKBadgeRank] isEqual:SKBadgeRankGoldKey]) {
@@ -146,7 +146,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	[name release];
 	[description release];
 	[badgeID release];
-	
+	[numberAwarded release];
 	[super dealloc];
 }
 

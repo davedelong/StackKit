@@ -16,10 +16,10 @@ extern NSString * SKTagsParticipatedInByUser;
 @interface SKTag : SKObject {
 	NSString *name;
 	
-	NSUInteger numberOfTaggedQuestions;
+	NSNumber * numberOfTaggedQuestions;
 }
 
 @property (readonly) NSString *name;
-@property (readonly) NSUInteger numberOfTaggedQuestions;
+@property (readonly) NSNumber * numberOfTaggedQuestions;
 
 @end

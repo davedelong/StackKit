@@ -11,8 +11,6 @@
 @implementation SKQuestion
 
 @synthesize tags;
-@synthesize title;
-@synthesize favoritedCount, viewCount;
 
 - (id) initWithSite:(SKSite *)aSite postID:(NSNumber *)anID {
 	SKQuestion * cachedQuestion = [[aSite cachedPosts] objectForKey:anID];

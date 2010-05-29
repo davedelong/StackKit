@@ -23,7 +23,6 @@ extern NSString * const SKCommentEditCount;
 	NSNumber * replyToUserID;
 	NSNumber * postID;
 	SKPostType_t postType;
-	NSNumber * score;
 	NSNumber * editCount;
 }
 
@@ -31,7 +30,6 @@ extern NSString * const SKCommentEditCount;
 @property (readonly) NSNumber * replyToUserID;
 @property (readonly) NSNumber * postID;
 @property (readonly) SKPostType_t postType;
-@property (readonly) NSNumber * score;
 @property (readonly) NSNumber * editCount;
 
 - (SKUser *) replyToUser;

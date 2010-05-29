@@ -12,6 +12,7 @@
 extern NSString * const SKPostCreationDate;
 extern NSString * const SKPostOwner;
 extern NSString * const SKPostBody;
+extern NSString * const SKPostScore;
 
 typedef enum {
 	SKPostTypeQuestion = 0,
@@ -24,11 +25,13 @@ typedef enum {
 	NSNumber * ownerID;
 	NSDate * creationDate;
 	NSString * body;
+	NSNumber * score;
 }
 
 @property (readonly) NSDate * creationDate;
 @property (readonly) NSNumber * ownerID;
 @property (readonly) NSString * body;
+@property (readonly) NSNumber * score;
 
 - (SKUser *)owner;
 
