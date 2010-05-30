@@ -45,7 +45,7 @@ void SKQLog(NSString *format, ...) {
 	va_end(argList);
 }
 
-id invalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo) {
+id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo) {
 	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:userInfo]];
 	return nil;
 }
@@ -76,6 +76,14 @@ NSNumber * SKExtractCommentID(id value) {
 	return SKExtractNumber(value, [SKComment class], @selector(commentID));
 }
 
+NSNumber * SKExtractQuestionID(id value) {
+	return SKExtractNumber(value, [SKQuestion class], @selector(questionID));
+}
+
+NSNumber * SKExtractAnswerID(id value) {
+	return SKExtractNumber(value, [SKAnswer class], @selector(answerID));
+}
+
 NSString * SKExtractTagName(id value) {
 	if ([value isKindOfClass:[NSString class]]) {
 		return value;
@@ -84,4 +92,16 @@ NSString * SKExtractTagName(id value) {
 	} else {
 		return [value description];
 	}
+}
+
+NSArray * SKExtractTagNames(id value) {
+	//we can only extract multiple names out of a collection:
+	if ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[NSSet class]]) {
+		NSMutableArray * names = [NSMutableArray array];
+		for (id tagValue in value) {
+			[names addObject:SKExtractTagName(tagValue)];
+		}
+		return names;
+	}
+	return nil;
 }

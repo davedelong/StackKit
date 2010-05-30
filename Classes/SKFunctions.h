@@ -29,11 +29,14 @@
 
 void SKQLog(NSString *format, ...);
 
-id invalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
+id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
 
 NSNumber * SKExtractUserID(id value);
 NSNumber * SKExtractBadgeID(id value);
 NSNumber * SKExtractPostID(id value);
 NSNumber * SKExtractCommentID(id value);
+NSNumber * SKExtractQuestionID(id value);
+NSNumber * SKExtractAnswerID(id value);
 
 NSString * SKExtractTagName(id value);
+NSArray * SKExtractTagNames(id value);

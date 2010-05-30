@@ -70,6 +70,13 @@ NSString * SKErrorMessageKey = @"message";
 			nil];
 }
 
+- (NSMutableDictionary *) defaultQueryDictionary {
+	NSMutableDictionary * d = [NSMutableDictionary dictionary];
+	[d setObject:[[self site] apiKey] forKey:SKSiteAPIKey];
+	
+	return d;
+}
+
 - (NSPredicate *) cleanedPredicate {
 	//TODO: clean the predicate.  replace left expressions as appropriate
 	return [self predicate];

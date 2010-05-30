@@ -111,7 +111,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
 											operator:NSEqualToPredicateOperatorType 
 								 rightExpressionType:NSConstantValueExpressionType] == NO) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		//if we get here, then the predicate is of the proper format
@@ -122,7 +122,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 		if (badgesByTag != nil) {
 			//we can only allow "YES"
 			if ([badgesByTag boolValue] == NO) {
-				return invalidPredicateErrorForFetchRequest(request, nil);
+				return SKInvalidPredicateErrorForFetchRequest(request, nil);
 			}
 			path = @"/badges/tags";
 		} else if (badgesForUser != nil) {
@@ -140,11 +140,10 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	
 	if (path == nil) {
 		//we somehow got a nil path.  not sure why...
-		return invalidPredicateErrorForFetchRequest(request, nil);
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];	
+	NSMutableDictionary * query = [request defaultQueryDictionary];	
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 	

@@ -31,6 +31,7 @@ NSString * SKSiteAPIKey = @"key";
 
 @synthesize apiKey;
 @synthesize apiURL;
+@synthesize apiVersion;
 @synthesize timeoutInterval;
 
 + (id) stackoverflowSite {
@@ -70,6 +71,10 @@ NSString * SKSiteAPIKey = @"key";
 
 - (SKSite *) site {
 	return [[self retain] autorelease];
+}
+
+- (NSString *) apiVersion {
+	return SKAPIVersion;
 }
 
 /**
@@ -131,6 +136,8 @@ NSString * SKSiteAPIKey = @"key";
 	[requestQueue addOperation:operation];
 	[operation release];
 }
+
+#pragma mark Site information
 
 - (NSDictionary *) statistics {
 	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self apiKey] forKey:SKSiteAPIKey];

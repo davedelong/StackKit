@@ -25,8 +25,76 @@
 
 #import "StackKit_Internal.h"
 
+NSString * const SKAnswerID = @"answer_id";
+NSString * const SKAnswerQuestion = @"question_id";
+NSString * const SKAnswerIsAccepted = @"accepted";
+NSString * const SKAnswerCommentsURL = @"answer_comments_url";
+
 @implementation SKAnswer
 
-@synthesize question, comments;
+@synthesize answerID, questionID, accepted, commentsURL;
+
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
+	/**
+	 Valid endpoints:
+	 
+	 /answers/{id}
+	 /questions/{id}/answers
+	 /users/{id}/answers
+	 
+	 
+	 Valid predicates:
+	 
+	 SKAnswerID = ##
+	 SKQuestionID = ##
+	 SKUserID = ##
+	 **/
+	
+	if ([request predicate] == nil) {
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
+	}
+	
+	if ([[request predicate] isKindOfClass:[NSComparisonPredicate class]] == NO) {
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
+	}
+	
+	NSString * path = nil;
+	NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)[request predicate];
+	
+	NSArray * validLeftKeyPaths = [NSArray arrayWithObjects:SKAnswerID, SKQuestionID, SKUserID, nil];
+	if ([comparisonP isComparisonPredicateWithLeftKeyPaths:validLeftKeyPaths operator:NSEqualToPredicateOperatorType rightExpressionType:NSConstantValueExpressionType] == NO) {
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
+	}
+	
+	id answerID = [comparisonP constantValueForLeftKeyPath:SKAnswerID];
+	id questionID = [comparisonP constantValueForLeftKeyPath:SKQuestionID];
+	id userID = [comparisonP constantValueForLeftKeyPath:SKUserID];
+	
+	if (answerID != nil) {
+		answerID = SKExtractAnswerID(answerID);
+		if (answerID == nil) {
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
+		}
+		path = [NSString stringWithFormat:@"/answers/%@", answerID];
+	} else if (questionID != nil) {
+		questionID = SKExtractQuestionID(questionID);
+		if (questionID == nil) {
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
+		}
+		path = [NSString stringWithFormat:@"/questions/%@/answers", questionID];
+	} else if (userID != nil) {
+		userID = SKExtractUserID(userID);
+		if (userID == nil) {
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
+		}
+		path = [NSString stringWithFormat:@"/users/%@/answers", userID];
+	} else {
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
+	}
+	
+	NSMutableDictionary * query = [request defaultQueryDictionary];
+	
+	return [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
+}
 
 @end

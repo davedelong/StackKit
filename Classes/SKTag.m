@@ -66,7 +66,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
 											operator:NSEqualToPredicateOperatorType 
 								 rightExpressionType:NSConstantValueExpressionType] == NO) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		//if we get here, we know the predicate is SKTagsParticipatedInByUser = constantValue
@@ -78,8 +78,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 	}
 	
 	
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
+	NSMutableDictionary * query = [request defaultQueryDictionary];
 	
 	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
 		NSUInteger pagesize = ([request fetchLimit] > 0 ? [request fetchLimit] : SKTagDefaultPageSize);

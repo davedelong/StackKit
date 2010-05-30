@@ -26,14 +26,23 @@
 #import <Foundation/Foundation.h>
 #import "SKQAPost.h"
 
+extern NSString * const SKAnswerID;
+extern NSString * const SKAnswerQuestion;
+extern NSString * const SKAnswerIsAccepted;
+extern NSString * const SKAnswerCommentsURL;
+
 @class SKQuestion;
 
 @interface SKAnswer : SKQAPost {
-	SKQuestion * question;
-	NSArray * comments;
+	NSNumber * answerID;
+	NSNumber * questionID;
+	NSNumber * accepted;
+	NSURL * commentsURL;
 }
 
-@property (readonly) SKQuestion * question;
-@property (readonly) NSArray * comments;
+@property (readonly) NSNumber * answerID;
+@property (readonly) NSNumber * questionID;
+@property (readonly) NSNumber * accepted;
+@property (readonly) NSURL * commentsURL;
 
 @end

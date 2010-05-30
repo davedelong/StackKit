@@ -165,7 +165,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		if ([p isComparisonPredicateWithLeftKeyPaths:validLeftKeyPaths 
 											operator:NSEqualToPredicateOperatorType 
 								 rightExpressionType:NSConstantValueExpressionType] == NO) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		//if we get here, we know the predicate is SKUserID = constantValue
@@ -178,8 +178,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	}
 	
 	NSURL * baseURL = [[request site] apiURL];
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
+	NSMutableDictionary * query = [request defaultQueryDictionary];
 	
 	//TODO: sorting
 	

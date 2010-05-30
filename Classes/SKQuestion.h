@@ -39,11 +39,13 @@ extern NSString * const SKQuestionTimelineURL;
 extern NSString * const SKQuestionCommentsURL;
 extern NSString * const SKQuestionAnswersURL;
 
+extern NSString * const SKQuestionFavoritedByUser;
+
 
 @interface SKQuestion : SKQAPost {
 	NSNumber * questionID;
 	
-	NSSet * tagNames;
+	NSSet * tags;
 	NSNumber * answerCount;
 	NSNumber * acceptedAnswerID;
 	NSNumber * favoriteCount;
@@ -57,6 +59,17 @@ extern NSString * const SKQuestionAnswersURL;
 	NSURL * answersURL;
 }
 
+@property (readonly) NSNumber * questionID;
 @property (readonly) NSSet * tags;
+@property (readonly) NSNumber * answerCount;
+@property (readonly) NSNumber * acceptedAnswerID;
+@property (readonly) NSNumber * favoriteCount;
+@property (readonly) NSDate * bountyCloseDate;
+@property (readonly) NSNumber * bountyAmount;
+@property (readonly) NSDate * closeDate;
+@property (readonly) NSString * closeReason;
+@property (readonly) NSURL * timelineURL;
+@property (readonly) NSURL * commentsURL;
+@property (readonly) NSURL * answersURL;
 
 @end

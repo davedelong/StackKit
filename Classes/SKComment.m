@@ -69,7 +69,7 @@ NSString * const SKCommentEditCount = @"edit_count";
 	//this *must* have a predicate
 	NSPredicate * p = [request predicate];
 	if (p == nil) {
-		return invalidPredicateErrorForFetchRequest(request, nil);
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
 	if ([p isKindOfClass:[NSComparisonPredicate class]]) {
@@ -78,7 +78,7 @@ NSString * const SKCommentEditCount = @"edit_count";
 		if ([comparisonP isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
 													  operator:NSEqualToPredicateOperatorType 
 										   rightExpressionType:NSConstantValueExpressionType] == NO) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		/**
@@ -98,13 +98,13 @@ NSString * const SKCommentEditCount = @"edit_count";
 		} else if (replyTo != nil) {
 			path = [NSString stringWithFormat:@"/users/%@/mentioned", SKExtractUserID(replyTo)];
 		} else {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 	} else if ([p isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compoundP = (NSCompoundPredicate *)p;
 		if ([compoundP compoundPredicateType] != NSAndPredicateType) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		/**
@@ -115,7 +115,7 @@ NSString * const SKCommentEditCount = @"edit_count";
 		 **/
 		NSArray * subpredicates = [compoundP subpredicates];
 		if ([subpredicates count] != 2) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		NSPredicate * first = [subpredicates objectAtIndex:0];
@@ -135,12 +135,12 @@ NSString * const SKCommentEditCount = @"edit_count";
 			
 			if (post == nil || type == nil) {
 				//this should never happen, but just in case...
-				return invalidPredicateErrorForFetchRequest(request, nil);
+				return SKInvalidPredicateErrorForFetchRequest(request, nil);
 			}
 			
 			SKPostType_t postType = [type intValue];
 			if (postType != SKPostTypeQuestion && postType != SKPostTypeAnswer) {
-				return invalidPredicateErrorForFetchRequest(request, nil);
+				return SKInvalidPredicateErrorForFetchRequest(request, nil);
 			}
 			
 			NSNumber * postID = SKExtractPostID(post);
@@ -153,7 +153,7 @@ NSString * const SKCommentEditCount = @"edit_count";
 			if (replyTo == nil) { replyTo = [second constantValueForLeftKeyPath:SKCommentInReplyToUser]; }
 			
 			if (owner == nil || replyTo == nil) {
-				return invalidPredicateErrorForFetchRequest(request, nil);
+				return SKInvalidPredicateErrorForFetchRequest(request, nil);
 			}
 			
 			NSNumber * ownerID = SKExtractUserID(owner);
@@ -161,12 +161,11 @@ NSString * const SKCommentEditCount = @"edit_count";
 			
 			path = [NSString stringWithFormat:@"/users/%@/comments/%@", ownerID, replyToID];
 		} else {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 	}
 	
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];	
+	NSMutableDictionary * query = [request defaultQueryDictionary];
 	
 	return [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 }

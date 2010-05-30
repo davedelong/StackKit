@@ -56,7 +56,7 @@
 	return nil;
 }
 
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
 	
 	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
@@ -88,11 +88,6 @@
 
 + (NSDictionary *) validSortDescriptorKeys {
 	return [self APIAttributeToPropertyMapping];
-}
-
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
-	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
-	return nil;
 }
 
 #pragma mark -

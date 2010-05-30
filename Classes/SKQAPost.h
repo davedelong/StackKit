@@ -55,4 +55,6 @@ extern NSString * const SKQAPostTitle;
 @property (readonly) NSNumber * communityOwned;
 @property (readonly) NSString * title;
 
+@property (readonly) NSURL * commentsURL;
+
 @end

@@ -27,6 +27,8 @@
 
 @interface SKFetchRequest (Private)
 
+- (NSMutableDictionary *) defaultQueryDictionary;
+
 - (NSString *) entityDataKey;
 - (NSURL *) apiCall;
 

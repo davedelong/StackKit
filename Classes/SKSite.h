@@ -42,6 +42,7 @@ extern NSString * SKSiteAPIKey;
 
 @property (readonly) NSURL * apiURL;
 @property (readonly) NSString * apiKey;
+@property (readonly) NSString * apiVersion;
 
 @property NSTimeInterval timeoutInterval;
 

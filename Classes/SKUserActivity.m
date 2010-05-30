@@ -84,7 +84,7 @@ NSString * SKUserActivityToDateKey = @"todate";
 	return _kSKUserActivityMappings;
 }
 
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible activity endpoints:
 	 
@@ -110,13 +110,13 @@ NSString * SKUserActivityToDateKey = @"todate";
 		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
 											operator:NSEqualToPredicateOperatorType 
 								 rightExpressionType:NSConstantValueExpressionType] == NO) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 	} else if ([p isKindOfClass:[NSCompoundPredicate class]]) {
 		//TODO: finish the compound predicate
 		NSCompoundPredicate * compoundP = (NSCompoundPredicate *)p;
 		if ([compoundP compoundPredicateType] != NSAndPredicateType) {
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKUserID, SKUserActivityCreationDate, nil];
@@ -125,25 +125,25 @@ NSString * SKUserActivityToDateKey = @"todate";
 			if ([subP isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
 												   operator:-1 
 										rightExpressionType:NSConstantValueExpressionType] == NO) {
-				return invalidPredicateErrorForFetchRequest(request, nil);
+				return SKInvalidPredicateErrorForFetchRequest(request, nil);
 			}
 		}
 		NSArray * userIDSubPredicate = [compoundP subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
 		if ([userIDSubPredicate count] != 1) {
 			//there can only be one
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		} else {
 			//TODO: verify it's an SKUserID = ## comparison
 		}
 		NSArray * dateSubPredicates = [compoundP subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];
 		if ([dateSubPredicates count] > 2) {
 			//there can't be more than 2
-			return invalidPredicateErrorForFetchRequest(request, nil);
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		} else {
 			//TODO: verify it's a legit date comparison (<=, >=)
 		}
 	} else {
-		return invalidPredicateErrorForFetchRequest(request, nil);
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
 	id activityForUser = [p constantValueForLeftKeyPath:SKUserID];
@@ -151,8 +151,7 @@ NSString * SKUserActivityToDateKey = @"todate";
 	
 	path = [NSString stringWithFormat:@"/users/%@/timeline", userID];
 	
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
+	NSMutableDictionary * query = [request defaultQueryDictionary];
 	
 	/**
 	NSArray * datePredicates = [[request predicate] subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];

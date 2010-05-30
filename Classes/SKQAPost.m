@@ -81,4 +81,6 @@ NSString * const SKQAPostTitle = @"title";
 	[super dealloc];
 }
 
+- (NSURL *) commentsURL { return nil; }
+
 @end
