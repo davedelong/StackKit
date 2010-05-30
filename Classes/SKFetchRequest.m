@@ -176,6 +176,13 @@ NSString * SKErrorMessageKey = @"message";
 
 - (NSArray *) execute {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	
+	NSString * apiKey = [[self site] apiKey];
+	if (apiKey == nil) {
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidApplicationPublicKey userInfo:nil]];
+		goto cleanup;
+	}
+	
 	NSMutableArray * objects = nil;
 	
 	//construct our fetch url

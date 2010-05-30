@@ -44,8 +44,10 @@ extern NSString * SKUserType;
 extern NSString * SKUserAcceptRate;
 
 typedef enum {
-	SKUserTypeRegistered = 0,
-	SKUserTypeModerator = 1
+	SKUserTypeAnonymous = 0,
+	SKUserTypeUnregistered = 1,
+	SKUserTypeRegistered = 2,
+	SKUserTypeModerator = 3
 } SKUserType_t;
 
 @class SKSite;

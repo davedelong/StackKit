@@ -47,8 +47,10 @@ NSString * SKUserAnswerCount = @"answer_count";
 //used internally
 NSUInteger SKUserDefaultPageSize = 35;
 
-NSString * SKUserAccountTypeModerator = @"moderator";
+NSString * SKUserAccountTypeAnonymous = @"anonymous";
+NSString * SKUserAccountTypeUnregistered = @"unregistered";
 NSString * SKUserAccountTypeRegistered = @"registered";
+NSString * SKUserAccountTypeModerator = @"moderator";
 
 @implementation SKUser
 
@@ -92,9 +94,14 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		downVotes = [[dictionary objectForKey:SKUserDownVotes] retain];
 		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] retain];
 		
+		NSString * type = [dictionary objectForKey:SKUserType];
 		userType = SKUserTypeRegistered;
-		if ([[dictionary objectForKey:SKUserType] isEqual:SKUserAccountTypeModerator]) {
+		if ([type isEqual:SKUserAccountTypeModerator]) {
 			userType = SKUserTypeModerator;
+		} else if ([type isEqual:SKUserAccountTypeUnregistered]) {
+			userType = SKUserTypeUnregistered;
+		} else if ([type isEqual:SKUserAccountTypeAnonymous]) {
+			userType = SKUserTypeAnonymous;
 		}
 	}
 	return self;
@@ -219,7 +226,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 - (NSArray *) badges {
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgesAwardedToUser, [self userID]]];
 	
 	NSArray * badges = [[self site] executeSynchronousFetchRequest:r error:nil];
 	[r release];
@@ -230,7 +237,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 - (NSArray *) tags {
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKTagsParticipatedInByUser, [self userID]]];
 	
 	NSArray * tags = [[self site] executeSynchronousFetchRequest:r error:nil];
 	[r release];

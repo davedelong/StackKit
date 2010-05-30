@@ -31,7 +31,7 @@ NSString * SKBadgeName = @"name";
 NSString * SKBadgeDescription = @"description";
 NSString * SKBadgeAwardCount = @"award_count";
 NSString * SKBadgeTagBased = @"tag_based";
-NSString * SKBadgeAwardedToUser = __SKUserID;
+NSString * SKBadgesAwardedToUser = __SKUserID;
 
 NSString * SKBadgeRankGoldKey = @"gold";
 NSString * SKBadgeRankSilverKey = @"silver";
@@ -107,7 +107,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	
 	if (p != nil) {
 		
-		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKBadgeAwardedToUser, SKBadgeTagBased, SKBadgeID, nil];
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKBadgesAwardedToUser, SKBadgeTagBased, SKBadgeID, nil];
 		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
 											operator:NSEqualToPredicateOperatorType 
 								 rightExpressionType:NSConstantValueExpressionType] == NO) {
@@ -116,7 +116,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 		
 		//if we get here, then the predicate is of the proper format
 		NSNumber * badgesByTag = [p constantValueForLeftKeyPath:SKBadgeTagBased];
-		id badgesForUser = [p constantValueForLeftKeyPath:SKBadgeAwardedToUser];
+		id badgesForUser = [p constantValueForLeftKeyPath:SKBadgesAwardedToUser];
 		id badgeID = [p constantValueForLeftKeyPath:SKBadgeID];
 		
 		if (badgesByTag != nil) {

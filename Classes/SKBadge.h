@@ -39,7 +39,7 @@ extern NSString * SKBadgeName;
 extern NSString * SKBadgeDescription;
 extern NSString * SKBadgeAwardCount;
 extern NSString * SKBadgeTagBased;
-extern NSString * SKBadgeAwardedToUser;
+extern NSString * SKBadgesAwardedToUser;
 
 @interface SKBadge : SKObject {
 	NSNumber *badgeID;
