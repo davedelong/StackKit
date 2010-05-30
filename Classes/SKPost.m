@@ -25,9 +25,9 @@
 
 #import "StackKit_Internal.h"
 
-NSString * const SKPostCreationDate = @"creation_date";
-NSString * const SKPostOwner = @"owner";
-NSString * const SKPostBody = @"body";
+NSString * const SKPostCreationDate = __SKPostCreationDate;
+NSString * const SKPostOwner = __SKPostOwner;
+NSString * const SKPostBody = __SKPostBody;
 NSString * const SKPostScore = __SKPostScore;
 
 @implementation SKPost

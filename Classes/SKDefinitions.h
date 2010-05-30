@@ -37,7 +37,7 @@
  
  To get around the trouble of defining @"user_id" in 3 different places, all three of these constants are declared like so:
  
- NSString * const SKWhateverThisConstantIs = __SKUserID;
+ NSString * const SKWhateverThisConstantIs __SKUserID;
  
 __SKUserID is #defined below to be @"user_id".
  
@@ -47,6 +47,33 @@ __SKUserID is #defined below to be @"user_id".
 
 #define __SKUserID @"user_id"
 #define __SKPostScore @"score"
+#define __SKPostCreationDate @"creation_date"
+#define __SKPostOwner @"owner"
+#define __SKPostBody @"body"
+#define __SKQAPostLockedDate @"locked_date"
+#define __SKQAPostLastEditDate @"last_edit_date"
+#define __SKQAPostLastActivityDate @"last_activity_date"
+#define __SKQAPostUpVotes @"up_vote_count"
+#define __SKQAPostDownVotes @"down_vote_count"
+#define __SKQAPostViewCount @"view_count"
+#define __SKQAPostCommunityOwned @"community_owned"
+#define __SKQAPostTitle @"title"
+#define __SKQuestionID @"question_id"
+#define __SKQuestionTags @"tags"
+#define __SKQuestionAnswerCount @"answer_count"
+#define __SKQuestionAcceptedAnswer @"accepted_answer_id"
+#define __SKQuestionFavoriteCount @"favorite_count"
+#define __SKQuestionBountyCloseDate @"bounty_closes_date"
+#define __SKQuestionBountyAmount @"bounty_amount"
+#define __SKQuestionCloseDate @"closed_date"
+#define __SKQuestionCloseReason @"closed_reason"
+#define __SKQuestionTimelineURL @"question_timeline_url"
+#define __SKQuestionCommentsURL @"question_comments_url"
+#define __SKQuestionAnswersURL @"question_answers_url"
+#define __SKAnswerID @"answer_id"
+#define __SKAnswerQuestion @"question_id"
+#define __SKAnswerIsAccepted @"accepted"
+#define __SKAnswerCommentsURL @"answer_comments_url"
 
 
 #ifndef SKLog

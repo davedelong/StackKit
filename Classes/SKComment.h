@@ -26,6 +26,12 @@
 #import <Foundation/Foundation.h>
 #import "SKPost.h"
 
+//inherited
+extern NSString * const SKCommentCreationDate;
+extern NSString * const SKCommentOwner;
+extern NSString * const SKCommentBody;
+extern NSString * const SKCommentScore;
+
 extern NSString * const SKCommentID;
 extern NSString * const SKCommentInReplyToUser;
 extern NSString * const SKCommentPost;

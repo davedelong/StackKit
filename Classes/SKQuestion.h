@@ -24,7 +24,21 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "SKQAPost.h"
+#import "SKQuestion.h"
+
+//inherited
+extern NSString * const SKQuestionCreationDate;
+extern NSString * const SKQuestionOwner;
+extern NSString * const SKQuestionBody;
+extern NSString * const SKQuestionScore;
+extern NSString * const SKQuestionLockedDate;
+extern NSString * const SKQuestionLastEditDate;
+extern NSString * const SKQuestionLastActivityDate;
+extern NSString * const SKQuestionUpVotes;
+extern NSString * const SKQuestionDownVotes;
+extern NSString * const SKQuestionViewCount;
+extern NSString * const SKQuestionCommunityOwned;
+extern NSString * const SKQuestionTitle;
 
 extern NSString * const SKQuestionID;
 extern NSString * const SKQuestionTags;
@@ -39,7 +53,7 @@ extern NSString * const SKQuestionTimelineURL;
 extern NSString * const SKQuestionCommentsURL;
 extern NSString * const SKQuestionAnswersURL;
 
-extern NSString * const SKQuestionFavoritedByUser;
+extern NSString * const SKQuestionsFavoritedByUser;
 
 
 @interface SKQuestion : SKQAPost {

@@ -25,14 +25,20 @@
 
 #import "StackKit_Internal.h"
 
-NSString * const SKQAPostLockedDate = @"locked_date";
-NSString * const SKQAPostLastEditDate = @"last_edit_date";
-NSString * const SKQAPostLastActivityDate = @"last_activity_date";
-NSString * const SKQAPostUpVotes = @"up_vote_count";
-NSString * const SKQAPostDownVotes = @"down_vote_count";
-NSString * const SKQAPostViewCount = @"view_count";
-NSString * const SKQAPostCommunityOwned = @"community_owned";
-NSString * const SKQAPostTitle = @"title";
+//inherited
+NSString * const SKQAPostCreationDate = __SKPostCreationDate;
+NSString * const SKQAPostOwner = __SKPostOwner;
+NSString * const SKQAPostBody = __SKPostBody;
+NSString * const SKQAPostScore = __SKPostScore;
+
+NSString * const SKQAPostLockedDate = __SKQAPostLockedDate;
+NSString * const SKQAPostLastEditDate = __SKQAPostLastEditDate;
+NSString * const SKQAPostLastActivityDate = __SKQAPostLastActivityDate;
+NSString * const SKQAPostUpVotes = __SKQAPostUpVotes;
+NSString * const SKQAPostDownVotes = __SKQAPostDownVotes;
+NSString * const SKQAPostViewCount = __SKQAPostViewCount;
+NSString * const SKQAPostCommunityOwned = __SKQAPostCommunityOwned;
+NSString * const SKQAPostTitle = __SKQAPostTitle;
 
 @implementation SKQAPost
 

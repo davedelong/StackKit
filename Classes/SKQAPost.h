@@ -26,6 +26,12 @@
 #import <Foundation/Foundation.h>
 #import "SKPost.h"
 
+//inherited
+extern NSString * const SKQAPostCreationDate;
+extern NSString * const SKQAPostOwner;
+extern NSString * const SKQAPostBody;
+extern NSString * const SKQAPostScore;
+
 extern NSString * const SKQAPostLockedDate;
 extern NSString * const SKQAPostLastEditDate;
 extern NSString * const SKQAPostLastActivityDate;

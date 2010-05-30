@@ -24,21 +24,34 @@
  **/
 
 #import "StackKit_Internal.h"
+//inherited
+NSString * const SKQuestionCreationDate = __SKPostCreationDate;
+NSString * const SKQuestionOwner = __SKPostOwner;
+NSString * const SKQuestionBody = __SKPostBody;
+NSString * const SKQuestionScore = __SKPostScore;
+NSString * const SKQuestionLockedDate = __SKQAPostLockedDate;
+NSString * const SKQuestionLastEditDate = __SKQAPostLastEditDate;
+NSString * const SKQuestionLastActivityDate = __SKQAPostLastActivityDate;
+NSString * const SKQuestionUpVotes = __SKQAPostUpVotes;
+NSString * const SKQuestionDownVotes = __SKQAPostDownVotes;
+NSString * const SKQuestionViewCount = __SKQAPostViewCount;
+NSString * const SKQuestionCommunityOwned = __SKQAPostCommunityOwned;
+NSString * const SKQuestionTitle = __SKQAPostTitle;
 
-NSString * const SKQuestionID = @"question_id";
-NSString * const SKQuestionTags = @"tags";
-NSString * const SKQuestionAnswerCount = @"answer_count";
-NSString * const SKQuestionAcceptedAnswer = @"accepted_answer_id";
-NSString * const SKQuestionFavoriteCount = @"favorite_count";
-NSString * const SKQuestionBountyCloseDate = @"bounty_closes_date";
-NSString * const SKQuestionBountyAmount = @"bounty_amount";
-NSString * const SKQuestionCloseDate = @"closed_date";
-NSString * const SKQuestionCloseReason = @"closed_reason";
-NSString * const SKQuestionTimelineURL = @"question_timeline_url";
-NSString * const SKQuestionCommentsURL = @"question_comments_url";
-NSString * const SKQuestionAnswersURL = @"question_answers_url";
+NSString * const SKQuestionID = __SKQuestionID;
+NSString * const SKQuestionTags = __SKQuestionTags;
+NSString * const SKQuestionAnswerCount = __SKQuestionAnswerCount;
+NSString * const SKQuestionAcceptedAnswer = __SKQuestionAcceptedAnswer;
+NSString * const SKQuestionFavoriteCount = __SKQuestionFavoriteCount;
+NSString * const SKQuestionBountyCloseDate = __SKQuestionBountyCloseDate;
+NSString * const SKQuestionBountyAmount = __SKQuestionBountyAmount;
+NSString * const SKQuestionCloseDate = __SKQuestionCloseDate;
+NSString * const SKQuestionCloseReason = __SKQuestionCloseReason;
+NSString * const SKQuestionTimelineURL = __SKQuestionTimelineURL;
+NSString * const SKQuestionCommentsURL = __SKQuestionCommentsURL;
+NSString * const SKQuestionAnswersURL = __SKQuestionAnswersURL;
 
-NSString * const SKQuestionFavoritedByUser = @"question_favorited_by_user";
+NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 
 @implementation SKQuestion
 
@@ -85,11 +98,11 @@ NSString * const SKQuestionFavoritedByUser = @"question_favorited_by_user";
 			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
-		NSArray * simpleLeftKeyPaths = [NSArray arrayWithObjects:SKQuestionID, SKQuestionAnswerCount, SKQuestionFavoritedByUser, SKPostOwner, nil];
+		NSArray * simpleLeftKeyPaths = [NSArray arrayWithObjects:SKQuestionID, SKQuestionAnswerCount, SKQuestionsFavoritedByUser, SKPostOwner, nil];
 		if ([p isComparisonPredicateWithLeftKeyPaths:simpleLeftKeyPaths operator:NSEqualToPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
 			id questionID = [p constantValueForLeftKeyPath:SKQuestionID];
 			id answerCount = [p constantValueForLeftKeyPath:SKQuestionAnswerCount];
-			id favByUser = [p constantValueForLeftKeyPath:SKQuestionFavoritedByUser];
+			id favByUser = [p constantValueForLeftKeyPath:SKQuestionsFavoritedByUser];
 			id owner = [p constantValueForLeftKeyPath:SKPostOwner];
 			
 			if (questionID != nil) {
