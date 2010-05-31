@@ -1,5 +1,5 @@
 //
-//  SKComment.h
+//  SKDefinitions.m
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,39 +23,4 @@
  THE SOFTWARE.
  **/
 
-#import <Foundation/Foundation.h>
-#import "SKPost.h"
-
-//inherited
-extern NSString * const SKCommentCreationDate;
-extern NSString * const SKCommentOwner;
-extern NSString * const SKCommentBody;
-extern NSString * const SKCommentScore;
-
-extern NSString * const SKCommentID;
-extern NSString * const SKCommentInReplyToUser;
-extern NSString * const SKCommentPost;
-extern NSString * const SKCommentScore;
-extern NSString * const SKCommentEditCount;
-
-@class SKPost;
-@class SKUser;
-
-@interface SKComment : SKPost {
-	NSNumber * commentID;
-	NSNumber * replyToUserID;
-	NSNumber * postID;
-	SKPostType_t postType;
-	NSNumber * editCount;
-}
-
-@property (readonly) NSNumber * commentID;
-@property (readonly) NSNumber * replyToUserID;
-@property (readonly) NSNumber * postID;
-@property (readonly) SKPostType_t postType;
-@property (readonly) NSNumber * editCount;
-
-- (SKUser *) replyToUser;
-- (SKPost *) post;
-
-@end
+#import "SKDefinitions.h"

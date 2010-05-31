@@ -1,10 +1,27 @@
 //
 //  SKBadge.m
 //  StackKit
-//
-//  Created by Alex Rozanski on 26/01/2010.
-//  Copyright 2010 Alex Rozanski. http://perspx.com
-//
+/**
+ Copyright (c) 2010 Dave DeLong
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ **/
 
 #import "StackKit_Internal.h"
 
@@ -14,6 +31,7 @@ NSString * SKBadgeName = @"name";
 NSString * SKBadgeDescription = @"description";
 NSString * SKBadgeAwardCount = @"award_count";
 NSString * SKBadgeTagBased = @"tag_based";
+NSString * SKBadgesAwardedToUser = __SKUserID;
 
 NSString * SKBadgeRankGoldKey = @"gold";
 NSString * SKBadgeRankSilverKey = @"silver";
@@ -23,7 +41,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 
 @synthesize name;
 @synthesize description;
-@synthesize ID;
+@synthesize badgeID;
 @synthesize rank;
 @synthesize numberAwarded;
 @synthesize tagBased;
@@ -32,11 +50,11 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite]) {
-		ID = [[dictionary objectForKey:SKBadgeID] retain];
+		badgeID = [[dictionary objectForKey:SKBadgeID] retain];
 		description = [[dictionary objectForKey:SKBadgeDescription] retain];
 		name = [[dictionary objectForKey:SKBadgeName] retain];
 		
-		numberAwarded = [[dictionary objectForKey:SKBadgeAwardCount] integerValue];
+		numberAwarded = [[dictionary objectForKey:SKBadgeAwardCount] retain];
 		
 		rank = SKBadgeRankBronze;
 		if ([[dictionary objectForKey:SKBadgeRank] isEqual:SKBadgeRankGoldKey]) {
@@ -77,7 +95,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	 
 	 Therefore, the only supported predicates are:
 	 
-	 SKUserID = ##
+	 SKBadgeAwardedToUser = ##
 	 SKBadgeID = ##
 	 SKBadgeTagBased = 1
 	 
@@ -88,68 +106,30 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	NSString * path = nil;
 	
 	if (p != nil) {
-		//first, make sure that the predicate is an NSComparisonPredicate
-		if ([p isKindOfClass:[NSComparisonPredicate class]] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
 		
-		//next, make sure the operator is ==
-		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
-		if ([comparisonP predicateOperatorType] != NSEqualToPredicateOperatorType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//make sure the left expression is a keyPath
-		NSExpression * left = [comparisonP leftExpression];
-		if ([left expressionType] != NSKeyPathExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//make sure the left expression is either SKUserID, SKBadgeTagBased, SKBadgeID
-		NSString * leftKeyPath = [left keyPath];
-		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKUserID, SKBadgeTagBased, SKBadgeID, nil];
-		if ([validKeyPaths containsObject:leftKeyPath] == NO) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//make sure the right expression is a constantValue
-		NSExpression * right = [comparisonP rightExpression];
-		if ([right expressionType] != NSConstantValueExpressionType) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
-		}
-		
-		//if the left expression is SKBadgeTagBased, then the right expression must be 1
-		if ([leftKeyPath isEqual:SKBadgeTagBased] && [[right constantValue] intValue] != 1) {
-			[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-			return nil;
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKBadgesAwardedToUser, SKBadgeTagBased, SKBadgeID, nil];
+		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+											operator:NSEqualToPredicateOperatorType 
+								 rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
 		//if we get here, then the predicate is of the proper format
-		NSNumber * badgesByTag = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeTagBased]];
-		id badgesForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-		id badgeID = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKBadgeID]];
+		NSNumber * badgesByTag = [p constantValueForLeftKeyPath:SKBadgeTagBased];
+		id badgesForUser = [p constantValueForLeftKeyPath:SKBadgesAwardedToUser];
+		id badgeID = [p constantValueForLeftKeyPath:SKBadgeID];
 		
 		if (badgesByTag != nil) {
+			//we can only allow "YES"
+			if ([badgesByTag boolValue] == NO) {
+				return SKInvalidPredicateErrorForFetchRequest(request, nil);
+			}
 			path = @"/badges/tags";
 		} else if (badgesForUser != nil) {
-			NSNumber * userID = nil;
-			if ([badgesForUser isKindOfClass:[SKUser class]]) {
-				userID = [badgesForUser userID];
-			} else if ([badgesForUser isKindOfClass:[NSNumber class]]) {
-				userID = badgesForUser;
-			} else {
-				userID = [NSNumber numberWithInt:[[badgesForUser description] intValue]];
-			}
+			NSNumber * userID = SKExtractUserID(badgesForUser);
 			path = [NSString stringWithFormat:@"/users/%@/badges", userID];
 		} else if (badgeID != nil) {
-			if ([badgeID isKindOfClass:[NSNumber class]] == NO) {
-				badgeID = [NSNumber numberWithInt:[[badgeID description] intValue]];
-			}
+			badgeID = SKExtractBadgeID(badgeID);
 			path = [NSString stringWithFormat:@"/badges/%@", badgeID];
 		}
 	} else {
@@ -160,35 +140,29 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	
 	if (path == nil) {
 		//we somehow got a nil path.  not sure why...
-		[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeUnknownError userInfo:nil]];
-		return nil;
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];	
+	NSMutableDictionary * query = [request defaultQueryDictionary];	
 	
 	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 	
 	return apiCall;
 }
 
-+ (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
-	return [[request predicate] predicateByRemovingSubPredicateWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-}
-
 #pragma mark SKBadge-specific methods
 
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
-	return ([[self ID] isEqual:[object ID]]);
+	return ([[self badgeID] isEqual:[object badgeID]]);
 }
 
 - (void)dealloc
 {
 	[name release];
 	[description release];
-	[ID release];
-	
+	[badgeID release];
+	[numberAwarded release];
 	[super dealloc];
 }
 

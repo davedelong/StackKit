@@ -1,14 +1,31 @@
 //
 //  SKUser.m
 //  StackKit
-//
-//  Created by Dave DeLong on 1/25/10.
-//  Copyright 2010 Home. All rights reserved.
-//
+/**
+ Copyright (c) 2010 Dave DeLong
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ **/
 
 #import "StackKit_Internal.h"
 
-NSString * SKUserID = @"user_id";
+NSString * const SKUserID = __SKUserID;
 NSString * SKUserReputation = @"reputation";
 NSString * SKUserCreationDate = @"creation_date";
 NSString * SKUserDisplayName = @"display_name";
@@ -30,8 +47,10 @@ NSString * SKUserAnswerCount = @"answer_count";
 //used internally
 NSUInteger SKUserDefaultPageSize = 35;
 
-NSString * SKUserAccountTypeModerator = @"moderator";
+NSString * SKUserAccountTypeAnonymous = @"anonymous";
+NSString * SKUserAccountTypeUnregistered = @"unregistered";
 NSString * SKUserAccountTypeRegistered = @"registered";
+NSString * SKUserAccountTypeModerator = @"moderator";
 
 @implementation SKUser
 
@@ -65,19 +84,24 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		location = [[dictionary objectForKey:SKUserLocation] retain];
 		aboutMe = [[dictionary objectForKey:SKUserAboutMe] retain];
 		
-		creationDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserCreationDate] doubleValue]];
-		lastAccessDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserLastAccessDate] doubleValue]];
+		creationDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserCreationDate] doubleValue]] retain];
+		lastAccessDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserLastAccessDate] doubleValue]] retain];
 		
-		reputation = [[dictionary objectForKey:SKUserReputation] integerValue];
-		age = [[dictionary objectForKey:SKUserAge] integerValue];
-		views = [[dictionary objectForKey:SKUserViews] integerValue];
-		upVotes = [[dictionary objectForKey:SKUserUpVotes] integerValue];
-		downVotes = [[dictionary objectForKey:SKUserDownVotes] integerValue];
-		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] floatValue];
+		reputation = [[dictionary objectForKey:SKUserReputation] retain];
+		age = [[dictionary objectForKey:SKUserAge] retain];
+		views = [[dictionary objectForKey:SKUserViews] retain];
+		upVotes = [[dictionary objectForKey:SKUserUpVotes] retain];
+		downVotes = [[dictionary objectForKey:SKUserDownVotes] retain];
+		acceptRate = [[dictionary objectForKey:SKUserAcceptRate] retain];
 		
+		NSString * type = [dictionary objectForKey:SKUserType];
 		userType = SKUserTypeRegistered;
-		if ([[dictionary objectForKey:SKUserType] isEqual:SKUserAccountTypeModerator]) {
+		if ([type isEqual:SKUserAccountTypeModerator]) {
 			userType = SKUserTypeModerator;
+		} else if ([type isEqual:SKUserAccountTypeUnregistered]) {
+			userType = SKUserTypeUnregistered;
+		} else if ([type isEqual:SKUserAccountTypeAnonymous]) {
+			userType = SKUserTypeAnonymous;
 		}
 	}
 	return self;
@@ -92,6 +116,12 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 	[websiteURL release];
 	[location release];
 	[aboutMe release];
+	[reputation release];
+	[age release];
+	[views release];
+	[upVotes release];
+	[downVotes release];
+	[acceptRate release];
 	
 	[super dealloc];
 }
@@ -125,69 +155,39 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 endpoints returning user objects:
+	 /users
 	 /users/{id}
-	 /users/?sort=reputation
-	 /users/?sort=newest
-	 /users/?sort=name
 	 
-	 while there are other endpoints that have these same (or similar) prefixes,
-	 only endpoints that return SKUser objects are constructed here
+	 This means that *only* predicate that's supported is:
+	 SKUserID = ##
 	 
 	 **/
-	NSURL * baseURL = [[request site] apiURL];
-	NSString * apiKey = [[request site] apiKey];
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:apiKey forKey:SKSiteAPIKey];
 	
-	NSMutableString * relativeString = [NSMutableString stringWithString:@"/users"];
-	NSPredicate * predicate = [request predicate];
-	NSArray * sortDescriptors = [request sortDescriptors];
+	NSPredicate * p = [request predicate];
+	NSString * path = nil;
 	
-	if (predicate != nil) {
-		//look for a "UserId = [NSNumber]" predicate
-		id userID = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-		id displayNameFilter = [predicate constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserDisplayName]];
-		if (userID != nil && ([userID isKindOfClass:[NSNumber class]] || [userID isKindOfClass:[NSString class]])) {
-			[relativeString appendFormat:@"/%@", userID];
-		} else if (displayNameFilter != nil && [displayNameFilter isKindOfClass:[NSString class]]) {
-			[query setObject:displayNameFilter forKey:@"filter"];
-		}
-	} else if (sortDescriptors != nil) {
-		//we have to use an elseif here because /users/{id}/reputation is not a valid endpoint
-		//so we'll prioritize looking for a specific user over looking for users sorted by {sortDescriptor}
+	if (p != nil) {
 		
-		//we have to look for sortDescriptors for SKUserReputation, SKUserCreationDate, and SKUserDisplayName
-		//however, we can only use *one* of those.  we'll use the first one that we find
-		//we also have to translate them, in case they're using @"reputation" instead of SKUserReputation
-		
-		NSString * sort = @"reputation";
-		NSString * order = @"asc";
-		NSSortDescriptor * mainDescriptor = nil;
-		
-		for (NSSortDescriptor * sortDescriptor in sortDescriptors) {
-			NSString * key = [[self class] propertyKeyFromAPIAttributeKey:[sortDescriptor key]];
-			if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserReputation]]) {
-				sort = @"reputation";
-				mainDescriptor = sortDescriptor;
-				break;
-			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserDisplayName]]) {
-				sort = @"name";
-				mainDescriptor = sortDescriptor;
-				break;
-			} else if ([key isEqual:[[self class] propertyKeyFromAPIAttributeKey:SKUserCreationDate]]) {
-				sort = @"creation";
-				mainDescriptor = sortDescriptor;
-				break;
-			}
+		NSArray * validLeftKeyPaths = [NSArray arrayWithObject:SKUserID];
+		if ([p isComparisonPredicateWithLeftKeyPaths:validLeftKeyPaths 
+											operator:NSEqualToPredicateOperatorType 
+								 rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		}
 		
-		if (mainDescriptor != nil) {
-			order = ([mainDescriptor ascending] == YES ? @"asc" : @"desc");
-		}
-		
-		[query setObject:sort forKey:SKSortKey];
-		[query setObject:order forKey:SKSortOrderKey];
+		//if we get here, we know the predicate is SKUserID = constantValue
+		id user = [p constantValueForLeftKeyPath:SKUserID];
+		NSNumber * userID = SKExtractUserID(user);
+		path = [NSString stringWithFormat:@"/users/%@", userID];
+	} else {
+		//there is no predicate
+		path = @"/users";
 	}
+	
+	NSURL * baseURL = [[request site] apiURL];
+	NSMutableDictionary * query = [request defaultQueryDictionary];
+	
+	//TODO: sorting
 	
 	if ([request fetchOffset] != 0 || [request fetchLimit] != 0) {
 		/** three use cases:
@@ -213,7 +213,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 		[query setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];
 	}
 	
-	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:relativeString query:query];
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:baseURL relativePath:path query:query];
 	
 	return apiCall;
 }
@@ -226,7 +226,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 - (NSArray *) badges {
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgesAwardedToUser, [self userID]]];
 	
 	NSArray * badges = [[self site] executeSynchronousFetchRequest:r error:nil];
 	[r release];
@@ -237,7 +237,7 @@ NSString * SKUserAccountTypeRegistered = @"registered";
 - (NSArray *) tags {
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [self userID]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKTagsParticipatedInByUser, [self userID]]];
 	
 	NSArray * tags = [[self site] executeSynchronousFetchRequest:r error:nil];
 	[r release];

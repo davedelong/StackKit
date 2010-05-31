@@ -1,62 +1,69 @@
 //
 //  SKPost.m
 //  StackKit
-//
-//  Created by Dave DeLong on 1/25/10.
-//  Copyright 2010 Home. All rights reserved.
-//
+/**
+ Copyright (c) 2010 Dave DeLong
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ **/
 
 #import "StackKit_Internal.h"
 
+NSString * const SKPostCreationDate = __SKPostCreationDate;
+NSString * const SKPostOwner = __SKPostOwner;
+NSString * const SKPostBody = __SKPostBody;
+NSString * const SKPostScore = __SKPostScore;
+
 @implementation SKPost
 
-@synthesize postID, creationDate, modifiedDate, author;
+@synthesize creationDate, ownerID, body, score;
 
-- (id) initWithSite:(SKSite *)aSite json:(NSDictionary *)json {
-	NSNumber * anID = [json objectForKey:@"Id"];
-	SKPost * p = [[aSite cachedPosts] objectForKey:anID];
-	if (p != nil) {
-		[self release];
-		return [p retain];
-	}
-	
-	if (self = [super initWithSite:aSite]) {
-		postID = [anID copy];
-	}
-	[aSite cachePost:self];
-	return self;
++ (NSDictionary *) APIAttributeToPropertyMapping {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			@"ownerID", SKPostOwner,
+			@"creationDate", SKPostCreationDate,
+			nil];
 }
 
-- (id) initWithSite:(SKSite *)aSite postID:(NSNumber *)anID {
-	SKPost * p = [[aSite cachedPosts] objectForKey:anID];
-	if (p != nil) {
-		[self release];
-		return [p retain];
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
+		creationDate = [[dictionary objectForKey:SKPostCreationDate] retain];
+		
+		NSDictionary * ownerDictionary = [dictionary objectForKey:SKPostOwner];
+		ownerID = [[ownerDictionary objectForKey:SKUserID] retain];
+		
+		body = [[dictionary objectForKey:SKPostBody] retain];
+		score = [[dictionary objectForKey:SKPostScore] retain];
 	}
-	
-	if (self = [super initWithSite:aSite]) {
-		postID = [anID copy];
-	}
-	
-	[aSite cachePost:self];
 	return self;
 }
 
 - (void) dealloc {
-	[postID release];
+	[creationDate release];
+	[ownerID release];
+	[body release];
+	[score release];
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark Private Methods
-
-- (void) loadJSON:(NSDictionary *)jsonDictionary {
-	if ([jsonDictionary objectForKey:@"CreatedDate"] != nil) {
-		creationDate = [[NSDate dateWithJSONString:[jsonDictionary objectForKey:@"CreatedDate"]] retain];
-	}
-	if ([jsonDictionary objectForKey:@"LastEditDate"] != nil) {
-		modifiedDate = [[NSDate dateWithJSONString:[jsonDictionary objectForKey:@"LastEditDate"]] retain];
-	}
+- (SKUser *)owner {
+	return [[self site] userWithID:[self ownerID]];
 }
 
 @end

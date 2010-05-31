@@ -1,5 +1,5 @@
 //
-//  SKComment.h
+//  SKFunctions.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -24,38 +24,19 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "SKPost.h"
 
-//inherited
-extern NSString * const SKCommentCreationDate;
-extern NSString * const SKCommentOwner;
-extern NSString * const SKCommentBody;
-extern NSString * const SKCommentScore;
+@class SKFetchRequest;
 
-extern NSString * const SKCommentID;
-extern NSString * const SKCommentInReplyToUser;
-extern NSString * const SKCommentPost;
-extern NSString * const SKCommentScore;
-extern NSString * const SKCommentEditCount;
+void SKQLog(NSString *format, ...);
 
-@class SKPost;
-@class SKUser;
+id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
 
-@interface SKComment : SKPost {
-	NSNumber * commentID;
-	NSNumber * replyToUserID;
-	NSNumber * postID;
-	SKPostType_t postType;
-	NSNumber * editCount;
-}
+NSNumber * SKExtractUserID(id value);
+NSNumber * SKExtractBadgeID(id value);
+NSNumber * SKExtractPostID(id value);
+NSNumber * SKExtractCommentID(id value);
+NSNumber * SKExtractQuestionID(id value);
+NSNumber * SKExtractAnswerID(id value);
 
-@property (readonly) NSNumber * commentID;
-@property (readonly) NSNumber * replyToUserID;
-@property (readonly) NSNumber * postID;
-@property (readonly) SKPostType_t postType;
-@property (readonly) NSNumber * editCount;
-
-- (SKUser *) replyToUser;
-- (SKPost *) post;
-
-@end
+NSString * SKExtractTagName(id value);
+NSArray * SKExtractTagNames(id value);

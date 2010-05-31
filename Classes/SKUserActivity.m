@@ -1,10 +1,27 @@
 //
 //  SKUserActivity.m
 //  StackKit
-//
-//  Created by Dave DeLong on 4/5/10.
-//  Copyright 2010 Home. All rights reserved.
-//
+/**
+ Copyright (c) 2010 Dave DeLong
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ **/
 
 #import "StackKit_Internal.h"
 
@@ -67,7 +84,7 @@ NSString * SKUserActivityToDateKey = @"todate";
 	return _kSKUserActivityMappings;
 }
 
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
++ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible activity endpoints:
 	 
@@ -75,35 +92,68 @@ NSString * SKUserActivityToDateKey = @"todate";
 	 
 	 **/
 	
-	NSMutableString * relativeString = [NSMutableString string];
+	NSString * path = nil;
+	
+	/**
+	 this can be either a comparison or a compound predicate
+	 if it's a comparison, it must be SKUserID = ##
+	 if it's a compound, it must be an AND compound (OR is not sufficient)
+	 - it must have 1 SKUserID = ## comparison
+	 - it may also have up to 2 SKUserActivityCreationDate comparisons
+	 - it may only have comparison subpredicates
+	 **/
 	
 	NSPredicate * p = [request predicate];
-	id activityForUser = [p constantValueForLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
-	
-	if (p != nil && activityForUser != nil) {
-		//retrieve badges for a specific user
+	if ([p isKindOfClass:[NSComparisonPredicate class]]) {
+		//the predicate must be SKUserID = ##
+		NSArray * validKeyPaths = [NSArray arrayWithObject:SKUserID];
+		if ([p isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+											operator:NSEqualToPredicateOperatorType 
+								 rightExpressionType:NSConstantValueExpressionType] == NO) {
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
+		}
+	} else if ([p isKindOfClass:[NSCompoundPredicate class]]) {
+		//TODO: finish the compound predicate
+		NSCompoundPredicate * compoundP = (NSCompoundPredicate *)p;
+		if ([compoundP compoundPredicateType] != NSAndPredicateType) {
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
+		}
 		
-		NSNumber * userID = nil;
-		if ([activityForUser isKindOfClass:[SKUser class]]) {
-			userID = [activityForUser userID];
-		} else if ([activityForUser isKindOfClass:[NSNumber class]]) {
-			userID = activityForUser;
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKUserID, SKUserActivityCreationDate, nil];
+		for (NSPredicate * subP in [compoundP subpredicates]) {
+			//all the subpredicates must be comparisons with constants values
+			if ([subP isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
+												   operator:-1 
+										rightExpressionType:NSConstantValueExpressionType] == NO) {
+				return SKInvalidPredicateErrorForFetchRequest(request, nil);
+			}
+		}
+		NSArray * userIDSubPredicate = [compoundP subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+		if ([userIDSubPredicate count] != 1) {
+			//there can only be one
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
 		} else {
-			userID = [NSNumber numberWithInt:[[activityForUser description] intValue]];
+			//TODO: verify it's an SKUserID = ## comparison
 		}
-		
-		[relativeString appendFormat:@"/users/%@/timeline", userID];
+		NSArray * dateSubPredicates = [compoundP subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];
+		if ([dateSubPredicates count] > 2) {
+			//there can't be more than 2
+			return SKInvalidPredicateErrorForFetchRequest(request, nil);
+		} else {
+			//TODO: verify it's a legit date comparison (<=, >=)
+		}
 	} else {
-		//we can't operate without a predicate or a userID
-		if (error != nil) {
-			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil];
-		}
-		return nil;
+		return SKInvalidPredicateErrorForFetchRequest(request, nil);
 	}
 	
-	NSMutableDictionary * query = [NSMutableDictionary dictionary];
-	[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
+	id activityForUser = [p constantValueForLeftKeyPath:SKUserID];
+	NSNumber * userID = SKExtractUserID(activityForUser);
 	
+	path = [NSString stringWithFormat:@"/users/%@/timeline", userID];
+	
+	NSMutableDictionary * query = [request defaultQueryDictionary];
+	
+	/**
 	NSArray * datePredicates = [[request predicate] subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:SKUserActivityCreationDate]];
 	if ([datePredicates count] > 0) {
 		//find the first predicate with either > or >= as the operator.  this is our fromdate
@@ -142,8 +192,9 @@ NSString * SKUserActivityToDateKey = @"todate";
 			}
 		}
 	}
+	 **/
 	
-	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:relativeString query:query];
+	NSURL * apiCall = [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
 	
 	return apiCall;
 }
@@ -201,7 +252,7 @@ NSString * SKUserActivityToDateKey = @"todate";
 			activityDetail = [[dictionary objectForKey:SKUserActivityDetail] retain];
 		}
 		
-		creationDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserActivityCreationDate] doubleValue]];
+		creationDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKUserActivityCreationDate] doubleValue]] retain];
 	}
 	return self;
 }
