@@ -68,8 +68,8 @@
 	if (queryString != nil) {
 		path = [NSString stringWithFormat:@"%@?%@", path, queryString];
 	}
-	NSURL * relativeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", base, path]];
-	
+	NSURL * relativeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [base absoluteString], path]];
+
 	return [relativeURL absoluteURL];
 }
 

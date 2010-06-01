@@ -42,7 +42,8 @@
 	NSURL * requestURL = [request apiCall];
 	STAssertEqualObjects([requestURL absoluteString], expected, @"request did not generate appropriate URL");
 	
-	NSArray * results = [site executeSynchronousFetchRequest:request error:nil];
+	NSError * error = nil;
+	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
 	STAssertTrue([results count] == 1, @"request should return 1 object");
 	
 	SKUser * davedelong = [results objectAtIndex:0];
