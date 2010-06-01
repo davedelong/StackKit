@@ -31,7 +31,6 @@ NSString * SKSiteAPIKey = @"key";
 
 @synthesize apiKey;
 @synthesize apiURL;
-@synthesize apiVersion;
 @synthesize timeoutInterval;
 
 + (id) stackoverflowSite {
