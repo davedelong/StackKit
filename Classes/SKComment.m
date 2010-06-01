@@ -40,6 +40,10 @@ NSString * const SKCommentEditCount = @"edit_count";
 @synthesize postType;
 @synthesize editCount;
 
++ (NSString *) dataKey {
+	return @"comments";
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 valid endpoints:

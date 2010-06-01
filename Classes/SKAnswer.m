@@ -48,6 +48,10 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 
 @synthesize answerID, questionID, accepted, commentsURL;
 
++ (NSString *) dataKey {
+	return @"answers";
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Valid endpoints:

@@ -84,6 +84,10 @@ NSString * SKUserActivityToDateKey = @"todate";
 	return _kSKUserActivityMappings;
 }
 
++ (NSString *) dataKey {
+	return @"user_timelines";
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible activity endpoints:

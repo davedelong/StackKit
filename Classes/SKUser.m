@@ -152,6 +152,10 @@ NSString * SKUserAccountTypeModerator = @"moderator";
 	return _kSKUserMappings;
 }
 
++ (NSString *) dataKey {
+	return @"users";
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 endpoints returning user objects:

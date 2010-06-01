@@ -220,7 +220,6 @@ NSString * SKErrorMessageKey = @"message";
 	//TODO: FIX THIS
 	NSDictionary * responseObjects = [responseString JSONValue];
 	assert([responseObjects isKindOfClass:[NSDictionary class]]);
-	assert([[responseObjects allKeys] count] == 1);
 	
 	//check for an error in the response
 	NSDictionary * errorDictionary = [responseObjects objectForKey:SKErrorResponseKey];
@@ -235,7 +234,8 @@ NSString * SKErrorMessageKey = @"message";
 	}
 	
 	//pull out the data container
-	id dataObject = [responseObjects objectForKey:[[responseObjects allKeys] objectAtIndex:0]];
+	NSString * dataKey = [[self entity] dataKey];
+	id dataObject = [responseObjects objectForKey:dataKey];
 	
 	objects = [[NSMutableArray alloc] init];	
 	

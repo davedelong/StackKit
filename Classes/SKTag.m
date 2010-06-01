@@ -47,6 +47,10 @@ NSUInteger SKTagDefaultPageSize = 70;
 	return _kSKTagMappings;
 }
 
++ (NSString *) dataKey {
+	return @"tags";
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Valid endpoints:

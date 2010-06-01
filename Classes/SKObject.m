@@ -78,6 +78,11 @@
 	return nil;
 }
 
++ (NSString *) dataKey {
+	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	return nil;
+}
+
 + (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key {
 	NSDictionary * mappings = [self APIAttributeToPropertyMapping];
 	if ([mappings objectForKey:key] != nil) {

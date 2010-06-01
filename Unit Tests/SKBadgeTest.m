@@ -126,7 +126,7 @@
 	
 	for (SKBadge * badge in badges) {
 		SKBadgeRank_t rank = [badge rank];
-		badgeCount[rank] += [badge numberAwarded];
+		badgeCount[rank] += [[badge numberAwarded] intValue];
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeRankBronze] == 33, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
@@ -154,7 +154,7 @@
 	
 	for (SKBadge * badge in badges) {
 		SKBadgeRank_t rank = [badge rank];
-		badgeCount[rank] += [badge numberAwarded];
+		badgeCount[rank] += [[badge numberAwarded] intValue];
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeRankBronze] == 33, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);

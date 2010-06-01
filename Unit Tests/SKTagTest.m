@@ -59,9 +59,9 @@
 	
 	STAssertNil(error, @"error should be nil: %@", error);
 	
-	NSUInteger previousCount = UINT_MAX;
+	NSNumber * previousCount = nil;
 	for (SKTag * tag in popular) {
-		STAssertTrue(previousCount >= [tag numberOfTaggedQuestions], @"out-of-order tag! (%lu >=? %lu)", previousCount, [tag numberOfTaggedQuestions]);
+		STAssertTrue([previousCount integerValue] >= [[tag numberOfTaggedQuestions] integerValue], @"out-of-order tag! (%@ >=? %@)", previousCount, [tag numberOfTaggedQuestions]);
 		previousCount = [tag numberOfTaggedQuestions];
 	}
 }

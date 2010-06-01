@@ -68,6 +68,10 @@ NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 @synthesize commentsURL;
 @synthesize answersURL;
 
++ (NSString *) dataKey {
+	return @"questions";
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible endpoints:
