@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		55D6CFD611B4DD9C00C624F0 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9111B4DD9C00C624F0 /* StackKit.h */; };
+		55D6CFD711B4DD9C00C624F0 /* StackKit_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */; };
+		55D6CFD811B4DD9C00C624F0 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9411B4DD9C00C624F0 /* SKConstants.h */; };
+		55D6CFD911B4DD9C00C624F0 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CF9511B4DD9C00C624F0 /* SKConstants.m */; };
+		55D6CFDA11B4DD9C00C624F0 /* SKDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9611B4DD9C00C624F0 /* SKDefinitions.h */; };
+		55D6CFDB11B4DD9C00C624F0 /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CF9711B4DD9C00C624F0 /* SKDefinitions.m */; };
+		55D6CFDC11B4DD9C00C624F0 /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9811B4DD9C00C624F0 /* SKFunctions.h */; };
+		55D6CFDD11B4DD9C00C624F0 /* SKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CF9911B4DD9C00C624F0 /* SKFunctions.m */; };
+		55D6CFDE11B4DD9C00C624F0 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9B11B4DD9C00C624F0 /* SKObject.h */; };
+		55D6CFDF11B4DD9C00C624F0 /* SKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CF9C11B4DD9C00C624F0 /* SKObject.m */; };
+		55D6CFE011B4DD9C00C624F0 /* SKObject+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9D11B4DD9C00C624F0 /* SKObject+Private.h */; };
+		55D6CFE111B4DD9C00C624F0 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9F11B4DD9C00C624F0 /* SKSite.h */; };
+		55D6CFE211B4DD9C00C624F0 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFA011B4DD9C00C624F0 /* SKSite.m */; };
+		55D6CFE311B4DD9C00C624F0 /* SKSite+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFA111B4DD9C00C624F0 /* SKSite+Private.h */; };
+		55D6CFE411B4DD9C00C624F0 /* SKFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFA311B4DD9C00C624F0 /* SKFetchRequest.h */; };
+		55D6CFE511B4DD9C00C624F0 /* SKFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFA411B4DD9C00C624F0 /* SKFetchRequest.m */; };
+		55D6CFE611B4DD9C00C624F0 /* SKFetchRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFA511B4DD9C00C624F0 /* SKFetchRequestDelegate.h */; };
+		55D6CFE711B4DD9C00C624F0 /* SKFetchRequest+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFA611B4DD9C00C624F0 /* SKFetchRequest+Private.h */; };
+		55D6CFE811B4DD9C00C624F0 /* SKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFA811B4DD9C00C624F0 /* SKUser.h */; };
+		55D6CFE911B4DD9C00C624F0 /* SKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFA911B4DD9C00C624F0 /* SKUser.m */; };
+		55D6CFEA11B4DD9C00C624F0 /* SKUserActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFAA11B4DD9C00C624F0 /* SKUserActivity.h */; };
+		55D6CFEB11B4DD9C00C624F0 /* SKUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFAB11B4DD9C00C624F0 /* SKUserActivity.m */; };
+		55D6CFEC11B4DD9C00C624F0 /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFAD11B4DD9C00C624F0 /* SKBadge.h */; };
+		55D6CFED11B4DD9C00C624F0 /* SKBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFAE11B4DD9C00C624F0 /* SKBadge.m */; };
+		55D6CFEE11B4DD9C00C624F0 /* SKTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFB011B4DD9C00C624F0 /* SKTag.h */; };
+		55D6CFEF11B4DD9C00C624F0 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFB111B4DD9C00C624F0 /* SKTag.m */; };
+		55D6CFF011B4DD9C00C624F0 /* SKPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFB311B4DD9C00C624F0 /* SKPost.h */; };
+		55D6CFF111B4DD9C00C624F0 /* SKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFB411B4DD9C00C624F0 /* SKPost.m */; };
+		55D6CFF211B4DD9C00C624F0 /* SKQAPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFB611B4DD9C00C624F0 /* SKQAPost.h */; };
+		55D6CFF311B4DD9C00C624F0 /* SKQAPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFB711B4DD9C00C624F0 /* SKQAPost.m */; };
+		55D6CFF411B4DD9C00C624F0 /* SKQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFB811B4DD9C00C624F0 /* SKQuestion.h */; };
+		55D6CFF511B4DD9C00C624F0 /* SKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFB911B4DD9C00C624F0 /* SKQuestion.m */; };
+		55D6CFF611B4DD9C00C624F0 /* SKAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFBA11B4DD9C00C624F0 /* SKAnswer.h */; };
+		55D6CFF711B4DD9C00C624F0 /* SKAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFBB11B4DD9C00C624F0 /* SKAnswer.m */; };
+		55D6CFF811B4DD9C00C624F0 /* SKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFBD11B4DD9C00C624F0 /* SKComment.h */; };
+		55D6CFF911B4DD9C00C624F0 /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFBE11B4DD9C00C624F0 /* SKComment.m */; };
+		55D6CFFA11B4DD9C00C624F0 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFC111B4DD9C00C624F0 /* JSON.h */; };
+		55D6CFFB11B4DD9C00C624F0 /* SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFC211B4DD9C00C624F0 /* SKJSON.h */; };
+		55D6CFFC11B4DD9C00C624F0 /* SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFC311B4DD9C00C624F0 /* SKJSON.m */; };
+		55D6CFFD11B4DD9C00C624F0 /* NSObject+SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFC411B4DD9C00C624F0 /* NSObject+SKJSON.h */; };
+		55D6CFFE11B4DD9C00C624F0 /* NSObject+SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFC511B4DD9C00C624F0 /* NSObject+SKJSON.m */; };
+		55D6CFFF11B4DD9C00C624F0 /* NSString+SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFC611B4DD9C00C624F0 /* NSString+SKJSON.h */; };
+		55D6D00011B4DD9C00C624F0 /* NSString+SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFC711B4DD9C00C624F0 /* NSString+SKJSON.m */; };
+		55D6D00111B4DD9C00C624F0 /* SKJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFC811B4DD9C00C624F0 /* SKJsonBase.h */; };
+		55D6D00211B4DD9C00C624F0 /* SKJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFC911B4DD9C00C624F0 /* SKJsonBase.m */; };
+		55D6D00311B4DD9C00C624F0 /* SKJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFCA11B4DD9C00C624F0 /* SKJsonParser.h */; };
+		55D6D00411B4DD9C00C624F0 /* SKJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFCB11B4DD9C00C624F0 /* SKJsonParser.m */; };
+		55D6D00511B4DD9C00C624F0 /* SKJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFCC11B4DD9C00C624F0 /* SKJsonWriter.h */; };
+		55D6D00611B4DD9C00C624F0 /* SKJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFCD11B4DD9C00C624F0 /* SKJsonWriter.m */; };
+		55D6D00711B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFCE11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.h */; };
+		55D6D00811B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFCF11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.m */; };
+		55D6D00911B4DD9C00C624F0 /* NSDate+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFD011B4DD9C00C624F0 /* NSDate+SKAdditions.h */; };
+		55D6D00A11B4DD9C00C624F0 /* NSDate+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFD111B4DD9C00C624F0 /* NSDate+SKAdditions.m */; };
+		55D6D00B11B4DD9C00C624F0 /* NSPredicate+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFD211B4DD9C00C624F0 /* NSPredicate+SKAdditions.h */; };
+		55D6D00C11B4DD9C00C624F0 /* NSPredicate+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFD311B4DD9C00C624F0 /* NSPredicate+SKAdditions.m */; };
+		55D6D00D11B4DD9C00C624F0 /* NSDictionary+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CFD411B4DD9C00C624F0 /* NSDictionary+SKAdditions.h */; };
+		55D6D00E11B4DD9C00C624F0 /* NSDictionary+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFD511B4DD9C00C624F0 /* NSDictionary+SKAdditions.m */; };
+		AA747D9F0F9514B9006C5449 /* StackKit_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* StackKit_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		55D6CF9111B4DD9C00C624F0 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
+		55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Internal.h; sourceTree = "<group>"; };
+		55D6CF9411B4DD9C00C624F0 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
+		55D6CF9511B4DD9C00C624F0 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
+		55D6CF9611B4DD9C00C624F0 /* SKDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDefinitions.h; sourceTree = "<group>"; };
+		55D6CF9711B4DD9C00C624F0 /* SKDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDefinitions.m; sourceTree = "<group>"; };
+		55D6CF9811B4DD9C00C624F0 /* SKFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFunctions.h; sourceTree = "<group>"; };
+		55D6CF9911B4DD9C00C624F0 /* SKFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFunctions.m; sourceTree = "<group>"; };
+		55D6CF9B11B4DD9C00C624F0 /* SKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObject.h; sourceTree = "<group>"; };
+		55D6CF9C11B4DD9C00C624F0 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
+		55D6CF9D11B4DD9C00C624F0 /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
+		55D6CF9F11B4DD9C00C624F0 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
+		55D6CFA011B4DD9C00C624F0 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
+		55D6CFA111B4DD9C00C624F0 /* SKSite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Private.h"; sourceTree = "<group>"; };
+		55D6CFA311B4DD9C00C624F0 /* SKFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequest.h; sourceTree = "<group>"; };
+		55D6CFA411B4DD9C00C624F0 /* SKFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFetchRequest.m; sourceTree = "<group>"; };
+		55D6CFA511B4DD9C00C624F0 /* SKFetchRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequestDelegate.h; sourceTree = "<group>"; };
+		55D6CFA611B4DD9C00C624F0 /* SKFetchRequest+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKFetchRequest+Private.h"; sourceTree = "<group>"; };
+		55D6CFA811B4DD9C00C624F0 /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
+		55D6CFA911B4DD9C00C624F0 /* SKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUser.m; sourceTree = "<group>"; };
+		55D6CFAA11B4DD9C00C624F0 /* SKUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserActivity.h; sourceTree = "<group>"; };
+		55D6CFAB11B4DD9C00C624F0 /* SKUserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserActivity.m; sourceTree = "<group>"; };
+		55D6CFAD11B4DD9C00C624F0 /* SKBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadge.h; sourceTree = "<group>"; };
+		55D6CFAE11B4DD9C00C624F0 /* SKBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadge.m; sourceTree = "<group>"; };
+		55D6CFB011B4DD9C00C624F0 /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
+		55D6CFB111B4DD9C00C624F0 /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
+		55D6CFB311B4DD9C00C624F0 /* SKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPost.h; sourceTree = "<group>"; };
+		55D6CFB411B4DD9C00C624F0 /* SKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPost.m; sourceTree = "<group>"; };
+		55D6CFB611B4DD9C00C624F0 /* SKQAPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQAPost.h; sourceTree = "<group>"; };
+		55D6CFB711B4DD9C00C624F0 /* SKQAPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQAPost.m; sourceTree = "<group>"; };
+		55D6CFB811B4DD9C00C624F0 /* SKQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestion.h; sourceTree = "<group>"; };
+		55D6CFB911B4DD9C00C624F0 /* SKQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestion.m; sourceTree = "<group>"; };
+		55D6CFBA11B4DD9C00C624F0 /* SKAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAnswer.h; sourceTree = "<group>"; };
+		55D6CFBB11B4DD9C00C624F0 /* SKAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnswer.m; sourceTree = "<group>"; };
+		55D6CFBD11B4DD9C00C624F0 /* SKComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKComment.h; sourceTree = "<group>"; };
+		55D6CFBE11B4DD9C00C624F0 /* SKComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKComment.m; sourceTree = "<group>"; };
+		55D6CFC111B4DD9C00C624F0 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		55D6CFC211B4DD9C00C624F0 /* SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJSON.h; sourceTree = "<group>"; };
+		55D6CFC311B4DD9C00C624F0 /* SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJSON.m; sourceTree = "<group>"; };
+		55D6CFC411B4DD9C00C624F0 /* NSObject+SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SKJSON.h"; sourceTree = "<group>"; };
+		55D6CFC511B4DD9C00C624F0 /* NSObject+SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SKJSON.m"; sourceTree = "<group>"; };
+		55D6CFC611B4DD9C00C624F0 /* NSString+SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SKJSON.h"; sourceTree = "<group>"; };
+		55D6CFC711B4DD9C00C624F0 /* NSString+SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SKJSON.m"; sourceTree = "<group>"; };
+		55D6CFC811B4DD9C00C624F0 /* SKJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonBase.h; sourceTree = "<group>"; };
+		55D6CFC911B4DD9C00C624F0 /* SKJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonBase.m; sourceTree = "<group>"; };
+		55D6CFCA11B4DD9C00C624F0 /* SKJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonParser.h; sourceTree = "<group>"; };
+		55D6CFCB11B4DD9C00C624F0 /* SKJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonParser.m; sourceTree = "<group>"; };
+		55D6CFCC11B4DD9C00C624F0 /* SKJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonWriter.h; sourceTree = "<group>"; };
+		55D6CFCD11B4DD9C00C624F0 /* SKJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonWriter.m; sourceTree = "<group>"; };
+		55D6CFCE11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+SKAdditions.h"; sourceTree = "<group>"; };
+		55D6CFCF11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+SKAdditions.m"; sourceTree = "<group>"; };
+		55D6CFD011B4DD9C00C624F0 /* NSDate+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+SKAdditions.h"; sourceTree = "<group>"; };
+		55D6CFD111B4DD9C00C624F0 /* NSDate+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SKAdditions.m"; sourceTree = "<group>"; };
+		55D6CFD211B4DD9C00C624F0 /* NSPredicate+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+SKAdditions.h"; sourceTree = "<group>"; };
+		55D6CFD311B4DD9C00C624F0 /* NSPredicate+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+SKAdditions.m"; sourceTree = "<group>"; };
+		55D6CFD411B4DD9C00C624F0 /* NSDictionary+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SKAdditions.h"; sourceTree = "<group>"; };
+		55D6CFD511B4DD9C00C624F0 /* NSDictionary+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SKAdditions.m"; sourceTree = "<group>"; };
+		AA747D9E0F9514B9006C5449 /* StackKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackKit_Prefix.pch; path = "Other Sources/StackKit_Prefix.pch"; sourceTree = "<group>"; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libStackKitMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStackKitMobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libStackKitMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* StackKitMobile */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CF9011B4DD9C00C624F0 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = StackKitMobile;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA747D9E0F9514B9006C5449 /* StackKit_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		55D6CF9011B4DD9C00C624F0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFBF11B4DD9C00C624F0 /* Categories */,
+				55D6CFB211B4DD9C00C624F0 /* Posts */,
+				55D6CFAF11B4DD9C00C624F0 /* Tag */,
+				55D6CFAC11B4DD9C00C624F0 /* Badge */,
+				55D6CFA711B4DD9C00C624F0 /* User */,
+				55D6CFA211B4DD9C00C624F0 /* Fetch Request */,
+				55D6CF9E11B4DD9C00C624F0 /* Site */,
+				55D6CF9A11B4DD9C00C624F0 /* Object Base */,
+				55D6CF9311B4DD9C00C624F0 /* Constants */,
+				55D6CF9111B4DD9C00C624F0 /* StackKit.h */,
+				55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		55D6CF9311B4DD9C00C624F0 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CF9411B4DD9C00C624F0 /* SKConstants.h */,
+				55D6CF9511B4DD9C00C624F0 /* SKConstants.m */,
+				55D6CF9611B4DD9C00C624F0 /* SKDefinitions.h */,
+				55D6CF9711B4DD9C00C624F0 /* SKDefinitions.m */,
+				55D6CF9811B4DD9C00C624F0 /* SKFunctions.h */,
+				55D6CF9911B4DD9C00C624F0 /* SKFunctions.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		55D6CF9A11B4DD9C00C624F0 /* Object Base */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CF9B11B4DD9C00C624F0 /* SKObject.h */,
+				55D6CF9C11B4DD9C00C624F0 /* SKObject.m */,
+				55D6CF9D11B4DD9C00C624F0 /* SKObject+Private.h */,
+			);
+			name = "Object Base";
+			sourceTree = "<group>";
+		};
+		55D6CF9E11B4DD9C00C624F0 /* Site */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CF9F11B4DD9C00C624F0 /* SKSite.h */,
+				55D6CFA011B4DD9C00C624F0 /* SKSite.m */,
+				55D6CFA111B4DD9C00C624F0 /* SKSite+Private.h */,
+			);
+			name = Site;
+			sourceTree = "<group>";
+		};
+		55D6CFA211B4DD9C00C624F0 /* Fetch Request */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFA311B4DD9C00C624F0 /* SKFetchRequest.h */,
+				55D6CFA411B4DD9C00C624F0 /* SKFetchRequest.m */,
+				55D6CFA511B4DD9C00C624F0 /* SKFetchRequestDelegate.h */,
+				55D6CFA611B4DD9C00C624F0 /* SKFetchRequest+Private.h */,
+			);
+			name = "Fetch Request";
+			sourceTree = "<group>";
+		};
+		55D6CFA711B4DD9C00C624F0 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFA811B4DD9C00C624F0 /* SKUser.h */,
+				55D6CFA911B4DD9C00C624F0 /* SKUser.m */,
+				55D6CFAA11B4DD9C00C624F0 /* SKUserActivity.h */,
+				55D6CFAB11B4DD9C00C624F0 /* SKUserActivity.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		55D6CFAC11B4DD9C00C624F0 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFAD11B4DD9C00C624F0 /* SKBadge.h */,
+				55D6CFAE11B4DD9C00C624F0 /* SKBadge.m */,
+			);
+			name = Badge;
+			sourceTree = "<group>";
+		};
+		55D6CFAF11B4DD9C00C624F0 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFB011B4DD9C00C624F0 /* SKTag.h */,
+				55D6CFB111B4DD9C00C624F0 /* SKTag.m */,
+			);
+			name = Tag;
+			sourceTree = "<group>";
+		};
+		55D6CFB211B4DD9C00C624F0 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFBC11B4DD9C00C624F0 /* Comments */,
+				55D6CFB511B4DD9C00C624F0 /* Q&A */,
+				55D6CFB311B4DD9C00C624F0 /* SKPost.h */,
+				55D6CFB411B4DD9C00C624F0 /* SKPost.m */,
+			);
+			name = Posts;
+			sourceTree = "<group>";
+		};
+		55D6CFB511B4DD9C00C624F0 /* Q&A */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFB611B4DD9C00C624F0 /* SKQAPost.h */,
+				55D6CFB711B4DD9C00C624F0 /* SKQAPost.m */,
+				55D6CFB811B4DD9C00C624F0 /* SKQuestion.h */,
+				55D6CFB911B4DD9C00C624F0 /* SKQuestion.m */,
+				55D6CFBA11B4DD9C00C624F0 /* SKAnswer.h */,
+				55D6CFBB11B4DD9C00C624F0 /* SKAnswer.m */,
+			);
+			name = "Q&A";
+			sourceTree = "<group>";
+		};
+		55D6CFBC11B4DD9C00C624F0 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFBD11B4DD9C00C624F0 /* SKComment.h */,
+				55D6CFBE11B4DD9C00C624F0 /* SKComment.m */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
+		55D6CFBF11B4DD9C00C624F0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFC011B4DD9C00C624F0 /* JSON */,
+				55D6CFCE11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.h */,
+				55D6CFCF11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.m */,
+				55D6CFD011B4DD9C00C624F0 /* NSDate+SKAdditions.h */,
+				55D6CFD111B4DD9C00C624F0 /* NSDate+SKAdditions.m */,
+				55D6CFD211B4DD9C00C624F0 /* NSPredicate+SKAdditions.h */,
+				55D6CFD311B4DD9C00C624F0 /* NSPredicate+SKAdditions.m */,
+				55D6CFD411B4DD9C00C624F0 /* NSDictionary+SKAdditions.h */,
+				55D6CFD511B4DD9C00C624F0 /* NSDictionary+SKAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		55D6CFC011B4DD9C00C624F0 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				55D6CFC111B4DD9C00C624F0 /* JSON.h */,
+				55D6CFC211B4DD9C00C624F0 /* SKJSON.h */,
+				55D6CFC311B4DD9C00C624F0 /* SKJSON.m */,
+				55D6CFC411B4DD9C00C624F0 /* NSObject+SKJSON.h */,
+				55D6CFC511B4DD9C00C624F0 /* NSObject+SKJSON.m */,
+				55D6CFC611B4DD9C00C624F0 /* NSString+SKJSON.h */,
+				55D6CFC711B4DD9C00C624F0 /* NSString+SKJSON.m */,
+				55D6CFC811B4DD9C00C624F0 /* SKJsonBase.h */,
+				55D6CFC911B4DD9C00C624F0 /* SKJsonBase.m */,
+				55D6CFCA11B4DD9C00C624F0 /* SKJsonParser.h */,
+				55D6CFCB11B4DD9C00C624F0 /* SKJsonParser.m */,
+				55D6CFCC11B4DD9C00C624F0 /* SKJsonWriter.h */,
+				55D6CFCD11B4DD9C00C624F0 /* SKJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA747D9F0F9514B9006C5449 /* StackKit_Prefix.pch in Headers */,
+				55D6CFD611B4DD9C00C624F0 /* StackKit.h in Headers */,
+				55D6CFD711B4DD9C00C624F0 /* StackKit_Internal.h in Headers */,
+				55D6CFD811B4DD9C00C624F0 /* SKConstants.h in Headers */,
+				55D6CFDA11B4DD9C00C624F0 /* SKDefinitions.h in Headers */,
+				55D6CFDC11B4DD9C00C624F0 /* SKFunctions.h in Headers */,
+				55D6CFDE11B4DD9C00C624F0 /* SKObject.h in Headers */,
+				55D6CFE011B4DD9C00C624F0 /* SKObject+Private.h in Headers */,
+				55D6CFE111B4DD9C00C624F0 /* SKSite.h in Headers */,
+				55D6CFE311B4DD9C00C624F0 /* SKSite+Private.h in Headers */,
+				55D6CFE411B4DD9C00C624F0 /* SKFetchRequest.h in Headers */,
+				55D6CFE611B4DD9C00C624F0 /* SKFetchRequestDelegate.h in Headers */,
+				55D6CFE711B4DD9C00C624F0 /* SKFetchRequest+Private.h in Headers */,
+				55D6CFE811B4DD9C00C624F0 /* SKUser.h in Headers */,
+				55D6CFEA11B4DD9C00C624F0 /* SKUserActivity.h in Headers */,
+				55D6CFEC11B4DD9C00C624F0 /* SKBadge.h in Headers */,
+				55D6CFEE11B4DD9C00C624F0 /* SKTag.h in Headers */,
+				55D6CFF011B4DD9C00C624F0 /* SKPost.h in Headers */,
+				55D6CFF211B4DD9C00C624F0 /* SKQAPost.h in Headers */,
+				55D6CFF411B4DD9C00C624F0 /* SKQuestion.h in Headers */,
+				55D6CFF611B4DD9C00C624F0 /* SKAnswer.h in Headers */,
+				55D6CFF811B4DD9C00C624F0 /* SKComment.h in Headers */,
+				55D6CFFA11B4DD9C00C624F0 /* JSON.h in Headers */,
+				55D6CFFB11B4DD9C00C624F0 /* SKJSON.h in Headers */,
+				55D6CFFD11B4DD9C00C624F0 /* NSObject+SKJSON.h in Headers */,
+				55D6CFFF11B4DD9C00C624F0 /* NSString+SKJSON.h in Headers */,
+				55D6D00111B4DD9C00C624F0 /* SKJsonBase.h in Headers */,
+				55D6D00311B4DD9C00C624F0 /* SKJsonParser.h in Headers */,
+				55D6D00511B4DD9C00C624F0 /* SKJsonWriter.h in Headers */,
+				55D6D00711B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.h in Headers */,
+				55D6D00911B4DD9C00C624F0 /* NSDate+SKAdditions.h in Headers */,
+				55D6D00B11B4DD9C00C624F0 /* NSPredicate+SKAdditions.h in Headers */,
+				55D6D00D11B4DD9C00C624F0 /* NSDictionary+SKAdditions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* StackKitMobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "StackKitMobile" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StackKitMobile;
+			productName = StackKitMobile;
+			productReference = D2AAC07E0554694100DB518D /* libStackKitMobile.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "StackKitMobile" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* StackKitMobile */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* StackKitMobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55D6CFD911B4DD9C00C624F0 /* SKConstants.m in Sources */,
+				55D6CFDB11B4DD9C00C624F0 /* SKDefinitions.m in Sources */,
+				55D6CFDD11B4DD9C00C624F0 /* SKFunctions.m in Sources */,
+				55D6CFDF11B4DD9C00C624F0 /* SKObject.m in Sources */,
+				55D6CFE211B4DD9C00C624F0 /* SKSite.m in Sources */,
+				55D6CFE511B4DD9C00C624F0 /* SKFetchRequest.m in Sources */,
+				55D6CFE911B4DD9C00C624F0 /* SKUser.m in Sources */,
+				55D6CFEB11B4DD9C00C624F0 /* SKUserActivity.m in Sources */,
+				55D6CFED11B4DD9C00C624F0 /* SKBadge.m in Sources */,
+				55D6CFEF11B4DD9C00C624F0 /* SKTag.m in Sources */,
+				55D6CFF111B4DD9C00C624F0 /* SKPost.m in Sources */,
+				55D6CFF311B4DD9C00C624F0 /* SKQAPost.m in Sources */,
+				55D6CFF511B4DD9C00C624F0 /* SKQuestion.m in Sources */,
+				55D6CFF711B4DD9C00C624F0 /* SKAnswer.m in Sources */,
+				55D6CFF911B4DD9C00C624F0 /* SKComment.m in Sources */,
+				55D6CFFC11B4DD9C00C624F0 /* SKJSON.m in Sources */,
+				55D6CFFE11B4DD9C00C624F0 /* NSObject+SKJSON.m in Sources */,
+				55D6D00011B4DD9C00C624F0 /* NSString+SKJSON.m in Sources */,
+				55D6D00211B4DD9C00C624F0 /* SKJsonBase.m in Sources */,
+				55D6D00411B4DD9C00C624F0 /* SKJsonParser.m in Sources */,
+				55D6D00611B4DD9C00C624F0 /* SKJsonWriter.m in Sources */,
+				55D6D00811B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.m in Sources */,
+				55D6D00A11B4DD9C00C624F0 /* NSDate+SKAdditions.m in Sources */,
+				55D6D00C11B4DD9C00C624F0 /* NSPredicate+SKAdditions.m in Sources */,
+				55D6D00E11B4DD9C00C624F0 /* NSDictionary+SKAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/StackKitMobile.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Other Sources/StackKit_Prefix.pch";
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = StackKitMobile;
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/StackKitMobile.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Other Sources/StackKit_Prefix.pch";
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = StackKitMobile;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.2;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "StackKitMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "StackKitMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

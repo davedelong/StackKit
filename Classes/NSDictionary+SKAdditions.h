@@ -23,7 +23,7 @@
  THE SOFTWARE.
  **/
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
 @interface NSDictionary (SKAdditions)

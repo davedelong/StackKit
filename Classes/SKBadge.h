@@ -23,7 +23,7 @@
  THE SOFTWARE.
  **/
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import "SKObject.h"
 
 //Enumeration for badge "levels" – bronze, silver or gold

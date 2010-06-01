@@ -23,7 +23,7 @@
  THE SOFTWARE.
  **/
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
 @interface NSPredicate (SKAdditions)
@@ -33,6 +33,8 @@
 - (id) constantValueForLeftExpression:(NSExpression *)left;
 - (id) constantValueForLeftKeyPath:(NSString *)left;
 - (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left;
+
+- (NSPredicate *) predicateByReplacingLeftKeyPathsFromMapping:(NSDictionary *)mapping;
 
 - (BOOL) isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType;
 

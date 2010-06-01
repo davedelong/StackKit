@@ -126,4 +126,14 @@
 	return nil;
 }
 
+- (NSPredicate *) predicateByReplacingLeftKeyPathsFromMapping:(NSDictionary *)mapping {
+	if ([self isKindOfClass:[NSComparisonPredicate class]]) {
+		NSComparisonPredicate * compP = (NSComparisonPredicate *)self;
+	} else if ([self isKindOfClass:[NSCompoundPredicate class]]) {
+		
+	} else {
+		return nil;
+	}
+}
+
 @end
