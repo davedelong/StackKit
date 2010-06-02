@@ -44,7 +44,7 @@
 @property NSUInteger fetchLimit;
 @property NSUInteger fetchOffset;
 @property (retain) NSPredicate * predicate;
-@property (retain) NSError * error;
+@property (readonly, retain) NSError * error;
 @property (assign) id<SKFetchRequestDelegate> delegate;
 
 @end

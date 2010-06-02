@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SKFetchRequest ()
-
+@property (retain) NSError * error;
 @property (retain) NSURL * fetchURL;
 
 - (NSMutableDictionary *) defaultQueryDictionary;

@@ -36,3 +36,6 @@
 #import "NSPredicate+SKAdditions.h"
 #import "NSDictionary+SKAdditions.h"
 #import "JSON.h"
+
+#import "SKEndpoint.h"
+#import "SKEndpoint+Private.h"
