@@ -48,4 +48,6 @@
 + (NSDictionary *) validSortDescriptorKeys;
 + (NSDictionary *) validPredicateKeyPaths;
 
++ (NSArray *) endpoints;
+
 @end

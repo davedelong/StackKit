@@ -101,6 +101,10 @@
 	return nil;
 }
 
++ (NSArray *) endpoints {
+	return [NSArray arrayWithObject:[SKEndpoint class]];
+}
+
 #pragma mark -
 #pragma mark KVC Compliance
 

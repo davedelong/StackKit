@@ -129,6 +129,13 @@ NSString * SKUserAccountTypeModerator = @"moderator";
 #pragma mark -
 #pragma mark Fetch Requests
 
++ (NSArray *) endpoints {
+	return [NSArray arrayWithObjects:
+			[SKAllUsersEndpoint class],
+			[SKSpecificUserEndpoint class],
+			nil];
+}
+
 //these are the valid keypaths in predicates
 + (NSDictionary *) validPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:

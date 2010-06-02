@@ -1,5 +1,5 @@
 //
-//  StackKit_Internal.h
+//  SKUserEndpoint.m
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,32 +23,29 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit.h"
-#import "SKDefinitions.h"
-#import "SKFunctions.h"
+#import "StackKit_Internal.h"
 
-#import "SKObject+Private.h"
-#import "SKSite+Private.h"
-#import "SKFetchRequest+Private.h"
 
-#import "NSNumberFormatter+SKAdditions.h"
-#import "NSDate+SKAdditions.h"
-#import "NSPredicate+SKAdditions.h"
-#import "NSDictionary+SKAdditions.h"
-#import "JSON.h"
+@implementation SKUserEndpoint
 
-#import "SKEndpoint.h"
-#import "SKEndpoint+Private.h"
+- (BOOL) validateEntity:(Class)entity {
+	if (entity == [SKUser class]) {
+		return YES;
+	}
+	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
+	return NO;
+}
 
-#import "SKUserEndpoint.h"
-#import "SKAllUsersEndpoint.h"
-#import "SKSpecificUserEndpoint.h"
+- (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor {
+	BOOL ok = [super validateSortDescriptor:sortDescriptor];
+	
+	if (ok) {
+		//the sort descriptor passed the generic setup (compare:, no block, etc)
+		//validate the sort key
+		NSString * key = [sortDescriptor key];
+		ok = YES;
+	}
+	return ok;
+}
 
-#import "SKBadgeEndpoint.h"
-#import "SKAllBadgesEndpoint.h"
-#import "SKTagBadgesEndpoint.h"
-#import "SKUserBadgesEndpoint.h"
-
-#import "SKTagEndpoint.h"
-#import "SKAllTagsEndpoint.h"
-#import "SKUserTagsEndpoint.h"
+@end

@@ -12,6 +12,26 @@
 		5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */; };
 		5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7EB11ACF12300C47C1B /* SKFunctions.h */; };
 		5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7EC11ACF12300C47C1B /* SKFunctions.m */; };
+		558331CA11B6C32600CA8D62 /* SKUserEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331C811B6C32600CA8D62 /* SKUserEndpoint.h */; };
+		558331CB11B6C32600CA8D62 /* SKUserEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331C911B6C32600CA8D62 /* SKUserEndpoint.m */; };
+		558331DB11B6D95C00CA8D62 /* SKAllUsersEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331D911B6D95C00CA8D62 /* SKAllUsersEndpoint.h */; };
+		558331DC11B6D95C00CA8D62 /* SKAllUsersEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331DA11B6D95C00CA8D62 /* SKAllUsersEndpoint.m */; };
+		558331DF11B6DBA000CA8D62 /* SKSpecificUserEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331DD11B6DBA000CA8D62 /* SKSpecificUserEndpoint.h */; };
+		558331E011B6DBA000CA8D62 /* SKSpecificUserEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331DE11B6DBA000CA8D62 /* SKSpecificUserEndpoint.m */; };
+		558331ED11B7089800CA8D62 /* SKBadgeEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331EB11B7089800CA8D62 /* SKBadgeEndpoint.h */; };
+		558331EE11B7089800CA8D62 /* SKBadgeEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331EC11B7089800CA8D62 /* SKBadgeEndpoint.m */; };
+		558331F211B7162700CA8D62 /* SKAllBadgesEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331F011B7162700CA8D62 /* SKAllBadgesEndpoint.h */; };
+		558331F311B7162700CA8D62 /* SKAllBadgesEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331F111B7162700CA8D62 /* SKAllBadgesEndpoint.m */; };
+		558331F611B7166F00CA8D62 /* SKTagBadgesEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331F411B7166F00CA8D62 /* SKTagBadgesEndpoint.h */; };
+		558331FA11B7168500CA8D62 /* SKUserBadgesEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331F811B7168500CA8D62 /* SKUserBadgesEndpoint.h */; };
+		558331FB11B7168500CA8D62 /* SKUserBadgesEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331F911B7168500CA8D62 /* SKUserBadgesEndpoint.m */; };
+		5583320411B718E500CA8D62 /* SKTagEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5583320211B718E500CA8D62 /* SKTagEndpoint.h */; };
+		5583320511B718E500CA8D62 /* SKTagEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583320311B718E500CA8D62 /* SKTagEndpoint.m */; };
+		5583320911B7193C00CA8D62 /* SKAllTagsEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5583320711B7193C00CA8D62 /* SKAllTagsEndpoint.h */; };
+		5583320A11B7193C00CA8D62 /* SKAllTagsEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583320811B7193C00CA8D62 /* SKAllTagsEndpoint.m */; };
+		5583320D11B7194700CA8D62 /* SKUserTagsEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5583320B11B7194700CA8D62 /* SKUserTagsEndpoint.h */; };
+		5583320E11B7194700CA8D62 /* SKUserTagsEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583320C11B7194700CA8D62 /* SKUserTagsEndpoint.m */; };
+		5583324311B71A5900CA8D62 /* SKTagBadgesEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583324211B71A5900CA8D62 /* SKTagBadgesEndpoint.m */; };
 		55A2E4DE110E35F10038E510 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4DC110E35F10038E510 /* SKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4DF110E35F10038E510 /* SKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4DD110E35F10038E510 /* SKObject.m */; };
 		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -103,6 +123,26 @@
 		5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDefinitions.m; sourceTree = "<group>"; };
 		5506C7EB11ACF12300C47C1B /* SKFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFunctions.h; sourceTree = "<group>"; };
 		5506C7EC11ACF12300C47C1B /* SKFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFunctions.m; sourceTree = "<group>"; };
+		558331C811B6C32600CA8D62 /* SKUserEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserEndpoint.h; sourceTree = "<group>"; };
+		558331C911B6C32600CA8D62 /* SKUserEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserEndpoint.m; sourceTree = "<group>"; };
+		558331D911B6D95C00CA8D62 /* SKAllUsersEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAllUsersEndpoint.h; sourceTree = "<group>"; };
+		558331DA11B6D95C00CA8D62 /* SKAllUsersEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAllUsersEndpoint.m; sourceTree = "<group>"; };
+		558331DD11B6DBA000CA8D62 /* SKSpecificUserEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSpecificUserEndpoint.h; sourceTree = "<group>"; };
+		558331DE11B6DBA000CA8D62 /* SKSpecificUserEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSpecificUserEndpoint.m; sourceTree = "<group>"; };
+		558331EB11B7089800CA8D62 /* SKBadgeEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadgeEndpoint.h; sourceTree = "<group>"; };
+		558331EC11B7089800CA8D62 /* SKBadgeEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadgeEndpoint.m; sourceTree = "<group>"; };
+		558331F011B7162700CA8D62 /* SKAllBadgesEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAllBadgesEndpoint.h; sourceTree = "<group>"; };
+		558331F111B7162700CA8D62 /* SKAllBadgesEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAllBadgesEndpoint.m; sourceTree = "<group>"; };
+		558331F411B7166F00CA8D62 /* SKTagBadgesEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagBadgesEndpoint.h; sourceTree = "<group>"; };
+		558331F811B7168500CA8D62 /* SKUserBadgesEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserBadgesEndpoint.h; sourceTree = "<group>"; };
+		558331F911B7168500CA8D62 /* SKUserBadgesEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserBadgesEndpoint.m; sourceTree = "<group>"; };
+		5583320211B718E500CA8D62 /* SKTagEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagEndpoint.h; sourceTree = "<group>"; };
+		5583320311B718E500CA8D62 /* SKTagEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagEndpoint.m; sourceTree = "<group>"; };
+		5583320711B7193C00CA8D62 /* SKAllTagsEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAllTagsEndpoint.h; sourceTree = "<group>"; };
+		5583320811B7193C00CA8D62 /* SKAllTagsEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAllTagsEndpoint.m; sourceTree = "<group>"; };
+		5583320B11B7194700CA8D62 /* SKUserTagsEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserTagsEndpoint.h; sourceTree = "<group>"; };
+		5583320C11B7194700CA8D62 /* SKUserTagsEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserTagsEndpoint.m; sourceTree = "<group>"; };
+		5583324211B71A5900CA8D62 /* SKTagBadgesEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagBadgesEndpoint.m; sourceTree = "<group>"; };
 		55A2E4DC110E35F10038E510 /* SKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObject.h; sourceTree = "<group>"; };
 		55A2E4DD110E35F10038E510 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
@@ -309,6 +349,47 @@
 			name = Comments;
 			sourceTree = "<group>";
 		};
+		558331CC11B6C3D700CA8D62 /* SKUser endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				558331C811B6C32600CA8D62 /* SKUserEndpoint.h */,
+				558331C911B6C32600CA8D62 /* SKUserEndpoint.m */,
+				558331D911B6D95C00CA8D62 /* SKAllUsersEndpoint.h */,
+				558331DA11B6D95C00CA8D62 /* SKAllUsersEndpoint.m */,
+				558331DD11B6DBA000CA8D62 /* SKSpecificUserEndpoint.h */,
+				558331DE11B6DBA000CA8D62 /* SKSpecificUserEndpoint.m */,
+			);
+			name = "SKUser endpoints";
+			sourceTree = "<group>";
+		};
+		558331EF11B7089C00CA8D62 /* SKBadge endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				558331EB11B7089800CA8D62 /* SKBadgeEndpoint.h */,
+				558331EC11B7089800CA8D62 /* SKBadgeEndpoint.m */,
+				558331F011B7162700CA8D62 /* SKAllBadgesEndpoint.h */,
+				558331F111B7162700CA8D62 /* SKAllBadgesEndpoint.m */,
+				558331F411B7166F00CA8D62 /* SKTagBadgesEndpoint.h */,
+				5583324211B71A5900CA8D62 /* SKTagBadgesEndpoint.m */,
+				558331F811B7168500CA8D62 /* SKUserBadgesEndpoint.h */,
+				558331F911B7168500CA8D62 /* SKUserBadgesEndpoint.m */,
+			);
+			name = "SKBadge endpoints";
+			sourceTree = "<group>";
+		};
+		5583320611B718E600CA8D62 /* SKTag endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				5583320211B718E500CA8D62 /* SKTagEndpoint.h */,
+				5583320311B718E500CA8D62 /* SKTagEndpoint.m */,
+				5583320711B7193C00CA8D62 /* SKAllTagsEndpoint.h */,
+				5583320811B7193C00CA8D62 /* SKAllTagsEndpoint.m */,
+				5583320B11B7194700CA8D62 /* SKUserTagsEndpoint.h */,
+				5583320C11B7194700CA8D62 /* SKUserTagsEndpoint.m */,
+			);
+			name = "SKTag endpoints";
+			sourceTree = "<group>";
+		};
 		55A2E507110E400A0038E510 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +539,9 @@
 				55D6D20211B699A700C624F0 /* SKEndpoint.h */,
 				55D6D20311B699A700C624F0 /* SKEndpoint.m */,
 				55D6D20711B69A4400C624F0 /* SKEndpoint+Private.h */,
+				5583320611B718E600CA8D62 /* SKTag endpoints */,
+				558331CC11B6C3D700CA8D62 /* SKUser endpoints */,
+				558331EF11B7089C00CA8D62 /* SKBadge endpoints */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";
@@ -506,6 +590,16 @@
 				5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */,
 				55D6D20411B699A700C624F0 /* SKEndpoint.h in Headers */,
 				55D6D20811B69A4400C624F0 /* SKEndpoint+Private.h in Headers */,
+				558331CA11B6C32600CA8D62 /* SKUserEndpoint.h in Headers */,
+				558331DB11B6D95C00CA8D62 /* SKAllUsersEndpoint.h in Headers */,
+				558331DF11B6DBA000CA8D62 /* SKSpecificUserEndpoint.h in Headers */,
+				558331ED11B7089800CA8D62 /* SKBadgeEndpoint.h in Headers */,
+				558331F211B7162700CA8D62 /* SKAllBadgesEndpoint.h in Headers */,
+				558331F611B7166F00CA8D62 /* SKTagBadgesEndpoint.h in Headers */,
+				558331FA11B7168500CA8D62 /* SKUserBadgesEndpoint.h in Headers */,
+				5583320411B718E500CA8D62 /* SKTagEndpoint.h in Headers */,
+				5583320911B7193C00CA8D62 /* SKAllTagsEndpoint.h in Headers */,
+				5583320D11B7194700CA8D62 /* SKUserTagsEndpoint.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +742,16 @@
 				5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */,
 				5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */,
 				55D6D20511B699A700C624F0 /* SKEndpoint.m in Sources */,
+				558331CB11B6C32600CA8D62 /* SKUserEndpoint.m in Sources */,
+				558331DC11B6D95C00CA8D62 /* SKAllUsersEndpoint.m in Sources */,
+				558331E011B6DBA000CA8D62 /* SKSpecificUserEndpoint.m in Sources */,
+				558331EE11B7089800CA8D62 /* SKBadgeEndpoint.m in Sources */,
+				558331F311B7162700CA8D62 /* SKAllBadgesEndpoint.m in Sources */,
+				558331FB11B7168500CA8D62 /* SKUserBadgesEndpoint.m in Sources */,
+				5583320511B718E500CA8D62 /* SKTagEndpoint.m in Sources */,
+				5583320A11B7193C00CA8D62 /* SKAllTagsEndpoint.m in Sources */,
+				5583320E11B7194700CA8D62 /* SKUserTagsEndpoint.m in Sources */,
+				5583324311B71A5900CA8D62 /* SKTagBadgesEndpoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

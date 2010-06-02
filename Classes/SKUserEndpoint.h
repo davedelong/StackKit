@@ -1,5 +1,5 @@
 //
-//  StackKit_Internal.h
+//  SKUserEndpoint.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,32 +23,11 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit.h"
-#import "SKDefinitions.h"
-#import "SKFunctions.h"
-
-#import "SKObject+Private.h"
-#import "SKSite+Private.h"
-#import "SKFetchRequest+Private.h"
-
-#import "NSNumberFormatter+SKAdditions.h"
-#import "NSDate+SKAdditions.h"
-#import "NSPredicate+SKAdditions.h"
-#import "NSDictionary+SKAdditions.h"
-#import "JSON.h"
-
+#import <Foundation/Foundation.h>
 #import "SKEndpoint.h"
-#import "SKEndpoint+Private.h"
 
-#import "SKUserEndpoint.h"
-#import "SKAllUsersEndpoint.h"
-#import "SKSpecificUserEndpoint.h"
+@interface SKUserEndpoint : SKEndpoint {
 
-#import "SKBadgeEndpoint.h"
-#import "SKAllBadgesEndpoint.h"
-#import "SKTagBadgesEndpoint.h"
-#import "SKUserBadgesEndpoint.h"
+}
 
-#import "SKTagEndpoint.h"
-#import "SKAllTagsEndpoint.h"
-#import "SKUserTagsEndpoint.h"
+@end

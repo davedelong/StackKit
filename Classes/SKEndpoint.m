@@ -1,12 +1,30 @@
 //
 //  SKEndpoint.m
 //  StackKit
-//
-//  Created by Dave DeLong on 6/2/10.
-//  Copyright 2010 Home. All rights reserved.
-//
+/**
+ Copyright (c) 2010 Dave DeLong
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ **/
 
 #import "StackKit_Internal.h"
+#import <objc/runtime.h>
 
 @implementation SKEndpoint
 @synthesize path, error, query;
@@ -68,8 +86,25 @@
 
 - (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor {
 	if ([self error] != nil) { return NO; }
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
-	return NO;
+	
+	//use respondsTo... and perform... so that this will still work on 10.5
+	if ([sortDescriptor respondsToSelector:@selector(comparator)]) {
+		id comparator = [sortDescriptor performSelector:@selector(comparator)];
+		if (comparator != nil) {
+			NSString * msg = @"Sort descriptors may not use comparator blocks";
+			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+			return NO;
+		}
+	}
+	
+	SEL comparisonSelector = [sortDescriptor selector];
+	if (comparisonSelector == nil || sel_isEqual(comparisonSelector, @selector(compare:)) == NO) {
+		NSString * msg = @"Sort descriptors may only sort using the compare: selector";
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+		return NO;
+	}
+	
+	return YES;
 }
 
 - (NSString *) apiPath {

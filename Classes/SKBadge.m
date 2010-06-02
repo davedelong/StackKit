@@ -88,6 +88,14 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 	return @"badges";
 }
 
++ (NSArray *) endpoints {
+	return [NSArray arrayWithObjects:
+			[SKAllBadgesEndpoint class],
+			[SKTagBadgesEndpoint class],
+			[SKUserBadgesEndpoint class],
+			nil];
+}
+
 + (NSDictionary *) validPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
 			SKBadgesAwardedToUser, SKBadgesAwardedToUser,

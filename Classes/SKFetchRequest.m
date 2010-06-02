@@ -123,33 +123,24 @@ NSString * SKErrorMessageKey = @"message";
 	if ([self site] == nil) { return nil; }
 	
 	Class fetchEntity = [self entity];
-	if ([[[self class] validFetchEntities] containsObject:fetchEntity] == NO) {
-		//invalid entity
-		NSString * msg = [NSString stringWithFormat:@"%@ is not a valid fetch entity", fetchEntity];
-		NSDictionary * userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey];
-		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:userInfo]];
+	
+	if ([fetchEntity respondsToSelector:@selector(endpoints)] == NO) {
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
 		return nil;
 	}
 	
-	if ([self predicate] != nil) {
-		NSPredicate * cleanedPredicate = [self cleanedPredicate];
-		if (cleanedPredicate == nil) {
-			//invalid predicate.  error set in cleanedPredicate
-			return nil;
+	NSArray * endpoints = [fetchEntity endpoints];
+	for (Class endpointClass in endpoints) {
+		SKEndpoint * endpoint = [endpointClass endpoint];
+		if ([endpoint validateFetchRequest:self]) {
+			[self setError:nil];
+			return [endpoint APIURLForFetchRequest:self];
+		} else {
+			[self setError:[endpoint error]];
 		}
-		[self setPredicate:cleanedPredicate];
 	}
 	
-	if ([self sortDescriptor] != nil) {
-		NSSortDescriptor * cleanedSortDescriptor = [self cleanedSortDescriptor];
-		if (cleanedSortDescriptor == nil) {
-			//invalid sorting.  error set in cleanedSortDescriptor
-			return nil;
-		}
-		[self setSortDescriptor:cleanedSortDescriptor];
-	}
-	
-	return [fetchEntity apiCallForFetchRequest:self];
+	return nil;
 }
 
 - (void) executeAsynchronously {
