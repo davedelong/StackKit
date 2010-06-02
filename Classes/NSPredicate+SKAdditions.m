@@ -129,11 +129,37 @@
 - (NSPredicate *) predicateByReplacingLeftKeyPathsFromMapping:(NSDictionary *)mapping {
 	if ([self isKindOfClass:[NSComparisonPredicate class]]) {
 		NSComparisonPredicate * compP = (NSComparisonPredicate *)self;
+		NSExpression * left = [compP leftExpression];
+		if ([left expressionType] == NSKeyPathExpressionType) {
+			NSString * keyPath = [left keyPath];
+			NSString * mappedKeyPath = [mapping objectForKey:keyPath];
+			if (mappedKeyPath != nil) {
+				NSComparisonPredicate * translated = [[NSComparisonPredicate alloc] initWithLeftExpression:[NSExpression expressionForKeyPath:mappedKeyPath] 
+																						   rightExpression:[compP rightExpression] 
+																								  modifier:[compP comparisonPredicateModifier] 
+																									  type:[compP predicateOperatorType] 
+																								   options:[compP options]];
+				return [translated autorelease];
+			}
+		}
 	} else if ([self isKindOfClass:[NSCompoundPredicate class]]) {
-		
+		NSCompoundPredicate * compoundP = (NSCompoundPredicate *)self;
+		NSArray * subpredicates = [compoundP subpredicates];
+		NSMutableArray * translated = [NSMutableArray array];
+		for (NSPredicate * subpredicate in subpredicates) {
+			NSPredicate * newSubpredicate = [subpredicate predicateByReplacingLeftKeyPathsFromMapping:mapping];
+			if (newSubpredicate != nil) {
+				[translated addObject:newSubpredicate];
+			}
+			if ([translated count] == 0) { return nil; }
+			NSCompoundPredicate * newCompound = [[NSCompoundPredicate alloc] initWithType:[compoundP compoundPredicateType] 
+																			subpredicates:translated];
+			return [newCompound autorelease];
+		}
 	} else {
 		return nil;
 	}
+	return self;
 }
 
 @end

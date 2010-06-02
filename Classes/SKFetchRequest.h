@@ -36,7 +36,10 @@
 	
 	NSError * error;
 	id<SKFetchRequestDelegate> delegate;
+	NSURL * fetchURL;
 }
+
+@property (retain) NSURL * fetchURL;
 
 @property Class entity;
 @property (retain) NSArray * sortDescriptors;

@@ -51,6 +51,12 @@ NSUInteger SKTagDefaultPageSize = 70;
 	return @"tags";
 }
 
++ (NSDictionary *) validPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKTagsParticipatedInByUser, SKTagsParticipatedInByUser, 
+			nil];
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Valid endpoints:

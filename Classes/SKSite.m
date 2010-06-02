@@ -153,9 +153,9 @@ NSString * SKSiteAPIKey = @"key";
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSDictionary * statistics = [responseString JSONValue];
+	NSLog(@"%@", statistics);
 	
 	assert([statistics isKindOfClass:[NSDictionary class]]);
-	assert([[statistics allKeys] count] == 1);
 	
 	return [[statistics objectForKey:@"statistics"] objectAtIndex:0];
 }

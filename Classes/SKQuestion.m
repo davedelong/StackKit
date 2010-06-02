@@ -72,6 +72,17 @@ NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 	return @"questions";
 }
 
++ (NSDictionary *) validPredicateKeyPaths {
+	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+							   SKQuestionID, @"questionID",
+							   SKQuestionAnswerCount, @"answerCount",
+							   SKQuestionTags, @"tags",
+							   SKQuestionsFavoritedByUser, SKQuestionsFavoritedByUser,
+							   nil];
+	[d addEntriesFromDictionary:[super validPredicateKeyPaths]];
+	return d;
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible endpoints:

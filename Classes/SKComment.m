@@ -44,13 +44,23 @@ NSString * const SKCommentEditCount = @"edit_count";
 	return @"comments";
 }
 
++ (NSDictionary *) validPredicateKeyPaths {
+	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+							   SKCommentInReplyToUser, @"replyToUserID",
+							   SKCommentPost, @"postID",
+							   nil];
+	[d addEntriesFromDictionary:[super validPredicateKeyPaths]];
+	return d;
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 valid endpoints:
 	 
-	 /questions/{id}/comments
-	 /answers/{id}/comments
 	 /users/{id}/comments/{toid}
+	 
+	 /questions/{id}/comments		|\__merged into /posts/{id}/comments
+	 /answers/{id}/comments			|/
 	 
 	 /comments/{id}
 	 /users/{id}/comments
@@ -58,12 +68,11 @@ NSString * const SKCommentEditCount = @"edit_count";
 	 
 	 This means the valid predicates are (respectively):
 	 
-	 SKCommentPost = ## AND SKCommentPostType = SKPostTypeQuestion
-	 SKCommentPost = ## AND SKCommentPostType = SKPostTypeAnswer
 	 SKPostOwner = ## AND SKCommentInReplyToUser = ##
 	 
 	 SKCommentID = ##
 	 SKPostOwner = ##
+	 SKCommentPost = ##
 	 SKCommentInReplyToUser = ##
 	 
 	 **/
@@ -78,7 +87,7 @@ NSString * const SKCommentEditCount = @"edit_count";
 	
 	if ([p isKindOfClass:[NSComparisonPredicate class]]) {
 		NSComparisonPredicate * comparisonP = (NSComparisonPredicate *)p;
-		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKCommentID, SKPostOwner, SKCommentInReplyToUser, nil];
+		NSArray * validKeyPaths = [NSArray arrayWithObjects:SKCommentID, SKPostOwner, SKCommentPost, SKCommentInReplyToUser, nil];
 		if ([comparisonP isComparisonPredicateWithLeftKeyPaths:validKeyPaths 
 													  operator:NSEqualToPredicateOperatorType 
 										   rightExpressionType:NSConstantValueExpressionType] == NO) {
@@ -89,16 +98,20 @@ NSString * const SKCommentEditCount = @"edit_count";
 		 it's one of:
 		 SKCommentID = ##
 		 SKPostOwner = ##
+		 SKCommentPost = ##
 		 SKCommentInReplyToUser = ##
 		 **/
 		id commentID = [comparisonP constantValueForLeftKeyPath:SKCommentID];
 		id postOwner = [comparisonP constantValueForLeftKeyPath:SKPostOwner];
+		id commentPost = [comparisonP constantValueForLeftKeyPath:SKCommentPost];
 		id replyTo = [comparisonP constantValueForLeftKeyPath:SKCommentInReplyToUser];
 		
 		if (commentID != nil) {
 			path = [NSString stringWithFormat:@"/comments/%@", SKExtractCommentID(commentID)];
 		} else if (postOwner != nil) {
 			path = [NSString stringWithFormat:@"/users/%@/comments", SKExtractUserID(postOwner)];
+		} else if (commentPost != nil) {
+			path = [NSString stringWithFormat:@"/posts/%@/comments", SKExtractPostID(commentPost)];
 		} else if (replyTo != nil) {
 			path = [NSString stringWithFormat:@"/users/%@/mentioned", SKExtractUserID(replyTo)];
 		} else {
@@ -112,9 +125,6 @@ NSString * const SKCommentEditCount = @"edit_count";
 		}
 		
 		/**
-		 it's one of:
-		 SKCommentPost = ## AND SKCommentPostType = SKPostTypeQuestion
-		 SKCommentPost = ## AND SKCommentPostType = SKPostTypeAnswer
 		 SKPostOwner = ## AND SKCommentInReplyToUser = ##
 		 **/
 		NSArray * subpredicates = [compoundP subpredicates];
@@ -125,31 +135,10 @@ NSString * const SKCommentEditCount = @"edit_count";
 		NSPredicate * first = [subpredicates objectAtIndex:0];
 		NSPredicate * second = [subpredicates objectAtIndex:1];
 		
-		BOOL hasCommentPost = ([first isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentPost] || [second isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentPost]);
-		BOOL hasCommentPostType = ([first isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentPostType] || [second isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentPostType]);
 		BOOL hasPostOwner = ([first isPredicateWithConstantValueEqualToLeftKeyPath:SKPostOwner] || [second isPredicateWithConstantValueEqualToLeftKeyPath:SKPostOwner]);
 		BOOL hasReplyTo = ([first isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentInReplyToUser] || [second isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentInReplyToUser]);
 		
-		if (hasCommentPost && hasCommentPostType) {
-			id post = [first constantValueForLeftKeyPath:SKCommentPost];
-			if (post == nil) { post = [second constantValueForLeftKeyPath:SKCommentPost]; }
-			
-			id type = [first constantValueForLeftKeyPath:SKCommentPostType];
-			if (type == nil) { type = [second constantValueForLeftKeyPath:SKCommentPostType]; }
-			
-			if (post == nil || type == nil) {
-				//this should never happen, but just in case...
-				return SKInvalidPredicateErrorForFetchRequest(request, nil);
-			}
-			
-			SKPostType_t postType = [type intValue];
-			if (postType != SKPostTypeQuestion && postType != SKPostTypeAnswer) {
-				return SKInvalidPredicateErrorForFetchRequest(request, nil);
-			}
-			
-			NSNumber * postID = SKExtractPostID(post);
-			path = [NSString stringWithFormat:@"/%@/%@/comments", (postType == SKPostTypeQuestion ? @"questions" : @"answers"), postID];
-		} else if (hasPostOwner && hasReplyTo) {
+		if (hasPostOwner && hasReplyTo) {
 			id owner = [first constantValueForLeftKeyPath:SKPostOwner];
 			if (owner == nil) { owner = [second constantValueForLeftKeyPath:SKPostOwner]; }
 			

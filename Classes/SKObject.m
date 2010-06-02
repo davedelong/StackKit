@@ -59,7 +59,7 @@
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
 	
-	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
 	return nil;
 }
 
@@ -74,12 +74,12 @@
 }
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
-	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
 	return nil;
 }
 
 + (NSString *) dataKey {
-	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
+	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
 	return nil;
 }
 
@@ -92,7 +92,13 @@
 }
 
 + (NSDictionary *) validSortDescriptorKeys {
-	return [self APIAttributeToPropertyMapping];
+	SKLog(@"+[%@ %@] should be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd));
+	return nil;
+}
+
++ (NSDictionary *) validPredicateKeyPaths {
+	SKLog(@"+[%@ %@] should be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd));
+	return nil;
 }
 
 #pragma mark -

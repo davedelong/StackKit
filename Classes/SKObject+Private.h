@@ -46,5 +46,6 @@
 + (NSString *) dataKey;
 
 + (NSDictionary *) validSortDescriptorKeys;
++ (NSDictionary *) validPredicateKeyPaths;
 
 @end

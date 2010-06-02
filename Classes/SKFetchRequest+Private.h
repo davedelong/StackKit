@@ -35,4 +35,6 @@
 - (NSArray *) execute;
 - (void) executeAsynchronously;
 
+- (NSArray *) executeFetchRequest;
+
 @end

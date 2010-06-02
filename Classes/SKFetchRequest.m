@@ -34,6 +34,7 @@
 @synthesize predicate;
 @synthesize error;
 @synthesize delegate;
+@synthesize fetchURL;
 
 NSString * SKErrorResponseKey = @"error";
 NSString * SKErrorCodeKey = @"code";
@@ -55,6 +56,7 @@ NSString * SKErrorMessageKey = @"message";
 	[sortDescriptors release];
 	[predicate release];
 	[error release];
+	[fetchURL release];
 	[super dealloc];
 }
 
@@ -78,8 +80,8 @@ NSString * SKErrorMessageKey = @"message";
 }
 
 - (NSPredicate *) cleanedPredicate {
-	//TODO: clean the predicate.  replace left expressions as appropriate
-	return [self predicate];
+	NSDictionary * keyPathMapping = [[self entity] validPredicateKeyPaths];
+	return [[self predicate] predicateByReplacingLeftKeyPathsFromMapping:keyPathMapping];
 }
 
 - (NSArray *) cleanedSortDescriptors {
@@ -183,15 +185,21 @@ NSString * SKErrorMessageKey = @"message";
 		goto cleanup;
 	}
 	
-	NSMutableArray * objects = nil;
-	
 	//construct our fetch url
-	NSURL * fetchURL = [self apiCall];
-	
-	SKLog(@"fetching from: %@", fetchURL);
+	[self setFetchURL:[self apiCall]];
 	
 	if ([self error] != nil) { goto cleanup; }
-	if (fetchURL == nil) { goto cleanup; }
+	if ([self fetchURL] == nil) { goto cleanup; }
+	
+	NSArray * objects = [[self executeFetchRequest] retain];
+	
+cleanup:
+	[pool release];
+	return [objects autorelease];
+}
+
+- (NSArray *) executeFetchRequest {
+	SKLog(@"fetching from: %@", fetchURL);
 	
 	//signal the delegate
 	if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequestWillBeginExecuting:)]) {
@@ -199,7 +207,7 @@ NSString * SKErrorMessageKey = @"message";
 	}
 	
 	//execute the GET request
-	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:fetchURL];
+	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[self fetchURL]];
 	NSURLResponse * response = nil;
 	NSError * connectionError = nil;
 	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&connectionError];
@@ -211,13 +219,12 @@ NSString * SKErrorMessageKey = @"message";
 	
 	if (connectionError != nil) {
 		[self setError:connectionError];
-		goto cleanup;
+		return nil;
 	}
 	
 	//handle the response
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
-	//TODO: FIX THIS
 	NSDictionary * responseObjects = [responseString JSONValue];
 	assert([responseObjects isKindOfClass:[NSDictionary class]]);
 	
@@ -230,14 +237,14 @@ NSString * SKErrorMessageKey = @"message";
 		
 		NSDictionary * userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:[errorCode integerValue] userInfo:userInfo]];
-		goto cleanup;
+		return nil;
 	}
 	
 	//pull out the data container
 	NSString * dataKey = [[self entity] dataKey];
 	id dataObject = [responseObjects objectForKey:dataKey];
 	
-	objects = [[NSMutableArray alloc] init];	
+	NSMutableArray * objects = [[NSMutableArray alloc] init];	
 	
 	//parse the response into objects
 	if ([dataObject isKindOfClass:[NSArray class]]) {
@@ -250,8 +257,6 @@ NSString * SKErrorMessageKey = @"message";
 		[objects addObject:object];
 	}
 	
-cleanup:
-	[pool release];
 	return [objects autorelease];
 }
 

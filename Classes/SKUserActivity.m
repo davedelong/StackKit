@@ -88,6 +88,12 @@ NSString * SKUserActivityToDateKey = @"todate";
 	return @"user_timelines";
 }
 
++ (NSDictionary *) validPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKUserID, SKUserID,
+			nil];
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Possible activity endpoints:

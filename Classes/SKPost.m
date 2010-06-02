@@ -41,6 +41,12 @@ NSString * const SKPostScore = __SKPostScore;
 			nil];
 }
 
++ (NSDictionary *) validPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKPostOwner, @"ownerID",
+			nil];
+}
+
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
 		creationDate = [[dictionary objectForKey:SKPostCreationDate] retain];

@@ -70,8 +70,9 @@ __SKUserID is #defined below to be @"user_id".
 #define __SKQuestionTimelineURL @"question_timeline_url"
 #define __SKQuestionCommentsURL @"question_comments_url"
 #define __SKQuestionAnswersURL @"question_answers_url"
+
 #define __SKAnswerID @"answer_id"
-#define __SKAnswerQuestion @"question_id"
+#define __SKAnswerQuestion __SKQuestionID
 #define __SKAnswerIsAccepted @"accepted"
 #define __SKAnswerCommentsURL @"answer_comments_url"
 

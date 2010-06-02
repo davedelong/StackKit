@@ -129,27 +129,11 @@ NSString * SKUserAccountTypeModerator = @"moderator";
 #pragma mark -
 #pragma mark Fetch Requests
 
-+ (NSDictionary *) APIAttributeToPropertyMapping {
-	static NSDictionary * _kSKUserMappings = nil;
-	if (_kSKUserMappings == nil) {
-		_kSKUserMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"userID", SKUserID,
-							@"displayName", SKUserDisplayName,
-							@"emailHash", SKUserEmailHash,
-							@"websiteURL", SKUserWebsiteURL,
-							@"location", SKUserLocation,
-							@"aboutMe", SKUserAboutMe,
-							@"creationDate", SKUserCreationDate,
-							@"lastAccessDate", SKUserLastAccessDate,
-							@"reputation", SKUserReputation,
-							@"age", SKUserAge,
-							@"upVotes", SKUserUpVotes,
-							@"downVotes", SKUserDownVotes,
-							@"userType", SKUserType,
-							@"acceptRate", SKUserAcceptRate,
-							nil];
-	}
-	return _kSKUserMappings;
+//these are the valid keypaths in predicates
++ (NSDictionary *) validPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKUserID, @"userID",
+			nil];
 }
 
 + (NSString *) dataKey {

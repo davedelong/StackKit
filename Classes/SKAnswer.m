@@ -52,6 +52,15 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 	return @"answers";
 }
 
++ (NSDictionary *) validPredicateKeyPaths {
+	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+							   SKAnswerID, @"answerID",
+							   SKAnswerQuestion, @"questionID",
+							   nil];
+	[d addEntriesFromDictionary:[super validPredicateKeyPaths]];
+	return d;
+}
+
 + (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
 	/**
 	 Valid endpoints:
