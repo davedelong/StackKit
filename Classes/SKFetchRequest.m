@@ -81,6 +81,7 @@ NSString * SKErrorMessageKey = @"message";
 
 - (NSPredicate *) cleanedPredicate {
 	NSDictionary * keyPathMapping = [[self entity] validPredicateKeyPaths];
+	if (keyPathMapping == nil) { return [self predicate]; }
 	return [[self predicate] predicateByReplacingLeftKeyPathsFromMapping:keyPathMapping];
 }
 

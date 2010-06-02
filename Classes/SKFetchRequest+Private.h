@@ -25,11 +25,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SKFetchRequest (Private)
+@interface SKFetchRequest ()
+
+@property (retain) NSURL * fetchURL;
 
 - (NSMutableDictionary *) defaultQueryDictionary;
 
-- (NSString *) entityDataKey;
 - (NSURL *) apiCall;
 
 - (NSArray *) execute;

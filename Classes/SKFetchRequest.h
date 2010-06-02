@@ -39,8 +39,6 @@
 	NSURL * fetchURL;
 }
 
-@property (retain) NSURL * fetchURL;
-
 @property Class entity;
 @property (retain) NSArray * sortDescriptors;
 @property NSUInteger fetchLimit;
