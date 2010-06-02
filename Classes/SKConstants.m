@@ -53,8 +53,8 @@ NSString * const SKStatsAPIInfoRevision = @"revision";
 
 #pragma mark -
 #pragma mark Error Constants
-NSString * const SKErrorDomain = @"com.github.davedelong.stackkit";
-NSString * const SKExceptionInvalidDelegate = @"com.github.davedelong.stackkit.skfetchrequest.delegate";
+NSString * const SKErrorDomain = @"com.stackkit";
+NSString * const SKExceptionInvalidDelegate = @"com.stackkit.skfetchrequest.delegate";
 
 #pragma mark Error codes
 NSUInteger const SKErrorCodeNotImplemented = 1;
@@ -64,7 +64,13 @@ NSUInteger const SKErrorCodeUnknownError = 4;
 
 NSInteger const SKErrorCodeNotFound = 404;
 NSInteger const SKErrorCodeInternalServerError = 500;
+
 NSInteger const SKErrorCodeInvalidApplicationPublicKey = 4000;
 NSInteger const SKErrorCodeInvalidPageSize = 4001;
 NSInteger const SKErrorCodeInvalidSort = 4002;
 NSInteger const SKErrorCodeInvalidOrder = 4003;
+NSInteger const SKErrorCodeRequestRateExceeded = 4004;
+NSInteger const SKErrorCodeInvalidVectorFormat = 4005;
+NSInteger const SKErrorCodeTooManyIds = 4006;
+NSInteger const SKErrorCodeUnconstrainedSearch = 4007;
+NSInteger const SKErrorCodeInvalidTags = 4008;

@@ -69,3 +69,8 @@ extern NSInteger const SKErrorCodeInvalidApplicationPublicKey;
 extern NSInteger const SKErrorCodeInvalidPageSize;
 extern NSInteger const SKErrorCodeInvalidSort;
 extern NSInteger const SKErrorCodeInvalidOrder;
+extern NSInteger const SKErrorCodeRequestRateExceeded;
+extern NSInteger const SKErrorCodeInvalidVectorFormat;
+extern NSInteger const SKErrorCodeTooManyIds;
+extern NSInteger const SKErrorCodeUnconstrainedSearch;
+extern NSInteger const SKErrorCodeInvalidTags;
