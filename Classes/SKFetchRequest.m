@@ -28,7 +28,7 @@
 
 @implementation SKFetchRequest
 @synthesize entity;
-@synthesize sortDescriptors;
+@synthesize sortDescriptor;
 @synthesize fetchLimit;
 @synthesize fetchOffset;
 @synthesize predicate;
@@ -53,7 +53,7 @@ NSString * SKErrorMessageKey = @"message";
 }
 
 - (void) dealloc {
-	[sortDescriptors release];
+	[sortDescriptor release];
 	[predicate release];
 	[error release];
 	[fetchURL release];
@@ -85,43 +85,38 @@ NSString * SKErrorMessageKey = @"message";
 	return [[self predicate] predicateByReplacingLeftKeyPathsFromMapping:keyPathMapping];
 }
 
-- (NSArray *) cleanedSortDescriptors {
+- (NSSortDescriptor *) cleanedSortDescriptor {
 	//evaluate the sort descriptors.  error if there are non-supported keys, comparators, or selectors, and replace keys as appropriate
 	NSDictionary * validSortKeys = [[self entity] validSortDescriptorKeys];
 	
-	NSMutableArray * cleaned = [NSMutableArray array];
-	for (NSSortDescriptor * sort in [self sortDescriptors]) {
-		NSString * sortKey = [sort key];
-		NSString * cleanedKey = [validSortKeys objectForKey:sortKey];
-		if (cleanedKey == nil) {
-			NSString * msg = [NSString stringWithFormat:@"%@ is not a valid sort key", sortKey];
-			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
-			return nil;
-		}
-		
-		//use respondsTo... and perform... so that this will still work on 10.5
-		if ([sort respondsToSelector:@selector(comparator)]) {
-			id comparator = [sort performSelector:@selector(comparator)];
-			if (comparator != nil) {
-				NSString * msg = @"Sort descriptors may not use comparator blocks";
-				[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
-				return nil;
-			}
-		}
-		
-		SEL comparisonSelector = [sort selector];
-		if (comparisonSelector == nil || sel_isEqual(comparisonSelector, @selector(compare:)) == NO) {
-			NSString * msg = @"Sort descriptors may only sort using the compare: selector";
-			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
-			return nil;
-		}
-		
-		NSSortDescriptor * newDescriptor = [[NSSortDescriptor alloc] initWithKey:cleanedKey ascending:[sort ascending] selector:[sort selector]];
-		[cleaned addObject:newDescriptor];
-		[newDescriptor release];
+	NSSortDescriptor * sort = [self sortDescriptor];
+	NSString * sortKey = [sort key];
+	NSString * cleanedKey = [validSortKeys objectForKey:sortKey];
+	if (cleanedKey == nil) {
+		NSString * msg = [NSString stringWithFormat:@"%@ is not a valid sort key", sortKey];
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+		return nil;
 	}
 	
-	return cleaned;
+	//use respondsTo... and perform... so that this will still work on 10.5
+	if ([sort respondsToSelector:@selector(comparator)]) {
+		id comparator = [sort performSelector:@selector(comparator)];
+		if (comparator != nil) {
+			NSString * msg = @"Sort descriptors may not use comparator blocks";
+			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+			return nil;
+		}
+	}
+	
+	SEL comparisonSelector = [sort selector];
+	if (comparisonSelector == nil || sel_isEqual(comparisonSelector, @selector(compare:)) == NO) {
+		NSString * msg = @"Sort descriptors may only sort using the compare: selector";
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+		return nil;
+	}
+	
+	NSSortDescriptor * newDescriptor = [[NSSortDescriptor alloc] initWithKey:cleanedKey ascending:[sort ascending] selector:[sort selector]];
+	return [newDescriptor autorelease];
 }
 
 - (NSURL *) apiCall {
@@ -145,13 +140,13 @@ NSString * SKErrorMessageKey = @"message";
 		[self setPredicate:cleanedPredicate];
 	}
 	
-	if ([self sortDescriptors] != nil) {
-		NSArray * cleanedSortDescriptors = [self cleanedSortDescriptors];
-		if (cleanedSortDescriptors == nil) {
-			//invalid sorting.  error set in cleanedSortDescriptors
+	if ([self sortDescriptor] != nil) {
+		NSSortDescriptor * cleanedSortDescriptor = [self cleanedSortDescriptor];
+		if (cleanedSortDescriptor == nil) {
+			//invalid sorting.  error set in cleanedSortDescriptor
 			return nil;
 		}
-		[self setSortDescriptors:cleanedSortDescriptors];
+		[self setSortDescriptor:cleanedSortDescriptor];
 	}
 	
 	return [fetchEntity apiCallForFetchRequest:self];

@@ -62,7 +62,7 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SKUserCreationDate ascending:YES]]];
+	[request setSortDescriptor:[NSSortDescriptor sortDescriptorWithKey:SKUserCreationDate ascending:YES]];
 	[request setFetchLimit:10];
 	
 	NSError * error = nil;

@@ -52,6 +52,8 @@ extern NSString * const SKStatsAPIInfo;
 extern NSString * const SKStatsAPIInfoVersion;
 extern NSString * const SKStatsAPIInfoRevision;
 
+extern NSString * const SKStatsSiteDisplayName;
+
 #pragma mark -
 #pragma mark Error Constants
 extern NSString * const SKErrorDomain;

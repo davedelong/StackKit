@@ -51,6 +51,8 @@ NSString * const SKStatsAPIInfo = @"api_version";
 NSString * const SKStatsAPIInfoVersion = @"version";
 NSString * const SKStatsAPIInfoRevision = @"revision";	
 
+NSString * const SKStatsSiteDisplayName = @"display_name";
+
 #pragma mark -
 #pragma mark Error Constants
 NSString * const SKErrorDomain = @"com.stackkit";

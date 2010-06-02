@@ -29,7 +29,7 @@
 
 @interface SKFetchRequest : SKObject {
 	Class entity;
-	NSArray * sortDescriptors;
+	NSSortDescriptor * sortDescriptor;
 	NSUInteger fetchLimit;
 	NSUInteger fetchOffset;
 	NSPredicate * predicate;
@@ -40,7 +40,7 @@
 }
 
 @property Class entity;
-@property (retain) NSArray * sortDescriptors;
+@property (retain) NSSortDescriptor * sortDescriptor;
 @property NSUInteger fetchLimit;
 @property NSUInteger fetchOffset;
 @property (retain) NSPredicate * predicate;
