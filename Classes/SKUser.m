@@ -172,7 +172,7 @@ NSString * SKUserAccountTypeModerator = @"moderator";
 		path = @"/users";
 	}
 	
-	NSURL * baseURL = [[request site] apiURL];
+	NSURL * baseURL = [[request site] APIURL];
 	NSMutableDictionary * query = [request defaultQueryDictionary];
 	
 	//TODO: sorting

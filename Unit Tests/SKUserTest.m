@@ -33,7 +33,7 @@
 - (void) testUserAPICall {
 	SKSite * site = [SKSite stackoverflowSite];
 	
-	NSString * expected = [NSString stringWithFormat:@"%@/%@/users/115730?key=%@", SKTestAPISite, SKAPIVersion, [site apiKey]];
+	NSString * expected = [NSString stringWithFormat:@"%@/%@/users/115730?key=%@", SKTestAPISite, SKAPIVersion, [site APIKey]];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
 	[request setEntity:[SKUser class]];

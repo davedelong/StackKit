@@ -74,7 +74,7 @@ NSString * SKErrorMessageKey = @"message";
 
 - (NSMutableDictionary *) defaultQueryDictionary {
 	NSMutableDictionary * d = [NSMutableDictionary dictionary];
-	[d setObject:[[self site] apiKey] forKey:SKSiteAPIKey];
+	[d setObject:[[self site] APIKey] forKey:SKSiteAPIKey];
 	
 	return d;
 }
@@ -180,7 +180,7 @@ NSString * SKErrorMessageKey = @"message";
 - (NSArray *) execute {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
-	NSString * apiKey = [[self site] apiKey];
+	NSString * apiKey = [[self site] APIKey];
 	if (apiKey == nil) {
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidApplicationPublicKey userInfo:nil]];
 		goto cleanup;

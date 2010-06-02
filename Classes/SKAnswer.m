@@ -121,7 +121,7 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 	
 	NSMutableDictionary * query = [request defaultQueryDictionary];
 	
-	return [[self class] constructAPICallForBaseURL:[[request site] apiURL] relativePath:path query:query];
+	return [[self class] constructAPICallForBaseURL:[[request site] APIURL] relativePath:path query:query];
 }
 
 @end

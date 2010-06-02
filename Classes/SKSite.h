@@ -32,17 +32,17 @@ extern NSString * SKSiteAPIKey;
 @class SKFetchRequest;
 
 @interface SKSite : SKObject {
-	NSString * apiKey;
-	NSURL * apiURL;
+	NSString * APIKey;
+	NSURL * APIURL;
 	
 	NSTimeInterval timeoutInterval;
 	
 	NSOperationQueue * requestQueue;
 }
 
-@property (readonly) NSURL * apiURL;
-@property (readonly) NSString * apiKey;
-@property (readonly) NSString * apiVersion;
+@property (copy) NSString * APIKey;
+@property (readonly) NSURL * APIURL;
+@property (readonly) NSString * APIVersion;
 
 @property NSTimeInterval timeoutInterval;
 

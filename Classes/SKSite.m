@@ -29,8 +29,8 @@ NSString * SKSiteAPIKey = @"key";
 
 @implementation SKSite
 
-@synthesize apiKey;
-@synthesize apiURL;
+@synthesize APIKey;
+@synthesize APIURL;
 @synthesize timeoutInterval;
 
 + (id) stackoverflowSite {
@@ -45,8 +45,8 @@ NSString * SKSiteAPIKey = @"key";
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key {
 	if (self = [super initWithSite:nil]) {
 		NSString * urlPath = [[aURL path] stringByAppendingPathComponent:SKAPIVersion];
-		apiURL = [[NSURL alloc] initWithString:urlPath relativeToURL:aURL];
-		apiKey = [key copy];
+		APIURL = [[NSURL alloc] initWithString:urlPath relativeToURL:aURL];
+		[self setAPIKey:key];
 		
 		timeoutInterval = 60.0;
 		requestQueue = [[NSOperationQueue alloc] init];
@@ -56,8 +56,8 @@ NSString * SKSiteAPIKey = @"key";
 }
 
 - (void) dealloc {
-	[apiURL release];
-	[apiKey release];
+	[APIURL release];
+	[APIKey release];
 	
 	[requestQueue cancelAllOperations];
 	[requestQueue release];
@@ -72,7 +72,7 @@ NSString * SKSiteAPIKey = @"key";
 	return [[self retain] autorelease];
 }
 
-- (NSString *) apiVersion {
+- (NSString *) APIVersion {
 	return SKAPIVersion;
 }
 
@@ -139,10 +139,10 @@ NSString * SKSiteAPIKey = @"key";
 #pragma mark Site information
 
 - (NSDictionary *) statistics {
-	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self apiKey] forKey:SKSiteAPIKey];
+	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self APIKey] forKey:SKSiteAPIKey];
 	NSString * statsPath = [NSString stringWithFormat:@"stats?%@", [queryDictionary queryString]];
 	
-	NSString * statsCall = [[[self apiURL] absoluteString] stringByAppendingPathComponent:statsPath];
+	NSString * statsCall = [[[self APIURL] absoluteString] stringByAppendingPathComponent:statsPath];
 	
 	NSURL * statsURL = [NSURL URLWithString:statsCall];
 	
