@@ -80,6 +80,7 @@ NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 			[SKQuestionsTaggedEndpoint class],
 			[SKUnansweredQuestionsEndpoint class],
 			[SKUserFavoritedQuestionsEndpoint class],
+			[SKQuestionSearchEndpoint class],
 			nil];
 }
 

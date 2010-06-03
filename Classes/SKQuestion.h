@@ -55,7 +55,6 @@ extern NSString * const SKQuestionAnswersURL;
 
 extern NSString * const SKQuestionsFavoritedByUser;
 
-
 @interface SKQuestion : SKQAPost {
 	NSNumber * questionID;
 	
