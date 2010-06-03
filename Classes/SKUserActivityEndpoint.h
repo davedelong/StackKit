@@ -1,5 +1,5 @@
 //
-//  SKObject+Private.h
+//  SKUserActivityEndpoint.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -24,28 +24,10 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "SKObject.h"
+#import "SKEndpoint.h"
 
-@class SKSite;
-@class SKFetchRequest;
+@interface SKUserActivityEndpoint : SKEndpoint {
 
-@interface SKObject ()
-
-- (void) setSite:(SKSite *)newSite;
-
-+ (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
-- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
-
-#pragma mark Class methods implemented by SKObject
-+ (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;
-
-#pragma mark Class methods that should be overriden by subclasses
-+ (NSDictionary *) APIAttributeToPropertyMapping;
-+ (NSString *) dataKey;
-
-+ (NSDictionary *) validSortDescriptorKeys;
-+ (NSDictionary *) validPredicateKeyPaths;
-
-+ (NSArray *) endpoints;
+}
 
 @end

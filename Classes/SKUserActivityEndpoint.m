@@ -1,5 +1,5 @@
 //
-//  SKObject+Private.h
+//  SKUserActivityEndpoint.m
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,29 +23,29 @@
  THE SOFTWARE.
  **/
 
-#import <Foundation/Foundation.h>
-#import "SKObject.h"
+#import "StackKit_Internal.h"
 
-@class SKSite;
-@class SKFetchRequest;
+@implementation SKUserActivityEndpoint
 
-@interface SKObject ()
+- (BOOL) validateEntity:(Class)entity {
+	if (entity == [SKComment class]) {
+		return YES;
+	}
+	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
+	return NO;
+}
 
-- (void) setSite:(SKSite *)newSite;
-
-+ (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
-- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
-
-#pragma mark Class methods implemented by SKObject
-+ (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;
-
-#pragma mark Class methods that should be overriden by subclasses
-+ (NSDictionary *) APIAttributeToPropertyMapping;
-+ (NSString *) dataKey;
-
-+ (NSDictionary *) validSortDescriptorKeys;
-+ (NSDictionary *) validPredicateKeyPaths;
-
-+ (NSArray *) endpoints;
+- (BOOL) validatePredicate:(NSPredicate *)predicate {
+	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKUserID]) {
+		id user = [predicate constantValueForLeftKeyPath:SKUserID];
+		if (user) {
+			[self setPath:[NSString stringWithFormat:@"/users/%@/timeline", SKExtractUserID(user)]];
+			return YES;
+		}
+	}
+	
+	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+	return NO;
+}
 
 @end

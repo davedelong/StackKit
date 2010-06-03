@@ -44,6 +44,8 @@
 #import "SKAllUsersEndpoint.h"
 #import "SKSpecificUserEndpoint.h"
 
+#import "SKUserActivityEndpoint.h"
+
 #import "SKBadgeEndpoint.h"
 #import "SKAllBadgesEndpoint.h"
 #import "SKTagBadgesEndpoint.h"

@@ -66,6 +66,8 @@
 		558332F111B75F3C00CA8D62 /* SKCommentsToUserEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558332EF11B75F3C00CA8D62 /* SKCommentsToUserEndpoint.m */; };
 		558332F411B75F4500CA8D62 /* SKPostCommentsEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558332F211B75F4500CA8D62 /* SKPostCommentsEndpoint.h */; };
 		558332F511B75F4500CA8D62 /* SKPostCommentsEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558332F311B75F4500CA8D62 /* SKPostCommentsEndpoint.m */; };
+		5583330A11B764B400CA8D62 /* SKUserActivityEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5583330811B764B400CA8D62 /* SKUserActivityEndpoint.h */; };
+		5583330B11B764B400CA8D62 /* SKUserActivityEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583330911B764B400CA8D62 /* SKUserActivityEndpoint.m */; };
 		55A2E4DE110E35F10038E510 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4DC110E35F10038E510 /* SKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4DF110E35F10038E510 /* SKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4DD110E35F10038E510 /* SKObject.m */; };
 		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -211,6 +213,8 @@
 		558332EF11B75F3C00CA8D62 /* SKCommentsToUserEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCommentsToUserEndpoint.m; sourceTree = "<group>"; };
 		558332F211B75F4500CA8D62 /* SKPostCommentsEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPostCommentsEndpoint.h; sourceTree = "<group>"; };
 		558332F311B75F4500CA8D62 /* SKPostCommentsEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPostCommentsEndpoint.m; sourceTree = "<group>"; };
+		5583330811B764B400CA8D62 /* SKUserActivityEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserActivityEndpoint.h; sourceTree = "<group>"; };
+		5583330911B764B400CA8D62 /* SKUserActivityEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserActivityEndpoint.m; sourceTree = "<group>"; };
 		55A2E4DC110E35F10038E510 /* SKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObject.h; sourceTree = "<group>"; };
 		55A2E4DD110E35F10038E510 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
@@ -662,6 +666,8 @@
 				55D6D20211B699A700C624F0 /* SKEndpoint.h */,
 				55D6D20311B699A700C624F0 /* SKEndpoint.m */,
 				55D6D20711B69A4400C624F0 /* SKEndpoint+Private.h */,
+				5583330811B764B400CA8D62 /* SKUserActivityEndpoint.h */,
+				5583330911B764B400CA8D62 /* SKUserActivityEndpoint.m */,
 				558332E111B75EBA00CA8D62 /* SKComment endpoints */,
 				558332BC11B75CB100CA8D62 /* SKAnswer endpoints */,
 				5583325311B7463000CA8D62 /* SKQuestion endpoints */,
@@ -743,6 +749,7 @@
 				558332EC11B75F1000CA8D62 /* SKCommentsFromUserToUserEndpoint.h in Headers */,
 				558332F011B75F3C00CA8D62 /* SKCommentsToUserEndpoint.h in Headers */,
 				558332F411B75F4500CA8D62 /* SKPostCommentsEndpoint.h in Headers */,
+				5583330A11B764B400CA8D62 /* SKUserActivityEndpoint.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,6 +919,7 @@
 				558332ED11B75F1000CA8D62 /* SKCommentsFromUserToUserEndpoint.m in Sources */,
 				558332F111B75F3C00CA8D62 /* SKCommentsToUserEndpoint.m in Sources */,
 				558332F511B75F4500CA8D62 /* SKPostCommentsEndpoint.m in Sources */,
+				5583330B11B764B400CA8D62 /* SKUserActivityEndpoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
