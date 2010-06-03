@@ -128,8 +128,9 @@ NSString * SKErrorMessageKey = @"message";
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
 		return nil;
 	}
-	
+
 	NSArray * endpoints = [fetchEntity endpoints];
+
 	for (Class endpointClass in endpoints) {
 		SKEndpoint * endpoint = [endpointClass endpointForFetchRequest:self];
 		if ([endpoint validateFetchRequest]) {
@@ -186,7 +187,6 @@ cleanup:
 }
 
 - (NSArray *) executeFetchRequest {
-	SKLog(@"fetching from: %@", fetchURL);
 	
 	//signal the delegate
 	if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequestWillBeginExecuting:)]) {
