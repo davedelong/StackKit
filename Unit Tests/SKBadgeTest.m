@@ -34,6 +34,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgeTagBased, [NSNumber numberWithBool:NO]]];
 
 	NSError * error = nil;
 	NSArray * badges = [site executeSynchronousFetchRequest:r error:&error];
@@ -88,6 +89,8 @@
 							   @"Tumbleweed",
 							   @"Yearling",
 							   nil];
+	
+	NSLog(@"%d", [badges count]);
 	
 	STAssertEqualObjects(actualNames, expectedNames, @"expected names should match");
 	

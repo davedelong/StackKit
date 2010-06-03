@@ -91,6 +91,7 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 + (NSArray *) endpoints {
 	return [NSArray arrayWithObjects:
 			[SKAllBadgesEndpoint class],
+			[SKNameBadgesEndpoint class],
 			[SKTagBadgesEndpoint class],
 			[SKUserBadgesEndpoint class],
 			nil];

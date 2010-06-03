@@ -48,6 +48,7 @@
 
 #import "SKBadgeEndpoint.h"
 #import "SKAllBadgesEndpoint.h"
+#import "SKNameBadgesEndpoint.h"
 #import "SKTagBadgesEndpoint.h"
 #import "SKUserBadgesEndpoint.h"
 
