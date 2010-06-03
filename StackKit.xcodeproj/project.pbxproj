@@ -139,7 +139,6 @@
 		D25F172C110F675D009E11E5 /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = D25F172A110F675D009E11E5 /* SKBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D25F172D110F675D009E11E5 /* SKBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D25F172B110F675D009E11E5 /* SKBadge.m */; };
 		D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C2410C116ADF71009064EE /* SKUserActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2C728FA11B8091D00F3871B /* SKNameBadgesEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C728F911B8091D00F3871B /* SKNameBadgesEndpoint.m */; };
 		D2C728FF11B80A5900F3871B /* SKNameBadgesEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C728F911B8091D00F3871B /* SKNameBadgesEndpoint.m */; };
 /* End PBXBuildFile section */
 
@@ -876,7 +875,6 @@
 				55C23C9211699C40009064EE /* SKTestConstants.m in Sources */,
 				55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */,
 				55C24146116AF72E009064EE /* SKUserActivityTest.m in Sources */,
-				D2C728FA11B8091D00F3871B /* SKNameBadgesEndpoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
