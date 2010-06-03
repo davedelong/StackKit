@@ -44,6 +44,8 @@ NSString * SKUserAcceptRate = @"accept_rate";
 NSString * SKUserQuestionCount = @"question_count";
 NSString * SKUserAnswerCount = @"answer_count";
 
+NSString * const SKUserBadges = @"user_badges";
+
 //used internally
 NSUInteger SKUserDefaultPageSize = 35;
 

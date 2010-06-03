@@ -43,6 +43,8 @@ extern NSString * SKUserDownVotes;
 extern NSString * SKUserType;
 extern NSString * SKUserAcceptRate;
 
+extern NSString * const SKUserBadges;
+
 typedef enum {
 	SKUserTypeAnonymous = 0,
 	SKUserTypeUnregistered = 1,

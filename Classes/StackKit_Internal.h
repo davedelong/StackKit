@@ -43,6 +43,7 @@
 #import "SKUserEndpoint.h"
 #import "SKAllUsersEndpoint.h"
 #import "SKSpecificUserEndpoint.h"
+#import "SKUsersWithBadgeEndpoint.h"
 
 #import "SKUserActivityEndpoint.h"
 

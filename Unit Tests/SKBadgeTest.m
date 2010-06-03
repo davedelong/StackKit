@@ -141,18 +141,11 @@
 	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
-	[r setEntity:[SKUser class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
-	NSArray * matches = [site executeSynchronousFetchRequest:r error:nil];
+	[r setEntity:[SKBadge class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgesAwardedToUser, [NSNumber numberWithInt:115730]]];
+	NSArray * badges = [site executeSynchronousFetchRequest:r error:nil];
 	[r release];
 	
-	STAssertTrue([matches count] == 1, @"wrong number of users");
-	
-	SKUser * davedelong = [matches objectAtIndex:0];
-	
-	NSArray * badges = [davedelong badges];
-	
-	STAssertTrue ([matches count] > 0, @"not enough badges");
 	int badgeCount[3] = {0, 0, 0};
 	
 	for (SKBadge * badge in badges) {

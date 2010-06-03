@@ -1,5 +1,5 @@
 //
-//  SKFunctions.h
+//  SKUsersWithBadgeEndpoint.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -24,22 +24,10 @@
  **/
 
 #import <Foundation/Foundation.h>
+#import "SKUserEndpoint.h"
 
-@class SKFetchRequest;
+@interface SKUsersWithBadgeEndpoint : SKUserEndpoint {
 
-void SKQLog(NSString *format, ...);
+}
 
-id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
-
-NSNumber * SKExtractUserID(id value);
-
-NSNumber * SKExtractBadgeID(id value);
-NSArray * SKExtractBadgeIDs(id value);
-
-NSNumber * SKExtractPostID(id value);
-NSNumber * SKExtractCommentID(id value);
-NSNumber * SKExtractQuestionID(id value);
-NSNumber * SKExtractAnswerID(id value);
-
-NSString * SKExtractTagName(id value);
-NSArray * SKExtractTagNames(id value);
+@end

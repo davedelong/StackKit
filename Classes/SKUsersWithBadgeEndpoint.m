@@ -1,5 +1,5 @@
 //
-//  SKFunctions.h
+//  SKUsersWithBadgeEndpoint.m
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,23 +23,23 @@
  THE SOFTWARE.
  **/
 
-#import <Foundation/Foundation.h>
+#import "StackKit_Internal.h"
 
-@class SKFetchRequest;
+@implementation SKUsersWithBadgeEndpoint
 
-void SKQLog(NSString *format, ...);
+- (BOOL) validatePredicate:(NSPredicate *)predicate {
+	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserBadges] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
+		id badges = [predicate constantValueForLeftKeyPath:SKUserBadges];
+		if (badges) {
+			NSArray * ids = SKExtractBadgeIDs(badges);
+			NSString * vector = [ids componentsJoinedByString:@";"];
+			[self setPath:[NSString stringWithFormat:@"/badges/%@", vector]];
+			return YES;
+		}
+	}
+	
+	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+	return NO;
+}
 
-id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
-
-NSNumber * SKExtractUserID(id value);
-
-NSNumber * SKExtractBadgeID(id value);
-NSArray * SKExtractBadgeIDs(id value);
-
-NSNumber * SKExtractPostID(id value);
-NSNumber * SKExtractCommentID(id value);
-NSNumber * SKExtractQuestionID(id value);
-NSNumber * SKExtractAnswerID(id value);
-
-NSString * SKExtractTagName(id value);
-NSArray * SKExtractTagNames(id value);
+@end

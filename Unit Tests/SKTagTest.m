@@ -51,7 +51,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[NSSortDescriptor sortDescriptorWithKey:SKTagCount ascending:NO]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagCount ascending:NO] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
@@ -69,13 +69,20 @@
 - (void) testName {
 	SKSite * site = [SKSite stackoverflowSite];
 	
+	NSLog(@"request");
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	NSLog(@"entity");
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[NSSortDescriptor sortDescriptorWithKey:SKTagName ascending:YES]];
+	NSLog(@"sort");
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagName ascending:YES] autorelease]];
 	
 	NSError * error = nil;
+	NSLog(@"execute");
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
+	NSLog(@"release");
 	[r release];
+	
+	NSLog(@"%@", error);
 	
 	STAssertTrue(error == nil, @"error should be nil: %@", error);
 	
