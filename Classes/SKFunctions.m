@@ -69,7 +69,16 @@ NSNumber * SKExtractBadgeID(id value) {
 }
 
 NSNumber * SKExtractPostID(id value) {
-	return SKExtractNumber(value, [SKPost class], @selector(postID));
+	if ([value isKindOfClass:[SKAnswer class]]) {
+		return SKExtractAnswerID(value);
+	} else if ([value isKindOfClass:[SKQuestion class]]) {
+		return SKExtractQuestionID(value);
+	} else if ([value isKindOfClass:[SKComment class]]) {
+		return SKExtractCommentID(value);
+	} else {
+		//we can call this with SKPost because it's abstract
+		return SKExtractNumber(value, [SKPost class], @selector(postID));
+	}
 }
 
 NSNumber * SKExtractCommentID(id value) {

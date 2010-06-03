@@ -130,7 +130,7 @@
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeRankBronze] == 33, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
-	STAssertTrue(badgeCount[SKBadgeRankSilver] == 18, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
+	STAssertTrue(badgeCount[SKBadgeRankSilver] == 19, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
 	STAssertTrue(badgeCount[SKBadgeRankGold] == 2, @"gold badge rank does not match (%d)", badgeCount[SKBadgeRankGold]);
 }
 
@@ -158,7 +158,7 @@
 	}
 	
 	STAssertTrue(badgeCount[SKBadgeRankBronze] == 33, @"bronze badge rank does not match (%d)", badgeCount[SKBadgeRankBronze]);
-	STAssertTrue(badgeCount[SKBadgeRankSilver] == 18, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
+	STAssertTrue(badgeCount[SKBadgeRankSilver] == 19, @"silver badge rank does not match (%d)", badgeCount[SKBadgeRankSilver]);
 	STAssertTrue(badgeCount[SKBadgeRankGold] == 2, @"gold badge rank does not match (%d)", badgeCount[SKBadgeRankGold]);
 }
 

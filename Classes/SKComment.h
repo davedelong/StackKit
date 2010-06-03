@@ -35,7 +35,6 @@ extern NSString * const SKCommentScore;
 extern NSString * const SKCommentID;
 extern NSString * const SKCommentInReplyToUser;
 extern NSString * const SKCommentPost;
-extern NSString * const SKCommentScore;
 extern NSString * const SKCommentEditCount;
 
 @class SKPost;

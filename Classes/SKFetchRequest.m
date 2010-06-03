@@ -213,7 +213,10 @@ cleanup:
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSDictionary * responseObjects = [responseString JSONValue];
-	assert([responseObjects isKindOfClass:[NSDictionary class]]);
+	if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeUnknownError userInfo:nil]];
+		return nil;
+	}
 	
 	//check for an error in the response
 	NSDictionary * errorDictionary = [responseObjects objectForKey:SKErrorResponseKey];

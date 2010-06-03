@@ -52,6 +52,14 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 	return @"answers";
 }
 
++ (NSArray *) endpoints {
+	return [NSArray arrayWithObjects:
+			[SKSpecificAnswerEndpoint class],
+			[SKQuestionAnswersEndpoint class],
+			[SKUserAnswersEndpoint class],
+			nil];
+}
+
 + (NSDictionary *) validPredicateKeyPaths {
 	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 							   SKAnswerID, @"answerID",

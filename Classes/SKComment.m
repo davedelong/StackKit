@@ -24,12 +24,15 @@
  **/
 
 #import "StackKit_Internal.h"
+NSString * const SKCommentCreationDate = __SKPostCreationDate;
+NSString * const SKCommentOwner = __SKPostOwner;
+NSString * const SKCommentBody = __SKPostBody;
+NSString * const SKCommentScore = __SKPostScore;
 
 NSString * const SKCommentID = @"comment_id";
 NSString * const SKCommentInReplyToUser = @"reply_to_user";
 NSString * const SKCommentPost = @"post_id";
 NSString * const SKCommentPostType = @"post_type";
-NSString * const SKCommentScore = __SKPostScore;
 NSString * const SKCommentEditCount = @"edit_count";
 
 @implementation SKComment
@@ -42,6 +45,16 @@ NSString * const SKCommentEditCount = @"edit_count";
 
 + (NSString *) dataKey {
 	return @"comments";
+}
+
++ (NSArray *) endpoints {
+	return [NSArray arrayWithObjects:
+			[SKSpecificCommentEndpoint class],
+			[SKUserCommentsEndpoint class],
+			[SKCommentsFromUserToUserEndpoint class],
+			[SKCommentsToUserEndpoint class],
+			[SKPostCommentsEndpoint class],
+			nil];
 }
 
 + (NSDictionary *) validPredicateKeyPaths {

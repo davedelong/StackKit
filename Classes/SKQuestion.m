@@ -72,6 +72,17 @@ NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 	return @"questions";
 }
 
++ (NSArray *) endpoints {
+	return [NSArray arrayWithObjects:
+			[SKAllQuestionsEndpoint class],
+			[SKUserQuestionsEndpoint class],
+			[SKSpecificQuestionEndpoint class],
+			[SKQuestionsTaggedEndpoint class],
+			[SKUnansweredQuestionsEndpoint class],
+			[SKUserFavoritedQuestionsEndpoint class],
+			nil];
+}
+
 + (NSDictionary *) validPredicateKeyPaths {
 	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 							   SKQuestionID, @"questionID",

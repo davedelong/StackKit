@@ -1,5 +1,5 @@
 //
-//  SKUserBadgesEndpoint.m
+//  SKUserQuestionsEndpoint.m
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -25,16 +25,17 @@
 
 #import "StackKit_Internal.h"
 
-@implementation SKUserBadgesEndpoint
+@implementation SKUserQuestionsEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKBadgesAwardedToUser]) {
-		id user = [predicate constantValueForLeftKeyPath:SKBadgesAwardedToUser];
-		if (user != nil) {
-			[self setPath:[NSString stringWithFormat:@"/users/%@/badges", SKExtractUserID(user)]];
+	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionOwner]) {
+		id owner = [predicate constantValueForLeftKeyPath:SKQuestionOwner];
+		if (owner) {
+			[self setPath:[NSString stringWithFormat:@"/users/%@/questions", SKExtractUserID(owner)]];
 			return YES;
 		}
 	}
+	
 	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
 	return NO;
 }
