@@ -94,4 +94,37 @@ NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 	return d;
 }
 
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
+		questionID = [[dictionary objectForKey:SKQuestionID] retain];
+		answerCount = [[dictionary objectForKey:SKQuestionAnswerCount] retain];
+		acceptedAnswerID = [[dictionary objectForKey:SKQuestionAcceptedAnswer] retain];
+		favoriteCount = [[dictionary objectForKey:SKQuestionFavoriteCount] retain];
+		bountyCloseDate = [[dictionary objectForKey:SKQuestionBountyCloseDate] retain];
+		bountyAmount = [[dictionary objectForKey:SKQuestionBountyAmount] retain];
+		closeDate = [[dictionary objectForKey:SKQuestionCloseDate] retain];
+		closeReason = [[dictionary objectForKey:SKQuestionCloseReason] retain];
+		
+		timelineURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionTimelineURL]];
+		commentsURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionCommentsURL]];
+		answersURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionAnswersURL]];
+	}
+	return self;
+}
+
+- (void) dealloc {
+	[questionID release];
+	[answerCount release];
+	[acceptedAnswerID release];
+	[favoriteCount release];
+	[bountyCloseDate release];
+	[bountyAmount release];
+	[closeDate release];
+	[closeReason release];
+	[timelineURL release];
+	[commentsURL release];
+	[answersURL release];
+	[super dealloc];
+}
+
 @end

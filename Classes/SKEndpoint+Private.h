@@ -28,9 +28,12 @@
 
 @interface SKEndpoint ()
 
+@property (retain) SKFetchRequest * request;
 @property (retain) NSMutableDictionary * query;
 @property (retain) NSString * path;
 @property (retain) NSError * error;
+
+- (NSString *) apiPath;
 
 - (BOOL) validateEntity:(Class)entity;
 - (BOOL) validatePredicate:(NSPredicate *)predicate;

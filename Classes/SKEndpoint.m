@@ -27,14 +27,15 @@
 #import <objc/runtime.h>
 
 @implementation SKEndpoint
-@synthesize path, error, query;
+@synthesize path, error, query, request;
 
-+ (id) endpoint {
-	return [[[self alloc] init] autorelease];
++ (id) endpointForFetchRequest:(SKFetchRequest *)request {
+	return [[[self alloc] initWithFetchRequest:request] autorelease];
 }
 
-- (id) init {
+- (id) initWithFetchRequest:(SKFetchRequest *)aRequest {
 	if (self = [super init]) {
+		[self setRequest:aRequest];
 		query = [[NSMutableDictionary alloc] init];
 	}
 	return self;
@@ -47,8 +48,8 @@
 	[super dealloc];
 }
 
-- (BOOL) validateFetchRequest:(SKFetchRequest *)request {
-	[query addEntriesFromDictionary:[request defaultQueryDictionary]];
+- (BOOL) validateFetchRequest {
+	[query addEntriesFromDictionary:[[self request] defaultQueryDictionary]];
 	/**
 	 Validation steps:
 	 
@@ -57,15 +58,15 @@
 	 3.  Validate the sort
 	 **/
 	
-	if (![self validateEntity:[request entity]]) {
+	if (![self validateEntity:[[self request] entity]]) {
 		return NO;
 	}
 	
-	if (![self validatePredicate:[request predicate]]) {
+	if (![self validatePredicate:[[self request] predicate]]) {
 		return NO;
 	}
 	
-	if (![self validateSortDescriptor:[request sortDescriptor]]) {
+	if (![self validateSortDescriptor:[[self request] sortDescriptor]]) {
 		return NO;
 	}
 	
@@ -116,7 +117,7 @@
 - (NSURL *) APIURLForFetchRequest:(SKFetchRequest *)request {
 	if ([self error] != nil) { return nil; }
 	
-	NSString * urlBase = [[[request site] APIURL] absoluteString];
+	NSString * urlBase = [[[[self request] site] APIURL] absoluteString];
 	NSString * apiPath = [self apiPath];
 	
 	NSString * fullAPIString = [urlBase stringByAppendingString:apiPath];

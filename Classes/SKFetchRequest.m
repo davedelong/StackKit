@@ -131,8 +131,8 @@ NSString * SKErrorMessageKey = @"message";
 	
 	NSArray * endpoints = [fetchEntity endpoints];
 	for (Class endpointClass in endpoints) {
-		SKEndpoint * endpoint = [endpointClass endpoint];
-		if ([endpoint validateFetchRequest:self]) {
+		SKEndpoint * endpoint = [endpointClass endpointForFetchRequest:self];
+		if ([endpoint validateFetchRequest]) {
 			[self setError:nil];
 			return [endpoint APIURLForFetchRequest:self];
 		} else {

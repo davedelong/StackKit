@@ -28,19 +28,21 @@
 @class SKFetchRequest;
 
 @interface SKEndpoint : NSObject {
+	SKFetchRequest * request;
 	NSMutableDictionary * query;
 	NSString * path;
 	NSError * error;
 }
 
+@property (readonly, retain) SKFetchRequest * request;
 @property (readonly, retain) NSMutableDictionary * query;
 @property (readonly, retain) NSString * path;
 @property (readonly, retain) NSError * error;
 
-+ (id) endpoint;
-- (BOOL) validateFetchRequest:(SKFetchRequest *)request;
++ (id) endpointForFetchRequest:(SKFetchRequest *)request;
+- (id) initWithFetchRequest:(SKFetchRequest *)aRequest;
 
-- (NSString *) apiPath;
+- (BOOL) validateFetchRequest;
 
 - (NSURL *) APIURLForFetchRequest:(SKFetchRequest *)request;
 
