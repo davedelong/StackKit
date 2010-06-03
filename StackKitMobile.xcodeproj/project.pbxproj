@@ -66,6 +66,7 @@
 		558333B911B765C500CA8D62 /* SKTagBadgesEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583337E11B765C500CA8D62 /* SKTagBadgesEndpoint.m */; };
 		558333BA11B765C500CA8D62 /* SKUserBadgesEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5583337F11B765C500CA8D62 /* SKUserBadgesEndpoint.h */; };
 		558333BB11B765C500CA8D62 /* SKUserBadgesEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583338011B765C500CA8D62 /* SKUserBadgesEndpoint.m */; };
+		558333C511B768D500CA8D62 /* SKSiteDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 558333C411B768D500CA8D62 /* SKSiteDelegate.h */; };
 		55D6CFD611B4DD9C00C624F0 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9111B4DD9C00C624F0 /* StackKit.h */; };
 		55D6CFD711B4DD9C00C624F0 /* StackKit_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */; };
 		55D6CFD811B4DD9C00C624F0 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9411B4DD9C00C624F0 /* SKConstants.h */; };
@@ -187,6 +188,7 @@
 		5583337E11B765C500CA8D62 /* SKTagBadgesEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagBadgesEndpoint.m; sourceTree = "<group>"; };
 		5583337F11B765C500CA8D62 /* SKUserBadgesEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserBadgesEndpoint.h; sourceTree = "<group>"; };
 		5583338011B765C500CA8D62 /* SKUserBadgesEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserBadgesEndpoint.m; sourceTree = "<group>"; };
+		558333C411B768D500CA8D62 /* SKSiteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteDelegate.h; sourceTree = "<group>"; };
 		55D6CF9111B4DD9C00C624F0 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
 		55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Internal.h; sourceTree = "<group>"; };
 		55D6CF9411B4DD9C00C624F0 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 			children = (
 				55D6CF9F11B4DD9C00C624F0 /* SKSite.h */,
 				55D6CFA011B4DD9C00C624F0 /* SKSite.m */,
+				558333C411B768D500CA8D62 /* SKSiteDelegate.h */,
 				55D6CFA111B4DD9C00C624F0 /* SKSite+Private.h */,
 			);
 			name = Site;
@@ -641,6 +644,7 @@
 				558333B611B765C500CA8D62 /* SKAllBadgesEndpoint.h in Headers */,
 				558333B811B765C500CA8D62 /* SKTagBadgesEndpoint.h in Headers */,
 				558333BA11B765C500CA8D62 /* SKUserBadgesEndpoint.h in Headers */,
+				558333C511B768D500CA8D62 /* SKSiteDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

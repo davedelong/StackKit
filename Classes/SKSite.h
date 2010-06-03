@@ -25,6 +25,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
+#import "SKSiteDelegate.h"
 
 extern NSString * SKSiteAPIKey;
 
@@ -38,8 +39,10 @@ extern NSString * SKSiteAPIKey;
 	NSTimeInterval timeoutInterval;
 	
 	NSOperationQueue * requestQueue;
+	id<SKSiteDelegate> delegate;
 }
 
+@property (assign) id<SKSiteDelegate> delegate;
 @property (copy) NSString * APIKey;
 @property (readonly) NSURL * APIURL;
 @property (readonly) NSString * APIVersion;
@@ -56,5 +59,6 @@ extern NSString * SKSiteAPIKey;
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest;
 
 - (NSDictionary *) statistics;
+- (void) requestStatistics;
 
 @end

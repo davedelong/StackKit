@@ -1,5 +1,5 @@
 //
-//  SKSite+Private.h
+//  SKSiteDelegate.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -24,19 +24,12 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "SKSite.h"
-#import "SKUser.h"
-#import "SKTag.h"
-#import "SKPost.h"
 
-@interface SKSite ()
+@class SKSite;
 
-/**- (void) cacheUser:(SKUser *)newUser;
-- (void) cacheTag:(SKTag *)newTag;
-- (void) cachePost:(SKPost *)newPost;
-- (void) cacheBadge:(SKBadge *)newBadge;**/
+@protocol SKSiteDelegate <NSObject>
 
-- (void) asynchronousStatistics;
-- (NSDictionary *) statisticsWithError:(NSError **)error;
+@required
+- (void) site:(SKSite *)site didRetrieveStatistics:(NSDictionary *)statistics error:(NSError *)error;
 
 @end

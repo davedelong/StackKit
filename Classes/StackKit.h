@@ -24,9 +24,13 @@
  **/
 
 #import "SKObject.h"
+
 #import "SKFetchRequest.h"
+#import "SKFetchRequestDelegate.h"
 
 #import "SKSite.h"
+#import "SKSiteDelegate.h"
+
 #import "SKUser.h"
 #import "SKTag.h"
 #import "SKBadge.h"

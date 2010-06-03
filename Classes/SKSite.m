@@ -29,6 +29,7 @@ NSString * SKSiteAPIKey = @"key";
 
 @implementation SKSite
 
+@synthesize delegate;
 @synthesize APIKey;
 @synthesize APIURL;
 @synthesize timeoutInterval;
@@ -138,7 +139,7 @@ NSString * SKSiteAPIKey = @"key";
 
 #pragma mark Site information
 
-- (NSDictionary *) statistics {
+- (NSDictionary *) statisticsWithError:(NSError **)error {
 	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self APIKey] forKey:SKSiteAPIKey];
 	NSString * statsPath = [NSString stringWithFormat:@"stats?%@", [queryDictionary queryString]];
 	
@@ -149,7 +150,7 @@ NSString * SKSiteAPIKey = @"key";
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[statsURL absoluteURL]];
 	NSURLResponse * response = nil;
 	
-	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:nil];
+	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:error];
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSDictionary * statistics = [responseString JSONValue];
@@ -157,6 +158,35 @@ NSString * SKSiteAPIKey = @"key";
 	if ([statistics isKindOfClass:[NSDictionary class]] == NO) { return nil; }
 	
 	return [[statistics objectForKey:@"statistics"] objectAtIndex:0];
+}
+
+- (NSDictionary *) statistics {
+	return [self statisticsWithError:nil];
+}
+
+- (void) requestStatistics {
+	if ([self delegate] == nil) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKSite.delegate cannot be nil" userInfo:nil];
+	}
+	
+	if ([[self delegate] conformsToProtocol:@protocol(SKSiteDelegate)] == NO) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKSite.delegate must conform to <SKSiteDelegate>" userInfo:nil];
+	}
+	
+	NSInvocationOperation * op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(asynchronousStatistics) object:nil];
+	[requestQueue addOperation:op];
+	[op release];
+}
+
+- (void) asynchronousStatistics {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	
+	NSError * error = nil;
+	NSDictionary * stats = [self statisticsWithError:&error];
+	
+	[[self delegate] site:self didRetrieveStatistics:stats error:error];
+	
+	[pool release];
 }
 
 @end
