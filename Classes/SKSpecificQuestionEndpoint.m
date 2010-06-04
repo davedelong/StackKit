@@ -27,6 +27,15 @@
 
 @implementation SKSpecificQuestionEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionLastActivityDate, @"lastActivityDate",
+			SKQuestionViewCount, @"viewCount",
+			SKQuestionCreationDate, @"creationDate",
+			SKQuestionScore, @"score",
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
 	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionID]) {
 		id question = [predicate constantValueForLeftKeyPath:SKQuestionID];

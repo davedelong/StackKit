@@ -62,11 +62,15 @@
 		return NO;
 	}
 	
-	if (![self validatePredicate:[[self request] predicate]]) {
+	NSSortDescriptor * cleanedSortDescriptor = [self cleanSortDescriptor:[[self request] sortDescriptor]];
+	
+	if (![self validateSortDescriptor:cleanedSortDescriptor]) {
 		return NO;
 	}
 	
-	if (![self validateSortDescriptor:[[self request] sortDescriptor]]) {
+	NSPredicate * cleanedPredicate = [self cleanPredicate:[[self request] predicate]];
+	
+	if (![self validatePredicate:cleanedPredicate]) {
 		return NO;
 	}
 	
@@ -87,6 +91,7 @@
 
 - (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor {
 	if ([self error] != nil) { return NO; }
+	if (sortDescriptor == nil) { return YES; }
 	
 	//use respondsTo... and perform... so that this will still work on 10.5
 	if ([sortDescriptor respondsToSelector:@selector(comparator)]) {
@@ -106,6 +111,30 @@
 	}
 	
 	return YES;
+}
+
+- (NSDictionary *) validPredicateKeyPaths {
+	return nil;
+}
+
+- (NSDictionary *) validSortDescriptorKeys {
+	return nil;
+}		
+
+- (NSSortDescriptor *) cleanSortDescriptor:(NSSortDescriptor *)sortDescriptor {
+	NSDictionary * sortDescriptorKeys = [self validSortDescriptorKeys];
+	NSString * key = [sortDescriptor key];
+	NSString * cleanedKey = [sortDescriptorKeys objectForKey:key];
+	if (cleanedKey != nil) {
+		return [[[NSSortDescriptor alloc] initWithKey:cleanedKey ascending:[sortDescriptor ascending] selector:[sortDescriptor selector]] autorelease];
+	}
+	//this can't be cleaned:
+	return sortDescriptor;
+}
+
+- (NSPredicate *) cleanPredicate:(NSPredicate *)predicate {
+	NSDictionary * predicateKeyPaths = [self validPredicateKeyPaths];
+	return [predicate predicateByReplacingLeftKeyPathsFromMapping:predicateKeyPaths];
 }
 
 - (NSString *) apiPath {

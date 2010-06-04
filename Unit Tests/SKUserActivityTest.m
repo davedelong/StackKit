@@ -58,6 +58,7 @@
 	
 	NSError * error = nil;
 	NSArray * activity = [site executeSynchronousFetchRequest:r error:&error];
+	NSLog(@"%@", error);
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);

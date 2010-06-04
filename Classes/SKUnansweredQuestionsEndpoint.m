@@ -27,6 +27,13 @@
 
 @implementation SKUnansweredQuestionsEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionCreationDate, @"creationDate",
+			SKQuestionScore, @"score",
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
 	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionAnswerCount]) {
 		id answerCount = [predicate constantValueForLeftKeyPath:SKQuestionAnswerCount];

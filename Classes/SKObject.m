@@ -91,16 +91,6 @@
 	return key;
 }
 
-+ (NSDictionary *) validSortDescriptorKeys {
-	SKLog(@"+[%@ %@] should be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd));
-	return nil;
-}
-
-+ (NSDictionary *) validPredicateKeyPaths {
-	SKLog(@"+[%@ %@] should be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd));
-	return nil;
-}
-
 + (NSArray *) endpoints {
 	return [NSArray arrayWithObject:[SKEndpoint class]];
 }

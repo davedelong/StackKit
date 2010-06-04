@@ -27,6 +27,15 @@
 
 @implementation SKUserQuestionsEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionLastActivityDate, @"lastActivityDate",
+			SKQuestionViewCount, @"viewCount",
+			SKQuestionCreationDate, @"creationDate",
+			SKQuestionScore, @"score",
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
 	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionOwner]) {
 		id owner = [predicate constantValueForLeftKeyPath:SKQuestionOwner];

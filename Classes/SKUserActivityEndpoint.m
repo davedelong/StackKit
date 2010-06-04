@@ -48,4 +48,11 @@
 	return NO;
 }
 
+- (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor {
+	if (sortDescriptor == nil) { return YES; }
+	
+	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:nil]];
+	return NO;
+}
+
 @end

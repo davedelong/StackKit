@@ -43,9 +43,6 @@
 + (NSDictionary *) APIAttributeToPropertyMapping;
 + (NSString *) dataKey;
 
-+ (NSDictionary *) validSortDescriptorKeys;
-+ (NSDictionary *) validPredicateKeyPaths;
-
 + (NSArray *) endpoints;
 
 @end

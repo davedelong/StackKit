@@ -90,8 +90,6 @@
 							   @"Yearling",
 							   nil];
 	
-	NSLog(@"%d", [badges count]);
-	
 	STAssertEqualObjects(actualNames, expectedNames, @"expected names should match");
 	
 	STAssertTrue([badges count] == 44, @"there should be 44 badges");

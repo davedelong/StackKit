@@ -96,7 +96,9 @@
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKTagsParticipatedInByUser, [NSNumber numberWithInt:115730]]];
 	
 	NSError * error = nil;
+	NSLog(@"%@", r);
 	NSArray * userTags = [site executeSynchronousFetchRequest:r error:&error];
+	NSLog(@"%@", error);
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);

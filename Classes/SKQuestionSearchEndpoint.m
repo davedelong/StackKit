@@ -27,6 +27,15 @@
 
 @implementation SKQuestionSearchEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionLastActivityDate, @"lastActivityDate",
+			SKQuestionViewCount, @"viewCount",
+			SKQuestionCreationDate, @"creationDate",
+			SKQuestionScore, @"score",
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
 	[self setPath:@"/search"];
 	

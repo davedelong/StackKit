@@ -138,13 +138,6 @@ NSString * SKUserAccountTypeModerator = @"moderator";
 			nil];
 }
 
-//these are the valid keypaths in predicates
-+ (NSDictionary *) validPredicateKeyPaths {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKUserID, @"userID",
-			nil];
-}
-
 + (NSString *) dataKey {
 	return @"users";
 }

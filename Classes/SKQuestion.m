@@ -52,6 +52,7 @@ NSString * const SKQuestionCommentsURL = __SKQuestionCommentsURL;
 NSString * const SKQuestionAnswersURL = __SKQuestionAnswersURL;
 
 NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
+NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 
 @implementation SKQuestion
 
@@ -82,17 +83,6 @@ NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 			[SKUserFavoritedQuestionsEndpoint class],
 			[SKQuestionSearchEndpoint class],
 			nil];
-}
-
-+ (NSDictionary *) validPredicateKeyPaths {
-	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-							   SKQuestionID, @"questionID",
-							   SKQuestionAnswerCount, @"answerCount",
-							   SKQuestionTags, @"tags",
-							   SKQuestionsFavoritedByUser, SKQuestionsFavoritedByUser,
-							   nil];
-	[d addEntriesFromDictionary:[super validPredicateKeyPaths]];
-	return d;
 }
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {

@@ -60,13 +60,4 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 			nil];
 }
 
-+ (NSDictionary *) validPredicateKeyPaths {
-	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-							   SKAnswerID, @"answerID",
-							   SKAnswerQuestion, @"questionID",
-							   nil];
-	[d addEntriesFromDictionary:[super validPredicateKeyPaths]];
-	return d;
-}
-
 @end
