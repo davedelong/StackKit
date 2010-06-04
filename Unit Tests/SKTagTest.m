@@ -96,15 +96,13 @@
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKTagsParticipatedInByUser, [NSNumber numberWithInt:115730]]];
 	
 	NSError * error = nil;
-	NSLog(@"%@", r);
 	NSArray * userTags = [site executeSynchronousFetchRequest:r error:&error];
-	NSLog(@"%@", error);
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);
 	
-	//even though user #115730 has been active in more than 70 tags, only 70 are returned at a time (by default, max is 100)
-	STAssertTrue([userTags count] == 70, @"incorrect number of badges (%ld)", [userTags count]);
+	//even though user #115730 has been active in more than 100 tags, only 100 are returned at a time (by default, max is 100)
+	STAssertTrue([userTags count] == 100, @"incorrect number of badges (%ld)", [userTags count]);
 }
 
 @end

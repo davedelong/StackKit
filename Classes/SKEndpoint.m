@@ -178,7 +178,7 @@
 - (NSURL *) APIURLForFetchRequest:(SKFetchRequest *)fetchRequest {
 	if ([self error] != nil) { return nil; }
 	
-	if ([fetchRequest fetchLimit] > 0 && [fetchRequest fetchOffset] > 0) {
+	if ([fetchRequest fetchLimit] > 0) {
 		[[self query] setObject:[NSNumber numberWithUnsignedInteger:[fetchRequest fetchLimit]] forKey:SKPageSizeKey];
 		NSUInteger page = ([fetchRequest fetchOffset] % [fetchRequest fetchLimit]);
 		[[self query] setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];

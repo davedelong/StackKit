@@ -32,6 +32,11 @@
 	if (predicate == nil) {
 		[self setPath:@"/users"];
 		return YES;
+	} else if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserDisplayName] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
+		NSString * name = [[predicate constantValueForLeftKeyPath:SKUserDisplayName] description];
+		[[self query] setObject:name forKey:@"filter"];
+		[self setPath:@"/users"];
+		return YES;
 	}
 	
 	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];

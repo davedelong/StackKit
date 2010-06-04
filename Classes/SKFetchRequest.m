@@ -42,7 +42,7 @@ NSString * SKErrorMessageKey = @"message";
 
 - (id) initWithSite:(SKSite *)aSite {
 	if (self = [super initWithSite:aSite]) {
-		fetchLimit = 0;
+		fetchLimit = SKPageSizeLimitMax;
 		fetchOffset = 0;
 	}
 	return self;

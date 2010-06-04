@@ -33,14 +33,9 @@
 - (void) testUserAPICall {
 	SKSite * site = [SKSite stackoverflowSite];
 	
-	NSString * expected = [NSString stringWithFormat:@"%@/%@/users/115730?key=%@", SKTestAPISite, SKAPIVersion, [site APIKey]];
-	
 	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
-	
-	NSURL * requestURL = [request apiCall];
-	STAssertEqualObjects([requestURL absoluteString], expected, @"request did not generate appropriate URL");
 	
 	NSError * error = nil;
 	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
@@ -94,11 +89,14 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKUserDisplayName, @"DeLong"]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKUserDisplayName, @"Dave DeLong"]];
 	
 	NSError * error = nil;
 	NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
 	[request release];
+	
+	NSLog(@"%@", matches);
+	
 	STAssertNil(error, @"error should be nil");
 	STAssertTrue([matches count] == 1, @"matches should only have 1 object");
 	
