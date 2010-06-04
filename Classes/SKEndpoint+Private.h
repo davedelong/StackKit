@@ -36,8 +36,6 @@
 - (NSSortDescriptor *) cleanSortDescriptor:(NSSortDescriptor *)sortDescriptor;
 - (NSPredicate *) cleanPredicate:(NSPredicate *)predicate;
 
-- (NSString *) apiPath;
-
 - (BOOL) validateEntity:(Class)entity;
 - (BOOL) validatePredicate:(NSPredicate *)predicate;
 - (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor;

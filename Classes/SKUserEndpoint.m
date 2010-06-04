@@ -30,9 +30,12 @@
 
 - (NSDictionary *) validSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKUserReputation, @"reputation",
-			SKUserCreationDate, @"creationDate",
-			SKUserDisplayName, @"displayName",
+			SKSortReputation, @"reputation",
+			SKSortReputation, SKUserReputation,
+			SKSortCreation, @"creationDate",
+			SKSortCreation, SKUserCreationDate,
+			SKSortName, @"displayName",
+			SKSortName, SKUserDisplayName,
 			nil];
 }
 

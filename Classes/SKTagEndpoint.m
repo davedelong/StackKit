@@ -29,9 +29,10 @@
 
 - (NSDictionary *) validSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKTagNumberOfTaggedQuestions, SKTagNumberOfTaggedQuestions,
-			SKTagLastUsedDate, SKTagLastUsedDate,
-			SKTagName, @"name",
+			SKSortPopular, SKTagNumberOfTaggedQuestions,
+			SKSortActivity, SKTagLastUsedDate,
+			SKSortName, @"name",
+			SKSortName, SKTagName,
 			nil];
 }
 

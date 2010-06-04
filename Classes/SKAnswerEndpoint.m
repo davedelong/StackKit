@@ -37,10 +37,17 @@
 
 - (NSDictionary *) validSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKAnswerLastActivityDate, @"lastActivityDate",
-			SKAnswerViewCount, @"viewCount",
-			SKAnswerCreationDate, @"creationDate",
-			SKAnswerScore, @"score",
+			SKSortActivity, @"lastActivityDate",
+			SKSortActivity, SKAnswerLastActivityDate,
+			
+			SKSortViews, @"viewCount",
+			SKSortViews, SKAnswerViewCount,
+			
+			SKSortCreation, @"creationDate",
+			SKSortCreation, SKAnswerCreationDate,
+			
+			SKSortVotes, @"score",
+			SKSortVotes, SKAnswerScore,
 			nil];
 }
 

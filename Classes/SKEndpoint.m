@@ -94,6 +94,7 @@
 	NSDictionary * validSortKeys = [self validSortDescriptorKeys];
 	
 	if (validSortKeys == nil && sortDescriptor == nil) {
+		//this endpoint doesn't support sorting, and we weren't given a sort descriptor
 		return YES;
 	}
 	
@@ -164,7 +165,8 @@
 	if (cleanedKey != nil) {
 		return [[[NSSortDescriptor alloc] initWithKey:cleanedKey ascending:[sortDescriptor ascending] selector:[sortDescriptor selector]] autorelease];
 	}
-	//this can't be cleaned:
+	//this can't be cleaned
+	//return the same descriptor, because the validate method will choke on it
 	return sortDescriptor;
 }
 
@@ -173,17 +175,17 @@
 	return [predicate predicateByReplacingLeftKeyPathsFromMapping:predicateKeyPaths];
 }
 
-- (NSString *) apiPath {
+- (NSURL *) APIURLForFetchRequest:(SKFetchRequest *)fetchRequest {
 	if ([self error] != nil) { return nil; }
 	
-	return [NSString stringWithFormat:@"%@?%@", [self path], [[self query] queryString]];
-}
-
-- (NSURL *) APIURLForFetchRequest:(SKFetchRequest *)request {
-	if ([self error] != nil) { return nil; }
+	if ([fetchRequest fetchLimit] > 0 && [fetchRequest fetchOffset] > 0) {
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:[fetchRequest fetchLimit]] forKey:SKPageSizeKey];
+		NSUInteger page = ([fetchRequest fetchOffset] % [fetchRequest fetchLimit]);
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];
+	}
 	
 	NSString * urlBase = [[[[self request] site] APIURL] absoluteString];
-	NSString * apiPath = [self apiPath];
+	NSString * apiPath = [NSString stringWithFormat:@"%@?%@", [self path], [[self query] queryString]];
 	
 	NSString * fullAPIString = [urlBase stringByAppendingString:apiPath];
 	return [NSURL URLWithString:fullAPIString];

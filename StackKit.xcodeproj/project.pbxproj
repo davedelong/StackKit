@@ -12,6 +12,7 @@
 		5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */; };
 		5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7EB11ACF12300C47C1B /* SKFunctions.h */; };
 		5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7EC11ACF12300C47C1B /* SKFunctions.m */; };
+		5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */; };
 		558331CA11B6C32600CA8D62 /* SKUserEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331C811B6C32600CA8D62 /* SKUserEndpoint.h */; };
 		558331CB11B6C32600CA8D62 /* SKUserEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331C911B6C32600CA8D62 /* SKUserEndpoint.m */; };
 		558331DB11B6D95C00CA8D62 /* SKAllUsersEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331D911B6D95C00CA8D62 /* SKAllUsersEndpoint.h */; };
@@ -164,6 +165,7 @@
 		5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDefinitions.m; sourceTree = "<group>"; };
 		5506C7EB11ACF12300C47C1B /* SKFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFunctions.h; sourceTree = "<group>"; };
 		5506C7EC11ACF12300C47C1B /* SKFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFunctions.m; sourceTree = "<group>"; };
+		5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants_Internal.h; sourceTree = "<group>"; };
 		558331C811B6C32600CA8D62 /* SKUserEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserEndpoint.h; sourceTree = "<group>"; };
 		558331C911B6C32600CA8D62 /* SKUserEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserEndpoint.m; sourceTree = "<group>"; };
 		558331D911B6D95C00CA8D62 /* SKAllUsersEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAllUsersEndpoint.h; sourceTree = "<group>"; };
@@ -379,8 +381,8 @@
 				55C23E31116A8FBE009064EE /* Badge */,
 				55C23E30116A8FBB009064EE /* Tag */,
 				55A2E52B110E44030038E510 /* Posts */,
-				55C23E2B116A8F94009064EE /* Categories */,
 				55D6D20611B699AA00C624F0 /* Endpoints */,
+				55C23E2B116A8F94009064EE /* Categories */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -670,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				55FA969911616A65003A9CD7 /* SKConstants.h */,
+				5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */,
 				55FA969A11616A65003A9CD7 /* SKConstants.m */,
 				5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */,
 				5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */,
@@ -772,6 +775,7 @@
 				558333BF11B7668E00CA8D62 /* SKSiteDelegate.h in Headers */,
 				558333FD11B8033C00CA8D62 /* SKQuestionSearchEndpoint.h in Headers */,
 				5583342C11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.h in Headers */,
+				5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,7 +884,6 @@
 				55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */,
 				55C23C9211699C40009064EE /* SKTestConstants.m in Sources */,
 				55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */,
-				55C24146116AF72E009064EE /* SKUserActivityTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

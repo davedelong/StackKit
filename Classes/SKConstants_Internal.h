@@ -1,5 +1,5 @@
 //
-//  SKUnansweredQuestionsEndpoint.m
+//  SKConstants_Internal.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,21 +23,16 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit_Internal.h"
-
-@implementation SKUnansweredQuestionsEndpoint
-
-- (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionAnswerCount]) {
-		id answerCount = [predicate constantValueForLeftKeyPath:SKQuestionAnswerCount];
-		if (answerCount && [answerCount intValue] == 0) {
-			[self setPath:@"/questions/unanswered"];
-			return YES;
-		}
-	}
-	
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
-	return NO;
-}
-
-@end
+extern NSString * const SKSortCreation;
+extern NSString * const SKSortActivity;
+extern NSString * const SKSortVotes;
+extern NSString * const SKSortViews;
+extern NSString * const SKSortNewest;
+extern NSString * const SKSortFeatured;
+extern NSString * const SKSortHot;
+extern NSString * const SKSortWeek;
+extern NSString * const SKSortMonth;
+extern NSString * const SKSortAdded;
+extern NSString * const SKSortPopular;
+extern NSString * const SKSortReputation;
+extern NSString * const SKSortName;

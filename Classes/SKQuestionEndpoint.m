@@ -37,8 +37,10 @@
 
 - (NSDictionary *) validSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKCommentScore, @"score",
-			SKCommentCreationDate, @"creationDate",
+			SKSortVotes, @"score",
+			SKSortVotes, SKCommentScore,
+			SKSortCreation, @"creationDate",
+			SKSortCreation, SKCommentCreationDate,
 			nil];
 }
 
