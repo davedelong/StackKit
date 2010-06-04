@@ -79,46 +79,6 @@ NSString * SKErrorMessageKey = @"message";
 	return d;
 }
 
-- (NSPredicate *) cleanedPredicate {
-	NSDictionary * keyPathMapping = [[self entity] validPredicateKeyPaths];
-	if (keyPathMapping == nil) { return [self predicate]; }
-	return [[self predicate] predicateByReplacingLeftKeyPathsFromMapping:keyPathMapping];
-}
-
-- (NSSortDescriptor *) cleanedSortDescriptor {
-	//evaluate the sort descriptors.  error if there are non-supported keys, comparators, or selectors, and replace keys as appropriate
-	NSDictionary * validSortKeys = [[self entity] validSortDescriptorKeys];
-	
-	NSSortDescriptor * sort = [self sortDescriptor];
-	NSString * sortKey = [sort key];
-	NSString * cleanedKey = [validSortKeys objectForKey:sortKey];
-	if (cleanedKey == nil) {
-		NSString * msg = [NSString stringWithFormat:@"%@ is not a valid sort key", sortKey];
-		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
-		return nil;
-	}
-	
-	//use respondsTo... and perform... so that this will still work on 10.5
-	if ([sort respondsToSelector:@selector(comparator)]) {
-		id comparator = [sort performSelector:@selector(comparator)];
-		if (comparator != nil) {
-			NSString * msg = @"Sort descriptors may not use comparator blocks";
-			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
-			return nil;
-		}
-	}
-	
-	SEL comparisonSelector = [sort selector];
-	if (comparisonSelector == nil || sel_isEqual(comparisonSelector, @selector(compare:)) == NO) {
-		NSString * msg = @"Sort descriptors may only sort using the compare: selector";
-		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
-		return nil;
-	}
-	
-	NSSortDescriptor * newDescriptor = [[NSSortDescriptor alloc] initWithKey:cleanedKey ascending:[sort ascending] selector:[sort selector]];
-	return [newDescriptor autorelease];
-}
-
 - (NSURL *) apiCall {
 	if ([self site] == nil) { return nil; }
 	
@@ -194,6 +154,8 @@ cleanup:
 	}
 	
 	//execute the GET request
+	NSLog(@"fetching from: %@", [self fetchURL]);
+	NSLog(@"%@", [self fetchURL]);
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[self fetchURL]];
 	NSURLResponse * response = nil;
 	NSError * connectionError = nil;

@@ -51,7 +51,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagCount ascending:NO] autorelease]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagNumberOfTaggedQuestions ascending:YES] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
@@ -59,7 +59,7 @@
 	
 	STAssertNil(error, @"error should be nil: %@", error);
 	
-	NSNumber * previousCount = nil;
+	NSNumber * previousCount = [NSNumber numberWithInt:INT_MAX];
 	for (SKTag * tag in popular) {
 		STAssertTrue([previousCount integerValue] >= [[tag numberOfTaggedQuestions] integerValue], @"out-of-order tag! (%@ >=? %@)", previousCount, [tag numberOfTaggedQuestions]);
 		previousCount = [tag numberOfTaggedQuestions];

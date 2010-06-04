@@ -28,24 +28,20 @@
 
 @implementation SKUserEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKUserReputation, @"reputation",
+			SKUserCreationDate, @"creationDate",
+			SKUserDisplayName, @"displayName",
+			nil];
+}
+
 - (BOOL) validateEntity:(Class)entity {
 	if (entity == [SKUser class]) {
 		return YES;
 	}
 	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
 	return NO;
-}
-
-- (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor {
-	BOOL ok = [super validateSortDescriptor:sortDescriptor];
-	
-	if (ok) {
-		//the sort descriptor passed the generic setup (compare:, no block, etc)
-		//validate the sort key
-		NSString * key = [sortDescriptor key];
-		ok = YES;
-	}
-	return ok;
 }
 
 @end

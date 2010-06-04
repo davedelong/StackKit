@@ -67,6 +67,7 @@
 	
 	NSError * error = nil;
 	NSArray * users = [site executeSynchronousFetchRequest:request error:&error];
+	NSLog(@"%@", error);
 	[request release];
 	
 	NSArray * oldest = [NSArray arrayWithObjects:@"Community",

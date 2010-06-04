@@ -122,7 +122,6 @@
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
 		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
 		55C2410F116ADF71009064EE /* SKUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2410D116ADF71009064EE /* SKUserActivity.m */; };
-		55C24146116AF72E009064EE /* SKUserActivityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C24145116AF72E009064EE /* SKUserActivityTest.m */; };
 		55D6D20411B699A700C624F0 /* SKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6D20211B699A700C624F0 /* SKEndpoint.h */; };
 		55D6D20511B699A700C624F0 /* SKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6D20311B699A700C624F0 /* SKEndpoint.m */; };
 		55D6D20811B69A4400C624F0 /* SKEndpoint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6D20711B69A4400C624F0 /* SKEndpoint+Private.h */; };

@@ -27,6 +27,11 @@
 
 @implementation SKUsersWithBadgeEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	//this user endpoint doesn't support sorting
+	return nil;
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
 	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserBadges] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
 		id badges = [predicate constantValueForLeftKeyPath:SKUserBadges];

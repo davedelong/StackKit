@@ -91,23 +91,59 @@
 
 - (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor {
 	if ([self error] != nil) { return NO; }
-	if (sortDescriptor == nil) { return YES; }
+	NSDictionary * validSortKeys = [self validSortDescriptorKeys];
 	
-	//use respondsTo... and perform... so that this will still work on 10.5
-	if ([sortDescriptor respondsToSelector:@selector(comparator)]) {
-		id comparator = [sortDescriptor performSelector:@selector(comparator)];
-		if (comparator != nil) {
-			NSString * msg = @"Sort descriptors may not use comparator blocks";
+	if (validSortKeys == nil && sortDescriptor == nil) {
+		return YES;
+	}
+	
+	if (validSortKeys == nil && sortDescriptor != nil) {
+		//trying to specify a sort descriptor on a endpoint that doesn't support it
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:nil]];
+		return NO;
+	}
+	
+	if (validSortKeys != nil && sortDescriptor == nil) {
+		//ok, since we're going to go with the default, implicit sort
+	}
+	
+	if (validSortKeys != nil && sortDescriptor != nil) { 
+		//need to validate the sort descriptor
+		NSString * sortKey = [sortDescriptor key];
+		NSString * requestSort = [validSortKeys objectForKey:sortKey];
+		if (requestSort == nil) {
+			//it could be that the key is already cleaned:
+			if ([[validSortKeys allValues] containsObject:sortKey] == NO) {
+				//this sorting key isn't valid
+				[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:nil]];
+				return NO;
+			} else {
+				requestSort = sortKey;
+			}
+		}
+		
+		//check to make sure we're not using a block for comparison
+		//use respondsTo... and perform... so that this will still work on 10.5
+		if ([sortDescriptor respondsToSelector:@selector(comparator)]) {
+			id comparator = [sortDescriptor performSelector:@selector(comparator)];
+			if (comparator != nil) {
+				NSString * msg = @"Sort descriptors may not use comparator blocks";
+				[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
+				return NO;
+			}
+		}
+		
+		//check to make sure that we're not using any special comparison selector
+		SEL comparisonSelector = [sortDescriptor selector];
+		if (comparisonSelector == nil || sel_isEqual(comparisonSelector, @selector(compare:)) == NO) {
+			NSString * msg = @"Sort descriptors may only sort using the compare: selector";
 			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
 			return NO;
 		}
-	}
-	
-	SEL comparisonSelector = [sortDescriptor selector];
-	if (comparisonSelector == nil || sel_isEqual(comparisonSelector, @selector(compare:)) == NO) {
-		NSString * msg = @"Sort descriptors may only sort using the compare: selector";
-		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:msg forKey:NSLocalizedDescriptionKey]]];
-		return NO;
+		
+		//if we get here the key is valid and the comparison is valid
+		[[self query] setObject:requestSort forKey:SKSortKey];
+		[[self query] setObject:([sortDescriptor ascending] ? @"asc" : @"desc") forKey:SKSortOrderKey];
 	}
 	
 	return YES;
