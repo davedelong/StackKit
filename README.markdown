@@ -29,8 +29,8 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 <table>
 	<tr>
 	  <th>If you want...</th>
-	  <th>Use this fetch entity</th>
-	  <th>And this predicate...</th>
+	  <th>Use this fetch entity:</th>
+	  <th>And this predicate:</th>
 	</tr>
 	<tr>
 	  <td>A specific answer</td>
