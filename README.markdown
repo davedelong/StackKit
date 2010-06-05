@@ -224,6 +224,7 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 		<li>The <code>##</code> symbol can be either a string, a number, or an object of the appropriate type.  If the keypath is asking (for example) for a tag, the value can be either the tag's name or an SKTag object</li>
 		<li>A value inside parenthesis (Example: <code>(tags)</code>, <code>(badges)</code>, etc) denotes a collection (array) of objects.  This collection can be a collection of ID's, names, or objects (as appropriate).</li>
 		<li>Keypaths must always be the left expression of a predicate.  While <code>42 = aProperty</code> is a valid predicate, StackKit would require it to be of the form: <code>aProperty = 42</code>.  This may change in the future.</li>
+		<li>The values listed as sort values are to be used as the <code>key</code> of an <code>NSSortDescriptor</code>.  For example:  <code>NSSortDescriptor * sortByName = [[NSSortDescriptor alloc] initWithKey:SKUserDisplayName ascending:YES];</code></li>
 	</tfoot>
 </table>
 
