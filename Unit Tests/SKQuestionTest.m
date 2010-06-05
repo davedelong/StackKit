@@ -32,16 +32,25 @@
 - (void) testQuestion {
 	SKSite * site = [SKSite stackoverflowSite];
 	
-	SKQuestion * q = [[SKQuestion alloc] initWithSite:site postID:[NSNumber numberWithUnsignedInteger:1283419]];
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKQuestionID, 1283419]];
+	
+	NSError * e = nil;
+	NSArray * matches = [site executeSynchronousFetchRequest:r error:&e];
+	[r release];
+	
+	STAssertTrue([matches count] > 0, @"Expecting 1 question");
+	STAssertNil(e, @"Expecting nil error: %@", e);
+	
+	SKQuestion * q = [matches objectAtIndex:0];
 	
 	STAssertEqualObjects([q title], @"Valid use of accessors in init and dealloc methods?", @"Unexpected title");
-	STAssertTrue([q voteCount] == 7, @"Unexpected vote count");
-	STAssertTrue([q viewCount] == 269, @"Unexpected view count");
-	STAssertTrue([q favoritedCount] == 2, @"Unexpected favorited count");
-	STAssertTrue([q upVotes] == 7, @"Unexpected upvote count");
-	STAssertTrue([q downVotes] == 0, @"Unexpected downvote count");
-	
-	[q release];
+	STAssertTrue([[q score] intValue] == 7, @"Unexpected vote count");
+	STAssertTrue([[q viewCount] intValue] > 0, @"Unexpected view count");
+	STAssertTrue([[q favoriteCount] intValue] > 0, @"Unexpected favorited count");
+	STAssertTrue([[q upVotes] intValue] == 7, @"Unexpected upvote count");
+	STAssertTrue([[q downVotes] intValue] == 0, @"Unexpected downvote count");
 }
 
 @end

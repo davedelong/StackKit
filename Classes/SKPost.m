@@ -42,7 +42,7 @@ NSString * const SKPostScore = __SKPostScore;
 }
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
-	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
+	if (self = [super initWithSite:aSite]) {
 		creationDate = [[dictionary objectForKey:SKPostCreationDate] retain];
 		
 		NSDictionary * ownerDictionary = [dictionary objectForKey:SKPostOwner];

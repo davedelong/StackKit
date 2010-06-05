@@ -13,6 +13,7 @@
 		5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7EB11ACF12300C47C1B /* SKFunctions.h */; };
 		5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7EC11ACF12300C47C1B /* SKFunctions.m */; };
 		5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */; };
+		5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E70F110EBAA60038E510 /* SKQuestionTest.m */; };
 		558331CA11B6C32600CA8D62 /* SKUserEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331C811B6C32600CA8D62 /* SKUserEndpoint.h */; };
 		558331CB11B6C32600CA8D62 /* SKUserEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558331C911B6C32600CA8D62 /* SKUserEndpoint.m */; };
 		558331DB11B6D95C00CA8D62 /* SKAllUsersEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558331D911B6D95C00CA8D62 /* SKAllUsersEndpoint.h */; };
@@ -899,6 +900,7 @@
 				55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */,
 				55C23C9211699C40009064EE /* SKTestConstants.m in Sources */,
 				55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */,
+				5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

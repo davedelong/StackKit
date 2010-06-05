@@ -72,6 +72,7 @@ NSString * const SKQAPostTitle = __SKQAPostTitle;
 		downVotes = [[dictionary objectForKey:SKQAPostDownVotes] retain];
 		viewCount = [[dictionary objectForKey:SKQAPostViewCount] retain];
 		communityOwned = [[dictionary objectForKey:SKQAPostCommunityOwned] retain];
+		title = [[dictionary objectForKey:SKQAPostTitle] retain];
 	}
 	return self;
 }

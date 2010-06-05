@@ -42,8 +42,8 @@
 @property (readonly) SEL successSelector;
 @property (readonly) SEL failureSelector;
 
-- (id)initWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure;
 + (id)callbackWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure;
+- (id)initWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure;
 
 #ifdef NS_BLOCKS_AVAILABLE
 + (id) callbackWithCompletionHandler:(SKFetchRequestCompletionHandler)handler;

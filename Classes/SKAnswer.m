@@ -60,4 +60,22 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 			nil];
 }
 
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
+		answerID = [[dictionary objectForKey:SKAnswerID] retain];
+		questionID = [[dictionary objectForKey:SKAnswerQuestion] retain];
+		accepted = [[dictionary objectForKey:SKAnswerIsAccepted] retain];
+		commentsURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKAnswerCommentsURL]];
+	}
+	return self;
+}
+
+- (void) dealloc {
+	[answerID release];
+	[questionID release];
+	[accepted release];
+	[commentsURL release];
+	[super dealloc];
+}
+
 @end
