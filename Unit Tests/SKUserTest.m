@@ -33,14 +33,9 @@
 - (void) testUserAPICall {
 	SKSite * site = [SKSite stackoverflowSite];
 	
-	NSString * expected = [NSString stringWithFormat:@"%@/%@/users/115730?key=%@", SKTestAPISite, SKAPIVersion, [site APIKey]];
-	
 	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
-	
-	NSURL * requestURL = [request apiCall];
-	STAssertEqualObjects([requestURL absoluteString], expected, @"request did not generate appropriate URL");
 	
 	NSError * error = nil;
 	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
@@ -62,30 +57,27 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setSortDescriptor:[NSSortDescriptor sortDescriptorWithKey:SKUserCreationDate ascending:YES]];
+	[request setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKUserCreationDate ascending:YES] autorelease]];
 	[request setFetchLimit:10];
 	
 	NSError * error = nil;
 	NSArray * users = [site executeSynchronousFetchRequest:request error:&error];
+	NSLog(@"%@", error);
 	[request release];
 	
-	NSArray * oldest = [NSArray arrayWithObjects:@"Community",
-						@"Jarrod Dixon",
-						@"Jeff Atwood",
-						@"Geoff Dalgas",
-						@"Joel Spolsky",
-						@"Jon Galloway",
-						@"Eggs McLaren",
-						@"Kevin Dente",
-						@"Sneakers O'Toole",
-						@"Chris Jester-Young",
-						nil];
-	
-	NSArray * returnedDisplayNames = [users valueForKey:SKUserDisplayName];
-	STAssertEqualObjects(returnedDisplayNames, oldest, @"oldest users do not match");
 	STAssertTrue([users count] == 10, @"only 10 users should've been fetched: %@", users);
 	
 	STAssertNil(error, @"error should be nil: %@", error);
+	
+	NSArray * returnedCreationDates = [users valueForKey:SKUserCreationDate];
+	
+	NSDate * previousDate = nil;
+	for (NSDate * date in returnedCreationDates) {
+		if (previousDate != nil) {
+			STAssertTrue([previousDate earlierDate:date] == previousDate, @"out-or-order user! (%@ >=? %@", previousDate, date);
+		}
+		previousDate = date;
+	}
 }
 
 - (void) testUserFilter {
@@ -93,11 +85,14 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKUserDisplayName, @"DeLong"]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKUserDisplayName, @"Dave DeLong"]];
 	
 	NSError * error = nil;
 	NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
 	[request release];
+	
+	NSLog(@"%@", matches);
+	
 	STAssertNil(error, @"error should be nil");
 	STAssertTrue([matches count] == 1, @"matches should only have 1 object");
 	

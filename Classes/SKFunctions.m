@@ -68,6 +68,23 @@ NSNumber * SKExtractBadgeID(id value) {
 	return SKExtractNumber(value, [SKBadge class], @selector(badgeID));
 }
 
+NSArray * SKExtractBadgeIDs(id value) {
+	if ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[NSSet class]]) {
+		NSMutableArray * values = [NSMutableArray array];
+		for (id badge in value) {
+			[values addObject:SKExtractBadgeID(badge)];
+		}
+		return values;
+	}
+	
+	id badge = SKExtractBadgeID(value);
+	if (badge) {
+		return [NSArray arrayWithObject:badge];
+	}
+	
+	return nil;
+}
+
 NSNumber * SKExtractPostID(id value) {
 	if ([value isKindOfClass:[SKAnswer class]]) {
 		return SKExtractAnswerID(value);

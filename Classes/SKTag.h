@@ -30,6 +30,9 @@ extern NSString * SKTagName;
 extern NSString * SKTagCount;
 extern NSString * SKTagsParticipatedInByUser;
 
+extern NSString * const SKTagNumberOfTaggedQuestions;
+extern NSString * const SKTagLastUsedDate;
+
 @interface SKTag : SKObject {
 	NSString *name;
 	

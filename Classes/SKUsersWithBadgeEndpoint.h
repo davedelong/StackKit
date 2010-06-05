@@ -1,5 +1,5 @@
 //
-//  SKCommentEndpoint.m
+//  SKUsersWithBadgeEndpoint.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,25 +23,11 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit_Internal.h"
+#import <Foundation/Foundation.h>
+#import "SKUserEndpoint.h"
 
-@implementation SKCommentEndpoint
+@interface SKUsersWithBadgeEndpoint : SKUserEndpoint {
 
-- (BOOL) validateEntity:(Class)entity {
-	if (entity == [SKComment class]) {
-		return YES;
-	}
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
-	return NO;
-}
-
-- (NSDictionary *) validSortDescriptorKeys {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortVotes, @"score",
-			SKSortVotes, SKCommentScore,
-			SKSortCreation, @"creationDate",
-			SKSortCreation, SKCommentCreationDate,
-			nil];
 }
 
 @end

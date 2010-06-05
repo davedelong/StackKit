@@ -1,5 +1,5 @@
 //
-//  SKCommentEndpoint.m
+//  SKUsersWithBadgeEndpoint.m
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -25,23 +25,26 @@
 
 #import "StackKit_Internal.h"
 
-@implementation SKCommentEndpoint
-
-- (BOOL) validateEntity:(Class)entity {
-	if (entity == [SKComment class]) {
-		return YES;
-	}
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
-	return NO;
-}
+@implementation SKUsersWithBadgeEndpoint
 
 - (NSDictionary *) validSortDescriptorKeys {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortVotes, @"score",
-			SKSortVotes, SKCommentScore,
-			SKSortCreation, @"creationDate",
-			SKSortCreation, SKCommentCreationDate,
-			nil];
+	//this user endpoint doesn't support sorting
+	return nil;
+}
+
+- (BOOL) validatePredicate:(NSPredicate *)predicate {
+	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserBadges] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
+		id badges = [predicate constantValueForLeftKeyPath:SKUserBadges];
+		if (badges) {
+			NSArray * ids = SKExtractBadgeIDs(badges);
+			NSString * vector = [ids componentsJoinedByString:@";"];
+			[self setPath:[NSString stringWithFormat:@"/badges/%@", vector]];
+			return YES;
+		}
+	}
+	
+	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+	return NO;
 }
 
 @end

@@ -51,7 +51,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[NSSortDescriptor sortDescriptorWithKey:SKTagCount ascending:NO]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagNumberOfTaggedQuestions ascending:YES] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
@@ -59,7 +59,7 @@
 	
 	STAssertNil(error, @"error should be nil: %@", error);
 	
-	NSNumber * previousCount = nil;
+	NSNumber * previousCount = [NSNumber numberWithInt:INT_MAX];
 	for (SKTag * tag in popular) {
 		STAssertTrue([previousCount integerValue] >= [[tag numberOfTaggedQuestions] integerValue], @"out-of-order tag! (%@ >=? %@)", previousCount, [tag numberOfTaggedQuestions]);
 		previousCount = [tag numberOfTaggedQuestions];
@@ -71,7 +71,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[NSSortDescriptor sortDescriptorWithKey:SKTagName ascending:YES]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagName ascending:YES] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
@@ -93,7 +93,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKTagsParticipatedInByUser, [NSNumber numberWithInt:115730]]];
 	
 	NSError * error = nil;
 	NSArray * userTags = [site executeSynchronousFetchRequest:r error:&error];
@@ -101,8 +101,8 @@
 	
 	STAssertNil(error, @"error should be nil: %@", error);
 	
-	//even though user #115730 has been active in more than 70 tags, only 70 are returned at a time (by default, max is 100)
-	STAssertTrue([userTags count] == 70, @"incorrect number of badges (%ld)", [userTags count]);
+	//even though user #115730 has been active in more than 100 tags, only 100 are returned at a time (by default, max is 100)
+	STAssertTrue([userTags count] == 100, @"incorrect number of badges (%ld)", [userTags count]);
 }
 
 @end

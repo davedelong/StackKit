@@ -33,19 +33,20 @@
 
 - (void) setSite:(SKSite *)newSite;
 
+//the designated initializers for SKObject SUBCLASSES
 + (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
 
 #pragma mark Class methods implemented by SKObject
+// used in valueForKey:
 + (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;
 
 #pragma mark Class methods that should be overriden by subclasses
+// used to help valueForKey: out so that we can request properties via the constants (SKQuestionID vs @"questionID", for example)
 + (NSDictionary *) APIAttributeToPropertyMapping;
+// the key used to extract information from the JSON response
 + (NSString *) dataKey;
-
-+ (NSDictionary *) validSortDescriptorKeys;
-+ (NSDictionary *) validPredicateKeyPaths;
-
+// the array of SKEndpoint class objects this object recognizes
 + (NSArray *) endpoints;
 
 @end

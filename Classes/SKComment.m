@@ -57,15 +57,6 @@ NSString * const SKCommentEditCount = @"edit_count";
 			nil];
 }
 
-+ (NSDictionary *) validPredicateKeyPaths {
-	NSMutableDictionary * d = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-							   SKCommentInReplyToUser, @"replyToUserID",
-							   SKCommentPost, @"postID",
-							   nil];
-	[d addEntriesFromDictionary:[super validPredicateKeyPaths]];
-	return d;
-}
-
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 										@"commentID", SKCommentID,

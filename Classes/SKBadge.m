@@ -97,12 +97,6 @@ NSString * SKBadgeRankBronzeKey = @"bronze";
 			nil];
 }
 
-+ (NSDictionary *) validPredicateKeyPaths {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKBadgesAwardedToUser, SKBadgesAwardedToUser,
-			nil];
-}
-
 #pragma mark SKBadge-specific methods
 
 - (BOOL) isEqual:(id)object {

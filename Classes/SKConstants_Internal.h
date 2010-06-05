@@ -1,5 +1,5 @@
 //
-//  SKCommentEndpoint.m
+//  SKConstants_Internal.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,25 +23,16 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit_Internal.h"
-
-@implementation SKCommentEndpoint
-
-- (BOOL) validateEntity:(Class)entity {
-	if (entity == [SKComment class]) {
-		return YES;
-	}
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
-	return NO;
-}
-
-- (NSDictionary *) validSortDescriptorKeys {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortVotes, @"score",
-			SKSortVotes, SKCommentScore,
-			SKSortCreation, @"creationDate",
-			SKSortCreation, SKCommentCreationDate,
-			nil];
-}
-
-@end
+extern NSString * const SKSortCreation;
+extern NSString * const SKSortActivity;
+extern NSString * const SKSortVotes;
+extern NSString * const SKSortViews;
+extern NSString * const SKSortNewest;
+extern NSString * const SKSortFeatured;
+extern NSString * const SKSortHot;
+extern NSString * const SKSortWeek;
+extern NSString * const SKSortMonth;
+extern NSString * const SKSortAdded;
+extern NSString * const SKSortPopular;
+extern NSString * const SKSortReputation;
+extern NSString * const SKSortName;

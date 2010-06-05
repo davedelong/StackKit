@@ -32,7 +32,10 @@ void SKQLog(NSString *format, ...);
 id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
 
 NSNumber * SKExtractUserID(id value);
+
 NSNumber * SKExtractBadgeID(id value);
+NSArray * SKExtractBadgeIDs(id value);
+
 NSNumber * SKExtractPostID(id value);
 NSNumber * SKExtractCommentID(id value);
 NSNumber * SKExtractQuestionID(id value);

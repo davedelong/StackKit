@@ -24,6 +24,7 @@
  **/
 
 #import "StackKit.h"
+#import "SKConstants_Internal.h"
 #import "SKDefinitions.h"
 #import "SKFunctions.h"
 
@@ -43,6 +44,7 @@
 #import "SKUserEndpoint.h"
 #import "SKAllUsersEndpoint.h"
 #import "SKSpecificUserEndpoint.h"
+#import "SKUsersWithBadgeEndpoint.h"
 
 #import "SKUserActivityEndpoint.h"
 

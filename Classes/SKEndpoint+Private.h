@@ -33,10 +33,14 @@
 @property (retain) NSString * path;
 @property (retain) NSError * error;
 
-- (NSString *) apiPath;
+- (NSSortDescriptor *) cleanSortDescriptor:(NSSortDescriptor *)sortDescriptor;
+- (NSPredicate *) cleanPredicate:(NSPredicate *)predicate;
 
 - (BOOL) validateEntity:(Class)entity;
 - (BOOL) validatePredicate:(NSPredicate *)predicate;
 - (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor;
+
+- (NSDictionary *) validPredicateKeyPaths;
+- (NSDictionary *) validSortDescriptorKeys;
 
 @end

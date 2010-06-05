@@ -35,4 +35,20 @@
 	return NO;
 }
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortActivity, @"lastActivityDate",
+			SKSortActivity, SKAnswerLastActivityDate,
+			
+			SKSortViews, @"viewCount",
+			SKSortViews, SKAnswerViewCount,
+			
+			SKSortCreation, @"creationDate",
+			SKSortCreation, SKAnswerCreationDate,
+			
+			SKSortVotes, @"score",
+			SKSortVotes, SKAnswerScore,
+			nil];
+}
+
 @end

@@ -29,6 +29,9 @@ NSString * SKTagName = @"name";
 NSString * SKTagCount = @"count";
 NSString * SKTagsParticipatedInByUser = __SKUserID;
 
+NSString * const SKTagNumberOfTaggedQuestions = @"tag_popular";
+NSString * const SKTagLastUsedDate = @"tag_activity";
+
 NSUInteger SKTagDefaultPageSize = 70;
 
 @implementation SKTag
@@ -51,9 +54,10 @@ NSUInteger SKTagDefaultPageSize = 70;
 	return @"tags";
 }
 
-+ (NSDictionary *) validPredicateKeyPaths {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKTagsParticipatedInByUser, SKTagsParticipatedInByUser, 
++ (NSArray *) endpoints {
+	return [NSArray arrayWithObjects:
+			[SKAllTagsEndpoint class],
+			[SKUserTagsEndpoint class],
 			nil];
 }
 

@@ -88,12 +88,6 @@ NSString * SKUserActivityToDateKey = @"todate";
 	return @"user_timelines";
 }
 
-+ (NSDictionary *) validPredicateKeyPaths {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKUserID, SKUserID,
-			nil];
-}
-
 + (NSArray *) endpoints {
 	return [NSArray arrayWithObjects:
 			[SKUserActivityEndpoint class],

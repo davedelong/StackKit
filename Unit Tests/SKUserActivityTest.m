@@ -54,10 +54,11 @@
 					 SKUserActivityCreationDate, [NSDate dateWithString:@"2010-04-01 00:00:00 -0000"],
 					 SKUserActivityCreationDate, [NSDate dateWithString:@"2010-04-04 00:00:00 -0600"],
 					 nil]];
-	[r setSortDescriptor:[NSSortDescriptor sortDescriptorWithKey:SKUserActivityCreationDate ascending:YES]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKUserActivityCreationDate ascending:YES] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * activity = [site executeSynchronousFetchRequest:r error:&error];
+	NSLog(@"%@", error);
 	[r release];
 	
 	STAssertNil(error, @"error should be nil: %@", error);

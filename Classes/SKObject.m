@@ -91,16 +91,6 @@
 	return key;
 }
 
-+ (NSDictionary *) validSortDescriptorKeys {
-	SKLog(@"+[%@ %@] should be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd));
-	return nil;
-}
-
-+ (NSDictionary *) validPredicateKeyPaths {
-	SKLog(@"+[%@ %@] should be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd));
-	return nil;
-}
-
 + (NSArray *) endpoints {
 	return [NSArray arrayWithObject:[SKEndpoint class]];
 }
@@ -111,9 +101,11 @@
 - (id) valueForUndefinedKey:(NSString *)key {
 	NSString * newKey = [[self class] propertyKeyFromAPIAttributeKey:key];
 	if (newKey != nil && [newKey isEqual:key] == NO) {
+		//this is a new key! try again
 		return [self valueForKey:newKey];
 	}
-	return [super valueForKey:key];
+	//eh, we couldn't find a replacement.  pass it on up the chain
+	return [super valueForUndefinedKey:key];
 }
 
 @end

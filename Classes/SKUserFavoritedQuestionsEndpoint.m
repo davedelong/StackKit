@@ -27,6 +27,20 @@
 
 @implementation SKUserFavoritedQuestionsEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortActivity, @"lastActivityDate",
+			SKSortActivity, SKQuestionLastActivityDate,
+			SKSortViews, @"viewCount",
+			SKSortViews, SKQuestionViewCount,
+			SKSortCreation, @"creationDate",
+			SKSortCreation, SKQuestionCreationDate,
+			SKSortVotes, @"score",
+			SKSortVotes, SKQuestionScore,
+			SKSortAdded, SKQuestionFavoritedDate,
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
 	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionsFavoritedByUser]) {
 		id user = [predicate constantValueForLeftKeyPath:SKQuestionsFavoritedByUser];

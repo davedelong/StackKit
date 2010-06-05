@@ -27,6 +27,15 @@
 
 @implementation SKTagEndpoint
 
+- (NSDictionary *) validSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortPopular, SKTagNumberOfTaggedQuestions,
+			SKSortActivity, SKTagLastUsedDate,
+			SKSortName, @"name",
+			SKSortName, SKTagName,
+			nil];
+}
+
 - (BOOL) validateEntity:(Class)entity {
 	if (entity == [SKTag class]) {
 		return YES;
