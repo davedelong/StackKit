@@ -27,5 +27,5 @@
 
 
 #ifdef NS_BLOCKS_AVAILABLE
-typedef (void)(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
+typedef void(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
 #endif

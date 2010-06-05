@@ -146,6 +146,15 @@ NSString * SKSiteAPIKey = @"key";
 	[operation release];
 }
 
+#ifdef NS_BLOCKS_AVAILABLE
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestCompletionHandler)handler {
+	SKCallback * callback = [SKCallback callbackWithCompletionHandler:handler];
+	[fetchRequest setCallback:callback];
+	[fetchRequest setDelegate:nil];
+	[self executeFetchRequest:fetchRequest];
+}
+#endif
+
 #pragma mark Site information
 
 - (NSDictionary *) statisticsWithError:(NSError **)error {

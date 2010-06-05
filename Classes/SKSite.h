@@ -26,6 +26,7 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 #import "SKSiteDelegate.h"
+#import "SKDefinitions.h"
 
 extern NSString * SKSiteAPIKey;
 
@@ -57,6 +58,10 @@ extern NSString * SKSiteAPIKey;
 
 - (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest;
+
+#ifdef NS_BLOCKS_AVAILABLE
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestCompletionHandler)handler;
+#endif
 
 - (NSDictionary *) statistics;
 - (void) requestStatistics;

@@ -32,6 +32,19 @@
 #pragma mark -
 #pragma mark Init/Dealloc
 
+#ifdef NS_BLOCKS_AVAILABLE
++ (id) callbackWithCompletionHandler:(SKFetchRequestCompletionHandler)handler {
+	return [[[self alloc] initWithCompletionHandler:handler] autorelease];
+}
+
+- (id) initWithCompletionHandler:(SKFetchRequestCompletionHandler)handler {
+	if (self = [super init]) {
+		completionHandler = Block_copy(handler);
+	}
+	return self;
+}
+#endif
+
 + (id)callbackWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure
 {
 	return [[[self alloc] initWithTarget:target successSelector:onSuccess failureSelector:onFailure] autorelease];
@@ -49,6 +62,9 @@
 }
 
 - (void) dealloc {
+#ifdef NS_BLOCKS_AVAILABLE
+	Block_release(completionHandler);
+#endif
 	[_target release];
 	[super dealloc];
 }
@@ -56,15 +72,27 @@
 #pragma mark -
 #pragma mark Invoking
 
-- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(id)argument
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(NSArray *)argument
 {
+#ifdef NS_BLOCKS_AVAILABLE
+	if (completionHandler != NULL) {
+		completionHandler(argument, nil);
+		return;
+	}
+#endif
 	if(_successSelector!=NULL) {
 		[_target performSelector:_successSelector withObject:fetchRequest withObject:argument];
 	}
 }
 
-- (void) fetchRequest:(SKFetchRequest *)fetchRequest failedWithError:(id)argument
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest failedWithError:(NSError *)argument
 {
+#ifdef NS_BLOCKS_AVAILABLE
+	if (completionHandler != NULL) {
+		completionHandler(nil, argument);
+		return;
+	}
+#endif
 	if(_failureSelector!=NULL) {
 		[_target performSelector:_failureSelector withObject:fetchRequest withObject:argument];
 	}

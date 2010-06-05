@@ -24,10 +24,15 @@
  **/
 
 #import <Foundation/Foundation.h>
+#import "SKDefinitions.h"
 
 @class SKFetchRequest;
 
 @interface SKCallback : NSObject {
+#ifdef NS_BLOCKS_AVAILABLE
+	SKFetchRequestCompletionHandler completionHandler;
+#endif
+	
 	id _target;
 	
 	SEL _successSelector;
@@ -40,7 +45,12 @@
 - (id)initWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure;
 + (id)callbackWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure;
 
-- (void) fetchRequest:(SKFetchRequest *)fetchRequest failedWithError:(id)argument;
-- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(id)argument;
+#ifdef NS_BLOCKS_AVAILABLE
++ (id) callbackWithCompletionHandler:(SKFetchRequestCompletionHandler)handler;
+- (id) initWithCompletionHandler:(SKFetchRequestCompletionHandler)handler;
+#endif
+
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest failedWithError:(NSError *)argument;
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(NSArray *)argument;
 
 @end
