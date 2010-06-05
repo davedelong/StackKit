@@ -65,23 +65,19 @@
 	NSLog(@"%@", error);
 	[request release];
 	
-	NSArray * oldest = [NSArray arrayWithObjects:@"Community",
-						@"Jarrod Dixon",
-						@"Jeff Atwood",
-						@"Geoff Dalgas",
-						@"Joel Spolsky",
-						@"Jon Galloway",
-						@"Eggs McLaren",
-						@"Kevin Dente",
-						@"Sneakers O'Toole",
-						@"Chris Jester-Young",
-						nil];
-	
-	NSArray * returnedDisplayNames = [users valueForKey:SKUserDisplayName];
-	STAssertEqualObjects(returnedDisplayNames, oldest, @"oldest users do not match");
 	STAssertTrue([users count] == 10, @"only 10 users should've been fetched: %@", users);
 	
 	STAssertNil(error, @"error should be nil: %@", error);
+	
+	NSArray * returnedCreationDates = [users valueForKey:SKUserCreationDate];
+	
+	NSDate * previousDate = nil;
+	for (NSDate * date in returnedCreationDates) {
+		if (previousDate != nil) {
+			STAssertTrue([previousDate earlierDate:date] == previousDate, @"out-or-order user! (%@ >=? %@", previousDate, date);
+		}
+		previousDate = date;
+	}
 }
 
 - (void) testUserFilter {
