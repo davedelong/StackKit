@@ -1,6 +1,6 @@
 #StackKit
 
-StackKit is a Cocoa framework used to interact with the Stack Overflow API (used by [Stack Overflow][1], [Super User][2] and [Server Fault][3] and [Stack Exchange][4] websites).
+StackKit is a Cocoa framework used to interact with the Stack Exchange API (used by [Stack Overflow][1], [Super User][2], [Server Fault][3], [Stack Exchange][4], and related websites).
 
 It is developed by [Dave DeLong][5], and [Alex Rozanski][6].
 
@@ -10,7 +10,16 @@ About 80% of the API is implemented.  Chances are it will work, but if it doesn'
 
 ##Using the API
 
-In order to use the framework, you will need to acquire an [API Key][7] and save it as a file called "consumerKey.txt" in the root level of your clone.
+This framework can be used with Mac OS and iPhone OS applications.
+
+###Mac
+Use the provided `StackKit.xcodeproj` file to build StackKit as a framework for inclusion in your Mac application.
+
+###iPhone/iPod touch/iPad
+Use the provided `StackKitMobile.xcodeproj` file to build StackKit as a static library for inclusion in your mobile application.
+
+###Running the unit tests
+The unit tests use a special convenience constructor on `SKSite` called `+stackoverflowSite`.  This constructor requires an [API Key][7] that has been saved to a file called "consumerKey.txt" in the root level of your project.
 
 ##The future
 
