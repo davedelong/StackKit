@@ -56,7 +56,7 @@ NSString * const SKStatsSiteDisplayName = @"display_name";
 #pragma mark -
 #pragma mark Error Constants
 NSString * const SKErrorDomain = @"com.stackkit";
-NSString * const SKExceptionInvalidDelegate = @"com.stackkit.skfetchrequest.delegate";
+NSString * const SKExceptionInvalidHandler = @"com.stackkit.skfetchrequest.handler";
 
 #pragma mark Error codes
 NSUInteger const SKErrorCodeNotImplemented = 1;

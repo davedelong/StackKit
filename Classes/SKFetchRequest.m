@@ -35,6 +35,7 @@
 @synthesize error;
 @synthesize delegate;
 @synthesize fetchURL;
+@synthesize callback;
 
 NSString * SKErrorResponseKey = @"error";
 NSString * SKErrorCodeKey = @"code";
@@ -57,6 +58,7 @@ NSString * SKErrorMessageKey = @"message";
 	[predicate release];
 	[error release];
 	[fetchURL release];
+	[callback release];
 	[super dealloc];
 }
 
@@ -150,12 +152,24 @@ NSString * SKErrorMessageKey = @"message";
 	
 	if ([self error] != nil) {
 		//ERROR!
-		if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didFailWithError:)]) {
+		
+		//Check for a callback first
+		if([self callback]) {
+			[[self callback] invokeOnFailureWithArgument:[self error]];
+		}
+		//Or use the delegate
+		else if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didFailWithError:)]) {
 			[[self delegate] fetchRequest:self didFailWithError:[self error]];
 		}
 	} else {
 		//OK
-		if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didReturnResults:)]) {
+		
+		//Check for a callback first
+		if([self callback]) {
+			[[self callback] invokeOnSuccessWithArgument:results];
+		}
+		//Or use the delegate
+		else if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didReturnResults:)]) {
 			[[self delegate] fetchRequest:self didReturnResults:results];
 		}
 	}

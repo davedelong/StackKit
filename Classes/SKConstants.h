@@ -57,7 +57,7 @@ extern NSString * const SKStatsSiteDisplayName;
 #pragma mark -
 #pragma mark Error Constants
 extern NSString * const SKErrorDomain;
-extern NSString * const SKExceptionInvalidDelegate;
+extern NSString * const SKExceptionInvalidHandler;
 
 #pragma mark Error codes
 extern NSUInteger const SKErrorCodeNotImplemented;

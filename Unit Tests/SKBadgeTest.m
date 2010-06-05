@@ -142,7 +142,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKUser class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgesAwardedToUser, [NSNumber numberWithInt:115730]]];
 	NSArray * matches = [site executeSynchronousFetchRequest:r error:nil];
 	[r release];
 	

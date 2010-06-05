@@ -1,8 +1,8 @@
 //
-//  SKFetchRequest.h
+//  SKCallback.m
 //  StackKit
 /**
- Copyright (c) 2010 Dave DeLong
+ Copyright (c) 2010 Alex Rozanski
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -23,33 +23,41 @@
  THE SOFTWARE.
  **/
 
-#import <Foundation/Foundation.h>
-#import "SKObject.h"
-#import "SKFetchRequestDelegate.h"
+#import "SKCallback.h"
 
-@class SKCallback;
 
-@interface SKFetchRequest : SKObject {
-	Class entity;
-	NSSortDescriptor * sortDescriptor;
-	NSUInteger fetchLimit;
-	NSUInteger fetchOffset;
-	NSPredicate * predicate;
+@implementation SKCallback
+
+#pragma mark -
+#pragma mark Init/Dealloc
+
+- (id)initWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure
+{
+	if(self = [super init]) {
+		_target = target;
+		_successSelector = onSuccess;
+		_failureSelector = onFailure;
+	}
 	
-	NSError * error;
-	id<SKFetchRequestDelegate> delegate;
-	NSURL * fetchURL;
-	
-	SKCallback *callback;
+	return self;
 }
 
-@property Class entity;
-@property (retain) NSSortDescriptor * sortDescriptor;
-@property NSUInteger fetchLimit;
-@property NSUInteger fetchOffset;
-@property (retain) NSPredicate * predicate;
-@property (readonly, retain) NSError * error;
-@property (assign) id<SKFetchRequestDelegate> delegate;
-@property (retain) SKCallback *callback;
++ (id)callbackWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure
+{
+	return [[[[self class] alloc] initWithTarget:target successSelector:onSuccess failureSelector:onFailure] autorelease];
+}
+
+#pragma mark -
+#pragma mark Invoking
+
+- (void)invokeOnSuccessWithArgument:(id)argument
+{
+	[_target performSelector:_successSelector withObject:argument];
+}
+
+- (void)invokeOnFailureWithArgument:(id)argument
+{
+	[_target performSelector:_failureSelector withObject:argument];
+}
 
 @end

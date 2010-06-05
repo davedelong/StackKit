@@ -125,12 +125,14 @@ NSString * SKSiteAPIKey = @"key";
 }
 
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest {
-	if ([fetchRequest delegate] == nil) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKFetchRequest.delegate cannot be nil" userInfo:nil];
+	if([fetchRequest callback] == nil && [fetchRequest delegate] == nil) {
+		if ([fetchRequest delegate] == nil) {
+			@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest must have a delegate or callback specified" userInfo:nil];
+		}
 	}
-	if ([[fetchRequest delegate] conformsToProtocol:@protocol(SKFetchRequestDelegate)] == NO) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKFetchRequest.delegate must conform to <SKFetchRequestDelegate>" userInfo:nil];
-	}
+	else if ([fetchRequest delegate] && [[fetchRequest delegate] conformsToProtocol:@protocol(SKFetchRequestDelegate)] == NO) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest.delegate must conform to <SKFetchRequestDelegate>" userInfo:nil];
+	}	
 	
 	NSInvocationOperation * operation = [[NSInvocationOperation alloc] initWithTarget:fetchRequest selector:@selector(executeAsynchronously) object:nil];
 	[requestQueue addOperation:operation];
@@ -166,11 +168,11 @@ NSString * SKSiteAPIKey = @"key";
 
 - (void) requestStatistics {
 	if ([self delegate] == nil) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKSite.delegate cannot be nil" userInfo:nil];
+		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKSite.delegate cannot be nil" userInfo:nil];
 	}
 	
 	if ([[self delegate] conformsToProtocol:@protocol(SKSiteDelegate)] == NO) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidDelegate reason:@"SKSite.delegate must conform to <SKSiteDelegate>" userInfo:nil];
+		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKSite.delegate must conform to <SKSiteDelegate>" userInfo:nil];
 	}
 	
 	NSInvocationOperation * op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(asynchronousStatistics) object:nil];
