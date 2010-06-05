@@ -185,9 +185,9 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 		The following conventions are being used in this list:
 		<li>Any predicate attribute that begins with "SK" is implied to be a Key Path.</li>
 		<li>Any predicate with a keypath should be constructed in the following format: <code>@"%K = %@", SKSomeKeyPath, someValue</code></li>
-		<li>The `##` symbol can be either a string, a number, or an object of the appropriate type.  If the keypath is asking (for example) for a tag, the value can be either the tag's name or an SKTag object</li>
-		<li>A value inside parenthesis (Example: `(tags)`, `(badges)`, etc) denotes a collection (array) of objects.  This collection can be a collection of ID's, names, or objects (as appropriate).</li>
-		<li>Keypaths must always be the left expression of a predicate.  While `42 = aProperty` is a valid predicate, StackKit would require it to be of the form: `aProperty = 42`.  This may change in the future.</li>
+		<li>The <code>##</code> symbol can be either a string, a number, or an object of the appropriate type.  If the keypath is asking (for example) for a tag, the value can be either the tag's name or an SKTag object</li>
+		<li>A value inside parenthesis (Example: <code>(tags)</code>, <code>(badges)</code>, etc) denotes a collection (array) of objects.  This collection can be a collection of ID's, names, or objects (as appropriate).</li>
+		<li>Keypaths must always be the left expression of a predicate.  While <code>42 = aProperty</code> is a valid predicate, StackKit would require it to be of the form: <code>aProperty = 42</code>.  This may change in the future.</li>
 	</tfoot>
 </table>
 
