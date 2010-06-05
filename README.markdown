@@ -31,104 +31,171 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	  <th>If you want...</th>
 	  <th>Use this fetch entity:</th>
 	  <th>And this predicate:</th>
+	  <th>And you can sort it by (one of):</th>
 	</tr>
 	<tr>
 	  <td>A specific answer</td>
 	  <td>SKAnswer</td>
 	  <td>SKAnswerID = ##</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>The answers for a specific question</td>
 	  <td>SKAnswer</td>
 	  <td>SKQuestionID = ##</td>
+	  <td>SKAnswerLastActivityDate, SKAnswerViewCount, SKAnswerCreationDate, SKAnswerScore</td>
 	</tr>
 	<tr>
 	  <td>A specific user's answers</td>
 	  <td>SKAnswer</td>
 	  <td>SKUserID = ##</td>
+	  <td>SKAnswerLastActivityDate, SKAnswerViewCount, SKAnswerCreationDate, SKAnswerScore</td>
 	</tr>
 	<tr>
 	  <td>All badges</td>
 	  <td>SKBadge</td>
+	  <td>(none)</td>
 	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>All non-tag-based badges</td>
 	  <td>SKBadge</td>
 	  <td>SKBadgeTagBased = NO</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>All tag-based badges</td>
 	  <td>SKBadge</td>
 	  <td>SKBadgeTagBased = YES</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>A specific user's badges</td>
 	  <td>SKBadge</td>
 	  <td>SKBadgesAwardedToUser = ##</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>All users that have been awarded a specific badge</td>
 	  <td>SKUser</td>
 	  <td>SKUserBadges CONTAINS (badges)</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>A specific comment</td>
 	  <td>SKComment</td>
 	  <td>SKCommentID = ##</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>A specific user's comments</td>
 	  <td>SKComment</td>
 	  <td>SKCommentOwner = ##</td>
+	  <td>SKCommentCreationDate, SKCommentScore</td>
 	</tr>
 	<tr>
 	  <td>All comments from one user in reply to another user</td>
 	  <td>SKComment</td>
 	  <td>SKCommentOwner = ## AND SKCommentInReplyToUser = ##</td>
+	  <td>SKCommentCreationDate, SKCommentScore</td>
 	</tr>
 	<tr>
 	  <td>All comments where a specific user is mentioned</td>
 	  <td>SKComment</td>
 	  <td>SKCommentInReplyToUser = ##</td>
+	  <td>SKCommentCreationDate, SKCommentScore</td>
 	</tr>
 	<tr>
 	  <td>All comments for a post (a question or an answer)</td>
 	  <td>SKComment</td>
 	  <td>SKPostID = ##</td>
+	  <td>SKCommentCreationDate, SKCommentScore</td>
 	</tr>
 	<tr>
 	  <td>A list of questions</td>
 	  <td>SKQuestion</td>
 	  <td>(none)</td>
+	  <td>(not yet implemented)</td>
 	</tr>
 	<tr>
 	  <td>A specific question</td>
 	  <td>SKQuestion</td>
 	  <td>SKQuestionID = ##</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>Questions that are tagged with certain tags</td>
 	  <td>SKQuestion</td>
 	  <td>SKQuestionTags CONTAINS (tags)</td>
+	  <td>(not yet implemented)</td>
 	</tr>
 	<tr>
 	  <td>Unanswerd questions</td>
 	  <td>SKQuestion</td>
 	  <td>SKQuestionAnswerCount = 0</td>
+	  <td>SKQuestionCreationDate, SKQuestionScore</td>
 	</tr>
 	<tr>
 	  <td>Favorited questions of a specific user</td>
 	  <td>SKQuestion</td>
 	  <td>SKFavoritedByUser = ##</td>
+	  <td>SKQuestionLastActivityDate, SKQuestionViewCount, SKQuestionCreationDate, SKQuestionScore, SKQuestionFavoritedDate</td>
 	</tr>
 	<tr>
 	  <td>Questions asked by a specific user</td>
 	  <td>SKQuestion</td>
 	  <td>SKQuestionOwner = ##</td>
+	  <td>SKQuestionLastActivityDate, SKQuestionViewCount, SKQuestionCreationDate, SKQuestionScore</td>
+	</tr>
+	<tr>
+	  <td>A list of all tags</td>
+	  <td>SKTag</td>
+	  <td>(none)</td>
+	  <td>SKTagNumberOfTaggedQuestions, SKTagLastUsedDate, SKTagName</td>
+	</tr>
+	<tr>
+	  <td>A list of tags in which a specific user has participated</td>
+	  <td>SKTag</td>
+	  <td>SKTagsParticipatedInByUser = ##</td>
+	  <td>SKTagNumberOfTaggedQuestions, SKTagLastUsedDate, SKTagName</td>
+	</tr>
+	<tr>
+	  <td>A list of users</td>
+	  <td>SKUser</td>
+	  <td>(none)</td>
+	  <td>SKUserReputation, SKUserCreationDate, SKUserDisplayName</td>
+	</tr>
+	<tr>
+	  <td>To search for users by their name</td>
+	  <td>SKUser</td>
+	  <td>SKUserDisplayName CONTAINS "string"</td>
+	  <td>SKUserReputation, SKUserCreationDate, SKUserDisplayName</td>
+	</tr>
+	<tr>
+	  <td>A specific user</td>
+	  <td>SKUser</td>
+	  <td>SKUserID = ##</td>
+	  <td>(none)</td>
+	</tr>
+	<tr>
+	  <td>A list of recent activity for a specific user</td>
+	  <td>SKUserActivity</td>
+	  <td>SKUserID = ##</td>
+	  <td>(none)</td>
+	</tr>
+	<tr>
+	  <td>To search for questions by their title or tags</td>
+	  <td>SKQuestion</td>
+	  <td>One of:
+	  	<li>SKQuestionTitle CONTAINS "string"</li>
+	  	<li>SKQuestionTags CONTAINS (tags)</li>
+	  	<li>NOT(SKQuestionTags CONTAINS (tags))</li>
+	  </td>
+	  <td>SKQuestionLastActivityDate, SKQuestionViewCount, SKQuestionCreationDate, SKQuestionScore/td>
 	</tr>
 	<tr>
 	  <td>The activity on a specific question</td>
+	  <td>(not yet implemented)</td>
 	  <td>(not yet implemented)</td>
 	  <td>(not yet implemented)</td>
 	</tr>
@@ -136,48 +203,17 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	  <td>A list of revisions for a question or answer</td>
 	  <td>(not yet implemented)</td>
 	  <td>(not yet implemented)</td>
+	  <td>(not yet implemented)</td>
 	</tr>
 	<tr>
 	  <td>A specific revision</td>
 	  <td>(not yet implemented)</td>
 	  <td>(not yet implemented)</td>
-	</tr>
-	<tr>
-	  <td>A list of all tags</td>
-	  <td>SKTag</td>
-	  <td>(none)</td>
-	</tr>
-	<tr>
-	  <td>A list of tags in which a specific user has participated</td>
-	  <td>SKTag</td>
-	  <td>SKTagsParticipatedInByUser = ##</td>
-	</tr>
-	<tr>
-	  <td>A list of users</td>
-	  <td>SKUser</td>
-	  <td>(none)</td>
-	</tr>
-	<tr>
-	  <td>A specific user</td>
-	  <td>SKUser</td>
-	  <td>SKUserID = ##</td>
-	</tr>
-	<tr>
-	  <td>A list of recent activity for a specific user</td>
-	  <td>SKUserActivity</td>
-	  <td>SKUserID = ##</td>
-	</tr>
-	<tr>
-	  <td>Questions by their title</td>
-	  <td>SKQuestion</td>
-	  <td>One of:
-	  	<li>SKQuestionTitle CONTAINS "string"</li>
-	  	<li>SKQuestionTags CONTAINS (tags)</li>
-	  	<li>NOT(SKQuestionTags CONTAINS (tags))</li>
-	  </td>
+	  <td>(not yet implemented)</td>
 	</tr>
 	<tr>
 	  <td>A list of reputation changes for a specific user</td>
+	  <td>(not yet implemented)</td>
 	  <td>(not yet implemented)</td>
 	  <td>(not yet implemented)</td>
 	</tr>
