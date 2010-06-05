@@ -23,18 +23,24 @@
  THE SOFTWARE.
  **/
 
-#import "SKCallback.h"
-
+#import "StackKit_Internal.h"
 
 @implementation SKCallback
+@synthesize successSelector=_successSelector;
+@synthesize failureSelector=_failureSelector;
 
 #pragma mark -
 #pragma mark Init/Dealloc
 
++ (id)callbackWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure
+{
+	return [[[self alloc] initWithTarget:target successSelector:onSuccess failureSelector:onFailure] autorelease];
+}
+
 - (id)initWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure
 {
 	if(self = [super init]) {
-		_target = target;
+		_target = [target retain];
 		_successSelector = onSuccess;
 		_failureSelector = onFailure;
 	}
@@ -42,25 +48,25 @@
 	return self;
 }
 
-+ (id)callbackWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure
-{
-	return [[[[self class] alloc] initWithTarget:target successSelector:onSuccess failureSelector:onFailure] autorelease];
+- (void) dealloc {
+	[_target release];
+	[super dealloc];
 }
 
 #pragma mark -
 #pragma mark Invoking
 
-- (void)invokeOnSuccessWithArgument:(id)argument
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(id)argument
 {
 	if(_successSelector!=NULL) {
-		[_target performSelector:_successSelector withObject:argument];
+		[_target performSelector:_successSelector withObject:fetchRequest withObject:argument];
 	}
 }
 
-- (void)invokeOnFailureWithArgument:(id)argument
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest failedWithError:(id)argument
 {
 	if(_failureSelector!=NULL) {
-		[_target performSelector:_failureSelector withObject:argument];
+		[_target performSelector:_failureSelector withObject:fetchRequest withObject:argument];
 	}
 }
 

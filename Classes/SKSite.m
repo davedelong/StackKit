@@ -78,25 +78,25 @@ NSString * SKSiteAPIKey = @"key";
 }
 
 /**
-#pragma mark -
-#pragma mark Object Caching
-
-- (void) cacheUser:(SKUser *)newUser {
-	[cachedUsers setObject:newUser forKey:[newUser userID]];
-}
-
-- (void) cacheTag:(SKTag *)newTag {
-	[cachedTags setObject:newTag forKey:[newTag name]];
-}
-
-- (void) cachePost:(SKPost *)newPost {
-	[cachedPosts setObject:newPost forKey:[newPost postID]];
-}
-
-- (void) cacheBadge:(SKBadge *)newBadge {
-	[cachedBadges setObject:newBadge forKey:[newBadge ID]];
-}
-**/
+ #pragma mark -
+ #pragma mark Object Caching
+ 
+ - (void) cacheUser:(SKUser *)newUser {
+ [cachedUsers setObject:newUser forKey:[newUser userID]];
+ }
+ 
+ - (void) cacheTag:(SKTag *)newTag {
+ [cachedTags setObject:newTag forKey:[newTag name]];
+ }
+ 
+ - (void) cachePost:(SKPost *)newPost {
+ [cachedPosts setObject:newPost forKey:[newPost postID]];
+ }
+ 
+ - (void) cacheBadge:(SKBadge *)newBadge {
+ [cachedBadges setObject:newBadge forKey:[newBadge ID]];
+ }
+ **/
 
 #pragma mark -
 #pragma mark Fetch Requests
@@ -126,12 +126,19 @@ NSString * SKSiteAPIKey = @"key";
 
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest {
 	if([fetchRequest callback] == nil && [fetchRequest delegate] == nil) {
-		if ([fetchRequest delegate] == nil) {
-			@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest must have a delegate or callback specified" userInfo:nil];
-		}
+		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest must have a delegate or callback specified" userInfo:nil];
 	}
 	else if ([fetchRequest delegate] && [[fetchRequest delegate] conformsToProtocol:@protocol(SKFetchRequestDelegate)] == NO) {
 		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest.delegate must conform to <SKFetchRequestDelegate>" userInfo:nil];
+	}
+	
+	if ([fetchRequest delegate] != nil && [fetchRequest callback] == nil) {
+		//transform the delegate into an SKCallback:
+		SKCallback * callback = [SKCallback callbackWithTarget:[fetchRequest delegate] 
+											   successSelector:@selector(fetchRequest:didReturnResults:) 
+											   failureSelector:@selector(fetchRequest:didFailWithError:)];
+		[fetchRequest setDelegate:nil];
+		[fetchRequest setCallback:callback];
 	}	
 	
 	NSInvocationOperation * operation = [[NSInvocationOperation alloc] initWithTarget:fetchRequest selector:@selector(executeAsynchronously) object:nil];

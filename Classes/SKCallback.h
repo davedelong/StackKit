@@ -23,8 +23,9 @@
  THE SOFTWARE.
  **/
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
+@class SKFetchRequest;
 
 @interface SKCallback : NSObject {
 	id _target;
@@ -33,10 +34,13 @@
 	SEL _failureSelector;
 }
 
+@property (readonly) SEL successSelector;
+@property (readonly) SEL failureSelector;
+
 - (id)initWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure;
 + (id)callbackWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure;
 
-- (void)invokeOnSuccessWithArgument:(id)argument;
-- (void)invokeOnFailureWithArgument:(id)argument;
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest failedWithError:(id)argument;
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(id)argument;
 
 @end

@@ -113,26 +113,10 @@ NSString * SKErrorMessageKey = @"message";
 	
 	if ([self error] != nil) {
 		//ERROR!
-		
-		//Check for a callback first
-		if([self callback]) {
-			[[self callback] invokeOnFailureWithArgument:[self error]];
-		}
-		//Or use the delegate
-		else if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didFailWithError:)]) {
-			[[self delegate] fetchRequest:self didFailWithError:[self error]];
-		}
+		[[self callback] fetchRequest:self failedWithError:[self error]];
 	} else {
 		//OK
-		
-		//Check for a callback first
-		if([self callback]) {
-			[[self callback] invokeOnSuccessWithArgument:results];
-		}
-		//Or use the delegate
-		else if ([self delegate] && [[self delegate] respondsToSelector:@selector(fetchRequest:didReturnResults:)]) {
-			[[self delegate] fetchRequest:self didReturnResults:results];
-		}
+		[[self callback] fetchRequest:self succeededWithResults:results];
 	}
 	
 	[pool release];
@@ -169,7 +153,6 @@ cleanup:
 	
 	//execute the GET request
 	NSLog(@"fetching from: %@", [self fetchURL]);
-	NSLog(@"%@", [self fetchURL]);
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[self fetchURL]];
 	NSURLResponse * response = nil;
 	NSError * connectionError = nil;
