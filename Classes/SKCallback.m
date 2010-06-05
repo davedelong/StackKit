@@ -52,12 +52,16 @@
 
 - (void)invokeOnSuccessWithArgument:(id)argument
 {
-	[_target performSelector:_successSelector withObject:argument];
+	if(_successSelector!=NULL) {
+		[_target performSelector:_successSelector withObject:argument];
+	}
 }
 
 - (void)invokeOnFailureWithArgument:(id)argument
 {
-	[_target performSelector:_failureSelector withObject:argument];
+	if(_failureSelector!=NULL) {
+		[_target performSelector:_failureSelector withObject:argument];
+	}
 }
 
 @end
