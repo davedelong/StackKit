@@ -65,9 +65,9 @@ NSString * const SKQAPostTitle = __SKQAPostTitle;
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
-		lockedDate = [[dictionary objectForKey:SKQAPostLockedDate] retain];
-		lastEditDate = [[dictionary objectForKey:SKQAPostLastEditDate] retain];
-		lastActivityDate = [[dictionary objectForKey:SKQAPostLastActivityDate] retain];
+		lockedDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKQAPostLockedDate] doubleValue]] retain];
+		lastEditDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKQAPostLastEditDate] doubleValue]] retain];
+		lastActivityDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKQAPostLastActivityDate] doubleValue]] retain];
 		upVotes = [[dictionary objectForKey:SKQAPostUpVotes] retain];
 		downVotes = [[dictionary objectForKey:SKQAPostDownVotes] retain];
 		viewCount = [[dictionary objectForKey:SKQAPostViewCount] retain];

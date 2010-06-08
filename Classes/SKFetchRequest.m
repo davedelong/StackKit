@@ -192,6 +192,7 @@ cleanup:
 	//pull out the data container
 	NSString * dataKey = [[self entity] dataKey];
 	id dataObject = [responseObjects objectForKey:dataKey];
+	NSLog(@"response data: %@", responseObjects);
 	
 	NSMutableArray * objects = [[NSMutableArray alloc] init];	
 	

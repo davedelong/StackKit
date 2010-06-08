@@ -32,12 +32,18 @@
 	NSMutableDictionary * query;
 	NSString * path;
 	NSError * error;
+	
+	BOOL didValidateSortDescriptor;
+	BOOL didValidatePredicate;
 }
 
-@property (readonly, retain) SKFetchRequest * request;
+@property (readonly, assign) SKFetchRequest * request;
 @property (readonly, retain) NSMutableDictionary * query;
 @property (readonly, retain) NSString * path;
 @property (readonly, retain) NSError * error;
+
+@property (readonly) BOOL didValidateSortDescriptor;
+@property (readonly) BOOL didValidatePredicate;
 
 + (id) endpointForFetchRequest:(SKFetchRequest *)request;
 - (id) initWithFetchRequest:(SKFetchRequest *)aRequest;

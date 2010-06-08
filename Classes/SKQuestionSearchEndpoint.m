@@ -51,7 +51,7 @@
 		id tags = [predicate constantValueForLeftKeyPath:SKQuestionTags];
 		
 		if (title) {
-			[[self query] setObject:[title description] forKey:SKQuestionTitle];
+			[[self query] setObject:[title description] forKey:@"intitle"];
 			return YES;
 		} else if (tags) {
 			NSArray * names = SKExtractTagNames(tags);

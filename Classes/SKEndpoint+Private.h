@@ -28,10 +28,12 @@
 
 @interface SKEndpoint ()
 
-@property (retain) SKFetchRequest * request;
+@property (assign) SKFetchRequest * request;
 @property (retain) NSMutableDictionary * query;
 @property (retain) NSString * path;
 @property (retain) NSError * error;
+
+- (NSString *) sortDescriptorKey;
 
 - (NSSortDescriptor *) cleanSortDescriptor:(NSSortDescriptor *)sortDescriptor;
 - (NSPredicate *) cleanPredicate:(NSPredicate *)predicate;

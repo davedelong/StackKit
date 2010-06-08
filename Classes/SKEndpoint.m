@@ -27,7 +27,7 @@
 #import <objc/runtime.h>
 
 @implementation SKEndpoint
-@synthesize path, error, query, request;
+@synthesize path, error, query, request, didValidateSortDescriptor, didValidatePredicate;
 
 + (id) endpointForFetchRequest:(SKFetchRequest *)request {
 	return [[[self alloc] initWithFetchRequest:request] autorelease];
@@ -63,16 +63,12 @@
 	}
 	
 	NSSortDescriptor * cleanedSortDescriptor = [self cleanSortDescriptor:[[self request] sortDescriptor]];
-	
-	if (![self validateSortDescriptor:cleanedSortDescriptor]) {
-		return NO;
-	}
+	didValidateSortDescriptor = [self validateSortDescriptor:cleanedSortDescriptor];
+	if ([self didValidateSortDescriptor] == NO) { return NO; }
 	
 	NSPredicate * cleanedPredicate = [self cleanPredicate:[[self request] predicate]];
-	
-	if (![self validatePredicate:cleanedPredicate]) {
-		return NO;
-	}
+	didValidatePredicate = [self validatePredicate:cleanedPredicate];
+	if ([self didValidatePredicate] == NO) { return NO; }
 	
 	return YES;
 }
@@ -111,6 +107,11 @@
 	if (validSortKeys != nil && sortDescriptor != nil) { 
 		//need to validate the sort descriptor
 		NSString * sortKey = [sortDescriptor key];
+		if (sortKey == nil) {
+			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:nil]];
+			return NO;
+		}
+		
 		NSString * requestSort = [validSortKeys objectForKey:sortKey];
 		if (requestSort == nil) {
 			//it could be that the key is already cleaned:
@@ -150,6 +151,10 @@
 	return YES;
 }
 
+- (NSString *) sortDescriptorKey {
+	return [[self query] objectForKey:SKSortKey];
+}
+
 - (NSDictionary *) validPredicateKeyPaths {
 	return nil;
 }
@@ -181,6 +186,7 @@
 	if ([fetchRequest fetchLimit] > 0) {
 		[[self query] setObject:[NSNumber numberWithUnsignedInteger:[fetchRequest fetchLimit]] forKey:SKPageSizeKey];
 		NSUInteger page = ([fetchRequest fetchOffset] % [fetchRequest fetchLimit]);
+		if (page == 0) { page = 1; }
 		[[self query] setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];
 	}
 	

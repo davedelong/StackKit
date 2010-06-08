@@ -29,7 +29,7 @@
 
 @implementation SKQuestionTest
 
-- (void) testQuestion {
+- (void) testSingleQuestion {
 	SKSite * site = [SKSite stackoverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
@@ -51,6 +51,63 @@
 	STAssertTrue([[q favoriteCount] intValue] > 0, @"Unexpected favorited count");
 	STAssertTrue([[q upVotes] intValue] == 7, @"Unexpected upvote count");
 	STAssertTrue([[q downVotes] intValue] == 0, @"Unexpected downvote count");
+}
+
+- (void) testTaggedQuestions {
+	SKSite * s = [SKSite stackoverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKQuestionTags, @"cocoa"]];
+	
+	NSError * e = nil;
+	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
+	
+	for (SKQuestion * q in results) {
+		
+	}
+}
+
+- (void) testQuestionSearch {
+	SKSite * s = [SKSite stackoverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKQuestionTitle, @"Constants by another name"]];
+	
+	NSError * e = nil;
+	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
+	[r release];
+	
+	STAssertNil(e, @"Error should be nil: %@", e);
+	STAssertTrue([results count] > 0, @"expecting at least 1 result");
+	
+	SKQuestion * q = [results objectAtIndex:0];
+	
+	STAssertEqualObjects([q ownerID], [NSNumber numberWithInt:115730], @"Owner should be #115730: %@", [q ownerID]);
+}
+
+- (void) testAllQuestions {
+	SKSite * s = [SKSite stackoverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKQuestionCreationDate ascending:NO] autorelease]];
+	[r setFetchLimit:10];
+	
+	NSError * e = nil;
+	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
+	[r release];
+	
+	STAssertNil(e, @"Error should be nil: %@", e);
+	STAssertTrue([results count] == 10, @"expecting 10 results; got %d", [results count]);
+	
+	NSDate * previous = [NSDate distantFuture];
+	for (SKQuestion * q in results) {
+		NSDate * qDate = [q creationDate];
+		STAssertTrue([qDate laterDate:previous] == previous, @"%@ is earlier than %@", previous, qDate);
+		previous = qDate;
+	}
 }
 
 @end

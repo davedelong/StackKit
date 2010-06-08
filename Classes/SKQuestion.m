@@ -91,9 +91,9 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 		answerCount = [[dictionary objectForKey:SKQuestionAnswerCount] retain];
 		acceptedAnswerID = [[dictionary objectForKey:SKQuestionAcceptedAnswer] retain];
 		favoriteCount = [[dictionary objectForKey:SKQuestionFavoriteCount] retain];
-		bountyCloseDate = [[dictionary objectForKey:SKQuestionBountyCloseDate] retain];
+		bountyCloseDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKQuestionBountyCloseDate] doubleValue]] retain];
 		bountyAmount = [[dictionary objectForKey:SKQuestionBountyAmount] retain];
-		closeDate = [[dictionary objectForKey:SKQuestionCloseDate] retain];
+		closeDate = [[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKQuestionCloseDate] doubleValue]] retain];
 		closeReason = [[dictionary objectForKey:SKQuestionCloseReason] retain];
 		
 		timelineURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionTimelineURL]];
