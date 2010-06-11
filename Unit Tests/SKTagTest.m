@@ -82,7 +82,7 @@
 	NSString * previousName = nil;
 	for (SKTag * tag in popular) {
 		if (previousName != nil) {
-			STAssertTrue([[tag name] compare:previousName] == NSOrderedDescending, @"out-of-order tag! (%@ >=? %@)", previousName, [tag name]);
+			STAssertTrue([[tag name] localizedCompare:previousName] == NSOrderedDescending, @"out-of-order tag! (%@ >=? %@)", previousName, [tag name]);
 		}
 		previousName = [tag name];
 	}

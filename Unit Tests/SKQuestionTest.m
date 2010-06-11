@@ -105,7 +105,7 @@
 	NSDate * previous = [NSDate distantFuture];
 	for (SKQuestion * q in results) {
 		NSDate * qDate = [q creationDate];
-		STAssertTrue([qDate laterDate:previous] == previous, @"%@ is earlier than %@", previous, qDate);
+		STAssertTrue([[qDate laterDate:previous] isEqualToDate:previous], @"%@ is earlier than %@", previous, qDate);
 		previous = qDate;
 	}
 }
