@@ -29,3 +29,12 @@
 #ifdef NS_BLOCKS_AVAILABLE
 typedef void(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
 #endif
+
+typedef struct _SKRange {
+	NSUInteger lower;
+	NSUInteger upper;
+} SKRange;
+
+enum {SKNotFound = NSUIntegerMax};
+
+extern SKRange const SKRangeNotFound;

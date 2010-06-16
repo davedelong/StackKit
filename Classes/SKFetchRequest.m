@@ -125,6 +125,8 @@ NSString * SKErrorMessageKey = @"message";
 - (NSArray *) execute {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
+	NSArray * objects = nil;
+	
 	NSString * apiKey = [[self site] APIKey];
 	if (apiKey == nil) {
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidApplicationPublicKey userInfo:nil]];
@@ -137,7 +139,7 @@ NSString * SKErrorMessageKey = @"message";
 	if ([self error] != nil) { goto cleanup; }
 	if ([self fetchURL] == nil) { goto cleanup; }
 	
-	NSArray * objects = [[self executeFetchRequest] retain];
+	objects = [[self executeFetchRequest] retain];
 	
 cleanup:
 	[pool release];

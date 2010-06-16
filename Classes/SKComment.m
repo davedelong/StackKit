@@ -89,7 +89,6 @@ NSString * const SKCommentEditCount = @"edit_count";
 - (void) dealloc {
 	[commentID release];
 	[postID release];
-	[score release];
 	[editCount release];
 	[replyToUserID release];
 	[super dealloc];

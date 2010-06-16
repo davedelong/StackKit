@@ -24,20 +24,31 @@
  **/
 
 #import <Foundation/Foundation.h>
+#import "SKDefinitions.h"
 
+enum {
+	SKAnyPredicateOperator = NSUIntegerMax
+};
 
 @interface NSPredicate (SKAdditions)
 
-- (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left;
 - (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left;
+- (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left;
+- (NSArray *) subPredicatesWithLeftKeyPath:(NSString *)left;
+
 - (id) constantValueForLeftExpression:(NSExpression *)left;
 - (id) constantValueForLeftKeyPath:(NSString *)left;
-- (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left;
 
+- (id) constantValueForOperator:(NSPredicateOperatorType)operator;
+- (id) constantValueForOneOfOperators:(NSArray *)operators;
+
+- (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left;
 - (NSPredicate *) predicateByReplacingLeftKeyPathsFromMapping:(NSDictionary *)mapping;
 
 - (BOOL) isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType;
-
 - (BOOL) isPredicateWithConstantValueEqualToLeftKeyPath:(NSString *)leftKeyPath;
+- (BOOL) isSimpleAndPredicate;
+
+- (SKRange) rangeOfConstantValuesForLeftKeyPath:(NSString *)left;
 
 @end

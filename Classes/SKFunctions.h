@@ -43,3 +43,6 @@ NSNumber * SKExtractAnswerID(id value);
 
 NSString * SKExtractTagName(id value);
 NSArray * SKExtractTagNames(id value);
+
+NSDate * SKExtractDate(id value);
+NSUInteger SKExtractInteger(id value);

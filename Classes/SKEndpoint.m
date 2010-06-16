@@ -144,15 +144,15 @@
 		}
 		
 		//if we get here the key is valid and the comparison is valid
-		[[self query] setObject:requestSort forKey:SKSortKey];
-		[[self query] setObject:([sortDescriptor ascending] ? @"asc" : @"desc") forKey:SKSortOrderKey];
+		[[self query] setObject:requestSort forKey:SKQuerySort];
+		[[self query] setObject:([sortDescriptor ascending] ? @"asc" : @"desc") forKey:SKQuerySortOrder];
 	}
 	
 	return YES;
 }
 
 - (NSString *) sortDescriptorKey {
-	return [[self query] objectForKey:SKSortKey];
+	return [[self query] objectForKey:SKQuerySort];
 }
 
 - (NSDictionary *) validPredicateKeyPaths {
@@ -184,16 +184,17 @@
 	if ([self error] != nil) { return nil; }
 	
 	if ([fetchRequest fetchLimit] > 0) {
-		[[self query] setObject:[NSNumber numberWithUnsignedInteger:[fetchRequest fetchLimit]] forKey:SKPageSizeKey];
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:[fetchRequest fetchLimit]] forKey:SKQueryPageSize];
 		NSUInteger page = ([fetchRequest fetchOffset] % [fetchRequest fetchLimit]);
 		if (page == 0) { page = 1; }
-		[[self query] setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKPageKey];
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKQueryPage];
 	}
 	
 	NSString * urlBase = [[[[self request] site] APIURL] absoluteString];
 	NSString * apiPath = [NSString stringWithFormat:@"%@?%@", [self path], [[self query] queryString]];
 	
 	NSString * fullAPIString = [urlBase stringByAppendingString:apiPath];
+	
 	return [NSURL URLWithString:fullAPIString];
 }
 

@@ -1,5 +1,5 @@
 //
-//  SKDefinitions.m
+//  SKCommentTest.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,6 +23,10 @@
  THE SOFTWARE.
  **/
 
-#import "SKDefinitions.h"
+#import <SenTestingKit/SenTestingKit.h>
 
-SKRange const SKRangeNotFound = {SKNotFound, SKNotFound};
+@interface SKCommentTest : SenTestCase {
+
+}
+
+@end

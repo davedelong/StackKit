@@ -36,6 +36,41 @@
 		}
 	}
 	
+	if ([predicate isSimpleAndPredicate]) {
+		//retrieve the user out of the AND predicate:
+		NSArray * userIDPredicates = [predicate subPredicatesWithLeftKeyPath:SKCommentOwner];
+		if ([userIDPredicates count] != 1) { goto errorExit; }
+		NSPredicate * ownerPredicate = [userIDPredicates objectAtIndex:0];
+		id owner = [ownerPredicate constantValueForLeftKeyPath:SKCommentOwner];
+		if (!owner) { goto errorExit; }
+		[self setPath:[NSString stringWithFormat:@"/users/%@/comments", SKExtractUserID(owner)]];
+		
+		//retrieve the creationDate range out of the predicate
+		SKRange creationDateRange = [predicate rangeOfConstantValuesForLeftKeyPath:SKCommentCreationDate];
+		if (creationDateRange.lower != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:creationDateRange.lower] forKey:SKQueryFromDate];
+		}
+		if (creationDateRange.upper != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:creationDateRange.upper] forKey:SKQueryToDate];
+		}
+		
+		//retrieve the score range out of the predicate, but only if the sortKey is SKSortVotes
+		NSArray * votePredicates = [predicate subPredicatesWithLeftKeyPath:SKCommentScore];
+		if ([[self sortDescriptorKey] isEqual:SKSortVotes] == NO && [votePredicates count] > 0) { goto errorExit; }
+		if ([votePredicates count] > 2) { goto errorExit; }
+		
+		SKRange voteRange = [predicate rangeOfConstantValuesForLeftKeyPath:SKCommentScore];
+		if (voteRange.lower != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:voteRange.lower] forKey:SKQueryMinSort];
+		}
+		if (voteRange.upper != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:voteRange.upper] forKey:SKQueryMaxSort];
+		}
+		
+		return YES;
+	}
+	
+errorExit:
 	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
 	return NO;
 }

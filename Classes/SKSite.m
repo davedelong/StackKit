@@ -35,9 +35,7 @@ NSString * SKSiteAPIKey = @"key";
 @synthesize timeoutInterval;
 
 + (id) stackoverflowSite {
-	NSString * key = [NSString stringWithContentsOfFile:@"consumerKey.txt" encoding:NSUTF8StringEncoding error:nil];
-	if (key == nil) { return nil; }
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:key] autorelease];
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"hqh1uqA-AkeM48lxWWPeWA"] autorelease];
 }
 
 #pragma mark -

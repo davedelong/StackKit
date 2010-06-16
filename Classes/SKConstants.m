@@ -29,11 +29,6 @@
 NSString * const SKAPIVersion = @"0.8";
 
 NSUInteger const SKPageSizeLimitMax = 100;
-NSString * const SKPageKey = @"page";
-NSString * const SKPageSizeKey = @"pagesize";
-
-NSString * const SKSortKey = @"sort";
-NSString * const SKSortOrderKey = @"order";
 
 #pragma mark -
 #pragma mark Statistics Keys
@@ -52,7 +47,13 @@ NSString * const SKStatsAPIInfo = @"api_version";
 NSString * const SKStatsAPIInfoVersion = @"version";
 NSString * const SKStatsAPIInfoRevision = @"revision";	
 
-NSString * const SKStatsSiteDisplayName = @"display_name";
+NSString * const SKStateSiteInfo = @"site";
+NSString * const SKStatsSiteInfoName = @"name";
+NSString * const SKStatsSiteInfoLogoURL = @"logo_url";
+NSString * const SKStatsSiteInfoAPIURL = @"api_endpoint";
+NSString * const SKStatsSiteInfoSiteURL = @"site_url";
+NSString * const SKStatsSiteInfoDescription = @"description";
+NSString * const SKStatsSiteInfoIconURL = @"icon_url";
 
 #pragma mark -
 #pragma mark Error Constants
@@ -95,3 +96,14 @@ NSString * const SKSortAdded = @"added";
 NSString * const SKSortPopular = @"popular";
 NSString * const SKSortReputation = @"reputation";
 NSString * const SKSortName = @"name";
+
+#pragma mark Query Keys
+
+NSString * const SKQueryFromDate = @"fromdate";
+NSString * const SKQueryToDate = @"todate";
+NSString * const SKQueryMinSort = @"min";
+NSString * const SKQueryMaxSort = @"max";
+NSString * const SKQueryPage = @"page";
+NSString * const SKQueryPageSize = @"pagesize";
+NSString * const SKQuerySort = @"sort";
+NSString * const SKQuerySortOrder = @"order";

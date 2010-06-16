@@ -24,7 +24,7 @@
  **/
 
 #import "NSPredicate+SKAdditions.h"
-
+#import "SKFunctions.h"
 
 @implementation NSPredicate (SKAdditions)
 
@@ -38,8 +38,8 @@
 	NSString * leftKeyPath = [left keyPath];
 	if ([leftKeyPaths containsObject:leftKeyPath] == NO) { return NO; }
 	
-	//pass -1 to ignore operator
-	if (operator >= 0) {
+	//pass SKAnyPredicateOperator to ignore operator
+	if (operator != SKAnyPredicateOperator) {
 		if ([comp predicateOperatorType] != operator) { return NO; }
 	}
 	
@@ -76,6 +76,10 @@
 	return nil;
 }
 
+- (NSArray *) subPredicatesWithLeftKeyPath:(NSString *)left {
+	return [self subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:left]];
+}
+
 - (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left {
 	NSArray * matches = [self subPredicatesWithLeftExpression:left];
 	if ([matches count] > 0) {
@@ -94,6 +98,24 @@
 
 - (id) constantValueForLeftKeyPath:(NSString *)left {
 	return [self constantValueForLeftExpression:[NSExpression expressionForKeyPath:left]];
+}
+
+- (id) constantValueForOperator:(NSPredicateOperatorType)operator {
+	if ([self isKindOfClass:[NSComparisonPredicate class]] == NO) { return nil; }
+	NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
+	if ([comparison predicateOperatorType] != operator) { return nil; }
+	NSExpression * rightExpression = [comparison rightExpression];
+	if ([rightExpression expressionType] != NSConstantValueExpressionType) { return nil; }
+	return [rightExpression constantValue];
+}
+
+- (id) constantValueForOneOfOperators:(NSArray *)operators {
+	for (NSNumber * op in operators) {
+		NSPredicateOperatorType operator = [op unsignedIntegerValue];
+		id value = [self constantValueForOperator:operator];
+		if (value) { return value; }
+	}
+	return nil;
 }
 
 - (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left {
@@ -151,15 +173,68 @@
 			if (newSubpredicate != nil) {
 				[translated addObject:newSubpredicate];
 			}
-			if ([translated count] == 0) { return nil; }
-			NSCompoundPredicate * newCompound = [[NSCompoundPredicate alloc] initWithType:[compoundP compoundPredicateType] 
-																			subpredicates:translated];
-			return [newCompound autorelease];
 		}
+		if ([translated count] == 0) { return nil; }
+		NSCompoundPredicate * newCompound = [[NSCompoundPredicate alloc] initWithType:[compoundP compoundPredicateType] 
+																		subpredicates:translated];
+		return [newCompound autorelease];
 	} else {
 		return nil;
 	}
 	return self;
+}
+
+- (BOOL) isSimpleAndPredicate {
+	if ([self isKindOfClass:[NSCompoundPredicate class]] == NO) { return NO; }
+	NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
+	if ([compound compoundPredicateType] != NSAndPredicateType) { return NO; }
+	
+	NSArray * subpredicates = [compound subpredicates];
+	BOOL ok = YES;
+	for (NSPredicate * subpredicate in subpredicates) {
+		ok &= [subpredicate isKindOfClass:[NSComparisonPredicate class]];
+	}
+	
+	return ok;
+}
+
+- (SKRange) rangeOfConstantValuesForLeftKeyPath:(NSString *)left {
+	SKRange result = SKRangeNotFound;
+	if ([self isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:left] 
+										   operator:SKAnyPredicateOperator
+								rightExpressionType:NSConstantValueExpressionType]) {
+		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
+		
+		id upperValue = [comparison constantValueForOneOfOperators:[NSArray arrayWithObjects:
+																	[NSNumber numberWithUnsignedInteger:NSLessThanPredicateOperatorType],
+																	[NSNumber numberWithUnsignedInteger:NSLessThanOrEqualToPredicateOperatorType],
+																	nil]];
+		if (upperValue) {
+			result.upper = SKExtractInteger(upperValue);
+		}
+		
+		id lowerValue = [comparison constantValueForOneOfOperators:[NSArray arrayWithObjects:
+																	[NSNumber numberWithUnsignedInteger:NSGreaterThanPredicateOperatorType],
+																	[NSNumber numberWithUnsignedInteger:NSGreaterThanOrEqualToPredicateOperatorType],
+																	nil]];
+		if (lowerValue) {
+			result.lower = SKExtractInteger(lowerValue);
+		}
+	} else if ([self isKindOfClass:[NSCompoundPredicate class]]) {
+		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
+		NSArray * subpredicates = [compound subPredicatesWithLeftKeyPath:left];
+		for (NSPredicate * predicate in subpredicates) {
+			SKRange subpredicateRange = [predicate rangeOfConstantValuesForLeftKeyPath:left];
+			if (result.lower == SKNotFound && subpredicateRange.lower != SKNotFound) {
+				result.lower = subpredicateRange.lower;
+			}
+			if (result.upper == SKNotFound && subpredicateRange.upper != SKNotFound) {
+				result.upper = subpredicateRange.upper;
+			}
+			if (result.lower != SKNotFound && result.upper != SKNotFound) { break; }
+		}
+	}
+	return result;
 }
 
 @end

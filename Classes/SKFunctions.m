@@ -131,3 +131,25 @@ NSArray * SKExtractTagNames(id value) {
 	}
 	return nil;
 }
+
+NSDate * SKExtractDate(id value) {
+	if ([value isKindOfClass:[NSDate class]]) {
+		return value;
+	} else if ([value isKindOfClass:[NSNumber class]]) {
+		return [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
+	} else {
+		return [NSDate dateWithTimeIntervalSince1970:[[value description] doubleValue]];
+	}
+}
+
+NSUInteger SKExtractInteger(id value) {
+	if ([value isKindOfClass:[NSNumber class]]) {
+		return [value unsignedIntegerValue];
+	} else if ([value isKindOfClass:[NSDate class]]) {
+		NSTimeInterval interval = [value timeIntervalSince1970];
+		NSNumber * boxedInterval = [NSNumber numberWithDouble:interval];
+		return [boxedInterval unsignedIntegerValue];
+	} else {
+		return [[value description] integerValue];
+	}
+}

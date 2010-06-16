@@ -39,6 +39,16 @@ extern NSString * const SKSortPopular;
 extern NSString * const SKSortReputation;
 extern NSString * const SKSortName;
 
+extern NSUInteger const SKPageSizeLimitMax;
+extern NSString * const SKQueryPage;
+extern NSString * const SKQueryPageSize;
+extern NSString * const SKQuerySort;
+extern NSString * const SKQuerySortOrder;
+extern NSString * const SKQueryFromDate;
+extern NSString * const SKQueryToDate;
+extern NSString * const SKQueryMinSort;
+extern NSString * const SKQueryMaxSort;
+
 /**
  There are some cases where constants can have different names but the same value.  For example:
  - in SKUser:	SKUserID

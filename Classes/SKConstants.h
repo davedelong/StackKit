@@ -28,13 +28,6 @@
 extern NSString * const SKAPIKey;
 extern NSString * const SKAPIVersion;
 
-extern NSUInteger const SKPageSizeLimitMax;
-extern NSString * const SKPageKey;
-extern NSString * const SKPageSizeKey;
-
-extern NSString * const SKSortKey;
-extern NSString * const SKSortOrderKey;
-
 #pragma mark -
 #pragma mark Statistics Keys
 extern NSString * const SKStatsTotalQuestions;
@@ -52,7 +45,13 @@ extern NSString * const SKStatsAPIInfo;
 extern NSString * const SKStatsAPIInfoVersion;
 extern NSString * const SKStatsAPIInfoRevision;
 
-extern NSString * const SKStatsSiteDisplayName;
+extern NSString * const SKStateSiteInfo;
+extern NSString * const SKStatsSiteInfoName;
+extern NSString * const SKStatsSiteInfoLogoURL;
+extern NSString * const SKStatsSiteInfoAPIURL;
+extern NSString * const SKStatsSiteInfoSiteURL;
+extern NSString * const SKStatsSiteInfoDescription;
+extern NSString * const SKStatsSiteInfoIconURL;
 
 #pragma mark -
 #pragma mark Error Constants
