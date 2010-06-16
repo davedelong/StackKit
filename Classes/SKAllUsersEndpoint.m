@@ -35,7 +35,7 @@
 	}
 	
 	NSPredicate * userPredicate = [predicate subPredicateForLeftKeyPath:SKUserDisplayName];
-	if ([userPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKUserDisplayName]) {
+	if ([userPredicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserDisplayName] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
 		NSString * name = [[userPredicate constantValueForLeftKeyPath:SKUserDisplayName] description];
 		[[self query] setObject:name forKey:SKQueryFilter];
 		[self setPath:@"/users"];
