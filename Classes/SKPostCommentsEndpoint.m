@@ -28,8 +28,9 @@
 @implementation SKPostCommentsEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentPost]) {
-		id post = [predicate constantValueForLeftKeyPath:SKCommentPost];
+	NSPredicate * postPredicate = [predicate subPredicateForLeftKeyPath:SKCommentPost];
+	if ([postPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentPost]) {
+		id post = [postPredicate constantValueForLeftKeyPath:SKCommentPost];
 		if (post) {
 			[self setPath:[NSString stringWithFormat:@"/posts/%@/comments", SKExtractPostID(post)]];
 			return YES;

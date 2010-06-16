@@ -36,6 +36,14 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKTagNumberOfTaggedQuestions, SKSortPopular,
+			SKTagLastUsedDate, SKSortActivity,
+			SKTagName, SKSortName,
+			nil];
+}
+
 - (BOOL) validateEntity:(Class)entity {
 	if (entity == [SKTag class]) {
 		return YES;

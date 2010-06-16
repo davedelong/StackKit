@@ -28,29 +28,22 @@
 @implementation SKCommentsFromUserToUserEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isKindOfClass:[NSCompoundPredicate class]]) {
+	if ([predicate isSimpleAndPredicate]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)predicate;
-		if ([compound compoundPredicateType] == NSAndPredicateType && [[compound subpredicates] count] == 2) {
+		
+		NSPredicate * fromPredicate = [compound subPredicateForLeftKeyPath:SKCommentOwner];
+		NSPredicate * toPredicate = [compound subPredicateForLeftKeyPath:SKCommentInReplyToUser];
+		
+		if (fromPredicate != nil && [fromPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentOwner] && 
+			toPredicate != nil && [toPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentInReplyToUser]) {
 			
-			NSPredicate * first = [[compound subpredicates] objectAtIndex:0];
-			NSPredicate * second = [[compound subpredicates] objectAtIndex:1];
+			id from = [fromPredicate constantValueForLeftKeyPath:SKCommentOwner];
+			id to = [toPredicate constantValueForLeftKeyPath:SKCommentInReplyToUser];
 			
-			BOOL hasOwner = ([first isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentOwner] || [second isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentOwner]);
-			BOOL hasReplyTo = ([first isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentInReplyToUser] || [second isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentInReplyToUser]);
-			
-			if (hasOwner && hasReplyTo) {
-				id owner = [first constantValueForLeftKeyPath:SKPostOwner];
-				if (owner == nil) { owner = [second constantValueForLeftKeyPath:SKPostOwner]; }
-				
-				id replyTo = [first constantValueForLeftKeyPath:SKCommentInReplyToUser];
-				if (replyTo == nil) { replyTo = [second constantValueForLeftKeyPath:SKCommentInReplyToUser]; }
-				
-				if (owner && replyTo) {
-					[self setPath:[NSString stringWithFormat:@"/users/%@/comments/%@", SKExtractUserID(owner), SKExtractUserID(replyTo)]];
-					return YES;
-				}
+			if (from != nil && to != nil) {
+				[self setPath:[NSString stringWithFormat:@"/users/%@/comments/%@", SKExtractUserID(from), SKExtractUserID(to)]];
+				return YES;
 			}
-			
 		}
 	}
 	

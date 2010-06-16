@@ -107,3 +107,4 @@ NSString * const SKQueryPage = @"page";
 NSString * const SKQueryPageSize = @"pagesize";
 NSString * const SKQuerySort = @"sort";
 NSString * const SKQuerySortOrder = @"order";
+NSString * const SKQueryFilter = @"filter";

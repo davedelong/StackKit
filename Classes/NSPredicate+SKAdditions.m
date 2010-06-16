@@ -88,6 +88,10 @@
 	return nil;
 }
 
+- (NSPredicate *) subPredicateForLeftKeyPath:(NSString *)left {
+	return [self subPredicateForLeftExpression:[NSExpression expressionForKeyPath:left]];
+}
+
 - (id) constantValueForLeftExpression:(NSExpression *)left {
 	NSComparisonPredicate * comparison = (NSComparisonPredicate *)[self subPredicateForLeftExpression:left];
 	if (comparison == nil) { return nil; }

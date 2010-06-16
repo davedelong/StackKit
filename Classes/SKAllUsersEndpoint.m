@@ -32,9 +32,12 @@
 	if (predicate == nil) {
 		[self setPath:@"/users"];
 		return YES;
-	} else if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserDisplayName] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
-		NSString * name = [[predicate constantValueForLeftKeyPath:SKUserDisplayName] description];
-		[[self query] setObject:name forKey:@"filter"];
+	}
+	
+	NSPredicate * userPredicate = [predicate subPredicateForLeftKeyPath:SKUserDisplayName];
+	if ([userPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKUserDisplayName]) {
+		NSString * name = [[userPredicate constantValueForLeftKeyPath:SKUserDisplayName] description];
+		[[self query] setObject:name forKey:SKQueryFilter];
 		[self setPath:@"/users"];
 		return YES;
 	}

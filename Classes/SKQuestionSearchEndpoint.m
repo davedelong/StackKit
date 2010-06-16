@@ -40,7 +40,17 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionLastActivityDate, SKSortActivity,
+			SKQuestionViewCount, SKSortViews,
+			SKQuestionCreationDate, SKSortCreation,
+			SKQuestionScore, SKSortVotes,
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
+	NSLog(@"FIX ME: %s", __PRETTY_FUNCTION__);
 	[self setPath:@"/search"];
 	
 	NSArray * leftPaths = [NSArray arrayWithObjects:SKQuestionTitle, SKQuestionTags, nil];

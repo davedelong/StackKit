@@ -28,8 +28,9 @@
 @implementation SKCommentsToUserEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentInReplyToUser]) {
-		id mentioned = [predicate constantValueForLeftKeyPath:SKCommentInReplyToUser];
+	NSPredicate * mentionedPredicate = [predicate subPredicateForLeftKeyPath:SKCommentInReplyToUser];
+	if ([mentionedPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKCommentInReplyToUser]) {
+		id mentioned = [mentionedPredicate constantValueForLeftKeyPath:SKCommentInReplyToUser];
 		if (mentioned) {
 			[self setPath:[NSString stringWithFormat:@"/users/%@/mentioned", SKExtractUserID(mentioned)]];
 			return YES;

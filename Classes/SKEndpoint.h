@@ -35,6 +35,7 @@
 	
 	BOOL didValidateSortDescriptor;
 	BOOL didValidatePredicate;
+	BOOL didValidateRanges;
 }
 
 @property (readonly, assign) SKFetchRequest * request;
@@ -44,6 +45,7 @@
 
 @property (readonly) BOOL didValidateSortDescriptor;
 @property (readonly) BOOL didValidatePredicate;
+@property (readonly) BOOL didValidateRanges;
 
 + (id) endpointForFetchRequest:(SKFetchRequest *)request;
 - (id) initWithFetchRequest:(SKFetchRequest *)aRequest;

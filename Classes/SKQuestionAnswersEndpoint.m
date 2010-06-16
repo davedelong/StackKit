@@ -28,8 +28,9 @@
 @implementation SKQuestionAnswersEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKAnswerQuestion]) {
-		id question = [predicate constantValueForLeftKeyPath:SKAnswerQuestion];
+	NSPredicate * questionPredicate = [predicate subPredicateForLeftKeyPath:SKAnswerQuestion];
+	if ([questionPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKAnswerQuestion]) {
+		id question = [questionPredicate constantValueForLeftKeyPath:SKAnswerQuestion];
 		if (question) {
 			[self setPath:[NSString stringWithFormat:@"/questions/%@/answers", SKExtractQuestionID(question)]];
 			return YES;

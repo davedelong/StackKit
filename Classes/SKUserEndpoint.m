@@ -39,6 +39,14 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKUserReputation, SKSortReputation,
+			SKUserCreationDate, SKSortCreation,
+			SKUserDisplayName, SKSortName,
+			nil];
+}
+
 - (BOOL) validateEntity:(Class)entity {
 	if (entity == [SKUser class]) {
 		return YES;

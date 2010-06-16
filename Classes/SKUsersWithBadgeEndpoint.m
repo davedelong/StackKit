@@ -33,6 +33,7 @@
 }
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
+	NSLog(@"FIX ME: %s", __PRETTY_FUNCTION__);
 	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserBadges] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
 		id badges = [predicate constantValueForLeftKeyPath:SKUserBadges];
 		if (badges) {

@@ -41,9 +41,20 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionLastActivityDate, SKSortActivity,
+			SKQuestionViewCount, SKSortViews,
+			SKQuestionCreationDate, SKSortCreation,
+			SKQuestionScore, SKSortVotes,
+			SKQuestionFavoritedDate, SKSortAdded,
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionsFavoritedByUser]) {
-		id user = [predicate constantValueForLeftKeyPath:SKQuestionsFavoritedByUser];
+	NSPredicate * userPredicate = [predicate subPredicateForLeftKeyPath:SKQuestionsFavoritedByUser];
+	if ([userPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionsFavoritedByUser]) {
+		id user = [userPredicate constantValueForLeftKeyPath:SKQuestionsFavoritedByUser];
 		if (user) {
 			[self setPath:[NSString stringWithFormat:@"/users/%@/favorites", SKExtractUserID(user)]];
 			return YES;

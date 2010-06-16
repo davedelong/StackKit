@@ -28,13 +28,15 @@
 @implementation SKUserTagsEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKTagsParticipatedInByUser]) {
-		id user = [predicate constantValueForLeftKeyPath:SKTagsParticipatedInByUser];
-		if (user != nil) {
+	NSPredicate * userPredicate = [predicate subPredicateForLeftKeyPath:SKTagsParticipatedInByUser];
+	if ([userPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKTagsParticipatedInByUser]) {
+		id user = [userPredicate constantValueForLeftKeyPath:SKTagsParticipatedInByUser];
+		if (user) {
 			[self setPath:[NSString stringWithFormat:@"/users/%@/tags", SKExtractUserID(user)]];
 			return YES;
 		}
 	}
+	
 	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
 	return NO;
 }

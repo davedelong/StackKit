@@ -74,13 +74,10 @@
 	NSDate * fromDate = [NSDate dateWithNaturalLanguageString:@"1 Jan 2010"];
 	NSDate * toDate = [NSDate dateWithNaturalLanguageString:@"3 Jan 2010"];
 	
-	NSLog(@"from: %@", fromDate);
-	NSLog(@"to: %@", toDate);
-	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d AND %K >= %@ AND %K <= %@", SKCommentOwner, 115730, SKCommentCreationDate, fromDate, SKCommentCreationDate, toDate]];
-	NSLog(@"%@", [r predicate]);
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKCommentCreationDate ascending:YES] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];

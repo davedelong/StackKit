@@ -33,6 +33,8 @@ enum {
 @interface NSPredicate (SKAdditions)
 
 - (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left;
+- (NSPredicate *) subPredicateForLeftKeyPath:(NSString *)left;
+
 - (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left;
 - (NSArray *) subPredicatesWithLeftKeyPath:(NSString *)left;
 

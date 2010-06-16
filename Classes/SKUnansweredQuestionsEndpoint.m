@@ -28,10 +28,11 @@
 @implementation SKUnansweredQuestionsEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionAnswerCount]) {
-		id answerCount = [predicate constantValueForLeftKeyPath:SKQuestionAnswerCount];
+	NSPredicate * countPredicate = [predicate subPredicateForLeftKeyPath:SKQuestionAnswerCount];
+	if ([countPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionAnswerCount]) {
+		id answerCount = [countPredicate constantValueForLeftKeyPath:SKQuestionAnswerCount];
 		if (answerCount && [answerCount intValue] == 0) {
-			[self setPath:@"/questions/unanswered"];
+			[self setPath:[NSString stringWithFormat:@"/questions/unanswered"]];
 			return YES;
 		}
 	}

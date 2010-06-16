@@ -27,7 +27,7 @@
 #import <objc/runtime.h>
 
 @implementation SKEndpoint
-@synthesize path, error, query, request, didValidateSortDescriptor, didValidatePredicate;
+@synthesize path, error, query, request, didValidateSortDescriptor, didValidatePredicate, didValidateRanges;
 
 + (id) endpointForFetchRequest:(SKFetchRequest *)request {
 	return [[[self alloc] initWithFetchRequest:request] autorelease];
@@ -54,8 +54,9 @@
 	 Validation steps:
 	 
 	 1.  Validate the entity
-	 2.  Validate the predicate
-	 3.  Validate the sort
+	 2.  Validate the sort
+	 3.  Validate the predicate
+	 4.  Extract ranges from predicate
 	 **/
 	
 	if (![self validateEntity:[[self request] entity]]) {
@@ -69,6 +70,9 @@
 	NSPredicate * cleanedPredicate = [self cleanPredicate:[[self request] predicate]];
 	didValidatePredicate = [self validatePredicate:cleanedPredicate];
 	if ([self didValidatePredicate] == NO) { return NO; }
+	
+	didValidateRanges = [self validateRangesInPredicate:cleanedPredicate];
+	if ([self didValidateRanges] == NO) { return NO; }
 	
 	return YES;
 }
@@ -151,6 +155,43 @@
 	return YES;
 }
 
+- (BOOL) validateRangesInPredicate:(NSPredicate *)predicate {
+	if ([predicate isSimpleAndPredicate] == NO) {
+		//return YES if it's a comparison, else NO (more complex than simple AND)
+		if ([predicate isKindOfClass:[NSComparisonPredicate class]] == NO) {
+			[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
+			return NO;
+		}
+		return YES;
+	}
+	
+	//it's a simple AND
+	NSDictionary * validRangeKeys = [self validRangeKeys];
+	NSString * sortKey = [self sortDescriptorKey];
+	if (sortKey == nil) {
+		return YES;
+	}
+	NSString * rangeKeyPath = [validRangeKeys objectForKey:[self sortDescriptorKey]];
+	if (rangeKeyPath == nil) {
+		//we have a valid sort key but an invalid range key?  shouldn't happen...
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:[NSDictionary dictionaryWithObject:@"valid sort but invalid range" forKey:NSLocalizedDescriptionKey]]];
+		return NO;
+	}
+	
+	NSString * minKey = ([sortKey isEqual:SKSortCreation] ? SKQueryFromDate : SKQueryMinSort);
+	NSString * maxKey = ([sortKey isEqual:SKSortCreation] ? SKQueryToDate : SKQueryMaxSort);
+	
+	SKRange range = [predicate rangeOfConstantValuesForLeftKeyPath:rangeKeyPath];
+	if (range.lower != SKNotFound) {
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:range.lower] forKey:minKey];
+	}
+	if (range.upper != SKNotFound) {
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:range.upper] forKey:maxKey];
+	}
+	
+	return YES;
+}
+
 - (NSString *) sortDescriptorKey {
 	return [[self query] objectForKey:SKQuerySort];
 }
@@ -161,7 +202,11 @@
 
 - (NSDictionary *) validSortDescriptorKeys {
 	return nil;
-}		
+}
+
+- (NSDictionary *) validRangeKeys {
+	return nil;
+}
 
 - (NSSortDescriptor *) cleanSortDescriptor:(NSSortDescriptor *)sortDescriptor {
 	NSDictionary * sortDescriptorKeys = [self validSortDescriptorKeys];

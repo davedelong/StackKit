@@ -39,10 +39,12 @@
 - (NSPredicate *) cleanPredicate:(NSPredicate *)predicate;
 
 - (BOOL) validateEntity:(Class)entity;
-- (BOOL) validatePredicate:(NSPredicate *)predicate;
 - (BOOL) validateSortDescriptor:(NSSortDescriptor *)sortDescriptor;
+- (BOOL) validatePredicate:(NSPredicate *)predicate;
+- (BOOL) validateRangesInPredicate:(NSPredicate *)predicate;
 
 - (NSDictionary *) validPredicateKeyPaths;
 - (NSDictionary *) validSortDescriptorKeys;
+- (NSDictionary *) validRangeKeys;
 
 @end

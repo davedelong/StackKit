@@ -44,4 +44,11 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKCommentScore, SKSortVotes,
+			SKCommentCreationDate, SKSortCreation,
+			nil];
+}
+
 @end

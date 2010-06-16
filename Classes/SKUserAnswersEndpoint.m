@@ -28,8 +28,9 @@
 @implementation SKUserAnswersEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKUserID]) {
-		id user = [predicate constantValueForLeftKeyPath:SKUserID];
+	NSPredicate * userPredicate = [predicate subPredicateForLeftKeyPath:SKUserID];
+	if ([userPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKUserID]) {
+		id user = [userPredicate constantValueForLeftKeyPath:SKUserID];
 		if (user) {
 			[self setPath:[NSString stringWithFormat:@"/users/%@/answers", SKExtractUserID(user)]];
 			return YES;

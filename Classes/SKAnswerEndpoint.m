@@ -51,4 +51,13 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKAnswerLastActivityDate, SKSortActivity,
+			SKAnswerViewCount, SKSortViews,
+			SKAnswerCreationDate, SKSortCreation,
+			SKAnswerScore, SKSortVotes,
+			nil];
+}
+
 @end

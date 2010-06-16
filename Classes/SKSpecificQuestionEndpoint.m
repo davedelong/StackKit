@@ -40,6 +40,15 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionLastActivityDate, SKSortActivity,
+			SKQuestionViewCount, SKSortViews,
+			SKQuestionCreationDate, SKSortCreation,
+			SKQuestionScore, SKSortVotes,
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
 	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionID]) {
 		id question = [predicate constantValueForLeftKeyPath:SKQuestionID];

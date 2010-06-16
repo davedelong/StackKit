@@ -40,11 +40,21 @@
 			nil];
 }
 
+- (NSDictionary *) validRangeKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKQuestionLastActivityDate, SKSortActivity,
+			SKQuestionViewCount, SKSortViews,
+			SKQuestionCreationDate, SKSortCreation,
+			SKQuestionScore, SKSortVotes,
+			nil];
+}
+
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	if ([predicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionOwner]) {
-		id owner = [predicate constantValueForLeftKeyPath:SKQuestionOwner];
-		if (owner) {
-			[self setPath:[NSString stringWithFormat:@"/users/%@/questions", SKExtractUserID(owner)]];
+	NSPredicate * userPredicate = [predicate subPredicateForLeftKeyPath:SKQuestionOwner];
+	if ([userPredicate isPredicateWithConstantValueEqualToLeftKeyPath:SKQuestionOwner]) {
+		id user = [userPredicate constantValueForLeftKeyPath:SKQuestionOwner];
+		if (user) {
+			[self setPath:[NSString stringWithFormat:@"/users/%@/questions", SKExtractUserID(user)]];
 			return YES;
 		}
 	}
