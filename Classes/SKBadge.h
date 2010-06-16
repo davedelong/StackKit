@@ -33,13 +33,13 @@ typedef enum {
 	SKBadgeRankGold = 2
 } SKBadgeRank_t;
 
-extern NSString * SKBadgeID;
-extern NSString * SKBadgeRank;
-extern NSString * SKBadgeName;
-extern NSString * SKBadgeDescription;
-extern NSString * SKBadgeAwardCount;
-extern NSString * SKBadgeTagBased;
-extern NSString * SKBadgesAwardedToUser;
+extern NSString * const SKBadgeID;
+extern NSString * const SKBadgeRank;
+extern NSString * const SKBadgeName;
+extern NSString * const SKBadgeDescription;
+extern NSString * const SKBadgeAwardCount;
+extern NSString * const SKBadgeTagBased;
+extern NSString * const SKBadgesAwardedToUser;
 
 @interface SKBadge : SKObject {
 	NSNumber *badgeID;

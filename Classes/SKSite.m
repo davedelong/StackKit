@@ -25,7 +25,7 @@
 
 #import "StackKit_Internal.h"
 
-NSString * SKSiteAPIKey = @"key";
+NSString * const SKSiteAPIKey = @"key";
 
 @implementation SKSite
 

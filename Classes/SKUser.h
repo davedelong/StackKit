@@ -28,20 +28,20 @@
 
 extern NSString * const SKUserID;
 
-extern NSString * SKUserReputation;
-extern NSString * SKUserCreationDate;
-extern NSString * SKUserDisplayName;
-extern NSString * SKUserEmailHash;
-extern NSString * SKUserAge;
-extern NSString * SKUserLastAccessDate;
-extern NSString * SKUserWebsiteURL;
-extern NSString * SKUserLocation;
-extern NSString * SKUserAboutMe;
-extern NSString * SKUserViews;
-extern NSString * SKUserUpVotes;
-extern NSString * SKUserDownVotes;
-extern NSString * SKUserType;
-extern NSString * SKUserAcceptRate;
+extern NSString * const SKUserReputation;
+extern NSString * const SKUserCreationDate;
+extern NSString * const SKUserDisplayName;
+extern NSString * const SKUserEmailHash;
+extern NSString * const SKUserAge;
+extern NSString * const SKUserLastAccessDate;
+extern NSString * const SKUserWebsiteURL;
+extern NSString * const SKUserLocation;
+extern NSString * const SKUserAboutMe;
+extern NSString * const SKUserViews;
+extern NSString * const SKUserUpVotes;
+extern NSString * const SKUserDownVotes;
+extern NSString * const SKUserType;
+extern NSString * const SKUserAcceptRate;
 
 extern NSString * const SKUserBadges;
 

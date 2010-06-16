@@ -25,9 +25,9 @@
 
 #import "StackKit_Internal.h"
 
-NSString * SKTagName = @"name";
-NSString * SKTagCount = @"count";
-NSString * SKTagsParticipatedInByUser = __SKUserID;
+NSString * const SKTagName = @"name";
+NSString * const SKTagCount = @"count";
+NSString * const SKTagsParticipatedInByUser = __SKUserID;
 
 NSString * const SKTagNumberOfTaggedQuestions = @"tag_popular";
 NSString * const SKTagLastUsedDate = @"tag_activity";

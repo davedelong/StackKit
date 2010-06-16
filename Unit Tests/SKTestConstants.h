@@ -23,4 +23,4 @@
  THE SOFTWARE.
  **/
 
-extern NSString * SKTestAPISite;
+extern NSString * const SKTestAPISite;

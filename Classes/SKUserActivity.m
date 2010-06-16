@@ -25,36 +25,36 @@
 
 #import "StackKit_Internal.h"
 
-NSString * SKUserActivityType = @"timeline_type";
-NSString * SKUserActivityPostID = @"post_id";
-NSString * SKUserActivityPostType = @"post_type";
-NSString * SKUserActivityCommentID = @"comment_id";
-NSString * SKUserActivityAction = @"action";
-NSString * SKUserActivityCreationDate = @"creation_date";
-NSString * SKUserActivityDescription = @"description";
-NSString * SKUserActivityDetail = @"detail";
+NSString * const SKUserActivityType = @"timeline_type";
+NSString * const SKUserActivityPostID = @"post_id";
+NSString * const SKUserActivityPostType = @"post_type";
+NSString * const SKUserActivityCommentID = @"comment_id";
+NSString * const SKUserActivityAction = @"action";
+NSString * const SKUserActivityCreationDate = @"creation_date";
+NSString * const SKUserActivityDescription = @"description";
+NSString * const SKUserActivityDetail = @"detail";
 
 //internal
 
 //actions
-NSString * SKUserActivityActionComment = @"comment";
-NSString * SKUserActivityActionRevised = @"revised";
-NSString * SKUserActivityActionAwarded = @"awarded";
-NSString * SKUserActivityActionAnswered = @"answered";
+NSString * const SKUserActivityActionComment = @"comment";
+NSString * const SKUserActivityActionRevised = @"revised";
+NSString * const SKUserActivityActionAwarded = @"awarded";
+NSString * const SKUserActivityActionAnswered = @"answered";
 
 //timeline types
-NSString * SKUserActivityTimelineTypeComment = @"comment";
-NSString * SKUserActivityTimelineTypeRevision = @"revision";
-NSString * SKUserActivityTimelineTypeBadge = @"badge";
-NSString * SKUserActivityTimelineTypeAskOrAnswered = @"askoranswered";
-NSString * SKUserActivityTimelineTypeAccepted = @"accepted";
+NSString * const SKUserActivityTimelineTypeComment = @"comment";
+NSString * const SKUserActivityTimelineTypeRevision = @"revision";
+NSString * const SKUserActivityTimelineTypeBadge = @"badge";
+NSString * const SKUserActivityTimelineTypeAskOrAnswered = @"askoranswered";
+NSString * const SKUserActivityTimelineTypeAccepted = @"accepted";
 
 //post constants
-NSString * SKPostQuestion = @"question";
-NSString * SKPostAnswer = @"answer";
+NSString * const SKPostQuestion = @"question";
+NSString * const SKPostAnswer = @"answer";
 
-NSString * SKUserActivityFromDateKey = @"fromdate";
-NSString * SKUserActivityToDateKey = @"todate";
+NSString * const SKUserActivityFromDateKey = @"fromdate";
+NSString * const SKUserActivityToDateKey = @"todate";
 
 @implementation SKUserActivity
 

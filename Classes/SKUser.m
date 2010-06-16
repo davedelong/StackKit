@@ -26,33 +26,33 @@
 #import "StackKit_Internal.h"
 
 NSString * const SKUserID = __SKUserID;
-NSString * SKUserReputation = @"reputation";
-NSString * SKUserCreationDate = @"creation_date";
-NSString * SKUserDisplayName = @"display_name";
-NSString * SKUserEmailHash = @"email_hash";
-NSString * SKUserAge = @"age";
-NSString * SKUserLastAccessDate = @"last_access_date";
-NSString * SKUserWebsiteURL = @"website_url";
-NSString * SKUserLocation = @"location";
-NSString * SKUserAboutMe = @"about_me";
-NSString * SKUserViews = @"view_count";
-NSString * SKUserUpVotes = @"up_vote_count";
-NSString * SKUserDownVotes = @"down_vote_count";
-NSString * SKUserType = @"user_type";
-NSString * SKUserAcceptRate = @"accept_rate";
+NSString * const SKUserReputation = @"reputation";
+NSString * const SKUserCreationDate = @"creation_date";
+NSString * const SKUserDisplayName = @"display_name";
+NSString * const SKUserEmailHash = @"email_hash";
+NSString * const SKUserAge = @"age";
+NSString * const SKUserLastAccessDate = @"last_access_date";
+NSString * const SKUserWebsiteURL = @"website_url";
+NSString * const SKUserLocation = @"location";
+NSString * const SKUserAboutMe = @"about_me";
+NSString * const SKUserViews = @"view_count";
+NSString * const SKUserUpVotes = @"up_vote_count";
+NSString * const SKUserDownVotes = @"down_vote_count";
+NSString * const SKUserType = @"user_type";
+NSString * const SKUserAcceptRate = @"accept_rate";
 
-NSString * SKUserQuestionCount = @"question_count";
-NSString * SKUserAnswerCount = @"answer_count";
+NSString * const SKUserQuestionCount = @"question_count";
+NSString * const SKUserAnswerCount = @"answer_count";
 
 NSString * const SKUserBadges = @"user_badges";
 
 //used internally
-NSUInteger SKUserDefaultPageSize = 35;
+NSUInteger const SKUserDefaultPageSize = 35;
 
-NSString * SKUserAccountTypeAnonymous = @"anonymous";
-NSString * SKUserAccountTypeUnregistered = @"unregistered";
-NSString * SKUserAccountTypeRegistered = @"registered";
-NSString * SKUserAccountTypeModerator = @"moderator";
+NSString * const SKUserAccountTypeAnonymous = @"anonymous";
+NSString * const SKUserAccountTypeUnregistered = @"unregistered";
+NSString * const SKUserAccountTypeRegistered = @"registered";
+NSString * const SKUserAccountTypeModerator = @"moderator";
 
 @implementation SKUser
 

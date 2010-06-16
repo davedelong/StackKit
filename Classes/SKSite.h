@@ -28,7 +28,7 @@
 #import "SKSiteDelegate.h"
 #import "SKDefinitions.h"
 
-extern NSString * SKSiteAPIKey;
+extern NSString * const SKSiteAPIKey;
 
 @class SKUser;
 @class SKFetchRequest;

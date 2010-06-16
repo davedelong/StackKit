@@ -23,4 +23,4 @@
  THE SOFTWARE.
  **/
 
-NSString * SKTestAPISite = @"http://api.stackoverflow.com";
+NSString * const SKTestAPISite = @"http://api.stackoverflow.com";

@@ -25,17 +25,17 @@
 
 #import "StackKit_Internal.h"
 
-NSString * SKBadgeID = @"badge_id";
-NSString * SKBadgeRank = @"rank";
-NSString * SKBadgeName = @"name";
-NSString * SKBadgeDescription = @"description";
-NSString * SKBadgeAwardCount = @"award_count";
-NSString * SKBadgeTagBased = @"tag_based";
-NSString * SKBadgesAwardedToUser = __SKUserID;
+NSString * const SKBadgeID = @"badge_id";
+NSString * const SKBadgeRank = @"rank";
+NSString * const SKBadgeName = @"name";
+NSString * const SKBadgeDescription = @"description";
+NSString * const SKBadgeAwardCount = @"award_count";
+NSString * const SKBadgeTagBased = @"tag_based";
+NSString * const SKBadgesAwardedToUser = __SKUserID;
 
-NSString * SKBadgeRankGoldKey = @"gold";
-NSString * SKBadgeRankSilverKey = @"silver";
-NSString * SKBadgeRankBronzeKey = @"bronze";
+NSString * const SKBadgeRankGoldKey = @"gold";
+NSString * const SKBadgeRankSilverKey = @"silver";
+NSString * const SKBadgeRankBronzeKey = @"bronze";
 
 @implementation SKBadge
 
