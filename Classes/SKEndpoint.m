@@ -156,6 +156,7 @@
 }
 
 - (BOOL) validateRangesInPredicate:(NSPredicate *)predicate {
+	if (predicate == nil) { return YES; }
 	if ([predicate isSimpleAndPredicate] == NO) {
 		//return YES if it's a comparison, else NO (more complex than simple AND)
 		if ([predicate isKindOfClass:[NSComparisonPredicate class]] == NO) {
