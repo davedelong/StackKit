@@ -31,7 +31,7 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
 	[request setEntity:[SKUser class]];
@@ -53,7 +53,7 @@
  
 
 - (void) testOldestUsers {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -81,7 +81,7 @@
 }
 
 - (void) testUserFilter {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -99,4 +99,5 @@
 	SKUser * davedelong = [matches objectAtIndex:0];
 	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"non-matching user id");
 }
+
 @end

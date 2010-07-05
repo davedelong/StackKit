@@ -30,7 +30,7 @@
 @implementation SKSiteTest
 
 - (void) testStatistics {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	NSDictionary * stats = [site statistics];
 	

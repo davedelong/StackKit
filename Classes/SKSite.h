@@ -50,7 +50,13 @@ extern NSString * const SKSiteAPIKey;
 
 @property NSTimeInterval timeoutInterval;
 
-+ (id) stackoverflowSite;
++ (id) stackOverflowSite;
+
++ (id) stackOverflowSiteWithAPIKey:(NSString *)key;
++ (id) metaStackOverflowSiteWithAPIKey:(NSString *)key;
++ (id) stackAppsSiteWithAPIKey:(NSString *)key;
++ (id) serverFaultSiteWithAPIKey:(NSString *)key;
++ (id) superUserSiteWithAPIKey:(NSString *)key;
 
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 

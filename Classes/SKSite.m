@@ -34,8 +34,28 @@ NSString * const SKSiteAPIKey = @"key";
 @synthesize APIURL;
 @synthesize timeoutInterval;
 
-+ (id) stackoverflowSite {
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:@"hqh1uqA-AkeM48lxWWPeWA"] autorelease];
++ (id) stackOverflowSite {
+	return [self stackOverflowSiteWithAPIKey:@"hqh1uqA-AkeM48lxWWPeWA"];
+}
+
++ (id) stackOverflowSiteWithAPIKey:(NSString *)key {
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:key] autorelease];
+}
+
++ (id) metaStackOverflowSiteWithAPIKey:(NSString *)key {
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.meta.stackoverflow.com"] APIKey:key] autorelease];
+}
+
++ (id) stackAppsSiteWithAPIKey:(NSString *)key {
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackapps.com"] APIKey:key] autorelease];
+}
+
++ (id) serverFaultSiteWithAPIKey:(NSString *)key {
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.serverfault.com"] APIKey:key] autorelease];
+}
+
++ (id) superUserSiteWithAPIKey:(NSString *)key {
+	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.superuser.com"] APIKey:key] autorelease];
 }
 
 #pragma mark -
@@ -138,6 +158,8 @@ NSString * const SKSiteAPIKey = @"key";
 		[fetchRequest setDelegate:nil];
 		[fetchRequest setCallback:callback];
 	}	
+	
+	[fetchRequest setSite:self];
 	
 	NSInvocationOperation * operation = [[NSInvocationOperation alloc] initWithTarget:fetchRequest selector:@selector(executeAsynchronously) object:nil];
 	[requestQueue addOperation:operation];

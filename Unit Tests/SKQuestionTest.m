@@ -29,8 +29,16 @@
 
 @implementation SKQuestionTest
 
+- (void) setUp {
+	didReceiveCallback = NO;
+}
+
+- (void) tearDown {
+	didReceiveCallback = NO;
+}
+
 - (void) testSingleQuestion {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -54,7 +62,7 @@
 }
 
 - (void) testTaggedQuestions {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -69,7 +77,7 @@
 }
 
 - (void) testQuestionSearch {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -88,7 +96,7 @@
 }
 
 - (void) testAllQuestions {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -108,6 +116,34 @@
 		STAssertTrue([[qDate laterDate:previous] isEqualToDate:previous], @"%@ is earlier than %@", previous, qDate);
 		previous = qDate;
 	}
+}
+
+- (void) testAsynchronousQuestion {
+	SKSite * s = [SKSite stackOverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKQuestionID, 3145955]];
+	[r setDelegate:self];
+	[s executeFetchRequest:r];
+	
+	while (didReceiveCallback == NO) {
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+	}
+	
+	STAssertNil([r error], @"Fetch request error should be nil: %@", [r error]);
+	
+	[r release];
+}
+
+- (void)fetchRequest:(SKFetchRequest *)request didFailWithError:(NSError *)error {
+	NSLog(@"failed: %@", error);
+	didReceiveCallback = YES;
+}
+
+- (void) fetchRequest:(SKFetchRequest *)request didReturnResults:(NSArray *)results {
+	NSLog(@"returned: %@", results);
+	didReceiveCallback = YES;
 }
 
 @end

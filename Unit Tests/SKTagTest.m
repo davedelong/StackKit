@@ -29,7 +29,7 @@
 @implementation SKTagTest
 
 - (void) testRecent {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
@@ -47,7 +47,7 @@
 }
 
 - (void) testPopular {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
@@ -67,7 +67,7 @@
 }
 
 - (void) testName {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
@@ -89,7 +89,7 @@
 }
 
 - (void) testUser {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
