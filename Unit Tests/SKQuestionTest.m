@@ -59,6 +59,7 @@
 	STAssertTrue([[q favoriteCount] intValue] > 0, @"Unexpected favorited count");
 	STAssertTrue([[q upVotes] intValue] == 7, @"Unexpected upvote count");
 	STAssertTrue([[q downVotes] intValue] == 0, @"Unexpected downvote count");
+	STAssertNotNil([q body], @"question body shouldn't be nil");
 }
 
 - (void) testTaggedQuestions {

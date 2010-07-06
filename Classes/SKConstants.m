@@ -30,6 +30,9 @@ NSString * const SKAPIVersion = @"0.9";
 
 NSUInteger const SKPageSizeLimitMax = 100;
 
+NSString * const SKQueryTrue = @"true";
+NSString * const SKQueryFalse = @"false";
+
 #pragma mark -
 #pragma mark Statistics Keys
 NSString * const SKStatsTotalQuestions = @"total_questions";
@@ -108,3 +111,4 @@ NSString * const SKQueryPageSize = @"pagesize";
 NSString * const SKQuerySort = @"sort";
 NSString * const SKQuerySortOrder = @"order";
 NSString * const SKQueryFilter = @"filter";
+NSString * const SKQueryBody = @"body";

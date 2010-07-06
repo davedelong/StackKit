@@ -39,6 +39,9 @@ extern NSString * const SKSortPopular;
 extern NSString * const SKSortReputation;
 extern NSString * const SKSortName;
 
+extern NSString * const SKQueryTrue;
+extern NSString * const SKQueryFalse;
+
 extern NSUInteger const SKPageSizeLimitMax;
 extern NSString * const SKQueryPage;
 extern NSString * const SKQueryPageSize;
@@ -49,6 +52,7 @@ extern NSString * const SKQueryToDate;
 extern NSString * const SKQueryMinSort;
 extern NSString * const SKQueryMaxSort;
 extern NSString * const SKQueryFilter;
+extern NSString * const SKQueryBody;
 
 /**
  There are some cases where constants can have different names but the same value.  For example:
