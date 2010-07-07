@@ -75,9 +75,11 @@
 	
 	NSError * e = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
+	[r release];
 	
 	for (SKQuestion * q in results) {
-		
+		NSSet * questionTags = [[q tags] valueForKey:SKTagName];
+		STAssertTrue([questionTags containsObject:@"cocoa"], @"Question (%@) is not tagged with \"cocoa\": %@", q, [q tags]);
 	}
 }
 

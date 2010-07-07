@@ -53,6 +53,7 @@ extern NSString * const SKQueryMinSort;
 extern NSString * const SKQueryMaxSort;
 extern NSString * const SKQueryFilter;
 extern NSString * const SKQueryBody;
+extern NSString * const SKQueryTagged;
 
 /**
  There are some cases where constants can have different names but the same value.  For example:

@@ -112,3 +112,4 @@ NSString * const SKQuerySort = @"sort";
 NSString * const SKQuerySortOrder = @"order";
 NSString * const SKQueryFilter = @"filter";
 NSString * const SKQueryBody = @"body";
+NSString * const SKQueryTagged = @"tagged";
