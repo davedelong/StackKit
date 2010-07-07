@@ -101,14 +101,13 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 		answersURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionAnswersURL]];
 		
 		NSArray * tagNames = [dictionary objectForKey:SKQuestionTags];
-		NSMutableArray * builtTags = [NSMutableArray arrayWithCapacity:[tagNames count]];
+		tags = [[NSMutableArray alloc] initWithCapacity:[tagNames count]];
 		for (NSString * name in tagNames) {
 			NSDictionary * tagDictionary = [NSDictionary dictionaryWithObject:name forKey:SKTagName];
 			SKTag * tag = [[SKTag alloc] initWithSite:aSite dictionaryRepresentation:tagDictionary];
-			[builtTags addObject:tag];
+			[tags addObject:tag];
 			[tag release];
 		}
-		tags = [builtTags retain];
 	}
 	return self;
 }
