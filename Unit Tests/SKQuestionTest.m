@@ -60,6 +60,10 @@
 	STAssertTrue([[q upVotes] intValue] == 7, @"Unexpected upvote count");
 	STAssertTrue([[q downVotes] intValue] == 0, @"Unexpected downvote count");
 	STAssertNotNil([q body], @"question body shouldn't be nil");
+	
+	NSSet * expectedTagNames = [NSSet setWithObjects:@"objective-c",@"properties",@"accessors",@"initialization",@"dealloc", nil];
+	NSSet * actualTagNames = [[q tags] valueForKey:SKTagName];
+	STAssertEqualObjects(expectedTagNames, actualTagNames, @"unexpected tags.  Expected %@, given %@", expectedTagNames, actualTagNames);
 }
 
 - (void) testTaggedQuestions {
