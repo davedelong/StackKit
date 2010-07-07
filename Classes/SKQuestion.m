@@ -105,7 +105,7 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 		for (NSString * name in tagNames) {
 			NSDictionary * tagDictionary = [NSDictionary dictionaryWithObject:name forKey:SKTagName];
 			SKTag * tag = [[SKTag alloc] initWithSite:aSite dictionaryRepresentation:tagDictionary];
-			[tags addObject:tag];
+			[(NSMutableArray *)tags addObject:tag];
 			[tag release];
 		}
 	}
