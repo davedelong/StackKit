@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5506C7BE11AB29B700C47C1B /* SKFetchRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5506C7E311ACBEBD00C47C1B /* SKDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */; };
+		5506C7E311ACBEBD00C47C1B /* SKDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */; };
 		5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7EB11ACF12300C47C1B /* SKFunctions.h */; };
 		5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7EC11ACF12300C47C1B /* SKFunctions.m */; };
@@ -141,7 +141,7 @@
 		55FA969C11616A65003A9CD7 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA969A11616A65003A9CD7 /* SKConstants.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
-		D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D402811BAB4EC00D5AD93 /* SKCallback.h */; };
+		D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D402811BAB4EC00D5AD93 /* SKCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D21D402B11BAB4EC00D5AD93 /* SKCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = D21D402911BAB4EC00D5AD93 /* SKCallback.m */; };
 		D25F172C110F675D009E11E5 /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = D25F172A110F675D009E11E5 /* SKBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D25F172D110F675D009E11E5 /* SKBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D25F172B110F675D009E11E5 /* SKBadge.m */; };
