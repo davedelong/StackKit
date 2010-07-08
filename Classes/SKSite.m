@@ -117,6 +117,26 @@ NSString * const SKSiteAPIKey = @"key";
  **/
 
 #pragma mark -
+#pragma mark Misc
+
+- (BOOL) isEqual:(id)anotherObject
+{
+	return [self isEqualToSite:anotherObject];
+}
+
+- (BOOL) isEqualToSite:(SKSite*)anotherSite
+{
+	//Sites are equal if:
+	//1. Their API keys are equal
+	//2. Their API URLs are equal
+	if([[self APIKey] isEqual:[anotherSite APIKey]]&&[[self APIURL] isEqual:[anotherSite APIURL]]) {
+		return YES;
+	}
+	
+	return NO;
+}
+
+#pragma mark -
 #pragma mark Fetch Requests
 
 - (SKUser *) userWithID:(NSNumber *)aUserID {
