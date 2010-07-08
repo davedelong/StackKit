@@ -29,6 +29,7 @@
 
 - (BOOL) validateEntity:(Class)entity {
 	if (entity == [SKAnswer class]) {
+		[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 		return YES;
 	}
 	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];

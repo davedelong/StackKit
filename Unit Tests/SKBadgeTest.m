@@ -30,7 +30,7 @@
 @implementation SKBadgeTest
 
 - (void) testBadgesByName {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
@@ -96,7 +96,7 @@
 }
 
 - (void) testBadgesByTag {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
@@ -114,7 +114,7 @@
 }
 
 - (void) testBadgesForUser {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
@@ -136,7 +136,7 @@
 }
 
 - (void) testUserBadges {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];

@@ -28,12 +28,12 @@
 @implementation SKQuestionsTaggedEndpoint
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	NSLog(@"FIX ME: %s", __PRETTY_FUNCTION__);
 	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKQuestionTags] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
 		id tags = [predicate constantValueForLeftKeyPath:SKQuestionTags];
 		if (tags) {
 			NSArray * names = SKExtractTagNames(tags);
-			[self setPath:[NSString stringWithFormat:@"/questions/tagged/%@", [names componentsJoinedByString:@";"]]];
+			[self setPath:@"/questions"];
+			[[self query] setObject:[names componentsJoinedByString:@";"] forKey:SKQueryTagged];
 			return YES;
 		}
 	}

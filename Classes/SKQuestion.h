@@ -59,7 +59,7 @@ extern NSString * const SKQuestionFavoritedDate;
 @interface SKQuestion : SKQAPost {
 	NSNumber * questionID;
 	
-	NSSet * tags;
+	NSArray * tags;
 	NSNumber * answerCount;
 	NSNumber * acceptedAnswerID;
 	NSNumber * favoriteCount;
@@ -74,7 +74,7 @@ extern NSString * const SKQuestionFavoritedDate;
 }
 
 @property (readonly) NSNumber * questionID;
-@property (readonly) NSSet * tags;
+@property (readonly) NSArray * tags;
 @property (readonly) NSNumber * answerCount;
 @property (readonly) NSNumber * acceptedAnswerID;
 @property (readonly) NSNumber * favoriteCount;

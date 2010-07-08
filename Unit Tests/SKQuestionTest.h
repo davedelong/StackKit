@@ -24,10 +24,12 @@
  **/
 
 #import <SenTestingKit/SenTestingKit.h>
+#import <StackKit/StackKit.h>
 
+@protocol SKFetchRequestDelegate;
 
-@interface SKQuestionTest : SenTestCase {
-
+@interface SKQuestionTest : SenTestCase <SKFetchRequestDelegate> {
+	BOOL didReceiveCallback;
 }
 
 @end

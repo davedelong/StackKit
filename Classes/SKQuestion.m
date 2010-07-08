@@ -99,11 +99,21 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 		timelineURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionTimelineURL]];
 		commentsURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionCommentsURL]];
 		answersURL = [[NSURL alloc] initWithString:[dictionary objectForKey:SKQuestionAnswersURL]];
+		
+		NSArray * tagNames = [dictionary objectForKey:SKQuestionTags];
+		tags = [[NSMutableArray alloc] initWithCapacity:[tagNames count]];
+		for (NSString * name in tagNames) {
+			NSDictionary * tagDictionary = [NSDictionary dictionaryWithObject:name forKey:SKTagName];
+			SKTag * tag = [[SKTag alloc] initWithSite:aSite dictionaryRepresentation:tagDictionary];
+			[(NSMutableArray *)tags addObject:tag];
+			[tag release];
+		}
 	}
 	return self;
 }
 
 - (void) dealloc {
+	[tags release];
 	[questionID release];
 	[answerCount release];
 	[acceptedAnswerID release];

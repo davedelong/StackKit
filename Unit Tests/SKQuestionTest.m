@@ -29,8 +29,16 @@
 
 @implementation SKQuestionTest
 
+- (void) setUp {
+	didReceiveCallback = NO;
+}
+
+- (void) tearDown {
+	didReceiveCallback = NO;
+}
+
 - (void) testSingleQuestion {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -51,10 +59,15 @@
 	STAssertTrue([[q favoriteCount] intValue] > 0, @"Unexpected favorited count");
 	STAssertTrue([[q upVotes] intValue] == 7, @"Unexpected upvote count");
 	STAssertTrue([[q downVotes] intValue] == 0, @"Unexpected downvote count");
+	STAssertNotNil([q body], @"question body shouldn't be nil");
+	
+	NSSet * expectedTagNames = [NSSet setWithObjects:@"objective-c",@"properties",@"accessors",@"initialization",@"dealloc", nil];
+	NSSet * actualTagNames = [[q tags] valueForKey:SKTagName];
+	STAssertEqualObjects(expectedTagNames, actualTagNames, @"unexpected tags.  Expected %@, given %@", expectedTagNames, actualTagNames);
 }
 
 - (void) testTaggedQuestions {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -62,14 +75,16 @@
 	
 	NSError * e = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
+	[r release];
 	
 	for (SKQuestion * q in results) {
-		
+		NSSet * questionTags = [[q tags] valueForKey:SKTagName];
+		STAssertTrue([questionTags containsObject:@"cocoa"], @"Question (%@) is not tagged with \"cocoa\": %@", q, [q tags]);
 	}
 }
 
 - (void) testQuestionSearch {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -88,7 +103,7 @@
 }
 
 - (void) testAllQuestions {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -108,6 +123,34 @@
 		STAssertTrue([[qDate laterDate:previous] isEqualToDate:previous], @"%@ is earlier than %@", previous, qDate);
 		previous = qDate;
 	}
+}
+
+- (void) testAsynchronousQuestion {
+	SKSite * s = [SKSite stackOverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKQuestionID, 3145955]];
+	[r setDelegate:self];
+	[s executeFetchRequest:r];
+	
+	while (didReceiveCallback == NO) {
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+	}
+	
+	STAssertNil([r error], @"Fetch request error should be nil: %@", [r error]);
+	
+	[r release];
+}
+
+- (void)fetchRequest:(SKFetchRequest *)request didFailWithError:(NSError *)error {
+	NSLog(@"failed: %@", error);
+	didReceiveCallback = YES;
+}
+
+- (void) fetchRequest:(SKFetchRequest *)request didReturnResults:(NSArray *)results {
+	NSLog(@"returned: %@", results);
+	didReceiveCallback = YES;
 }
 
 @end

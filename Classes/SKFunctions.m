@@ -128,6 +128,8 @@ NSArray * SKExtractTagNames(id value) {
 			[names addObject:SKExtractTagName(tagValue)];
 		}
 		return names;
+	} else if ([value isKindOfClass:[NSString class]]) {
+		return [NSArray arrayWithObject:value];
 	}
 	return nil;
 }

@@ -30,7 +30,7 @@
 @implementation SKCommentTest
 
 - (void) testIndividualComment {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
@@ -49,7 +49,7 @@
 }
 
 - (void) testUserComments {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
@@ -69,7 +69,7 @@
 }
 
 - (void) testUserCommentsInDateRange {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	NSDate * fromDate = [NSDate dateWithNaturalLanguageString:@"1 Jan 2010"];
 	NSDate * toDate = [NSDate dateWithNaturalLanguageString:@"3 Jan 2010"];
@@ -94,7 +94,7 @@
 }
 
 - (void) testUserCommentsInScoreRange {
-	SKSite * s = [SKSite stackoverflowSite];
+	SKSite * s = [SKSite stackOverflowSite];
 	
 	int lowerScore = 3;
 	int higherScore = 5;
