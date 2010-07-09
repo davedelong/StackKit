@@ -94,7 +94,9 @@ NSArray * _skKnownSites = nil;
 			return aSite;
 		}
 	}
-	return nil;
+	
+	NSDictionary * tempInfo = [NSDictionary dictionaryWithObject:[aURL absoluteString] forKey:@"api_endpoint"];
+	return [[[self alloc] initWithSite:nil dictionaryRepresentation:tempInfo] autorelease];
 }
 
 + (id) stackOverflowSite {
