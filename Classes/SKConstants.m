@@ -27,6 +27,7 @@
 #import "SKConstants_Internal.h"
 
 NSString * const SKAPIVersion = @"0.9";
+NSString * const SKFrameworkAPIKey = @"hqh1uqA-AkeM48lxWWPeWA";
 
 NSUInteger const SKPageSizeLimitMax = 100;
 

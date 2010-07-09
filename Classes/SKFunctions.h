@@ -23,7 +23,11 @@
  THE SOFTWARE.
  **/
 
-#import <Foundation/Foundation.h>
+#ifdef StackKitMobile
+#import <UIKit/UIKit.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
 
 @class SKFetchRequest;
 
@@ -46,3 +50,9 @@ NSArray * SKExtractTagNames(id value);
 
 NSDate * SKExtractDate(id value);
 NSUInteger SKExtractInteger(id value);
+
+#ifdef StackKitMobile
+UIColor * SKColorFromHexString(NSString * hexString);
+#else
+NSColor * SKColorFromHexString(NSString * hexString);
+#endif

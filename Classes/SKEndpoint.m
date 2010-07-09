@@ -236,7 +236,7 @@
 		[[self query] setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKQueryPage];
 	}
 	
-	NSString * urlBase = [[[[self request] site] APIURL] absoluteString];
+	NSString * urlBase = [[[[self request] site] apiURL] absoluteString];
 	NSString * apiPath = [NSString stringWithFormat:@"%@?%@", [self path], [[self query] queryString]];
 	
 	NSString * fullAPIString = [urlBase stringByAppendingString:apiPath];

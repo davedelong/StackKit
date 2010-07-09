@@ -25,6 +25,8 @@
 
 #import "SKFunctions.h"
 
+extern NSString * const SKFrameworkAPIKey;
+
 extern NSString * const SKSortCreation;
 extern NSString * const SKSortActivity;
 extern NSString * const SKSortVotes;

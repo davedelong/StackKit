@@ -155,3 +155,31 @@ NSUInteger SKExtractInteger(id value) {
 		return [[value description] integerValue];
 	}
 }
+
+#if StackKitMobile
+
+UIColor * SKColorFromHexString(NSString * hexString) {
+	NSScanner * scanner = [NSScanner scannerWithString:hexString];
+	unsigned int baseColor = 0;
+	[scanner scanHexInt:&baseColor]; 
+	float red   = ((baseColor & 0xFF0000) >> 16) / 255.0f;
+	float green = ((baseColor & 0x00FF00) >>  8) / 255.0f;
+	float blue  =  (baseColor & 0x0000FF) / 255.0f;
+	
+	return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+}
+
+#else
+
+NSColor * SKColorFromHexString(NSString * hexString) {
+	NSScanner * scanner = [NSScanner scannerWithString:hexString];
+	unsigned int baseColor = 0;
+	[scanner scanHexInt:&baseColor]; 
+	float red   = ((baseColor & 0xFF0000) >> 16) / 255.0f;
+	float green = ((baseColor & 0x00FF00) >>  8) / 255.0f;
+	float blue  =  (baseColor & 0x0000FF) / 255.0f;
+	
+	return [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1.0];
+}
+
+#endif

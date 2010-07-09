@@ -27,45 +27,127 @@
 
 NSString * const SKSiteAPIKey = @"key";
 
+NSString * const SKSiteStylingLinkColor = @"link_color";
+NSString * const SKSiteStylingTagColor = @"tag_foreground_color";
+NSString * const SKSiteStylingTagBackgroundColor = @"tag_background_color";
+
+NSArray * _skKnownSites = nil;
+
 @implementation SKSite
 
 @synthesize delegate;
-@synthesize APIKey;
-@synthesize APIURL;
+@synthesize apiKey;
+@synthesize apiURL;
 @synthesize timeoutInterval;
 
+@synthesize name;
+@synthesize siteURL;
+@synthesize logoURL;
+@synthesize iconURL;
+@synthesize summary;
+@synthesize state;
+@synthesize stylingInformation;
+
+#pragma mark Site Constructors
+
++ (void) loadSites {
+	NSString * stackAuth = [NSString stringWithFormat:@"http://stackauth.com/%@/sites", SKAPIVersion];
+	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:stackAuth]];
+	
+	NSHTTPURLResponse * response = nil;
+	NSError * error = nil;
+	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	
+	if (error != nil) { return; }
+	if (data == nil) { return; }
+	
+	NSString * dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	NSDictionary * sitesDictionary = [dataString JSONValue];
+	[dataString release];
+	
+	if (sitesDictionary == nil) { return; }
+	
+	NSArray * sites = [sitesDictionary objectForKey:@"api_sites"];
+	
+	_skKnownSites = [[NSMutableArray alloc] init];
+	for (NSDictionary * siteDictionary in sites) {
+		SKSite * thisSite = [[SKSite alloc] initWithSite:nil dictionaryRepresentation:siteDictionary];
+		[(NSMutableArray *)_skKnownSites addObject:thisSite];
+		[thisSite release];
+	}
+}
+
++ (NSArray *) knownSites {
+	if (_skKnownSites == nil) {
+		[self loadSites];
+	}
+	return _skKnownSites;
+}
+
+#pragma mark -
+
++ (id) siteWithAPIURL:(NSURL *)aURL {
+	NSString * apiHost = [aURL host];
+	for (SKSite * aSite in [[self class] knownSites]) {
+		NSURL * siteAPIURUL = [aSite apiURL];
+		if ([[siteAPIURUL host] isEqual:apiHost]) {
+			return aSite;
+		}
+	}
+	return nil;
+}
+
 + (id) stackOverflowSite {
-	return [self stackOverflowSiteWithAPIKey:@"hqh1uqA-AkeM48lxWWPeWA"];
+	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
 }
 
-+ (id) stackOverflowSiteWithAPIKey:(NSString *)key {
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"] APIKey:key] autorelease];
++ (id) metaStackOverflowSite {
+	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.meta.stackoverflow.com"]];
 }
 
-+ (id) metaStackOverflowSiteWithAPIKey:(NSString *)key {
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.meta.stackoverflow.com"] APIKey:key] autorelease];
++ (id) stackAppsSite {
+	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.stackapps.com"]];
 }
 
-+ (id) stackAppsSiteWithAPIKey:(NSString *)key {
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.stackapps.com"] APIKey:key] autorelease];
++ (id) serverFaultSite {
+	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.serverfault.com"]];
 }
 
-+ (id) serverFaultSiteWithAPIKey:(NSString *)key {
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.serverfault.com"] APIKey:key] autorelease];
-}
-
-+ (id) superUserSiteWithAPIKey:(NSString *)key {
-	return [[[self alloc] initWithAPIURL:[NSURL URLWithString:@"http://api.superuser.com"] APIKey:key] autorelease];
++ (id) superUserSite {
+	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.superuser.com"]];
 }
 
 #pragma mark -
 #pragma mark Init/Dealloc
 
-- (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key {
+							 
+							 
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:nil]) {
-		NSString * urlPath = [[aURL path] stringByAppendingPathComponent:SKAPIVersion];
-		APIURL = [[NSURL alloc] initWithString:urlPath relativeToURL:aURL];
-		[self setAPIKey:key];
+		[self setApiKey:SKFrameworkAPIKey];
+		name = [[dictionary objectForKey:@"name"] retain];
+		logoURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"logo_url"]];
+		apiURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"api_endpoint"]];
+		siteURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"site_url"]];
+		iconURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"icon_url"]];
+		summary = [[dictionary objectForKey:@"description"] retain];
+		
+		stylingInformation = [[NSMutableDictionary alloc] init];
+		NSDictionary * styleDict = [dictionary objectForKey:@"styling"];
+		[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:SKSiteStylingLinkColor]) forKey:SKSiteStylingLinkColor];
+		[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:SKSiteStylingTagColor]) forKey:SKSiteStylingTagColor];
+		[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:SKSiteStylingTagBackgroundColor]) forKey:SKSiteStylingTagBackgroundColor];
+		
+		state = SKSiteStateNormal;
+		NSString * stateString = [dictionary objectForKey:@"state"];
+		if ([stateString isEqual:@"linked_meta"]) {
+			state = SKSiteStateLinkedMeta;
+		} else if ([stateString isEqual:@"open_beta"]) {
+			state = SKSiteStateOpenBeta;
+		} else if ([stateString isEqual:@"closed_beta"]) {
+			state = SKSiteStateClosedBeta;
+		}
+		
 		
 		timeoutInterval = 60.0;
 		requestQueue = [[NSOperationQueue alloc] init];
@@ -75,8 +157,14 @@ NSString * const SKSiteAPIKey = @"key";
 }
 
 - (void) dealloc {
-	[APIURL release];
-	[APIKey release];
+	[apiKey release];
+	[name release];
+	[logoURL release];
+	[apiURL release];
+	[siteURL release];
+	[iconURL release];
+	[summary release];
+	[stylingInformation release];
 	
 	[requestQueue cancelAllOperations];
 	[requestQueue release];
@@ -91,7 +179,7 @@ NSString * const SKSiteAPIKey = @"key";
 	return [[self retain] autorelease];
 }
 
-- (NSString *) APIVersion {
+- (NSString *) apiVersion {
 	return SKAPIVersion;
 }
 
@@ -129,7 +217,7 @@ NSString * const SKSiteAPIKey = @"key";
 	//Sites are equal if:
 	//1. Their API keys are equal
 	//2. Their API URLs are equal
-	if([[self APIKey] isEqual:[anotherSite APIKey]]&&[[self APIURL] isEqual:[anotherSite APIURL]]) {
+	if([[self apiKey] isEqual:[anotherSite apiKey]]&&[[self apiURL] isEqual:[anotherSite apiURL]]) {
 		return YES;
 	}
 	
@@ -198,10 +286,10 @@ NSString * const SKSiteAPIKey = @"key";
 #pragma mark Site information
 
 - (NSDictionary *) statisticsWithError:(NSError **)error {
-	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self APIKey] forKey:SKSiteAPIKey];
+	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self apiKey] forKey:SKSiteAPIKey];
 	NSString * statsPath = [NSString stringWithFormat:@"stats?%@", [queryDictionary queryString]];
 	
-	NSString * statsCall = [[[self APIURL] absoluteString] stringByAppendingPathComponent:statsPath];
+	NSString * statsCall = [[[self apiURL] absoluteString] stringByAppendingPathComponent:statsPath];
 	
 	NSURL * statsURL = [NSURL URLWithString:statsCall];
 	
