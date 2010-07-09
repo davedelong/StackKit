@@ -89,8 +89,8 @@ NSArray * _skKnownSites = nil;
 + (id) siteWithAPIURL:(NSURL *)aURL {
 	NSString * apiHost = [aURL host];
 	for (SKSite * aSite in [[self class] knownSites]) {
-		NSURL * siteAPIURUL = [aSite apiURL];
-		if ([[siteAPIURUL host] isEqual:apiHost]) {
+		NSURL * siteAPIURL = [aSite apiURL];
+		if ([[siteAPIURL host] isEqual:apiHost]) {
 			return aSite;
 		}
 	}
@@ -127,7 +127,8 @@ NSArray * _skKnownSites = nil;
 		[self setApiKey:SKFrameworkAPIKey];
 		name = [[dictionary objectForKey:@"name"] retain];
 		logoURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"logo_url"]];
-		apiURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"api_endpoint"]];
+		NSString * apiPath = [dictionary objectForKey:@"api_endpoint"];
+		apiURL = [[NSURL alloc] initWithString:[apiPath stringByAppendingPathComponent:SKAPIVersion]];
 		siteURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"site_url"]];
 		iconURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"icon_url"]];
 		summary = [[dictionary objectForKey:@"description"] retain];
