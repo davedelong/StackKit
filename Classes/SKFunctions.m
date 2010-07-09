@@ -171,10 +171,10 @@ void SKScanHexColor(NSString * hexString, float * red, float * green, float * bl
 	unsigned int baseValue;
 	[[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
 	
-	if (red) { *red = ((baseValue >> 24) & 0xFF); }
-	if (green) { *green = ((baseValue >> 16) & 0xFF); }
-	if (blue) { *blue = ((baseValue >> 8) & 0xFF); }
-	if (alpha) { *alpha = ((baseValue >> 0) & 0xFF); }
+	if (red) { *red = ((baseValue >> 24) & 0xFF)/255.0f; }
+	if (green) { *green = ((baseValue >> 16) & 0xFF)/255.0f; }
+	if (blue) { *blue = ((baseValue >> 8) & 0xFF)/255.0f; }
+	if (alpha) { *alpha = ((baseValue >> 0) & 0xFF)/255.0f; }
 }
 
 #if StackKitMobile
