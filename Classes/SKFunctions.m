@@ -177,11 +177,11 @@ void SKScanHexColor(NSString * hexString, float * red, float * green, float * bl
 	if (alpha) { *alpha = ((baseValue >> 0) & 0xFF)/255.0f; }
 }
 
-#if StackKitMobile
+#ifdef StackKitMobile
 
 UIColor * SKColorFromHexString(NSString * hexString) {
 	float red, green, blue, alpha;
-	SKScanHexColor(hexString, &red, &green, &blue, &alpha)
+	SKScanHexColor(hexString, &red, &green, &blue, &alpha);
 	
 	return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
