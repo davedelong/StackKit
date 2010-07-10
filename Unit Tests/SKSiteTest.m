@@ -38,4 +38,16 @@
 	STAssertEqualObjects(apiVersion, SKAPIVersion, @"API versions do not match!");
 }
 
+- (void) testMetaSite {
+	SKSite * so = [SKSite stackOverflowSite];
+	SKSite * metaSO = [so metaSite];
+	
+	STAssertEqualObjects([[metaSO apiURL] host], @"api.meta.stackoverflow.com", @"Unexpected meta URL: %@", [metaSO apiURL]);
+	
+	SKSite * su = [SKSite superUserSite];
+	SKSite * metaSU = [su metaSite];
+	
+	STAssertNil(metaSU, @"unexpected SuperUser meta site: %@", [metaSU apiURL]);
+}
+
 @end

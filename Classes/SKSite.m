@@ -130,7 +130,7 @@ NSArray * _skKnownSites = nil;
 		name = [[dictionary objectForKey:@"name"] retain];
 		logoURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"logo_url"]];
 		NSString * apiPath = [dictionary objectForKey:@"api_endpoint"];
-		apiURL = [[NSURL alloc] initWithString:[apiPath stringByAppendingPathComponent:SKAPIVersion]];
+		apiURL = [[NSURL alloc] initWithString:[apiPath stringByAppendingFormat:@"/%@", SKAPIVersion]];
 		siteURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"site_url"]];
 		iconURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"icon_url"]];
 		summary = [[dictionary objectForKey:@"description"] retain];
@@ -184,6 +184,33 @@ NSArray * _skKnownSites = nil;
 
 - (NSString *) apiVersion {
 	return SKAPIVersion;
+}
+
+- (SKSite *) metaSite {
+	NSString * scheme = [[self apiURL] scheme];
+	
+	NSString * host = [[self apiURL] host];
+	NSString * path = [[self apiURL] path];
+	
+	NSMutableArray * hostComponents = [[host componentsSeparatedByString:@"."] mutableCopy];
+	if ([[hostComponents objectAtIndex:0] isEqual:@"api"]) {
+		[hostComponents insertObject:@"meta" atIndex:1];
+	} else {
+		[hostComponents insertObject:@"meta" atIndex:0];
+	}
+	host = [hostComponents componentsJoinedByString:@"."];
+	[hostComponents release];
+	
+	NSURL * metaAPIURL = [[[NSURL alloc] initWithScheme:scheme host:host path:path] autorelease];
+	NSLog(@"meta: %@", metaAPIURL);
+	
+	for (SKSite * potentialSite in _skKnownSites) {
+		if ([[[potentialSite apiURL] host] isEqual:[metaAPIURL host]]) {
+			return potentialSite;
+		}
+	}
+	
+	return nil;
 }
 
 /**
