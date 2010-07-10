@@ -62,7 +62,7 @@
 	STAssertNotNil([q body], @"question body shouldn't be nil");
 	
 	NSSet * expectedTagNames = [NSSet setWithObjects:@"objective-c",@"properties",@"accessors",@"initialization",@"dealloc", nil];
-	NSSet * actualTagNames = [[q tags] valueForKey:SKTagName];
+	NSSet * actualTagNames = [NSSet setWithArray:[[q tags] valueForKey:SKTagName]];
 	STAssertEqualObjects(expectedTagNames, actualTagNames, @"unexpected tags.  Expected %@, given %@", expectedTagNames, actualTagNames);
 }
 

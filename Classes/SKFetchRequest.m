@@ -76,7 +76,7 @@ NSString * SKErrorMessageKey = @"message";
 
 - (NSMutableDictionary *) defaultQueryDictionary {
 	NSMutableDictionary * d = [NSMutableDictionary dictionary];
-	[d setObject:[[self site] APIKey] forKey:SKSiteAPIKey];
+	[d setObject:[[self site] apiKey] forKey:SKSiteAPIKey];
 	
 	return d;
 }
@@ -127,7 +127,7 @@ NSString * SKErrorMessageKey = @"message";
 	
 	NSArray * objects = nil;
 	
-	NSString * apiKey = [[self site] APIKey];
+	NSString * apiKey = [[self site] apiKey];
 	if (apiKey == nil) {
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidApplicationPublicKey userInfo:nil]];
 		goto cleanup;

@@ -30,12 +30,32 @@
 
 extern NSString * const SKSiteAPIKey;
 
+extern NSString * const SKSiteStylingLinkColor;
+extern NSString * const SKSiteStylingTagColor;
+extern NSString * const SKSiteStylingTagBackgroundColor;
+
+typedef enum {
+	SKSiteStateNormal = 0,
+	SKSiteStateLinkedMeta = 1,
+	SKSiteStateOpenBeta = 2,
+	SKSiteStateClosedBeta = 3
+} SKSiteState;
+
 @class SKUser;
 @class SKFetchRequest;
 
 @interface SKSite : SKObject {
-	NSString * APIKey;
-	NSURL * APIURL;
+	NSString * apiKey;
+	NSURL * apiURL;
+	NSString * name;
+	NSURL * siteURL;
+	NSURL * logoURL;
+	NSURL * iconURL;
+	NSString * summary;
+	
+	SKSiteState state;
+	
+	NSDictionary * stylingInformation;
 	
 	NSTimeInterval timeoutInterval;
 	
@@ -44,21 +64,31 @@ extern NSString * const SKSiteAPIKey;
 }
 
 @property (assign) id<SKSiteDelegate> delegate;
-@property (copy) NSString * APIKey;
-@property (readonly) NSURL * APIURL;
-@property (readonly) NSString * APIVersion;
+@property (copy) NSString * apiKey;
+@property (readonly) NSURL * apiURL;
+@property (readonly) NSString * apiVersion;
+
+@property (readonly) NSString * name;
+@property (readonly) NSURL * siteURL;
+@property (readonly) NSURL * logoURL;
+@property (readonly) NSURL * iconURL;
+@property (readonly) NSString * summary;
+@property (readonly) SKSiteState state;
+@property (readonly) NSDictionary * stylingInformation;
 
 @property NSTimeInterval timeoutInterval;
 
++ (NSArray *) knownSites;
+
++ (id) siteWithAPIURL:(NSURL *)aURL;
+
 + (id) stackOverflowSite;
++ (id) metaStackOverflowSite;
++ (id) stackAppsSite;
++ (id) serverFaultSite;
++ (id) superUserSite;
 
-+ (id) stackOverflowSiteWithAPIKey:(NSString *)key;
-+ (id) metaStackOverflowSiteWithAPIKey:(NSString *)key;
-+ (id) stackAppsSiteWithAPIKey:(NSString *)key;
-+ (id) serverFaultSiteWithAPIKey:(NSString *)key;
-+ (id) superUserSiteWithAPIKey:(NSString *)key;
-
-- (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
+- (SKSite *) metaSite;
 
 - (BOOL) isEqualToSite:(SKSite*)anotherSite;
 

@@ -155,3 +155,44 @@ NSUInteger SKExtractInteger(id value) {
 		return [[value description] integerValue];
 	}
 }
+
+void SKScanHexColor(NSString * hexString, float * red, float * green, float * blue, float * alpha) {
+	NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
+	if([cleanString length] == 3) {
+		cleanString = [NSString stringWithFormat:@"%@%@%@%@%@%@", 
+					   [cleanString substringWithRange:NSMakeRange(0, 1)],[cleanString substringWithRange:NSMakeRange(0, 1)],
+					   [cleanString substringWithRange:NSMakeRange(1, 1)],[cleanString substringWithRange:NSMakeRange(1, 1)],
+					   [cleanString substringWithRange:NSMakeRange(2, 1)],[cleanString substringWithRange:NSMakeRange(2, 1)]];
+	}
+	if([cleanString length] == 6) {
+		cleanString = [cleanString stringByAppendingString:@"ff"];
+	}
+	
+	unsigned int baseValue;
+	[[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
+	
+	if (red) { *red = ((baseValue >> 24) & 0xFF)/255.0f; }
+	if (green) { *green = ((baseValue >> 16) & 0xFF)/255.0f; }
+	if (blue) { *blue = ((baseValue >> 8) & 0xFF)/255.0f; }
+	if (alpha) { *alpha = ((baseValue >> 0) & 0xFF)/255.0f; }
+}
+
+#if StackKitMobile
+
+UIColor * SKColorFromHexString(NSString * hexString) {
+	float red, green, blue, alpha;
+	SKScanHexColor(hexString, &red, &green, &blue, &alpha)
+	
+	return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
+#else
+
+NSColor * SKColorFromHexString(NSString * hexString) {
+	float red, green, blue, alpha;
+	SKScanHexColor(hexString, &red, &green, &blue, &alpha);
+	
+	return [NSColor colorWithDeviceRed:red green:green blue:blue alpha:alpha];
+}
+
+#endif

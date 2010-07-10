@@ -51,7 +51,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagNumberOfTaggedQuestions ascending:YES] autorelease]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagNumberOfTaggedQuestions ascending:NO] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];

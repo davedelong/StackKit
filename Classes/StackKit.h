@@ -23,6 +23,12 @@
  THE SOFTWARE.
  **/
 
+#ifdef StackKitMobile
+#import <UIKit/UIKit.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
+
 #import "SKObject.h"
 
 #import "SKFetchRequest.h"
