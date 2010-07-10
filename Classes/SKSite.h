@@ -90,6 +90,7 @@ typedef enum {
 
 - (SKSite *) qaSite;
 - (SKSite *) metaSite;
+- (SKSite *) companionSite;
 
 - (BOOL) isEqualToSite:(SKSite*)anotherSite;
 

@@ -200,7 +200,7 @@ NSArray * _skKnownSites = nil;
 	[newHostComponents release];
 	
 	for (SKSite * potentialSite in [[self class] knownSites]) {
-		if ([[[potentialSite apiURL] host] isEqual:metaHost]) {
+		if ([[[potentialSite apiURL] host] isEqual:qaHost]) {
 			return potentialSite;
 		}		
 	}
@@ -233,6 +233,15 @@ NSArray * _skKnownSites = nil;
 	}
 	
 	return nil;
+}
+
+- (SKSite *) companionSite {
+	//if this is a meta site, return the QA site (and vice versa)
+	if ([[[self apiURL] host] rangeOfString:@".meta."].location != NSNotFound) {
+		return [self qaSite];
+	} else {
+		return [self metaSite];
+	}
 }
 
 /**
