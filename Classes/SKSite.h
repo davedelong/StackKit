@@ -88,6 +88,7 @@ typedef enum {
 + (id) serverFaultSite;
 + (id) superUserSite;
 
+- (SKSite *) qaSite;
 - (SKSite *) metaSite;
 
 - (BOOL) isEqualToSite:(SKSite*)anotherSite;

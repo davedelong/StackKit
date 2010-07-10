@@ -188,6 +188,25 @@ NSArray * _skKnownSites = nil;
 	return SKAPIVersion;
 }
 
+- (SKSite *) qaSite {
+	NSString * host = [[self apiURL] host];
+	NSArray * originalHostComponents = [host componentsSeparatedByString:@"."];
+	if ([originalHostComponents containsObject:@"meta"] == NO) { return self; }
+	
+	NSMutableArray * newHostComponents = [originalHostComponents mutableCopy];
+	[newHostComponents removeObject:@"meta"];
+	
+	NSString * qaHost = [newHostComponents componentsJoinedByString:@"."];
+	[newHostComponents release];
+	
+	for (SKSite * potentialSite in [[self class] knownSites]) {
+		if ([[[potentialSite apiURL] host] isEqual:metaHost]) {
+			return potentialSite;
+		}		
+	}
+	return nil;
+}
+
 - (SKSite *) metaSite {
 	//takes an API URL (api.somesite.com) and transforms it into (api.meta.somesite.com)
 	//and then looks for a known site that has the same hostname
@@ -207,7 +226,7 @@ NSArray * _skKnownSites = nil;
 	NSString * metaHost = [newHostComponents componentsJoinedByString:@"."];
 	[newHostComponents release];
 	
-	for (SKSite * potentialSite in _skKnownSites) {
+	for (SKSite * potentialSite in [[self class] knownSites]) {
 		if ([[[potentialSite apiURL] host] isEqual:metaHost]) {
 			return potentialSite;
 		}
