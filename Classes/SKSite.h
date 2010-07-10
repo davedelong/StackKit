@@ -60,7 +60,7 @@ extern NSString * const SKSiteAPIKey;
 
 - (id) initWithAPIURL:(NSURL *)aURL APIKey:(NSString*)key;
 
-- (id) isEqualToSite:(SKSite*)anotherSite;
+- (BOOL) isEqualToSite:(SKSite*)anotherSite;
 
 - (SKUser *) userWithID:(NSNumber *)aUserID;
 

@@ -101,7 +101,7 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
-	return ([[self badgeID] isEqual:[object badgeID]]);
+	return ([[self badgeID] isEqual:[object badgeID]]&&[[self site] isEqual:[object site]]);
 }
 
 - (void)dealloc

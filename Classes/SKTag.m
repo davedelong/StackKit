@@ -74,7 +74,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 		return NO;
 	}
 	
-	return [[self name] isEqual:[object name]];
+	return ([[self name] isEqual:[object name]]&&[[self site] isEqual:[object site]]);
 }
 
 - (void) dealloc {

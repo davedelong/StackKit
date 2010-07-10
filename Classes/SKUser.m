@@ -166,7 +166,7 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 
 - (BOOL) isEqual:(id)object {
 	if ([object isKindOfClass:[self class]] == NO) { return NO; }
-	return ([[self userID] isEqual:[object userID]]);
+	return ([[self userID] isEqual:[object userID]]&&[[self site] isEqual:[object site]]);
 }
 
 - (NSArray *) badges {

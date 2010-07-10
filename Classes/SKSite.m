@@ -121,6 +121,7 @@ NSString * const SKSiteAPIKey = @"key";
 
 - (BOOL) isEqual:(id)anotherObject
 {
+	if ([anotherObject isKindOfClass:[self class]] == NO) { return NO; }
 	return [self isEqualToSite:anotherObject];
 }
 
