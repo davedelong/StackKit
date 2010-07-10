@@ -95,6 +95,8 @@ NSArray * _skKnownSites = nil;
 		}
 	}
 	
+	//for some reason, StackAuth doesn't know about this site
+	//build an SKSite anyway, and if it fails, it fails
 	NSDictionary * tempInfo = [NSDictionary dictionaryWithObject:[aURL absoluteString] forKey:@"api_endpoint"];
 	return [[[self alloc] initWithSite:nil dictionaryRepresentation:tempInfo] autorelease];
 }
@@ -137,9 +139,9 @@ NSArray * _skKnownSites = nil;
 		
 		stylingInformation = [[NSMutableDictionary alloc] init];
 		NSDictionary * styleDict = [dictionary objectForKey:@"styling"];
-		[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:SKSiteStylingLinkColor]) forKey:SKSiteStylingLinkColor];
-		[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:SKSiteStylingTagColor]) forKey:SKSiteStylingTagColor];
-		[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:SKSiteStylingTagBackgroundColor]) forKey:SKSiteStylingTagBackgroundColor];
+		for (NSString * key in styleDict) {
+			[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:key]) forKey:key];
+		}
 		
 		state = SKSiteStateNormal;
 		NSString * stateString = [dictionary objectForKey:@"state"];
@@ -187,25 +189,26 @@ NSArray * _skKnownSites = nil;
 }
 
 - (SKSite *) metaSite {
-	NSString * scheme = [[self apiURL] scheme];
+	//takes an API URL (api.somesite.com) and transforms it into (api.meta.somesite.com)
+	//and then looks for a known site that has the same hostname
 	
 	NSString * host = [[self apiURL] host];
-	NSString * path = [[self apiURL] path];
 	
-	NSMutableArray * hostComponents = [[host componentsSeparatedByString:@"."] mutableCopy];
-	if ([[hostComponents objectAtIndex:0] isEqual:@"api"]) {
-		[hostComponents insertObject:@"meta" atIndex:1];
+	NSArray * originalHostComponents = [host componentsSeparatedByString:@"."];
+	//if we are a meta site, return ourself
+	if ([originalHostComponents containsObject:@"meta"]) { return self; }
+	
+	NSMutableArray * newHostComponents = [originalHostComponents mutableCopy];
+	if ([[newHostComponents objectAtIndex:0] isEqual:@"api"]) {
+		[newHostComponents insertObject:@"meta" atIndex:1];
 	} else {
-		[hostComponents insertObject:@"meta" atIndex:0];
+		[newHostComponents insertObject:@"meta" atIndex:0];
 	}
-	host = [hostComponents componentsJoinedByString:@"."];
-	[hostComponents release];
-	
-	NSURL * metaAPIURL = [[[NSURL alloc] initWithScheme:scheme host:host path:path] autorelease];
-	NSLog(@"meta: %@", metaAPIURL);
+	NSString * metaHost = [newHostComponents componentsJoinedByString:@"."];
+	[newHostComponents release];
 	
 	for (SKSite * potentialSite in _skKnownSites) {
-		if ([[[potentialSite apiURL] host] isEqual:[metaAPIURL host]]) {
+		if ([[[potentialSite apiURL] host] isEqual:metaHost]) {
 			return potentialSite;
 		}
 	}

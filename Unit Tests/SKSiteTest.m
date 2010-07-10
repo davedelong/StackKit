@@ -41,12 +41,13 @@
 - (void) testMetaSite {
 	SKSite * so = [SKSite stackOverflowSite];
 	SKSite * metaSO = [so metaSite];
-	
 	STAssertEqualObjects([[metaSO apiURL] host], @"api.meta.stackoverflow.com", @"Unexpected meta URL: %@", [metaSO apiURL]);
+	
+	SKSite * metaMetaSO = [metaSO metaSite];
+	STAssertTrue(metaSO == metaMetaSO, @"meta.stackoverflow.com should not have a meta site, but found: %@", [metaMetaSO apiURL]);
 	
 	SKSite * su = [SKSite superUserSite];
 	SKSite * metaSU = [su metaSite];
-	
 	STAssertNil(metaSU, @"unexpected SuperUser meta site: %@", [metaSU apiURL]);
 }
 
