@@ -231,8 +231,7 @@
 	
 	if ([fetchRequest fetchLimit] > 0) {
 		[[self query] setObject:[NSNumber numberWithUnsignedInteger:[fetchRequest fetchLimit]] forKey:SKQueryPageSize];
-		NSUInteger page = ([fetchRequest fetchOffset] % [fetchRequest fetchLimit]);
-		if (page == 0) { page = 1; }
+		NSUInteger page = ([fetchRequest fetchOffset] / [fetchRequest fetchLimit]) + 1;
 		[[self query] setObject:[NSNumber numberWithUnsignedInteger:page] forKey:SKQueryPage];
 	}
 	
