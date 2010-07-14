@@ -191,4 +191,13 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 	return tags;
 }
 
+- (NSURL *) gravatarIconURLForSize:(CGSize)size {
+	if (size.width != size.height) { return nil; }
+	int dimension = size.width;
+	if (dimension < 0) { dimension = 1; }
+	if (dimension > 512) { dimension = 512; }
+	
+	return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=%d", [self emailHash], dimension]];
+}
+
 @end

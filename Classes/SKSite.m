@@ -313,6 +313,9 @@ NSArray * _skKnownSites = nil;
 }
 
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest {
+	if (fetchRequest == nil) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidRequest reason:@"fetchRequest cannot be nil" userInfo:nil];
+	}
 	if([fetchRequest callback] == nil && [fetchRequest delegate] == nil) {
 		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest must have a delegate or callback specified" userInfo:nil];
 	}
@@ -338,6 +341,9 @@ NSArray * _skKnownSites = nil;
 
 #ifdef NS_BLOCKS_AVAILABLE
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestCompletionHandler)handler {
+	if (handler == nil) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"CompletionHandler cannot be nil" userInfo:nil];
+	}
 	SKCallback * callback = [SKCallback callbackWithCompletionHandler:handler];
 	[fetchRequest setCallback:callback];
 	[fetchRequest setDelegate:nil];

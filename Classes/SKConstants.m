@@ -63,6 +63,7 @@ NSString * const SKStatsSiteInfoIconURL = @"icon_url";
 #pragma mark Error Constants
 NSString * const SKErrorDomain = @"com.stackkit";
 NSString * const SKExceptionInvalidHandler = @"com.stackkit.skfetchrequest.handler";
+NSString * const SKExceptionInvalidRequest = @"com.stackkit.skfetchrequest";
 
 #pragma mark Error codes
 NSUInteger const SKErrorCodeNotImplemented = 1;

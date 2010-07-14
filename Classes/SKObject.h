@@ -32,7 +32,7 @@
 	__weak SKSite * site;
 }
 
-@property (readonly) SKSite * site;
+@property (readonly) __weak SKSite * site;
 
 - (id) initWithSite:(SKSite *)aSite;
 

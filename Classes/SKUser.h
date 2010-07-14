@@ -92,4 +92,6 @@ typedef enum {
 - (NSArray *) badges;
 - (NSArray *) tags;
 
+- (NSURL *) gravatarIconURLForSize:(CGSize)size;
+
 @end
