@@ -191,18 +191,17 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 	return tags;
 }
 
+- (NSURL *) gravatarIconURL {
+	return [self gravatarIconURLForSize:CGSizeMake(80, 80)];
+}
+
 - (NSURL *) gravatarIconURLForSize:(CGSize)size {
 	if (size.width != size.height) { return nil; }
 	int dimension = size.width;
-	if (dimension < 0) { dimension = 1; }
+	if (dimension <= 0) { dimension = 1; }
 	if (dimension > 512) { dimension = 512; }
 	
-	NSString * sizeParameter = @"";
-	if (dimension > 0) {
-		sizeParameter = [NSString stringWithFormat:@"?s=%d", dimension];
-	}
-	
-	return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@%@", [self emailHash], sizeParameter]];
+	return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=%d", [self emailHash], dimension]];
 }
 
 @end
