@@ -197,7 +197,12 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 	if (dimension < 0) { dimension = 1; }
 	if (dimension > 512) { dimension = 512; }
 	
-	return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=%d", [self emailHash], dimension]];
+	NSString * sizeParameter = @"";
+	if (dimension > 0) {
+		sizeParameter = [NSString stringWithFormat:@"?s=%d", dimension];
+	}
+	
+	return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@%@", [self emailHash], sizeParameter]];
 }
 
 @end
