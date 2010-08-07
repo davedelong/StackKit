@@ -31,6 +31,7 @@
 @synthesize sortDescriptor;
 @synthesize fetchLimit;
 @synthesize fetchOffset;
+@synthesize fetchTotal;
 @synthesize predicate;
 @synthesize error;
 @synthesize delegate;
@@ -40,6 +41,8 @@
 NSString * SKErrorResponseKey = @"error";
 NSString * SKErrorCodeKey = @"code";
 NSString * SKErrorMessageKey = @"message";
+
+NSString * SKFetchTotalKey = @"total";
 
 - (id) initWithSite:(SKSite *)aSite {
 	if (self = [super initWithSite:aSite]) {
@@ -54,6 +57,7 @@ NSString * SKErrorMessageKey = @"message";
 }
 
 - (void) dealloc {
+	[fetchTotal release];
 	[sortDescriptor release];
 	[predicate release];
 	[error release];
@@ -178,6 +182,8 @@ cleanup:
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeUnknownError userInfo:nil]];
 		return nil;
 	}
+	
+	fetchTotal = [[responseObjects objectForKey:SKFetchTotalKey] retain];
 	
 	//check for an error in the response
 	NSDictionary * errorDictionary = [responseObjects objectForKey:SKErrorResponseKey];

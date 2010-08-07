@@ -34,6 +34,7 @@
 	NSSortDescriptor * sortDescriptor;
 	NSUInteger fetchLimit;
 	NSUInteger fetchOffset;
+	NSNumber * fetchTotal;
 	NSPredicate * predicate;
 	
 	NSError * error;
@@ -47,6 +48,7 @@
 @property (retain) NSSortDescriptor * sortDescriptor;
 @property NSUInteger fetchLimit;
 @property NSUInteger fetchOffset;
+@property (readonly) NSNumber * fetchTotal;
 @property (retain) NSPredicate * predicate;
 @property (readonly, retain) NSError * error;
 @property (assign) id<SKFetchRequestDelegate> delegate;
