@@ -191,7 +191,7 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	  	<li>SKQuestionTags CONTAINS (tags)</li>
 	  	<li>NOT(SKQuestionTags CONTAINS (tags))</li>
 	  </td>
-	  <td>SKQuestionLastActivityDate, SKQuestionViewCount, SKQuestionCreationDate, SKQuestionScore/td>
+	  <td>SKQuestionLastActivityDate, SKQuestionViewCount, SKQuestionCreationDate, SKQuestionScore</td>
 	</tr>
 	<tr>
 	  <td>The activity on a specific question</td>
@@ -221,7 +221,7 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 		The following conventions are being used in this list:
 		<li>Any predicate attribute that begins with "SK" is implied to be a Key Path.</li>
 		<li>Any predicate with a keypath should be constructed in the following format: <code>@"%K = %@", SKSomeKeyPath, someValue</code></li>
-		<li>The <code>##</code> symbol can be either a string, a number, or an object of the appropriate type.  If the keypath is asking (for example) for a tag, the value can be either the tag's name or an SKTag object.  In many cases, you may also pass an array or set of objects of the appropriate type in order to "OR" them together.  For example, this predicate will request all questions created by one of the two users:  <code>SKQuestionOwner = (123, 456)</code> (where <code>(123, 456)</code> is an array or set).</li>
+		<li>The <code>##</code> symbol can be either a string, a number, or an object of the appropriate type.  If the keypath is asking (for example) for a tag, the value can be either the tag's name or an SKTag object.  In many cases, you may also pass an array or set of objects of the appropriate type in order to "OR" them together.  For example, this predicate will request all questions created either one of the two users:  <code>SKQuestionOwner = (123, 456)</code> (where <code>(123, 456)</code> is an array or set).</li>
 		<li>A value inside parenthesis (Example: <code>(tags)</code>, <code>(badges)</code>, etc) denotes a collection (array) of objects.  This collection can be a collection of ID's, names, or objects (as appropriate).</li>
 		<li>Keypaths must always be the left expression of a predicate.  While <code>42 = aProperty</code> is a valid predicate, StackKit would require it to be of the form: <code>aProperty = 42</code>.  This may change in the future.</li>
 		<li>The values listed as sort values are to be used as the <code>key</code> of an <code>NSSortDescriptor</code>.  For example:  <code>NSSortDescriptor * sortByName = [[NSSortDescriptor alloc] initWithKey:SKUserDisplayName ascending:YES];</code></li>
