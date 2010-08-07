@@ -50,6 +50,10 @@ id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary
 	return nil;
 }
 
+BOOL SKIsVectorClass(id value) {
+	return ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[NSSet class]]);
+}
+
 NSNumber * SKExtractNumber(id object, Class type, SEL idGetter) {
 	if ([object isKindOfClass:type]) {
 		return [object performSelector:idGetter];
@@ -60,33 +64,24 @@ NSNumber * SKExtractNumber(id object, Class type, SEL idGetter) {
 	}
 }
 
-NSNumber * SKExtractUserID(id value) {
+id SKExtractUserID(id value) {
+	if (SKIsVectorClass(value)) {
+		return SKExtractVectorizedUserIDs(value);
+	}
 	return SKExtractNumber(value, [SKUser class], @selector(userID));
 }
 
-NSNumber * SKExtractBadgeID(id value) {
+id SKExtractBadgeID(id value) {
+	if (SKIsVectorClass(value)) {
+		return SKExtractVectorizedBadgeIDs(value);
+	}
 	return SKExtractNumber(value, [SKBadge class], @selector(badgeID));
 }
 
-NSArray * SKExtractBadgeIDs(id value) {
-	if ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[NSSet class]]) {
-		NSMutableArray * values = [NSMutableArray array];
-		for (id badge in value) {
-			[values addObject:SKExtractBadgeID(badge)];
-		}
-		return values;
-	}
-	
-	id badge = SKExtractBadgeID(value);
-	if (badge) {
-		return [NSArray arrayWithObject:badge];
-	}
-	
-	return nil;
-}
-
-NSNumber * SKExtractPostID(id value) {
-	if ([value isKindOfClass:[SKAnswer class]]) {
+id SKExtractPostID(id value) {
+	if (SKIsVectorClass(value)) {
+		return SKExtractVectorizedPostIDs(value);
+	} else if ([value isKindOfClass:[SKAnswer class]]) {
 		return SKExtractAnswerID(value);
 	} else if ([value isKindOfClass:[SKQuestion class]]) {
 		return SKExtractQuestionID(value);
@@ -98,20 +93,87 @@ NSNumber * SKExtractPostID(id value) {
 	}
 }
 
-NSNumber * SKExtractCommentID(id value) {
+id SKExtractCommentID(id value) {
+	if (SKIsVectorClass(value)) {
+		return SKExtractVectorizedCommentIDs(value);
+	}
 	return SKExtractNumber(value, [SKComment class], @selector(commentID));
 }
 
-NSNumber * SKExtractQuestionID(id value) {
+id SKExtractQuestionID(id value) {
+	if (SKIsVectorClass(value)) {
+		return SKExtractVectorizedQuestionIDs(value);
+	}
 	return SKExtractNumber(value, [SKQuestion class], @selector(questionID));
 }
 
-NSNumber * SKExtractAnswerID(id value) {
+id SKExtractAnswerID(id value) {
+	if (SKIsVectorClass(value)) {
+		return SKExtractVectorizedAnswerIDs(value);
+	}
 	return SKExtractNumber(value, [SKAnswer class], @selector(answerID));
 }
 
-NSString * SKExtractTagName(id value) {
-	if ([value isKindOfClass:[NSString class]]) {
+NSString * SKExtractVectorizedPostIDs(id value) {
+	NSMutableSet * components = [NSMutableSet set];
+	for (id component in value) {
+		[components addObject:[SKExtractPostID(component) description]];
+	}
+	return SKVectorizedCollection(components);
+}
+
+NSString * SKExtractVectorizedCommentIDs(id value) {
+	NSMutableSet * components = [NSMutableSet set];
+	for (id component in value) {
+		[components addObject:[SKExtractCommentID(component) description]];
+	}
+	return SKVectorizedCollection(components);
+}
+
+NSString * SKExtractVectorizedQuestionIDs(id value) {
+	NSMutableSet * components = [NSMutableSet set];
+	for (id component in value) {
+		[components addObject:[SKExtractQuestionID(component) description]];
+	}
+	return SKVectorizedCollection(components);
+}
+
+NSString * SKExtractVectorizedAnswerIDs(id value) {
+	NSMutableSet * components = [NSMutableSet set];
+	for (id component in value) {
+		[components addObject:[SKExtractAnswerID(component) description]];
+	}
+	return SKVectorizedCollection(components);
+}
+
+NSString * SKExtractVectorizedUserIDs(id value) {
+	NSMutableSet * components = [NSMutableSet set];
+	for (id component in value) {
+		[components addObject:[SKExtractUserID(component) description]];
+	}
+	return SKVectorizedCollection(components);
+}
+
+NSString * SKExtractVectorizedBadgeIDs(id value) {
+	NSMutableSet * components = [NSMutableSet set];
+	for (id component in value) {
+		[components addObject:[SKExtractBadgeID(component) description]];
+	}
+	return SKVectorizedCollection(components);
+}
+
+NSString * SKExtractVectorizedTagNames(id value) {
+	NSMutableSet * components = [NSMutableSet set];
+	for (id component in value) {
+		[components addObject:[SKExtractTagName(component) description]];
+	}
+	return SKVectorizedCollection(components);
+}
+
+id SKExtractTagName(id value) {
+	if (SKIsVectorClass(value)) {
+		return SKExtractVectorizedTagNames(value);
+	} else if ([value isKindOfClass:[NSString class]]) {
 		return value;
 	} else if ([value isKindOfClass:[SKTag class]]) {
 		return [value name];
@@ -120,16 +182,11 @@ NSString * SKExtractTagName(id value) {
 	}
 }
 
-NSArray * SKExtractTagNames(id value) {
-	//we can only extract multiple names out of a collection:
-	if ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[NSSet class]]) {
-		NSMutableArray * names = [NSMutableArray array];
-		for (id tagValue in value) {
-			[names addObject:SKExtractTagName(tagValue)];
-		}
-		return names;
-	} else if ([value isKindOfClass:[NSString class]]) {
-		return [NSArray arrayWithObject:value];
+NSString * SKVectorizedCollection(id value) {
+	if ([value isKindOfClass:[NSArray class]]) {
+		return [value componentsJoinedByString:@";"];
+	} else if ([value isKindOfClass:[NSSet class]]) {
+		return SKVectorizedCollection([value allObjects]);
 	}
 	return nil;
 }

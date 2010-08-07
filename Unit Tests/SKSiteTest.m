@@ -48,7 +48,7 @@
 	
 	SKSite * su = [SKSite superUserSite];
 	SKSite * metaSU = [su metaSite];
-	STAssertNil(metaSU, @"unexpected SuperUser meta site: %@", [metaSU apiURL]);
+	STAssertNotNil(metaSU, @"SuperUser should have a meta site");
 }
 
 @end

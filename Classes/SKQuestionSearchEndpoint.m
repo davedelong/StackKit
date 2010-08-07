@@ -64,9 +64,7 @@
 			[[self query] setObject:[title description] forKey:@"intitle"];
 			return YES;
 		} else if (tags) {
-			NSArray * names = SKExtractTagNames(tags);
-			NSString * vector = [names componentsJoinedByString:@";"];
-			[[self query] setObject:vector forKey:@"tagged"];
+			[[self query] setObject:SKExtractTagName(tags) forKey:@"tagged"];
 			return YES;
 		}
 	} else if ([predicate isKindOfClass:[NSCompoundPredicate class]]) {
@@ -75,9 +73,7 @@
 		if ([compound compoundPredicateType] == NSNotPredicateType && [[compound subpredicates] count] == 1) {
 			id tags = [[[compound subpredicates] objectAtIndex:0] constantValueForLeftKeyPath:SKQuestionTags];
 			if (tags) {
-				NSArray * names = SKExtractTagNames(tags);
-				NSString * vector = [names componentsJoinedByString:@";"];
-				[[self query] setObject:vector forKey:@"nottagged"];
+				[[self query] setObject:SKExtractTagName(tags) forKey:@"nottagged"];
 				return YES;
 			}
 		}

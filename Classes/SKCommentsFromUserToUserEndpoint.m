@@ -41,8 +41,10 @@
 			id to = [toPredicate constantValueForLeftKeyPath:SKCommentInReplyToUser];
 			
 			if (from != nil && to != nil) {
-				[self setPath:[NSString stringWithFormat:@"/users/%@/comments/%@", SKExtractUserID(from), SKExtractUserID(to)]];
-				return YES;
+				if (SKIsVectorClass(to) == NO) {
+					[self setPath:[NSString stringWithFormat:@"/users/%@/comments/%@", SKExtractUserID(from), SKExtractUserID(to)]];
+					return YES;
+				}
 			}
 		}
 	}

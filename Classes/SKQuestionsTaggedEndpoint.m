@@ -31,9 +31,8 @@
 	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKQuestionTags] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
 		id tags = [predicate constantValueForLeftKeyPath:SKQuestionTags];
 		if (tags) {
-			NSArray * names = SKExtractTagNames(tags);
 			[self setPath:@"/questions"];
-			[[self query] setObject:[names componentsJoinedByString:@";"] forKey:SKQueryTagged];
+			[[self query] setObject:SKExtractTagName(tags) forKey:SKQueryTagged];
 			return YES;
 		}
 	}

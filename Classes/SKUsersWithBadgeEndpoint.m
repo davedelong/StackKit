@@ -33,13 +33,10 @@
 }
 
 - (BOOL) validatePredicate:(NSPredicate *)predicate {
-	NSLog(@"FIX ME: %s", __PRETTY_FUNCTION__);
 	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKUserBadges] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
 		id badges = [predicate constantValueForLeftKeyPath:SKUserBadges];
 		if (badges) {
-			NSArray * ids = SKExtractBadgeIDs(badges);
-			NSString * vector = [ids componentsJoinedByString:@";"];
-			[self setPath:[NSString stringWithFormat:@"/badges/%@", vector]];
+			[self setPath:[NSString stringWithFormat:@"/badges/%@", SKExtractBadgeID(badges)]];
 			return YES;
 		}
 	}
