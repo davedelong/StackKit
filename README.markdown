@@ -235,8 +235,7 @@ As the API is released and updated by the Stack Overflow team, we will be able t
   [4]: http://stackexchange.com/
   [5]: http://github.com/davedelong
   [6]: http://github.com/perspx
-  [7]: http://stackapps.com/apps/register
-  [8]: http://github.com/davedelong/StackKit/issues
+  [7]: http://github.com/davedelong/StackKit/issues
   [woolf]: http://github.com/brockwoolf
   [cbguder]: http://github.com/cbguder
   [tonklon]: http://github.com/tonklon
