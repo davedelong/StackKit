@@ -2,11 +2,11 @@
 
 StackKit is a Cocoa framework used to interact with the Stack Exchange API (used by [Stack Overflow][1], [Super User][2], [Server Fault][3], [Stack Exchange][4], and related websites).
 
-It is developed by [Dave DeLong][5], and [Alex Rozanski][6].
+It is developed by [Dave DeLong][5].  Significant contributions (suggestions, enhancements, etc) have been made by [Alex Rozanski][6], [Brock Woolf][woolf], [Can Berk GŸder][cbguder], and [Tobias Klonk][tonklon].
 
 ##Current Progress
 
-About 80% of the API is implemented.  Chances are it will work, but if it doesn't, please [file a bug][7]!
+About 85% of the API is implemented.  Chances are it will work, but if it doesn't, please [file a bug][7]!
 
 ##Using the API
 
@@ -16,10 +16,10 @@ This framework can be used with Mac OS and iPhone OS applications.
 Use the provided `StackKit.xcodeproj` file to build StackKit as a framework for inclusion in your Mac application.
 
 ###iPhone/iPod touch/iPad
-Use the provided `StackKitMobile.xcodeproj` file to build StackKit as a static library for inclusion in your mobile application.
+Use the provided `StackKitMobile.xcodeproj` file to build StackKit as a static library for inclusion in your mobile application.  You must add <code>-ObjC</code> and <code>-all_load</code> to your Other Linker Flags section of your build settings.  This ensures that the Categories in StackKit will be loaded with the static library.
 
 ###Running the unit tests
-The unit tests use a special convenience constructor on `SKSite` called `+stackoverflowSite`.  This constructor requires an [API Key][7] that has been saved to a file called "consumerKey.txt" in the root level of your project.
+Change the target to "Unit Tests" and then choose "Build and Run".  The StackKit project is set up to only run the tests from the executable (so that they can be debugged), and not during compilation.
 
 ##The future
 
@@ -237,4 +237,6 @@ As the API is released and updated by the Stack Overflow team, we will be able t
   [6]: http://github.com/perspx
   [7]: http://stackapps.com/apps/register
   [8]: http://github.com/davedelong/StackKit/issues
-  
+  [woolf]: http://github.com/brockwoolf
+  [cbguder]: http://github.com/cbguder
+  [tonklon]: http://github.com/tonklon
