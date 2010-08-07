@@ -48,6 +48,30 @@
 	STAssertEqualObjects([comment ownerID], [NSNumber numberWithInt:115730], @"Unexpected post owner: %@", [comment ownerID]);
 }
 
+- (void) testMultipleComments {
+	SKSite * s = [SKSite stackOverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKComment class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKCommentID, [NSArray arrayWithObjects:@"3056814",@"2520617", nil]]];
+	
+	NSError * error = nil;
+	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
+	[r release];
+	
+	STAssertNil(error, @"Error should be nil: %@", error);
+	STAssertTrue([results count] == 2, @"Unexpected number of results: %@", results);
+	
+	SKComment * comment = [results objectAtIndex:0];
+	
+	STAssertEqualObjects([comment ownerID], [NSNumber numberWithInt:115730], @"Unexpected post owner: %@", [comment ownerID]);
+	
+	comment = [results objectAtIndex:1];
+	
+	STAssertEqualObjects([comment ownerID], [NSNumber numberWithInt:267256], @"Unexpected post owner: %@", [comment ownerID]);
+	
+}
+
 - (void) testUserComments {
 	SKSite * s = [SKSite stackOverflowSite];
 	

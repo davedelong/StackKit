@@ -50,7 +50,32 @@
 	
 	STAssertEquals([[davedelong acceptRate] floatValue], 100.0f, @"accept rate does not match");
 }
- 
+
+- (void) testMultipleUsersAPICall {
+	SKSite * site = [SKSite stackOverflowSite];
+	
+	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
+	[request setEntity:[SKUser class]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSArray arrayWithObjects:[NSNumber numberWithInt:115730],[NSNumber numberWithInt:382190],nil]]];
+	
+	NSError * error = nil;
+	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
+	STAssertTrue([results count] == 2, @"request should return 2 objects");
+	
+	SKUser * davedelong = [results objectAtIndex:0];
+	STAssertEqualObjects([davedelong displayName], @"Dave DeLong", @"incorrect user displayName");
+	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"incorrect user id");
+	
+	SKUser * tonklon = [results objectAtIndex:1];
+	STAssertEqualObjects([tonklon displayName], @"tonklon", @"incorrect user displayName");
+	STAssertEqualObjects([tonklon userID], [NSNumber numberWithInt:382190], @"incorrect user id");
+	
+	
+	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
+	STAssertEqualObjects(davedelong, test, @"user does not match itself");
+	
+	STAssertEquals([[davedelong acceptRate] floatValue], 100.0f, @"accept rate does not match");
+}
 
 - (void) testOldestUsers {
 	SKSite * site = [SKSite stackOverflowSite];

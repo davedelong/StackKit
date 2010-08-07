@@ -66,6 +66,55 @@
 	STAssertEqualObjects(expectedTagNames, actualTagNames, @"unexpected tags.  Expected %@, given %@", expectedTagNames, actualTagNames);
 }
 
+- (void) testMultipleQuestions {
+	SKSite * site = [SKSite stackOverflowSite];
+	
+	NSDictionary* mockUpQuestionDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										[NSNumber numberWithInt:1283419],SKQuestionID,
+										@"http://www.example.com",SKQuestionTimelineURL,
+										@"http://www.example.com",SKQuestionCommentsURL,
+										@"http://www.example.com",SKQuestionAnswersURL,										
+										nil];
+	
+	SKQuestion* testQuestion = [[SKQuestion alloc] initWithSite:site dictionaryRepresentation:mockUpQuestionDict];
+	
+	NSArray* questionsToFetch = [NSArray arrayWithObjects:
+								 @"3403569",
+								 [NSNumber numberWithInt:3389487],
+								 testQuestion,
+								 nil];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKQuestionID, questionsToFetch]];
+	
+	NSError * e = nil;
+	NSArray * matches = [site executeSynchronousFetchRequest:r error:&e];
+	[r release];
+	
+	STAssertTrue([matches count] == 3, @"Expecting 3 questions");
+	STAssertNil(e, @"Expecting nil error: %@", e);
+	
+	SKQuestion * q = [matches objectAtIndex:0];
+	STAssertTrue([[q questionID] isEqualToNumber:[NSNumber numberWithInt:3403569]], @"Unexpected question returned at index 0");
+	
+	q = [matches objectAtIndex:1];
+	STAssertTrue([[q questionID] isEqualToNumber:[NSNumber numberWithInt:3389487]], @"Unexpected question returned at index 1");
+	
+	q = [matches objectAtIndex:2];
+	STAssertEqualObjects([q title], @"Valid use of accessors in init and dealloc methods?", @"Unexpected title");
+	STAssertTrue([[q score] intValue] == 7, @"Unexpected vote count");
+	STAssertTrue([[q viewCount] intValue] > 0, @"Unexpected view count");
+	STAssertTrue([[q favoriteCount] intValue] > 0, @"Unexpected favorited count");
+	STAssertTrue([[q upVotes] intValue] == 7, @"Unexpected upvote count");
+	STAssertTrue([[q downVotes] intValue] == 0, @"Unexpected downvote count");
+	STAssertNotNil([q body], @"question body shouldn't be nil");
+	
+	NSSet * expectedTagNames = [NSSet setWithObjects:@"objective-c",@"properties",@"accessors",@"initialization",@"dealloc", nil];
+	NSSet * actualTagNames = [NSSet setWithArray:[[q tags] valueForKey:SKTagName]];
+	STAssertEqualObjects(expectedTagNames, actualTagNames, @"unexpected tags.  Expected %@, given %@", expectedTagNames, actualTagNames);
+}
+
 - (void) testTaggedQuestions {
 	SKSite * s = [SKSite stackOverflowSite];
 	
