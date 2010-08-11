@@ -115,7 +115,7 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	  <td>A list of questions</td>
 	  <td>SKQuestion</td>
 	  <td>(none)</td>
-	  <td>(not yet implemented)</td>
+	  <td>SKQuestionCreationDate, SKQuestionScore</td>
 	</tr>
 	<tr>
 	  <td>A specific question</td>
@@ -127,7 +127,7 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	  <td>Questions that are tagged with certain tags</td>
 	  <td>SKQuestion</td>
 	  <td>SKQuestionTags CONTAINS (tags)</td>
-	  <td>(not yet implemented)</td>
+	  <td>SKQuestionCreationDate, SKQuestionScore</td>
 	</tr>
 	<tr>
 	  <td>Unanswerd questions</td>
@@ -158,6 +158,12 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	  <td>SKTag</td>
 	  <td>SKTagsParticipatedInByUser = ##</td>
 	  <td>SKTagNumberOfTaggedQuestions, SKTagLastUsedDate, SKTagName</td>
+	</tr>
+	<tr>
+	  <td>A list of tags with a particular string in the name</td>
+	  <td>SKTag</td>
+	  <td>SKTagName CONTAINS ##</td>
+	  <td>(none)</td>
 	</tr>
 	<tr>
 	  <td>A list of users</td>

@@ -58,6 +58,7 @@ NSUInteger SKTagDefaultPageSize = 70;
 	return [NSArray arrayWithObjects:
 			[SKAllTagsEndpoint class],
 			[SKUserTagsEndpoint class],
+			[SKSearchTagsEndpoint class],
 			nil];
 }
 

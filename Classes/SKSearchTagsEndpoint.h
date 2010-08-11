@@ -1,5 +1,5 @@
 //
-//  SKQuestionEndpoint.m
+//  SKSearchTagsEndpoint.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,33 +23,11 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit_Internal.h"
+#import <Foundation/Foundation.h>
+#import "SKTagEndpoint.h"
 
-@implementation SKQuestionEndpoint
+@interface SKSearchTagsEndpoint : SKTagEndpoint {
 
-- (BOOL) validateEntity:(Class)entity {
-	if (entity == [SKQuestion class]) {
-		[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
-		return YES;
-	}
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
-	return NO;
-}
-
-- (NSDictionary *) validSortDescriptorKeys {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortVotes, @"score",
-			SKSortVotes, SKQuestionScore,
-			SKSortCreation, @"creationDate",
-			SKSortCreation, SKQuestionCreationDate,
-			nil];
-}
-
-- (NSDictionary *) validRangeKeys {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKCommentScore, SKSortVotes,
-			SKCommentCreationDate, SKSortCreation,
-			nil];
 }
 
 @end

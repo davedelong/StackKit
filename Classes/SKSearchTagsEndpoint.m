@@ -1,5 +1,5 @@
 //
-//  SKQuestionEndpoint.m
+//  SKSearchTagsEndpoint.m
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -25,31 +25,21 @@
 
 #import "StackKit_Internal.h"
 
-@implementation SKQuestionEndpoint
 
-- (BOOL) validateEntity:(Class)entity {
-	if (entity == [SKQuestion class]) {
-		[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
-		return YES;
+@implementation SKSearchTagsEndpoint
+
+- (BOOL) validatePredicate:(NSPredicate *)predicate {
+	if ([predicate isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:SKTagName] operator:NSContainsPredicateOperatorType rightExpressionType:NSConstantValueExpressionType]) {
+		id name = [predicate constantValueForLeftKeyPath:SKTagName];
+		if (name && SKIsVectorClass(name) == NO) {
+			[self setPath:@"/tags"];
+			[[self query] setObject:SKExtractTagName(name) forKey:@"filter"];
+			return YES;
+		}
 	}
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
+	
+	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil]];
 	return NO;
-}
-
-- (NSDictionary *) validSortDescriptorKeys {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortVotes, @"score",
-			SKSortVotes, SKQuestionScore,
-			SKSortCreation, @"creationDate",
-			SKSortCreation, SKQuestionCreationDate,
-			nil];
-}
-
-- (NSDictionary *) validRangeKeys {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKCommentScore, SKSortVotes,
-			SKCommentCreationDate, SKSortCreation,
-			nil];
 }
 
 @end

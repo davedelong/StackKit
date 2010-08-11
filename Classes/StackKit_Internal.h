@@ -56,6 +56,7 @@
 #import "SKTagEndpoint.h"
 #import "SKAllTagsEndpoint.h"
 #import "SKUserTagsEndpoint.h"
+#import "SKSearchTagsEndpoint.h"
 
 #import "SKQuestionEndpoint.h"
 #import "SKAllQuestionsEndpoint.h"

@@ -105,4 +105,23 @@
 	STAssertTrue([userTags count] == 100, @"incorrect number of badges (%ld)", [userTags count]);
 }
 
+- (void) testTagsNamed {
+	SKSite * site = [SKSite stackOverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKTag class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKTagName, @"iphone"]];
+	
+	NSError * error = nil;
+	NSArray * tags = [site executeSynchronousFetchRequest:r error:&error];
+	[r release];
+	
+	STAssertNil(error, @"error should be nil: %@", error);
+	
+	STAssertTrue([tags count] > 0, @"expected some tags returned");
+	for (SKTag * tag in tags) {
+		STAssertTrue([[tag name] rangeOfString:@"iphone"].location != NSNotFound, @"tag does not contain \"iphone\": %@", tag);
+	}
+}
+
 @end
