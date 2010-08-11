@@ -162,8 +162,8 @@ As the API is released and updated by the Stack Overflow team, we will be able t
 	<tr>
 	  <td>A list of tags with a particular string in the name</td>
 	  <td>SKTag</td>
-	  <td>SKTagName CONTAINS ##</td>
-	  <td>(none)</td>
+	  <td>SKTagName CONTAINS "string"</td>
+	  <td>SKTagNumberOfTaggedQuestions, SKTagLastUsedDate, SKTagName</td>
 	</tr>
 	<tr>
 	  <td>A list of users</td>
