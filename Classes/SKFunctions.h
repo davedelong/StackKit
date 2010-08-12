@@ -33,9 +33,13 @@
 
 void SKQLog(NSString *format, ...);
 
+typedef id (*SKExtractor)(id);
+
 id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
 
 BOOL SKIsVectorClass(id value);
+NSString * SKExtractVector(id value, SKExtractor extractor);
+NSString * SKVectorizedCollection(id value);
 
 id SKExtractPostID(id value);
 id SKExtractCommentID(id value);
@@ -44,17 +48,6 @@ id SKExtractAnswerID(id value);
 id SKExtractUserID(id value);
 id SKExtractBadgeID(id value);
 id SKExtractTagName(id value);
-
-NSString * SKExtractVectorizedPostIDs(id value);
-NSString * SKExtractVectorizedCommentIDs(id value);
-NSString * SKExtractVectorizedQuestionIDs(id value);
-NSString * SKExtractVectorizedAnswerIDs(id value);
-NSString * SKExtractVectorizedUserIDs(id value);
-NSString * SKExtractVectorizedBadgeIDs(id value);
-NSString * SKExtractVectorizedTagNames(id value);
-
-NSString * SKVectorizedCollection(id value);
-
 
 NSDate * SKExtractDate(id value);
 NSUInteger SKExtractInteger(id value);

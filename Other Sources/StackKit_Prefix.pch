@@ -27,7 +27,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #define StackKitMobile 1
 #else
 #define StackKitMac 1

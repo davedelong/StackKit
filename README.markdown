@@ -2,7 +2,7 @@
 
 StackKit is a Cocoa framework used to interact with the Stack Exchange API (used by [Stack Overflow][1], [Super User][2], [Server Fault][3], [Stack Exchange][4], and related websites).
 
-It is developed by [Dave DeLong][5].  Significant contributions (suggestions, enhancements, etc) have been made by [Alex Rozanski][6], [Brock Woolf][woolf], [Can Berk G&uuml;der][cbguder], and [Tobias Klonk][tonklon].
+It is developed by [Dave DeLong][5].  Significant contributions (suggestions, enhancements, etc) have been made by [Alex Rozanski][6], [Brock Woolf][woolf], [Can Berk G&uuml;der][cbguder], [Tobias Klonk][tonklon], and [Cory Kilger][cmkilger].
 
 ##Current Progress
 
@@ -245,3 +245,4 @@ As the API is released and updated by the Stack Overflow team, we will be able t
   [woolf]: http://github.com/brockwoolf
   [cbguder]: http://github.com/cbguder
   [tonklon]: http://github.com/tonklon
+  [cmkilger]: http://github.com/cmkilger
