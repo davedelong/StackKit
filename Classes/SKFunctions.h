@@ -33,8 +33,6 @@
 
 void SKQLog(NSString *format, ...);
 
-typedef id (*SKExtractor)(id);
-
 id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);
 
 BOOL SKIsVectorClass(id value);

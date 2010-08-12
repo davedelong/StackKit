@@ -30,6 +30,8 @@
 typedef void(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
 #endif
 
+typedef id (*SKExtractor)(id);
+
 typedef struct _SKRange {
 	NSUInteger lower;
 	NSUInteger upper;
