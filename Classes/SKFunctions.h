@@ -29,6 +29,8 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
+#import "SKDefinitions.h"
+
 @class SKFetchRequest;
 
 void SKQLog(NSString *format, ...);
