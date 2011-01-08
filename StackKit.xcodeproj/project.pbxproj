@@ -78,6 +78,8 @@
 		558333FE11B8033C00CA8D62 /* SKQuestionSearchEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 558333FC11B8033C00CA8D62 /* SKQuestionSearchEndpoint.m */; };
 		5583342C11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5583342A11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.h */; };
 		5583342D11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583342B11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.m */; };
+		55978749128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 55978746128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.h */; };
+		5597874A128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 55978747128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.m */; };
 		55A2E4DE110E35F10038E510 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4DC110E35F10038E510 /* SKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4DF110E35F10038E510 /* SKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4DD110E35F10038E510 /* SKObject.m */; };
 		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -140,6 +142,10 @@
 		55FA95DA11614245003A9CD7 /* NSDictionary+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */; };
 		55FA969B11616A65003A9CD7 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA969911616A65003A9CD7 /* SKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FA969C11616A65003A9CD7 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA969A11616A65003A9CD7 /* SKConstants.m */; };
+		55FF3A8512D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
+		55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */; };
+		55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
+		55FF3AA412D85D9100CC4B9D /* SKRequestBuilder+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF3AA112D85D9100CC4B9D /* SKRequestBuilder+Private.h */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D402811BAB4EC00D5AD93 /* SKCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -251,6 +257,8 @@
 		558333FC11B8033C00CA8D62 /* SKQuestionSearchEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestionSearchEndpoint.m; sourceTree = "<group>"; };
 		5583342A11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUsersWithBadgeEndpoint.h; sourceTree = "<group>"; };
 		5583342B11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUsersWithBadgeEndpoint.m; sourceTree = "<group>"; };
+		55978746128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUnansweredQuestionsTaggedEndpoint.h; sourceTree = "<group>"; };
+		55978747128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUnansweredQuestionsTaggedEndpoint.m; sourceTree = "<group>"; };
 		55A2E4DC110E35F10038E510 /* SKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObject.h; sourceTree = "<group>"; };
 		55A2E4DD110E35F10038E510 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
@@ -322,6 +330,9 @@
 		55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SKAdditions.m"; sourceTree = "<group>"; };
 		55FA969911616A65003A9CD7 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
 		55FA969A11616A65003A9CD7 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
+		55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKRequestBuilder.h; sourceTree = "<group>"; };
+		55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKRequestBuilder.m; sourceTree = "<group>"; };
+		55FF3AA112D85D9100CC4B9D /* SKRequestBuilder+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKRequestBuilder+Private.h"; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Other Sources/Info.plist"; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* StackKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StackKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21D402811BAB4EC00D5AD93 /* SKCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCallback.h; sourceTree = "<group>"; };
@@ -409,6 +420,7 @@
 				55C23E30116A8FBB009064EE /* Tag */,
 				55A2E52B110E44030038E510 /* Posts */,
 				55D6D20611B699AA00C624F0 /* Endpoints */,
+				55FF3A8812D859C500CC4B9D /* Request Builder */,
 				55C23E2B116A8F94009064EE /* Categories */,
 			);
 			path = Classes;
@@ -526,6 +538,8 @@
 				5583326411B7479000CA8D62 /* SKQuestionsTaggedEndpoint.m */,
 				5583326711B7479C00CA8D62 /* SKUnansweredQuestionsEndpoint.h */,
 				5583326811B7479C00CA8D62 /* SKUnansweredQuestionsEndpoint.m */,
+				55978746128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.h */,
+				55978747128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.m */,
 				5583326B11B747AC00CA8D62 /* SKUserFavoritedQuestionsEndpoint.h */,
 				5583326C11B747AC00CA8D62 /* SKUserFavoritedQuestionsEndpoint.m */,
 			);
@@ -731,6 +745,16 @@
 			name = Endpoints;
 			sourceTree = "<group>";
 		};
+		55FF3A8812D859C500CC4B9D /* Request Builder */ = {
+			isa = PBXGroup;
+			children = (
+				55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */,
+				55FF3AA112D85D9100CC4B9D /* SKRequestBuilder+Private.h */,
+				55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */,
+			);
+			name = "Request Builder";
+			sourceTree = "<group>";
+		};
 		D21D402711BAB4DF00D5AD93 /* Callbacks */ = {
 			isa = PBXGroup;
 			children = (
@@ -817,6 +841,9 @@
 				5583342C11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.h in Headers */,
 				5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */,
 				D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */,
+				55978749128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.h in Headers */,
+				55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */,
+				55FF3AA412D85D9100CC4B9D /* SKRequestBuilder+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,7 +895,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "StackKit" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* StackKit */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -911,6 +945,7 @@
 				55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */,
 				5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */,
 				5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */,
+				55FF3A8512D859BF00CC4B9D /* SKRequestBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,6 +1012,8 @@
 				5583342D11B80B3B00CA8D62 /* SKUsersWithBadgeEndpoint.m in Sources */,
 				D21D402B11BAB4EC00D5AD93 /* SKCallback.m in Sources */,
 				552A99811212451F00EAE68C /* SKSearchTagsEndpoint.m in Sources */,
+				5597874A128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.m in Sources */,
+				55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

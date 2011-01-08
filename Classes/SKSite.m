@@ -400,7 +400,7 @@ NSArray * _skKnownSites = nil;
 	
 	[[self delegate] site:self didRetrieveStatistics:stats error:error];
 	
-	[pool release];
+	[pool drain];
 }
 
 @end

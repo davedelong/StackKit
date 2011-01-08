@@ -123,7 +123,7 @@ NSString * SKFetchTotalKey = @"total";
 		[[self callback] fetchRequest:self succeededWithResults:results];
 	}
 	
-	[pool release];
+	[pool drain];
 }
 
 - (NSArray *) execute {
@@ -146,7 +146,7 @@ NSString * SKFetchTotalKey = @"total";
 	objects = [[self executeFetchRequest] retain];
 	
 cleanup:
-	[pool release];
+	[pool drain];
 	return [objects autorelease];
 }
 
@@ -158,7 +158,7 @@ cleanup:
 	}
 	
 	//execute the GET request
-	NSLog(@"fetching from: %@", [self fetchURL]);
+//	NSLog(@"fetching from: %@", [self fetchURL]);
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[self fetchURL]];
 	NSURLResponse * response = nil;
 	NSError * connectionError = nil;

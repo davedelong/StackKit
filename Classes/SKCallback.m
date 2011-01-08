@@ -72,29 +72,50 @@
 #pragma mark -
 #pragma mark Invoking
 
-- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(NSArray *)argument
-{
-#ifdef NS_BLOCKS_AVAILABLE
+- (void) finishWithInformation:(NSDictionary *)information {
+	SKFetchRequest * request = [information objectForKey:@"request"];
+	NSArray * results = [information objectForKey:@"results"];
+	NSError * error = [information objectForKey:@"error"];
+
+#if NS_BLOCKS_AVAILABLE
 	if (completionHandler != NULL) {
-		completionHandler(argument, nil);
+		completionHandler(results, error);
 		return;
 	}
 #endif
-	if(_successSelector!=NULL) {
-		[_target performSelector:_successSelector withObject:fetchRequest withObject:argument];
+	
+	if (_successSelector != NULL && results != nil) {
+		[_target performSelector:_successSelector withObject:request withObject:results];
+	} else if (_failureSelector != NULL && error != nil) {
+		[_target performSelector:_failureSelector withObject:request withObject:error];
+	}
+}
+
+- (void) fetchRequest:(SKFetchRequest *)fetchRequest succeededWithResults:(NSArray *)argument
+{
+	NSDictionary * info = [NSDictionary dictionaryWithObjectsAndKeys:
+						   fetchRequest, @"request",
+						   argument, @"results",
+						   nil];
+	
+	if ([[NSThread currentThread] isEqual:[NSThread mainThread]]) {
+		[self finishWithInformation:info];
+	} else {
+		[self performSelectorOnMainThread:@selector(finishWithInformation:) withObject:info waitUntilDone:NO];
 	}
 }
 
 - (void) fetchRequest:(SKFetchRequest *)fetchRequest failedWithError:(NSError *)argument
 {
-#ifdef NS_BLOCKS_AVAILABLE
-	if (completionHandler != NULL) {
-		completionHandler(nil, argument);
-		return;
-	}
-#endif
-	if(_failureSelector!=NULL) {
-		[_target performSelector:_failureSelector withObject:fetchRequest withObject:argument];
+	NSDictionary * info = [NSDictionary dictionaryWithObjectsAndKeys:
+						   fetchRequest, @"request",
+						   argument, @"error",
+						   nil];
+	
+	if ([[NSThread currentThread] isEqual:[NSThread mainThread]]) {
+		[self finishWithInformation:info];
+	} else {
+		[self performSelectorOnMainThread:@selector(finishWithInformation:) withObject:info waitUntilDone:NO];
 	}
 }
 

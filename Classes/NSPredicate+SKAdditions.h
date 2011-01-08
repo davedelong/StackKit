@@ -53,4 +53,6 @@ enum {
 
 - (SKRange) rangeOfConstantValuesForLeftKeyPath:(NSString *)left;
 
+- (NSSet *) leftKeyPaths;
+
 @end

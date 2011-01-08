@@ -78,6 +78,7 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 			[SKAllQuestionsEndpoint class],
 			[SKUserQuestionsEndpoint class],
 			[SKSpecificQuestionEndpoint class],
+			[SKUnansweredQuestionsTaggedEndpoint class],
 			[SKQuestionsTaggedEndpoint class],
 			[SKUnansweredQuestionsEndpoint class],
 			[SKUserFavoritedQuestionsEndpoint class],

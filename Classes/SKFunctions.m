@@ -55,9 +55,11 @@ BOOL SKIsVectorClass(id value) {
 }
 
 NSString * SKExtractVector(id value, SKExtractor extractor) {
-	NSMutableSet * components = [NSMutableSet set];
+	NSMutableArray * components = [NSMutableArray array];
 	for (id component in value) {
-		[components addObject:[extractor(component) description]];
+		if ([components containsObject:component] == NO) {
+			[components addObject:[extractor(component) description]];
+		}
 	}
 	return SKVectorizedCollection(components);
 }

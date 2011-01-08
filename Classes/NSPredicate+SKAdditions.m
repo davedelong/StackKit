@@ -241,4 +241,20 @@
 	return result;
 }
 
+- (NSSet *) leftKeyPaths {
+	NSMutableSet * paths = [NSMutableSet set];
+	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
+		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
+		for (NSPredicate * subpredicate in [compound subpredicates]) {
+			[paths unionSet:[subpredicate leftKeyPaths]];
+		}
+	} else {
+		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
+		if ([[comparison leftExpression] expressionType] == NSKeyPathExpressionType) {
+			[paths addObject:[[comparison leftExpression] keyPath]];
+		}
+	}
+	return paths;
+}
+
 @end

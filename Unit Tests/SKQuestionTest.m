@@ -174,6 +174,27 @@
 	}
 }
 
+- (void) testUnansweredTaggedQuestions {
+	SKSite * s = [SKSite stackOverflowSite];
+	
+	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+	[r setEntity:[SKQuestion class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = 0 AND %K CONTAINS (%@)", SKQuestionAnswerCount, SKQuestionTags, @"iphone"]];
+	
+	NSError * e = nil;
+	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
+	[r release];
+	
+	STAssertNil(e, @"Error should be nil: %@", e);
+	
+	for (SKQuestion * question in results) {
+		STAssertTrue([[question answerCount] intValue] == 0, @"question should have 0 answers");
+		
+		NSArray * tagNames = [[question tags] valueForKey:SKTagName];
+		STAssertTrue([tagNames containsObject:@"iphone"], @"questions should have \"iphone\" tag");
+	}
+}
+
 - (void) testAsynchronousQuestion {
 	SKSite * s = [SKSite stackOverflowSite];
 	
@@ -193,12 +214,10 @@
 }
 
 - (void)fetchRequest:(SKFetchRequest *)request didFailWithError:(NSError *)error {
-	NSLog(@"failed: %@", error);
 	didReceiveCallback = YES;
 }
 
 - (void) fetchRequest:(SKFetchRequest *)request didReturnResults:(NSArray *)results {
-	NSLog(@"returned: %@", results);
 	didReceiveCallback = YES;
 }
 

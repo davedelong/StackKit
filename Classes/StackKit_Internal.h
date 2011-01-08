@@ -64,6 +64,7 @@
 #import "SKSpecificQuestionEndpoint.h"
 #import "SKQuestionsTaggedEndpoint.h"
 #import "SKUnansweredQuestionsEndpoint.h"
+#import "SKUnansweredQuestionsTaggedEndpoint.h"
 #import "SKUserFavoritedQuestionsEndpoint.h"
 #import "SKQuestionSearchEndpoint.h"
 

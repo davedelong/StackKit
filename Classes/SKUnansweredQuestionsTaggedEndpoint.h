@@ -1,5 +1,5 @@
 //
-//  StackKit.h
+//  SKUnansweredQuestionsTaggedEndpoint.h
 //  StackKit
 /**
  Copyright (c) 2010 Dave DeLong
@@ -23,37 +23,11 @@
  THE SOFTWARE.
  **/
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-#define StackKitMobile 1
-#else
-#define StackKitMac 1
-#endif
+#import <Foundation/Foundation.h>
+#import "SKQuestionEndpoint.h"
 
-#if StackKitMobile
-#import <UIKit/UIKit.h>
-#else
-#import <Cocoa/Cocoa.h>
-#endif
+@interface SKUnansweredQuestionsTaggedEndpoint : SKQuestionEndpoint {
 
-#import "SKObject.h"
+}
 
-#import "SKFetchRequest.h"
-#import "SKFetchRequestDelegate.h"
-#import "SKCallback.h"
-
-#import "SKSite.h"
-#import "SKSiteDelegate.h"
-
-#import "SKUser.h"
-#import "SKTag.h"
-#import "SKBadge.h"
-#import "SKUserActivity.h"
-
-#import "SKPost.h"
-#import "SKQAPost.h"
-#import "SKQuestion.h"
-#import "SKAnswer.h"
-#import "SKComment.h"
-
-#import "SKConstants.h"
-#import "SKDefinitions.h"
+@end

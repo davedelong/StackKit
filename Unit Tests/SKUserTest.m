@@ -27,8 +27,13 @@
 #import "SKTestConstants.h"
 #import <StackKit/StackKit.h>
 #import "SKFetchRequest+Private.h"
+#import "SKRequestBuilder.h"
 
 @implementation SKUserTest
+
+- (void) test1 {
+	[SKRequestBuilder URLForFetchRequest:nil error:nil];
+}
 
 - (void) testUserAPICall {
 	SKSite * site = [SKSite stackOverflowSite];
@@ -123,6 +128,55 @@
 	
 	SKUser * davedelong = [matches objectAtIndex:0];
 	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"non-matching user id");
+}
+
+- (void) testUsersWithMostFavoritedQuestions {
+	SKSite * site = [SKSite stackAppsSite];
+	
+	SKFetchRequest * request = [[SKFetchRequest alloc] init];
+	[request setEntity:[SKQuestion class]];
+	
+	NSCountedSet * counts = [NSCountedSet set];
+	
+	NSUInteger count = NSUIntegerMax;
+	for (NSUInteger offset = 0; offset < count; offset += 100) {
+		[request setFetchOffset:offset];
+		
+		NSError * error = nil;
+		NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
+		for (SKQuestion * question in matches) {
+			NSUInteger count = [[question favoriteCount] unsignedIntegerValue];
+			for (int i = 0; i < count; ++i) { [counts addObject:[question ownerID]]; }
+		}
+		
+		if (count == NSUIntegerMax) {
+			count = [[request fetchTotal] unsignedIntegerValue];
+		}
+	}
+	[request release];
+	
+	NSMutableArray * favoriteCounts = [NSMutableArray array];
+	for (id user in counts) {
+		[favoriteCounts addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+								   user, @"user",
+								   [NSNumber numberWithUnsignedInteger:[counts countForObject:user]], @"count",
+								   nil]];
+	}
+	[favoriteCounts sortUsingDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"count" ascending:NO] autorelease]]];
+	
+	request = [[SKFetchRequest alloc] init];
+	[request setEntity:[SKUser class]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [favoriteCounts valueForKey:@"user"]]];
+	
+	NSArray * users = [site executeSynchronousFetchRequest:request error:nil];
+	[request release];
+	
+	NSDictionary * userMapping = [NSDictionary dictionaryWithObjects:users forKeys:[users valueForKey:SKUserID]];
+	
+	for (NSDictionary * top in favoriteCounts) {
+		SKUser * user = [userMapping objectForKey:[top objectForKey:@"user"]];
+		NSLog(@"%02d - %@ [%@]", [[top objectForKey:@"count"] unsignedIntegerValue], [user displayName], [user userID]);
+	}
 }
 
 @end

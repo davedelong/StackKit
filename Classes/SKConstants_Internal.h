@@ -68,7 +68,7 @@ extern NSString * const SKQueryTagged;
  
  To get around the trouble of defining @"user_id" in 3 different places, all three of these constants are declared like so:
  
- NSString * const SKWhateverThisConstantIs __SKUserID;
+ NSString * const SKWhateverThisConstantIs = __SKUserID;
  
  __SKUserID is #defined below to be @"user_id".
  
