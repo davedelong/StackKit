@@ -7,17 +7,8 @@
 //
 
 #import "SKRequestBuilder.h"
-#import "SKRequestBuilder+Private.h"
+#import "_SKConcreteRequestBuilder.h"
 #import <objc/runtime.h>
-
-BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper) {
-	Class aSuper = nil;
-	while ((aSuper = class_getSuperclass(aClass)) != nil) {
-		if (aSuper == targetSuper) { return YES; }
-		aClass = aSuper;
-	}
-	return NO;
-}
 
 @implementation SKRequestBuilder
 
@@ -34,7 +25,13 @@ BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper) {
 			
 			for (int i = 0; i < numClasses; ++i) {
 				Class thisClass = allClasses[i];
-				if (sk_classIsSubclassOfClass(thisClass, [SKRequestBuilder class])) {
+				/**
+				 Why not use +isSubclassOfClass:?
+				 Because one of the classes returned by objc_getClassList() is the NSZombie class,
+				 and invoking *any* method on it will result in an NSZombie exception.  
+				 Instead, we have to walk the isa chain ourselves.  Lame.
+				 **/
+				if (sk_classIsSubclassOfClass(thisClass, [_SKConcreteRequestBuilder class])) {
 					[_requestBuilderClasses addObject:thisClass];
 				}
 			}
@@ -44,64 +41,50 @@ BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper) {
 	return _requestBuilderClasses;
 }
 
-+ (NSURL *) URLForFetchRequest:(SKFetchRequest *)request error:(NSError **)error {
++ (NSURL *) URLForFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
 	NSURL * url = nil;
+	NSError * buildError = nil;
 	
-	NSMutableArray * recognizers = [[self _requestBuilders] mutableCopy];
-	NSMutableIndexSet * unrecognized = [NSMutableIndexSet indexSet];
+	NSMutableArray * builders = [[SKRequestBuilder _requestBuilders] mutableCopy];
 	
-	//cull out any request builders that don't recognize the request entity
-	for (NSUInteger i = 0; i < [recognizers count]; ++i) {
-		Class requestBuilder = [recognizers objectAtIndex:i];
-		Class recognizedEntity = [requestBuilder recognizedFetchEntity];
-		if (recognizedEntity == nil || recognizedEntity != [request entity]) {
-			[unrecognized addIndex:i];
-		}
-	}
-	
-	if ([unrecognized count] > 0) {
-		[recognizers removeObjectsAtIndexes:unrecognized];
-		[unrecognized removeAllIndexes];
-	}
-	
-	if ([recognizers count] == 0) {
-		if (error) {
-			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil];
-		}
+	[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizedFetchEntity = %@", [fetchRequest entity]]];
+	if ([fetchRequest entity] == nil || [builders count] == 0) {
+		buildError = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil];
 		goto errorExit;
 	}
 	
-	//cull out any recognizers that don't recognize the predicate keypaths
-	NSSet * requestPredicateKeyPaths = [[request predicate] leftKeyPaths];
-	for (NSUInteger i = 0; i < [recognizers count]; ++i) {
-		Class requestBuilder = [recognizers objectAtIndex:i];
-		Class recognizedEntity = [requestBuilder recognizedFetchEntity];
-		if (recognizedEntity == nil) {
-			[unrecognized addIndex:i];
-		} else {
-			NSSet * recognizedKeyPaths = [recognizedEntity recognizedPredicateKeyPaths];
-			NSSet * unionedKeyPaths = [recognizedKeyPaths setByAddingObjectsFromSet:requestPredicateKeyPaths];
-			if ([unionedKeyPaths count] > [recognizedKeyPaths count]) {
-				//adding in the keypaths from the request predicate resulted in keypaths that this builder doesn't recognize
-				[unrecognized addIndex:i];
-			}
-		}
+	if ([fetchRequest sortDescriptor] != nil) {
+		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizedSortDescriptorKeys CONTAINS %@", [[fetchRequest sortDescriptor] key]]];
 	}
-	
-	if ([unrecognized count] > 0) {
-		[recognizers removeObjectsAtIndexes:unrecognized];
-		[unrecognized removeAllIndexes];
-	}
-	
-	if ([recognizers count] == 0) {
-		if (error) {
-			*error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil];
-		}
+	if ([builders count] == 0) {
+		buildError = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:nil];
 		goto errorExit;
 	}
-
+	
+	if ([fetchRequest predicate] != nil) {
+		NSSet * leftKeyPaths = [[fetchRequest predicate] leftKeyPaths];
+		NSPredicate * p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths", leftKeyPaths];
+		[builders filterUsingPredicate:p];
+		
+		p = [NSPredicate predicateWithFormat:@"ALL requiredPredicateKeyPaths IN %@", leftKeyPaths];
+		[builders filterUsingPredicate:p];
+	} else {
+		//this request doesn't have a predicate
+		//therefore, remove all builders that require certain left keypaths (because those could never be satisfied)
+		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"requiredPredicateKeyPaths.@count == 0"]];
+	}
+	if ([builders count] == 0) {
+		buildError = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil];
+		goto errorExit;
+	}
+	
+	NSLog(@"potential builders: %@", builders);
+	
 errorExit:
-	[recognizers release];
+	[builders release];
+	if (buildError != nil && error != nil) {
+		*error = buildError;
+	}
 	return url;
 }
 

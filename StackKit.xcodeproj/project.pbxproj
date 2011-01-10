@@ -13,6 +13,62 @@
 		5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7EB11ACF12300C47C1B /* SKFunctions.h */; };
 		5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7EC11ACF12300C47C1B /* SKFunctions.m */; };
 		552A99811212451F00EAE68C /* SKSearchTagsEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 552A997D1212434D00EAE68C /* SKSearchTagsEndpoint.m */; };
+		5533A9A612D9A7E400F755F7 /* _SKConcreteRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533A9A412D9A7E400F755F7 /* _SKConcreteRequestBuilder.h */; };
+		5533A9A712D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */; };
+		5533A9A812D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */; };
+		5533A9F912DA419600F755F7 /* _SKRequestBuilderAnswersByID.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533A9F712DA419600F755F7 /* _SKRequestBuilderAnswersByID.h */; };
+		5533A9FA12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */; };
+		5533A9FB12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */; };
+		5533AA1912DA431000F755F7 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
+		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
+		5533AA6112DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h */; };
+		5533AA6212DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m */; };
+		5533AA7412DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA7212DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h */; };
+		5533AA7512DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA7312DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m */; };
+		5533AA7812DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA7612DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h */; };
+		5533AA7912DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA7712DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.m */; };
+		5533AA7E12DA465200F755F7 /* _SKRequestBuilderNameBadges.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA7C12DA465200F755F7 /* _SKRequestBuilderNameBadges.h */; };
+		5533AA7F12DA465200F755F7 /* _SKRequestBuilderNameBadges.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA7D12DA465200F755F7 /* _SKRequestBuilderNameBadges.m */; };
+		5533AA8212DA46A700F755F7 /* _SKRequestBuilderTagBadges.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA8012DA46A700F755F7 /* _SKRequestBuilderTagBadges.h */; };
+		5533AA8312DA46A700F755F7 /* _SKRequestBuilderTagBadges.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA8112DA46A700F755F7 /* _SKRequestBuilderTagBadges.m */; };
+		5533AA9712DA476A00F755F7 /* _SKRequestBuilderCommentsByID.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA9512DA476A00F755F7 /* _SKRequestBuilderCommentsByID.h */; };
+		5533AA9812DA476A00F755F7 /* _SKRequestBuilderCommentsByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA9612DA476A00F755F7 /* _SKRequestBuilderCommentsByID.m */; };
+		5533AA9B12DA481300F755F7 /* _SKRequestBuilderQuestions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA9912DA481200F755F7 /* _SKRequestBuilderQuestions.h */; };
+		5533AA9C12DA481300F755F7 /* _SKRequestBuilderQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA9A12DA481300F755F7 /* _SKRequestBuilderQuestions.m */; };
+		5533AAA012DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA9E12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.h */; };
+		5533AAA112DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA9F12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m */; };
+		5533AAA412DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAA212DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h */; };
+		5533AAA512DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAA312DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m */; };
+		5533AAA812DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAA612DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h */; };
+		5533AAA912DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAA712DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m */; };
+		5533AAC512DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAC312DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h */; };
+		5533AAC612DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAC412DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m */; };
+		5533AAC912DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAC712DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h */; };
+		5533AACA12DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAC812DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.m */; };
+		5533AACD12DA914600F755F7 /* _SKRequestBuilderTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AACB12DA914600F755F7 /* _SKRequestBuilderTags.h */; };
+		5533AACE12DA914600F755F7 /* _SKRequestBuilderTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AACC12DA914600F755F7 /* _SKRequestBuilderTags.m */; };
+		5533AAD112DA96A800F755F7 /* _SKRequestBuilderUsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AACF12DA96A800F755F7 /* _SKRequestBuilderUsers.h */; };
+		5533AAD212DA96A800F755F7 /* _SKRequestBuilderUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAD012DA96A800F755F7 /* _SKRequestBuilderUsers.m */; };
+		5533AAD512DA970D00F755F7 /* _SKRequestBuilderUsersByID.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAD312DA970D00F755F7 /* _SKRequestBuilderUsersByID.h */; };
+		5533AAD612DA970D00F755F7 /* _SKRequestBuilderUsersByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAD412DA970D00F755F7 /* _SKRequestBuilderUsersByID.m */; };
+		5533AADB12DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAD912DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.h */; };
+		5533AADC12DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AADA12DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.m */; };
+		5533AADF12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AADD12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.h */; };
+		5533AAE012DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AADE12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.m */; };
+		5533AAE312DA988300F755F7 /* _SKRequestBuilderCommentsByUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAE112DA988300F755F7 /* _SKRequestBuilderCommentsByUser.h */; };
+		5533AAE412DA988300F755F7 /* _SKRequestBuilderCommentsByUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAE212DA988300F755F7 /* _SKRequestBuilderCommentsByUser.m */; };
+		5533AAE712DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAE512DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.h */; };
+		5533AAE812DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAE612DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.m */; };
+		5533AAEB12DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAE912DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.h */; };
+		5533AAEC12DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAEA12DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.m */; };
+		5533AAEF12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAED12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.h */; };
+		5533AAF012DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAEE12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.m */; };
+		5533AAF312DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAF112DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.h */; };
+		5533AAF412DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAF212DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.m */; };
+		5533AAF812DAB5F300F755F7 /* _SKRequestBuilderUserTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAF612DAB5F300F755F7 /* _SKRequestBuilderUserTags.h */; };
+		5533AAF912DAB5F300F755F7 /* _SKRequestBuilderUserTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAF712DAB5F300F755F7 /* _SKRequestBuilderUserTags.m */; };
+		5533AAFC12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAFA12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.h */; };
+		5533AAFD12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAFB12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m */; };
 		5547A6B511C8281000CE89E1 /* StackKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */; };
 		5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */; };
@@ -145,7 +201,6 @@
 		55FF3A8512D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
 		55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */; };
 		55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
-		55FF3AA412D85D9100CC4B9D /* SKRequestBuilder+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF3AA112D85D9100CC4B9D /* SKRequestBuilder+Private.h */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D402811BAB4EC00D5AD93 /* SKCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -157,6 +212,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5533AA1712DA430D00F755F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* StackKit */;
+			remoteInfo = StackKit;
+		};
 		55A2E4FC110E3A100038E510 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
@@ -193,6 +255,60 @@
 		5506C7EC11ACF12300C47C1B /* SKFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFunctions.m; sourceTree = "<group>"; };
 		552A997C1212434D00EAE68C /* SKSearchTagsEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSearchTagsEndpoint.h; sourceTree = "<group>"; };
 		552A997D1212434D00EAE68C /* SKSearchTagsEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSearchTagsEndpoint.m; sourceTree = "<group>"; };
+		5533A9A412D9A7E400F755F7 /* _SKConcreteRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKConcreteRequestBuilder.h; sourceTree = "<group>"; };
+		5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKConcreteRequestBuilder.m; sourceTree = "<group>"; };
+		5533A9F712DA419600F755F7 /* _SKRequestBuilderAnswersByID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderAnswersByID.h; sourceTree = "<group>"; };
+		5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderAnswersByID.m; sourceTree = "<group>"; };
+		5533AA1312DA430900F755F7 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
+		5533AA1E12DA432600F755F7 /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
+		5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsForAnswer.h; sourceTree = "<group>"; };
+		5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsForAnswer.m; sourceTree = "<group>"; };
+		5533AA7212DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderAllBadges.h; sourceTree = "<group>"; };
+		5533AA7312DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderAllBadges.m; sourceTree = "<group>"; };
+		5533AA7612DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUsersWithBadge.h; sourceTree = "<group>"; };
+		5533AA7712DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUsersWithBadge.m; sourceTree = "<group>"; };
+		5533AA7C12DA465200F755F7 /* _SKRequestBuilderNameBadges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderNameBadges.h; sourceTree = "<group>"; };
+		5533AA7D12DA465200F755F7 /* _SKRequestBuilderNameBadges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderNameBadges.m; sourceTree = "<group>"; };
+		5533AA8012DA46A700F755F7 /* _SKRequestBuilderTagBadges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderTagBadges.h; sourceTree = "<group>"; };
+		5533AA8112DA46A700F755F7 /* _SKRequestBuilderTagBadges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderTagBadges.m; sourceTree = "<group>"; };
+		5533AA9512DA476A00F755F7 /* _SKRequestBuilderCommentsByID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsByID.h; sourceTree = "<group>"; };
+		5533AA9612DA476A00F755F7 /* _SKRequestBuilderCommentsByID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsByID.m; sourceTree = "<group>"; };
+		5533AA9912DA481200F755F7 /* _SKRequestBuilderQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderQuestions.h; sourceTree = "<group>"; };
+		5533AA9A12DA481300F755F7 /* _SKRequestBuilderQuestions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderQuestions.m; sourceTree = "<group>"; };
+		5533AA9E12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderQuestionsByID.h; sourceTree = "<group>"; };
+		5533AA9F12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderQuestionsByID.m; sourceTree = "<group>"; };
+		5533AAA212DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderAnswersForQuestion.h; sourceTree = "<group>"; };
+		5533AAA312DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderAnswersForQuestion.m; sourceTree = "<group>"; };
+		5533AAA612DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsForQuestion.h; sourceTree = "<group>"; };
+		5533AAA712DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsForQuestion.m; sourceTree = "<group>"; };
+		5533AAC312DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUnansweredQuestions.h; sourceTree = "<group>"; };
+		5533AAC412DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUnansweredQuestions.m; sourceTree = "<group>"; };
+		5533AAC712DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderQuestionSearch.h; sourceTree = "<group>"; };
+		5533AAC812DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderQuestionSearch.m; sourceTree = "<group>"; };
+		5533AACB12DA914600F755F7 /* _SKRequestBuilderTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderTags.h; sourceTree = "<group>"; };
+		5533AACC12DA914600F755F7 /* _SKRequestBuilderTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderTags.m; sourceTree = "<group>"; };
+		5533AACF12DA96A800F755F7 /* _SKRequestBuilderUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUsers.h; sourceTree = "<group>"; };
+		5533AAD012DA96A800F755F7 /* _SKRequestBuilderUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUsers.m; sourceTree = "<group>"; };
+		5533AAD312DA970D00F755F7 /* _SKRequestBuilderUsersByID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUsersByID.h; sourceTree = "<group>"; };
+		5533AAD412DA970D00F755F7 /* _SKRequestBuilderUsersByID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUsersByID.m; sourceTree = "<group>"; };
+		5533AAD912DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderAnswersForUser.h; sourceTree = "<group>"; };
+		5533AADA12DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderAnswersForUser.m; sourceTree = "<group>"; };
+		5533AADD12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderBadgesForUser.h; sourceTree = "<group>"; };
+		5533AADE12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderBadgesForUser.m; sourceTree = "<group>"; };
+		5533AAE112DA988300F755F7 /* _SKRequestBuilderCommentsByUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsByUser.h; sourceTree = "<group>"; };
+		5533AAE212DA988300F755F7 /* _SKRequestBuilderCommentsByUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsByUser.m; sourceTree = "<group>"; };
+		5533AAE512DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsFromUserToUser.h; sourceTree = "<group>"; };
+		5533AAE612DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsFromUserToUser.m; sourceTree = "<group>"; };
+		5533AAE912DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderFavoritedQuestions.h; sourceTree = "<group>"; };
+		5533AAEA12DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderFavoritedQuestions.m; sourceTree = "<group>"; };
+		5533AAED12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsToUser.h; sourceTree = "<group>"; };
+		5533AAEE12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsToUser.m; sourceTree = "<group>"; };
+		5533AAF112DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderQuestionsByUser.h; sourceTree = "<group>"; };
+		5533AAF212DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderQuestionsByUser.m; sourceTree = "<group>"; };
+		5533AAF612DAB5F300F755F7 /* _SKRequestBuilderUserTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUserTags.h; sourceTree = "<group>"; };
+		5533AAF712DAB5F300F755F7 /* _SKRequestBuilderUserTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUserTags.m; sourceTree = "<group>"; };
+		5533AAFA12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUserModerators.h; sourceTree = "<group>"; };
+		5533AAFB12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUserModerators.m; sourceTree = "<group>"; };
 		5547A6FD11C82F5F00CE89E1 /* SKCommentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCommentTest.h; sourceTree = "<group>"; };
 		5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCommentTest.m; sourceTree = "<group>"; };
 		5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants_Internal.h; sourceTree = "<group>"; };
@@ -332,7 +448,6 @@
 		55FA969A11616A65003A9CD7 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
 		55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKRequestBuilder.h; sourceTree = "<group>"; };
 		55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKRequestBuilder.m; sourceTree = "<group>"; };
-		55FF3AA112D85D9100CC4B9D /* SKRequestBuilder+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKRequestBuilder+Private.h"; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Other Sources/Info.plist"; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* StackKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StackKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21D402811BAB4EC00D5AD93 /* SKCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCallback.h; sourceTree = "<group>"; };
@@ -345,6 +460,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5533AA1112DA430900F755F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5533AA1912DA431000F755F7 /* StackKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55A2E4F1110E3A050038E510 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,6 +492,7 @@
 			children = (
 				8DC2EF5B0486A6940098B216 /* StackKit.framework */,
 				55A2E4F4110E3A050038E510 /* Unit Tests.octest */,
+				5533AA1312DA430900F755F7 /* Dummy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -448,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				32DBCF5E0370ADEE00C91783 /* StackKit_Prefix.pch */,
+				5533AA1E12DA432600F755F7 /* Dummy.m */,
 			);
 			path = "Other Sources";
 			sourceTree = "<group>";
@@ -472,6 +597,113 @@
 				55A2E524110E426E0038E510 /* SKComment.m */,
 			);
 			name = Comments;
+			sourceTree = "<group>";
+		};
+		5533AA5612DA440B00F755F7 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				5533A9A412D9A7E400F755F7 /* _SKConcreteRequestBuilder.h */,
+				5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */,
+				5533AAF512DAB5B500F755F7 /* Tags */,
+				5533AA9D12DA48EE00F755F7 /* Questions */,
+				5533AA8512DA46F600F755F7 /* Answers */,
+				5533AA8612DA46F900F755F7 /* Comments */,
+				5533AA8712DA46FD00F755F7 /* Users */,
+				5533AA8412DA46E600F755F7 /* Badges */,
+			);
+			name = Builders;
+			sourceTree = "<group>";
+		};
+		5533AA8412DA46E600F755F7 /* Badges */ = {
+			isa = PBXGroup;
+			children = (
+				5533AA7212DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h */,
+				5533AA7312DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m */,
+				5533AA7C12DA465200F755F7 /* _SKRequestBuilderNameBadges.h */,
+				5533AA7D12DA465200F755F7 /* _SKRequestBuilderNameBadges.m */,
+				5533AA8012DA46A700F755F7 /* _SKRequestBuilderTagBadges.h */,
+				5533AA8112DA46A700F755F7 /* _SKRequestBuilderTagBadges.m */,
+				5533AADD12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.h */,
+				5533AADE12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.m */,
+			);
+			name = Badges;
+			sourceTree = "<group>";
+		};
+		5533AA8512DA46F600F755F7 /* Answers */ = {
+			isa = PBXGroup;
+			children = (
+				5533A9F712DA419600F755F7 /* _SKRequestBuilderAnswersByID.h */,
+				5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */,
+				5533AAA212DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h */,
+				5533AAA312DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m */,
+				5533AAD912DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.h */,
+				5533AADA12DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.m */,
+			);
+			name = Answers;
+			sourceTree = "<group>";
+		};
+		5533AA8612DA46F900F755F7 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h */,
+				5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m */,
+				5533AA9512DA476A00F755F7 /* _SKRequestBuilderCommentsByID.h */,
+				5533AA9612DA476A00F755F7 /* _SKRequestBuilderCommentsByID.m */,
+				5533AAA612DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h */,
+				5533AAA712DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m */,
+				5533AAE112DA988300F755F7 /* _SKRequestBuilderCommentsByUser.h */,
+				5533AAE212DA988300F755F7 /* _SKRequestBuilderCommentsByUser.m */,
+				5533AAE512DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.h */,
+				5533AAE612DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.m */,
+				5533AAED12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.h */,
+				5533AAEE12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.m */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
+		5533AA8712DA46FD00F755F7 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				5533AA7612DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h */,
+				5533AA7712DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.m */,
+				5533AACF12DA96A800F755F7 /* _SKRequestBuilderUsers.h */,
+				5533AAD012DA96A800F755F7 /* _SKRequestBuilderUsers.m */,
+				5533AAD312DA970D00F755F7 /* _SKRequestBuilderUsersByID.h */,
+				5533AAD412DA970D00F755F7 /* _SKRequestBuilderUsersByID.m */,
+				5533AAFA12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.h */,
+				5533AAFB12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m */,
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		5533AA9D12DA48EE00F755F7 /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				5533AA9912DA481200F755F7 /* _SKRequestBuilderQuestions.h */,
+				5533AA9A12DA481300F755F7 /* _SKRequestBuilderQuestions.m */,
+				5533AA9E12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.h */,
+				5533AA9F12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m */,
+				5533AAC312DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h */,
+				5533AAC412DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m */,
+				5533AAC712DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h */,
+				5533AAC812DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.m */,
+				5533AAE912DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.h */,
+				5533AAEA12DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.m */,
+				5533AAF112DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.h */,
+				5533AAF212DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.m */,
+			);
+			name = Questions;
+			sourceTree = "<group>";
+		};
+		5533AAF512DAB5B500F755F7 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				5533AACB12DA914600F755F7 /* _SKRequestBuilderTags.h */,
+				5533AACC12DA914600F755F7 /* _SKRequestBuilderTags.m */,
+				5533AAF612DAB5F300F755F7 /* _SKRequestBuilderUserTags.h */,
+				5533AAF712DAB5F300F755F7 /* _SKRequestBuilderUserTags.m */,
+			);
+			name = Tags;
 			sourceTree = "<group>";
 		};
 		558331CC11B6C3D700CA8D62 /* SKUser endpoints */ = {
@@ -749,8 +981,8 @@
 			isa = PBXGroup;
 			children = (
 				55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */,
-				55FF3AA112D85D9100CC4B9D /* SKRequestBuilder+Private.h */,
 				55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */,
+				5533AA5612DA440B00F755F7 /* Builders */,
 			);
 			name = "Request Builder";
 			sourceTree = "<group>";
@@ -843,13 +1075,55 @@
 				D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */,
 				55978749128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.h in Headers */,
 				55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */,
-				55FF3AA412D85D9100CC4B9D /* SKRequestBuilder+Private.h in Headers */,
+				5533A9A612D9A7E400F755F7 /* _SKConcreteRequestBuilder.h in Headers */,
+				5533A9F912DA419600F755F7 /* _SKRequestBuilderAnswersByID.h in Headers */,
+				5533AA6112DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h in Headers */,
+				5533AA7412DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h in Headers */,
+				5533AA7812DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h in Headers */,
+				5533AA7E12DA465200F755F7 /* _SKRequestBuilderNameBadges.h in Headers */,
+				5533AA8212DA46A700F755F7 /* _SKRequestBuilderTagBadges.h in Headers */,
+				5533AA9712DA476A00F755F7 /* _SKRequestBuilderCommentsByID.h in Headers */,
+				5533AA9B12DA481300F755F7 /* _SKRequestBuilderQuestions.h in Headers */,
+				5533AAA012DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.h in Headers */,
+				5533AAA412DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h in Headers */,
+				5533AAA812DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h in Headers */,
+				5533AAC512DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h in Headers */,
+				5533AAC912DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h in Headers */,
+				5533AACD12DA914600F755F7 /* _SKRequestBuilderTags.h in Headers */,
+				5533AAD112DA96A800F755F7 /* _SKRequestBuilderUsers.h in Headers */,
+				5533AAD512DA970D00F755F7 /* _SKRequestBuilderUsersByID.h in Headers */,
+				5533AADB12DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.h in Headers */,
+				5533AADF12DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.h in Headers */,
+				5533AAE312DA988300F755F7 /* _SKRequestBuilderCommentsByUser.h in Headers */,
+				5533AAE712DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.h in Headers */,
+				5533AAEB12DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.h in Headers */,
+				5533AAEF12DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.h in Headers */,
+				5533AAF312DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.h in Headers */,
+				5533AAF812DAB5F300F755F7 /* _SKRequestBuilderUserTags.h in Headers */,
+				5533AAFC12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		5533AA1212DA430900F755F7 /* Dummy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5533AA2012DA432600F755F7 /* Build configuration list for PBXNativeTarget "Dummy" */;
+			buildPhases = (
+				5533AA1012DA430900F755F7 /* Sources */,
+				5533AA1112DA430900F755F7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5533AA1812DA430D00F755F7 /* PBXTargetDependency */,
+			);
+			name = Dummy;
+			productName = Dummy;
+			productReference = 5533AA1312DA430900F755F7 /* Dummy */;
+			productType = "com.apple.product-type.tool";
+		};
 		55A2E4F3110E3A050038E510 /* Unit Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55A2E4F8110E3A060038E510 /* Build configuration list for PBXNativeTarget "Unit Tests" */;
@@ -910,6 +1184,7 @@
 			targets = (
 				8DC2EF4F0486A6940098B216 /* StackKit */,
 				55A2E4F3110E3A050038E510 /* Unit Tests */,
+				5533AA1212DA430900F755F7 /* Dummy */,
 			);
 		};
 /* End PBXProject section */
@@ -933,6 +1208,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5533AA1012DA430900F755F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5533AA1F12DA432600F755F7 /* Dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55A2E4F0110E3A050038E510 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -946,6 +1229,8 @@
 				5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */,
 				5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */,
 				55FF3A8512D859BF00CC4B9D /* SKRequestBuilder.m in Sources */,
+				5533A9A812D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */,
+				5533A9FB12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,12 +1299,43 @@
 				552A99811212451F00EAE68C /* SKSearchTagsEndpoint.m in Sources */,
 				5597874A128A10AE00815494 /* SKUnansweredQuestionsTaggedEndpoint.m in Sources */,
 				55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */,
+				5533A9A712D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */,
+				5533A9FA12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */,
+				5533AA6212DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m in Sources */,
+				5533AA7512DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m in Sources */,
+				5533AA7912DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.m in Sources */,
+				5533AA7F12DA465200F755F7 /* _SKRequestBuilderNameBadges.m in Sources */,
+				5533AA8312DA46A700F755F7 /* _SKRequestBuilderTagBadges.m in Sources */,
+				5533AA9812DA476A00F755F7 /* _SKRequestBuilderCommentsByID.m in Sources */,
+				5533AA9C12DA481300F755F7 /* _SKRequestBuilderQuestions.m in Sources */,
+				5533AAA112DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m in Sources */,
+				5533AAA512DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m in Sources */,
+				5533AAA912DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m in Sources */,
+				5533AAC612DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m in Sources */,
+				5533AACA12DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.m in Sources */,
+				5533AACE12DA914600F755F7 /* _SKRequestBuilderTags.m in Sources */,
+				5533AAD212DA96A800F755F7 /* _SKRequestBuilderUsers.m in Sources */,
+				5533AAD612DA970D00F755F7 /* _SKRequestBuilderUsersByID.m in Sources */,
+				5533AADC12DA977A00F755F7 /* _SKRequestBuilderAnswersForUser.m in Sources */,
+				5533AAE012DA983E00F755F7 /* _SKRequestBuilderBadgesForUser.m in Sources */,
+				5533AAE412DA988300F755F7 /* _SKRequestBuilderCommentsByUser.m in Sources */,
+				5533AAE812DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.m in Sources */,
+				5533AAEC12DAAFB400F755F7 /* _SKRequestBuilderFavoritedQuestions.m in Sources */,
+				5533AAF012DAB1F300F755F7 /* _SKRequestBuilderCommentsToUser.m in Sources */,
+				5533AAF412DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.m in Sources */,
+				5533AAF912DAB5F300F755F7 /* _SKRequestBuilderUserTags.m in Sources */,
+				5533AAFD12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5533AA1812DA430D00F755F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DC2EF4F0486A6940098B216 /* StackKit */;
+			targetProxy = 5533AA1712DA430D00F755F7 /* PBXContainerItemProxy */;
+		};
 		55A2E4FD110E3A100038E510 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DC2EF4F0486A6940098B216 /* StackKit */;
@@ -1108,6 +1424,52 @@
 			};
 			name = Release;
 		};
+		5533AA1512DA430900F755F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Dummy;
+			};
+			name = Debug;
+		};
+		5533AA1612DA430900F755F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Dummy;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		55A2E4F6110E3A060038E510 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1179,6 +1541,15 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5533AA2012DA432600F755F7 /* Build configuration list for PBXNativeTarget "Dummy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5533AA1512DA430900F755F7 /* Debug */,
+				5533AA1612DA430900F755F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

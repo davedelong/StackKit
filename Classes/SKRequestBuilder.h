@@ -10,9 +10,9 @@
 #import "StackKit_Internal.h"
 
 @interface SKRequestBuilder : NSObject {
-
+	
 }
 
-+ (NSURL *) URLForFetchRequest:(SKFetchRequest *)request error:(NSError **)error;
++ (NSURL *) URLForFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
 
 @end

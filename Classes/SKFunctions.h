@@ -33,6 +33,8 @@
 
 @class SKFetchRequest;
 
+BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper);
+
 void SKQLog(NSString *format, ...);
 
 id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo);

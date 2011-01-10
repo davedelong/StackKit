@@ -24,6 +24,16 @@
  **/
 
 #import "StackKit_Internal.h"
+#import <objc/runtime.h>
+
+BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper) {
+	Class aSuper = nil;
+	while ((aSuper = class_getSuperclass(aClass)) != nil) {
+		if (aSuper == targetSuper) { return YES; }
+		aClass = aSuper;
+	}
+	return NO;
+}
 
 void SKQLog(NSString *format, ...) {
 	if (format == nil) {
