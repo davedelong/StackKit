@@ -17,7 +17,7 @@
 
 + (NSSet *) recognizedPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserID,
+			SKAnswerOwner,
 			SKAnswerCreationDate,
 			SKAnswerLastActivityDate,
 			SKAnswerViewCount,
@@ -27,7 +27,7 @@
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserID,
+			SKAnswerOwner,
 			nil];
 }
 
@@ -37,7 +37,7 @@
 			SKAnswerViewCount,
 			SKAnswerLastActivityDate,
 			SKAnswerScore,
-			NIL];
+			nil];
 }
 
 @end

@@ -17,7 +17,7 @@
 
 + (NSSet *) recognizedPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserID,
+			SKCommentOwner,
 			SKCommentCreationDate,
 			SKCommentScore,
 			nil];
@@ -25,7 +25,7 @@
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserID,
+			SKCommentOwner,
 			nil];
 }
 

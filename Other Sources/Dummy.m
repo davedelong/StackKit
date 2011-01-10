@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKAnswer class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKAnswerID, 1234]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKAnswerOwner, 1234]];
 	
 	NSError * e = nil;
 	Class builder = NSClassFromString(@"SKRequestBuilder");

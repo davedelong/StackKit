@@ -17,13 +17,13 @@
 
 + (NSSet *) recognizedPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserID,
+			SKBadgesAwardedToUser,
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserID,
+			SKBadgesAwardedToUser,
 			nil];
 }
 
