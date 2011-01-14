@@ -15,11 +15,11 @@
 	return [SKComment class];
 }
 
-+ (NSSet *) recognizedPredicateKeyPaths {
-	return [NSSet setWithObjects:
-			SKCommentID,
-			SKCommentCreationDate,
-			SKCommentScore,
++ (NSDictionary *) recognizedPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKCommentID,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKCommentCreationDate,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKCommentScore,
 			nil];
 }
 

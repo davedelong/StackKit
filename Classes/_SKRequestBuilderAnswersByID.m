@@ -15,14 +15,13 @@
 	return [SKAnswer class];
 }
 
-+ (NSSet *) recognizedPredicateKeyPaths {
-	return [NSSet setWithObjects:
-			SKAnswerID,
-			SKAnswerCreationDate,
-			
-			SKAnswerLastActivityDate,
-			SKAnswerViewCount,
-			SKAnswerScore,
++ (NSDictionary *) recognizedPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKAnswerID,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerCreationDate,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerLastActivityDate,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerViewCount,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerScore,
 			nil];
 }
 
