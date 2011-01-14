@@ -15,11 +15,11 @@
 	return [SKQuestion class];
 }
 
-+ (NSSet *) recognizedPredicateKeyPaths {
-	return [NSSet setWithObjects:
-			SKQuestionAnswerCount,
-			SKQuestionCreationDate,
-			SKQuestionScore,
++ (NSDictionary *) recognizedPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionAnswerCount,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionCreationDate,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionScore,
 			nil];
 }
 

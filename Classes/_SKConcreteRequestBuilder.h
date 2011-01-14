@@ -24,7 +24,7 @@
 
 + (Class) recognizedFetchEntity;
 + (BOOL) recognizesAPredicate;
-+ (NSSet *) recognizedPredicateKeyPaths;
++ (NSDictionary *) recognizedPredicateKeyPaths;
 + (NSSet *) requiredPredicateKeyPaths;
 + (NSSet *) recognizedSortDescriptorKeys;
 

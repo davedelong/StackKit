@@ -35,6 +35,23 @@ BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper) {
 	return NO;
 }
 
+NSArray * _sk_boxOperators(NSUInteger operator, ...) {
+	NSMutableArray * a = [NSMutableArray array];
+	
+	va_list argList;
+	va_start(argList, operator);
+	
+	while (operator != NSNotFound) {
+		NSNumber * op = [NSNumber numberWithUnsignedInteger:operator];
+		[a addObject:op];
+		
+		operator = va_arg(argList, NSUInteger);
+	}
+	
+	va_end(argList);
+	return a;
+}
+
 void SKQLog(NSString *format, ...) {
 	if (format == nil) {
 		printf("(null)\n");

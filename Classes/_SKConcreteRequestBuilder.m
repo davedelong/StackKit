@@ -48,13 +48,23 @@
 
 + (Class) recognizedFetchEntity { return nil; }
 + (BOOL) recognizesAPredicate { return YES; }
-+ (NSSet *) recognizedPredicateKeyPaths { return [NSSet set]; }
++ (NSDictionary *) recognizedPredicateKeyPaths { return [NSDictionary dictionary]; }
 + (NSSet *) requiredPredicateKeyPaths { return [NSSet set]; }
 + (NSSet *) recognizedSortDescriptorKeys { return [NSSet set]; }
 
 - (NSURL *) URL {
-	[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
-	return nil;
+	if ([self isMemberOfClass:[_SKConcreteRequestBuilder class]]) {
+		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
+		return nil;
+	}
+	
+	NSURL * apiURL = [[fetchRequest site] apiURL];
+	NSString * urlBase = [apiURL absoluteString];
+	NSString * apiPath = [NSString stringWithFormat:@"%@?%@", [self path], [query queryString]];
+	
+	NSString * fullAPIString = [urlBase stringByAppendingString:apiPath];
+	
+	return [NSURL URLWithString:fullAPIString];
 }
 
 @end

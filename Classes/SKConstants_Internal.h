@@ -117,3 +117,7 @@ printf("[%s:%d] ", [[file lastPathComponent] UTF8String], __LINE__); \
 SKQLog((format),##__VA_ARGS__); \
 }
 #endif
+
+#ifndef SK_BOX
+#define SK_BOX(o,...) _sk_boxOperators(o, ##__VA_ARGS__, NSNotFound)
+#endif

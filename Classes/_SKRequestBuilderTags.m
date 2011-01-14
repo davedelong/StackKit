@@ -8,18 +8,17 @@
 
 #import "_SKRequestBuilderTags.h"
 
-
 @implementation _SKRequestBuilderTags
 
 + (Class) recognizedFetchEntity {
 	return [SKTag class];
 }
 
-+ (NSSet *) recognizedPredicateKeyPaths {
-	return [NSSet setWithObjects:
-			SKTagCount,
-			SKTagLastUsedDate,
-			SKTagName,
++ (NSDictionary *) recognizedPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKTagCount,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKTagLastUsedDate,
+			SK_BOX(NSContainsPredicateOperatorType), SKTagName,
 			nil];
 }
 

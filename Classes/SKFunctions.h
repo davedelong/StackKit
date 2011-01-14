@@ -34,6 +34,7 @@
 @class SKFetchRequest;
 
 BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper);
+NSArray* _sk_boxOperators(NSUInteger operator, ...);
 
 void SKQLog(NSString *format, ...);
 
