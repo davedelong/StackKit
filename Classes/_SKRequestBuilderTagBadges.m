@@ -15,9 +15,9 @@
 	return [SKBadge class];
 }
 
-+ (NSSet *) recognizedPredicateKeyPaths {
-	return [NSSet setWithObjects:
-			SKBadgeTagBased,
++ (NSDictionary *) recognizedPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SK_BOX(NSEqualToPredicateOperatorType), SKBadgeTagBased,
 			nil];
 }
 

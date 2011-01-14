@@ -15,10 +15,10 @@
 	return [SKUser class];
 }
 
-+ (NSSet *) recognizedPredicateKeyPaths {
-	return [NSSet setWithObjects:
-			SKUserCreationDate,
-			SKUserBadges,
++ (NSDictionary *) recognizedPredicateKeyPaths {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserCreationDate,
+			SK_BOX(NSContainsPredicateOperatorType), SKUserBadges,
 			nil];
 }
 

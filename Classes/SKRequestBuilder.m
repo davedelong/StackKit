@@ -66,7 +66,7 @@
 		[builders filterUsingPredicate:p];
 		
 		NSSet * leftKeyPaths = [[fetchRequest predicate] leftKeyPaths];
-		p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths", leftKeyPaths];
+		p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths.@allKeys", leftKeyPaths];
 		[builders filterUsingPredicate:p];
 		
 		p = [NSPredicate predicateWithFormat:@"ALL requiredPredicateKeyPaths IN %@", leftKeyPaths];
