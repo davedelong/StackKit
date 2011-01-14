@@ -10,17 +10,26 @@
 #import "StackKit_Internal.h"
 
 @interface _SKConcreteRequestBuilder : NSObject {
+	@private
 	SKFetchRequest * fetchRequest;
+	NSError * error;
+	NSMutableDictionary * query;
+	NSString * path;
 }
 
 @property (nonatomic, readonly) SKFetchRequest * fetchRequest;
 @property (nonatomic, readonly, retain) NSError * error;
+@property (nonatomic, readonly) NSMutableDictionary * query;
+@property (nonatomic, copy) NSString * path;
 
 + (Class) recognizedFetchEntity;
++ (BOOL) recognizesAPredicate;
 + (NSSet *) recognizedPredicateKeyPaths;
 + (NSSet *) requiredPredicateKeyPaths;
 + (NSSet *) recognizedSortDescriptorKeys;
 
 - (id) initWithFetchRequest:(SKFetchRequest *)request;
+
+- (NSURL *) URL;
 
 @end

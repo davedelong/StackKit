@@ -94,6 +94,8 @@ NSString * SKFetchTotalKey = @"total";
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
 		return nil;
 	}
+	
+	[SKRequestBuilder URLForFetchRequest:self error:nil];
 
 	NSArray * endpoints = [fetchEntity endpoints];
 

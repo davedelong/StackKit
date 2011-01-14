@@ -11,6 +11,10 @@
 
 @implementation _SKRequestBuilderAllBadges
 
++ (BOOL) recognizesAPredicate {
+	return NO;
+}
+
 + (Class) recognizedFetchEntity {
 	return [SKBadge class];
 }

@@ -62,8 +62,11 @@
 	}
 	
 	if ([fetchRequest predicate] != nil) {
+		NSPredicate * p = [NSPredicate predicateWithFormat:@"recognizesAPredicate = YES"];
+		[builders filterUsingPredicate:p];
+		
 		NSSet * leftKeyPaths = [[fetchRequest predicate] leftKeyPaths];
-		NSPredicate * p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths", leftKeyPaths];
+		p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths", leftKeyPaths];
 		[builders filterUsingPredicate:p];
 		
 		p = [NSPredicate predicateWithFormat:@"ALL requiredPredicateKeyPaths IN %@", leftKeyPaths];

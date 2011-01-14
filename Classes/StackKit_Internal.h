@@ -37,6 +37,8 @@
 #import "NSDictionary+SKAdditions.h"
 #import "JSON.h"
 
+#import "SKRequestBuilder.h"
+
 #import "SKEndpoint.h"
 #import "SKEndpoint+Private.h"
 
