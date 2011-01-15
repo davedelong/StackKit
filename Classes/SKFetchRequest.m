@@ -95,7 +95,9 @@ NSString * SKFetchTotalKey = @"total";
 		return nil;
 	}
 	
-	[SKRequestBuilder URLForFetchRequest:self error:nil];
+	NSError * requestBuilderError = nil;
+	NSURL * builderURL = [SKRequestBuilder URLForFetchRequest:self error:&requestBuilderError];
+	NSLog(@"builderURL: %@ (%@)", builderURL, requestBuilderError);
 
 	NSArray * endpoints = [fetchEntity endpoints];
 

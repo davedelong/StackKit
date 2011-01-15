@@ -15,10 +15,8 @@
 		552A99811212451F00EAE68C /* SKSearchTagsEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 552A997D1212434D00EAE68C /* SKSearchTagsEndpoint.m */; };
 		5533A9A612D9A7E400F755F7 /* _SKConcreteRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533A9A412D9A7E400F755F7 /* _SKConcreteRequestBuilder.h */; };
 		5533A9A712D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */; };
-		5533A9A812D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */; };
 		5533A9F912DA419600F755F7 /* _SKRequestBuilderAnswersByID.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533A9F712DA419600F755F7 /* _SKRequestBuilderAnswersByID.h */; };
 		5533A9FA12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */; };
-		5533A9FB12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */; };
 		5533AA1912DA431000F755F7 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
 		5533AA6112DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h */; };
@@ -198,7 +196,6 @@
 		55FA95DA11614245003A9CD7 /* NSDictionary+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */; };
 		55FA969B11616A65003A9CD7 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA969911616A65003A9CD7 /* SKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FA969C11616A65003A9CD7 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA969A11616A65003A9CD7 /* SKConstants.m */; };
-		55FF3A8512D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
 		55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */; };
 		55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
@@ -1228,9 +1225,6 @@
 				55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */,
 				5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */,
 				5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */,
-				55FF3A8512D859BF00CC4B9D /* SKRequestBuilder.m in Sources */,
-				5533A9A812D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */,
-				5533A9FB12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

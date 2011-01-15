@@ -121,3 +121,7 @@ SKQLog((format),##__VA_ARGS__); \
 #ifndef SK_BOX
 #define SK_BOX(o,...) _sk_boxOperators(o, ##__VA_ARGS__, NSNotFound)
 #endif
+
+#ifndef SK_EREASON
+#define SK_EREASON(o,...) [NSDictionary dictionaryWithObject:[NSString stringWithFormat:(o), ##__VA_ARGS__] forKey:NSLocalizedDescriptionKey]
+#endif

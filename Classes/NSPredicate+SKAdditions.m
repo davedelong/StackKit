@@ -257,4 +257,23 @@
 	return paths;
 }
 
+//this has to return an NSNumber.  If it returned a BOOL, then we'd get an EXC_BAD_ACCESS when using it in our FUNCTION() predicate
+- (NSNumber *) sk_matchesRecognizedKeyPathsAndOperators:(NSDictionary *)keyPaths {
+	BOOL matches = YES;
+	for (NSString * keyPath in keyPaths) {
+		NSArray * allowedOperatorsForKeyPath = [keyPaths objectForKey:keyPath];
+		NSArray * subPredicatesUsingKeyPath = [self subPredicatesWithLeftKeyPath:keyPath];
+		for (NSComparisonPredicate * subPredicate in subPredicatesUsingKeyPath) {
+			NSPredicateOperatorType operator = [subPredicate predicateOperatorType];
+			NSNumber * boxed = [NSNumber numberWithUnsignedInteger:operator];
+			if ([allowedOperatorsForKeyPath containsObject:boxed] == NO) {
+				matches = NO;
+				break;
+			}
+		}
+		if (matches == NO) { break; }
+	}
+	return [NSNumber numberWithBool:matches];
+}
+
 @end

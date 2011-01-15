@@ -49,7 +49,9 @@
 	
 	[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizedFetchEntity = %@", [fetchRequest entity]]];
 	if ([fetchRequest entity] == nil || [builders count] == 0) {
-		buildError = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil];
+		buildError = [NSError errorWithDomain:SKErrorDomain 
+										 code:SKErrorCodeInvalidEntity 
+									 userInfo:SK_EREASON(@"Unrecognized fetch entity: %@", NSStringFromClass([fetchRequest entity]))];
 		goto errorExit;
 	}
 	
@@ -57,36 +59,88 @@
 		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizedSortDescriptorKeys CONTAINS %@", [[fetchRequest sortDescriptor] key]]];
 	}
 	if ([builders count] == 0) {
-		buildError = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:nil];
+		buildError = [NSError errorWithDomain:SKErrorDomain 
+										 code:SKErrorCodeInvalidSort 
+									 userInfo:SK_EREASON(@"Unrecognized sort key: %@", [[fetchRequest sortDescriptor] key])];
 		goto errorExit;
 	}
 	
 	if ([fetchRequest predicate] != nil) {
+		if ([[fetchRequest predicate] isKindOfClass:[NSCompoundPredicate class]] && [[fetchRequest predicate] isSimpleAndPredicate] == NO) {
+			buildError = [NSError errorWithDomain:SKErrorDomain 
+											 code:SKErrorCodeInvalidPredicate 
+										 userInfo:SK_EREASON(@"Only comparison predicates and AND predicates with no compound subpredicates are recognized")];
+			goto errorExit;
+		}
+		//some endpoints do not recognize a predicate
 		NSPredicate * p = [NSPredicate predicateWithFormat:@"recognizesAPredicate = YES"];
 		[builders filterUsingPredicate:p];
 		
 		NSSet * leftKeyPaths = [[fetchRequest predicate] leftKeyPaths];
+		
+		//the predicate must only use recognized keypaths
 		p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths.@allKeys", leftKeyPaths];
 		[builders filterUsingPredicate:p];
 		
+		//the predicate must have any required keypaths
 		p = [NSPredicate predicateWithFormat:@"ALL requiredPredicateKeyPaths IN %@", leftKeyPaths];
 		[builders filterUsingPredicate:p];
+		
+		//the predicate must only use certain operators for certain keypaths
+		p = [NSPredicate predicateWithFormat:@"FUNCTION(%@, 'sk_matchesRecognizedKeyPathsAndOperators:', SELF.recognizedPredicateKeyPaths) == YES", [fetchRequest predicate]];
+		[builders filterUsingPredicate:p];
+		
 	} else {
 		//this request doesn't have a predicate
 		//therefore, remove all builders that require certain left keypaths (because those could never be satisfied)
 		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"requiredPredicateKeyPaths.@count == 0"]];
 	}
 	if ([builders count] == 0) {
-		buildError = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:nil];
+		buildError = [NSError errorWithDomain:SKErrorDomain 
+										 code:SKErrorCodeInvalidPredicate 
+									 userInfo:SK_EREASON(@"Invalid predicate structure")];
 		goto errorExit;
 	}
 	
-	NSLog(@"potential builders: %@", builders);
+	NSMutableArray * successfulBuilders = [NSMutableArray array];
+	NSMutableArray * failedBuilders = [NSMutableArray array];
+	for (Class builder in builders) {
+		_SKConcreteRequestBuilder * concreteBuilder = [[builder alloc] initWithFetchRequest:fetchRequest];
+		if ([concreteBuilder error] != nil) {
+			[failedBuilders addObject:concreteBuilder];
+		} else {
+			[successfulBuilders addObject:concreteBuilder];
+		}
+		[concreteBuilder release];
+	}
+	
+	if ([successfulBuilders count] > 0) {
+		//something succeeded!
+		_SKConcreteRequestBuilder * successfulBuilder = [successfulBuilders objectAtIndex:0];
+		buildError = nil;
+		url = [successfulBuilder URL];
+		
+		if ([successfulBuilders count] > 1) {
+			NSLog(@"multiple URLs built: %@", [successfulBuilders valueForKey:@"URL"]);
+		}
+	} else if ([failedBuilders count] > 0) {
+		//nothing succeeded and something failed
+		_SKConcreteRequestBuilder * failedBuilder = [failedBuilders objectAtIndex:0];
+		buildError = [failedBuilder error];
+		url = nil;
+	} else {
+		//nothing succeeded and nothing failed
+		//this should be impossible
+		NSLog(@"Impossible branch reached!");
+	}
 	
 errorExit:
 	[builders release];
-	if (buildError != nil && error != nil) {
-		*error = buildError;
+	if (buildError != nil) {
+		NSLog(@"build error: %@", buildError);
+		if (error != nil) {
+			*error = buildError;
+		}
 	}
 	return url;
 }

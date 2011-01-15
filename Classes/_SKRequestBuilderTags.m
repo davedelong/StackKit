@@ -30,4 +30,9 @@
 			nil];
 }
 
+- (void) buildURL {
+
+	[super buildURL];
+}
+
 @end

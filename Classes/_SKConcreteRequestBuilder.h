@@ -13,12 +13,14 @@
 	@private
 	SKFetchRequest * fetchRequest;
 	NSError * error;
+	NSURL * URL;
 	NSMutableDictionary * query;
 	NSString * path;
 }
 
 @property (nonatomic, readonly) SKFetchRequest * fetchRequest;
 @property (nonatomic, readonly, retain) NSError * error;
+@property (nonatomic, readonly, retain) NSURL * URL;
 @property (nonatomic, readonly) NSMutableDictionary * query;
 @property (nonatomic, copy) NSString * path;
 
@@ -30,6 +32,12 @@
 
 - (id) initWithFetchRequest:(SKFetchRequest *)request;
 
-- (NSURL *) URL;
+@end
+
+@interface _SKConcreteRequestBuilder (SubclassMethods)
+
+- (void) buildURL;
+- (NSPredicate *) requestPredicate;
+- (NSSortDescriptor *) requestSortDescriptor;
 
 @end

@@ -55,4 +55,6 @@ enum {
 
 - (NSSet *) leftKeyPaths;
 
+- (NSNumber *) sk_matchesRecognizedKeyPathsAndOperators:(NSDictionary *)keyPaths;
+
 @end
