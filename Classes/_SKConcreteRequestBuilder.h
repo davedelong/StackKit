@@ -19,7 +19,7 @@
 }
 
 @property (nonatomic, readonly) SKFetchRequest * fetchRequest;
-@property (nonatomic, readonly, retain) NSError * error;
+@property (nonatomic, retain) NSError * error;
 @property (nonatomic, readonly, retain) NSURL * URL;
 @property (nonatomic, readonly) NSMutableDictionary * query;
 @property (nonatomic, copy) NSString * path;
@@ -28,6 +28,7 @@
 + (BOOL) recognizesAPredicate;
 + (NSDictionary *) recognizedPredicateKeyPaths;
 + (NSSet *) requiredPredicateKeyPaths;
++ (BOOL) recognizesASortDescriptor;
 + (NSSet *) recognizedSortDescriptorKeys;
 
 - (id) initWithFetchRequest:(SKFetchRequest *)request;

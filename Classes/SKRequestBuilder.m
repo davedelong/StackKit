@@ -56,20 +56,17 @@
 	}
 	
 	if ([fetchRequest sortDescriptor] != nil) {
+		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizesASortDescriptor = YES"]];
 		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizedSortDescriptorKeys CONTAINS %@", [[fetchRequest sortDescriptor] key]]];
 	}
 	if ([builders count] == 0) {
-		buildError = [NSError errorWithDomain:SKErrorDomain 
-										 code:SKErrorCodeInvalidSort 
-									 userInfo:SK_EREASON(@"Unrecognized sort key: %@", [[fetchRequest sortDescriptor] key])];
+		buildError = SK_SORTERROR(@"Unrecognized sort key: %@", [[fetchRequest sortDescriptor] key]);
 		goto errorExit;
 	}
 	
 	if ([fetchRequest predicate] != nil) {
 		if ([[fetchRequest predicate] isKindOfClass:[NSCompoundPredicate class]] && [[fetchRequest predicate] isSimpleAndPredicate] == NO) {
-			buildError = [NSError errorWithDomain:SKErrorDomain 
-											 code:SKErrorCodeInvalidPredicate 
-										 userInfo:SK_EREASON(@"Only comparison predicates and AND predicates with no compound subpredicates are recognized")];
+			buildError = SK_PREDERROR(@"Only comparison predicates and AND predicates with no compound subpredicates are recognized");
 			goto errorExit;
 		}
 		//some endpoints do not recognize a predicate
@@ -96,9 +93,9 @@
 		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"requiredPredicateKeyPaths.@count == 0"]];
 	}
 	if ([builders count] == 0) {
-		buildError = [NSError errorWithDomain:SKErrorDomain 
-										 code:SKErrorCodeInvalidPredicate 
-									 userInfo:SK_EREASON(@"Invalid predicate structure")];
+		if (buildError == nil) {
+			buildError = SK_PREDERROR(@"Invalid predicate structure");
+		}
 		goto errorExit;
 	}
 	

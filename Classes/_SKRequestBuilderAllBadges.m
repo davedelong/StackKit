@@ -25,4 +25,13 @@
 			nil];
 }
 
+- (void) buildURL {
+	if ([[self requestSortDescriptor] ascending] == NO) {
+		[self setError:SK_SORTERROR(@"Badges can only be requested in ascending order")];
+	} else {
+		[self setPath:@"/badges"];
+		[super buildURL];
+	}
+}
+
 @end

@@ -35,4 +35,42 @@
 			nil];
 }
 
+- (void) buildURL {
+	NSPredicate * p = [self requestPredicate];
+	
+	id inTitle = [p constantValueForLeftKeyPath:SKQuestionTitle];
+	id tagged = [p constantValueForLeftKeyPath:SKQuestionTags];
+	
+	if (inTitle == nil && tagged == nil) {
+		[self setError:SK_PREDERROR(@"Searching requires a title or tag predicate")];
+		return;
+	}
+	
+	if (inTitle != nil) {
+		[[self query] setObject:inTitle forKey:SKQueryInTitle];
+	}
+	
+	if (tagged != nil) {
+		[[self query] setObject:SKExtractTagName(tagged) forKey:SKQueryTagged];
+	}
+	
+	//TODO: nottagged?
+	
+	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
+	
+	[self setPath:@"/search"];
+	
+	if ([self requestSortDescriptor] != nil) {
+		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		if (sortRange.lower != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.lower] forKey:SKQueryMinSort];
+		}
+		if (sortRange.upper != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.upper] forKey:SKQueryMaxSort];
+		}
+	}
+	
+	[super buildURL];
+}
+
 @end

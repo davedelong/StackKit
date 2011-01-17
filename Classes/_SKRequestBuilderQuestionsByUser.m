@@ -40,4 +40,32 @@
 			nil];
 }
 
+- (void) buildURL {
+	NSPredicate * p = [self requestPredicate];
+	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
+	
+	id questionIDs = [p constantValueForLeftKeyPath:SKQuestionOwner];
+	[self setPath:[NSString stringWithFormat:@"/users/%@/questions", SKExtractQuestionID(questionIDs)]];
+	
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKQuestionCreationDate];
+	if (dateRange.lower != SKNotFound) {
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:dateRange.lower] forKey:SKQueryFromDate];
+	}
+	if (dateRange.upper != SKNotFound) {
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:dateRange.upper] forKey:SKQueryToDate];
+	}
+	
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKQuestionCreationDate]) {
+		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		if (sortRange.lower != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.lower] forKey:SKQueryMinSort];
+		}
+		if (sortRange.upper != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.upper] forKey:SKQueryMaxSort];
+		}
+	}
+	
+	[super buildURL];
+}
+
 @end

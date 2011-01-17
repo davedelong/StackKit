@@ -27,4 +27,24 @@
 			nil];
 }
 
++ (NSSet *) recognizedSortDescriptorKeys {
+	return [NSSet setWithObjects:
+			SKBadgeName,
+			nil];
+}
+
+- (void) buildURL {
+	if ([self requestSortDescriptor] != nil && [[self requestSortDescriptor] ascending] == NO) {
+		[self setError:SK_SORTERROR(@"badges can only be requested in ascending order")];
+	}
+	
+	id tagBased = [[self requestPredicate] constantValueForLeftKeyPath:SKBadgeTagBased];
+	if ([tagBased isKindOfClass:[NSNumber class]] == NO || [tagBased boolValue] == YES) {
+		[self setError:SK_PREDERROR(@"Invalid predicate for fetching named badges")];
+	}
+	
+	[self setPath:@"/badges/name"];
+	[super buildURL];
+}
+
 @end

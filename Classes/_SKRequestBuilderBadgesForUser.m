@@ -27,4 +27,13 @@
 			nil];
 }
 
+- (void) buildURL {
+	NSPredicate * p = [self requestPredicate];
+	
+	id users = [p constantValueForLeftKeyPath:SKBadgesAwardedToUser];
+	[self setPath:[NSString stringWithFormat:@"/users/%@/badges", SKExtractUserID(users)]];
+	
+	[super buildURL];
+}
+
 @end

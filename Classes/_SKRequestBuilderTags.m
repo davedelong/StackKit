@@ -31,6 +31,23 @@
 }
 
 - (void) buildURL {
+	NSPredicate *p = [self requestPredicate];
+	[self setPath:@"/tags"];
+	
+	id filter = [p constantValueForLeftKeyPath:SKTagName];
+	if (filter) {
+		[[self query] setObject:filter forKey:SKQueryFilter];
+	}
+	
+	if ([self requestSortDescriptor] != nil) {
+		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		if (sortRange.lower != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.lower] forKey:SKQueryMinSort];
+		}
+		if (sortRange.upper != SKNotFound) {
+			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.upper] forKey:SKQueryMaxSort];
+		}
+	}
 
 	[super buildURL];
 }

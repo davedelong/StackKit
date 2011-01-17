@@ -94,10 +94,6 @@ NSString * SKFetchTotalKey = @"total";
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
 		return nil;
 	}
-	
-	NSError * requestBuilderError = nil;
-	NSURL * builderURL = [SKRequestBuilder URLForFetchRequest:self error:&requestBuilderError];
-	NSLog(@"builderURL: %@ (%@)", builderURL, requestBuilderError);
 
 	NSArray * endpoints = [fetchEntity endpoints];
 
@@ -143,6 +139,12 @@ NSString * SKFetchTotalKey = @"total";
 	
 	//construct our fetch url
 	[self setFetchURL:[self apiCall]];
+	
+	
+	NSError * requestBuilderError = nil;
+	NSURL * builderURL = [SKRequestBuilder URLForFetchRequest:self error:&requestBuilderError];
+	NSLog(@"endpointURL: %@ (%@)", [self fetchURL], [self error]);
+	NSLog(@"builderURL: %@ (%@)", builderURL, requestBuilderError);
 	
 	if ([self error] != nil) { goto cleanup; }
 	if ([self fetchURL] == nil) { goto cleanup; }

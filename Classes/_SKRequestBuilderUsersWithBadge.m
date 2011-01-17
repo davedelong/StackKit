@@ -28,4 +28,23 @@
 			nil];
 }
 
++ (BOOL) recognizesASortDescriptor {
+	return NO;
+}
+
+- (void) buildURL {
+	NSPredicate * p = [self requestPredicate];
+	id badges = [p constantValueForLeftKeyPath:SKUserBadges];
+	[self setPath:[NSString stringWithFormat:@"/badges/%@", SKExtractBadgeID(badges)]];
+	
+	SKRange r = [p rangeOfConstantValuesForLeftKeyPath:SKUserCreationDate];
+	if (r.lower != SKNotFound) {
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:r.lower] forKey:SKQueryFromDate];
+	}
+	if (r.upper != SKNotFound) {
+		[[self query] setObject:[NSNumber numberWithUnsignedInteger:r.upper] forKey:SKQueryToDate];
+	}
+	[super buildURL];
+}
+
 @end

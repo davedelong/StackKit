@@ -10,7 +10,6 @@
 
 @interface _SKConcreteRequestBuilder ()
 
-@property (nonatomic, retain) NSError * error;
 @property (nonatomic, retain) NSURL * URL;
 
 @end
@@ -30,7 +29,6 @@
 		query = [[NSMutableDictionary alloc] init];
 		
 		[query setObject:[[request site] apiKey] forKey:SKSiteAPIKey];
-		[query setObject:SKQueryTrue forKey:SKQueryBody];
 		
 		if ([request fetchLimit] > 0) {
 			[query setObject:[NSNumber numberWithUnsignedInteger:[request fetchLimit]] forKey:SKQueryPageSize];
@@ -61,6 +59,7 @@
 + (BOOL) recognizesAPredicate { return YES; }
 + (NSDictionary *) recognizedPredicateKeyPaths { return [NSDictionary dictionary]; }
 + (NSSet *) requiredPredicateKeyPaths { return [NSSet set]; }
++ (BOOL) recognizesASortDescriptor { return YES; }
 + (NSSet *) recognizedSortDescriptorKeys { return [NSSet set]; }
 
 - (void) buildURL {

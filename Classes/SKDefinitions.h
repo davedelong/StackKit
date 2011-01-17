@@ -40,3 +40,20 @@ typedef struct _SKRange {
 enum {SKNotFound = NSUIntegerMax};
 
 extern SKRange const SKRangeNotFound;
+
+
+#ifndef SK_BOX
+#define SK_BOX(o,...) _sk_boxOperators(o, ##__VA_ARGS__, NSNotFound)
+#endif
+
+#ifndef SK_EREASON
+#define SK_EREASON(o,...) [NSDictionary dictionaryWithObject:[NSString stringWithFormat:(o), ##__VA_ARGS__] forKey:NSLocalizedDescriptionKey]
+#endif
+
+#ifndef SK_SORTERROR
+#define SK_SORTERROR(o,...) [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidSort userInfo:SK_EREASON(o, ##__VA_ARGS__)]
+#endif
+
+#ifndef SK_PREDERROR
+#define SK_PREDERROR(o,...) [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:SK_EREASON(o, ##__VA_ARGS__)]
+#endif

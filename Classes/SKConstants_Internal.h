@@ -56,6 +56,8 @@ extern NSString * const SKQueryMaxSort;
 extern NSString * const SKQueryFilter;
 extern NSString * const SKQueryBody;
 extern NSString * const SKQueryTagged;
+extern NSString * const SKQueryNotTagged;
+extern NSString * const SKQueryInTitle;
 
 /**
  There are some cases where constants can have different names but the same value.  For example:
@@ -116,12 +118,4 @@ printf("[%s:%d] ", [[file lastPathComponent] UTF8String], __LINE__); \
 [file release]; \
 SKQLog((format),##__VA_ARGS__); \
 }
-#endif
-
-#ifndef SK_BOX
-#define SK_BOX(o,...) _sk_boxOperators(o, ##__VA_ARGS__, NSNotFound)
-#endif
-
-#ifndef SK_EREASON
-#define SK_EREASON(o,...) [NSDictionary dictionaryWithObject:[NSString stringWithFormat:(o), ##__VA_ARGS__] forKey:NSLocalizedDescriptionKey]
 #endif
