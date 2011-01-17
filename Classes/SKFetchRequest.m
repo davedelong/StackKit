@@ -85,31 +85,6 @@ NSString * SKFetchTotalKey = @"total";
 	return d;
 }
 
-- (NSURL *) apiCall {
-	if ([self site] == nil) { return nil; }
-	
-	Class fetchEntity = [self entity];
-	
-	if ([fetchEntity respondsToSelector:@selector(endpoints)] == NO) {
-		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:nil]];
-		return nil;
-	}
-
-	NSArray * endpoints = [fetchEntity endpoints];
-
-	for (Class endpointClass in endpoints) {
-		SKEndpoint * endpoint = [endpointClass endpointForFetchRequest:self];
-		if ([endpoint validateFetchRequest]) {
-			[self setError:nil];
-			return [endpoint APIURLForFetchRequest:self];
-		} else {
-			[self setError:[endpoint error]];
-		}
-	}
-	
-	return nil;
-}
-
 - (void) executeAsynchronously {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
@@ -138,13 +113,14 @@ NSString * SKFetchTotalKey = @"total";
 	}
 	
 	//construct our fetch url
-	[self setFetchURL:[self apiCall]];
-	
-	
 	NSError * requestBuilderError = nil;
 	NSURL * builderURL = [SKRequestBuilder URLForFetchRequest:self error:&requestBuilderError];
-	NSLog(@"endpointURL: %@ (%@)", [self fetchURL], [self error]);
-	NSLog(@"builderURL: %@ (%@)", builderURL, requestBuilderError);
+	
+	if (requestBuilderError != nil) {
+		[self setError:requestBuilderError];
+	} else {
+		[self setFetchURL:builderURL];
+	}
 	
 	if ([self error] != nil) { goto cleanup; }
 	if ([self fetchURL] == nil) { goto cleanup; }

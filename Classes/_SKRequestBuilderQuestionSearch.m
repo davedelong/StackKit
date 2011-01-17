@@ -63,10 +63,10 @@
 	if ([self requestSortDescriptor] != nil) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
-			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.lower] forKey:SKQueryMinSort];
+			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
 		}
 		if (sortRange.upper != SKNotFound) {
-			[[self query] setObject:[NSNumber numberWithUnsignedInteger:sortRange.upper] forKey:SKQueryMaxSort];
+			[[self query] setObject:sortRange.upper forKey:SKQueryMaxSort];
 		}
 	}
 	

@@ -33,11 +33,11 @@ typedef void(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
 typedef id (*SKExtractor)(id);
 
 typedef struct _SKRange {
-	NSUInteger lower;
-	NSUInteger upper;
+	id lower;
+	id upper;
 } SKRange;
 
-enum {SKNotFound = NSUIntegerMax};
+#define SKNotFound nil
 
 extern SKRange const SKRangeNotFound;
 

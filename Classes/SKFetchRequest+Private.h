@@ -31,8 +31,6 @@
 
 - (NSMutableDictionary *) defaultQueryDictionary;
 
-- (NSURL *) apiCall;
-
 - (NSArray *) execute;
 - (void) executeAsynchronously;
 

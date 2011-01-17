@@ -214,7 +214,7 @@
 																	[NSNumber numberWithUnsignedInteger:NSLessThanOrEqualToPredicateOperatorType],
 																	nil]];
 		if (upperValue) {
-			result.upper = SKExtractInteger(upperValue);
+			result.upper = upperValue;
 		}
 		
 		id lowerValue = [comparison constantValueForOneOfOperators:[NSArray arrayWithObjects:
@@ -222,7 +222,7 @@
 																	[NSNumber numberWithUnsignedInteger:NSGreaterThanOrEqualToPredicateOperatorType],
 																	nil]];
 		if (lowerValue) {
-			result.lower = SKExtractInteger(lowerValue);
+			result.lower = lowerValue;
 		}
 	} else if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;

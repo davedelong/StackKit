@@ -39,10 +39,10 @@
 	
 	SKRange r = [p rangeOfConstantValuesForLeftKeyPath:SKUserCreationDate];
 	if (r.lower != SKNotFound) {
-		[[self query] setObject:[NSNumber numberWithUnsignedInteger:r.lower] forKey:SKQueryFromDate];
+		[[self query] setObject:r.lower forKey:SKQueryFromDate];
 	}
 	if (r.upper != SKNotFound) {
-		[[self query] setObject:[NSNumber numberWithUnsignedInteger:r.upper] forKey:SKQueryToDate];
+		[[self query] setObject:r.upper forKey:SKQueryToDate];
 	}
 	[super buildURL];
 }

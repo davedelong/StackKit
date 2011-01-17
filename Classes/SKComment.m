@@ -47,16 +47,6 @@ NSString * const SKCommentEditCount = @"edit_count";
 	return @"comments";
 }
 
-+ (NSArray *) endpoints {
-	return [NSArray arrayWithObjects:
-			[SKSpecificCommentEndpoint class],
-			[SKUserCommentsEndpoint class],
-			[SKCommentsFromUserToUserEndpoint class],
-			[SKCommentsToUserEndpoint class],
-			[SKPostCommentsEndpoint class],
-			nil];
-}
-
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 										@"commentID", SKCommentID,

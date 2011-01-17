@@ -52,14 +52,6 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 	return @"answers";
 }
 
-+ (NSArray *) endpoints {
-	return [NSArray arrayWithObjects:
-			[SKSpecificAnswerEndpoint class],
-			[SKQuestionAnswersEndpoint class],
-			[SKUserAnswersEndpoint class],
-			nil];
-}
-
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
 		answerID = [[dictionary objectForKey:SKAnswerID] retain];

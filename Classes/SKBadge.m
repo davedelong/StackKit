@@ -84,19 +84,6 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 	return _kSKBadgeMappings;
 }
 
-+ (NSString *) dataKey {
-	return @"badges";
-}
-
-+ (NSArray *) endpoints {
-	return [NSArray arrayWithObjects:
-			[SKAllBadgesEndpoint class],
-			[SKNameBadgesEndpoint class],
-			[SKTagBadgesEndpoint class],
-			[SKUserBadgesEndpoint class],
-			nil];
-}
-
 #pragma mark SKBadge-specific methods
 
 - (BOOL) isEqual:(id)object {

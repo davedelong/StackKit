@@ -73,19 +73,6 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 	return @"questions";
 }
 
-+ (NSArray *) endpoints {
-	return [NSArray arrayWithObjects:
-			[SKAllQuestionsEndpoint class],
-			[SKUserQuestionsEndpoint class],
-			[SKSpecificQuestionEndpoint class],
-			[SKUnansweredQuestionsTaggedEndpoint class],
-			[SKQuestionsTaggedEndpoint class],
-			[SKUnansweredQuestionsEndpoint class],
-			[SKUserFavoritedQuestionsEndpoint class],
-			[SKQuestionSearchEndpoint class],
-			nil];
-}
-
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite dictionaryRepresentation:dictionary]) {
 		questionID = [[dictionary objectForKey:SKQuestionID] retain];

@@ -153,13 +153,6 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 	return _kSKUserMappings;
 }
 
-+ (NSArray *) endpoints {
-	return [NSArray arrayWithObjects:
-			[SKAllUsersEndpoint class],
-			[SKSpecificUserEndpoint class],
-			nil];
-}
-
 + (NSString *) dataKey {
 	return @"users";
 }

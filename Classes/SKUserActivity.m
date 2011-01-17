@@ -88,12 +88,6 @@ NSString * const SKUserActivityToDateKey = @"todate";
 	return @"user_timelines";
 }
 
-+ (NSArray *) endpoints {
-	return [NSArray arrayWithObjects:
-			[SKUserActivityEndpoint class],
-			nil];
-}
-
 + (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
 	return [[request predicate] predicateByRemovingSubPredicateWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
 }

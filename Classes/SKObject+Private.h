@@ -46,7 +46,5 @@
 + (NSDictionary *) APIAttributeToPropertyMapping;
 // the key used to extract information from the JSON response
 + (NSString *) dataKey;
-// the array of SKEndpoint class objects this object recognizes
-+ (NSArray *) endpoints;
 
 @end

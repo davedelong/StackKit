@@ -54,14 +54,6 @@ NSUInteger SKTagDefaultPageSize = 70;
 	return @"tags";
 }
 
-+ (NSArray *) endpoints {
-	return [NSArray arrayWithObjects:
-			[SKAllTagsEndpoint class],
-			[SKUserTagsEndpoint class],
-			[SKSearchTagsEndpoint class],
-			nil];
-}
-
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:aSite]) {
 		name = [[dictionary objectForKey:SKTagName] retain];
