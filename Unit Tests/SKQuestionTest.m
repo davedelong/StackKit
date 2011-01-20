@@ -79,7 +79,7 @@
 	SKQuestion* testQuestion = [[SKQuestion alloc] initWithSite:site dictionaryRepresentation:mockUpQuestionDict];
 	
 	NSArray* questionsToFetch = [NSArray arrayWithObjects:
-								 @"3403569",
+								 @"4729906",
 								 [NSNumber numberWithInt:3389487],
 								 testQuestion,
 								 nil];
@@ -96,7 +96,7 @@
 	STAssertNil(e, @"Expecting nil error: %@", e);
 	
 	SKQuestion * q = [matches objectAtIndex:0];
-	STAssertTrue([[q questionID] isEqualToNumber:[NSNumber numberWithInt:3403569]], @"Unexpected question returned at index 0");
+	STAssertTrue([[q questionID] isEqualToNumber:[NSNumber numberWithInt:4729906]], @"Unexpected question returned at index 0");
 	
 	q = [matches objectAtIndex:1];
 	STAssertTrue([[q questionID] isEqualToNumber:[NSNumber numberWithInt:3389487]], @"Unexpected question returned at index 1");
@@ -188,7 +188,7 @@
 	STAssertNil(e, @"Error should be nil: %@", e);
 	
 	for (SKQuestion * question in results) {
-		STAssertTrue([[question answerCount] intValue] == 0, @"question should have 0 answers");
+		STAssertTrue([[question answerCount] intValue] == 0, @"question should have 0 answers.  has: %@", [question answerCount]);
 		
 		NSArray * tagNames = [[question tags] valueForKey:SKTagName];
 		STAssertTrue([tagNames containsObject:@"iphone"], @"questions should have \"iphone\" tag");

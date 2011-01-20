@@ -49,15 +49,13 @@
 	
 	[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizedFetchEntity = %@", [fetchRequest entity]]];
 	if ([fetchRequest entity] == nil || [builders count] == 0) {
-		buildError = [NSError errorWithDomain:SKErrorDomain 
-										 code:SKErrorCodeInvalidEntity 
-									 userInfo:SK_EREASON(@"Unrecognized fetch entity: %@", NSStringFromClass([fetchRequest entity]))];
+		buildError = SK_ENTERROR(@"Unrecognized fetch entity: %@", NSStringFromClass([fetchRequest entity]));
 		goto errorExit;
 	}
 	
 	if ([fetchRequest sortDescriptor] != nil) {
 		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizesASortDescriptor = YES"]];
-		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"recognizedSortDescriptorKeys CONTAINS %@", [[fetchRequest sortDescriptor] key]]];
+		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"allRecognizedSortDescriptorKeys CONTAINS %@", [[fetchRequest sortDescriptor] key]]];
 	}
 	if ([builders count] == 0) {
 		buildError = SK_SORTERROR(@"Unrecognized sort key: %@", [[fetchRequest sortDescriptor] key]);
@@ -72,25 +70,45 @@
 		//some endpoints do not recognize a predicate
 		NSPredicate * p = [NSPredicate predicateWithFormat:@"recognizesAPredicate = YES"];
 		[builders filterUsingPredicate:p];
+		if ([builders count] == 0) {
+			buildError = SK_PREDERROR(@"no possible builders are recognizers");
+			goto errorExit;
+		}
 		
 		NSSet * leftKeyPaths = [[fetchRequest predicate] leftKeyPaths];
 		
 		//the predicate must only use recognized keypaths
 		p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths.@allKeys", leftKeyPaths];
 		[builders filterUsingPredicate:p];
+		if ([builders count] == 0) {
+			buildError = SK_PREDERROR(@"predicate uses unrecognized keypaths");
+			goto errorExit;
+		}
 		
 		//the predicate must have any required keypaths
 		p = [NSPredicate predicateWithFormat:@"ALL requiredPredicateKeyPaths IN %@", leftKeyPaths];
 		[builders filterUsingPredicate:p];
+		if ([builders count] == 0) {
+			buildError = SK_PREDERROR(@"predicate does not have all required keypaths");
+			goto errorExit;
+		}
 		
 		//the predicate must only use certain operators for certain keypaths
 		p = [NSPredicate predicateWithFormat:@"FUNCTION(%@, 'sk_matchesRecognizedKeyPathsAndOperators:', SELF.recognizedPredicateKeyPaths) == YES", [fetchRequest predicate]];
 		[builders filterUsingPredicate:p];
+		if ([builders count] == 0) {
+			buildError = SK_PREDERROR(@"predicate uses invalid operators for keypaths");
+			goto errorExit;
+		}
 		
 	} else {
 		//this request doesn't have a predicate
-		//therefore, remove all builders that require certain left keypaths (because those could never be satisfied)
+		//therefore, keep only the builders that don't require any left keypaths
 		[builders filterUsingPredicate:[NSPredicate predicateWithFormat:@"requiredPredicateKeyPaths.@count == 0"]];
+		if ([builders count] == 0) {
+			buildError = SK_PREDERROR(@"no possible builders recognize an empty predicate");
+			goto errorExit;
+		}
 	}
 	if ([builders count] == 0) {
 		if (buildError == nil) {

@@ -130,6 +130,10 @@
 		55FA95DA11614245003A9CD7 /* NSDictionary+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */; };
 		55FA969B11616A65003A9CD7 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA969911616A65003A9CD7 /* SKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FA969C11616A65003A9CD7 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA969A11616A65003A9CD7 /* SKConstants.m */; };
+		55FADE1812E3F25D00CFA69E /* NSString+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FADE1612E3F25D00CFA69E /* NSString+SKAdditions.h */; };
+		55FADE1912E3F25D00CFA69E /* NSString+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FADE1712E3F25D00CFA69E /* NSString+SKAdditions.m */; };
+		55FADE1C12E3F43B00CFA69E /* NSNumber+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FADE1A12E3F43B00CFA69E /* NSNumber+SKAdditions.h */; };
+		55FADE1D12E3F43B00CFA69E /* NSNumber+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FADE1B12E3F43B00CFA69E /* NSNumber+SKAdditions.m */; };
 		55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */; };
 		55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
@@ -376,6 +380,10 @@
 		55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SKAdditions.m"; sourceTree = "<group>"; };
 		55FA969911616A65003A9CD7 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
 		55FA969A11616A65003A9CD7 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
+		55FADE1612E3F25D00CFA69E /* NSString+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SKAdditions.h"; sourceTree = "<group>"; };
+		55FADE1712E3F25D00CFA69E /* NSString+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SKAdditions.m"; sourceTree = "<group>"; };
+		55FADE1A12E3F43B00CFA69E /* NSNumber+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+SKAdditions.h"; sourceTree = "<group>"; };
+		55FADE1B12E3F43B00CFA69E /* NSNumber+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+SKAdditions.m"; sourceTree = "<group>"; };
 		55FF3A8312D859BF00CC4B9D /* SKRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKRequestBuilder.h; sourceTree = "<group>"; };
 		55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKRequestBuilder.m; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Other Sources/Info.plist"; sourceTree = "<group>"; };
@@ -810,6 +818,10 @@
 				55FA956311613AD9003A9CD7 /* NSPredicate+SKAdditions.m */,
 				55FA95D711614245003A9CD7 /* NSDictionary+SKAdditions.h */,
 				55FA95D811614245003A9CD7 /* NSDictionary+SKAdditions.m */,
+				55FADE1612E3F25D00CFA69E /* NSString+SKAdditions.h */,
+				55FADE1712E3F25D00CFA69E /* NSString+SKAdditions.m */,
+				55FADE1A12E3F43B00CFA69E /* NSNumber+SKAdditions.h */,
+				55FADE1B12E3F43B00CFA69E /* NSNumber+SKAdditions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -998,6 +1010,8 @@
 				5533AAF312DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.h in Headers */,
 				5533AAF812DAB5F300F755F7 /* _SKRequestBuilderUserTags.h in Headers */,
 				5533AAFC12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.h in Headers */,
+				55FADE1812E3F25D00CFA69E /* NSString+SKAdditions.h in Headers */,
+				55FADE1C12E3F43B00CFA69E /* NSNumber+SKAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1185,6 +1199,8 @@
 				5533AAF412DAB3AA00F755F7 /* _SKRequestBuilderQuestionsByUser.m in Sources */,
 				5533AAF912DAB5F300F755F7 /* _SKRequestBuilderUserTags.m in Sources */,
 				5533AAFD12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m in Sources */,
+				55FADE1912E3F25D00CFA69E /* NSString+SKAdditions.m in Sources */,
+				55FADE1D12E3F43B00CFA69E /* NSNumber+SKAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

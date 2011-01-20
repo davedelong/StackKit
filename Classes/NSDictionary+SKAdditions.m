@@ -24,21 +24,34 @@
  **/
 
 #import "NSDictionary+SKAdditions.h"
-
+#import "NSDate+SKAdditions.h"
+#import "NSNumber+SKAdditions.h"
+#import "NSString+SKAdditions.h"
 
 @implementation NSDictionary (SKAdditions)
 
 - (NSString *) queryString {
-	if ([[self allKeys] count] == 0) { return nil; }
+	if ([[self allKeys] count] == 0) { return @""; }
 	NSMutableArray * queryArray = [NSMutableArray array];
 	for (NSString * key in self) {
-		NSString * value = [[self objectForKey:key] description];
+		id object = [self objectForKey:key];
+		NSString * value = [object description];
+		if ([object respondsToSelector:@selector(sk_queryString)]) {
+			value = [object sk_queryString];
+		}
 		[queryArray addObject:[NSString stringWithFormat:@"%@=%@",
-							   [key stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
-							   [value stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+							   [key sk_URLEncodedString],
+							   [value sk_URLEncodedString]]];
 	}
 	
 	return [queryArray componentsJoinedByString:@"&"];
+}
+
+- (NSSet *) sk_allObjectsAndKeys {
+	NSLog(@"%s", _cmd);
+	NSMutableSet * all = [NSMutableSet setWithArray:[self allKeys]];
+	[all addObjectsFromArray:[self allValues]];
+	return all;
 }
 
 @end

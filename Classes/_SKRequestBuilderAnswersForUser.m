@@ -31,12 +31,12 @@
 			nil];
 }
 
-+ (NSSet *) recognizedSortDescriptorKeys {
-	return [NSSet setWithObjects:
-			SKAnswerCreationDate,
-			SKAnswerViewCount,
-			SKAnswerLastActivityDate,
-			SKAnswerScore,
++ (NSDictionary *) recognizedSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortCreation, SKAnswerCreationDate,
+			SKSortViews, SKAnswerViewCount,
+			SKSortActivity, SKAnswerLastActivityDate,
+			SKSortVotes, SKAnswerScore,
 			nil];
 }
 

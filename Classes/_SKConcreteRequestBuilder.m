@@ -37,7 +37,12 @@
 		}
 		
 		if ([request sortDescriptor] != nil) {
-			[query setObject:[[request sortDescriptor] key] forKey:SKQuerySort];
+			NSString * sortKey = [[request sortDescriptor] key];
+			NSDictionary * recognizedSortKeys = [[self class] recognizedSortDescriptorKeys];
+			if ([recognizedSortKeys objectForKey:sortKey] != nil) {
+				sortKey = [recognizedSortKeys objectForKey:sortKey];
+			}
+			[query setObject:sortKey forKey:SKQuerySort];
 			[query setObject:([[request sortDescriptor] ascending] ? @"asc" : @"desc") forKey:SKQuerySortOrder];
 		}
 		
@@ -60,7 +65,14 @@
 + (NSDictionary *) recognizedPredicateKeyPaths { return [NSDictionary dictionary]; }
 + (NSSet *) requiredPredicateKeyPaths { return [NSSet set]; }
 + (BOOL) recognizesASortDescriptor { return YES; }
-+ (NSSet *) recognizedSortDescriptorKeys { return [NSSet set]; }
+
++ (NSSet *) allRecognizedSortDescriptorKeys {
+	NSDictionary * sortKeys = [self recognizedSortDescriptorKeys];
+	NSMutableSet * all = [NSMutableSet setWithArray:[sortKeys allKeys]];
+	[all addObjectsFromArray:[sortKeys allValues]];
+	return all;
+}
++ (NSDictionary *) recognizedSortDescriptorKeys { return [NSDictionary dictionary]; }
 
 - (void) buildURL {
 	//don't rebuild if we've already been built

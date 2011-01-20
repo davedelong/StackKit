@@ -30,11 +30,11 @@
 			nil];
 }
 
-+ (NSSet *) recognizedSortDescriptorKeys {
-	return [NSSet setWithObjects:
-			SKUserReputation,
-			SKUserCreationDate,
-			SKUserDisplayName,
++ (NSDictionary *) recognizedSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortReputation, SKUserReputation,
+			SKSortCreation, SKUserCreationDate,
+			SKSortName, SKUserDisplayName,
 			nil];
 }
 

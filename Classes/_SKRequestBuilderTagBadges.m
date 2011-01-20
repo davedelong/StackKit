@@ -27,6 +27,12 @@
 			nil];
 }
 
++ (NSDictionary *) recognizedSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortName, SKBadgeName,
+			nil];
+}
+
 - (void) buildURL {
 	if ([self requestSortDescriptor] != nil && [[self requestSortDescriptor] ascending] == NO) {
 		[self setError:SK_SORTERROR(@"badges can only be requested in ascending order")];

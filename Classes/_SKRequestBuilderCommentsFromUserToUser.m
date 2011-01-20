@@ -31,10 +31,10 @@
 			nil];
 }
 
-+ (NSSet *) recognizedSortDescriptorKeys {
-	return [NSSet setWithObjects:
-			SKCommentCreationDate,
-			SKCommentScore,
++ (NSDictionary *) recognizedSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortCreation, SKCommentCreationDate,
+			SKSortVotes, SKCommentScore,
 			nil];
 }
 

@@ -41,4 +41,9 @@
 	return [NSDate dateWithTimeIntervalSince1970:secondsSince1970];
 }
 
+- (NSString *) sk_queryString {
+	NSNumber * n = [NSNumber numberWithDouble:[self timeIntervalSince1970]];
+	return [n sk_queryString];
+}
+
 @end

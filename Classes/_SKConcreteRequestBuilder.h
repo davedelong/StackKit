@@ -29,7 +29,7 @@
 + (NSDictionary *) recognizedPredicateKeyPaths;
 + (NSSet *) requiredPredicateKeyPaths;
 + (BOOL) recognizesASortDescriptor;
-+ (NSSet *) recognizedSortDescriptorKeys;
++ (NSDictionary *) recognizedSortDescriptorKeys;
 
 - (id) initWithFetchRequest:(SKFetchRequest *)request;
 

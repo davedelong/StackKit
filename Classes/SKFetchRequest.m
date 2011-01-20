@@ -116,6 +116,8 @@ NSString * SKFetchTotalKey = @"total";
 	NSError * requestBuilderError = nil;
 	NSURL * builderURL = [SKRequestBuilder URLForFetchRequest:self error:&requestBuilderError];
 	
+	NSLog(@"buildURL: %@ (%@)", builderURL, requestBuilderError);
+	
 	if (requestBuilderError != nil) {
 		[self setError:requestBuilderError];
 	} else {

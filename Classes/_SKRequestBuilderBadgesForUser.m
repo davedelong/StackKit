@@ -27,6 +27,10 @@
 			nil];
 }
 
++ (BOOL) recognizesASortDescriptor {
+	return NO;
+}
+
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
 	

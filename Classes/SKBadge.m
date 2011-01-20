@@ -68,6 +68,10 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 	return self;
 }
 
++ (NSString *) dataKey {
+	return @"badges";
+}
+
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	static NSDictionary * _kSKBadgeMappings = nil;
 	if (_kSKBadgeMappings == nil) {

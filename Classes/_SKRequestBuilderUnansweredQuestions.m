@@ -17,9 +17,10 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionAnswerCount,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType), SKQuestionAnswerCount,
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionCreationDate,
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionScore,
+			SK_BOX(NSContainsPredicateOperatorType), SKQuestionTags,
 			nil];
 }
 
@@ -29,10 +30,10 @@
 			nil];
 }
 
-+ (NSSet *) recognizedSortDescriptorKeys {
-	return [NSSet setWithObjects:
-			SKQuestionCreationDate,
-			SKQuestionScore,
++ (NSDictionary *) recognizedSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortCreation, SKQuestionCreationDate,
+			SKSortVotes, SKQuestionScore,
 			nil];
 }
 
@@ -45,6 +46,11 @@
 	}
 	
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
+	
+	id tags = [p constantValueForLeftKeyPath:SKQuestionTags];
+	if (tags != nil) {
+		[[self query] setObject:SKExtractTagName(tags) forKey:SKQueryTagged];
+	}
 	
 	[self setPath:@"/questions/unanswered"];
 	

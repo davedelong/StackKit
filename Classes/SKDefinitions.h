@@ -57,3 +57,7 @@ extern SKRange const SKRangeNotFound;
 #ifndef SK_PREDERROR
 #define SK_PREDERROR(o,...) [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:SK_EREASON(o, ##__VA_ARGS__)]
 #endif
+
+#ifndef SK_ENTERROR
+#define SK_ENTERROR(o,...) [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:SK_EREASON(o, ##__VA_ARGS__)]
+#endif

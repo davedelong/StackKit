@@ -12,9 +12,20 @@
 int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
+	SKSite * s = [SKSite stackOverflowSite];
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKAnswer class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKAnswerOwner, 1234]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKAnswerCreationDate ascending:YES] autorelease]];
+	[r setSite:s];
+	
+	NSArray * a = [NSArray arrayWithObjects:
+				   NSClassFromString(@"_SKRequestBuilderAnswersByID"),
+				   NSClassFromString(@"_SKRequestBuilderAnswersForQuestion"),
+				   NSClassFromString(@"_SKRequestBuilderAnswersForUser"),
+				   nil];
+	NSLog(@"%@", a);
+	NSLog(@"%@", [a valueForKey:@"allRecognizedSortDescriptorKeys"]);
 	
 	NSError * e = nil;
 	Class builder = NSClassFromString(@"SKRequestBuilder");

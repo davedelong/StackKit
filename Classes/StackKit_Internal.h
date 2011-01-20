@@ -35,6 +35,8 @@
 #import "NSDate+SKAdditions.h"
 #import "NSPredicate+SKAdditions.h"
 #import "NSDictionary+SKAdditions.h"
+#import "NSString+SKAdditions.h"
+#import "NSNumber+SKAdditions.h"
 #import "JSON.h"
 
 #import "SKRequestBuilder.h"

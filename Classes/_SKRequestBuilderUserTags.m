@@ -30,11 +30,11 @@
 			nil];
 }
 
-+ (NSSet *) recognizedSortDescriptorKeys {
-	return [NSSet setWithObjects:
-			SKTagNumberOfTaggedQuestions,
-			SKTagLastUsedDate,
-			SKTagName,
++ (NSDictionary *) recognizedSortDescriptorKeys {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortPopular, SKTagNumberOfTaggedQuestions,
+			SKSortActivity, SKTagLastUsedDate,
+			SKSortName, SKTagName,
 			nil];
 }
 
