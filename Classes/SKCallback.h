@@ -2,7 +2,7 @@
 //  SKCallback.h
 //  StackKit
 /**
- Copyright (c) 2010 Alex Rozanski
+  Copyright (c) 2011 Alex Rozanski
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
