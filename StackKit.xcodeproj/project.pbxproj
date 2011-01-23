@@ -68,6 +68,7 @@
 		5533AAFD12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAFB12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m */; };
 		5547A6B511C8281000CE89E1 /* StackKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */; };
+		555E06E712ECAD7100172646 /* StackKit.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 555E06E612ECAD7100172646 /* StackKit.xcdatamodel */; };
 		5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */; };
 		5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E70F110EBAA60038E510 /* SKQuestionTest.m */; };
 		558333BF11B7668E00CA8D62 /* SKSiteDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -243,6 +244,7 @@
 		5533AAFB12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUserModerators.m; sourceTree = "<group>"; };
 		5547A6FD11C82F5F00CE89E1 /* SKCommentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCommentTest.h; sourceTree = "<group>"; };
 		5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCommentTest.m; sourceTree = "<group>"; };
+		555E06E612ECAD7100172646 /* StackKit.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
 		5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants_Internal.h; sourceTree = "<group>"; };
 		558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteDelegate.h; sourceTree = "<group>"; };
 		55A2E4DC110E35F10038E510 /* SKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObject.h; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 				55A2E4DC110E35F10038E510 /* SKObject.h */,
 				55A2E4DD110E35F10038E510 /* SKObject.m */,
 				55A2E578110E53A10038E510 /* SKObject+Private.h */,
+				555E06E612ECAD7100172646 /* StackKit.xcdatamodel */,
 			);
 			name = "Object Base";
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				5533AAFD12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m in Sources */,
 				55FADE1912E3F25D00CFA69E /* NSString+SKAdditions.m in Sources */,
 				55FADE1D12E3F43B00CFA69E /* NSNumber+SKAdditions.m in Sources */,
+				555E06E712ECAD7100172646 /* StackKit.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
