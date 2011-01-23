@@ -29,6 +29,5 @@
 @interface NSDictionary (SKAdditions)
 
 - (NSString *) queryString;
-- (NSSet *) sk_allObjectsAndKeys;
 
 @end

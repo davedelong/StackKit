@@ -47,11 +47,4 @@
 	return [queryArray componentsJoinedByString:@"&"];
 }
 
-- (NSSet *) sk_allObjectsAndKeys {
-	NSLog(@"%s", _cmd);
-	NSMutableSet * all = [NSMutableSet setWithArray:[self allKeys]];
-	[all addObjectsFromArray:[self allValues]];
-	return all;
-}
-
 @end
