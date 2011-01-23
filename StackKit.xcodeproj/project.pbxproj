@@ -849,6 +849,7 @@
 				55A2E4F0110E3A050038E510 /* Sources */,
 				55A2E4F1110E3A050038E510 /* Frameworks */,
 				5547A6D311C8284000CE89E1 /* Copy Frameworks */,
+				D29A1E9312ECE15E00F303EF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -886,7 +887,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "StackKit" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -923,6 +923,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D29A1E9312ECE15E00F303EF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5533AA1012DA430900F755F7 /* Sources */ = {
