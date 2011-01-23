@@ -63,16 +63,6 @@
 	return nil;
 }
 
-+ (NSURL *) constructAPICallForBaseURL:(NSURL *)base relativePath:(NSString *)path query:(NSDictionary *)query {
-	NSString * queryString = [query queryString];
-	if (queryString != nil) {
-		path = [NSString stringWithFormat:@"%@?%@", path, queryString];
-	}
-	NSURL * relativeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [base absoluteString], path]];
-
-	return [relativeURL absoluteURL];
-}
-
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
 	return nil;
