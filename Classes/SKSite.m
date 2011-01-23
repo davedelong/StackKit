@@ -32,6 +32,7 @@ NSString * const SKSiteStylingTagColor = @"tag_foreground_color";
 NSString * const SKSiteStylingTagBackgroundColor = @"tag_background_color";
 
 NSArray * _skKnownSites = nil;
+NSString *_defaultAPIKey = nil;
 
 @implementation SKSite
 
@@ -84,14 +85,34 @@ NSArray * _skKnownSites = nil;
 	return _skKnownSites;
 }
 
++ (void) setDefaultAPIKey:(NSString *)key
+{
+	NSString *newKey = [key copy];
+	[_defaultAPIKey release];
+	_defaultAPIKey = newKey;
+	
+	//Update all the cached sites to use the new default key
+	for(SKSite *theSite in _skKnownSites) {
+		[theSite setApiKey:_defaultAPIKey];
+	}
+}
+
 #pragma mark -
 
-+ (id) siteWithAPIURL:(NSURL *)aURL {
++ (id) siteWithAPIURL:(NSURL *)aURL APIKey:(NSString *)key {
 	NSString * apiHost = [aURL host];
 	for (SKSite * aSite in [[self class] knownSites]) {
 		NSURL * siteAPIURL = [aSite apiURL];
 		if ([[siteAPIURL host] isEqual:apiHost]) {
-			return aSite;
+			if(!key) {
+				return aSite;
+			}
+			else {
+				SKSite *customSite = [aSite copy];
+				[customSite setApiKey:key];
+				
+				return [customSite autorelease];
+			}
 		}
 	}
 	
@@ -99,6 +120,10 @@ NSArray * _skKnownSites = nil;
 	//build an SKSite anyway, and if it fails, it fails
 	NSDictionary * tempInfo = [NSDictionary dictionaryWithObject:[aURL absoluteString] forKey:@"api_endpoint"];
 	return [[[self alloc] initWithSite:nil dictionaryRepresentation:tempInfo] autorelease];
+}
+
++ (id) siteWithAPIURL:(NSURL *)aURL {
+	return [[self class] siteWithAPIURL:aURL APIKey:nil];
 }
 
 + (id) stackOverflowSite {
@@ -124,11 +149,10 @@ NSArray * _skKnownSites = nil;
 #pragma mark -
 #pragma mark Init/Dealloc
 
-							 
-							 
-- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+- (id) initWithSite:(SKSite *)aSite apiKey:(NSString*)key dictionaryRepresentation:(NSDictionary *)dictionary {
 	if (self = [super initWithSite:nil]) {
-		[self setApiKey:SKFrameworkAPIKey];
+		[self setApiKey:key];
+		
 		name = [[dictionary objectForKey:@"name"] retain];
 		logoURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"logo_url"]];
 		NSString * apiPath = [dictionary objectForKey:@"api_endpoint"];
@@ -158,7 +182,16 @@ NSArray * _skKnownSites = nil;
 		requestQueue = [[NSOperationQueue alloc] init];
 		[requestQueue setMaxConcurrentOperationCount:1];
 	}
-	return self;
+	return self;	
+}
+
+- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
+	NSString *key = SKFrameworkAPIKey;
+	if(_defaultAPIKey) {
+		key = _defaultAPIKey;
+	}
+	
+	return [self initWithSite:aSite apiKey:key dictionaryRepresentation:dictionary];
 }
 
 - (void) dealloc {
@@ -284,6 +317,23 @@ NSArray * _skKnownSites = nil;
 	}
 	
 	return NO;
+}
+
+- (id) copyWithZone:(NSZone *)zone
+{
+	SKSite *newSite = [[[self class] allocWithZone:zone] initWithSite:nil dictionaryRepresentation:nil];
+
+	[newSite setApiKey:[self apiKey]];
+	[newSite setApiURL:[self apiURL]];
+	[newSite setName:[self name]];
+	[newSite setSiteURL:[self siteURL]];
+	[newSite setLogoURL:[self logoURL]];
+	[newSite setIconURL:[self iconURL]];
+	[newSite setSummary:[self summary]];
+	[newSite setState:[self state]];
+	[newSite setStylingInformation:[self stylingInformation]];
+	
+	return newSite;
 }
 
 #pragma mark -

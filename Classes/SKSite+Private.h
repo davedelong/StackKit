@@ -31,6 +31,16 @@
 
 @interface SKSite ()
 
+@property (readwrite, retain) NSURL * apiURL;
+
+@property (readwrite, copy) NSString * name;
+@property (readwrite, retain) NSURL * siteURL;
+@property (readwrite, retain) NSURL * logoURL;
+@property (readwrite, retain) NSURL * iconURL;
+@property (readwrite, copy) NSString * summary;
+@property (readwrite) SKSiteState state;
+@property (readwrite, retain) NSDictionary * stylingInformation;
+
 /**- (void) cacheUser:(SKUser *)newUser;
 - (void) cacheTag:(SKTag *)newTag;
 - (void) cachePost:(SKPost *)newPost;

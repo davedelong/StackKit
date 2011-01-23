@@ -44,7 +44,7 @@ typedef enum {
 @class SKUser;
 @class SKFetchRequest;
 
-@interface SKSite : SKObject {
+@interface SKSite : SKObject <NSCopying> {
 	NSString * apiKey;
 	NSURL * apiURL;
 	NSString * name;
@@ -65,22 +65,24 @@ typedef enum {
 
 @property (assign) id<SKSiteDelegate> delegate;
 @property (copy) NSString * apiKey;
-@property (readonly) NSURL * apiURL;
+@property (readonly, retain) NSURL * apiURL;
 @property (readonly) NSString * apiVersion;
 
-@property (readonly) NSString * name;
-@property (readonly) NSURL * siteURL;
-@property (readonly) NSURL * logoURL;
-@property (readonly) NSURL * iconURL;
-@property (readonly) NSString * summary;
+@property (readonly, copy) NSString * name;
+@property (readonly, retain) NSURL * siteURL;
+@property (readonly, retain) NSURL * logoURL;
+@property (readonly, retain) NSURL * iconURL;
+@property (readonly, copy) NSString * summary;
 @property (readonly) SKSiteState state;
-@property (readonly) NSDictionary * stylingInformation;
+@property (readonly, retain) NSDictionary * stylingInformation;
 
 @property NSTimeInterval timeoutInterval;
 
 + (NSArray *) knownSites;
++ (void) setDefaultAPIKey:(NSString *)key;
 
 + (id) siteWithAPIURL:(NSURL *)aURL;
++ (id) siteWithAPIURL:(NSURL *)aURL APIKey:(NSString *)key;
 
 + (id) stackOverflowSite;
 + (id) metaStackOverflowSite;
