@@ -45,6 +45,8 @@
 #import "SKSiteDelegate.h"
 
 #import "SKUser.h"
+#import "SKUser+Public.h"
+
 #import "SKTag.h"
 #import "SKBadge.h"
 #import "SKUserActivity.h"

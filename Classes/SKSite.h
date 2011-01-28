@@ -24,6 +24,7 @@
  **/
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "SKObject.h"
 #import "SKSiteDelegate.h"
 #import "SKDefinitions.h"
@@ -33,13 +34,6 @@ extern NSString * const SKSiteAPIKey;
 extern NSString * const SKSiteStylingLinkColor;
 extern NSString * const SKSiteStylingTagColor;
 extern NSString * const SKSiteStylingTagBackgroundColor;
-
-typedef enum {
-	SKSiteStateNormal = 0,
-	SKSiteStateLinkedMeta = 1,
-	SKSiteStateOpenBeta = 2,
-	SKSiteStateClosedBeta = 3
-} SKSiteState;
 
 @class SKUser;
 @class SKFetchRequest;
@@ -61,6 +55,11 @@ typedef enum {
 	
 	NSOperationQueue * requestQueue;
 	id<SKSiteDelegate> delegate;
+	
+	@private
+	NSManagedObjectContext *managedObjectContext;
+	NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	NSManagedObjectModel *managedObjectModel;
 }
 
 @property (assign) id<SKSiteDelegate> delegate;

@@ -29,13 +29,12 @@
 @class SKSite;
 @class SKFetchRequest;
 
-@interface SKObject ()
+@interface SKObject (Private)
+
+- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary;
 
 - (void) setSite:(SKSite *)newSite;
-
-//the designated initializers for SKObject SUBCLASSES
-+ (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
-- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary;
+- (SKSite *)site;
 
 #pragma mark Class methods implemented by SKObject
 // used in valueForKey:

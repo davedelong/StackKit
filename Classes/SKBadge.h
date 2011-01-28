@@ -1,64 +1,25 @@
 //
 //  SKBadge.h
 //  StackKit
-/**
-  Copyright (c) 2011 Dave DeLong
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- **/
+//
+//  Created by Dave DeLong on 1/27/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
 
-#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "SKObject.h"
 
-//Enumeration for badge "levels" – bronze, silver or gold
-typedef enum {
-	SKBadgeRankBronze = 0,
-	SKBadgeRankSilver = 1,
-	SKBadgeRankGold = 2
-} SKBadgeRank_t;
-
-extern NSString * const SKBadgeID;
-extern NSString * const SKBadgeRank;
-extern NSString * const SKBadgeName;
-extern NSString * const SKBadgeDescription;
-extern NSString * const SKBadgeAwardCount;
-extern NSString * const SKBadgeTagBased;
-extern NSString * const SKBadgesAwardedToUser;
-
-@interface SKBadge : SKObject {
-	NSNumber *badgeID;
-	
-	NSString *name;
-	NSString *description;
-	
-	SKBadgeRank_t rank;
-	
-	BOOL tagBased;
-	NSNumber * numberAwarded;
+@interface SKBadge :  SKObject  
+{
 }
 
-@property (readonly) NSNumber *badgeID;
-@property (readonly) NSString *name;
-@property (readonly) NSString *description;
-@property (readonly) SKBadgeRank_t rank;
-
-@property (readonly) NSNumber * numberAwarded;
-@property (readonly, getter=isTagBased) BOOL tagBased;
+@property (nonatomic, retain, readonly) NSNumber * badgeID;
+@property (nonatomic, retain, readonly) NSString * summary;
+@property (nonatomic, retain, readonly) NSString * name;
+@property (nonatomic, retain, readonly) NSNumber * rank;
+@property (nonatomic, retain, readonly) NSNumber * numberAwarded;
+@property (nonatomic, retain, readonly) NSNumber * tagBased;
+@property (nonatomic, retain, readonly) NSSet* users;
 
 @end
+

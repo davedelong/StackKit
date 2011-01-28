@@ -29,11 +29,7 @@
 @class SKSite;
 
 @interface SKObject : NSObject {
-	__weak SKSite * site;
+	
 }
-
-@property (readonly) __weak SKSite * site;
-
-- (id) initWithSite:(SKSite *)aSite;
 
 @end

@@ -24,7 +24,7 @@
  **/
 
 #import "_SKRequestBuilderBadgesForUser.h"
-
+#import "SKBadge+Public.h"
 
 @implementation _SKRequestBuilderBadgesForUser
 

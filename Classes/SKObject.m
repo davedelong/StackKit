@@ -26,72 +26,8 @@
 #import "StackKit_Internal.h"
 
 @implementation SKObject
-@synthesize site;
 
 #pragma mark -
 #pragma mark Init/Dealloc
-
-- (id) initWithSite:(SKSite *)aSite {
-	if (self = [super init]) {
-		site = aSite;
-	}
-	return self;
-}
-
-- (void) setSite:(SKSite *)newSite {
-	if (newSite != site) {
-		site = newSite;
-	}
-}
-
-#pragma mark -
-#pragma mark Fetch Requests
-
-+ (id) objectWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
-	return [[[self alloc] initWithSite:aSite dictionaryRepresentation:dictionary] autorelease];
-}
-
-- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
-	NSAssert(NO, ([NSString stringWithFormat:@"-[%@ %@] must be overridden", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]));
-	return nil;
-}
-
-+ (NSURL *) apiCallForFetchRequest:(SKFetchRequest *)request {
-	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeNotImplemented userInfo:nil]];
-	
-	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
-	return nil;
-}
-
-+ (NSDictionary *) APIAttributeToPropertyMapping {
-	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
-	return nil;
-}
-
-+ (NSString *) dataKey {
-	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
-	return nil;
-}
-
-+ (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key {
-	NSDictionary * mappings = [self APIAttributeToPropertyMapping];
-	if ([mappings objectForKey:key] != nil) {
-		return [mappings objectForKey:key];
-	}
-	return key;
-}
-
-#pragma mark -
-#pragma mark KVC Compliance
-
-- (id) valueForUndefinedKey:(NSString *)key {
-	NSString * newKey = [[self class] propertyKeyFromAPIAttributeKey:key];
-	if (newKey != nil && [newKey isEqual:key] == NO) {
-		//this is a new key! try again
-		return [self valueForKey:newKey];
-	}
-	//eh, we couldn't find a replacement.  pass it on up the chain
-	return [super valueForUndefinedKey:key];
-}
 
 @end

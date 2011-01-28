@@ -41,6 +41,19 @@ typedef struct _SKRange {
 
 extern SKRange const SKRangeNotFound;
 
+typedef enum {
+	SKUserTypeAnonymous = 0,
+	SKUserTypeUnregistered = 1,
+	SKUserTypeRegistered = 2,
+	SKUserTypeModerator = 3
+} SKUserType_t;
+
+//Enumeration for badge "levels" – bronze, silver or gold
+typedef enum {
+	SKBadgeRankBronze = 0,
+	SKBadgeRankSilver = 1,
+	SKBadgeRankGold = 2
+} SKBadgeRank_t;
 
 #ifndef SK_BOX
 #define SK_BOX(o,...) _sk_boxOperators(o, ##__VA_ARGS__, NSNotFound)

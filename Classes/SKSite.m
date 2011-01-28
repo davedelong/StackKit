@@ -180,10 +180,6 @@ NSArray * _skKnownSites = nil;
 #pragma mark -
 #pragma mark Accessors
 
-- (SKSite *) site {
-	return [[self retain] autorelease];
-}
-
 - (NSString *) apiVersion {
 	return SKAPIVersion;
 }
@@ -401,6 +397,74 @@ NSArray * _skKnownSites = nil;
 	[[self delegate] site:self didRetrieveStatistics:stats error:error];
 	
 	[pool drain];
+}
+
+#pragma mark CoreData
+
+- (NSString *)applicationSupportDirectory {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+    return [basePath stringByAppendingPathComponent:@"StackKit"];
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    if (managedObjectModel) { return managedObjectModel; }
+    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+    return managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
+	
+    if (persistentStoreCoordinator) { return persistentStoreCoordinator; }
+	
+    NSManagedObjectModel *mom = [self managedObjectModel];
+    if (!mom) {
+        NSAssert(NO, @"Managed object model is nil");
+        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
+        return nil;
+    }
+	
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
+    NSError *error = nil;
+    
+    if ( ![fileManager fileExistsAtPath:applicationSupportDirectory isDirectory:NULL] ) {
+		if (![fileManager createDirectoryAtPath:applicationSupportDirectory withIntermediateDirectories:NO attributes:nil error:&error]) {
+            NSAssert(NO, ([NSString stringWithFormat:@"Failed to create App Support directory %@ : %@", applicationSupportDirectory,error]));
+            NSLog(@"Error creating application support directory at %@ : %@",applicationSupportDirectory,error);
+            return nil;
+		}
+    }
+    
+	NSString *storeFileName = [NSString stringWithFormat:@"%@.db", [self apiURL]];
+    NSURL *url = [NSURL fileURLWithPath:[applicationSupportDirectory stringByAppendingPathComponent:storeFileName]];
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType 
+												  configuration:nil 
+															URL:url 
+														options:nil 
+														  error:&error]){
+		NSLog(@"Error creating persistent store: %@", error);
+        [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
+        return nil;
+    }    
+	
+    return persistentStoreCoordinator;
+}
+
+- (NSManagedObjectContext *) managedObjectContext {
+	
+    if (managedObjectContext) return managedObjectContext;
+	
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+		NSLog(@"FAILED TO INITIALIZE STORE");
+        return nil;
+    }
+    managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [managedObjectContext setPersistentStoreCoordinator: coordinator];
+	
+    return managedObjectContext;
 }
 
 @end

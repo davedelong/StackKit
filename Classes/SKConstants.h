@@ -76,3 +76,13 @@ extern NSInteger const SKErrorCodeInvalidVectorFormat;
 extern NSInteger const SKErrorCodeTooManyIds;
 extern NSInteger const SKErrorCodeUnconstrainedSearch;
 extern NSInteger const SKErrorCodeInvalidTags;
+
+#pragma mark -
+#pragma mark Enums
+
+typedef enum {
+	SKSiteStateNormal = 0,
+	SKSiteStateLinkedMeta = 1,
+	SKSiteStateOpenBeta = 2,
+	SKSiteStateClosedBeta = 3
+} SKSiteState;
