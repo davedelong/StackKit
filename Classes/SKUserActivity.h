@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
-#import "SKPost.h"
+#import "SKDefinitions.h"
 
 typedef enum {
 	SKUserActivityTypeComment = 0,

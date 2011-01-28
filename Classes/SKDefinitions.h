@@ -65,6 +65,11 @@ typedef enum {
 	SKBadgeRankGold = 2
 } SKBadgeRank_t;
 
+typedef enum {
+	SKPostTypeQuestion = 0,
+	SKPostTypeAnswer = 1
+} SKPostType_t;
+
 #pragma mark -
 #pragma mark Helpher Macros
 

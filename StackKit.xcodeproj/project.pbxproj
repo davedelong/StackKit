@@ -80,10 +80,6 @@
 		55A2E51E110E424C0038E510 /* SKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E51C110E424C0038E510 /* SKQuestion.m */; };
 		55A2E521110E425E0038E510 /* SKAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E51F110E425E0038E510 /* SKAnswer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E522110E425E0038E510 /* SKAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E520110E425E0038E510 /* SKAnswer.m */; };
-		55A2E525110E426E0038E510 /* SKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E523110E426E0038E510 /* SKComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55A2E526110E426E0038E510 /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E524110E426E0038E510 /* SKComment.m */; };
-		55A2E529110E42E70038E510 /* SKPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E527110E42E70038E510 /* SKPost.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55A2E52A110E42E70038E510 /* SKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E528110E42E70038E510 /* SKPost.m */; };
 		55A2E551110E4FE00038E510 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E550110E4FE00038E510 /* StackKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E55A110E513E0038E510 /* SKSite+Private.h */; settings = {ATTRIBUTES = (); }; };
 		55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E578110E53A10038E510 /* SKObject+Private.h */; settings = {ATTRIBUTES = (); }; };
@@ -138,6 +134,18 @@
 		55E5BC4512F29A3200092A8D /* SKTag+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC4312F29A3200092A8D /* SKTag+Private.m */; };
 		55E5BC4C12F29D3B00092A8D /* SKTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC4A12F29D3B00092A8D /* SKTag.h */; };
 		55E5BC4D12F29D3B00092A8D /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC4B12F29D3B00092A8D /* SKTag.m */; };
+		55E5BC5A12F2A2A100092A8D /* SKPost+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC5812F2A2A100092A8D /* SKPost+Public.h */; };
+		55E5BC5B12F2A2A100092A8D /* SKPost+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC5912F2A2A100092A8D /* SKPost+Public.m */; };
+		55E5BC5E12F2A2A900092A8D /* SKPost+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC5C12F2A2A900092A8D /* SKPost+Private.h */; };
+		55E5BC5F12F2A2A900092A8D /* SKPost+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC5D12F2A2A900092A8D /* SKPost+Private.m */; };
+		55E5BC6412F2A40500092A8D /* SKPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC6212F2A40500092A8D /* SKPost.h */; };
+		55E5BC6512F2A40500092A8D /* SKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC6312F2A40500092A8D /* SKPost.m */; };
+		55E5BC7012F2AAFF00092A8D /* SKComment+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC6E12F2AAFF00092A8D /* SKComment+Public.h */; };
+		55E5BC7112F2AAFF00092A8D /* SKComment+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC6F12F2AAFF00092A8D /* SKComment+Public.m */; };
+		55E5BC7412F2AB0800092A8D /* SKComment+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC7212F2AB0800092A8D /* SKComment+Private.h */; };
+		55E5BC7512F2AB0800092A8D /* SKComment+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC7312F2AB0800092A8D /* SKComment+Private.m */; };
+		55E5BC7812F2AEBF00092A8D /* SKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC7612F2AEBF00092A8D /* SKComment.h */; };
+		55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC7712F2AEBF00092A8D /* SKComment.m */; };
 		55FA955E116132E3003A9CD7 /* SKFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA955C116132E3003A9CD7 /* SKFetchRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FA955F116132E3003A9CD7 /* SKFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA955D116132E3003A9CD7 /* SKFetchRequest.m */; };
 		55FA95611161345C003A9CD7 /* SKFetchRequest+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */; };
@@ -271,10 +279,6 @@
 		55A2E51C110E424C0038E510 /* SKQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestion.m; sourceTree = "<group>"; };
 		55A2E51F110E425E0038E510 /* SKAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAnswer.h; sourceTree = "<group>"; };
 		55A2E520110E425E0038E510 /* SKAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnswer.m; sourceTree = "<group>"; };
-		55A2E523110E426E0038E510 /* SKComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKComment.h; sourceTree = "<group>"; };
-		55A2E524110E426E0038E510 /* SKComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKComment.m; sourceTree = "<group>"; };
-		55A2E527110E42E70038E510 /* SKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPost.h; sourceTree = "<group>"; };
-		55A2E528110E42E70038E510 /* SKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPost.m; sourceTree = "<group>"; };
 		55A2E550110E4FE00038E510 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
 		55A2E55A110E513E0038E510 /* SKSite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Private.h"; sourceTree = "<group>"; };
 		55A2E578110E53A10038E510 /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
@@ -336,6 +340,18 @@
 		55E5BC4312F29A3200092A8D /* SKTag+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKTag+Private.m"; sourceTree = "<group>"; };
 		55E5BC4A12F29D3B00092A8D /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
 		55E5BC4B12F29D3B00092A8D /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
+		55E5BC5812F2A2A100092A8D /* SKPost+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKPost+Public.h"; sourceTree = "<group>"; };
+		55E5BC5912F2A2A100092A8D /* SKPost+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKPost+Public.m"; sourceTree = "<group>"; };
+		55E5BC5C12F2A2A900092A8D /* SKPost+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKPost+Private.h"; sourceTree = "<group>"; };
+		55E5BC5D12F2A2A900092A8D /* SKPost+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKPost+Private.m"; sourceTree = "<group>"; };
+		55E5BC6212F2A40500092A8D /* SKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPost.h; sourceTree = "<group>"; };
+		55E5BC6312F2A40500092A8D /* SKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPost.m; sourceTree = "<group>"; };
+		55E5BC6E12F2AAFF00092A8D /* SKComment+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKComment+Public.h"; sourceTree = "<group>"; };
+		55E5BC6F12F2AAFF00092A8D /* SKComment+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKComment+Public.m"; sourceTree = "<group>"; };
+		55E5BC7212F2AB0800092A8D /* SKComment+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKComment+Private.h"; sourceTree = "<group>"; };
+		55E5BC7312F2AB0800092A8D /* SKComment+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKComment+Private.m"; sourceTree = "<group>"; };
+		55E5BC7612F2AEBF00092A8D /* SKComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKComment.h; sourceTree = "<group>"; };
+		55E5BC7712F2AEBF00092A8D /* SKComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKComment.m; sourceTree = "<group>"; };
 		55FA955C116132E3003A9CD7 /* SKFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequest.h; sourceTree = "<group>"; };
 		55FA955D116132E3003A9CD7 /* SKFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFetchRequest.m; sourceTree = "<group>"; };
 		55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKFetchRequest+Private.h"; sourceTree = "<group>"; };
@@ -495,8 +511,12 @@
 		5506C81F11ADE13100C47C1B /* Comments */ = {
 			isa = PBXGroup;
 			children = (
-				55A2E523110E426E0038E510 /* SKComment.h */,
-				55A2E524110E426E0038E510 /* SKComment.m */,
+				55E5BC7612F2AEBF00092A8D /* SKComment.h */,
+				55E5BC7712F2AEBF00092A8D /* SKComment.m */,
+				55E5BC6E12F2AAFF00092A8D /* SKComment+Public.h */,
+				55E5BC6F12F2AAFF00092A8D /* SKComment+Public.m */,
+				55E5BC7212F2AB0800092A8D /* SKComment+Private.h */,
+				55E5BC7312F2AB0800092A8D /* SKComment+Private.m */,
 			);
 			name = Comments;
 			sourceTree = "<group>";
@@ -636,8 +656,12 @@
 		55A2E52B110E44030038E510 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				55A2E527110E42E70038E510 /* SKPost.h */,
-				55A2E528110E42E70038E510 /* SKPost.m */,
+				55E5BC6212F2A40500092A8D /* SKPost.h */,
+				55E5BC6312F2A40500092A8D /* SKPost.m */,
+				55E5BC5812F2A2A100092A8D /* SKPost+Public.h */,
+				55E5BC5912F2A2A100092A8D /* SKPost+Public.m */,
+				55E5BC5C12F2A2A900092A8D /* SKPost+Private.h */,
+				55E5BC5D12F2A2A900092A8D /* SKPost+Private.m */,
 				5506C81E11ADE12800C47C1B /* Q&A */,
 				5506C81F11ADE13100C47C1B /* Comments */,
 			);
@@ -803,8 +827,6 @@
 				55A2E4E2110E36550038E510 /* SKSite.h in Headers */,
 				55A2E51D110E424C0038E510 /* SKQuestion.h in Headers */,
 				55A2E521110E425E0038E510 /* SKAnswer.h in Headers */,
-				55A2E525110E426E0038E510 /* SKComment.h in Headers */,
-				55A2E529110E42E70038E510 /* SKPost.h in Headers */,
 				55A2E551110E4FE00038E510 /* StackKit.h in Headers */,
 				55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */,
 				55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */,
@@ -873,6 +895,12 @@
 				55E5BC4012F29A2A00092A8D /* SKTag+Public.h in Headers */,
 				55E5BC4412F29A3200092A8D /* SKTag+Private.h in Headers */,
 				55E5BC4C12F29D3B00092A8D /* SKTag.h in Headers */,
+				55E5BC5A12F2A2A100092A8D /* SKPost+Public.h in Headers */,
+				55E5BC5E12F2A2A900092A8D /* SKPost+Private.h in Headers */,
+				55E5BC6412F2A40500092A8D /* SKPost.h in Headers */,
+				55E5BC7012F2AAFF00092A8D /* SKComment+Public.h in Headers */,
+				55E5BC7412F2AB0800092A8D /* SKComment+Private.h in Headers */,
+				55E5BC7812F2AEBF00092A8D /* SKComment.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,8 +1038,6 @@
 				55A2E4E3110E36550038E510 /* SKSite.m in Sources */,
 				55A2E51E110E424C0038E510 /* SKQuestion.m in Sources */,
 				55A2E522110E425E0038E510 /* SKAnswer.m in Sources */,
-				55A2E526110E426E0038E510 /* SKComment.m in Sources */,
-				55A2E52A110E42E70038E510 /* SKPost.m in Sources */,
 				55A2E60C110E623C0038E510 /* SKJSON.m in Sources */,
 				55A2E60E110E623C0038E510 /* NSObject+SKJSON.m in Sources */,
 				55A2E610110E623C0038E510 /* NSString+SKJSON.m in Sources */,
@@ -1071,6 +1097,12 @@
 				55E5BC4112F29A2A00092A8D /* SKTag+Public.m in Sources */,
 				55E5BC4512F29A3200092A8D /* SKTag+Private.m in Sources */,
 				55E5BC4D12F29D3B00092A8D /* SKTag.m in Sources */,
+				55E5BC5B12F2A2A100092A8D /* SKPost+Public.m in Sources */,
+				55E5BC5F12F2A2A900092A8D /* SKPost+Private.m in Sources */,
+				55E5BC6512F2A40500092A8D /* SKPost.m in Sources */,
+				55E5BC7112F2AAFF00092A8D /* SKComment+Public.m in Sources */,
+				55E5BC7512F2AB0800092A8D /* SKComment+Private.m in Sources */,
+				55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
