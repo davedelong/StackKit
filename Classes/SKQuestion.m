@@ -24,6 +24,7 @@
  **/
 
 #import "StackKit_Internal.h"
+#import "SKTag+Public.h"
 //inherited
 NSString * const SKQuestionCreationDate = __SKPostCreationDate;
 NSString * const SKQuestionOwner = __SKPostOwner;

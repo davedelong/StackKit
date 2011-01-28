@@ -24,7 +24,7 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "SKQuestion.h"
+#import "SKQAPost.h"
 
 //inherited
 extern NSString * const SKQuestionCreationDate;

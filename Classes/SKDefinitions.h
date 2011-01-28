@@ -41,6 +41,16 @@ typedef struct _SKRange {
 
 extern SKRange const SKRangeNotFound;
 
+#pragma mark -
+#pragma mark Enums
+
+typedef enum {
+	SKSiteStateNormal = 0,
+	SKSiteStateLinkedMeta = 1,
+	SKSiteStateOpenBeta = 2,
+	SKSiteStateClosedBeta = 3
+} SKSiteState;
+
 typedef enum {
 	SKUserTypeAnonymous = 0,
 	SKUserTypeUnregistered = 1,
@@ -54,6 +64,9 @@ typedef enum {
 	SKBadgeRankSilver = 1,
 	SKBadgeRankGold = 2
 } SKBadgeRank_t;
+
+#pragma mark -
+#pragma mark Helpher Macros
 
 #ifndef SK_BOX
 #define SK_BOX(o,...) _sk_boxOperators(o, ##__VA_ARGS__, NSNotFound)
