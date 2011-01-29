@@ -9,6 +9,7 @@
 #import "SKObject+Private.h"
 
 @implementation SKObject (Private)
+@dynamic site;
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSAssert(NO, ([NSString stringWithFormat:@"+[%@ %@] must be overridden", NSStringFromClass(self), NSStringFromSelector(_cmd)]));
@@ -26,6 +27,18 @@
 		return [mappings objectForKey:key];
 	}
 	return key;
+}
+
++ (id) objectMergedWithDictionary:(NSDictionary *)dictionary inSite:(SKSite *)site {
+	//TODO: looking of existing objects?
+	SKObject *object = nil;
+	if (object == nil) {
+		object = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:[site managedObjectContext]];
+		[object setSite:site];
+	}
+	[object mergeInformationFromDictionary:dictionary];
+	
+	return object;
 }
 
 - (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {

@@ -31,10 +31,10 @@
 
 @interface SKObject (Private)
 
-- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary;
+@property (nonatomic, retain) SKSite * site;
 
-- (void) setSite:(SKSite *)newSite;
-- (SKSite *)site;
++ (id) objectMergedWithDictionary:(NSDictionary *)dictionary inSite:(SKSite *)site;
+- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary;
 
 #pragma mark Class methods implemented by SKObject
 // used in valueForKey:

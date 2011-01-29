@@ -24,6 +24,7 @@
  **/
 
 #import "StackKit_Internal.h"
+#import "SKObject+Private.h"
 #import <objc/runtime.h>
 
 @implementation SKFetchRequest
@@ -175,11 +176,11 @@ cleanup:
 	//parse the response into objects
 	if ([dataObject isKindOfClass:[NSArray class]]) {
 		for (NSDictionary * dataDictionary in dataObject) {
-			SKObject * object = [[self entity] objectWithSite:[self site] dictionaryRepresentation:dataDictionary];
+			SKObject *object = [[self entity] objectMergedWithDictionary:dataDictionary inSite:[self site]];
 			[objects addObject:object];
 		}
 	} else if ([dataObject isKindOfClass:[NSDictionary class]]) {
-		SKObject * object = [[self entity] objectWithSite:[self site] dictionaryRepresentation:dataObject];
+		SKObject *object = [[self entity] objectMergedWithDictionary:dataObject inSite:[self site]];
 		[objects addObject:object];
 	}
 	
