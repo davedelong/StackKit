@@ -24,6 +24,7 @@
  **/
 
 #import "_SKRequestBuilderUnansweredQuestions.h"
+#import "SKQuestion+Public.h"
 
 
 @implementation _SKRequestBuilderUnansweredQuestions

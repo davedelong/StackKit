@@ -44,16 +44,13 @@ NSString * SKErrorMessageKey = @"message";
 
 NSString * SKFetchTotalKey = @"total";
 
-- (id) initWithSite:(SKSite *)aSite {
-	if (self = [super initWithSite:aSite]) {
+- (id) init {
+	self = [super init];
+	if (self) {
 		fetchLimit = SKPageSizeLimitMax;
 		fetchOffset = 0;
 	}
 	return self;
-}
-
-- (id) init {
-	return [self initWithSite:nil];
 }
 
 - (void) dealloc {

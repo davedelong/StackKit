@@ -71,7 +71,7 @@ NSArray * _skKnownSites = nil;
 	
 	_skKnownSites = [[NSMutableArray alloc] init];
 	for (NSDictionary * siteDictionary in sites) {
-		SKSite * thisSite = [[SKSite alloc] initWithSite:nil dictionaryRepresentation:siteDictionary];
+		SKSite * thisSite = [[SKSite alloc] _initWithDictionary:siteDictionary];
 		[(NSMutableArray *)_skKnownSites addObject:thisSite];
 		[thisSite release];
 	}
@@ -98,7 +98,7 @@ NSArray * _skKnownSites = nil;
 	//for some reason, StackAuth doesn't know about this site
 	//build an SKSite anyway, and if it fails, it fails
 	NSDictionary * tempInfo = [NSDictionary dictionaryWithObject:[aURL absoluteString] forKey:@"api_endpoint"];
-	return [[[self alloc] initWithSite:nil dictionaryRepresentation:tempInfo] autorelease];
+	return [[[self alloc] _initWithDictionary:tempInfo] autorelease];
 }
 
 + (id) stackOverflowSite {
@@ -125,9 +125,9 @@ NSArray * _skKnownSites = nil;
 #pragma mark Init/Dealloc
 
 							 
-							 
-- (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
-	if (self = [super initWithSite:nil]) {
+
+- (id) _initWithDictionary:(NSDictionary *)dictionary {
+	if (self = [super init]) {
 		[self setApiKey:SKFrameworkAPIKey];
 		name = [[dictionary objectForKey:@"name"] retain];
 		logoURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"logo_url"]];

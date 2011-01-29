@@ -24,6 +24,7 @@
  **/
 
 #import "_SKRequestBuilderQuestionSearch.h"
+#import "SKQuestion+Public.h"
 
 
 @implementation _SKRequestBuilderQuestionSearch

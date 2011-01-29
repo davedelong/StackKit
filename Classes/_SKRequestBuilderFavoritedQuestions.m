@@ -24,6 +24,7 @@
  **/
 
 #import "_SKRequestBuilderFavoritedQuestions.h"
+#import "SKQuestion+Public.h"
 
 
 @implementation _SKRequestBuilderFavoritedQuestions

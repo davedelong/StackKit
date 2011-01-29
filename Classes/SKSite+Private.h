@@ -39,4 +39,6 @@
 - (void) asynchronousStatistics;
 - (NSDictionary *) statisticsWithError:(NSError **)error;
 
+- (id) _initWithDictionary:(NSDictionary *)dictionary;
+
 @end

@@ -76,10 +76,6 @@
 		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4E3110E36550038E510 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4E1110E36550038E510 /* SKSite.m */; };
 		55A2E4F9110E3A0B0038E510 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
-		55A2E51D110E424C0038E510 /* SKQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E51B110E424C0038E510 /* SKQuestion.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55A2E51E110E424C0038E510 /* SKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E51C110E424C0038E510 /* SKQuestion.m */; };
-		55A2E521110E425E0038E510 /* SKAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E51F110E425E0038E510 /* SKAnswer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55A2E522110E425E0038E510 /* SKAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E520110E425E0038E510 /* SKAnswer.m */; };
 		55A2E551110E4FE00038E510 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E550110E4FE00038E510 /* StackKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E55A110E513E0038E510 /* SKSite+Private.h */; settings = {ATTRIBUTES = (); }; };
 		55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E578110E53A10038E510 /* SKObject+Private.h */; settings = {ATTRIBUTES = (); }; };
@@ -98,8 +94,6 @@
 		55A2E614110E623C0038E510 /* SKJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E607110E623C0038E510 /* SKJsonParser.m */; };
 		55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E608110E623C0038E510 /* SKJsonWriter.h */; };
 		55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E609110E623C0038E510 /* SKJsonWriter.m */; };
-		55A2E68B110EA8940038E510 /* SKQAPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E689110EA8940038E510 /* SKQAPost.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55A2E68C110EA8940038E510 /* SKQAPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E68A110EA8940038E510 /* SKQAPost.m */; };
 		55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */; };
 		55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */; };
 		55A2E6BE110EB2170038E510 /* StackKit_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E6BD110EB2170038E510 /* StackKit_Internal.h */; };
@@ -146,6 +140,24 @@
 		55E5BC7512F2AB0800092A8D /* SKComment+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC7312F2AB0800092A8D /* SKComment+Private.m */; };
 		55E5BC7812F2AEBF00092A8D /* SKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC7612F2AEBF00092A8D /* SKComment.h */; };
 		55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC7712F2AEBF00092A8D /* SKComment.m */; };
+		55E5BCFA12F3D98300092A8D /* SKQAPost+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BCF812F3D98300092A8D /* SKQAPost+Public.h */; };
+		55E5BCFB12F3D98300092A8D /* SKQAPost+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BCF912F3D98300092A8D /* SKQAPost+Public.m */; };
+		55E5BCFE12F3D98B00092A8D /* SKQAPost+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BCFC12F3D98B00092A8D /* SKQAPost+Private.h */; };
+		55E5BCFF12F3D98B00092A8D /* SKQAPost+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BCFD12F3D98B00092A8D /* SKQAPost+Private.m */; };
+		55E5BD0612F3DAC000092A8D /* SKQAPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0412F3DAC000092A8D /* SKQAPost.h */; };
+		55E5BD0712F3DAC000092A8D /* SKQAPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD0512F3DAC000092A8D /* SKQAPost.m */; };
+		55E5BD0A12F3DC3A00092A8D /* SKQuestion+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */; };
+		55E5BD0B12F3DC3A00092A8D /* SKQuestion+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD0912F3DC3A00092A8D /* SKQuestion+Public.m */; };
+		55E5BD0E12F3DC4B00092A8D /* SKQuestion+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0C12F3DC4B00092A8D /* SKQuestion+Private.h */; };
+		55E5BD0F12F3DC4B00092A8D /* SKQuestion+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD0D12F3DC4B00092A8D /* SKQuestion+Private.m */; };
+		55E5BD2612F3DD1F00092A8D /* SKQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD2412F3DD1F00092A8D /* SKQuestion.h */; };
+		55E5BD2712F3DD1F00092A8D /* SKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD2512F3DD1F00092A8D /* SKQuestion.m */; };
+		55E5BD3212F3E0A200092A8D /* SKAnswer+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD3012F3E0A200092A8D /* SKAnswer+Public.h */; };
+		55E5BD3312F3E0A200092A8D /* SKAnswer+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD3112F3E0A200092A8D /* SKAnswer+Public.m */; };
+		55E5BD3612F3E0AB00092A8D /* SKAnswer+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD3412F3E0AB00092A8D /* SKAnswer+Private.h */; };
+		55E5BD3712F3E0AB00092A8D /* SKAnswer+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD3512F3E0AB00092A8D /* SKAnswer+Private.m */; };
+		55E5BD3A12F3E11E00092A8D /* SKAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD3812F3E11E00092A8D /* SKAnswer.h */; };
+		55E5BD3B12F3E11E00092A8D /* SKAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD3912F3E11E00092A8D /* SKAnswer.m */; };
 		55FA955E116132E3003A9CD7 /* SKFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA955C116132E3003A9CD7 /* SKFetchRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FA955F116132E3003A9CD7 /* SKFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA955D116132E3003A9CD7 /* SKFetchRequest.m */; };
 		55FA95611161345C003A9CD7 /* SKFetchRequest+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */; };
@@ -275,10 +287,6 @@
 		55A2E4E1110E36550038E510 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
 		55A2E4F4110E3A050038E510 /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A2E4F5110E3A050038E510 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit Tests-Info.plist"; path = "Unit Tests/Unit Tests-Info.plist"; sourceTree = "<group>"; };
-		55A2E51B110E424C0038E510 /* SKQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestion.h; sourceTree = "<group>"; };
-		55A2E51C110E424C0038E510 /* SKQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestion.m; sourceTree = "<group>"; };
-		55A2E51F110E425E0038E510 /* SKAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAnswer.h; sourceTree = "<group>"; };
-		55A2E520110E425E0038E510 /* SKAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnswer.m; sourceTree = "<group>"; };
 		55A2E550110E4FE00038E510 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
 		55A2E55A110E513E0038E510 /* SKSite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Private.h"; sourceTree = "<group>"; };
 		55A2E578110E53A10038E510 /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
@@ -297,8 +305,6 @@
 		55A2E607110E623C0038E510 /* SKJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonParser.m; sourceTree = "<group>"; };
 		55A2E608110E623C0038E510 /* SKJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonWriter.h; sourceTree = "<group>"; };
 		55A2E609110E623C0038E510 /* SKJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonWriter.m; sourceTree = "<group>"; };
-		55A2E689110EA8940038E510 /* SKQAPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQAPost.h; sourceTree = "<group>"; };
-		55A2E68A110EA8940038E510 /* SKQAPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQAPost.m; sourceTree = "<group>"; };
 		55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+SKAdditions.h"; sourceTree = "<group>"; };
 		55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+SKAdditions.m"; sourceTree = "<group>"; };
 		55A2E6BD110EB2170038E510 /* StackKit_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Internal.h; sourceTree = "<group>"; };
@@ -352,6 +358,24 @@
 		55E5BC7312F2AB0800092A8D /* SKComment+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKComment+Private.m"; sourceTree = "<group>"; };
 		55E5BC7612F2AEBF00092A8D /* SKComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKComment.h; sourceTree = "<group>"; };
 		55E5BC7712F2AEBF00092A8D /* SKComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKComment.m; sourceTree = "<group>"; };
+		55E5BCF812F3D98300092A8D /* SKQAPost+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQAPost+Public.h"; sourceTree = "<group>"; };
+		55E5BCF912F3D98300092A8D /* SKQAPost+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQAPost+Public.m"; sourceTree = "<group>"; };
+		55E5BCFC12F3D98B00092A8D /* SKQAPost+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQAPost+Private.h"; sourceTree = "<group>"; };
+		55E5BCFD12F3D98B00092A8D /* SKQAPost+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQAPost+Private.m"; sourceTree = "<group>"; };
+		55E5BD0412F3DAC000092A8D /* SKQAPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQAPost.h; sourceTree = "<group>"; };
+		55E5BD0512F3DAC000092A8D /* SKQAPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQAPost.m; sourceTree = "<group>"; };
+		55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQuestion+Public.h"; sourceTree = "<group>"; };
+		55E5BD0912F3DC3A00092A8D /* SKQuestion+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQuestion+Public.m"; sourceTree = "<group>"; };
+		55E5BD0C12F3DC4B00092A8D /* SKQuestion+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQuestion+Private.h"; sourceTree = "<group>"; };
+		55E5BD0D12F3DC4B00092A8D /* SKQuestion+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQuestion+Private.m"; sourceTree = "<group>"; };
+		55E5BD2412F3DD1F00092A8D /* SKQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestion.h; sourceTree = "<group>"; };
+		55E5BD2512F3DD1F00092A8D /* SKQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestion.m; sourceTree = "<group>"; };
+		55E5BD3012F3E0A200092A8D /* SKAnswer+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKAnswer+Public.h"; sourceTree = "<group>"; };
+		55E5BD3112F3E0A200092A8D /* SKAnswer+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKAnswer+Public.m"; sourceTree = "<group>"; };
+		55E5BD3412F3E0AB00092A8D /* SKAnswer+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKAnswer+Private.h"; sourceTree = "<group>"; };
+		55E5BD3512F3E0AB00092A8D /* SKAnswer+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKAnswer+Private.m"; sourceTree = "<group>"; };
+		55E5BD3812F3E11E00092A8D /* SKAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAnswer.h; sourceTree = "<group>"; };
+		55E5BD3912F3E11E00092A8D /* SKAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAnswer.m; sourceTree = "<group>"; };
 		55FA955C116132E3003A9CD7 /* SKFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequest.h; sourceTree = "<group>"; };
 		55FA955D116132E3003A9CD7 /* SKFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFetchRequest.m; sourceTree = "<group>"; };
 		55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKFetchRequest+Private.h"; sourceTree = "<group>"; };
@@ -498,12 +522,14 @@
 		5506C81E11ADE12800C47C1B /* Q&A */ = {
 			isa = PBXGroup;
 			children = (
-				55A2E689110EA8940038E510 /* SKQAPost.h */,
-				55A2E68A110EA8940038E510 /* SKQAPost.m */,
-				55A2E51B110E424C0038E510 /* SKQuestion.h */,
-				55A2E51C110E424C0038E510 /* SKQuestion.m */,
-				55A2E51F110E425E0038E510 /* SKAnswer.h */,
-				55A2E520110E425E0038E510 /* SKAnswer.m */,
+				55E5BD0412F3DAC000092A8D /* SKQAPost.h */,
+				55E5BD0512F3DAC000092A8D /* SKQAPost.m */,
+				55E5BCF812F3D98300092A8D /* SKQAPost+Public.h */,
+				55E5BCF912F3D98300092A8D /* SKQAPost+Public.m */,
+				55E5BCFC12F3D98B00092A8D /* SKQAPost+Private.h */,
+				55E5BCFD12F3D98B00092A8D /* SKQAPost+Private.m */,
+				55E5BCF612F3D96100092A8D /* Questions */,
+				55E5BCF712F3D96600092A8D /* Answers */,
 			);
 			name = "Q&A";
 			sourceTree = "<group>";
@@ -798,6 +824,32 @@
 			name = Constants;
 			sourceTree = "<group>";
 		};
+		55E5BCF612F3D96100092A8D /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				55E5BD2412F3DD1F00092A8D /* SKQuestion.h */,
+				55E5BD2512F3DD1F00092A8D /* SKQuestion.m */,
+				55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */,
+				55E5BD0912F3DC3A00092A8D /* SKQuestion+Public.m */,
+				55E5BD0C12F3DC4B00092A8D /* SKQuestion+Private.h */,
+				55E5BD0D12F3DC4B00092A8D /* SKQuestion+Private.m */,
+			);
+			name = Questions;
+			sourceTree = "<group>";
+		};
+		55E5BCF712F3D96600092A8D /* Answers */ = {
+			isa = PBXGroup;
+			children = (
+				55E5BD3812F3E11E00092A8D /* SKAnswer.h */,
+				55E5BD3912F3E11E00092A8D /* SKAnswer.m */,
+				55E5BD3012F3E0A200092A8D /* SKAnswer+Public.h */,
+				55E5BD3112F3E0A200092A8D /* SKAnswer+Public.m */,
+				55E5BD3412F3E0AB00092A8D /* SKAnswer+Private.h */,
+				55E5BD3512F3E0AB00092A8D /* SKAnswer+Private.m */,
+			);
+			name = Answers;
+			sourceTree = "<group>";
+		};
 		55FF3A8812D859C500CC4B9D /* Request Builder */ = {
 			isa = PBXGroup;
 			children = (
@@ -825,8 +877,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A2E4E2110E36550038E510 /* SKSite.h in Headers */,
-				55A2E51D110E424C0038E510 /* SKQuestion.h in Headers */,
-				55A2E521110E425E0038E510 /* SKAnswer.h in Headers */,
 				55A2E551110E4FE00038E510 /* StackKit.h in Headers */,
 				55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */,
 				55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */,
@@ -838,7 +888,6 @@
 				55A2E611110E623C0038E510 /* SKJsonBase.h in Headers */,
 				55A2E613110E623C0038E510 /* SKJsonParser.h in Headers */,
 				55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */,
-				55A2E68B110EA8940038E510 /* SKQAPost.h in Headers */,
 				55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */,
 				55A2E6BE110EB2170038E510 /* StackKit_Internal.h in Headers */,
 				55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */,
@@ -901,6 +950,15 @@
 				55E5BC7012F2AAFF00092A8D /* SKComment+Public.h in Headers */,
 				55E5BC7412F2AB0800092A8D /* SKComment+Private.h in Headers */,
 				55E5BC7812F2AEBF00092A8D /* SKComment.h in Headers */,
+				55E5BCFA12F3D98300092A8D /* SKQAPost+Public.h in Headers */,
+				55E5BCFE12F3D98B00092A8D /* SKQAPost+Private.h in Headers */,
+				55E5BD0612F3DAC000092A8D /* SKQAPost.h in Headers */,
+				55E5BD0A12F3DC3A00092A8D /* SKQuestion+Public.h in Headers */,
+				55E5BD0E12F3DC4B00092A8D /* SKQuestion+Private.h in Headers */,
+				55E5BD2612F3DD1F00092A8D /* SKQuestion.h in Headers */,
+				55E5BD3212F3E0A200092A8D /* SKAnswer+Public.h in Headers */,
+				55E5BD3612F3E0AB00092A8D /* SKAnswer+Private.h in Headers */,
+				55E5BD3A12F3E11E00092A8D /* SKAnswer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,15 +1094,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A2E4E3110E36550038E510 /* SKSite.m in Sources */,
-				55A2E51E110E424C0038E510 /* SKQuestion.m in Sources */,
-				55A2E522110E425E0038E510 /* SKAnswer.m in Sources */,
 				55A2E60C110E623C0038E510 /* SKJSON.m in Sources */,
 				55A2E60E110E623C0038E510 /* NSObject+SKJSON.m in Sources */,
 				55A2E610110E623C0038E510 /* NSString+SKJSON.m in Sources */,
 				55A2E612110E623C0038E510 /* SKJsonBase.m in Sources */,
 				55A2E614110E623C0038E510 /* SKJsonParser.m in Sources */,
 				55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */,
-				55A2E68C110EA8940038E510 /* SKQAPost.m in Sources */,
 				55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */,
 				55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */,
 				55FA955F116132E3003A9CD7 /* SKFetchRequest.m in Sources */,
@@ -1103,6 +1158,15 @@
 				55E5BC7112F2AAFF00092A8D /* SKComment+Public.m in Sources */,
 				55E5BC7512F2AB0800092A8D /* SKComment+Private.m in Sources */,
 				55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */,
+				55E5BCFB12F3D98300092A8D /* SKQAPost+Public.m in Sources */,
+				55E5BCFF12F3D98B00092A8D /* SKQAPost+Private.m in Sources */,
+				55E5BD0712F3DAC000092A8D /* SKQAPost.m in Sources */,
+				55E5BD0B12F3DC3A00092A8D /* SKQuestion+Public.m in Sources */,
+				55E5BD0F12F3DC4B00092A8D /* SKQuestion+Private.m in Sources */,
+				55E5BD2712F3DD1F00092A8D /* SKQuestion.m in Sources */,
+				55E5BD3312F3E0A200092A8D /* SKAnswer+Public.m in Sources */,
+				55E5BD3712F3E0AB00092A8D /* SKAnswer+Private.m in Sources */,
+				55E5BD3B12F3E11E00092A8D /* SKAnswer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
