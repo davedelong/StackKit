@@ -24,12 +24,20 @@
  **/
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-#define StackKitMobile 1
-#else
-#define StackKitMac 1
+
+#ifndef StackKitMobile
+#define StackKitMobile 
 #endif
 
-#if StackKitMobile
+#else
+
+#ifndef StackKitMac
+#define StackKitMac 
+#endif
+
+#endif
+
+#ifdef StackKitMobile
 #import <UIKit/UIKit.h>
 #else
 #import <Cocoa/Cocoa.h>
@@ -48,14 +56,27 @@
 #import "SKUser+Public.h"
 
 #import "SKTag.h"
+#import "SKTag+Public.h"
+
 #import "SKBadge.h"
+#import "SKBadge+Public.h"
+
 #import "SKUserActivity.h"
 
 #import "SKPost.h"
+#import "SKPost+Public.h"
+
 #import "SKQAPost.h"
+#import "SKQAPost+Public.h"
+
 #import "SKQuestion.h"
+#import "SKQuestion+Public.h"
+
 #import "SKAnswer.h"
+#import "SKAnswer+Public.h"
+
 #import "SKComment.h"
+#import "SKComment+Public.h"
 
 #import "SKConstants.h"
 #import "SKDefinitions.h"

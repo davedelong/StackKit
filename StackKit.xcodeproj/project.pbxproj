@@ -105,7 +105,6 @@
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
 		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
-		55C2410F116ADF71009064EE /* SKUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C2410D116ADF71009064EE /* SKUserActivity.m */; };
 		55E5BB7A12F1133500092A8D /* SKSite+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BB7912F1133500092A8D /* SKSite+Private.m */; };
 		55E5BBED12F27D1200092A8D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E5BBEC12F27D1200092A8D /* CoreData.framework */; };
 		55E5BBFA12F283B700092A8D /* SKUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BBF812F283B700092A8D /* SKUser+Private.h */; };
@@ -1106,7 +1105,6 @@
 				55FA956511613AD9003A9CD7 /* NSPredicate+SKAdditions.m in Sources */,
 				55FA95DA11614245003A9CD7 /* NSDictionary+SKAdditions.m in Sources */,
 				55FA969C11616A65003A9CD7 /* SKConstants.m in Sources */,
-				55C2410F116ADF71009064EE /* SKUserActivity.m in Sources */,
 				5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */,
 				5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */,
 				D21D402B11BAB4EC00D5AD93 /* SKCallback.m in Sources */,
