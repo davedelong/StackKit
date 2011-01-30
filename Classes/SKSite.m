@@ -24,14 +24,9 @@
  **/
 
 #import "StackKit_Internal.h"
+#import "SKSite+Private.h"
 
 NSString * const SKSiteAPIKey = @"key";
-
-NSString * const SKSiteStylingLinkColor = @"link_color";
-NSString * const SKSiteStylingTagColor = @"tag_foreground_color";
-NSString * const SKSiteStylingTagBackgroundColor = @"tag_background_color";
-
-NSArray * _skKnownSites = nil;
 
 @implementation SKSite
 
@@ -46,41 +41,15 @@ NSArray * _skKnownSites = nil;
 @synthesize iconURL;
 @synthesize summary;
 @synthesize state;
-@synthesize stylingInformation;
+@synthesize linkColor;
+@synthesize tagForegroundColor, tagBackgroundColor;
 
 #pragma mark Site Constructors
 
-+ (void) loadSites {
-	NSString * stackAuth = [NSString stringWithFormat:@"http://stackauth.com/%@/sites", SKAPIVersion];
-	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:stackAuth]];
-	
-	NSHTTPURLResponse * response = nil;
-	NSError * error = nil;
-	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	
-	if (error != nil) { return; }
-	if (data == nil) { return; }
-	
-	NSString * dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	NSDictionary * sitesDictionary = [dataString JSONValue];
-	[dataString release];
-	
-	if (sitesDictionary == nil) { return; }
-	
-	NSArray * sites = [sitesDictionary objectForKey:@"api_sites"];
-	
-	_skKnownSites = [[NSMutableArray alloc] init];
-	for (NSDictionary * siteDictionary in sites) {
-		SKSite * thisSite = [[SKSite alloc] _initWithDictionary:siteDictionary];
-		[(NSMutableArray *)_skKnownSites addObject:thisSite];
-		[thisSite release];
-	}
-}
-
 + (NSArray *) knownSites {
-	if (_skKnownSites == nil) {
-		[self loadSites];
-	}
+	[fetchLock lock];
+	NSArray *sites = _skKnownSites;
+	[fetchLock unlock];
 	return _skKnownSites;
 }
 
@@ -95,10 +64,8 @@ NSArray * _skKnownSites = nil;
 		}
 	}
 	
-	//for some reason, StackAuth doesn't know about this site
-	//build an SKSite anyway, and if it fails, it fails
-	NSDictionary * tempInfo = [NSDictionary dictionaryWithObject:[aURL absoluteString] forKey:@"api_endpoint"];
-	return [[[self alloc] _initWithDictionary:tempInfo] autorelease];
+	//only return an SKSite that points to a valid StackAuth site
+	return nil;
 }
 
 + (id) stackOverflowSite {
@@ -122,69 +89,13 @@ NSArray * _skKnownSites = nil;
 }
 
 #pragma mark -
-#pragma mark Init/Dealloc
-
-							 
-
-- (id) _initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super init]) {
-		[self setApiKey:SKFrameworkAPIKey];
-		name = [[dictionary objectForKey:@"name"] retain];
-		logoURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"logo_url"]];
-		NSString * apiPath = [dictionary objectForKey:@"api_endpoint"];
-		apiURL = [[NSURL alloc] initWithString:[apiPath stringByAppendingFormat:@"/%@", SKAPIVersion]];
-		siteURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"site_url"]];
-		iconURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"icon_url"]];
-		summary = [[dictionary objectForKey:@"description"] retain];
-		
-		stylingInformation = [[NSMutableDictionary alloc] init];
-		NSDictionary * styleDict = [dictionary objectForKey:@"styling"];
-		for (NSString * key in styleDict) {
-			[(NSMutableDictionary *)stylingInformation setObject:SKColorFromHexString([styleDict objectForKey:key]) forKey:key];
-		}
-		
-		state = SKSiteStateNormal;
-		NSString * stateString = [dictionary objectForKey:@"state"];
-		if ([stateString isEqual:@"linked_meta"]) {
-			state = SKSiteStateLinkedMeta;
-		} else if ([stateString isEqual:@"open_beta"]) {
-			state = SKSiteStateOpenBeta;
-		} else if ([stateString isEqual:@"closed_beta"]) {
-			state = SKSiteStateClosedBeta;
-		}
-		
-		
-		timeoutInterval = 60.0;
-		requestQueue = [[NSOperationQueue alloc] init];
-		[requestQueue setMaxConcurrentOperationCount:1];
-	}
-	return self;
-}
-
-- (void) dealloc {
-	[apiKey release];
-	[name release];
-	[logoURL release];
-	[apiURL release];
-	[siteURL release];
-	[iconURL release];
-	[summary release];
-	[stylingInformation release];
-	
-	[requestQueue cancelAllOperations];
-	[requestQueue release];
-	
-	[super dealloc];
-}
-
-#pragma mark -
 #pragma mark Accessors
 
 - (NSString *) apiVersion {
 	return SKAPIVersion;
 }
 
-- (SKSite *) qaSite {
+- (SKSite *) mainSite {
 	NSString * host = [[self apiURL] host];
 	NSArray * originalHostComponents = [host componentsSeparatedByString:@"."];
 	if ([originalHostComponents containsObject:@"meta"] == NO) { return self; }
@@ -234,32 +145,11 @@ NSArray * _skKnownSites = nil;
 - (SKSite *) companionSite {
 	//if this is a meta site, return the QA site (and vice versa)
 	if ([[[self apiURL] host] rangeOfString:@".meta."].location != NSNotFound) {
-		return [self qaSite];
+		return [self mainSite];
 	} else {
 		return [self metaSite];
 	}
 }
-
-/**
- #pragma mark -
- #pragma mark Object Caching
- 
- - (void) cacheUser:(SKUser *)newUser {
- [cachedUsers setObject:newUser forKey:[newUser userID]];
- }
- 
- - (void) cacheTag:(SKTag *)newTag {
- [cachedTags setObject:newTag forKey:[newTag name]];
- }
- 
- - (void) cachePost:(SKPost *)newPost {
- [cachedPosts setObject:newPost forKey:[newPost postID]];
- }
- 
- - (void) cacheBadge:(SKBadge *)newBadge {
- [cachedBadges setObject:newBadge forKey:[newBadge ID]];
- }
- **/
 
 #pragma mark -
 #pragma mark Misc
@@ -272,14 +162,8 @@ NSArray * _skKnownSites = nil;
 
 - (BOOL) isEqualToSite:(SKSite*)anotherSite
 {
-	//Sites are equal if:
-	//1. Their API keys are equal
-	//2. Their API URLs are equal
-	if([[self apiKey] isEqual:[anotherSite apiKey]]&&[[self apiURL] isEqual:[anotherSite apiURL]]) {
-		return YES;
-	}
-	
-	return NO;
+	//Sites are equal if their api urls are equal
+	return [[self apiURL] isEqual:[anotherSite apiURL]];
 }
 
 #pragma mark -

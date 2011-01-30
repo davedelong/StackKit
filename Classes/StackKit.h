@@ -39,8 +39,10 @@
 
 #ifdef StackKitMobile
 #import <UIKit/UIKit.h>
+#define SKColor UIColor
 #else
 #import <Cocoa/Cocoa.h>
+#define SKColor NSColor
 #endif
 
 #import "SKObject.h"

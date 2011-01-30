@@ -31,14 +31,10 @@
 
 extern NSString * const SKSiteAPIKey;
 
-extern NSString * const SKSiteStylingLinkColor;
-extern NSString * const SKSiteStylingTagColor;
-extern NSString * const SKSiteStylingTagBackgroundColor;
-
 @class SKUser;
 @class SKFetchRequest;
 
-@interface SKSite : SKObject {
+@interface SKSite : NSObject {
 	NSString * apiKey;
 	NSURL * apiURL;
 	NSString * name;
@@ -46,13 +42,14 @@ extern NSString * const SKSiteStylingTagBackgroundColor;
 	NSURL * logoURL;
 	NSURL * iconURL;
 	NSString * summary;
+	NSMutableArray * aliases;
 	
 	SKSiteState state;
-	
-	NSDictionary * stylingInformation;
+	SKColor * linkColor;
+	SKColor * tagBackgroundColor;
+	SKColor * tagForegroundColor;
 	
 	NSTimeInterval timeoutInterval;
-	
 	NSOperationQueue * requestQueue;
 	id<SKSiteDelegate> delegate;
 	
@@ -66,6 +63,7 @@ extern NSString * const SKSiteStylingTagBackgroundColor;
 @property (copy) NSString * apiKey;
 @property (readonly) NSURL * apiURL;
 @property (readonly) NSString * apiVersion;
+@property (readonly) NSArray * aliases;
 
 @property (readonly) NSString * name;
 @property (readonly) NSURL * siteURL;
@@ -73,7 +71,9 @@ extern NSString * const SKSiteStylingTagBackgroundColor;
 @property (readonly) NSURL * iconURL;
 @property (readonly) NSString * summary;
 @property (readonly) SKSiteState state;
-@property (readonly) NSDictionary * stylingInformation;
+@property (readonly) SKColor * linkColor;
+@property (readonly) SKColor * tagBackgroundColor;
+@property (readonly) SKColor * tagForegroundColor;
 
 @property NSTimeInterval timeoutInterval;
 
@@ -87,13 +87,11 @@ extern NSString * const SKSiteStylingTagBackgroundColor;
 + (id) serverFaultSite;
 + (id) superUserSite;
 
-- (SKSite *) qaSite;
+- (SKSite *) mainSite;
 - (SKSite *) metaSite;
 - (SKSite *) companionSite;
 
 - (BOOL) isEqualToSite:(SKSite*)anotherSite;
-
-- (SKUser *) userWithID:(NSNumber *)aUserID;
 
 - (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest;

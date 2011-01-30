@@ -29,6 +29,9 @@
 #import "SKTag.h"
 #import "SKPost.h"
 
+extern NSLock *fetchLock;
+extern NSArray *_skKnownSites;
+
 @interface SKSite ()
 
 /**- (void) cacheUser:(SKUser *)newUser;
@@ -39,6 +42,6 @@
 - (void) asynchronousStatistics;
 - (NSDictionary *) statisticsWithError:(NSError **)error;
 
-- (id) _initWithDictionary:(NSDictionary *)dictionary;
+- (void) mergeInformationFromDicitonary:(NSDictionary *)dictionary;
 
 @end
