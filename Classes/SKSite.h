@@ -57,6 +57,7 @@ extern NSString * const SKSiteAPIKey;
 	NSManagedObjectContext *managedObjectContext;
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	NSManagedObjectModel *managedObjectModel;
+	NSMutableDictionary *cache;
 }
 
 @property (assign) id<SKSiteDelegate> delegate;

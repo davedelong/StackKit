@@ -19,6 +19,10 @@
 	return @"answers";
 }
 
++ (NSString *) uniqueIDKey {
+	return SKAnswerID;
+}
+
 - (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {
 	[super mergeInformationFromDictionary:dictionary];
 	[self setAccepted:[dictionary objectForKey:SKAnswerIsAccepted]];

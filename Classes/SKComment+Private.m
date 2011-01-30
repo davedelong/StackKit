@@ -23,6 +23,10 @@ NSString * const SKCommentPostType = @"post_type";
 	return @"comments";
 }
 
++ (NSString *) uniqueIDKey {
+	return SKCommentID;
+}
+
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 										@"commentID", SKCommentID,

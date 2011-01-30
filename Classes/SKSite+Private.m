@@ -7,8 +7,11 @@
 //
 
 #import "SKSite+Private.h"
+#import "JSON.h"
+#import "SKConstants.h"
+#import "SKFunctions.h"
 
-static NSLock * fetchLock = nil;
+NSLock * fetchLock = nil;
 NSArray * _skKnownSites = nil;
 
 @implementation SKSite (Private)
@@ -61,7 +64,7 @@ NSArray * _skKnownSites = nil;
 #pragma mark -
 #pragma mark Init/Dealloc
 
-- (void) mergeInformationFromDicitonary:(NSDictionary *)dictionary {
+- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {
 	name = [[dictionary objectForKey:@"name"] retain];
 	logoURL = [[NSURL alloc] initWithString:[dictionary objectForKey:@"logo_url"]];
 	
@@ -94,6 +97,7 @@ NSArray * _skKnownSites = nil;
 	timeoutInterval = 60.0;
 	requestQueue = [[NSOperationQueue alloc] init];
 	[requestQueue setMaxConcurrentOperationCount:1];
+	cache = [[NSMutableDictionary alloc] init];
 }
 
 - (void) dealloc {
@@ -116,6 +120,7 @@ NSArray * _skKnownSites = nil;
 	[managedObjectModel release];
 	[persistentStoreCoordinator release];
 	[managedObjectContext release];
+	[cache release];
 	
 	[super dealloc];
 }

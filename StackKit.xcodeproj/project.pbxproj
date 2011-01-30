@@ -105,6 +105,8 @@
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
 		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
+		55C952D612F5331700B1E546 /* SKSite+Caching.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C952D412F5331700B1E546 /* SKSite+Caching.h */; };
+		55C952D712F5331700B1E546 /* SKSite+Caching.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C952D512F5331700B1E546 /* SKSite+Caching.m */; };
 		55E5BB7A12F1133500092A8D /* SKSite+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BB7912F1133500092A8D /* SKSite+Private.m */; };
 		55E5BBED12F27D1200092A8D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E5BBEC12F27D1200092A8D /* CoreData.framework */; };
 		55E5BBFA12F283B700092A8D /* SKUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BBF812F283B700092A8D /* SKUser+Private.h */; };
@@ -323,6 +325,8 @@
 		55C2410D116ADF71009064EE /* SKUserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserActivity.m; sourceTree = "<group>"; };
 		55C24144116AF72E009064EE /* SKUserActivityTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserActivityTest.h; sourceTree = "<group>"; };
 		55C24145116AF72E009064EE /* SKUserActivityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserActivityTest.m; sourceTree = "<group>"; };
+		55C952D412F5331700B1E546 /* SKSite+Caching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Caching.h"; sourceTree = "<group>"; };
+		55C952D512F5331700B1E546 /* SKSite+Caching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKSite+Caching.m"; sourceTree = "<group>"; };
 		55E5BB7912F1133500092A8D /* SKSite+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKSite+Private.m"; sourceTree = "<group>"; };
 		55E5BBEC12F27D1200092A8D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		55E5BBF812F283B700092A8D /* SKUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKUser+Private.h"; sourceTree = "<group>"; };
@@ -764,6 +768,8 @@
 				558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */,
 				55A2E55A110E513E0038E510 /* SKSite+Private.h */,
 				55E5BB7912F1133500092A8D /* SKSite+Private.m */,
+				55C952D412F5331700B1E546 /* SKSite+Caching.h */,
+				55C952D512F5331700B1E546 /* SKSite+Caching.m */,
 			);
 			name = Site;
 			sourceTree = "<group>";
@@ -958,6 +964,7 @@
 				55E5BD3612F3E0AB00092A8D /* SKAnswer+Private.h in Headers */,
 				55E5BD3A12F3E11E00092A8D /* SKAnswer.h in Headers */,
 				55E5BD7612F3F6BE00092A8D /* SKObject.h in Headers */,
+				55C952D612F5331700B1E546 /* SKSite+Caching.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,6 +1172,7 @@
 				55E5BD3712F3E0AB00092A8D /* SKAnswer+Private.m in Sources */,
 				55E5BD3B12F3E11E00092A8D /* SKAnswer.m in Sources */,
 				55E5BD7712F3F6BE00092A8D /* SKObject.m in Sources */,
+				55C952D712F5331700B1E546 /* SKSite+Caching.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1246,7 +1254,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -1260,7 +1268,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};

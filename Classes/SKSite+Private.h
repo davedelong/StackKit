@@ -34,14 +34,16 @@ extern NSArray *_skKnownSites;
 
 @interface SKSite ()
 
-/**- (void) cacheUser:(SKUser *)newUser;
-- (void) cacheTag:(SKTag *)newTag;
-- (void) cachePost:(SKPost *)newPost;
-- (void) cacheBadge:(SKBadge *)newBadge;**/
-
 - (void) asynchronousStatistics;
 - (NSDictionary *) statisticsWithError:(NSError **)error;
 
-- (void) mergeInformationFromDicitonary:(NSDictionary *)dictionary;
+- (NSManagedObjectContext *) managedObjectContext;
 
 @end
+
+@interface SKSite (Private)
+
+- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary;
+
+@end
+

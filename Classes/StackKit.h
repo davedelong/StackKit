@@ -23,28 +23,6 @@
  THE SOFTWARE.
  **/
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
-#ifndef StackKitMobile
-#define StackKitMobile 
-#endif
-
-#else
-
-#ifndef StackKitMac
-#define StackKitMac 
-#endif
-
-#endif
-
-#ifdef StackKitMobile
-#import <UIKit/UIKit.h>
-#define SKColor UIColor
-#else
-#import <Cocoa/Cocoa.h>
-#define SKColor NSColor
-#endif
-
 #import "SKObject.h"
 
 #import "SKFetchRequest.h"

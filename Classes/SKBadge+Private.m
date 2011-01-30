@@ -47,6 +47,10 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 	return @"badges";
 }
 
++ (NSString *) uniqueIDKey {
+	return SKBadgeID;
+}
+
 + (NSDictionary *) APIAttributeToPropertyMapping {
 	static NSDictionary * _kSKBadgeMappings = nil;
 	if (_kSKBadgeMappings == nil) {

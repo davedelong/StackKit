@@ -28,7 +28,15 @@
 #endif
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-#define StackKitMobile 1
+
+#define StackKitMobile 
+#import <UIKit/UIKit.h>
+#define SKColor UIColor
+
 #else
-#define StackKitMac 1
+
+#define StackKitMac 
+#import <Cocoa/Cocoa.h>
+#define SKColor NSColor
+
 #endif

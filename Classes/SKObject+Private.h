@@ -43,7 +43,8 @@
 #pragma mark Class methods that should be overriden by subclasses
 // used to help valueForKey: out so that we can request properties via the constants (SKQuestionID vs @"questionID", for example)
 + (NSDictionary *) APIAttributeToPropertyMapping;
-// the key used to extract information from the JSON response
+// keys used to extract information from the JSON response
 + (NSString *) dataKey;
++ (NSString *) uniqueIDKey;
 
 @end

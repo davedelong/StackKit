@@ -30,6 +30,10 @@
 	return @"tags";
 }
 
++ (NSString *) uniqueIDKey {
+	return SKTagName;
+}
+
 - (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {
 	[self setName:[dictionary objectForKey:SKTagName]];
 	[self setNumberOfTaggedQuestions:[dictionary objectForKey:SKTagCount]];

@@ -39,6 +39,7 @@ NSString * const SKSiteAPIKey = @"key";
 @synthesize siteURL;
 @synthesize logoURL;
 @synthesize iconURL;
+@synthesize aliases;
 @synthesize summary;
 @synthesize state;
 @synthesize linkColor;
@@ -50,7 +51,7 @@ NSString * const SKSiteAPIKey = @"key";
 	[fetchLock lock];
 	NSArray *sites = _skKnownSites;
 	[fetchLock unlock];
-	return _skKnownSites;
+	return sites;
 }
 
 #pragma mark -

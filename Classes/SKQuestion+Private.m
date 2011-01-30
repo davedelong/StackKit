@@ -28,6 +28,10 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 	return @"questions";
 }
 
++ (NSString *) uniqueIDKey {
+	return SKQuestionID;
+}
+
 - (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {
 	[super mergeInformationFromDictionary:dictionary];
 	

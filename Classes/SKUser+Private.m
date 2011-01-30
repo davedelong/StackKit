@@ -121,4 +121,8 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 	return @"users";
 }
 
++ (NSString *) uniqueIDKey {
+	return SKUserID;
+}
+
 @end
