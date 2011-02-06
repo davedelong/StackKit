@@ -92,3 +92,7 @@ typedef enum {
 #ifndef SK_ENTERROR
 #define SK_ENTERROR(o,...) [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidEntity userInfo:SK_EREASON(o, ##__VA_ARGS__)]
 #endif
+
+#ifndef SK_GETTER
+#define SK_GETTER(t,n) -(t) n { return [self valueForKey:@"n"]; }
+#endif

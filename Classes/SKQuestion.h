@@ -13,13 +13,13 @@
 {
 }
 
-@property (nonatomic, retain, readonly) NSDate * closeDate;
-@property (nonatomic, retain, readonly) NSNumber * bountyAmount;
-@property (nonatomic, retain, readonly) NSDate * bountyCloseDate;
-@property (nonatomic, retain, readonly) NSString * closeReason;
-@property (nonatomic, retain, readonly) NSNumber * favoriteCount;
-@property (nonatomic, retain, readonly) NSSet* answers;
-@property (nonatomic, retain, readonly) NSSet* tags;
+@property (nonatomic, readonly) NSDate * closeDate;
+@property (nonatomic, readonly) NSNumber * bountyAmount;
+@property (nonatomic, readonly) NSDate * bountyCloseDate;
+@property (nonatomic, readonly) NSString * closeReason;
+@property (nonatomic, readonly) NSNumber * favoriteCount;
+@property (nonatomic, readonly) NSSet* answers;
+@property (nonatomic, readonly) NSSet* tags;
 
 @end
 

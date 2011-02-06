@@ -7,9 +7,12 @@
 //
 
 #import "SKPost.h"
+#import "SKConstants_Internal.h"
 
-#import "SKUser.h"
-#import "SKUserActivity.h"
+NSString * const SKPostCreationDate = __SKPostCreationDate;
+NSString * const SKPostOwner = __SKPostOwner;
+NSString * const SKPostBody = __SKPostBody;
+NSString * const SKPostScore = __SKPostScore;
 
 @implementation SKPost 
 

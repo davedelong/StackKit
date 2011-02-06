@@ -15,16 +15,16 @@
 @dynamic accepted;
 @dynamic question;
 
-+ (NSString *) dataKey {
++ (NSString *) apiResponseDataKey {
 	return @"answers";
 }
 
-+ (NSString *) uniqueIDKey {
++ (NSString *) apiResponseUniqueIDKey {
 	return SKAnswerID;
 }
 
-- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {
-	[super mergeInformationFromDictionary:dictionary];
+- (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary {
+	[super mergeInformationFromAPIResponseDictionary:dictionary];
 	[self setAccepted:[dictionary objectForKey:SKAnswerIsAccepted]];
 	
 	//TODO: set question

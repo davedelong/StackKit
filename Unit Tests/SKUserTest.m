@@ -34,7 +34,7 @@
 - (void) testUserAPICall {
 	SKSite * site = [SKSite stackOverflowSite];
 	
-	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
+	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
 	
@@ -46,16 +46,13 @@
 	STAssertEqualObjects([davedelong displayName], @"Dave DeLong", @"incorrect user displayName");
 	STAssertEqualObjects([davedelong userID], [NSNumber numberWithInt:115730], @"incorrect user id");
 	
-	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
-	STAssertEqualObjects(davedelong, test, @"user does not match itself");
-	
 	STAssertTrue([[davedelong acceptRate] floatValue] > 0.0f, @"accept rate should be greater than 0");
 }
 
 - (void) testMultipleUsersAPICall {
 	SKSite * site = [SKSite stackOverflowSite];
 	
-	SKFetchRequest * request = [[SKFetchRequest alloc] initWithSite:site];
+	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSArray arrayWithObjects:[NSNumber numberWithInt:115730],[NSNumber numberWithInt:382190],nil]]];
 	
@@ -70,10 +67,6 @@
 	SKUser * tonklon = [results objectAtIndex:1];
 	STAssertEqualObjects([tonklon displayName], @"tonklon", @"incorrect user displayName");
 	STAssertEqualObjects([tonklon userID], [NSNumber numberWithInt:382190], @"incorrect user id");
-	
-	
-	SKUser * test = [site userWithID:[NSNumber numberWithInt:115730]];
-	STAssertEqualObjects(davedelong, test, @"user does not match itself");
 	
 	STAssertTrue([[davedelong acceptRate] floatValue] > 0.0f, @"accept rate should be greater than 0");
 }
@@ -171,7 +164,7 @@
 	
 	for (NSDictionary * top in favoriteCounts) {
 		SKUser * user = [userMapping objectForKey:[top objectForKey:@"user"]];
-		NSLog(@"%02d - %@ [%@]", [[top objectForKey:@"count"] unsignedIntegerValue], [user displayName], [user userID]);
+		NSLog(@"%02lu - %@ [%@]", [[top objectForKey:@"count"] unsignedIntegerValue], [user displayName], [user userID]);
 	}
 }
 

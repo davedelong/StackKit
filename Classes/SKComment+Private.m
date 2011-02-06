@@ -19,11 +19,11 @@ NSString * const SKCommentPostType = @"post_type";
 @dynamic post;
 @dynamic directedToUser;
 
-+ (NSString *) dataKey {
++ (NSString *) apiResponseDataKey {
 	return @"comments";
 }
 
-+ (NSString *) uniqueIDKey {
++ (NSString *) apiResponseUniqueIDKey {
 	return SKCommentID;
 }
 
@@ -39,8 +39,8 @@ NSString * const SKCommentPostType = @"post_type";
 	return dictionary;
 }
 
-- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {
-	[super mergeInformationFromDictionary:dictionary];
+- (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary {
+	[super mergeInformationFromAPIResponseDictionary:dictionary];
 	[self setEditCount:[dictionary objectForKey:SKCommentEditCount]];
 
 	//TODO: post and inReplyTo:

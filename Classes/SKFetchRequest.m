@@ -168,7 +168,7 @@ cleanup:
 	}
 	
 	//pull out the data container
-	NSString * dataKey = [[self entity] dataKey];
+	NSString * dataKey = [[self entity] apiResponseDataKey];
 	id dataObject = [responseObjects objectForKey:dataKey];
 	
 	NSMutableArray * objects = [[NSMutableArray alloc] init];	

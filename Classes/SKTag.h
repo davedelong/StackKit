@@ -9,15 +9,20 @@
 #import <CoreData/CoreData.h>
 #import "SKObject.h"
 
-@class SKQuestion;
+extern NSString * const SKTagName;
+extern NSString * const SKTagCount;
+extern NSString * const SKTagsParticipatedInByUser;
 
-@interface SKTag :  SKObject  
+extern NSString * const SKTagNumberOfTaggedQuestions;
+extern NSString * const SKTagLastUsedDate;
+
+@interface SKTag : SKObject  
 {
 }
 
-@property (nonatomic, retain, readonly) NSString * name;
-@property (nonatomic, retain, readonly) NSNumber * numberOfTaggedQuestions;
-@property (nonatomic, retain, readonly) NSSet* questions;
+@property (nonatomic, readonly) NSString * name;
+@property (nonatomic, readonly) NSNumber * numberOfTaggedQuestions;
+@property (nonatomic, readonly) NSSet* questions;
 
 @end
 

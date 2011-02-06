@@ -11,10 +11,10 @@
 
 @implementation SKSite (Caching)
 
-- (NSCache *) cacheForClass:(Class)aClass {
-	NSCache *objectCache = [cache objectForKey:NSStringFromClass(aClass)];
+- (SKCache *) cacheForClass:(Class)aClass {
+	SKCache *objectCache = [cache objectForKey:NSStringFromClass(aClass)];
 	if (objectCache == nil) {
-		objectCache = [[NSCache alloc] init];
+		objectCache = [[SKCache alloc] init];
 		[cache setObject:objectCache forKey:NSStringFromClass(aClass)];
 		[objectCache release];
 	}

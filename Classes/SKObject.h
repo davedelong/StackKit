@@ -10,7 +10,7 @@
 
 @class SKSite;
 
-@interface SKObject :  NSManagedObject  
+@interface SKObject : NSManagedObject  
 {
 }
 

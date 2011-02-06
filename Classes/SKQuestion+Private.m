@@ -8,8 +8,8 @@
 
 #import "SKQuestion+Private.h"
 #import "SKObject+Private.h"
-#import "SKQuestion+Public.h"
-#import "SKTag+Public.h"
+#import "SKQuestion.h"
+#import "SKTag.h"
 
 NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
@@ -24,16 +24,16 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 @dynamic answers;
 @dynamic tags;
 
-+ (NSString *) dataKey {
++ (NSString *) apiResponseDataKey {
 	return @"questions";
 }
 
-+ (NSString *) uniqueIDKey {
++ (NSString *) apiResponseUniqueIDKey {
 	return SKQuestionID;
 }
 
-- (void) mergeInformationFromDictionary:(NSDictionary *)dictionary {
-	[super mergeInformationFromDictionary:dictionary];
+- (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary {
+	[super mergeInformationFromAPIResponseDictionary:dictionary];
 	
 	[self setCloseDate:[NSDate dateWithTimeIntervalSince1970:[[dictionary objectForKey:SKQuestionCloseDate] doubleValue]]];
 	[self setBountyAmount:[dictionary objectForKey:SKQuestionBountyAmount]];

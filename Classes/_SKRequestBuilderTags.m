@@ -24,7 +24,7 @@
  **/
 
 #import "_SKRequestBuilderTags.h"
-#import "SKTag+Public.h"
+#import "SKTag.h"
 
 @implementation _SKRequestBuilderTags
 

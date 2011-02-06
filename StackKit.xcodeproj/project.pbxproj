@@ -12,6 +12,10 @@
 		5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */; };
 		5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7EB11ACF12300C47C1B /* SKFunctions.h */; };
 		5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7EC11ACF12300C47C1B /* SKFunctions.m */; };
+		551E009D12F9137D00143DD3 /* SKCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 551E009B12F9137D00143DD3 /* SKCache.h */; };
+		551E009E12F9137D00143DD3 /* SKCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 551E009C12F9137D00143DD3 /* SKCache.m */; };
+		551EFFD512F62CD800143DD3 /* SKBadgeAward.h in Headers */ = {isa = PBXBuildFile; fileRef = 551EFFCF12F62CD800143DD3 /* SKBadgeAward.h */; };
+		551EFFD612F62CD800143DD3 /* SKBadgeAward.m in Sources */ = {isa = PBXBuildFile; fileRef = 551EFFD012F62CD800143DD3 /* SKBadgeAward.m */; };
 		5533A9A612D9A7E400F755F7 /* _SKConcreteRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533A9A412D9A7E400F755F7 /* _SKConcreteRequestBuilder.h */; };
 		5533A9A712D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */; };
 		5533A9F912DA419600F755F7 /* _SKRequestBuilderAnswersByID.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533A9F712DA419600F755F7 /* _SKRequestBuilderAnswersByID.h */; };
@@ -68,8 +72,8 @@
 		5533AAFD12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAFB12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m */; };
 		5547A6B511C8281000CE89E1 /* StackKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */; };
+		5559421A12FE2C29002A28BE /* SKObject+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5559421812FE2C23002A28BE /* SKObject+Private.h */; };
 		555E06E712ECAD7100172646 /* StackKit.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 555E06E612ECAD7100172646 /* StackKit.xcdatamodel */; };
-		555E06F212ECB85D00172646 /* SKObject+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 555E06F112ECB85D00172646 /* SKObject+Private.m */; };
 		5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */; };
 		5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E70F110EBAA60038E510 /* SKQuestionTest.m */; };
 		558333BF11B7668E00CA8D62 /* SKSiteDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,7 +82,6 @@
 		55A2E4F9110E3A0B0038E510 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		55A2E551110E4FE00038E510 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E550110E4FE00038E510 /* StackKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E55A110E513E0038E510 /* SKSite+Private.h */; settings = {ATTRIBUTES = (); }; };
-		55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E578110E53A10038E510 /* SKObject+Private.h */; settings = {ATTRIBUTES = (); }; };
 		55A2E5CD110E5EE00038E510 /* SKUserTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E5CB110E5EE00038E510 /* SKUserTest.h */; };
 		55A2E5CF110E5EE80038E510 /* SKUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E5CC110E5EE00038E510 /* SKUserTest.m */; };
 		55A2E60A110E623C0038E510 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E5FD110E623C0038E510 /* JSON.h */; };
@@ -109,28 +112,12 @@
 		55C952D712F5331700B1E546 /* SKSite+Caching.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C952D512F5331700B1E546 /* SKSite+Caching.m */; };
 		55E5BB7A12F1133500092A8D /* SKSite+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BB7912F1133500092A8D /* SKSite+Private.m */; };
 		55E5BBED12F27D1200092A8D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E5BBEC12F27D1200092A8D /* CoreData.framework */; };
-		55E5BBFA12F283B700092A8D /* SKUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BBF812F283B700092A8D /* SKUser+Private.h */; };
-		55E5BBFB12F283B700092A8D /* SKUser+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BBF912F283B700092A8D /* SKUser+Private.m */; };
-		55E5BBFE12F2847200092A8D /* SKUser+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BBFC12F2847200092A8D /* SKUser+Public.h */; };
-		55E5BBFF12F2847200092A8D /* SKUser+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BBFD12F2847200092A8D /* SKUser+Public.m */; };
 		55E5BC0412F284EB00092A8D /* SKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC0212F284EB00092A8D /* SKUser.h */; };
 		55E5BC0512F284EB00092A8D /* SKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC0312F284EB00092A8D /* SKUser.m */; };
-		55E5BC1E12F2910A00092A8D /* SKBadge+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC1C12F2910A00092A8D /* SKBadge+Public.h */; };
-		55E5BC1F12F2910A00092A8D /* SKBadge+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC1D12F2910A00092A8D /* SKBadge+Public.m */; };
-		55E5BC2212F2911700092A8D /* SKBadge+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC2012F2911700092A8D /* SKBadge+Private.h */; };
-		55E5BC2312F2911700092A8D /* SKBadge+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC2112F2911700092A8D /* SKBadge+Private.m */; };
 		55E5BC2612F291CC00092A8D /* SKBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC2412F291CC00092A8D /* SKBadge.h */; };
 		55E5BC2712F291CC00092A8D /* SKBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC2512F291CC00092A8D /* SKBadge.m */; };
-		55E5BC4012F29A2A00092A8D /* SKTag+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC3E12F29A2A00092A8D /* SKTag+Public.h */; };
-		55E5BC4112F29A2A00092A8D /* SKTag+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC3F12F29A2A00092A8D /* SKTag+Public.m */; };
-		55E5BC4412F29A3200092A8D /* SKTag+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC4212F29A3200092A8D /* SKTag+Private.h */; };
-		55E5BC4512F29A3200092A8D /* SKTag+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC4312F29A3200092A8D /* SKTag+Private.m */; };
 		55E5BC4C12F29D3B00092A8D /* SKTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC4A12F29D3B00092A8D /* SKTag.h */; };
 		55E5BC4D12F29D3B00092A8D /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC4B12F29D3B00092A8D /* SKTag.m */; };
-		55E5BC5A12F2A2A100092A8D /* SKPost+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC5812F2A2A100092A8D /* SKPost+Public.h */; };
-		55E5BC5B12F2A2A100092A8D /* SKPost+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC5912F2A2A100092A8D /* SKPost+Public.m */; };
-		55E5BC5E12F2A2A900092A8D /* SKPost+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC5C12F2A2A900092A8D /* SKPost+Private.h */; };
-		55E5BC5F12F2A2A900092A8D /* SKPost+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC5D12F2A2A900092A8D /* SKPost+Private.m */; };
 		55E5BC6412F2A40500092A8D /* SKPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC6212F2A40500092A8D /* SKPost.h */; };
 		55E5BC6512F2A40500092A8D /* SKPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC6312F2A40500092A8D /* SKPost.m */; };
 		55E5BC7012F2AAFF00092A8D /* SKComment+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC6E12F2AAFF00092A8D /* SKComment+Public.h */; };
@@ -139,10 +126,6 @@
 		55E5BC7512F2AB0800092A8D /* SKComment+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC7312F2AB0800092A8D /* SKComment+Private.m */; };
 		55E5BC7812F2AEBF00092A8D /* SKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC7612F2AEBF00092A8D /* SKComment.h */; };
 		55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC7712F2AEBF00092A8D /* SKComment.m */; };
-		55E5BCFA12F3D98300092A8D /* SKQAPost+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BCF812F3D98300092A8D /* SKQAPost+Public.h */; };
-		55E5BCFB12F3D98300092A8D /* SKQAPost+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BCF912F3D98300092A8D /* SKQAPost+Public.m */; };
-		55E5BCFE12F3D98B00092A8D /* SKQAPost+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BCFC12F3D98B00092A8D /* SKQAPost+Private.h */; };
-		55E5BCFF12F3D98B00092A8D /* SKQAPost+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BCFD12F3D98B00092A8D /* SKQAPost+Private.m */; };
 		55E5BD0612F3DAC000092A8D /* SKQAPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0412F3DAC000092A8D /* SKQAPost.h */; };
 		55E5BD0712F3DAC000092A8D /* SKQAPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD0512F3DAC000092A8D /* SKQAPost.m */; };
 		55E5BD0A12F3DC3A00092A8D /* SKQuestion+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */; };
@@ -224,6 +207,10 @@
 		5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDefinitions.m; sourceTree = "<group>"; };
 		5506C7EB11ACF12300C47C1B /* SKFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFunctions.h; sourceTree = "<group>"; };
 		5506C7EC11ACF12300C47C1B /* SKFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFunctions.m; sourceTree = "<group>"; };
+		551E009B12F9137D00143DD3 /* SKCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCache.h; sourceTree = "<group>"; };
+		551E009C12F9137D00143DD3 /* SKCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCache.m; sourceTree = "<group>"; };
+		551EFFCF12F62CD800143DD3 /* SKBadgeAward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadgeAward.h; sourceTree = "<group>"; };
+		551EFFD012F62CD800143DD3 /* SKBadgeAward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadgeAward.m; sourceTree = "<group>"; };
 		5533A9A412D9A7E400F755F7 /* _SKConcreteRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKConcreteRequestBuilder.h; sourceTree = "<group>"; };
 		5533A9A512D9A7E400F755F7 /* _SKConcreteRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKConcreteRequestBuilder.m; sourceTree = "<group>"; };
 		5533A9F712DA419600F755F7 /* _SKRequestBuilderAnswersByID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderAnswersByID.h; sourceTree = "<group>"; };
@@ -280,8 +267,8 @@
 		5533AAFB12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUserModerators.m; sourceTree = "<group>"; };
 		5547A6FD11C82F5F00CE89E1 /* SKCommentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCommentTest.h; sourceTree = "<group>"; };
 		5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCommentTest.m; sourceTree = "<group>"; };
+		5559421812FE2C23002A28BE /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
 		555E06E612ECAD7100172646 /* StackKit.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
-		555E06F112ECB85D00172646 /* SKObject+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKObject+Private.m"; sourceTree = "<group>"; };
 		5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants_Internal.h; sourceTree = "<group>"; };
 		558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteDelegate.h; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
@@ -290,7 +277,6 @@
 		55A2E4F5110E3A050038E510 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit Tests-Info.plist"; path = "Unit Tests/Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		55A2E550110E4FE00038E510 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
 		55A2E55A110E513E0038E510 /* SKSite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Private.h"; sourceTree = "<group>"; };
-		55A2E578110E53A10038E510 /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
 		55A2E5CB110E5EE00038E510 /* SKUserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserTest.h; sourceTree = "<group>"; };
 		55A2E5CC110E5EE00038E510 /* SKUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserTest.m; sourceTree = "<group>"; };
 		55A2E5FD110E623C0038E510 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -329,28 +315,12 @@
 		55C952D512F5331700B1E546 /* SKSite+Caching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKSite+Caching.m"; sourceTree = "<group>"; };
 		55E5BB7912F1133500092A8D /* SKSite+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKSite+Private.m"; sourceTree = "<group>"; };
 		55E5BBEC12F27D1200092A8D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		55E5BBF812F283B700092A8D /* SKUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKUser+Private.h"; sourceTree = "<group>"; };
-		55E5BBF912F283B700092A8D /* SKUser+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKUser+Private.m"; sourceTree = "<group>"; };
-		55E5BBFC12F2847200092A8D /* SKUser+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKUser+Public.h"; sourceTree = "<group>"; };
-		55E5BBFD12F2847200092A8D /* SKUser+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKUser+Public.m"; sourceTree = "<group>"; };
 		55E5BC0212F284EB00092A8D /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
 		55E5BC0312F284EB00092A8D /* SKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUser.m; sourceTree = "<group>"; };
-		55E5BC1C12F2910A00092A8D /* SKBadge+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKBadge+Public.h"; sourceTree = "<group>"; };
-		55E5BC1D12F2910A00092A8D /* SKBadge+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKBadge+Public.m"; sourceTree = "<group>"; };
-		55E5BC2012F2911700092A8D /* SKBadge+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKBadge+Private.h"; sourceTree = "<group>"; };
-		55E5BC2112F2911700092A8D /* SKBadge+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKBadge+Private.m"; sourceTree = "<group>"; };
 		55E5BC2412F291CC00092A8D /* SKBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadge.h; sourceTree = "<group>"; };
 		55E5BC2512F291CC00092A8D /* SKBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadge.m; sourceTree = "<group>"; };
-		55E5BC3E12F29A2A00092A8D /* SKTag+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKTag+Public.h"; sourceTree = "<group>"; };
-		55E5BC3F12F29A2A00092A8D /* SKTag+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKTag+Public.m"; sourceTree = "<group>"; };
-		55E5BC4212F29A3200092A8D /* SKTag+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKTag+Private.h"; sourceTree = "<group>"; };
-		55E5BC4312F29A3200092A8D /* SKTag+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKTag+Private.m"; sourceTree = "<group>"; };
 		55E5BC4A12F29D3B00092A8D /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
 		55E5BC4B12F29D3B00092A8D /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
-		55E5BC5812F2A2A100092A8D /* SKPost+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKPost+Public.h"; sourceTree = "<group>"; };
-		55E5BC5912F2A2A100092A8D /* SKPost+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKPost+Public.m"; sourceTree = "<group>"; };
-		55E5BC5C12F2A2A900092A8D /* SKPost+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKPost+Private.h"; sourceTree = "<group>"; };
-		55E5BC5D12F2A2A900092A8D /* SKPost+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKPost+Private.m"; sourceTree = "<group>"; };
 		55E5BC6212F2A40500092A8D /* SKPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPost.h; sourceTree = "<group>"; };
 		55E5BC6312F2A40500092A8D /* SKPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPost.m; sourceTree = "<group>"; };
 		55E5BC6E12F2AAFF00092A8D /* SKComment+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKComment+Public.h"; sourceTree = "<group>"; };
@@ -359,10 +329,6 @@
 		55E5BC7312F2AB0800092A8D /* SKComment+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKComment+Private.m"; sourceTree = "<group>"; };
 		55E5BC7612F2AEBF00092A8D /* SKComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKComment.h; sourceTree = "<group>"; };
 		55E5BC7712F2AEBF00092A8D /* SKComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKComment.m; sourceTree = "<group>"; };
-		55E5BCF812F3D98300092A8D /* SKQAPost+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQAPost+Public.h"; sourceTree = "<group>"; };
-		55E5BCF912F3D98300092A8D /* SKQAPost+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQAPost+Public.m"; sourceTree = "<group>"; };
-		55E5BCFC12F3D98B00092A8D /* SKQAPost+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQAPost+Private.h"; sourceTree = "<group>"; };
-		55E5BCFD12F3D98B00092A8D /* SKQAPost+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQAPost+Private.m"; sourceTree = "<group>"; };
 		55E5BD0412F3DAC000092A8D /* SKQAPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQAPost.h; sourceTree = "<group>"; };
 		55E5BD0512F3DAC000092A8D /* SKQAPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQAPost.m; sourceTree = "<group>"; };
 		55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQuestion+Public.h"; sourceTree = "<group>"; };
@@ -480,9 +446,9 @@
 			children = (
 				55A2E550110E4FE00038E510 /* StackKit.h */,
 				55A2E6BD110EB2170038E510 /* StackKit_Internal.h */,
-				55C23E32116A8FC6009064EE /* Constants */,
 				55C23E2D116A8FA4009064EE /* Object Base */,
 				55C23E2E116A8FAC009064EE /* Site */,
+				55C23E32116A8FC6009064EE /* Constants */,
 				55C23E2C116A8F9E009064EE /* Fetch Request */,
 				D21D402711BAB4DF00D5AD93 /* Callbacks */,
 				55C23E2F116A8FB4009064EE /* User */,
@@ -527,10 +493,6 @@
 			children = (
 				55E5BD0412F3DAC000092A8D /* SKQAPost.h */,
 				55E5BD0512F3DAC000092A8D /* SKQAPost.m */,
-				55E5BCF812F3D98300092A8D /* SKQAPost+Public.h */,
-				55E5BCF912F3D98300092A8D /* SKQAPost+Public.m */,
-				55E5BCFC12F3D98B00092A8D /* SKQAPost+Private.h */,
-				55E5BCFD12F3D98B00092A8D /* SKQAPost+Private.m */,
 				55E5BCF612F3D96100092A8D /* Questions */,
 				55E5BCF712F3D96600092A8D /* Answers */,
 			);
@@ -687,10 +649,6 @@
 			children = (
 				55E5BC6212F2A40500092A8D /* SKPost.h */,
 				55E5BC6312F2A40500092A8D /* SKPost.m */,
-				55E5BC5812F2A2A100092A8D /* SKPost+Public.h */,
-				55E5BC5912F2A2A100092A8D /* SKPost+Public.m */,
-				55E5BC5C12F2A2A900092A8D /* SKPost+Private.h */,
-				55E5BC5D12F2A2A900092A8D /* SKPost+Private.m */,
 				5506C81E11ADE12800C47C1B /* Q&A */,
 				5506C81F11ADE13100C47C1B /* Comments */,
 			);
@@ -753,8 +711,7 @@
 			children = (
 				55E5BD7412F3F6BE00092A8D /* SKObject.h */,
 				55E5BD7512F3F6BE00092A8D /* SKObject.m */,
-				55A2E578110E53A10038E510 /* SKObject+Private.h */,
-				555E06F112ECB85D00172646 /* SKObject+Private.m */,
+				5559421812FE2C23002A28BE /* SKObject+Private.h */,
 				555E06E612ECAD7100172646 /* StackKit.xcdatamodel */,
 			);
 			name = "Object Base";
@@ -770,6 +727,8 @@
 				55E5BB7912F1133500092A8D /* SKSite+Private.m */,
 				55C952D412F5331700B1E546 /* SKSite+Caching.h */,
 				55C952D512F5331700B1E546 /* SKSite+Caching.m */,
+				551E009B12F9137D00143DD3 /* SKCache.h */,
+				551E009C12F9137D00143DD3 /* SKCache.m */,
 			);
 			name = Site;
 			sourceTree = "<group>";
@@ -779,10 +738,6 @@
 			children = (
 				55E5BC0212F284EB00092A8D /* SKUser.h */,
 				55E5BC0312F284EB00092A8D /* SKUser.m */,
-				55E5BBFC12F2847200092A8D /* SKUser+Public.h */,
-				55E5BBFD12F2847200092A8D /* SKUser+Public.m */,
-				55E5BBF812F283B700092A8D /* SKUser+Private.h */,
-				55E5BBF912F283B700092A8D /* SKUser+Private.m */,
 				55C2410C116ADF71009064EE /* SKUserActivity.h */,
 				55C2410D116ADF71009064EE /* SKUserActivity.m */,
 			);
@@ -794,10 +749,6 @@
 			children = (
 				55E5BC4A12F29D3B00092A8D /* SKTag.h */,
 				55E5BC4B12F29D3B00092A8D /* SKTag.m */,
-				55E5BC3E12F29A2A00092A8D /* SKTag+Public.h */,
-				55E5BC3F12F29A2A00092A8D /* SKTag+Public.m */,
-				55E5BC4212F29A3200092A8D /* SKTag+Private.h */,
-				55E5BC4312F29A3200092A8D /* SKTag+Private.m */,
 			);
 			name = Tag;
 			sourceTree = "<group>";
@@ -807,10 +758,8 @@
 			children = (
 				55E5BC2412F291CC00092A8D /* SKBadge.h */,
 				55E5BC2512F291CC00092A8D /* SKBadge.m */,
-				55E5BC1C12F2910A00092A8D /* SKBadge+Public.h */,
-				55E5BC1D12F2910A00092A8D /* SKBadge+Public.m */,
-				55E5BC2012F2911700092A8D /* SKBadge+Private.h */,
-				55E5BC2112F2911700092A8D /* SKBadge+Private.m */,
+				551EFFCF12F62CD800143DD3 /* SKBadgeAward.h */,
+				551EFFD012F62CD800143DD3 /* SKBadgeAward.m */,
 			);
 			name = Badge;
 			sourceTree = "<group>";
@@ -884,7 +833,6 @@
 				55A2E4E2110E36550038E510 /* SKSite.h in Headers */,
 				55A2E551110E4FE00038E510 /* StackKit.h in Headers */,
 				55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */,
-				55A2E579110E53A10038E510 /* SKObject+Private.h in Headers */,
 				55A2E5CD110E5EE00038E510 /* SKUserTest.h in Headers */,
 				55A2E60A110E623C0038E510 /* JSON.h in Headers */,
 				55A2E60B110E623C0038E510 /* SKJSON.h in Headers */,
@@ -939,23 +887,13 @@
 				5533AAFC12DAB68A00F755F7 /* _SKRequestBuilderUserModerators.h in Headers */,
 				55FADE1812E3F25D00CFA69E /* NSString+SKAdditions.h in Headers */,
 				55FADE1C12E3F43B00CFA69E /* NSNumber+SKAdditions.h in Headers */,
-				55E5BBFA12F283B700092A8D /* SKUser+Private.h in Headers */,
-				55E5BBFE12F2847200092A8D /* SKUser+Public.h in Headers */,
 				55E5BC0412F284EB00092A8D /* SKUser.h in Headers */,
-				55E5BC1E12F2910A00092A8D /* SKBadge+Public.h in Headers */,
-				55E5BC2212F2911700092A8D /* SKBadge+Private.h in Headers */,
 				55E5BC2612F291CC00092A8D /* SKBadge.h in Headers */,
-				55E5BC4012F29A2A00092A8D /* SKTag+Public.h in Headers */,
-				55E5BC4412F29A3200092A8D /* SKTag+Private.h in Headers */,
 				55E5BC4C12F29D3B00092A8D /* SKTag.h in Headers */,
-				55E5BC5A12F2A2A100092A8D /* SKPost+Public.h in Headers */,
-				55E5BC5E12F2A2A900092A8D /* SKPost+Private.h in Headers */,
 				55E5BC6412F2A40500092A8D /* SKPost.h in Headers */,
 				55E5BC7012F2AAFF00092A8D /* SKComment+Public.h in Headers */,
 				55E5BC7412F2AB0800092A8D /* SKComment+Private.h in Headers */,
 				55E5BC7812F2AEBF00092A8D /* SKComment.h in Headers */,
-				55E5BCFA12F3D98300092A8D /* SKQAPost+Public.h in Headers */,
-				55E5BCFE12F3D98B00092A8D /* SKQAPost+Private.h in Headers */,
 				55E5BD0612F3DAC000092A8D /* SKQAPost.h in Headers */,
 				55E5BD0A12F3DC3A00092A8D /* SKQuestion+Public.h in Headers */,
 				55E5BD0E12F3DC4B00092A8D /* SKQuestion+Private.h in Headers */,
@@ -965,6 +903,9 @@
 				55E5BD3A12F3E11E00092A8D /* SKAnswer.h in Headers */,
 				55E5BD7612F3F6BE00092A8D /* SKObject.h in Headers */,
 				55C952D612F5331700B1E546 /* SKSite+Caching.h in Headers */,
+				551EFFD512F62CD800143DD3 /* SKBadgeAward.h in Headers */,
+				551E009D12F9137D00143DD3 /* SKCache.h in Headers */,
+				5559421A12FE2C29002A28BE /* SKObject+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,25 +1086,14 @@
 				55FADE1912E3F25D00CFA69E /* NSString+SKAdditions.m in Sources */,
 				55FADE1D12E3F43B00CFA69E /* NSNumber+SKAdditions.m in Sources */,
 				555E06E712ECAD7100172646 /* StackKit.xcdatamodel in Sources */,
-				555E06F212ECB85D00172646 /* SKObject+Private.m in Sources */,
 				55E5BB7A12F1133500092A8D /* SKSite+Private.m in Sources */,
-				55E5BBFB12F283B700092A8D /* SKUser+Private.m in Sources */,
-				55E5BBFF12F2847200092A8D /* SKUser+Public.m in Sources */,
 				55E5BC0512F284EB00092A8D /* SKUser.m in Sources */,
-				55E5BC1F12F2910A00092A8D /* SKBadge+Public.m in Sources */,
-				55E5BC2312F2911700092A8D /* SKBadge+Private.m in Sources */,
 				55E5BC2712F291CC00092A8D /* SKBadge.m in Sources */,
-				55E5BC4112F29A2A00092A8D /* SKTag+Public.m in Sources */,
-				55E5BC4512F29A3200092A8D /* SKTag+Private.m in Sources */,
 				55E5BC4D12F29D3B00092A8D /* SKTag.m in Sources */,
-				55E5BC5B12F2A2A100092A8D /* SKPost+Public.m in Sources */,
-				55E5BC5F12F2A2A900092A8D /* SKPost+Private.m in Sources */,
 				55E5BC6512F2A40500092A8D /* SKPost.m in Sources */,
 				55E5BC7112F2AAFF00092A8D /* SKComment+Public.m in Sources */,
 				55E5BC7512F2AB0800092A8D /* SKComment+Private.m in Sources */,
 				55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */,
-				55E5BCFB12F3D98300092A8D /* SKQAPost+Public.m in Sources */,
-				55E5BCFF12F3D98B00092A8D /* SKQAPost+Private.m in Sources */,
 				55E5BD0712F3DAC000092A8D /* SKQAPost.m in Sources */,
 				55E5BD0B12F3DC3A00092A8D /* SKQuestion+Public.m in Sources */,
 				55E5BD0F12F3DC4B00092A8D /* SKQuestion+Private.m in Sources */,
@@ -1173,6 +1103,8 @@
 				55E5BD3B12F3E11E00092A8D /* SKAnswer.m in Sources */,
 				55E5BD7712F3F6BE00092A8D /* SKObject.m in Sources */,
 				55C952D712F5331700B1E546 /* SKSite+Caching.m in Sources */,
+				551EFFD612F62CD800143DD3 /* SKBadgeAward.m in Sources */,
+				551E009E12F9137D00143DD3 /* SKCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1330,7 +1262,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				GCC_PREFIX_HEADER = "Other Sources/StackKit_Prefix.pch";
 				INFOPLIST_FILE = "Unit Tests/Unit Tests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
@@ -1356,7 +1288,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				GCC_PREFIX_HEADER = "Other Sources/StackKit_Prefix.pch";
 				INFOPLIST_FILE = "Unit Tests/Unit Tests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (

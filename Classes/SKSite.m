@@ -25,6 +25,7 @@
 
 #import "StackKit_Internal.h"
 #import "SKSite+Private.h"
+#import "SKSite+Caching.h"
 
 NSString * const SKSiteAPIKey = @"key";
 
@@ -349,7 +350,24 @@ NSString * const SKSiteAPIKey = @"key";
     managedObjectContext = [[NSManagedObjectContext alloc] init];
     [managedObjectContext setPersistentStoreCoordinator: coordinator];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextWillSave:) name:NSManagedObjectContextWillSaveNotification object:managedObjectContext];
+	
     return managedObjectContext;
+}
+
+- (void) contextWillSave:(NSNotification *)notification {
+	NSMutableArray *objectIDs = [NSMutableArray array];
+	for (NSString *entityName in cache) {
+		SKCache *entityCache = [cache objectForKey:entityName];
+		[objectIDs addObjectsFromArray:[entityCache allObjects]];
+	}
+	[objectIDs filterUsingPredicate:[NSPredicate predicateWithFormat:@"isTemporaryID = YES"]];
+	
+	NSError *error = nil;
+	[[self managedObjectContext] obtainPermanentIDsForObjects:objectIDs error:&error];
+	if (error != nil) {
+		NSLog(@"error retrieving permanent ids: %@", error);
+	}
 }
 
 @end

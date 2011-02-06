@@ -32,31 +32,15 @@
 #import "SKSite.h"
 #import "SKSiteDelegate.h"
 
+#import "SKObject.h"
 #import "SKUser.h"
-#import "SKUser+Public.h"
-
 #import "SKTag.h"
-#import "SKTag+Public.h"
-
 #import "SKBadge.h"
-#import "SKBadge+Public.h"
-
 #import "SKUserActivity.h"
-
 #import "SKPost.h"
-#import "SKPost+Public.h"
-
 #import "SKQAPost.h"
-#import "SKQAPost+Public.h"
-
 #import "SKQuestion.h"
-#import "SKQuestion+Public.h"
-
 #import "SKAnswer.h"
-#import "SKAnswer+Public.h"
-
 #import "SKComment.h"
-#import "SKComment+Public.h"
-
 #import "SKConstants.h"
 #import "SKDefinitions.h"

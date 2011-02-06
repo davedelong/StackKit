@@ -7,8 +7,14 @@
 //
 
 #import "SKTag.h"
+#import "SKConstants_Internal.h"
 
-#import "SKQuestion.h"
+NSString * const SKTagName = @"name";
+NSString * const SKTagCount = @"count";
+NSString * const SKTagsParticipatedInByUser = __SKUserID;
+
+NSString * const SKTagNumberOfTaggedQuestions = @"tag_popular";
+NSString * const SKTagLastUsedDate = @"tag_activity";
 
 @implementation SKTag 
 

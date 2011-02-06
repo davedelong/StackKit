@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "SKSite.h"
+#import "SKCache.h"
 
 @interface SKSite (Caching)
 
-- (NSCache *) cacheForClass:(Class)aClass;
+- (SKCache *) cacheForClass:(Class)aClass;
 
 @end

@@ -15,8 +15,8 @@
 {
 }
 
-@property (nonatomic, retain, readonly) NSNumber * accepted;
-@property (nonatomic, retain, readonly) SKQuestion * question;
+@property (nonatomic, readonly) NSNumber * accepted;
+@property (nonatomic, readonly) SKQuestion * question;
 
 @end
 

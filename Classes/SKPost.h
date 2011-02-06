@@ -9,19 +9,23 @@
 #import <CoreData/CoreData.h>
 #import "SKObject.h"
 
-@class SKUser;
-@class SKUserActivity;
+extern NSString * const SKPostCreationDate;
+extern NSString * const SKPostOwner;
+extern NSString * const SKPostBody;
+extern NSString * const SKPostScore;
 
-@interface SKPost :  SKObject  
+@class SKUser;
+
+@interface SKPost : SKObject  
 {
 }
 
-@property (nonatomic, retain, readonly) NSString * body;
-@property (nonatomic, retain, readonly) NSDate * creationDate;
-@property (nonatomic, retain, readonly) NSNumber * score;
-@property (nonatomic, retain, readonly) NSNumber * postID;
-@property (nonatomic, retain, readonly) SKUser * owner;
-@property (nonatomic, retain, readonly) NSSet* postActivity;
+@property (nonatomic, readonly) NSString * body;
+@property (nonatomic, readonly) NSDate * creationDate;
+@property (nonatomic, readonly) NSNumber * score;
+@property (nonatomic, readonly) NSNumber * postID;
+@property (nonatomic, readonly) SKUser * owner;
+@property (nonatomic, readonly) NSSet* postActivity;
 
 @end
 

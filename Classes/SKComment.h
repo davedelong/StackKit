@@ -16,9 +16,9 @@
 {
 }
 
-@property (nonatomic, retain, readonly) NSNumber * editCount;
-@property (nonatomic, retain, readonly) SKQAPost * post;
-@property (nonatomic, retain, readonly) SKUser * directedToUser;
+@property (nonatomic, readonly) NSNumber * editCount;
+@property (nonatomic, readonly) SKQAPost * post;
+@property (nonatomic, readonly) SKUser * directedToUser;
 
 @end
 

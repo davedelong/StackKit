@@ -7,19 +7,34 @@
 //
 
 #import "SKQAPost.h"
+#import "SKConstants_Internal.h"
 
-#import "SKComment.h"
+//inherited
+NSString * const SKQAPostCreationDate = __SKPostCreationDate;
+NSString * const SKQAPostOwner = __SKPostOwner;
+NSString * const SKQAPostBody = __SKPostBody;
+NSString * const SKQAPostScore = __SKPostScore;
+
+NSString * const SKQAPostCommunityOwned = __SKQAPostCommunityOwned;
+NSString * const SKQAPostDownVotes = __SKQAPostDownVotes;
+NSString * const SKQAPostLastActivityDate = __SKQAPostLastActivityDate;
+NSString * const SKQAPostLastEditDate = __SKQAPostLastEditDate;
+NSString * const SKQAPostLockedDate = __SKQAPostLockedDate;
+NSString * const SKQAPostTitle = __SKQAPostTitle;
+NSString * const SKQAPostUpVotes = __SKQAPostUpVotes;
+NSString * const SKQAPostViewCount = __SKQAPostViewCount;
 
 @implementation SKQAPost 
 
-@dynamic upVotes;
-@dynamic title;
-@dynamic lastActivityDate;
-@dynamic lastEditDate;
-@dynamic downVotes;
-@dynamic lockedDate;
-@dynamic viewCount;
-@dynamic communityOwned;
-@dynamic comments;
+SK_GETTER(NSNumber *, communityOwned);
+SK_GETTER(NSNumber *, downVotes);
+SK_GETTER(NSDate *, lastActivityDate);
+SK_GETTER(NSDate *, lastEditDate);
+SK_GETTER(NSDate *, lockedDate);
+SK_GETTER(NSString *, title);
+SK_GETTER(NSNumber *, upVotes);
+SK_GETTER(NSNumber *, viewCount);
+
+SK_GETTER(NSSet*, comments);
 
 @end
