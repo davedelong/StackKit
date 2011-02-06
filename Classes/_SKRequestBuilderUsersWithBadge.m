@@ -24,7 +24,7 @@
  **/
 
 #import "_SKRequestBuilderUsersWithBadge.h"
-
+#import "SKUser.h"
 
 @implementation _SKRequestBuilderUsersWithBadge
 

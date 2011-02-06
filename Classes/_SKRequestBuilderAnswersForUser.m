@@ -24,7 +24,7 @@
  **/
 
 #import "_SKRequestBuilderAnswersForUser.h"
-#import "SKAnswer+Public.h"
+#import "SKAnswer.h"
 
 
 @implementation _SKRequestBuilderAnswersForUser

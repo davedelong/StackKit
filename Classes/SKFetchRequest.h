@@ -24,12 +24,12 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "SKObject.h"
 #import "SKFetchRequestDelegate.h"
 
 @class SKCallback;
+@class SKSite;
 
-@interface SKFetchRequest : SKObject {
+@interface SKFetchRequest : NSObject {
 	Class entity;
 	NSSortDescriptor * sortDescriptor;
 	NSUInteger fetchLimit;
@@ -42,9 +42,10 @@
 	NSURL * fetchURL;
 	
 	SKCallback *callback;
+    SKSite *site;
 }
 
-@property Class entity;
+@property (assign) Class entity;
 @property (retain) NSSortDescriptor * sortDescriptor;
 @property NSUInteger fetchLimit;
 @property NSUInteger fetchOffset;

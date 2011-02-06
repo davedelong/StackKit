@@ -24,7 +24,7 @@
  **/
 
 #import "_SKRequestBuilderCommentsForQuestion.h"
-#import "SKComment+Public.h"
+#import "SKComment.h"
 #import "SKQuestion.h"
 
 @implementation _SKRequestBuilderCommentsForQuestion

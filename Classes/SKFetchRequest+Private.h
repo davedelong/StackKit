@@ -25,11 +25,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class SKSite;
+
 @interface SKFetchRequest ()
+
 @property (retain) NSError * error;
 @property (retain) NSURL * fetchURL;
 
-- (NSMutableDictionary *) defaultQueryDictionary;
+- (void) setSite:(SKSite *)aSite;
+- (SKSite *) site;
 
 - (NSArray *) execute;
 - (void) executeAsynchronously;

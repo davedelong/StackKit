@@ -26,6 +26,7 @@ NSString * const SKUserUpVotes = @"up_vote_count";
 NSString * const SKUserDownVotes = @"down_vote_count";
 NSString * const SKUserType = @"user_type";
 NSString * const SKUserAcceptRate = @"accept_rate";
+NSString * const SKUserAssociationID = @"association_id";
 
 NSString * const SKUserQuestionCount = @"question_count";
 NSString * const SKUserAnswerCount = @"answer_count";

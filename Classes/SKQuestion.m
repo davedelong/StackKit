@@ -55,6 +55,7 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
     if (!mapping) {
         mapping = [[super APIAttributeToPropertyMapping] mutableCopy];
         [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                  @"postID", SKQuestionID, // inherited from SKPost
                                                                   @"closeDate", SKQuestionCloseDate,
                                                                   @"bountyAmount", SKQuestionBountyAmount,
                                                                   @"bountyCloseDate", SKQuestionBountyCloseDate,

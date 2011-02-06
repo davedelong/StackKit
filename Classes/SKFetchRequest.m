@@ -55,6 +55,7 @@ NSString * SKFetchTotalKey = @"total";
 }
 
 - (void) dealloc {
+    [site release];
 	[fetchTotal release];
 	[sortDescriptor release];
 	[predicate release];
@@ -64,11 +65,15 @@ NSString * SKFetchTotalKey = @"total";
 	[super dealloc];
 }
 
-- (NSMutableDictionary *) defaultQueryDictionary {
-	NSMutableDictionary * d = [NSMutableDictionary dictionary];
-	[d setObject:[[self site] apiKey] forKey:SKSiteAPIKey];
-	
-	return d;
+- (void) setSite:(SKSite *)aSite {
+    if (site != aSite) {
+        [site release];
+        site = [aSite retain];
+    }
+}
+
+- (SKSite *) site {
+    return site;
 }
 
 - (void) executeAsynchronously {
