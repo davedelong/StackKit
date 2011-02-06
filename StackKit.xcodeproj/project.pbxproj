@@ -99,7 +99,6 @@
 		55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E609110E623C0038E510 /* SKJsonWriter.m */; };
 		55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */; };
 		55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */; };
-		55A2E6BE110EB2170038E510 /* StackKit_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E6BD110EB2170038E510 /* StackKit_Internal.h */; };
 		55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E70E110EBAA60038E510 /* SKQuestionTest.h */; };
 		55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */; };
 		55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */; };
@@ -282,7 +281,6 @@
 		55A2E609110E623C0038E510 /* SKJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonWriter.m; sourceTree = "<group>"; };
 		55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+SKAdditions.h"; sourceTree = "<group>"; };
 		55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+SKAdditions.m"; sourceTree = "<group>"; };
-		55A2E6BD110EB2170038E510 /* StackKit_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Internal.h; sourceTree = "<group>"; };
 		55A2E70E110EBAA60038E510 /* SKQuestionTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestionTest.h; sourceTree = "<group>"; };
 		55A2E70F110EBAA60038E510 /* SKQuestionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestionTest.m; sourceTree = "<group>"; };
 		55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+SKAdditions.h"; sourceTree = "<group>"; };
@@ -421,7 +419,6 @@
 			isa = PBXGroup;
 			children = (
 				55A2E550110E4FE00038E510 /* StackKit.h */,
-				55A2E6BD110EB2170038E510 /* StackKit_Internal.h */,
 				55C23E2D116A8FA4009064EE /* Object Base */,
 				55C23E2E116A8FAC009064EE /* Site */,
 				55C23E32116A8FC6009064EE /* Constants */,
@@ -806,7 +803,6 @@
 				55A2E613110E623C0038E510 /* SKJsonParser.h in Headers */,
 				55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */,
 				55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */,
-				55A2E6BE110EB2170038E510 /* StackKit_Internal.h in Headers */,
 				55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */,
 				55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */,
 				55FA955E116132E3003A9CD7 /* SKFetchRequest.h in Headers */,
@@ -1134,6 +1130,7 @@
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1149,6 +1146,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

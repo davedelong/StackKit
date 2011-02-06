@@ -26,7 +26,6 @@
 #import "_SKRequestBuilderQuestionsByID.h"
 #import "SKQuestion.h"
 
-
 @implementation _SKRequestBuilderQuestionsByID
 
 + (Class) recognizedFetchEntity {

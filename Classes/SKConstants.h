@@ -28,6 +28,8 @@
 extern NSString * const SKAPIKey;
 extern NSString * const SKAPIVersion;
 
+extern NSUInteger const SKPageSizeLimitMax;
+
 #pragma mark -
 #pragma mark Statistics Keys
 extern NSString * const SKStatsTotalQuestions;

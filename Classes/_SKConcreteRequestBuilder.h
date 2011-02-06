@@ -24,7 +24,13 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "StackKit_Internal.h"
+#import "SKFetchRequest.h"
+#import "SKFetchRequest+Private.h"
+#import "SKDefinitions.h"
+#import "SKFunctions.h"
+#import "SKConstants.h"
+#import "NSPredicate+SKAdditions.h"
+#import "SKConstants_Internal.h"
 
 @interface _SKConcreteRequestBuilder : NSObject {
 	@private

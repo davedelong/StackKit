@@ -24,6 +24,8 @@
  **/
 
 #import "_SKConcreteRequestBuilder.h"
+#import "SKSite+Private.h"
+#import "NSDictionary+SKAdditions.h"
 
 @interface _SKConcreteRequestBuilder ()
 

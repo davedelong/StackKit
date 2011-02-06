@@ -23,7 +23,7 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit_Internal.h"
+#import "SKCallback.h"
 
 @implementation SKCallback
 @synthesize successSelector=_successSelector;
@@ -38,7 +38,8 @@
 }
 
 - (id) initWithCompletionHandler:(SKFetchRequestCompletionHandler)handler {
-	if (self = [super init]) {
+    self = [super init];
+	if (self) {
 		completionHandler = Block_copy(handler);
 	}
 	return self;
@@ -52,7 +53,8 @@
 
 - (id)initWithTarget:(id)target successSelector:(SEL)onSuccess failureSelector:(SEL)onFailure
 {
-	if(self = [super init]) {
+    self = [super init];
+	if(self) {
 		_target = [target retain];
 		_successSelector = onSuccess;
 		_failureSelector = onFailure;

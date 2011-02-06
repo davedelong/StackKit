@@ -24,7 +24,7 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "StackKit_Internal.h"
+#import "SKFetchRequest.h"
 
 @interface SKRequestBuilder : NSObject {
 	

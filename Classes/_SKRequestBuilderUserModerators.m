@@ -24,7 +24,7 @@
  **/
 
 #import "_SKRequestBuilderUserModerators.h"
-
+#import "SKUser.h"
 
 @implementation _SKRequestBuilderUserModerators
 

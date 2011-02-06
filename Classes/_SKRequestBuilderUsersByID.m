@@ -24,7 +24,7 @@
  **/
 
 #import "_SKRequestBuilderUsersByID.h"
-
+#import "SKUser.h"
 
 @implementation _SKRequestBuilderUsersByID
 

@@ -47,8 +47,8 @@
 
 @property (assign) Class entity;
 @property (retain) NSSortDescriptor * sortDescriptor;
-@property NSUInteger fetchLimit;
-@property NSUInteger fetchOffset;
+@property (assign) NSUInteger fetchLimit;
+@property (assign) NSUInteger fetchOffset;
 @property (readonly) NSNumber * fetchTotal;
 @property (retain) NSPredicate * predicate;
 @property (readonly, retain) NSError * error;

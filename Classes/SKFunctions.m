@@ -23,7 +23,15 @@
  THE SOFTWARE.
  **/
 
-#import "StackKit_Internal.h"
+#import "SKFunctions.h"
+#import "SKConstants.h"
+#import "SKDefinitions.h"
+#import "SKBadge.h"
+#import "SKAnswer.h"
+#import "SKQuestion.h"
+#import "SKComment.h"
+#import "SKUser.h"
+#import "SKTag.h"
 #import <objc/runtime.h>
 
 BOOL sk_classIsSubclassOfClass(Class aClass, Class targetSuper) {
@@ -70,11 +78,6 @@ void SKQLog(NSString *format, ...) {
 	printf("%s\n", [string UTF8String]);
 	[string release];
 	va_end(argList);
-}
-
-id SKInvalidPredicateErrorForFetchRequest(SKFetchRequest * request, NSDictionary * userInfo) {
-	[request setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidPredicate userInfo:userInfo]];
-	return nil;
 }
 
 BOOL SKIsVectorClass(id value) {
