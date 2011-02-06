@@ -8,6 +8,7 @@
 
 #import "SKPost.h"
 #import "SKConstants_Internal.h"
+#import "SKObject+Private.h"
 
 NSString * const SKPostCreationDate = __SKPostCreationDate;
 NSString * const SKPostOwner = __SKPostOwner;
@@ -22,5 +23,18 @@ NSString * const SKPostScore = __SKPostScore;
 @dynamic postID;
 @dynamic owner;
 @dynamic postActivity;
+
++ (NSDictionary *)APIAttributeToPropertyMapping {
+    static NSDictionary *mapping = nil;
+    if (!mapping) {
+        mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
+                   @"creationDate", SKPostCreationDate,
+                   @"owner", SKPostOwner,
+                   @"body", SKPostBody,
+                   @"score", SKPostScore,
+                   nil];
+    }
+    return mapping;
+}
 
 @end

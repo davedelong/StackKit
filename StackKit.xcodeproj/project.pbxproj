@@ -128,10 +128,6 @@
 		55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BC7712F2AEBF00092A8D /* SKComment.m */; };
 		55E5BD0612F3DAC000092A8D /* SKQAPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0412F3DAC000092A8D /* SKQAPost.h */; };
 		55E5BD0712F3DAC000092A8D /* SKQAPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD0512F3DAC000092A8D /* SKQAPost.m */; };
-		55E5BD0A12F3DC3A00092A8D /* SKQuestion+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */; };
-		55E5BD0B12F3DC3A00092A8D /* SKQuestion+Public.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD0912F3DC3A00092A8D /* SKQuestion+Public.m */; };
-		55E5BD0E12F3DC4B00092A8D /* SKQuestion+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD0C12F3DC4B00092A8D /* SKQuestion+Private.h */; };
-		55E5BD0F12F3DC4B00092A8D /* SKQuestion+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD0D12F3DC4B00092A8D /* SKQuestion+Private.m */; };
 		55E5BD2612F3DD1F00092A8D /* SKQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD2412F3DD1F00092A8D /* SKQuestion.h */; };
 		55E5BD2712F3DD1F00092A8D /* SKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BD2512F3DD1F00092A8D /* SKQuestion.m */; };
 		55E5BD3212F3E0A200092A8D /* SKAnswer+Public.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BD3012F3E0A200092A8D /* SKAnswer+Public.h */; };
@@ -331,10 +327,6 @@
 		55E5BC7712F2AEBF00092A8D /* SKComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKComment.m; sourceTree = "<group>"; };
 		55E5BD0412F3DAC000092A8D /* SKQAPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQAPost.h; sourceTree = "<group>"; };
 		55E5BD0512F3DAC000092A8D /* SKQAPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQAPost.m; sourceTree = "<group>"; };
-		55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQuestion+Public.h"; sourceTree = "<group>"; };
-		55E5BD0912F3DC3A00092A8D /* SKQuestion+Public.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQuestion+Public.m"; sourceTree = "<group>"; };
-		55E5BD0C12F3DC4B00092A8D /* SKQuestion+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKQuestion+Private.h"; sourceTree = "<group>"; };
-		55E5BD0D12F3DC4B00092A8D /* SKQuestion+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKQuestion+Private.m"; sourceTree = "<group>"; };
 		55E5BD2412F3DD1F00092A8D /* SKQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestion.h; sourceTree = "<group>"; };
 		55E5BD2512F3DD1F00092A8D /* SKQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestion.m; sourceTree = "<group>"; };
 		55E5BD3012F3E0A200092A8D /* SKAnswer+Public.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKAnswer+Public.h"; sourceTree = "<group>"; };
@@ -783,10 +775,6 @@
 			children = (
 				55E5BD2412F3DD1F00092A8D /* SKQuestion.h */,
 				55E5BD2512F3DD1F00092A8D /* SKQuestion.m */,
-				55E5BD0812F3DC3A00092A8D /* SKQuestion+Public.h */,
-				55E5BD0912F3DC3A00092A8D /* SKQuestion+Public.m */,
-				55E5BD0C12F3DC4B00092A8D /* SKQuestion+Private.h */,
-				55E5BD0D12F3DC4B00092A8D /* SKQuestion+Private.m */,
 			);
 			name = Questions;
 			sourceTree = "<group>";
@@ -895,8 +883,6 @@
 				55E5BC7412F2AB0800092A8D /* SKComment+Private.h in Headers */,
 				55E5BC7812F2AEBF00092A8D /* SKComment.h in Headers */,
 				55E5BD0612F3DAC000092A8D /* SKQAPost.h in Headers */,
-				55E5BD0A12F3DC3A00092A8D /* SKQuestion+Public.h in Headers */,
-				55E5BD0E12F3DC4B00092A8D /* SKQuestion+Private.h in Headers */,
 				55E5BD2612F3DD1F00092A8D /* SKQuestion.h in Headers */,
 				55E5BD3212F3E0A200092A8D /* SKAnswer+Public.h in Headers */,
 				55E5BD3612F3E0AB00092A8D /* SKAnswer+Private.h in Headers */,
@@ -1095,8 +1081,6 @@
 				55E5BC7512F2AB0800092A8D /* SKComment+Private.m in Sources */,
 				55E5BC7912F2AEBF00092A8D /* SKComment.m in Sources */,
 				55E5BD0712F3DAC000092A8D /* SKQAPost.m in Sources */,
-				55E5BD0B12F3DC3A00092A8D /* SKQuestion+Public.m in Sources */,
-				55E5BD0F12F3DC4B00092A8D /* SKQuestion+Private.m in Sources */,
 				55E5BD2712F3DD1F00092A8D /* SKQuestion.m in Sources */,
 				55E5BD3312F3E0A200092A8D /* SKAnswer+Public.m in Sources */,
 				55E5BD3712F3E0AB00092A8D /* SKAnswer+Private.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "SKTag.h"
 #import "SKConstants_Internal.h"
+#import "SKObject+Private.h"
 
 NSString * const SKTagName = @"name";
 NSString * const SKTagCount = @"count";
@@ -21,5 +22,24 @@ NSString * const SKTagLastUsedDate = @"tag_activity";
 @dynamic name;
 @dynamic numberOfTaggedQuestions;
 @dynamic questions;
+
++ (NSDictionary *) APIAttributeToPropertyMapping {
+	static NSDictionary * mapping = nil;
+	if (!mapping) {
+		mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
+                    @"name", SKTagName,
+                    @"numberOfTaggedQuestions", SKTagCount,
+                    nil];
+	}
+	return mapping;
+}
+
++ (NSString *) apiResponseDataKey {
+	return @"tags";
+}
+
++ (NSString *) apiResponseUniqueIDKey {
+    return SKTagName;
+}
 
 @end

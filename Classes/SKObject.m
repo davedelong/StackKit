@@ -53,6 +53,10 @@
 	return nil;
 }
 
++ (NSString *) uniqueIDKey {
+    return [[self APIAttributeToPropertyMapping] objectForKey:[self apiResponseUniqueIDKey]];
+}
+
 + (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key {
 	NSDictionary * mappings = [self APIAttributeToPropertyMapping];
 	if ([mappings objectForKey:key] != nil) {
@@ -140,6 +144,15 @@
             //TODO: merge in related objects
         }
     }
+}
+
+- (BOOL) isEqual:(id)object {
+    if ([object isKindOfClass:[self class]] == NO) { return NO; }
+    NSString * uniquePropertyName = [[self class] uniqueIDKey];
+    id myUniqueValue = [self valueForKey:uniquePropertyName];
+    id theirUniqueValue = [object valueForKey:uniquePropertyName];
+    
+    return [myUniqueValue isEqual:theirUniqueValue];
 }
 
 #pragma mark -

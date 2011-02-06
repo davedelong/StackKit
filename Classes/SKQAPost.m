@@ -8,6 +8,7 @@
 
 #import "SKQAPost.h"
 #import "SKConstants_Internal.h"
+#import "SKObject+Private.h"
 
 //inherited
 NSString * const SKQAPostCreationDate = __SKPostCreationDate;
@@ -26,15 +27,33 @@ NSString * const SKQAPostViewCount = __SKQAPostViewCount;
 
 @implementation SKQAPost 
 
-SK_GETTER(NSNumber *, communityOwned);
-SK_GETTER(NSNumber *, downVotes);
-SK_GETTER(NSDate *, lastActivityDate);
-SK_GETTER(NSDate *, lastEditDate);
-SK_GETTER(NSDate *, lockedDate);
-SK_GETTER(NSString *, title);
-SK_GETTER(NSNumber *, upVotes);
-SK_GETTER(NSNumber *, viewCount);
+@dynamic communityOwned;
+@dynamic downVotes;
+@dynamic lastActivityDate;
+@dynamic lastEditDate;
+@dynamic lockedDate;
+@dynamic title;
+@dynamic upVotes;
+@dynamic viewCount;
 
-SK_GETTER(NSSet*, comments);
+@dynamic comments;
+
++ (NSDictionary *)APIAttributeToPropertyMapping {
+    static NSDictionary *mapping = nil;
+    if (!mapping) {
+        mapping = [[super APIAttributeToPropertyMapping] mutableCopy];
+        [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                  @"communityOwned", SKQAPostCommunityOwned,
+                                                                  @"downVotes", SKQAPostDownVotes,
+                                                                  @"lastActivityDate", SKQAPostLastActivityDate,
+                                                                  @"lastEditDate", SKQAPostLastEditDate,
+                                                                  @"lockedDate", SKQAPostLockedDate,
+                                                                  @"title", SKQAPostTitle,
+                                                                  @"upVotes", SKQAPostUpVotes,
+                                                                  @"viewCount", SKQAPostViewCount,
+                                                                  nil]];
+    }
+    return mapping;
+}
 
 @end

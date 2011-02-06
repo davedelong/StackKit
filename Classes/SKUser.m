@@ -104,11 +104,6 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     return [super willMergeValue:value forProperty:property];
 }
 
-- (BOOL) isEqual:(id)object {
-	if ([object isKindOfClass:[self class]] == NO) { return NO; }
-	return ([[self userID] isEqual:[object userID]]);
-}
-
 - (NSURL *) gravatarIconURL {
 	return [self gravatarIconURLForSize:CGSizeMake(80, 80)];
 }
