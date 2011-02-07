@@ -43,6 +43,7 @@ extern NSString * const SKQuestionFavoritedDate;
 {
 }
 
+@property (nonatomic, readonly) NSNumber * questionID;
 @property (nonatomic, readonly) NSDate * closeDate;
 @property (nonatomic, readonly) NSNumber * bountyAmount;
 @property (nonatomic, readonly) NSDate * bountyCloseDate;

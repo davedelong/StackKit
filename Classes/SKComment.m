@@ -59,4 +59,8 @@ NSString * const SKCommentPostType = @"post_type";
     return [super transformValueToMerge:value forRelationship:relationship];
 }
 
+- (NSNumber *) commentID {
+    return [self postID];
+}
+
 @end

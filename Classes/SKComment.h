@@ -27,6 +27,7 @@ extern NSString * const SKCommentEditCount;
 {
 }
 
+@property (nonatomic, readonly) NSNumber * commentID;
 @property (nonatomic, readonly) NSNumber * editCount;
 @property (nonatomic, readonly) SKQAPost * post;
 @property (nonatomic, readonly) SKUser * directedToUser;

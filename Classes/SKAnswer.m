@@ -56,4 +56,8 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
 	return SKAnswerID;
 }
 
+- (NSNumber *) answerID {
+    return [self postID];
+}
+
 @end

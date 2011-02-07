@@ -90,4 +90,8 @@ NSString * const SKQuestionAnswers = @"answers";
     return [super transformValueToMerge:value forRelationship:relationship];
 }
 
+- (NSNumber *)questionID {
+    return [self postID];
+}
+
 @end

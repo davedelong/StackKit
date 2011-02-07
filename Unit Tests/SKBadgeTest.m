@@ -43,7 +43,7 @@
 	STAssertNil(error, @"error should be nil");
 	
 	for (SKBadge * badge in badges) {
-		STAssertFalse([badge isTagBased], @"Unexpected tag-based badge: %@", badge);
+		STAssertFalse([[badge tagBased] boolValue], @"Unexpected tag-based badge: %@", badge);
 	}
 }
 
@@ -61,7 +61,7 @@
 	STAssertNil(error, @"error should be nil");
 	
 	for (SKBadge * badge in badges) {
-		STAssertTrue([badge isTagBased] == YES, @"badge %@ should be tag-based", [badge name]);
+		STAssertTrue([[badge tagBased] boolValue], @"badge %@ should be tag-based", [badge name]);
 	}
 }
 
@@ -78,7 +78,7 @@
 	int badgeCount[3] = {0, 0, 0};
 	
 	for (SKBadge * badge in badges) {
-		SKBadgeRank_t rank = [badge rank];
+		SKBadgeRank_t rank = [[badge rank] intValue];
 		badgeCount[rank] += [[badge numberAwarded] intValue];
 	}
 	
@@ -99,7 +99,7 @@
 	int badgeCount[3] = {0, 0, 0};
 	
 	for (SKBadge * badge in badges) {
-		SKBadgeRank_t rank = [badge rank];
+		SKBadgeRank_t rank = [[badge rank] intValue];
 		badgeCount[rank] += [[badge numberAwarded] intValue];
 	}
 	

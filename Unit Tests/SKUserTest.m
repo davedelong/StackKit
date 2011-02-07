@@ -135,7 +135,7 @@
 		NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
 		for (SKQuestion * question in matches) {
 			NSUInteger count = [[question favoriteCount] unsignedIntegerValue];
-			for (int i = 0; i < count; ++i) { [counts addObject:[question ownerID]]; }
+			for (int i = 0; i < count; ++i) { [counts addObject:[[question owner] userID]]; }
 		}
 		
 		if (count == NSUIntegerMax) {

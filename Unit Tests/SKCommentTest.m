@@ -45,7 +45,7 @@
 	
 	SKComment * comment = [results objectAtIndex:0];
 	
-	STAssertEqualObjects([comment ownerID], [NSNumber numberWithInt:115730], @"Unexpected post owner: %@", [comment ownerID]);
+	STAssertEqualObjects([[comment owner] userID], [NSNumber numberWithInt:115730], @"Unexpected post owner: %@", [[comment owner] userID]);
 }
 
 - (void) testMultipleComments {
@@ -64,11 +64,11 @@
 	
 	SKComment * comment = [results objectAtIndex:0];
 	
-	STAssertEqualObjects([comment ownerID], [NSNumber numberWithInt:115730], @"Unexpected post owner: %@", [comment ownerID]);
+	STAssertEqualObjects([[comment owner] userID], [NSNumber numberWithInt:115730], @"Unexpected post owner: %@", [[comment owner] userID]);
 	
 	comment = [results objectAtIndex:1];
 	
-	STAssertEqualObjects([comment ownerID], [NSNumber numberWithInt:267256], @"Unexpected post owner: %@", [comment ownerID]);
+	STAssertEqualObjects([[comment owner] userID], [NSNumber numberWithInt:267256], @"Unexpected post owner: %@", [[comment owner] userID]);
 	
 }
 
@@ -88,7 +88,7 @@
 	
 	NSNumber * user = [NSNumber numberWithInt:115730];
 	for (SKComment * comment in results) {
-		STAssertEqualObjects([comment ownerID], user, @"Unexpected post owner: %@", [comment ownerID]);
+		STAssertEqualObjects([[comment owner] userID], user, @"Unexpected post owner: %@", [[comment owner] userID]);
 	}
 }
 

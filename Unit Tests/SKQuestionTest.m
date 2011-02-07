@@ -69,19 +69,10 @@
 - (void) testMultipleQuestions {
 	SKSite * site = [SKSite stackOverflowSite];
 	
-	NSDictionary* mockUpQuestionDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										[NSNumber numberWithInt:1283419],SKQuestionID,
-										@"http://www.example.com",SKQuestionTimelineURL,
-										@"http://www.example.com",SKQuestionCommentsURL,
-										@"http://www.example.com",SKQuestionAnswersURL,										
-										nil];
-	
-	SKQuestion* testQuestion = [[SKQuestion alloc] initWithSite:site dictionaryRepresentation:mockUpQuestionDict];
-	
 	NSArray* questionsToFetch = [NSArray arrayWithObjects:
 								 @"4729906",
 								 [NSNumber numberWithInt:3389487],
-								 testQuestion,
+								 [NSNumber numberWithInt:1283419],
 								 nil];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
@@ -148,7 +139,7 @@
 	
 	SKQuestion * q = [results objectAtIndex:0];
 	
-	STAssertEqualObjects([q ownerID], [NSNumber numberWithInt:115730], @"Owner should be #115730: %@", [q ownerID]);
+	STAssertEqualObjects([[q owner] userID], [NSNumber numberWithInt:115730], @"Owner should be #115730: %@", [[q owner] userID]);
 }
 
 - (void) testAllQuestions {
@@ -188,7 +179,9 @@
 	STAssertNil(e, @"Error should be nil: %@", e);
 	
 	for (SKQuestion * question in results) {
-		STAssertTrue([[question answerCount] intValue] == 0, @"question should have 0 answers.  has: %@", [question answerCount]);
+        for (SKAnswer *answer in [question answers]) {
+            STAssertTrue([[answer score] intValue] == 0, @"question should have 0 answers.  has: %@", [answer score]);
+        }
 		
 		NSArray * tagNames = [[question tags] valueForKey:SKTagName];
 		STAssertTrue([tagNames containsObject:@"iphone"], @"questions should have \"iphone\" tag");

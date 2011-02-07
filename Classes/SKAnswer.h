@@ -33,6 +33,7 @@ extern NSString * const SKAnswerIsAccepted;
 {
 }
 
+@property (nonatomic, readonly) NSNumber * answerID;
 @property (nonatomic, readonly) NSNumber * accepted;
 @property (nonatomic, readonly) SKQuestion * question;
 
