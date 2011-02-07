@@ -52,4 +52,11 @@ NSString * const SKCommentPostType = @"post_type";
     return mapping;
 }
 
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    if ([relationship isEqual:@"directedToUser"]) {
+        return [SKUser objectMergedWithDictionary:value inSite:[self site]];
+    }
+    return [super transformValueToMerge:value forRelationship:relationship];
+}
+
 @end

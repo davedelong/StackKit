@@ -87,7 +87,7 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     return mapping;
 }
 
-- (id) willMergeValue:(id)value forProperty:(NSString *)property {
+- (id) transformValueToMerge:(id)value forProperty:(NSString *)property {
     if ([property isEqualToString:@"userType"]) {
         
 		SKUserType_t type = SKUserTypeRegistered;
@@ -102,7 +102,12 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     }
     
     // super will convert dates and URLs for us
-    return [super willMergeValue:value forProperty:property];
+    return [super transformValueToMerge:value forProperty:property];
+}
+
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    // override for the sake of completeness
+    return [super transformValueToMerge:value forRelationship:relationship];
 }
 
 - (NSURL *) gravatarIconURL {

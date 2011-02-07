@@ -10,6 +10,9 @@
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
 
+#import "SKTag.h"
+#import "SKAnswer.h"
+
 //inherited
 NSString * const SKQuestionCreationDate = __SKPostCreationDate;
 NSString * const SKQuestionOwner = __SKPostOwner;
@@ -40,6 +43,8 @@ NSString * const SKQuestionAnswersURL = __SKQuestionAnswersURL;
 NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
 NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 
+NSString * const SKQuestionAnswers = @"answers";
+
 @implementation SKQuestion 
 
 @dynamic closeDate;
@@ -61,6 +66,8 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
                                                                   @"bountyCloseDate", SKQuestionBountyCloseDate,
                                                                   @"closeReason", SKQuestionCloseReason,
                                                                   @"favoriteCount", SKQuestionFavoriteCount,
+                                                                  @"answers", SKQuestionAnswers,
+                                                                  @"tags", SKQuestionTags,
                                                                   nil]];
     }
     return mapping;
@@ -72,6 +79,15 @@ NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
 
 + (NSString *)apiResponseUniqueIDKey {
     return SKQuestionID;
+}
+
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    if ([relationship isEqual:@"answers"]) {
+        return [SKAnswer objectMergedWithDictionary:value inSite:[self site]];
+    } else if ([relationship isEqual:@"tags"]) {
+        return [SKTag objectMergedWithDictionary:value inSite:[self site]];
+    }
+    return [super transformValueToMerge:value forRelationship:relationship];
 }
 
 @end

@@ -10,6 +10,8 @@
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
 #import "SKDefinitions.h"
+#import "SKUser.h"
+#import "SKBadgeAward.h"
 
 NSString * const SKBadgeID = @"badge_id";
 NSString * const SKBadgeRank = @"rank";
@@ -20,6 +22,8 @@ NSString * const SKBadgeTagBased = @"tag_based";
 
 NSString * const SKBadgesAwardedToUser = __SKUserID;
 
+NSString * const SKBadgeAwards = @"awards";
+NSString * const SKBadgeUser = @"user";
 NSString * const SKBadgeRankGoldKey = @"gold";
 NSString * const SKBadgeRankSilverKey = @"silver";
 NSString * const SKBadgeRankBronzeKey = @"bronze";
@@ -53,12 +57,27 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
                    @"rank", SKBadgeRank,
                    @"summary", SKBadgeSummary,
                    @"tagBased", SKBadgeTagBased,
+                   @"awards", SKBadgeAwards,
                    nil];
     }
     return mapping;
 }
 
-- (id)willMergeValue:(id)value forProperty:(NSString *)property {
+- (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary {
+    if ([dictionary objectForKey:SKBadgeUser] != nil && [dictionary objectForKey:SKBadgeNumberAwarded] != nil) {
+        NSMutableDictionary *mutable = [dictionary mutableCopy];
+        NSDictionary *user = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [dictionary objectForKey:SKBadgeNumberAwarded], SKBadgeNumberAwarded,
+                              [dictionary objectForKey:SKBadgeUser], SKBadgeUser,
+                              nil];
+        [mutable setObject:user forKey:SKBadgeAwards];
+        [mutable removeObjectForKey:SKBadgeNumberAwarded];
+        dictionary = [mutable autorelease];
+    }
+    [super mergeInformationFromAPIResponseDictionary:dictionary];
+}
+
+- (id)transformValueToMerge:(id)value forProperty:(NSString *)property {
     if ([property isEqualToString:@"rank"]) {
 		SKBadgeRank_t rank = SKBadgeRankBronze;
 		if ([value isEqual:SKBadgeRankGoldKey]) {
@@ -68,7 +87,33 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 		}
         return [NSNumber numberWithInt:rank];
     }
-    return [super willMergeValue:value forProperty:property];
+    return [super transformValueToMerge:value forProperty:property];
+}
+
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    // override for the sake of completeness
+    if ([relationship isEqualToString:SKBadgeAwards]) {
+        NSDictionary *user = [value objectForKey:SKBadgeUser];
+        NSNumber *awardCount = [value objectForKey:SKBadgeNumberAwarded];
+        
+        SKUser *userObject = [SKUser objectMergedWithDictionary:user inSite:[self site]];
+        SKBadgeAward *award = nil;
+        for (SKBadgeAward *awardedBadge in [userObject awardedBadges]) {
+            if ([[awardedBadge badge] isEqual:self]) {
+                award = awardedBadge;
+                break;
+            }
+        }
+        if (award == nil) {
+            award = [SKBadgeAward insertInManagedObjectContext:[self managedObjectContext]];
+            [award setValue:userObject forKey:@"user"];
+        }
+        
+        [award setValue:awardCount forKey:@"numberOfTimesAwarded"];
+        
+        return award;
+    }
+    return [super transformValueToMerge:value forRelationship:relationship];
 }
 
 @end

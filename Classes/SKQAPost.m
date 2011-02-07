@@ -9,6 +9,7 @@
 #import "SKQAPost.h"
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
+#import "SKComment.h"
 
 //inherited
 NSString * const SKQAPostCreationDate = __SKPostCreationDate;
@@ -24,6 +25,8 @@ NSString * const SKQAPostLockedDate = __SKQAPostLockedDate;
 NSString * const SKQAPostTitle = __SKQAPostTitle;
 NSString * const SKQAPostUpVotes = __SKQAPostUpVotes;
 NSString * const SKQAPostViewCount = __SKQAPostViewCount;
+
+NSString * const SKQAPostComments = @"comments";
 
 @implementation SKQAPost 
 
@@ -51,9 +54,17 @@ NSString * const SKQAPostViewCount = __SKQAPostViewCount;
                                                                   @"title", SKQAPostTitle,
                                                                   @"upVotes", SKQAPostUpVotes,
                                                                   @"viewCount", SKQAPostViewCount,
+                                                                  @"comments", SKQAPostComments,
                                                                   nil]];
     }
     return mapping;
+}
+
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    if ([relationship isEqual:@"comments"]) {
+        return [SKComment objectMergedWithDictionary:value inSite:[self site]];
+    }
+    return [super transformValueToMerge:value forRelationship:relationship];
 }
 
 @end

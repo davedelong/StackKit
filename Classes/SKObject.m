@@ -10,6 +10,7 @@
 #import "SKObject+Private.h"
 #import "SKSite+Private.h"
 #import "SKSite+Caching.h"
+#import "SKFunctions.h"
 
 #pragma mark Private methods
 @interface SKObject ()
@@ -54,7 +55,7 @@
 }
 
 + (NSString *) uniqueIDKey {
-    return [[self APIAttributeToPropertyMapping] objectForKey:[self apiResponseUniqueIDKey]];
+    return [self propertyKeyFromAPIAttributeKey:[self apiResponseUniqueIDKey]];
 }
 
 + (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key {
@@ -103,9 +104,9 @@
 	
 	if (object == nil) {
         object = [self insertInManagedObjectContext:[site managedObjectContext]];
-		[object setSite:site];
 	}
 	
+    [object setSite:site];
 	[objectIDCache setObject:[object objectID] forKey:uniqueID];
 	
 	[object mergeInformationFromAPIResponseDictionary:dictionary];
@@ -113,7 +114,7 @@
 	return object;
 }
 
-- (id) willMergeValue:(id)value forProperty:(NSString *)property {
+- (id) transformValueToMerge:(id)value forProperty:(NSString *)property {
     if ([property hasSuffix:@"Date"]) {
         // by convention, Date properties end with "Date" (creationDate, lastAccessDate, etc)
         return [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
@@ -124,24 +125,63 @@
     return value;
 }
 
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    NSLog(@"ERROR: unable to transform for -[%@ %@]: %@", NSStringFromClass([self class]), relationship, value);
+    return nil;
+}
+
 - (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary {
     NSEntityDescription *entity = [self entity];
     NSDictionary *properties = [entity propertiesByName];
     NSDictionary *propertyMapping = [[self class] APIAttributeToPropertyMapping];
     
-    for (NSString * apiAttribute in propertyMapping) {
-        id newValue = [dictionary objectForKey:apiAttribute];
-        if (newValue == nil) { continue; }
+    for (NSString * responseKey in dictionary) {
+        NSString *propertyName = [propertyMapping objectForKey:responseKey];
+        if (propertyName == nil) { continue; }
         
-        NSString *propertyName = [propertyMapping objectForKey:apiAttribute];
-        newValue = [self willMergeValue:newValue forProperty:propertyName];
-        if (newValue == nil) { continue; }
+        id newValue = [dictionary objectForKey:responseKey];
         
         NSPropertyDescription *propertyDescription = [properties objectForKey:propertyName];
         if ([propertyDescription isKindOfClass:[NSAttributeDescription class]]) {
+            // regular attribute.  transform and replace
+            newValue = [self transformValueToMerge:newValue forProperty:propertyName];
+            if (newValue == nil) { continue; }
+            
             [self setValue:newValue forKey:propertyName];
         } else if ([propertyDescription isKindOfClass:[NSRelationshipDescription class]]) {
-            //TODO: merge in related objects
+            // relationship. transform and merge
+            NSRelationshipDescription *relationship = (NSRelationshipDescription *)propertyDescription;
+            if ([relationship isToMany]) {
+                // to-many relationship. the value to transform can be a dictionary or collection
+                if ([newValue isKindOfClass:[NSDictionary class]] == NO && SKIsVectorClass(newValue) == NO) {
+                    NSLog(@"ERROR: cannot handle non-collection merge information for %@ relationship: %@", propertyName, newValue);
+                    continue;
+                }
+                // transform the dictionary into appropriate objects:
+                NSMutableSet *mergingObjects = [NSMutableSet set];
+                if (SKIsVectorClass(newValue)) {
+                    for (id subValue in newValue) {
+                        subValue = [self transformValueToMerge:subValue forRelationship:propertyName];
+                        if (subValue == nil) { continue; }
+                        [mergingObjects addObject:subValue];
+                    }
+                } else {
+                    id subValue = [self transformValueToMerge:newValue forRelationship:propertyName];
+                    [mergingObjects addObject:subValue];
+                }
+                
+                // merge in the objects
+                NSMutableSet *destination = [self mutableSetValueForKey:propertyName];
+                [destination unionSet:mergingObjects];
+            } else {
+                // to-one relationship.  the value to transform must be a dictionary
+                if (SKIsVectorClass(newValue)) {
+                    NSLog(@"ERROR: cannot handle collection merge information for %@ relationship: %@", propertyName, newValue);
+                    continue;
+                }
+                newValue = [self transformValueToMerge:newValue forRelationship:propertyName];
+                [self setValue:newValue forKey:propertyName];
+            }
         }
     }
 }

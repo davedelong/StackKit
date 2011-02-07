@@ -9,6 +9,7 @@
 #import "SKPost.h"
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
+#import "SKUser.h"
 
 NSString * const SKPostCreationDate = __SKPostCreationDate;
 NSString * const SKPostOwner = __SKPostOwner;
@@ -35,6 +36,13 @@ NSString * const SKPostScore = __SKPostScore;
                    nil];
     }
     return mapping;
+}
+
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    if ([relationship isEqual:@"owner"]) {
+        return [SKUser objectMergedWithDictionary:value inSite:[self site]];
+    }
+    return [super transformValueToMerge:value forRelationship:relationship];
 }
 
 @end
