@@ -25,6 +25,8 @@
 
 #import "SKUserActivity.h"
 #import "SKConstants_Internal.h"
+#import "SKUser.h"
+#import "NSPredicate+SKAdditions.h"
 
 NSString * const SKUserActivityType = @"timeline_type";
 NSString * const SKUserActivityPostID = @"post_id";

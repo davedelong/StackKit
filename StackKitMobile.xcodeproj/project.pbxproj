@@ -66,7 +66,6 @@
 		551B045712E82E5600BF14BC /* _SKRequestBuilderBadgesForUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 551B042112E82E5500BF14BC /* _SKRequestBuilderBadgesForUser.m */; };
 		558333C511B768D500CA8D62 /* SKSiteDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 558333C411B768D500CA8D62 /* SKSiteDelegate.h */; };
 		55D6CFD611B4DD9C00C624F0 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9111B4DD9C00C624F0 /* StackKit.h */; };
-		55D6CFD711B4DD9C00C624F0 /* StackKit_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */; };
 		55D6CFD811B4DD9C00C624F0 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9411B4DD9C00C624F0 /* SKConstants.h */; };
 		55D6CFD911B4DD9C00C624F0 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CF9511B4DD9C00C624F0 /* SKConstants.m */; };
 		55D6CFDA11B4DD9C00C624F0 /* SKDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55D6CF9611B4DD9C00C624F0 /* SKDefinitions.h */; };
@@ -186,7 +185,6 @@
 		551B042112E82E5500BF14BC /* _SKRequestBuilderBadgesForUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderBadgesForUser.m; sourceTree = "<group>"; };
 		558333C411B768D500CA8D62 /* SKSiteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteDelegate.h; sourceTree = "<group>"; };
 		55D6CF9111B4DD9C00C624F0 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
-		55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Internal.h; sourceTree = "<group>"; };
 		55D6CF9411B4DD9C00C624F0 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
 		55D6CF9511B4DD9C00C624F0 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
 		55D6CF9611B4DD9C00C624F0 /* SKDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDefinitions.h; sourceTree = "<group>"; };
@@ -435,7 +433,6 @@
 				55D6CF9311B4DD9C00C624F0 /* Constants */,
 				551B03E412E82E5500BF14BC /* Request Builder */,
 				55D6CF9111B4DD9C00C624F0 /* StackKit.h */,
-				55D6CF9211B4DD9C00C624F0 /* StackKit_Internal.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -593,7 +590,6 @@
 			files = (
 				AA747D9F0F9514B9006C5449 /* StackKit_Prefix.pch in Headers */,
 				55D6CFD611B4DD9C00C624F0 /* StackKit.h in Headers */,
-				55D6CFD711B4DD9C00C624F0 /* StackKit_Internal.h in Headers */,
 				55D6CFD811B4DD9C00C624F0 /* SKConstants.h in Headers */,
 				55D6CFDA11B4DD9C00C624F0 /* SKDefinitions.h in Headers */,
 				55D6CFDC11B4DD9C00C624F0 /* SKFunctions.h in Headers */,
