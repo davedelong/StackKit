@@ -124,6 +124,8 @@
 		55D6D00E11B4DD9C00C624F0 /* NSDictionary+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D6CFD511B4DD9C00C624F0 /* NSDictionary+SKAdditions.m */; };
 		AA747D9F0F9514B9006C5449 /* StackKit_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* StackKit_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		AE7070C61301A07E00594D9F /* NSString+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AE7070C41301A07E00594D9F /* NSString+SKAdditions.h */; };
+		AE7070C71301A07E00594D9F /* NSString+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7070C51301A07E00594D9F /* NSString+SKAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -244,6 +246,8 @@
 		55D6CFD511B4DD9C00C624F0 /* NSDictionary+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SKAdditions.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* StackKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackKit_Prefix.pch; path = "Other Sources/StackKit_Prefix.pch"; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AE7070C41301A07E00594D9F /* NSString+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SKAdditions.h"; sourceTree = "<group>"; };
+		AE7070C51301A07E00594D9F /* NSString+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SKAdditions.m"; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libStackKitMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStackKitMobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -551,6 +555,8 @@
 		55D6CFBF11B4DD9C00C624F0 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				AE7070C41301A07E00594D9F /* NSString+SKAdditions.h */,
+				AE7070C51301A07E00594D9F /* NSString+SKAdditions.m */,
 				55D6CFC011B4DD9C00C624F0 /* JSON */,
 				55D6CFCE11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.h */,
 				55D6CFCF11B4DD9C00C624F0 /* NSNumberFormatter+SKAdditions.m */,
@@ -654,6 +660,7 @@
 				551B045212E82E5600BF14BC /* _SKRequestBuilderNameBadges.h in Headers */,
 				551B045412E82E5600BF14BC /* _SKRequestBuilderTagBadges.h in Headers */,
 				551B045612E82E5600BF14BC /* _SKRequestBuilderBadgesForUser.h in Headers */,
+				AE7070C61301A07E00594D9F /* NSString+SKAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,6 +767,7 @@
 				551B045312E82E5600BF14BC /* _SKRequestBuilderNameBadges.m in Sources */,
 				551B045512E82E5600BF14BC /* _SKRequestBuilderTagBadges.m in Sources */,
 				551B045712E82E5600BF14BC /* _SKRequestBuilderBadgesForUser.m in Sources */,
+				AE7070C71301A07E00594D9F /* NSString+SKAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
