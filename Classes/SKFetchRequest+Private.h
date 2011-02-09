@@ -24,6 +24,8 @@
  **/
 
 #import <Foundation/Foundation.h>
+#import "SKFetchRequest.h"
+#import "SKLocalFetchRequest.h"
 
 @class SKSite;
 
@@ -39,5 +41,11 @@
 - (void) executeAsynchronously;
 
 - (NSArray *) executeFetchRequest;
+
+@end
+
+@interface SKLocalFetchRequest ()
+
+- (NSFetchRequest *) coreDataFetchRequestForManagedObjectContext:(NSManagedObjectContext *)moc;
 
 @end

@@ -29,11 +29,14 @@
 
 #import "SKConstants.h"
 #import "SKFetchRequest.h"
+#import "SKLocalFetchRequest.h"
 #import "SKFetchRequest+Private.h"
 #import "SKCallback.h"
 #import "JSON.h"
 
 #import "NSDictionary+SKAdditions.h"
+
+#import "SKStatisticsOperation.h"
 
 NSString * const SKSiteAPIKey = @"key";
 
@@ -212,6 +215,12 @@ NSString * const SKSiteAPIKey = @"key";
 	else if ([fetchRequest delegate] && [[fetchRequest delegate] conformsToProtocol:@protocol(SKFetchRequestDelegate)] == NO) {
 		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest.delegate must conform to <SKFetchRequestDelegate>" userInfo:nil];
 	}
+    
+    if ([fetchRequest isKindOfClass:[SKLocalFetchRequest class]]) {
+        
+    } else {
+        
+    }
 	
 	if ([fetchRequest delegate] != nil && [fetchRequest callback] == nil) {
 		//transform the delegate into an SKCallback:
@@ -243,54 +252,14 @@ NSString * const SKSiteAPIKey = @"key";
 
 #pragma mark Site information
 
-- (NSDictionary *) statisticsWithError:(NSError **)error {
-	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[self apiKey] forKey:SKSiteAPIKey];
-	NSString * statsPath = [NSString stringWithFormat:@"stats?%@", [queryDictionary queryString]];
-	
-	NSString * statsCall = [[[self apiURL] absoluteString] stringByAppendingPathComponent:statsPath];
-	
-	NSURL * statsURL = [NSURL URLWithString:statsCall];
-	
-	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[statsURL absoluteURL]];
-	NSURLResponse * response = nil;
-	
-	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:error];
-	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-	
-	NSDictionary * statistics = [responseString JSONValue];
-	
-	if ([statistics isKindOfClass:[NSDictionary class]] == NO) { return nil; }
-	
-	return [[statistics objectForKey:@"statistics"] objectAtIndex:0];
-}
-
-- (NSDictionary *) statistics {
-	return [self statisticsWithError:nil];
-}
-
-- (void) requestStatistics {
-	if ([self delegate] == nil) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKSite.delegate cannot be nil" userInfo:nil];
-	}
-	
-	if ([[self delegate] conformsToProtocol:@protocol(SKSiteDelegate)] == NO) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKSite.delegate must conform to <SKSiteDelegate>" userInfo:nil];
-	}
-	
-	NSInvocationOperation * op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(asynchronousStatistics) object:nil];
-	[requestQueue addOperation:op];
-	[op release];
-}
-
-- (void) asynchronousStatistics {
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	
-	NSError * error = nil;
-	NSDictionary * stats = [self statisticsWithError:&error];
-	
-	[[self delegate] site:self didRetrieveStatistics:stats error:error];
-	
-	[pool drain];
+- (void)requestStatisticsWithHandler:(SKStatisticsHandler)handler {
+    if (handler == nil) {
+        [NSException raise:NSInvalidArgumentException format:@"handler must not be nil"];
+    }
+    
+    SKStatisticsOperation *op = [[SKStatisticsOperation alloc] initWithSite:self completionHandler:handler];
+    [requestQueue addOperation:op];
+    [op release];
 }
 
 #pragma mark CoreData

@@ -101,7 +101,6 @@ extern NSString * const SKSiteAPIKey;
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestCompletionHandler)handler;
 #endif
 
-- (NSDictionary *) statistics;
-- (void) requestStatistics;
+- (void) requestStatisticsWithHandler:(SKStatisticsHandler)handler;
 
 @end

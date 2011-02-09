@@ -28,6 +28,8 @@
 
 #ifdef NS_BLOCKS_AVAILABLE
 typedef void(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
+
+typedef void(^SKStatisticsHandler)(NSDictionary *);
 #endif
 
 typedef id (*SKExtractor)(id);

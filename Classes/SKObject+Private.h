@@ -12,6 +12,7 @@
 @interface SKObject ()
 
 + (NSString*)entityName;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 
 + (id) objectMergedWithDictionary:(NSDictionary *)dictionary inSite:(SKSite *)site;

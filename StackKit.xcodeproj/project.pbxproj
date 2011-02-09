@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550369A8130245A700D20ECB /* SKLocalFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 550369A6130245A700D20ECB /* SKLocalFetchRequest.h */; };
+		550369A9130245A700D20ECB /* SKLocalFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 550369A7130245A700D20ECB /* SKLocalFetchRequest.m */; };
+		550369AC1302F83F00D20ECB /* SKOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 550369AA1302F83E00D20ECB /* SKOperation.h */; };
+		550369AD1302F83F00D20ECB /* SKOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 550369AB1302F83E00D20ECB /* SKOperation.m */; };
+		550369B11302F8AE00D20ECB /* SKStatisticsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 550369AF1302F8AE00D20ECB /* SKStatisticsOperation.h */; };
+		550369B21302F8AE00D20ECB /* SKStatisticsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 550369B01302F8AE00D20ECB /* SKStatisticsOperation.m */; };
 		5506C7BE11AB29B700C47C1B /* SKFetchRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5506C7E311ACBEBD00C47C1B /* SKDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */; };
@@ -189,6 +195,12 @@
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* StackKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit_Prefix.pch; sourceTree = "<group>"; };
+		550369A6130245A700D20ECB /* SKLocalFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLocalFetchRequest.h; sourceTree = "<group>"; };
+		550369A7130245A700D20ECB /* SKLocalFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLocalFetchRequest.m; sourceTree = "<group>"; };
+		550369AA1302F83E00D20ECB /* SKOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKOperation.h; sourceTree = "<group>"; };
+		550369AB1302F83E00D20ECB /* SKOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKOperation.m; sourceTree = "<group>"; };
+		550369AF1302F8AE00D20ECB /* SKStatisticsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKStatisticsOperation.h; sourceTree = "<group>"; };
+		550369B01302F8AE00D20ECB /* SKStatisticsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKStatisticsOperation.m; sourceTree = "<group>"; };
 		5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequestDelegate.h; sourceTree = "<group>"; };
 		5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDefinitions.h; sourceTree = "<group>"; };
 		5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDefinitions.m; sourceTree = "<group>"; };
@@ -419,9 +431,9 @@
 			isa = PBXGroup;
 			children = (
 				55A2E550110E4FE00038E510 /* StackKit.h */,
+				55C23E32116A8FC6009064EE /* Constants */,
 				55C23E2D116A8FA4009064EE /* Object Base */,
 				55C23E2E116A8FAC009064EE /* Site */,
-				55C23E32116A8FC6009064EE /* Constants */,
 				55C23E2C116A8F9E009064EE /* Fetch Request */,
 				D21D402711BAB4DF00D5AD93 /* Callbacks */,
 				55C23E2F116A8FB4009064EE /* User */,
@@ -459,6 +471,17 @@
 				5533AA1E12DA432600F755F7 /* Dummy.m */,
 			);
 			path = "Other Sources";
+			sourceTree = "<group>";
+		};
+		550369AE1302F84400D20ECB /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				550369AA1302F83E00D20ECB /* SKOperation.h */,
+				550369AB1302F83E00D20ECB /* SKOperation.m */,
+				550369AF1302F8AE00D20ECB /* SKStatisticsOperation.h */,
+				550369B01302F8AE00D20ECB /* SKStatisticsOperation.m */,
+			);
+			name = Operations;
 			sourceTree = "<group>";
 		};
 		5506C81E11ADE12800C47C1B /* Q&A */ = {
@@ -669,6 +692,8 @@
 			children = (
 				55FA955C116132E3003A9CD7 /* SKFetchRequest.h */,
 				55FA955D116132E3003A9CD7 /* SKFetchRequest.m */,
+				550369A6130245A700D20ECB /* SKLocalFetchRequest.h */,
+				550369A7130245A700D20ECB /* SKLocalFetchRequest.m */,
 				5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */,
 				55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */,
 			);
@@ -698,6 +723,7 @@
 				55C952D512F5331700B1E546 /* SKSite+Caching.m */,
 				551E009B12F9137D00143DD3 /* SKCache.h */,
 				551E009C12F9137D00143DD3 /* SKCache.m */,
+				550369AE1302F84400D20ECB /* Operations */,
 			);
 			name = Site;
 			sourceTree = "<group>";
@@ -860,6 +886,9 @@
 				551EFFD512F62CD800143DD3 /* SKBadgeAward.h in Headers */,
 				551E009D12F9137D00143DD3 /* SKCache.h in Headers */,
 				5559421A12FE2C29002A28BE /* SKObject+Private.h in Headers */,
+				550369A8130245A700D20ECB /* SKLocalFetchRequest.h in Headers */,
+				550369AC1302F83F00D20ECB /* SKOperation.h in Headers */,
+				550369B11302F8AE00D20ECB /* SKStatisticsOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +1082,9 @@
 				55C952D712F5331700B1E546 /* SKSite+Caching.m in Sources */,
 				551EFFD612F62CD800143DD3 /* SKBadgeAward.m in Sources */,
 				551E009E12F9137D00143DD3 /* SKCache.m in Sources */,
+				550369A9130245A700D20ECB /* SKLocalFetchRequest.m in Sources */,
+				550369AD1302F83F00D20ECB /* SKOperation.m in Sources */,
+				550369B21302F8AE00D20ECB /* SKStatisticsOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
