@@ -17,6 +17,7 @@
     if (self) {
         [self setSite:baseSite];
     }
+    return self;
 }
 
 - (void) dealloc {
