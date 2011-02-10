@@ -267,12 +267,16 @@ NSString * const SKSiteAPIKey = @"key";
 - (NSString *)applicationSupportDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+#ifdef StackKitMac
+    // alter basePath to point at the App's specific support dir, and not ~/Library/App Support
+#endif
     return [basePath stringByAppendingPathComponent:@"StackKit"];
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
     if (managedObjectModel) { return managedObjectModel; }
-    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+    NSArray *bundles = [NSArray arrayWithObject:[NSBundle bundleForClass:[SKSite class]]];
+    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:bundles] retain];    
     return managedObjectModel;
 }
 
@@ -299,7 +303,7 @@ NSString * const SKSiteAPIKey = @"key";
 		}
     }
     
-	NSString *storeFileName = [NSString stringWithFormat:@"%@.db", [self apiURL]];
+	NSString *storeFileName = [NSString stringWithFormat:@"%@.db", [[self apiURL] host]];
     NSURL *url = [NSURL fileURLWithPath:[applicationSupportDirectory stringByAppendingPathComponent:storeFileName]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType 

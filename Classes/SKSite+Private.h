@@ -34,9 +34,6 @@ extern NSArray *_skKnownSites;
 
 @interface SKSite ()
 
-- (void) asynchronousStatistics;
-- (NSDictionary *) statisticsWithError:(NSError **)error;
-
 - (NSManagedObjectContext *) managedObjectContext;
 
 @end
