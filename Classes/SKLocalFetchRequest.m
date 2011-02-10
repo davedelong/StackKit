@@ -8,8 +8,13 @@
 
 #import "SKLocalFetchRequest.h"
 #import "SKObject+Private.h"
+#import "SKLocalFetchOperation.h"
 
 @implementation SKLocalFetchRequest
+
++ (Class) operationClass {
+    return [SKLocalFetchOperation class];
+}
 
 - (NSFetchRequest *) coreDataFetchRequestForManagedObjectContext:(NSManagedObjectContext *)moc {
     NSFetchRequest * r = [[NSFetchRequest alloc] init];

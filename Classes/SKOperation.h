@@ -10,7 +10,7 @@
 #import "SKSite.h"
 
 @interface SKOperation : NSOperation {
-    
+    SKSite *site;
 }
 
 @property (nonatomic, retain) SKSite * site;

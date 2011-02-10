@@ -29,13 +29,14 @@
 
 #import "SKConstants.h"
 #import "SKFetchRequest.h"
+#import "SKFetchRequest+Private.h"
 #import "SKLocalFetchRequest.h"
 #import "SKFetchRequest+Private.h"
-#import "SKCallback.h"
 #import "JSON.h"
 
 #import "NSDictionary+SKAdditions.h"
 
+#import "SKFetchOperation.h"
 #import "SKStatisticsOperation.h"
 
 NSString * const SKSiteAPIKey = @"key";
@@ -183,72 +184,40 @@ NSString * const SKSiteAPIKey = @"key";
 #pragma mark Fetch Requests
 
 - (SKUser *) userWithID:(NSNumber *)aUserID {
-	SKFetchRequest * request = [[SKFetchRequest alloc] init];
+	SKLocalFetchRequest * request = [[SKLocalFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, aUserID]];
-	NSError * error = nil;
-	NSArray * matches = [self executeSynchronousFetchRequest:request error:&error];
-	[request release];
-	if (error != nil) { return nil; }
-	if ([matches count] != 1) { return nil; }
-	return [matches objectAtIndex:0];
-}
-
-- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
-	[fetchRequest setSite:self];
-	[fetchRequest setDelegate:nil];
-	
-	NSArray * results = [fetchRequest execute];
-	if ([fetchRequest error] && error) {
-		*error = [fetchRequest error];
-	}
-	return results;
-}
-
-- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest {
-	if (fetchRequest == nil) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidRequest reason:@"fetchRequest cannot be nil" userInfo:nil];
-	}
-	if([fetchRequest callback] == nil && [fetchRequest delegate] == nil) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest must have a delegate or callback specified" userInfo:nil];
-	}
-	else if ([fetchRequest delegate] && [[fetchRequest delegate] conformsToProtocol:@protocol(SKFetchRequestDelegate)] == NO) {
-		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"SKFetchRequest.delegate must conform to <SKFetchRequestDelegate>" userInfo:nil];
-	}
+	[request setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", aUserID]];
     
-    if ([fetchRequest isKindOfClass:[SKLocalFetchRequest class]]) {
-        
-    } else {
-        
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *coreDataRequest = [request coreDataFetchRequestForManagedObjectContext:context];
+    [request release];
+    
+    NSError *error = nil;
+    [context lock];
+    NSArray *objects = [context executeFetchRequest:coreDataRequest error:&error];
+    [context unlock];
+    
+    if (error != nil || [objects count] == 0) {
+        return nil;
     }
-	
-	if ([fetchRequest delegate] != nil && [fetchRequest callback] == nil) {
-		//transform the delegate into an SKCallback:
-		SKCallback * callback = [SKCallback callbackWithTarget:[fetchRequest delegate] 
-											   successSelector:@selector(fetchRequest:didReturnResults:) 
-											   failureSelector:@selector(fetchRequest:didFailWithError:)];
-		[fetchRequest setDelegate:nil];
-		[fetchRequest setCallback:callback];
-	}	
-	
-	[fetchRequest setSite:self];
-	
-	NSInvocationOperation * operation = [[NSInvocationOperation alloc] initWithTarget:fetchRequest selector:@selector(executeAsynchronously) object:nil];
-	[requestQueue addOperation:operation];
-	[operation release];
+    
+    return [objects objectAtIndex:0];
 }
 
-#ifdef NS_BLOCKS_AVAILABLE
-- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestCompletionHandler)handler {
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestHandler)handler {
 	if (handler == nil) {
 		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"CompletionHandler cannot be nil" userInfo:nil];
 	}
-	SKCallback * callback = [SKCallback callbackWithCompletionHandler:handler];
-	[fetchRequest setCallback:callback];
-	[fetchRequest setDelegate:nil];
-	[self executeFetchRequest:fetchRequest];
+	if (fetchRequest == nil) {
+		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"fetchRequest cannot be nil" userInfo:nil];
+	}
+    
+    Class operationClass = [[fetchRequest class] operationClass];
+    SKFetchOperation *op = [[operationClass alloc] initWithSite:self fetchRequest:fetchRequest];
+    [op setHandler:handler];
+    [requestQueue addOperation:op];
+    [op release];
 }
-#endif
 
 #pragma mark Site information
 

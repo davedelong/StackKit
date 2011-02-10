@@ -26,20 +26,14 @@
 #import <Foundation/Foundation.h>
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
-#define SKColor UIColor
-
+	#define SKColor UIColor
 #else
-
-#define SKColor NSColor
-
+	#define SKColor NSColor
 #endif
-
-#ifdef NS_BLOCKS_AVAILABLE
-typedef void(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
 
 typedef void(^SKStatisticsHandler)(NSDictionary *);
-#endif
+typedef void(^SKFetchRequestHandler)(NSArray *);
+typedef void(^SKActionBlock)(void);
 
 typedef id (*SKExtractor)(id);
 

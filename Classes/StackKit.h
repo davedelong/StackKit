@@ -27,8 +27,6 @@
 
 #import "SKFetchRequest.h"
 #import "SKLocalFetchRequest.h"
-#import "SKFetchRequestDelegate.h"
-#import "SKCallback.h"
 
 #import "SKSite.h"
 #import "SKSiteDelegate.h"
