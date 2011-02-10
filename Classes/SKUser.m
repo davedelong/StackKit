@@ -105,6 +105,15 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     return [super transformValueToMerge:value forProperty:property];
 }
 
++ (NSString*)entityName
+{
+    return @"SKUser";
+}
+
++ (NSString *)apiResponseUniqueIDKey {
+    return SKUserID;
+}
+
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
     // override for the sake of completeness
     return [super transformValueToMerge:value forRelationship:relationship];
