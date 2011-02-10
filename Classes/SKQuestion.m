@@ -55,6 +55,11 @@ NSString * const SKQuestionAnswers = @"answers";
 @dynamic answers;
 @dynamic tags;
 
++ (NSString*)entityName
+{
+    return @"SKQuestion";
+}
+
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;
     if (!mapping) {
