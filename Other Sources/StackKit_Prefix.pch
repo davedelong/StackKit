@@ -31,12 +31,10 @@
 
 #define StackKitMobile 
 #import <UIKit/UIKit.h>
-#define SKColor UIColor
 
 #else
 
 #define StackKitMac 
 #import <Cocoa/Cocoa.h>
-#define SKColor NSColor
 
 #endif

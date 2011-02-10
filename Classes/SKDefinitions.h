@@ -25,6 +25,15 @@
 
 #import <Foundation/Foundation.h>
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
+#define SKColor UIColor
+
+#else
+
+#define SKColor NSColor
+
+#endif
 
 #ifdef NS_BLOCKS_AVAILABLE
 typedef void(^SKFetchRequestCompletionHandler)(NSArray *,NSError *);
