@@ -43,7 +43,6 @@ NSString * const SKSiteAPIKey = @"key";
 
 @implementation SKSite
 
-@synthesize delegate;
 @synthesize apiKey;
 @synthesize apiURL;
 @synthesize timeoutInterval;
@@ -221,7 +220,7 @@ NSString * const SKSiteAPIKey = @"key";
 
 #pragma mark Site information
 
-- (void)requestStatisticsWithHandler:(SKStatisticsHandler)handler {
+- (void)requestStatisticsWithCompletionHandler:(SKStatisticsHandler)handler {
     if (handler == nil) {
         [NSException raise:NSInvalidArgumentException format:@"handler must not be nil"];
     }
