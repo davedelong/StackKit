@@ -24,9 +24,7 @@
  **/
 
 #import <Foundation/Foundation.h>
-#import "SKFetchRequestDelegate.h"
 
-@class SKCallback;
 @class SKSite;
 
 @interface SKFetchRequest : NSObject {
@@ -34,14 +32,12 @@
 	NSSortDescriptor * sortDescriptor;
 	NSUInteger fetchLimit;
 	NSUInteger fetchOffset;
-	NSNumber * fetchTotal;
+	NSUInteger fetchTotal;
 	NSPredicate * predicate;
 	
 	NSError * error;
-	id<SKFetchRequestDelegate> delegate;
 	NSURL * fetchURL;
 	
-	SKCallback *callback;
     SKSite *site;
 }
 
@@ -49,10 +45,8 @@
 @property (retain) NSSortDescriptor * sortDescriptor;
 @property (assign) NSUInteger fetchLimit;
 @property (assign) NSUInteger fetchOffset;
-@property (readonly) NSNumber * fetchTotal;
+@property (assign, readonly) NSUInteger fetchTotal;
 @property (retain) NSPredicate * predicate;
 @property (readonly, retain) NSError * error;
-@property (assign) id<SKFetchRequestDelegate> delegate;
-@property (retain) SKCallback *callback;
 
 @end

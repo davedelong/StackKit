@@ -31,16 +31,13 @@
 
 @interface SKFetchRequest ()
 
+@property (assign) NSUInteger fetchTotal;
 @property (retain) NSError * error;
 @property (retain) NSURL * fetchURL;
 
++ (Class) operationClass;
 - (void) setSite:(SKSite *)aSite;
 - (SKSite *) site;
-
-- (NSArray *) execute;
-- (void) executeAsynchronously;
-
-- (NSArray *) executeFetchRequest;
 
 @end
 

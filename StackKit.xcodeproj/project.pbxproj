@@ -13,7 +13,8 @@
 		550369AD1302F83F00D20ECB /* SKOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 550369AB1302F83E00D20ECB /* SKOperation.m */; };
 		550369B11302F8AE00D20ECB /* SKStatisticsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 550369AF1302F8AE00D20ECB /* SKStatisticsOperation.h */; };
 		550369B21302F8AE00D20ECB /* SKStatisticsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 550369B01302F8AE00D20ECB /* SKStatisticsOperation.m */; };
-		5506C7BE11AB29B700C47C1B /* SKFetchRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		550369DD1303500800D20ECB /* SKFetchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 550369DB1303500700D20ECB /* SKFetchOperation.h */; };
+		550369DE1303500800D20ECB /* SKFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 550369DC1303500700D20ECB /* SKFetchOperation.m */; };
 		5506C7E311ACBEBD00C47C1B /* SKDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */; };
 		5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506C7EB11ACF12300C47C1B /* SKFunctions.h */; };
@@ -108,6 +109,8 @@
 		55A2E710110EBAA60038E510 /* SKQuestionTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E70E110EBAA60038E510 /* SKQuestionTest.h */; };
 		55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */; };
 		55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */; };
+		55AC5F151303D27100F8FED7 /* SKLocalFetchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 55AC5F131303D27100F8FED7 /* SKLocalFetchOperation.h */; };
+		55AC5F161303D27100F8FED7 /* SKLocalFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AC5F141303D27100F8FED7 /* SKLocalFetchOperation.m */; };
 		55C23A0811690333009064EE /* SKSiteTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C23A0611690333009064EE /* SKSiteTest.h */; };
 		55C23A0A11690348009064EE /* SKSiteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A0711690333009064EE /* SKSiteTest.m */; };
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
@@ -153,8 +156,6 @@
 		55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
-		D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D402811BAB4EC00D5AD93 /* SKCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D21D402B11BAB4EC00D5AD93 /* SKCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = D21D402911BAB4EC00D5AD93 /* SKCallback.m */; };
 		D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C2410C116ADF71009064EE /* SKUserActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -201,7 +202,8 @@
 		550369AB1302F83E00D20ECB /* SKOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKOperation.m; sourceTree = "<group>"; };
 		550369AF1302F8AE00D20ECB /* SKStatisticsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKStatisticsOperation.h; sourceTree = "<group>"; };
 		550369B01302F8AE00D20ECB /* SKStatisticsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKStatisticsOperation.m; sourceTree = "<group>"; };
-		5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequestDelegate.h; sourceTree = "<group>"; };
+		550369DB1303500700D20ECB /* SKFetchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchOperation.h; sourceTree = "<group>"; };
+		550369DC1303500700D20ECB /* SKFetchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFetchOperation.m; sourceTree = "<group>"; };
 		5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDefinitions.h; sourceTree = "<group>"; };
 		5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDefinitions.m; sourceTree = "<group>"; };
 		5506C7EB11ACF12300C47C1B /* SKFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFunctions.h; sourceTree = "<group>"; };
@@ -297,6 +299,8 @@
 		55A2E70F110EBAA60038E510 /* SKQuestionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestionTest.m; sourceTree = "<group>"; };
 		55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+SKAdditions.h"; sourceTree = "<group>"; };
 		55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SKAdditions.m"; sourceTree = "<group>"; };
+		55AC5F131303D27100F8FED7 /* SKLocalFetchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLocalFetchOperation.h; sourceTree = "<group>"; };
+		55AC5F141303D27100F8FED7 /* SKLocalFetchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLocalFetchOperation.m; sourceTree = "<group>"; };
 		55C23A0611690333009064EE /* SKSiteTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteTest.h; sourceTree = "<group>"; };
 		55C23A0711690333009064EE /* SKSiteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSiteTest.m; sourceTree = "<group>"; };
 		55C23A8311693FE1009064EE /* SKBadgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadgeTest.h; sourceTree = "<group>"; };
@@ -350,8 +354,6 @@
 		55FF3A8412D859BF00CC4B9D /* SKRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKRequestBuilder.m; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Other Sources/Info.plist"; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* StackKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StackKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D21D402811BAB4EC00D5AD93 /* SKCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCallback.h; sourceTree = "<group>"; };
-		D21D402911BAB4EC00D5AD93 /* SKCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCallback.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -435,7 +437,6 @@
 				55C23E2D116A8FA4009064EE /* Object Base */,
 				55C23E2E116A8FAC009064EE /* Site */,
 				55C23E2C116A8F9E009064EE /* Fetch Request */,
-				D21D402711BAB4DF00D5AD93 /* Callbacks */,
 				55C23E2F116A8FB4009064EE /* User */,
 				55C23E31116A8FBE009064EE /* Badge */,
 				55C23E30116A8FBB009064EE /* Tag */,
@@ -480,6 +481,10 @@
 				550369AB1302F83E00D20ECB /* SKOperation.m */,
 				550369AF1302F8AE00D20ECB /* SKStatisticsOperation.h */,
 				550369B01302F8AE00D20ECB /* SKStatisticsOperation.m */,
+				550369DB1303500700D20ECB /* SKFetchOperation.h */,
+				550369DC1303500700D20ECB /* SKFetchOperation.m */,
+				55AC5F131303D27100F8FED7 /* SKLocalFetchOperation.h */,
+				55AC5F141303D27100F8FED7 /* SKLocalFetchOperation.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -694,7 +699,6 @@
 				55FA955D116132E3003A9CD7 /* SKFetchRequest.m */,
 				550369A6130245A700D20ECB /* SKLocalFetchRequest.h */,
 				550369A7130245A700D20ECB /* SKLocalFetchRequest.m */,
-				5506C7BD11AB29B700C47C1B /* SKFetchRequestDelegate.h */,
 				55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */,
 			);
 			name = "Fetch Request";
@@ -801,15 +805,6 @@
 			name = "Request Builder";
 			sourceTree = "<group>";
 		};
-		D21D402711BAB4DF00D5AD93 /* Callbacks */ = {
-			isa = PBXGroup;
-			children = (
-				D21D402811BAB4EC00D5AD93 /* SKCallback.h */,
-				D21D402911BAB4EC00D5AD93 /* SKCallback.m */,
-			);
-			name = Callbacks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -838,12 +833,10 @@
 				55FA969B11616A65003A9CD7 /* SKConstants.h in Headers */,
 				55C23A0811690333009064EE /* SKSiteTest.h in Headers */,
 				D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */,
-				5506C7BE11AB29B700C47C1B /* SKFetchRequestDelegate.h in Headers */,
 				5506C7E311ACBEBD00C47C1B /* SKDefinitions.h in Headers */,
 				5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */,
 				558333BF11B7668E00CA8D62 /* SKSiteDelegate.h in Headers */,
 				5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */,
-				D21D402A11BAB4EC00D5AD93 /* SKCallback.h in Headers */,
 				55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */,
 				5533A9A612D9A7E400F755F7 /* _SKConcreteRequestBuilder.h in Headers */,
 				5533A9F912DA419600F755F7 /* _SKRequestBuilderAnswersByID.h in Headers */,
@@ -889,6 +882,8 @@
 				550369A8130245A700D20ECB /* SKLocalFetchRequest.h in Headers */,
 				550369AC1302F83F00D20ECB /* SKOperation.h in Headers */,
 				550369B11302F8AE00D20ECB /* SKStatisticsOperation.h in Headers */,
+				550369DD1303500800D20ECB /* SKFetchOperation.h in Headers */,
+				55AC5F151303D27100F8FED7 /* SKLocalFetchOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,7 +1033,6 @@
 				55FA969C11616A65003A9CD7 /* SKConstants.m in Sources */,
 				5506C7E411ACBEBD00C47C1B /* SKDefinitions.m in Sources */,
 				5506C7EE11ACF12300C47C1B /* SKFunctions.m in Sources */,
-				D21D402B11BAB4EC00D5AD93 /* SKCallback.m in Sources */,
 				55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */,
 				5533A9A712D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */,
 				5533A9FA12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */,
@@ -1085,6 +1079,8 @@
 				550369A9130245A700D20ECB /* SKLocalFetchRequest.m in Sources */,
 				550369AD1302F83F00D20ECB /* SKOperation.m in Sources */,
 				550369B21302F8AE00D20ECB /* SKStatisticsOperation.m in Sources */,
+				550369DE1303500800D20ECB /* SKFetchOperation.m in Sources */,
+				55AC5F161303D27100F8FED7 /* SKLocalFetchOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
