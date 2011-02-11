@@ -64,4 +64,11 @@ NSString * const SKAnswerCommentsURL = __SKAnswerCommentsURL;
     return [self postID];
 }
 
+- (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
+    if ([relationship isEqual:@"question"]) {
+        return [SKQuestion objectMergedWithDictionary:[NSDictionary dictionaryWithObject:value forKey:SKQuestionID] inSite:[self site]];
+    }
+    return [super transformValueToMerge:value forRelationship:relationship];
+}
+
 @end
