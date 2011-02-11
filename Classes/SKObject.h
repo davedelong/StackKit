@@ -12,6 +12,7 @@
 
 @interface SKObject : NSManagedObject  
 {
+    SKSite *site;
 }
 
 @property (nonatomic, retain, readonly) SKSite * site;
