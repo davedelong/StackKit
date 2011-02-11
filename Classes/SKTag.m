@@ -38,6 +38,10 @@ NSString * const SKTagLastUsedDate = @"tag_activity";
 	return @"tags";
 }
 
++ (NSString *) entityName {
+    return @"SKTag";
+}
+
 + (NSString *) apiResponseUniqueIDKey {
     return SKTagName;
 }
