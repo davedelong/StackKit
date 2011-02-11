@@ -9,13 +9,6 @@
 #import <CoreData/CoreData.h>
 #import "SKObject.h"
 
-extern NSString * const SKTagName;
-extern NSString * const SKTagCount;
-extern NSString * const SKTagsParticipatedInByUser;
-
-extern NSString * const SKTagNumberOfTaggedQuestions;
-extern NSString * const SKTagLastUsedDate;
-
 @interface SKTag : SKObject  
 {
 }

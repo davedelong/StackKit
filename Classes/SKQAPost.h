@@ -9,21 +9,6 @@
 #import <CoreData/CoreData.h>
 #import "SKPost.h"
 
-//inherited
-extern NSString * const SKQAPostCreationDate;
-extern NSString * const SKQAPostOwner;
-extern NSString * const SKQAPostBody;
-extern NSString * const SKQAPostScore;
-
-extern NSString * const SKQAPostCommunityOwned;
-extern NSString * const SKQAPostDownVotes;
-extern NSString * const SKQAPostLastActivityDate;
-extern NSString * const SKQAPostLastEditDate;
-extern NSString * const SKQAPostLockedDate;
-extern NSString * const SKQAPostTitle;
-extern NSString * const SKQAPostUpVotes;
-extern NSString * const SKQAPostViewCount;
-
 @interface SKQAPost : SKPost  
 {
 }

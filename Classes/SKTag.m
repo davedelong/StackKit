@@ -10,13 +10,6 @@
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
 
-NSString * const SKTagName = @"name";
-NSString * const SKTagCount = @"count";
-NSString * const SKTagsParticipatedInByUser = __SKUserID;
-
-NSString * const SKTagNumberOfTaggedQuestions = @"tag_popular";
-NSString * const SKTagLastUsedDate = @"tag_activity";
-
 @implementation SKTag 
 
 @dynamic name;
@@ -27,8 +20,8 @@ NSString * const SKTagLastUsedDate = @"tag_activity";
 	static NSDictionary * mapping = nil;
 	if (!mapping) {
 		mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
-                    @"name", SKTagName,
-                    @"numberOfTaggedQuestions", SKTagCount,
+                    @"name", SKAPIName,
+                    @"numberOfTaggedQuestions", SKAPICount,
                     nil];
 	}
 	return mapping;
@@ -43,7 +36,7 @@ NSString * const SKTagLastUsedDate = @"tag_activity";
 }
 
 + (NSString *) apiResponseUniqueIDKey {
-    return SKTagName;
+    return SKAPIName;
 }
 
 @end

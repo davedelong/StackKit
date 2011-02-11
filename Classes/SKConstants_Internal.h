@@ -59,55 +59,63 @@ extern NSString * const SKQueryTagged;
 extern NSString * const SKQueryNotTagged;
 extern NSString * const SKQueryInTitle;
 
-/**
- There are some cases where constants can have different names but the same value.  For example:
- - in SKUser:	SKUserID
- - in SKTag:	SKTagsParticipatedInByUser
- - in SKBadge:	SKBadgeAwardedToUser
- 
- All three of those have the value of @"user_id", but it doesn't always make contextual sense to refer to them all as SKUserID.
- An SKBadge, for example, does not have an SKUserID.  However, it does know if it has been awarded to a particular user.
- 
- To get around the trouble of defining @"user_id" in 3 different places, all three of these constants are declared like so:
- 
- NSString * const SKWhateverThisConstantIs = __SKUserID;
- 
- __SKUserID is #defined below to be @"user_id".
- 
- For reference, see http://stackoverflow.com/questions/2909724
- 
- **/
-
-#define __SKUserID @"user_id"
-#define __SKPostScore @"score"
-#define __SKPostCreationDate @"creation_date"
-#define __SKPostOwner @"owner"
-#define __SKPostBody @"body"
-#define __SKQAPostLockedDate @"locked_date"
-#define __SKQAPostLastEditDate @"last_edit_date"
-#define __SKQAPostLastActivityDate @"last_activity_date"
-#define __SKQAPostUpVotes @"up_vote_count"
-#define __SKQAPostDownVotes @"down_vote_count"
-#define __SKQAPostViewCount @"view_count"
-#define __SKQAPostCommunityOwned @"community_owned"
-#define __SKQAPostTitle @"title"
-#define __SKQuestionID @"question_id"
-#define __SKQuestionTags @"tags"
-#define __SKQuestionAnswerCount @"answer_count"
-#define __SKQuestionAcceptedAnswer @"accepted_answer_id"
-#define __SKQuestionFavoriteCount @"favorite_count"
-#define __SKQuestionBountyCloseDate @"bounty_closes_date"
-#define __SKQuestionBountyAmount @"bounty_amount"
-#define __SKQuestionCloseDate @"closed_date"
-#define __SKQuestionCloseReason @"closed_reason"
-#define __SKQuestionTimelineURL @"question_timeline_url"
-#define __SKQuestionCommentsURL @"question_comments_url"
-#define __SKQuestionAnswersURL @"question_answers_url"
-
-#define __SKAnswerID @"answer_id"
-#define __SKAnswerQuestion __SKQuestionID
-#define __SKAnswerIsAccepted @"accepted"
-#define __SKAnswerCommentsURL @"answer_comments_url"
+extern NSString * const SKAPIAbout_Me;
+extern NSString * const SKAPIAccept_Rate;
+extern NSString * const SKAPIAccepted;
+extern NSString * const SKAPIAccepted_Answer_ID;
+extern NSString * const SKAPIAge;
+extern NSString * const SKAPIAnswers;
+extern NSString * const SKAPIAnswer_Count;
+extern NSString * const SKAPIAnswer_ID;
+extern NSString * const SKAPIAssociation_ID;
+extern NSString * const SKAPIAward_Count;
+extern NSString * const SKAPIAwards;
+extern NSString * const SKAPIBadge_ID;
+extern NSString * const SKAPIBody;
+extern NSString * const SKAPIBounty_Amount;
+extern NSString * const SKAPIBounty_Closes_Date;
+extern NSString * const SKAPIBronze;
+extern NSString * const SKAPIClosed_Date;
+extern NSString * const SKAPIClosed_Reason;
+extern NSString * const SKAPIComments;
+extern NSString * const SKAPIComment_ID;
+extern NSString * const SKAPICommunity_Owned;
+extern NSString * const SKAPICount;
+extern NSString * const SKAPICreation_Date;
+extern NSString * const SKAPIDescription;
+extern NSString * const SKAPIDisplay_Name;
+extern NSString * const SKAPIDown_Vote_Count;
+extern NSString * const SKAPIEdit_Count;
+extern NSString * const SKAPIEmail_Hash;
+extern NSString * const SKAPIFavorite_Count;
+extern NSString * const SKAPIGold;
+extern NSString * const SKAPILast_Access_Date;
+extern NSString * const SKAPILast_Activity_Date;
+extern NSString * const SKAPILast_Edit_Date;
+extern NSString * const SKAPILocation;
+extern NSString * const SKAPILocked_Date;
+extern NSString * const SKAPIName;
+extern NSString * const SKAPIOwner;
+extern NSString * const SKAPIPost_ID;
+extern NSString * const SKAPIPost_Type;
+extern NSString * const SKAPIQuestion_Count;
+extern NSString * const SKAPIQuestion_ID;
+extern NSString * const SKAPIRank;
+extern NSString * const SKAPIReply_To_User;
+extern NSString * const SKAPIReputation;
+extern NSString * const SKAPIScore;
+extern NSString * const SKAPISilver;
+extern NSString * const SKAPISummary;
+extern NSString * const SKAPITags;
+extern NSString * const SKAPITag_Based;
+extern NSString * const SKAPITitle;
+extern NSString * const SKAPIUp_Vote_Count;
+extern NSString * const SKAPIUser;
+extern NSString * const SKAPIUser_Badges;
+extern NSString * const SKAPIUser_ID;
+extern NSString * const SKAPIUser_Type;
+extern NSString * const SKAPIView_Count;
+extern NSString * const SKAPIWebsite_URL;
 
 
 #ifndef SKLog

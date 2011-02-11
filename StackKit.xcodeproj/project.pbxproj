@@ -110,6 +110,7 @@
 		55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */; };
 		55AC5F151303D27100F8FED7 /* SKLocalFetchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 55AC5F131303D27100F8FED7 /* SKLocalFetchOperation.h */; };
 		55AC5F161303D27100F8FED7 /* SKLocalFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AC5F141303D27100F8FED7 /* SKLocalFetchOperation.m */; };
+		55BB7DB41304CDB300B5F68C /* SKConstants_Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BB7DB31304CDB300B5F68C /* SKConstants_Internal.m */; };
 		55C23A0811690333009064EE /* SKSiteTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C23A0611690333009064EE /* SKSiteTest.h */; };
 		55C23A0A11690348009064EE /* SKSiteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A0711690333009064EE /* SKSiteTest.m */; };
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
@@ -299,6 +300,7 @@
 		55A2E744110EC29A0038E510 /* NSDate+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SKAdditions.m"; sourceTree = "<group>"; };
 		55AC5F131303D27100F8FED7 /* SKLocalFetchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLocalFetchOperation.h; sourceTree = "<group>"; };
 		55AC5F141303D27100F8FED7 /* SKLocalFetchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLocalFetchOperation.m; sourceTree = "<group>"; };
+		55BB7DB31304CDB300B5F68C /* SKConstants_Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants_Internal.m; sourceTree = "<group>"; };
 		55C23A0611690333009064EE /* SKSiteTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteTest.h; sourceTree = "<group>"; };
 		55C23A0711690333009064EE /* SKSiteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSiteTest.m; sourceTree = "<group>"; };
 		55C23A8311693FE1009064EE /* SKBadgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadgeTest.h; sourceTree = "<group>"; };
@@ -403,7 +405,6 @@
 				089C1665FE841158C02AAC07 /* Resources */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
 				034768DFFF38A50411DB9C8B /* Products */,
-				55E5BBEC12F27D1200092A8D /* CoreData.framework */,
 			);
 			name = StackKit;
 			sourceTree = "<group>";
@@ -448,6 +449,7 @@
 		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55E5BBEC12F27D1200092A8D /* CoreData.framework */,
 				1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -765,6 +767,7 @@
 			children = (
 				55FA969911616A65003A9CD7 /* SKConstants.h */,
 				5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */,
+				55BB7DB31304CDB300B5F68C /* SKConstants_Internal.m */,
 				55FA969A11616A65003A9CD7 /* SKConstants.m */,
 				5506C7E111ACBEBD00C47C1B /* SKDefinitions.h */,
 				5506C7E211ACBEBD00C47C1B /* SKDefinitions.m */,
@@ -1077,6 +1080,7 @@
 				550369B21302F8AE00D20ECB /* SKStatisticsOperation.m in Sources */,
 				550369DE1303500800D20ECB /* SKFetchOperation.m in Sources */,
 				55AC5F161303D27100F8FED7 /* SKLocalFetchOperation.m in Sources */,
+				55BB7DB41304CDB300B5F68C /* SKConstants_Internal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

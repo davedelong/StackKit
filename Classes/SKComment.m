@@ -12,18 +12,6 @@
 #import "SKUser.h"
 #import "SKConstants_Internal.h"
 
-NSString * const SKCommentCreationDate = __SKPostCreationDate;
-NSString * const SKCommentOwner = __SKPostOwner;
-NSString * const SKCommentBody = __SKPostBody;
-NSString * const SKCommentScore = __SKPostScore;
-
-NSString * const SKCommentID = @"comment_id";
-NSString * const SKCommentInReplyToUser = @"reply_to_user";
-NSString * const SKCommentPost = @"post_id";
-NSString * const SKCommentEditCount = @"edit_count";
-
-NSString * const SKCommentPostType = @"post_type";
-
 @implementation SKComment 
 
 @dynamic editCount;
@@ -35,7 +23,7 @@ NSString * const SKCommentPostType = @"post_type";
 }
 
 + (NSString *) apiResponseUniqueIDKey {
-	return SKCommentID;
+	return SKAPIComment_ID;
 }
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
@@ -43,10 +31,10 @@ NSString * const SKCommentPostType = @"post_type";
     if (!mapping) {
         mapping = [[super APIAttributeToPropertyMapping] mutableCopy];
         [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"postID", SKCommentID,
-                                                                  @"editCount", SKCommentEditCount,
-                                                                  @"post", SKCommentPost,
-                                                                  @"directedToUser", SKCommentInReplyToUser,
+                                                                  @"postID", SKAPIComment_ID,
+                                                                  @"editCount", SKAPIEdit_Count,
+                                                                  @"post", SKAPIPost_ID,
+                                                                  @"directedToUser", SKAPIReply_To_User,
                                                                   nil]];
     }
     return mapping;

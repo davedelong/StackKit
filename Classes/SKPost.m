@@ -11,11 +11,6 @@
 #import "SKObject+Private.h"
 #import "SKUser.h"
 
-NSString * const SKPostCreationDate = __SKPostCreationDate;
-NSString * const SKPostOwner = __SKPostOwner;
-NSString * const SKPostBody = __SKPostBody;
-NSString * const SKPostScore = __SKPostScore;
-
 @implementation SKPost 
 
 @dynamic body;
@@ -29,10 +24,10 @@ NSString * const SKPostScore = __SKPostScore;
     static NSDictionary *mapping = nil;
     if (!mapping) {
         mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
-                   @"creationDate", SKPostCreationDate,
-                   @"owner", SKPostOwner,
-                   @"body", SKPostBody,
-                   @"score", SKPostScore,
+                   @"creationDate", SKAPICreation_Date,
+                   @"owner", SKAPIOwner,
+                   @"body", SKAPIBody,
+                   @"score", SKAPIScore,
                    nil];
     }
     return mapping;

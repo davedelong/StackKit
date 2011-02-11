@@ -9,15 +9,6 @@
 #import <CoreData/CoreData.h>
 #import "SKObject.h"
 
-extern NSString * const SKBadgeID;
-extern NSString * const SKBadgeName;
-extern NSString * const SKBadgeNumberAwarded;
-extern NSString * const SKBadgeRank;
-extern NSString * const SKBadgeSummary;
-extern NSString * const SKBadgeTagBased;
-
-extern NSString * const SKBadgesAwardedToUser;
-
 @interface SKBadge : SKObject  
 {
 }

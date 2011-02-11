@@ -9,11 +9,6 @@
 #import <CoreData/CoreData.h>
 #import "SKObject.h"
 
-extern NSString * const SKPostBody;
-extern NSString * const SKPostCreationDate;
-extern NSString * const SKPostOwner;
-extern NSString * const SKPostScore;
-
 @class SKUser;
 
 @interface SKPost : SKObject  

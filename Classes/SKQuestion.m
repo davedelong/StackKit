@@ -13,38 +13,6 @@
 #import "SKTag.h"
 #import "SKAnswer.h"
 
-//inherited
-NSString * const SKQuestionCreationDate = __SKPostCreationDate;
-NSString * const SKQuestionOwner = __SKPostOwner;
-NSString * const SKQuestionBody = __SKPostBody;
-NSString * const SKQuestionScore = __SKPostScore;
-NSString * const SKQuestionLockedDate = __SKQAPostLockedDate;
-NSString * const SKQuestionLastEditDate = __SKQAPostLastEditDate;
-NSString * const SKQuestionLastActivityDate = __SKQAPostLastActivityDate;
-NSString * const SKQuestionUpVotes = __SKQAPostUpVotes;
-NSString * const SKQuestionDownVotes = __SKQAPostDownVotes;
-NSString * const SKQuestionViewCount = __SKQAPostViewCount;
-NSString * const SKQuestionCommunityOwned = __SKQAPostCommunityOwned;
-NSString * const SKQuestionTitle = __SKQAPostTitle;
-
-NSString * const SKQuestionID = __SKQuestionID;
-NSString * const SKQuestionTags = __SKQuestionTags;
-NSString * const SKQuestionAnswerCount = __SKQuestionAnswerCount;
-NSString * const SKQuestionAcceptedAnswer = __SKQuestionAcceptedAnswer;
-NSString * const SKQuestionFavoriteCount = __SKQuestionFavoriteCount;
-NSString * const SKQuestionBountyCloseDate = __SKQuestionBountyCloseDate;
-NSString * const SKQuestionBountyAmount = __SKQuestionBountyAmount;
-NSString * const SKQuestionCloseDate = __SKQuestionCloseDate;
-NSString * const SKQuestionCloseReason = __SKQuestionCloseReason;
-NSString * const SKQuestionTimelineURL = __SKQuestionTimelineURL;
-NSString * const SKQuestionCommentsURL = __SKQuestionCommentsURL;
-NSString * const SKQuestionAnswersURL = __SKQuestionAnswersURL;
-
-NSString * const SKQuestionsFavoritedByUser = @"question_favorited_by_user";
-NSString * const SKQuestionFavoritedDate = @"question_favorited_date";
-
-NSString * const SKQuestionAnswers = @"answers";
-
 @implementation SKQuestion 
 
 @dynamic closeDate;
@@ -64,14 +32,14 @@ NSString * const SKQuestionAnswers = @"answers";
     if (!mapping) {
         mapping = [[super APIAttributeToPropertyMapping] mutableCopy];
         [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"postID", SKQuestionID, // inherited from SKPost
-                                                                  @"closeDate", SKQuestionCloseDate,
-                                                                  @"bountyAmount", SKQuestionBountyAmount,
-                                                                  @"bountyCloseDate", SKQuestionBountyCloseDate,
-                                                                  @"closeReason", SKQuestionCloseReason,
-                                                                  @"favoriteCount", SKQuestionFavoriteCount,
-                                                                  @"answers", SKQuestionAnswers,
-                                                                  @"tags", SKQuestionTags,
+                                                                  @"postID", SKAPIPost_ID, // inherited from SKPost
+                                                                  @"closeDate", SKAPIClosed_Date,
+                                                                  @"bountyAmount", SKAPIBounty_Amount,
+                                                                  @"bountyCloseDate", SKAPIBounty_Closes_Date,
+                                                                  @"closeReason", SKAPIClosed_Reason,
+                                                                  @"favoriteCount", SKAPIFavorite_Count,
+                                                                  @"answers", SKAPIAnswers,
+                                                                  @"tags", SKAPITags,
                                                                   nil]];
     }
     return mapping;

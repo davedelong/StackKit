@@ -11,23 +11,6 @@
 #import "SKObject+Private.h"
 #import "SKComment.h"
 
-//inherited
-NSString * const SKQAPostCreationDate = __SKPostCreationDate;
-NSString * const SKQAPostOwner = __SKPostOwner;
-NSString * const SKQAPostBody = __SKPostBody;
-NSString * const SKQAPostScore = __SKPostScore;
-
-NSString * const SKQAPostCommunityOwned = __SKQAPostCommunityOwned;
-NSString * const SKQAPostDownVotes = __SKQAPostDownVotes;
-NSString * const SKQAPostLastActivityDate = __SKQAPostLastActivityDate;
-NSString * const SKQAPostLastEditDate = __SKQAPostLastEditDate;
-NSString * const SKQAPostLockedDate = __SKQAPostLockedDate;
-NSString * const SKQAPostTitle = __SKQAPostTitle;
-NSString * const SKQAPostUpVotes = __SKQAPostUpVotes;
-NSString * const SKQAPostViewCount = __SKQAPostViewCount;
-
-NSString * const SKQAPostComments = @"comments";
-
 @implementation SKQAPost 
 
 @dynamic communityOwned;
@@ -46,15 +29,15 @@ NSString * const SKQAPostComments = @"comments";
     if (!mapping) {
         mapping = [[super APIAttributeToPropertyMapping] mutableCopy];
         [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"communityOwned", SKQAPostCommunityOwned,
-                                                                  @"downVotes", SKQAPostDownVotes,
-                                                                  @"lastActivityDate", SKQAPostLastActivityDate,
-                                                                  @"lastEditDate", SKQAPostLastEditDate,
-                                                                  @"lockedDate", SKQAPostLockedDate,
-                                                                  @"title", SKQAPostTitle,
-                                                                  @"upVotes", SKQAPostUpVotes,
-                                                                  @"viewCount", SKQAPostViewCount,
-                                                                  @"comments", SKQAPostComments,
+                                                                  @"communityOwned", SKAPICommunity_Owned,
+                                                                  @"downVotes", SKAPIDown_Vote_Count,
+                                                                  @"lastActivityDate", SKAPILast_Activity_Date,
+                                                                  @"lastEditDate", SKAPILast_Edit_Date,
+                                                                  @"lockedDate", SKAPILocked_Date,
+                                                                  @"title", SKAPITitle,
+                                                                  @"upVotes", SKAPIUp_Vote_Count,
+                                                                  @"viewCount", SKAPIView_Count,
+                                                                  @"comments", SKAPIComments,
                                                                   nil]];
     }
     return mapping;

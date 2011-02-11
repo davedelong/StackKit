@@ -42,15 +42,6 @@ typedef enum {
 	SKUserActivityActionTypeAnswered = 3
 } SKUserActivityActionType_t;
 
-extern NSString * const SKUserActivityType;
-extern NSString * const SKUserActivityPostID;
-extern NSString * const SKUserActivityPostType;
-extern NSString * const SKUserActivityCommentID;
-extern NSString * const SKUserActivityAction;
-extern NSString * const SKUserActivityCreationDate;
-extern NSString * const SKUserActivityDescription;
-extern NSString * const SKUserActivityDetail;
-
 @interface SKUserActivity : SKObject {
 	SKUserActivityType_t type;
 	

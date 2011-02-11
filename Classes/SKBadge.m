@@ -13,21 +13,6 @@
 #import "SKUser.h"
 #import "SKBadgeAward.h"
 
-NSString * const SKBadgeID = @"badge_id";
-NSString * const SKBadgeRank = @"rank";
-NSString * const SKBadgeName = @"name";
-NSString * const SKBadgeNumberAwarded = @"award_count";
-NSString * const SKBadgeSummary = @"description";
-NSString * const SKBadgeTagBased = @"tag_based";
-
-NSString * const SKBadgesAwardedToUser = __SKUserID;
-
-NSString * const SKBadgeAwards = @"awards";
-NSString * const SKBadgeUser = @"user";
-NSString * const SKBadgeRankGoldKey = @"gold";
-NSString * const SKBadgeRankSilverKey = @"silver";
-NSString * const SKBadgeRankBronzeKey = @"bronze";
-
 @implementation SKBadge 
 
 @dynamic badgeID;
@@ -48,34 +33,34 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 }
 
 + (NSString *) apiResponseUniqueIDKey {
-    return SKBadgeID;
+    return SKAPIBadge_ID;
 }
 
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;
     if (!mapping) {
         mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
-                   @"badgeID", SKBadgeID,
-                   @"name", SKBadgeName,
-                   @"numberAwarded", SKBadgeNumberAwarded,
-                   @"rank", SKBadgeRank,
-                   @"summary", SKBadgeSummary,
-                   @"tagBased", SKBadgeTagBased,
-                   @"awards", SKBadgeAwards,
+                   @"badgeID", SKAPIBadge_ID,
+                   @"name", SKAPIName,
+                   @"numberAwarded", SKAPIAward_Count,
+                   @"rank", SKAPIRank,
+                   @"summary", SKAPISummary,
+                   @"tagBased", SKAPITag_Based,
+                   @"awards", @"awards",
                    nil];
     }
     return mapping;
 }
 
 - (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary {
-    if ([dictionary objectForKey:SKBadgeUser] != nil && [dictionary objectForKey:SKBadgeNumberAwarded] != nil) {
+    if ([dictionary objectForKey:SKAPIUser] != nil && [dictionary objectForKey:SKAPIAward_Count] != nil) {
         NSMutableDictionary *mutable = [dictionary mutableCopy];
         NSDictionary *user = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [dictionary objectForKey:SKBadgeNumberAwarded], SKBadgeNumberAwarded,
-                              [dictionary objectForKey:SKBadgeUser], SKBadgeUser,
+                              [dictionary objectForKey:SKAPIAward_Count], SKAPIAward_Count,
+                              [dictionary objectForKey:SKAPIUser], SKAPIUser,
                               nil];
-        [mutable setObject:user forKey:SKBadgeAwards];
-        [mutable removeObjectForKey:SKBadgeNumberAwarded];
+        [mutable setObject:user forKey:@"awards"];
+        [mutable removeObjectForKey:SKAPIAward_Count];
         dictionary = [mutable autorelease];
     }
     [super mergeInformationFromAPIResponseDictionary:dictionary];
@@ -84,9 +69,9 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 - (id)transformValueToMerge:(id)value forProperty:(NSString *)property {
     if ([property isEqualToString:@"rank"]) {
 		SKBadgeRank_t rank = SKBadgeRankBronze;
-		if ([value isEqual:SKBadgeRankGoldKey]) {
+		if ([value isEqual:SKAPIGold]) {
 			rank = SKBadgeRankGold;
-		} else if ([value isEqual:SKBadgeRankSilverKey]) {
+		} else if ([value isEqual:SKAPISilver]) {
 			rank = SKBadgeRankSilver;
 		}
         return [NSNumber numberWithInt:rank];
@@ -96,9 +81,9 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
 
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
     // override for the sake of completeness
-    if ([relationship isEqualToString:SKBadgeAwards]) {
-        NSDictionary *user = [value objectForKey:SKBadgeUser];
-        NSNumber *awardCount = [value objectForKey:SKBadgeNumberAwarded];
+    if ([relationship isEqualToString:@"awards"]) {
+        NSDictionary *user = [value objectForKey:SKAPIUser];
+        NSNumber *awardCount = [value objectForKey:SKAPIAward_Count];
         
         SKUser *userObject = [SKUser objectMergedWithDictionary:user inSite:[self site]];
         SKBadgeAward *award = nil;
