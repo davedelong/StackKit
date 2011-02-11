@@ -55,8 +55,7 @@ NSString * const SKQuestionAnswers = @"answers";
 @dynamic answers;
 @dynamic tags;
 
-+ (NSString*)entityName
-{
++ (NSString *) entityName {
     return @"SKQuestion";
 }
 

@@ -43,6 +43,10 @@ NSString * const SKBadgeRankBronzeKey = @"bronze";
     return @"badges";
 }
 
++ (NSString *) entityName {
+    return @"SKBadge";
+}
+
 + (NSString *) apiResponseUniqueIDKey {
     return SKBadgeID;
 }
