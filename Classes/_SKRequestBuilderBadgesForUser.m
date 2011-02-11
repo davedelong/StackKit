@@ -34,13 +34,13 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKBadgesAwardedToUser,
+			SK_BOX(NSContainsPredicateOperatorType), @"awards.user",
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKBadgesAwardedToUser,
+			@"awards.user",
 			nil];
 }
 
@@ -51,7 +51,7 @@
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
 	
-	id users = [p constantValueForLeftKeyPath:SKBadgesAwardedToUser];
+	id users = [p constantValueForLeftKeyPath:@"awards.user"];
 	[self setPath:[NSString stringWithFormat:@"/users/%@/badges", SKExtractUserID(users)]];
 	
 	[super buildURL];

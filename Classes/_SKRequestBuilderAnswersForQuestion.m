@@ -36,26 +36,26 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKQuestionID,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerCreationDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerLastActivityDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerViewCount,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKAnswerScore,
+			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), @"question",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"viewCount",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKQuestionID,
+			@"question",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortCreation, SKAnswerCreationDate,
-			SKSortActivity, SKAnswerLastActivityDate,
-			SKSortViews, SKAnswerViewCount,
-			SKSortVotes, SKAnswerScore,
+			SKSortCreation, @"creationDate",
+			SKSortActivity, @"lastActivityDate",
+			SKSortViews, @"viewCount",
+			SKSortVotes, @"score",
 			nil];
 }
 
@@ -63,10 +63,10 @@
 	NSPredicate * p = [self requestPredicate];
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 	
-	id questionIDs = [p constantValueForLeftKeyPath:SKQuestionID];
+	id questionIDs = [p constantValueForLeftKeyPath:@"question"];
 	[self setPath:[NSString stringWithFormat:@"/questions/%@/answers", SKExtractQuestionID(questionIDs)]];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKAnswerCreationDate];
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -74,7 +74,7 @@
 		[[self query] setObject:dateRange.upper forKey:SKQueryToDate];
 	}
 	
-	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKAnswerCreationDate]) {
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];

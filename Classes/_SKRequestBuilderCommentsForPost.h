@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 #import "_SKConcreteRequestBuilder.h"
 
-@interface _SKRequestBuilderCommentsForAnswer : _SKConcreteRequestBuilder {
+@interface _SKRequestBuilderCommentsForPost : _SKConcreteRequestBuilder {
 
 }
 

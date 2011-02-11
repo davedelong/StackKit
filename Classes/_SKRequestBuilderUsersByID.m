@@ -34,34 +34,34 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKUserID,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserCreationDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserReputation,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserDisplayName,
+			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), @"userID",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"reputation",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"displayName",
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserID,
+			@"userID",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortCreation, SKUserCreationDate,
-			SKSortReputation, SKUserReputation,
-			SKSortName, SKUserDisplayName,
+			SKSortCreation, @"creationDate",
+			SKSortReputation, @"reputation",
+			SKSortName, @"displayName",
 			nil];
 }
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
 	
-	id users = [p constantValueForLeftKeyPath:SKUserID];
+	id users = [p constantValueForLeftKeyPath:@"userID"];
 	[self setPath:[NSString stringWithFormat:@"/users/%@", SKExtractUserID(users)]];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKUserCreationDate];
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -69,7 +69,7 @@
 		[[self query] setObject:dateRange.upper forKey:SKQueryToDate];
 	}
 	
-	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKUserCreationDate]) {
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
@@ -79,7 +79,7 @@
 		}
 	}
 	
-	id filter = [p constantValueForLeftKeyPath:SKUserDisplayName];
+	id filter = [p constantValueForLeftKeyPath:@"displayName"];
 	if (filter != nil) {
 		[[self query] setObject:filter forKey:SKQueryFilter];
 	}

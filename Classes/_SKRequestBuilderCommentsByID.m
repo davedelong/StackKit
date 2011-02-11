@@ -34,31 +34,31 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKCommentID,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKCommentCreationDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKCommentScore,
+			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), @"postID",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKCommentID,
+			@"postID",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortCreation, SKCommentCreationDate,
-			SKSortVotes, SKCommentScore,
+			SKSortCreation, @"creationDate",
+			SKSortVotes, @"score",
 			nil];
 }
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id commentIDs = [p constantValueForLeftKeyPath:SKCommentID];
+	id commentIDs = [p constantValueForLeftKeyPath:@"postID"];
 	[self setPath:[NSString stringWithFormat:@"/comments/%@", SKExtractCommentID(commentIDs)]];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKCommentCreationDate];
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -66,7 +66,7 @@
 		[[self query] setObject:dateRange.upper forKey:SKQueryToDate];
 	}
 	
-	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKCommentCreationDate]) {
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];

@@ -33,7 +33,7 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 @dynamic upVotes;
 @dynamic userID;
 @dynamic userType;
-@dynamic views;
+@dynamic viewCount;
 @dynamic websiteURL;
 
 @dynamic awardedBadges;
@@ -44,22 +44,22 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     static NSDictionary *mapping = nil;
     if (!mapping) {
         mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
-                   @"aboutMe", SKUserAboutMe,
-                   @"acceptRate", SKUserAcceptRate,
-                   @"age", SKUserAge,
-                   @"associationID", SKUserAssociationID,
-                   @"creationDate", SKUserCreationDate,
-                   @"displayName", SKUserDisplayName,
-                   @"downVotes", SKUserDownVotes,
-                   @"emailHash", SKUserEmailHash,
-                   @"lastAccessDate", SKUserLastAccessDate,
-                   @"location", SKUserLocation,
-                   @"reputation", SKUserReputation,
-                   @"upVotes", SKUserUpVotes,
-                   @"userID", SKUserID,
-                   @"userType", SKUserType,
-                   @"views", SKUserViews,
-                   @"websiteURL", SKUserWebsiteURL,
+                   @"aboutMe", SKAPIAbout_Me,
+                   @"acceptRate", SKAPIAccept_Rate,
+                   @"age", SKAPIAge,
+                   @"associationID", SKAPIAssociation_ID,
+                   @"creationDate", SKAPICreation_Date,
+                   @"displayName", SKAPIDisplay_Name,
+                   @"downVotes", SKAPIDown_Vote_Count,
+                   @"emailHash", SKAPIEmail_Hash,
+                   @"lastAccessDate", SKAPILast_Access_Date,
+                   @"location", SKAPILocation,
+                   @"reputation", SKAPIReputation,
+                   @"upVotes", SKAPIUp_Vote_Count,
+                   @"userID", SKAPIUser_ID,
+                   @"userType", SKAPIUser_Type,
+                   @"viewCount", SKAPIView_Count,
+                   @"websiteURL", SKAPIWebsite_URL,
                    nil];
     }
     return mapping;

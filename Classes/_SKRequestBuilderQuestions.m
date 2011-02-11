@@ -34,10 +34,10 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionCreationDate,
-			SK_BOX(NSContainsPredicateOperatorType), SKQuestionTags,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionLastActivityDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionScore,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSContainsPredicateOperatorType), @"tags",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 //			SKQuestionIsFeatured,
 //			SKQuestionIsHot,
 //			SKQuestionWeek,
@@ -47,9 +47,9 @@
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortActivity, SKQuestionLastActivityDate,
-			SKSortCreation, SKQuestionCreationDate,
-			SKSortVotes, SKQuestionScore,
+			SKSortActivity, @"lastActivityDate",
+			SKSortCreation, @"creationDate",
+			SKSortVotes, @"score",
 //			SKQuestionIsFeatured,
 //			SKQuestionIsHot,
 //			SKQuestionWeek,
@@ -63,7 +63,7 @@
 	
 	[self setPath:@"/questions"];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKQuestionCreationDate];
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -71,7 +71,7 @@
 		[[self query] setObject:dateRange.upper forKey:SKQueryToDate];
 	}
 	
-	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKQuestionCreationDate]) {
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
@@ -81,7 +81,7 @@
 		}
 	}
 	
-	id tags = [p constantValueForLeftKeyPath:SKQuestionTags];
+	id tags = [p constantValueForLeftKeyPath:@"tags"];
 	if (tags != nil) {
 		[[self query] setObject:SKExtractTagName(tags) forKey:SKQueryTagged];
 	}

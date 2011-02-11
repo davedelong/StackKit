@@ -34,17 +34,17 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSContainsPredicateOperatorType), SKUserDisplayName,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserCreationDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserReputation,
+			SK_BOX(NSContainsPredicateOperatorType), @"displayName",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"reputation",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortName, SKUserDisplayName,
-			SKSortCreation, SKUserCreationDate,
-			SKSortReputation, SKUserReputation,
+			SKSortName, @"displayName",
+			SKSortCreation, @"creationDate",
+			SKSortReputation, @"reputation",
 			nil];
 }
 
@@ -53,7 +53,7 @@
 	
 	[self setPath:@"/users"];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKUserCreationDate];
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -61,7 +61,7 @@
 		[[self query] setObject:dateRange.upper forKey:SKQueryToDate];
 	}
 	
-	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKUserCreationDate]) {
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
@@ -71,7 +71,7 @@
 		}
 	}
 	
-	id filter = [p constantValueForLeftKeyPath:SKUserDisplayName];
+	id filter = [p constantValueForLeftKeyPath:@"displayName"];
 	if (filter != nil) {
 		[[self query] setObject:filter forKey:SKQueryFilter];
 	}

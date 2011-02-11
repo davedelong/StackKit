@@ -34,30 +34,30 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSEqualToPredicateOperatorType), SKUserType,
-			SK_BOX(NSContainsPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserDisplayName,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserCreationDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserReputation,
+			SK_BOX(NSEqualToPredicateOperatorType), @"userType",
+			SK_BOX(NSContainsPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"displayName",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"reputation",
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserType,
+			@"userType",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortReputation, SKUserReputation,
-			SKSortCreation, SKUserCreationDate,
-			SKSortName, SKUserDisplayName,
+			SKSortReputation, @"reputation",
+			SKSortCreation, @"creationDate",
+			SKSortName, @"displayName",
 			nil];
 }
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id userType = [p constantValueForLeftKeyPath:SKUserType];
+	id userType = [p constantValueForLeftKeyPath:@"userType"];
 	if ([userType respondsToSelector:@selector(intValue)]) {
 		int type = [userType intValue];
 		if (type != SKUserTypeModerator) {
@@ -66,14 +66,14 @@
 		}
 	}
 	
-	id filter = [p constantValueForLeftKeyPath:SKUserDisplayName];
+	id filter = [p constantValueForLeftKeyPath:@"displayName"];
 	if (filter != nil) {
 		[[self query] setObject:filter forKey:SKQueryFilter];
 	}
 	
 	[self setPath:@"/users/moderators"];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKUserCreationDate];
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -81,7 +81,7 @@
 		[[self query] setObject:dateRange.upper forKey:SKQueryToDate];
 	}
 	
-	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKUserCreationDate]) {
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];

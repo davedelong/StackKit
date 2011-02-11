@@ -35,9 +35,9 @@
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
 			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKTagsParticipatedInByUser,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKTagNumberOfTaggedQuestions,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKTagLastUsedDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKTagName,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"numberOfTaggedQuestions",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastUsedDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"name",
 			nil];
 }
 
@@ -49,9 +49,9 @@
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortPopular, SKTagNumberOfTaggedQuestions,
-			SKSortActivity, SKTagLastUsedDate,
-			SKSortName, SKTagName,
+			SKSortPopular, @"numberOfTaggedQuestions",
+			SKSortActivity, @"lastUsedDate",
+			SKSortName, @"name",
 			nil];
 }
 
@@ -61,7 +61,7 @@
 	id questionIDs = [p constantValueForLeftKeyPath:SKTagsParticipatedInByUser];
 	[self setPath:[NSString stringWithFormat:@"/users/%@/tags", SKExtractQuestionID(questionIDs)]];
 	
-	id filter = [p constantValueForLeftKeyPath:SKTagName];
+	id filter = [p constantValueForLeftKeyPath:@"name"];
 	if (filter) {
 		[[self query] setObject:filter forKey:SKQueryFilter];
 	}

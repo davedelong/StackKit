@@ -27,7 +27,7 @@
 @property (nonatomic, readonly) NSNumber * upVotes;
 @property (nonatomic, readonly) NSNumber * userID;
 @property (nonatomic, readonly) NSNumber * userType;
-@property (nonatomic, readonly) NSNumber * views;
+@property (nonatomic, readonly) NSNumber * viewCount;
 @property (nonatomic, readonly) NSURL * websiteURL;
 
 @property (nonatomic, readonly) NSSet * awardedBadges;

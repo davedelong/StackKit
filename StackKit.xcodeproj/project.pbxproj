@@ -29,8 +29,8 @@
 		5533A9FA12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */; };
 		5533AA1912DA431000F755F7 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
-		5533AA6112DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h */; };
-		5533AA6212DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m */; };
+		5533AA6112DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.h */; };
+		5533AA6212DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.m */; };
 		5533AA7412DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA7212DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h */; };
 		5533AA7512DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA7312DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m */; };
 		5533AA7812DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AA7612DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h */; };
@@ -47,8 +47,6 @@
 		5533AAA112DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA9F12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m */; };
 		5533AAA412DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAA212DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h */; };
 		5533AAA512DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAA312DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m */; };
-		5533AAA812DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAA612DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h */; };
-		5533AAA912DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAA712DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m */; };
 		5533AAC512DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAC312DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h */; };
 		5533AAC612DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AAC412DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m */; };
 		5533AAC912DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 5533AAC712DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h */; };
@@ -218,8 +216,8 @@
 		5533A9F812DA419600F755F7 /* _SKRequestBuilderAnswersByID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderAnswersByID.m; sourceTree = "<group>"; };
 		5533AA1312DA430900F755F7 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		5533AA1E12DA432600F755F7 /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
-		5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsForAnswer.h; sourceTree = "<group>"; };
-		5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsForAnswer.m; sourceTree = "<group>"; };
+		5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsForPost.h; sourceTree = "<group>"; };
+		5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsForPost.m; sourceTree = "<group>"; };
 		5533AA7212DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderAllBadges.h; sourceTree = "<group>"; };
 		5533AA7312DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderAllBadges.m; sourceTree = "<group>"; };
 		5533AA7612DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUsersWithBadge.h; sourceTree = "<group>"; };
@@ -236,8 +234,6 @@
 		5533AA9F12DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderQuestionsByID.m; sourceTree = "<group>"; };
 		5533AAA212DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderAnswersForQuestion.h; sourceTree = "<group>"; };
 		5533AAA312DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderAnswersForQuestion.m; sourceTree = "<group>"; };
-		5533AAA612DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderCommentsForQuestion.h; sourceTree = "<group>"; };
-		5533AAA712DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderCommentsForQuestion.m; sourceTree = "<group>"; };
 		5533AAC312DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderUnansweredQuestions.h; sourceTree = "<group>"; };
 		5533AAC412DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SKRequestBuilderUnansweredQuestions.m; sourceTree = "<group>"; };
 		5533AAC712DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SKRequestBuilderQuestionSearch.h; sourceTree = "<group>"; };
@@ -555,12 +551,10 @@
 		5533AA8612DA46F900F755F7 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
-				5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h */,
-				5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m */,
+				5533AA5F12DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.h */,
+				5533AA6012DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.m */,
 				5533AA9512DA476A00F755F7 /* _SKRequestBuilderCommentsByID.h */,
 				5533AA9612DA476A00F755F7 /* _SKRequestBuilderCommentsByID.m */,
-				5533AAA612DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h */,
-				5533AAA712DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m */,
 				5533AAE112DA988300F755F7 /* _SKRequestBuilderCommentsByUser.h */,
 				5533AAE212DA988300F755F7 /* _SKRequestBuilderCommentsByUser.m */,
 				5533AAE512DA98D600F755F7 /* _SKRequestBuilderCommentsFromUserToUser.h */,
@@ -839,7 +833,7 @@
 				55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */,
 				5533A9A612D9A7E400F755F7 /* _SKConcreteRequestBuilder.h in Headers */,
 				5533A9F912DA419600F755F7 /* _SKRequestBuilderAnswersByID.h in Headers */,
-				5533AA6112DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.h in Headers */,
+				5533AA6112DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.h in Headers */,
 				5533AA7412DA44FB00F755F7 /* _SKRequestBuilderAllBadges.h in Headers */,
 				5533AA7812DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.h in Headers */,
 				5533AA7E12DA465200F755F7 /* _SKRequestBuilderNameBadges.h in Headers */,
@@ -848,7 +842,6 @@
 				5533AA9B12DA481300F755F7 /* _SKRequestBuilderQuestions.h in Headers */,
 				5533AAA012DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.h in Headers */,
 				5533AAA412DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.h in Headers */,
-				5533AAA812DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.h in Headers */,
 				5533AAC512DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.h in Headers */,
 				5533AAC912DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.h in Headers */,
 				5533AACD12DA914600F755F7 /* _SKRequestBuilderTags.h in Headers */,
@@ -1035,7 +1028,7 @@
 				55FF3A8712D859BF00CC4B9D /* SKRequestBuilder.m in Sources */,
 				5533A9A712D9A7E400F755F7 /* _SKConcreteRequestBuilder.m in Sources */,
 				5533A9FA12DA419600F755F7 /* _SKRequestBuilderAnswersByID.m in Sources */,
-				5533AA6212DA444C00F755F7 /* _SKRequestBuilderCommentsForAnswer.m in Sources */,
+				5533AA6212DA444C00F755F7 /* _SKRequestBuilderCommentsForPost.m in Sources */,
 				5533AA7512DA44FB00F755F7 /* _SKRequestBuilderAllBadges.m in Sources */,
 				5533AA7912DA457F00F755F7 /* _SKRequestBuilderUsersWithBadge.m in Sources */,
 				5533AA7F12DA465200F755F7 /* _SKRequestBuilderNameBadges.m in Sources */,
@@ -1044,7 +1037,6 @@
 				5533AA9C12DA481300F755F7 /* _SKRequestBuilderQuestions.m in Sources */,
 				5533AAA112DA48FF00F755F7 /* _SKRequestBuilderQuestionsByID.m in Sources */,
 				5533AAA512DA49AF00F755F7 /* _SKRequestBuilderAnswersForQuestion.m in Sources */,
-				5533AAA912DA4BAA00F755F7 /* _SKRequestBuilderCommentsForQuestion.m in Sources */,
 				5533AAC612DA4C3B00F755F7 /* _SKRequestBuilderUnansweredQuestions.m in Sources */,
 				5533AACA12DA4CED00F755F7 /* _SKRequestBuilderQuestionSearch.m in Sources */,
 				5533AACE12DA914600F755F7 /* _SKRequestBuilderTags.m in Sources */,

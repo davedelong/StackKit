@@ -34,14 +34,14 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKUserCreationDate,
-			SK_BOX(NSContainsPredicateOperatorType), SKUserBadges,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSContainsPredicateOperatorType), @"awardedBadges.badges",
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKUserBadges,
+			@"awardedBadges.badges",
 			nil];
 }
 
@@ -51,10 +51,10 @@
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id badges = [p constantValueForLeftKeyPath:SKUserBadges];
+	id badges = [p constantValueForLeftKeyPath:@"awardedBadges.badges"];
 	[self setPath:[NSString stringWithFormat:@"/badges/%@", SKExtractBadgeID(badges)]];
 	
-	SKRange r = [p rangeOfConstantValuesForLeftKeyPath:SKUserCreationDate];
+	SKRange r = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (r.lower != SKNotFound) {
 		[[self query] setObject:r.lower forKey:SKQueryFromDate];
 	}

@@ -35,29 +35,29 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSContainsPredicateOperatorType), SKQuestionTitle,
-			SK_BOX(NSContainsPredicateOperatorType), SKQuestionTags,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionLastActivityDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionViewCount,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionCreationDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionScore,
+			SK_BOX(NSContainsPredicateOperatorType), @"title",
+			SK_BOX(NSContainsPredicateOperatorType), @"tags",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"viewCount",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortActivity, SKQuestionLastActivityDate,
-			SKSortViews, SKQuestionViewCount,
-			SKSortCreation, SKQuestionCreationDate,
-			SKSortVotes, SKQuestionScore,
+			SKSortActivity, @"lastActivityDate",
+			SKSortViews, @"viewCount",
+			SKSortCreation, @"creationDate",
+			SKSortVotes, @"score",
 			nil];
 }
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
 	
-	id inTitle = [p constantValueForLeftKeyPath:SKQuestionTitle];
-	id tagged = [p constantValueForLeftKeyPath:SKQuestionTags];
+	id inTitle = [p constantValueForLeftKeyPath:@"title"];
+	id tagged = [p constantValueForLeftKeyPath:@"tags"];
 	
 	if (inTitle == nil && tagged == nil) {
 		[self setError:SK_PREDERROR(@"Searching requires a title or tag predicate")];

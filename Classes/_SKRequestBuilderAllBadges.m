@@ -38,7 +38,7 @@
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortName, SKBadgeName,
+			SKSortName, @"name",
 			nil];
 }
 

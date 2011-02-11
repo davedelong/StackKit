@@ -23,11 +23,11 @@
  THE SOFTWARE.
  **/
 
-#import "_SKRequestBuilderCommentsForAnswer.h"
+#import "_SKRequestBuilderCommentsForPost.h"
 #import "SKComment.h"
 #import "SKAnswer.h"
 
-@implementation _SKRequestBuilderCommentsForAnswer
+@implementation _SKRequestBuilderCommentsForPost
 
 + (Class) recognizedFetchEntity {
 	return [SKComment class];
@@ -35,32 +35,32 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKAnswerID,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKCommentCreationDate,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKCommentScore,
+			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), @"post",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 			nil];
 }
 
 // Either SKAnswerID or SKCommentAnswer are required, but SKAnswerID has the same value as SKCommentAnswer
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKAnswerID,
+			@"post",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortCreation, SKCommentCreationDate,
-			SKSortVotes, SKCommentScore,
+			SKSortCreation, @"creationDate",
+			SKSortVotes, @"score",
 			nil];
 }
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id answerIDs = [p constantValueForLeftKeyPath:SKAnswerID];
-	[self setPath:[NSString stringWithFormat:@"/answers/%@/comments", SKExtractAnswerID(answerIDs)]];
+	id answerIDs = [p constantValueForLeftKeyPath:@"post"];
+	[self setPath:[NSString stringWithFormat:@"/posts/%@/comments", SKExtractAnswerID(answerIDs)]];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:SKCommentCreationDate];
+	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -68,7 +68,7 @@
 		[[self query] setObject:dateRange.upper forKey:SKQueryToDate];
 	}
 	
-	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:SKCommentCreationDate]) {
+	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
 		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];

@@ -34,17 +34,17 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKTagCount,
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKTagLastUsedDate,
-			SK_BOX(NSContainsPredicateOperatorType), SKTagName,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"numberOfTaggedQuestions",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastUsedDate",
+			SK_BOX(NSContainsPredicateOperatorType), @"name",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortPopular, SKTagCount,
-			SKSortActivity, SKTagLastUsedDate,
-			SKSortName, SKTagName,
+			SKSortPopular, @"numberOfTaggedQuestions",
+			SKSortActivity, @"lastUsedDate",
+			SKSortName, @"name",
 			nil];
 }
 
@@ -52,7 +52,7 @@
 	NSPredicate *p = [self requestPredicate];
 	[self setPath:@"/tags"];
 	
-	id filter = [p constantValueForLeftKeyPath:SKTagName];
+	id filter = [p constantValueForLeftKeyPath:@"name"];
 	if (filter) {
 		[[self query] setObject:filter forKey:SKQueryFilter];
 	}
