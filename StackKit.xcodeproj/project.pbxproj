@@ -83,7 +83,6 @@
 		555E06E712ECAD7100172646 /* StackKit.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 555E06E612ECAD7100172646 /* StackKit.xcdatamodel */; };
 		5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */; };
 		5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E70F110EBAA60038E510 /* SKQuestionTest.m */; };
-		558333BF11B7668E00CA8D62 /* SKSiteDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4E2110E36550038E510 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E4E0110E36550038E510 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E4E3110E36550038E510 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E4E1110E36550038E510 /* SKSite.m */; };
 		55A2E4F9110E3A0B0038E510 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
@@ -271,7 +270,6 @@
 		5559421812FE2C23002A28BE /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
 		555E06E612ECAD7100172646 /* StackKit.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
 		5580C18911B9AA6B0056E17C /* SKConstants_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants_Internal.h; sourceTree = "<group>"; };
-		558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteDelegate.h; sourceTree = "<group>"; };
 		55A2E4E0110E36550038E510 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
 		55A2E4E1110E36550038E510 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
 		55A2E4F4110E3A050038E510 /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -720,7 +718,6 @@
 			children = (
 				55A2E4E0110E36550038E510 /* SKSite.h */,
 				55A2E4E1110E36550038E510 /* SKSite.m */,
-				558333BE11B7668E00CA8D62 /* SKSiteDelegate.h */,
 				55A2E55A110E513E0038E510 /* SKSite+Private.h */,
 				55E5BB7912F1133500092A8D /* SKSite+Private.m */,
 				55C952D412F5331700B1E546 /* SKSite+Caching.h */,
@@ -835,7 +832,6 @@
 				D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */,
 				5506C7E311ACBEBD00C47C1B /* SKDefinitions.h in Headers */,
 				5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */,
-				558333BF11B7668E00CA8D62 /* SKSiteDelegate.h in Headers */,
 				5580C18A11B9AA6B0056E17C /* SKConstants_Internal.h in Headers */,
 				55FF3A8612D859BF00CC4B9D /* SKRequestBuilder.h in Headers */,
 				5533A9A612D9A7E400F755F7 /* _SKConcreteRequestBuilder.h in Headers */,
