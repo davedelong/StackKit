@@ -1,5 +1,5 @@
 //
-//  _SKRequestBuilderAllComments.h
+//  _SKRequestBuilderAllAnswers.h
 //  StackKit
 //
 //  Created by Dave DeLong on 2/11/11.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "_SKConcreteRequestBuilder.h"
 
-@interface _SKRequestBuilderAllComments : _SKConcreteRequestBuilder {
+@interface _SKRequestBuilderAnswers : _SKConcreteRequestBuilder {
     
 }
 

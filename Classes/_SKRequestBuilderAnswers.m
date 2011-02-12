@@ -1,38 +1,45 @@
 //
-//  _SKRequestBuilderAllComments.m
+//  _SKRequestBuilderAllAnswers.m
 //  StackKit
 //
 //  Created by Dave DeLong on 2/11/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "_SKRequestBuilderAllComments.h"
-#import "SKComment.h"
+#import "_SKRequestBuilderAnswers.h"
+#import "SKAnswer.h"
 
-@implementation _SKRequestBuilderAllComments
+@implementation _SKRequestBuilderAnswers
 
 + (Class) recognizedFetchEntity {
-	return [SKComment class];
+	return [SKAnswer class];
 }
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SKSortActivity, @"lastActivityDate",
 			SKSortCreation, @"creationDate",
 			SKSortVotes, @"score",
 			nil];
 }
 
 - (void) buildURL {
-	[self setPath:@"/comments"];
-	
+    [[self query] setObject:SKQueryTrue forKey:SKQueryBody];
+    [[self query] setObject:SKQueryTrue forKey:SKQueryAnswers];
+    [[self query] setObject:SKQueryTrue forKey:SKQueryComments];
+    
+    
 	NSPredicate * p = [self requestPredicate];
+	[self setPath:@"/answers"];
+	
 	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];

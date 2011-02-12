@@ -1,33 +1,15 @@
 //
-//  _SKRequestBuilderUnansweredQuestions.m
+//  _SKRequestBuilderUnansweredQuestionsByUser.m
 //  StackKit
-/**
-  Copyright (c) 2011 Dave DeLong
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- **/
+//
+//  Created by Dave DeLong on 2/11/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
 
-#import "_SKRequestBuilderQuestionsWithNoUpvotedAnswers.h"
+#import "_SKRequestBuilderUnansweredQuestionsByUser.h"
 #import "SKQuestion.h"
 
-
-@implementation _SKRequestBuilderQuestionsWithNoUpvotedAnswers
+@implementation _SKRequestBuilderUnansweredQuestionsByUser
 
 + (Class) recognizedFetchEntity {
 	return [SKQuestion class];
@@ -35,8 +17,11 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType), @"answers.score",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType), @"answers.@count",
+			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), @"owner",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"viewCount",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 			SK_BOX(NSContainsPredicateOperatorType), @"tags",
 			nil];
@@ -44,33 +29,39 @@
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			@"answers.score",
+			@"answers.@count",
+            @"owner",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
 			SKSortCreation, @"creationDate",
+            SKSortActivity, @"lastActivityDate",
+            SKSortViews, @"viewCount",
 			SKSortVotes, @"score",
 			nil];
 }
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id answerCount = [p constantValueForLeftKeyPath:@"answers.score"];
+	id answerCount = [p constantValueForLeftKeyPath:@"answers.@count"];
 	if (answerCount == nil || [answerCount isKindOfClass:[NSNumber class]] == NO || [answerCount intValue] != 0) {
-		[self setError:SK_PREDERROR(@"Requesting unanswered questions must have 'ALL answers.score = 0' in predicate")];
+		[self setError:SK_PREDERROR(@"Requesting unanswered questions must have 'answers.@count = 0' in predicate")];
 		return;
 	}
 	
+	[[self query] setObject:SKQueryTrue forKey:SKQueryAnswers];
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
+	[[self query] setObject:SKQueryTrue forKey:SKQueryComments];
 	
 	id tags = [p constantValueForLeftKeyPath:@"tags"];
 	if (tags != nil) {
 		[[self query] setObject:SKExtractTagName(tags) forKey:SKQueryTagged];
 	}
 	
-	[self setPath:@"/questions/unanswered"];
+	id users = [p constantValueForLeftKeyPath:@"owner"];
+	[self setPath:[NSString stringWithFormat:@"/users/%@/questions/no-answers", SKExtractUserID(users)]];
 	
 	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {

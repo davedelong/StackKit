@@ -1,44 +1,62 @@
 //
-//  _SKRequestBuilderAllAnswers.m
+//  _SKRequestBuilderUnansweredQuestions.m
 //  StackKit
 //
 //  Created by Dave DeLong on 2/11/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "_SKRequestBuilderAllAnswers.h"
-#import "SKAnswer.h"
+#import "_SKRequestBuilderUnansweredQuestions.h"
+#import "SKQuestion.h"
 
-@implementation _SKRequestBuilderAllAnswers
+@implementation _SKRequestBuilderUnansweredQuestions
 
 + (Class) recognizedFetchEntity {
-	return [SKAnswer class];
+	return [SKQuestion class];
 }
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType), @"answers.@count",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
+			SK_BOX(NSContainsPredicateOperatorType), @"tags",
+			nil];
+}
+
++ (NSSet *) requiredPredicateKeyPaths {
+	return [NSSet setWithObjects:
+			@"answers.@count",
 			nil];
 }
 
 + (NSDictionary *) recognizedSortDescriptorKeys {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SKSortActivity, @"lastActivityDate",
 			SKSortCreation, @"creationDate",
+            SKSortActivity, @"lastActivityDate",
 			SKSortVotes, @"score",
 			nil];
 }
 
 - (void) buildURL {
-    [[self query] setObject:SKQueryTrue forKey:SKQueryBody];
-    [[self query] setObject:SKQueryTrue forKey:SKQueryAnswers];
-    [[self query] setObject:SKQueryTrue forKey:SKQueryComments];
-    
-    
 	NSPredicate * p = [self requestPredicate];
-	[self setPath:@"/answers"];
+	id answerCount = [p constantValueForLeftKeyPath:@"answers.@count"];
+	if (answerCount == nil || [answerCount isKindOfClass:[NSNumber class]] == NO || [answerCount intValue] != 0) {
+		[self setError:SK_PREDERROR(@"Requesting unanswered questions must have 'answers.@count = 0' in predicate")];
+		return;
+	}
+	
+	[[self query] setObject:SKQueryTrue forKey:SKQueryAnswers];
+	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
+	[[self query] setObject:SKQueryTrue forKey:SKQueryComments];
+	
+	id tags = [p constantValueForLeftKeyPath:@"tags"];
+	if (tags != nil) {
+		[[self query] setObject:SKExtractTagName(tags) forKey:SKQueryTagged];
+	}
+	
+	[self setPath:@"/questions/no-answers"];
 	
 	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
