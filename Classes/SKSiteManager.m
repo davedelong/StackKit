@@ -12,6 +12,8 @@
 #import "SKSite.h"
 #import "SKSite+Private.h"
 
+#import "JSON.h"
+
 @implementation SKSiteManager
 
 + (id)sharedManager
