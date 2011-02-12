@@ -53,30 +53,35 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[[SKSite fetchLock] lock];
-	
-	
-	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://stackauth.com/sites"]];
-	
-	NSHTTPURLResponse * response = nil;
-	NSError * error = nil;
-	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	
-	if (error == nil && data != nil) {		
-		NSString * dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-		NSDictionary * sitesDictionary = [dataString JSONValue];
-		[dataString release];
-		
-		if (sitesDictionary != nil) {
-			NSArray * sites = [sitesDictionary objectForKey:@"api_sites"];
-			
-			for (NSDictionary * siteDictionary in sites) {
-				SKSite *thisSite = NSAllocateObject([SKSite class], 0, NULL);
-				[thisSite mergeInformationFromDictionary:siteDictionary];
-				[_knownSites addObject:thisSite];
-				[thisSite release];
-			}
-		}
-	}
+    
+    NSDictionary *sitesDictionary = [self cachedSitesDictionary];
+    
+    if(!sitesDictionary) {
+        NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://stackauth.com/sites"]];
+        
+        NSHTTPURLResponse * response = nil;
+        NSError * error = nil;
+        NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (error == nil && data != nil) {		
+            NSString * dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            sitesDictionary = [dataString JSONValue];
+            [dataString release];
+            
+            [self cacheSitesWithDictionary:sitesDictionary];
+        }
+    }
+    
+    if(sitesDictionary) {
+        NSArray * sites = [sitesDictionary objectForKey:@"api_sites"];
+        
+        for (NSDictionary * siteDictionary in sites) {
+            SKSite *thisSite = NSAllocateObject([SKSite class], 0, NULL);
+            [thisSite mergeInformationFromDictionary:siteDictionary];
+            [_knownSites addObject:thisSite];
+            [thisSite release];
+        }
+    }
 	
 	[[SKSite fetchLock] unlock];
 	[pool drain];
@@ -201,6 +206,21 @@
     // alter basePath to point at the App's specific support dir, and not ~/Library/App Support
 #endif
     return [basePath stringByAppendingPathComponent:@"StackKit"];
+}
+
+- (NSString*)cachedSitesFilename
+{
+    return [[self applicationSupportDirectory] stringByAppendingPathComponent:@"sites.db"];
+}
+
+- (NSDictionary*)cachedSitesDictionary
+{
+    return [NSDictionary dictionaryWithContentsOfFile:[self cachedSitesFilename]];
+}
+
+- (void)cacheSitesWithDictionary:(NSDictionary*)siteDictionary
+{
+    [siteDictionary writeToFile:[self cachedSitesFilename] atomically:NO];
 }
 
 @end
