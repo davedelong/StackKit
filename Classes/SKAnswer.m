@@ -47,7 +47,7 @@
 
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
     if ([relationship isEqual:@"question"]) {
-        return [SKQuestion objectMergedWithDictionary:[NSDictionary dictionaryWithObject:value forKey:SKQuestionID] inSite:[self site]];
+        return [SKQuestion objectMergedWithDictionary:[NSDictionary dictionaryWithObject:value forKey:SKAPIQuestion_ID] inSite:[self site]];
     }
     return [super transformValueToMerge:value forRelationship:relationship];
 }

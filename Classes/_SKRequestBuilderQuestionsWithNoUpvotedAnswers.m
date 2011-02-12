@@ -23,11 +23,11 @@
  THE SOFTWARE.
  **/
 
-#import "_SKRequestBuilderUnansweredQuestions.h"
+#import "_SKRequestBuilderQuestionsWithNoUpvotedAnswers.h"
 #import "SKQuestion.h"
 
 
-@implementation _SKRequestBuilderUnansweredQuestions
+@implementation _SKRequestBuilderQuestionsWithNoUpvotedAnswers
 
 + (Class) recognizedFetchEntity {
 	return [SKQuestion class];

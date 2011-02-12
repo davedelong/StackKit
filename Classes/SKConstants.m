@@ -26,7 +26,7 @@
 #import "SKConstants.h"
 #import "SKConstants_Internal.h"
 
-NSString * const SKAPIVersion = @"1.0";
+NSString * const SKAPIVersion = @"1.1";
 NSString * const SKFrameworkAPIKey = @"hqh1uqA-AkeM48lxWWPeWA";
 
 NSUInteger const SKPageSizeLimitMax = 100;
@@ -121,3 +121,5 @@ NSString * const SKQueryBody = @"body";
 NSString * const SKQueryTagged = @"tagged";
 NSString * const SKQueryNotTagged = @"nottagged";
 NSString * const SKQueryInTitle = @"intitle";
+NSString * const SKQueryAnswers = @"answers";
+NSString * const SKQueryComments = @"comments";

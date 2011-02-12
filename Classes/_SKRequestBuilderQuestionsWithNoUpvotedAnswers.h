@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 #import "_SKConcreteRequestBuilder.h"
 
-@interface _SKRequestBuilderUnansweredQuestions : _SKConcreteRequestBuilder {
+@interface _SKRequestBuilderQuestionsWithNoUpvotedAnswers : _SKConcreteRequestBuilder {
 
 }
 

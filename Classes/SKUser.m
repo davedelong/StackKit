@@ -84,13 +84,12 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     return [super transformValueToMerge:value forProperty:property];
 }
 
-+ (NSString*)entityName
-{
++ (NSString*)entityName {
     return @"SKUser";
 }
 
 + (NSString *)apiResponseUniqueIDKey {
-    return SKUserID;
+    return SKAPIUser_ID;
 }
 
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {

@@ -58,7 +58,7 @@
     if ([relationship isEqual:@"answers"]) {
         return [SKAnswer objectMergedWithDictionary:value inSite:[self site]];
     } else if ([relationship isEqual:@"tags"]) {
-        return [SKTag objectMergedWithDictionary:[NSDictionary dictionaryWithObject:value forKey:SKTagName] inSite:[self site]];
+        return [SKTag objectMergedWithDictionary:[NSDictionary dictionaryWithObject:value forKey:SKAPIName] inSite:[self site]];
     }
     return [super transformValueToMerge:value forRelationship:relationship];
 }

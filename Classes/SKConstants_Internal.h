@@ -58,6 +58,8 @@ extern NSString * const SKQueryBody;
 extern NSString * const SKQueryTagged;
 extern NSString * const SKQueryNotTagged;
 extern NSString * const SKQueryInTitle;
+extern NSString * const SKQueryAnswers;
+extern NSString * const SKQueryComments;
 
 extern NSString * const SKAPIAbout_Me;
 extern NSString * const SKAPIAccept_Rate;
