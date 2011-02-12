@@ -31,6 +31,7 @@
 {
     if((self = [super init])) {
         _knownSites = [[NSMutableArray alloc] init];
+        [self performSelectorInBackground:@selector(fetchSites) withObject:nil];
     }
     
     return self;
