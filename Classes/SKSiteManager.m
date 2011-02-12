@@ -191,4 +191,16 @@
 	}
 }
 
+#pragma mark -
+#pragma mark Persistence
+
+- (NSString *)applicationSupportDirectory {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+#ifdef StackKitMac
+    // alter basePath to point at the App's specific support dir, and not ~/Library/App Support
+#endif
+    return [basePath stringByAppendingPathComponent:@"StackKit"];
+}
+
 @end

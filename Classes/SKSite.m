@@ -165,15 +165,6 @@ NSString * const SKSiteAPIKey = @"key";
 
 #pragma mark CoreData
 
-- (NSString *)applicationSupportDirectory {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-#ifdef StackKitMac
-    // alter basePath to point at the App's specific support dir, and not ~/Library/App Support
-#endif
-    return [basePath stringByAppendingPathComponent:@"StackKit"];
-}
-
 - (NSManagedObjectModel *)managedObjectModel {
     if (managedObjectModel) { return managedObjectModel; }
     NSArray *bundles = [NSArray arrayWithObject:[NSBundle bundleForClass:[SKSite class]]];
@@ -193,7 +184,7 @@ NSString * const SKSiteAPIKey = @"key";
     }
 	
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *applicationSupportDirectory = [self applicationSupportDirectory];
+    NSString *applicationSupportDirectory = [[SKSiteManager sharedManager] applicationSupportDirectory];
     NSError *error = nil;
     
     if ( ![fileManager fileExistsAtPath:applicationSupportDirectory isDirectory:NULL] ) {
