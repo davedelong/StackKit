@@ -68,15 +68,15 @@ NSString * const SKSiteAPIKey = @"key";
 }
 
 - (SKSite *) mainSite {
-	return [[SHSiteManager sharedManager] mainSiteForSite:self];
+	return [[SKSiteManager sharedManager] mainSiteForSite:self];
 }
 
 - (SKSite *) metaSite {
-	return [[SHSiteManager sharedManager] metaSiteForSite:self];
+	return [[SKSiteManager sharedManager] metaSiteForSite:self];
 }
 
 - (SKSite *) companionSite {
-    return [[SHSiteManager sharedManager] companionSiteForSite:self];
+    return [[SKSiteManager sharedManager] companionSiteForSite:self];
 }
 
 #pragma mark -
