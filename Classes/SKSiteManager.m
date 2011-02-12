@@ -134,7 +134,7 @@
 {
     NSString * host = [[aSite apiURL] host];
 	NSArray * originalHostComponents = [host componentsSeparatedByString:@"."];
-	if ([originalHostComponents containsObject:@"meta"] == NO) { return self; }
+	if ([originalHostComponents containsObject:@"meta"] == NO) { return aSite; }
 	
 	NSMutableArray * newHostComponents = [originalHostComponents mutableCopy];
 	[newHostComponents removeObject:@"meta"];
