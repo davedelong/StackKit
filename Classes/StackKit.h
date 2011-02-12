@@ -28,6 +28,7 @@
 #import "SKFetchRequest.h"
 #import "SKLocalFetchRequest.h"
 
+#import "SKSiteManager.h"
 #import "SKSite.h"
 
 #import "SKObject.h"
