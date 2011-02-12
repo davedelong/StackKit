@@ -63,7 +63,7 @@
         NSError * error = nil;
         NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
-        if (error == nil && data != nil) {		
+        if (error == nil && data != nil) {	
             NSString * dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             sitesDictionary = [dataString JSONValue];
             [dataString release];
@@ -215,12 +215,25 @@
 
 - (NSDictionary*)cachedSitesDictionary
 {
-    return [NSDictionary dictionaryWithContentsOfFile:[self cachedSitesFilename]];
+    //Only re-request the dictionary if it is older than a day (following SO API guidelines)
+    NSDictionary *cacheDictionary = [NSDictionary dictionaryWithContentsOfFile:[self cachedSitesFilename]];
+    NSDate *cacheDate = [cacheDictionary objectForKey:@"cacheDate"];
+    
+    //Return nil if the cache is out of date
+    if(([cacheDate timeIntervalSinceNow]*-1)>=(3600*24)) {
+        return nil;
+    }
+    
+    return [cacheDictionary objectForKey:@"sites"];
 }
 
 - (void)cacheSitesWithDictionary:(NSDictionary*)siteDictionary
 {
-    [siteDictionary writeToFile:[self cachedSitesFilename] atomically:NO];
+    NSMutableDictionary *cacheDictionary = [NSMutableDictionary dictionary];
+    [cacheDictionary setObject:siteDictionary forKey:@"sites"];
+    [cacheDictionary setObject:[NSDate date] forKey:@"cacheDate"];
+     
+    [cacheDictionary writeToFile:[self cachedSitesFilename] atomically:NO];
 }
 
 @end
