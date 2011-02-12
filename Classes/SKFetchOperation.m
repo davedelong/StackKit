@@ -28,6 +28,7 @@ NSString * SKErrorMessageKey = @"message";
     self = [super initWithSite:baseSite];
     if (self) {
         request = [aRequest retain];
+        [request setSite:baseSite];
     }
     return self;
 }

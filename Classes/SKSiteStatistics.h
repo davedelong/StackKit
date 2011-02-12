@@ -11,7 +11,7 @@
 #import "SKSite.h"
 
 
-@interface SKSiteStats : NSObject {
+@interface SKSiteStatistics : NSObject {
     SKSite *_site;
     
     NSNumber *_totalQuestions;

@@ -10,7 +10,7 @@
 #import "NSDictionary+SKAdditions.h"
 #import "JSON.h"
 
-#import "SKSiteStats.h"
+#import "SKSiteStatistics.h"
 
 #import <dispatch/dispatch.h>
 
@@ -41,7 +41,7 @@
 	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
-	SKSiteStats *stats = nil;
+	SKSiteStatistics *stats = nil;
     NSDictionary *responseDictionary = [responseString JSONValue];
     
 	if ([responseDictionary isKindOfClass:[NSDictionary class]] && !error) {
@@ -53,7 +53,7 @@
         }
         
         if(dictionary) {
-            stats = [SKSiteStats statsForSite:[self site] withResponseDictionary:dictionary];
+            stats = [SKSiteStatistics statsForSite:[self site] withResponseDictionary:dictionary];
         }
     }
     

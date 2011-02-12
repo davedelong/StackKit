@@ -32,10 +32,10 @@ int main(int argc, char* argv[]) {
 	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKAnswer class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d", 1234]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d", 115730]];
 	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES] autorelease]];
     
-    NSArray *objects = [s executeSynchronousFetchRequest:r error:nil];
+    NSArray *objects = [s executeSynchronousFetchRequest:r];
 	
 	[r release];
     

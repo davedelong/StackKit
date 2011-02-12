@@ -32,6 +32,7 @@ extern NSString * const SKSiteAPIKey;
 
 @class SKUser;
 @class SKFetchRequest;
+@class SKSiteStatistics;
 
 @interface SKSite : NSObject {
 	NSString * apiKey;
@@ -82,8 +83,9 @@ extern NSString * const SKSiteAPIKey;
 - (BOOL) isEqualToSite:(SKSite*)anotherSite;
 
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestHandler)handler;
-- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest;
 
+- (SKSiteStatistics *) statistics;
 - (void) requestStatisticsWithCompletionHandler:(SKStatisticsHandler)handler;
 
 @end

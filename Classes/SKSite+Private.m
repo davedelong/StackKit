@@ -9,6 +9,7 @@
 #import "SKSite+Private.h"
 #import "JSON.h"
 #import "SKConstants.h"
+#import "SKConstants_Internal.h"
 #import "SKFunctions.h"
 
 @implementation SKSite (Private)
@@ -56,6 +57,8 @@
 	requestQueue = [[NSOperationQueue alloc] init];
 	[requestQueue setMaxConcurrentOperationCount:1];
 	cache = [[NSMutableDictionary alloc] init];
+    
+    apiKey = [SKFrameworkAPIKey retain];
 }
 
 - (void) dealloc {

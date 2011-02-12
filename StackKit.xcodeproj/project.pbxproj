@@ -168,8 +168,8 @@
 		D238770D1306943B00D160DE /* SKSiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D238770B1306943B00D160DE /* SKSiteManager.m */; };
 		D238770F1306958200D160DE /* SKSiteManager+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D238770E1306958100D160DE /* SKSiteManager+Private.h */; };
 		D238771E13069BE700D160DE /* SKSiteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D238770A1306943B00D160DE /* SKSiteManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D238774B1306D62600D160DE /* SKSiteStats.h in Headers */ = {isa = PBXBuildFile; fileRef = D23877491306D5FE00D160DE /* SKSiteStats.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D238774C1306D62600D160DE /* SKSiteStats.m in Sources */ = {isa = PBXBuildFile; fileRef = D238774A1306D60D00D160DE /* SKSiteStats.m */; };
+		D238774B1306D62600D160DE /* SKSiteStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = D23877491306D5FE00D160DE /* SKSiteStatistics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D238774C1306D62600D160DE /* SKSiteStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = D238774A1306D60D00D160DE /* SKSiteStatistics.m */; };
 		D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C2410C116ADF71009064EE /* SKUserActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -380,8 +380,8 @@
 		D238770A1306943B00D160DE /* SKSiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteManager.h; sourceTree = "<group>"; };
 		D238770B1306943B00D160DE /* SKSiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSiteManager.m; sourceTree = "<group>"; };
 		D238770E1306958100D160DE /* SKSiteManager+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSiteManager+Private.h"; sourceTree = "<group>"; };
-		D23877491306D5FE00D160DE /* SKSiteStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteStats.h; sourceTree = "<group>"; };
-		D238774A1306D60D00D160DE /* SKSiteStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSiteStats.m; sourceTree = "<group>"; };
+		D23877491306D5FE00D160DE /* SKSiteStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteStatistics.h; sourceTree = "<group>"; };
+		D238774A1306D60D00D160DE /* SKSiteStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSiteStatistics.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -761,8 +761,8 @@
 				D238770A1306943B00D160DE /* SKSiteManager.h */,
 				D238770B1306943B00D160DE /* SKSiteManager.m */,
 				D238770E1306958100D160DE /* SKSiteManager+Private.h */,
-				D23877491306D5FE00D160DE /* SKSiteStats.h */,
-				D238774A1306D60D00D160DE /* SKSiteStats.m */,
+				D23877491306D5FE00D160DE /* SKSiteStatistics.h */,
+				D238774A1306D60D00D160DE /* SKSiteStatistics.m */,
 				D23877051306940400D160DE /* Caching */,
 				550369AE1302F84400D20ECB /* Operations */,
 			);
@@ -868,7 +868,7 @@
 				55A2E551110E4FE00038E510 /* StackKit.h in Headers */,
 				55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */,
 				55A2E5CD110E5EE00038E510 /* SKUserTest.h in Headers */,
-				D238774B1306D62600D160DE /* SKSiteStats.h in Headers */,
+				D238774B1306D62600D160DE /* SKSiteStatistics.h in Headers */,
 				55A2E60A110E623C0038E510 /* JSON.h in Headers */,
 				55A2E60B110E623C0038E510 /* SKJSON.h in Headers */,
 				55A2E60D110E623C0038E510 /* NSObject+SKJSON.h in Headers */,
@@ -1144,7 +1144,7 @@
 				5519ACBD13066523001F77DE /* _SKRequestBuilderUnansweredQuestions.m in Sources */,
 				5519ACC1130667A4001F77DE /* _SKRequestBuilderUnansweredQuestionsByUser.m in Sources */,
 				D238770D1306943B00D160DE /* SKSiteManager.m in Sources */,
-				D238774C1306D62600D160DE /* SKSiteStats.m in Sources */,
+				D238774C1306D62600D160DE /* SKSiteStatistics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

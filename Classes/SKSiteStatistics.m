@@ -6,10 +6,10 @@
 //  Copyright 2011 Alex Rozanski. All rights reserved.
 //
 
-#import "SKSiteStats.h"
+#import "SKSiteStatistics.h"
 
 
-@implementation SKSiteStats
+@implementation SKSiteStatistics
 
 @synthesize site = _site;
 @synthesize totalQuestions = _totalQuestions, totalUnansweredQuestions = _totalUnansweredQuestions, totalAcceptedAnswers = _totalAcceptedAnswers;
@@ -66,7 +66,7 @@
 
 + (id)statsForSite:(SKSite*)site withResponseDictionary:(NSDictionary*)responseDictionary
 {
-    SKSiteStats *stats = [[SKSiteStats alloc] initWithSite:site responseDictionary:responseDictionary];
+    SKSiteStatistics *stats = [[SKSiteStatistics alloc] initWithSite:site responseDictionary:responseDictionary];
     
     return [stats autorelease];
 }

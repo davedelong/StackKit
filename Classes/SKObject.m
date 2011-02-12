@@ -186,14 +186,14 @@
     }
 }
 
-- (BOOL) isEqual:(id)object {
-    if ([object isKindOfClass:[self class]] == NO) { return NO; }
-    NSString * uniquePropertyName = [[self class] uniqueIDKey];
-    id myUniqueValue = [self valueForKey:uniquePropertyName];
-    id theirUniqueValue = [object valueForKey:uniquePropertyName];
-    
-    return [myUniqueValue isEqual:theirUniqueValue];
-}
+//- (BOOL) isEqual:(id)object {
+//    if ([object isKindOfClass:[self class]] == NO) { return NO; }
+//    NSString * uniquePropertyName = [[self class] uniqueIDKey];
+//    id myUniqueValue = [self valueForKey:uniquePropertyName];
+//    id theirUniqueValue = [object valueForKey:uniquePropertyName];
+//    
+//    return [myUniqueValue isEqual:theirUniqueValue];
+//}
 
 #pragma mark -
 #pragma mark KVC Compliance

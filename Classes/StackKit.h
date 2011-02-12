@@ -55,4 +55,4 @@
 #import "SKComment.h"
 #import "SKConstants.h"
 #import "SKDefinitions.h"
-#import "SKSiteStats.h"
+#import "SKSiteStatistics.h"

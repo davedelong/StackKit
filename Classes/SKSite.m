@@ -94,6 +94,10 @@ NSString * const SKSiteAPIKey = @"key";
 	return [[self apiURL] isEqual:[anotherSite apiURL]];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@(%@)", [super description], [self apiURL]];
+}
+
 #pragma mark -
 #pragma mark Fetch Requests
 
@@ -133,9 +137,10 @@ NSString * const SKSiteAPIKey = @"key";
     [op release];
 }
 
-- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest {
     __block NSArray *returnResults = nil;
     SKFetchRequestHandler b = ^(NSArray *results) {
+        NSLog(@"executing callback: %@", results);
         returnResults = [results retain];
     };
     
@@ -147,11 +152,29 @@ NSString * const SKSiteAPIKey = @"key";
     [op waitUntilFinished];
     
     [op release];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate date]];
     
     return [returnResults autorelease];
 }
 
 #pragma mark Site information
+
+- (SKSiteStatistics *) statistics {
+    __block SKSiteStatistics *returnStats = nil;
+    SKStatisticsHandler handler = ^(SKSiteStatistics *stats) {
+        returnStats = [stats retain];
+    };
+    
+    SKStatisticsOperation *op = [[SKStatisticsOperation alloc] initWithSite:self completionHandler:handler];
+    [requestQueue addOperation:op];
+    
+    [op waitUntilFinished];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate date]];
+    
+    [op release];
+    
+    return [returnStats autorelease];
+}
 
 - (void)requestStatisticsWithCompletionHandler:(SKStatisticsHandler)handler {
     if (handler == nil) {

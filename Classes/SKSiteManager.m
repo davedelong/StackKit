@@ -122,18 +122,17 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
 
 - (SKSite*) siteWithAPIURL:(NSURL *)aURL
 {
-    __block SKSite *returnValue = nil;
+    NSArray *knownSites = [self knownSites];
+    SKSite *returnValue = nil;
     
-    dispatch_sync(_knownSitesQueue, ^{
-        NSString * apiHost = [aURL host];
-        for (SKSite * aSite in _knownSites) {
-            NSURL * siteAPIURL = [aSite apiURL];
-            if ([[siteAPIURL host] isEqual:apiHost]) {
-                returnValue = aSite;
-                break;
-            }
+    NSString * apiHost = [aURL host];
+    for (SKSite * aSite in knownSites) {
+        NSURL * siteAPIURL = [aSite apiURL];
+        if ([[siteAPIURL host] isEqual:apiHost]) {
+            returnValue = aSite;
+            break;
         }
-    });
+    }
     
     //only return an SKSite that points to a valid StackAuth site
     return returnValue;
