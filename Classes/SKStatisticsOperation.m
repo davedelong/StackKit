@@ -10,6 +10,8 @@
 #import "NSDictionary+SKAdditions.h"
 #import "JSON.h"
 
+#import "SKSiteStats.h"
+
 #import <dispatch/dispatch.h>
 
 @implementation SKStatisticsOperation
@@ -39,15 +41,25 @@
 	NSData * data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
-	NSDictionary * statistics = [responseString JSONValue];
+	SKSiteStats *stats = nil;
+    NSDictionary *responseDictionary = [responseString JSONValue];
     
-	if ([statistics isKindOfClass:[NSDictionary class]] == NO || error != nil) {
-        statistics = nil;
+	if ([responseDictionary isKindOfClass:[NSDictionary class]] && !error) {
+        NSDictionary *dictionary = nil;
+        NSArray *statsArray = [responseDictionary objectForKey:@"statistics"];
+        
+        if([statsArray isKindOfClass:[NSArray class]]) {   
+            dictionary = [statsArray objectAtIndex:0];
+        }
+        
+        if(dictionary) {
+            stats = [SKSiteStats statsForSite:[self site] withResponseDictionary:dictionary];
+        }
     }
     
     SKStatisticsHandler h = [self handler];
     dispatch_async(dispatch_get_main_queue(), ^{
-        h(statistics);
+        h(stats);
     });
 }
 

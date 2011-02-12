@@ -25,13 +25,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class SKSiteStats;
+
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 	#define SKColor UIColor
 #else
 	#define SKColor NSColor
 #endif
 
-typedef void(^SKStatisticsHandler)(NSDictionary *);
+typedef void(^SKStatisticsHandler)(SKSiteStats *);
 typedef void(^SKFetchRequestHandler)(NSArray *);
 typedef void(^SKActionBlock)(void);
 
