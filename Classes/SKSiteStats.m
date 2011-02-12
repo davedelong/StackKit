@@ -52,7 +52,7 @@
 
 + (id)statsForSite:(SKSite*)site withResponseDictionary:(NSDictionary*)responseDictionary
 {
-    SKSiteStats *stats = [[self alloc] init];
+    SKSiteStats *stats = [[[self alloc] init] autorelease];
     
     stats->_site = [site retain];
     stats->_totalQuestions = [[responseDictionary objectForKey:@"total_questions"] retain];
