@@ -29,29 +29,17 @@
 int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	
-	SKSite * s = [SKSite stackOverflowSite];
+	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKAnswer class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKAnswerOwner, 1234]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKAnswerCreationDate ascending:YES] autorelease]];
-	[r setSite:s];
-	
-	NSArray * a = [NSArray arrayWithObjects:
-				   NSClassFromString(@"_SKRequestBuilderAnswersByID"),
-				   NSClassFromString(@"_SKRequestBuilderAnswersForQuestion"),
-				   NSClassFromString(@"_SKRequestBuilderAnswersForUser"),
-				   nil];
-	NSLog(@"%@", a);
-	NSLog(@"%@", [a valueForKey:@"allRecognizedSortDescriptorKeys"]);
-	
-	NSError * e = nil;
-	Class builder = NSClassFromString(@"SKRequestBuilder");
-	NSURL * u = [builder URLForFetchRequest:r error:&e];
-	
-	NSLog(@"error: %@", e);
-	NSLog(@"url: %@", u);
+	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d", 1234]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES] autorelease]];
+    
+    NSArray *objects = [s executeSynchronousFetchRequest:r error:nil];
 	
 	[r release];
+    
+    NSLog(@"got: %@", objects);
 	
 	[pool drain];
 	return 0;

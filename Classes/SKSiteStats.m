@@ -20,9 +20,23 @@
 #pragma mark - 
 #pragma mark Init/Dealloc
 
-- (id)init
+- (id)initWithSite:(SKSite *)site responseDictionary:(NSDictionary *)responseDictionary
 {
-    if((self = [super init])) {
+    self = [super init];
+    if (self) {
+        _site = [site retain];
+        _totalQuestions = [[responseDictionary objectForKey:@"total_questions"] retain];
+        _totalUnansweredQuestions = [[responseDictionary objectForKey:@"total_unanswered"] retain];
+        _totalAcceptedAnswers = [[responseDictionary objectForKey:@"total_accepted"] retain];
+        _totalAnswers = [[responseDictionary objectForKey:@"total_answers"] retain];
+        _totalComments = [[responseDictionary objectForKey:@"total_comments"] retain];
+        _totalVotes = [[responseDictionary objectForKey:@"total_votes"] retain];
+        _totalBadges = [[responseDictionary objectForKey:@"total_badges"] retain];
+        _totalUsers = [[responseDictionary objectForKey:@"total_users"] retain];
+        _questionsPerMinute = [[responseDictionary objectForKey:@"questions_per_minute"] retain];
+        _answersPerMinute = [[responseDictionary objectForKey:@"answers_per_minute"] retain];
+        _badgesPerMinute = [[responseDictionary objectForKey:@"badges_per_minute"] retain];
+        _viewsPerDay = [[responseDictionary objectForKey:@"views_per_day"] retain];
     }
     
     return self;
@@ -52,23 +66,9 @@
 
 + (id)statsForSite:(SKSite*)site withResponseDictionary:(NSDictionary*)responseDictionary
 {
-    SKSiteStats *stats = [[[self alloc] init] autorelease];
+    SKSiteStats *stats = [[SKSiteStats alloc] initWithSite:site responseDictionary:responseDictionary];
     
-    stats->_site = [site retain];
-    stats->_totalQuestions = [[responseDictionary objectForKey:@"total_questions"] retain];
-    stats->_totalUnansweredQuestions = [[responseDictionary objectForKey:@"total_unanswered"] retain];
-    stats->_totalAcceptedAnswers = [[responseDictionary objectForKey:@"total_accepted"] retain];
-    stats->_totalAnswers = [[responseDictionary objectForKey:@"total_answers"] retain];
-    stats->_totalComments = [[responseDictionary objectForKey:@"total_comments"] retain];
-    stats->_totalVotes = [[responseDictionary objectForKey:@"total_votes"] retain];
-    stats->_totalBadges = [[responseDictionary objectForKey:@"total_badges"] retain];
-    stats->_totalUsers = [[responseDictionary objectForKey:@"total_users"] retain];
-    stats->_questionsPerMinute = [[responseDictionary objectForKey:@"questions_per_minute"] retain];
-    stats->_answersPerMinute = [[responseDictionary objectForKey:@"answers_per_minute"] retain];
-    stats->_badgesPerMinute = [[responseDictionary objectForKey:@"badges_per_minute"] retain];
-    stats->_viewsPerDay = [[responseDictionary objectForKey:@"views_per_day"] retain];
-    
-    return stats;
+    return [stats autorelease];
 }
 
 @end

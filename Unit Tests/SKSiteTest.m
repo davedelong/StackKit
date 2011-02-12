@@ -30,7 +30,7 @@
 @implementation SKSiteTest
 
 - (void) testStatistics {
-	SKSite * site = [SKSite stackOverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	NSDictionary * stats = [site statistics];
 	
@@ -39,14 +39,14 @@
 }
 
 - (void) testMetaSite {
-	SKSite * so = [SKSite stackOverflowSite];
+	SKSite * so = [[SKSiteManager sharedManager] stackOverflowSite];
 	SKSite * metaSO = [so metaSite];
 	STAssertEqualObjects([[metaSO apiURL] host], @"api.meta.stackoverflow.com", @"Unexpected meta URL: %@", [metaSO apiURL]);
 	
 	SKSite * metaMetaSO = [metaSO metaSite];
 	STAssertTrue(metaSO == metaMetaSO, @"meta.stackoverflow.com should not have a meta site, but found: %@", [metaMetaSO apiURL]);
 	
-	SKSite * su = [SKSite superUserSite];
+	SKSite * su = [[SKSiteManager sharedManager] superUserSite];
 	SKSite * metaSU = [su metaSite];
 	STAssertNotNil(metaSU, @"SuperUser should have a meta site");
 }

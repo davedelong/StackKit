@@ -23,6 +23,18 @@
  THE SOFTWARE.
  **/
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
+#define StackKitMobile 
+#import <UIKit/UIKit.h>
+
+#else
+
+#define StackKitMac 
+#import <Cocoa/Cocoa.h>
+
+#endif
+
 #import "SKObject.h"
 
 #import "SKFetchRequest.h"

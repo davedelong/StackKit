@@ -11,6 +11,7 @@
 @class SKSite;
 
 @interface SKSiteManager : NSObject {
+    dispatch_queue_t _knownSitesQueue;
     NSMutableArray *_knownSites;
 }
 

@@ -32,7 +32,7 @@
 @implementation SKUserTest
 
 - (void) testUserAPICall {
-	SKSite * site = [SKSite stackOverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -50,7 +50,7 @@
 }
 
 - (void) testMultipleUsersAPICall {
-	SKSite * site = [SKSite stackOverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -72,7 +72,7 @@
 }
 
 - (void) testOldestUsers {
-	SKSite * site = [SKSite stackOverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
@@ -100,7 +100,7 @@
 }
 
 - (void) testUserFilter {
-	SKSite * site = [SKSite stackOverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];

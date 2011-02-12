@@ -7,7 +7,6 @@
 //
 
 @interface SKSiteManager ()
-- (void)fetchSites;
 
 - (SKSite*)metaSiteForSite:(SKSite*)aSite;
 - (SKSite*)mainSiteForSite:(SKSite*)aSite;

@@ -23,15 +23,19 @@
  THE SOFTWARE.
  **/
 
-#import <Foundation/Foundation.h>
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
+#import <UIKit/UIKit.h>
+typedef UIColor SKColor;
+
+#else
+
+#import <Cocoa/Cocoa.h>
+typedef NSColor SKColor;
+
+#endif
 
 @class SKSiteStats;
-
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-	#define SKColor UIColor
-#else
-	#define SKColor NSColor
-#endif
 
 typedef void(^SKStatisticsHandler)(SKSiteStats *);
 typedef void(^SKFetchRequestHandler)(NSArray *);

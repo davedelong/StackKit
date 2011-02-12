@@ -12,52 +12,74 @@
 #import "SKSite.h"
 #import "SKSite+Private.h"
 
+#import "SKConstants.h"
+
 #import "JSON.h"
+
+@interface SKSiteManager ()
+
+- (void)_performInitialSetup;
+- (void)fetchSites;
+
+@end
+
+static id _manager = nil;
+
+__attribute__((constructor)) void SKSiteManager_construct() {
+    NSAutoreleasePool *p = [[NSAutoreleasePool alloc] init];
+    _manager = NSAllocateObject([SKSiteManager class], 0, nil);
+    [_manager _performInitialSetup];
+    [p drain];
+}
+
+__attribute__((destructor)) void SKSiteManager_destruct() {
+    NSAutoreleasePool *p = [[NSAutoreleasePool alloc] init];
+    [_manager release], _manager = nil;
+    [p drain];
+}
 
 @implementation SKSiteManager
 
-+ (id)sharedManager
++ (id) sharedManager
 {
-    static id _manager = nil;
-    if(!_manager) {
-        _manager = [[self alloc] init];
-    }
-    
-    return _manager;
+    return [[_manager retain] autorelease];
 }
 
 #pragma mark -
 #pragma mark Init/Dealloc
 
-- (id)init
-{
-    if((self = [super init])) {
+- (void)_performInitialSetup {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _knownSitesQueue = dispatch_queue_create("com.stackkit.sites", 0);
         _knownSites = [[NSMutableArray alloc] init];
-        [self performSelectorInBackground:@selector(fetchSites) withObject:nil];
-    }
-    
-    return self;
+        dispatch_async(_knownSitesQueue, ^{
+            [self fetchSites];
+        });
+    });
 }
 
-- (void)dealloc
-{
++ (id) allocWithZone:(NSZone *)zone {
+    NSLog(@"you may not allocate an SKSiteManager object");
+    return nil;
+}
+
+- (void)dealloc {
+    dispatch_release(_knownSitesQueue), _knownSitesQueue = nil;
     [_knownSites release], _knownSites = nil;
-    
     [super dealloc];
 }
 
 #pragma mark -
 #pragma mark Loading
 
-- (void)fetchSites
-{
+- (void)fetchSites {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[[SKSite fetchLock] lock];
-    
     NSDictionary *sitesDictionary = [self cachedSitesDictionary];
     
     if(!sitesDictionary) {
-        NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://stackauth.com/sites"]];
+        NSString * urlString = [NSString stringWithFormat:@"http://stackauth.com/%@/sites", SKAPIVersion];
+        NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
         
         NSHTTPURLResponse * response = nil;
         NSError * error = nil;
@@ -73,7 +95,7 @@
     }
     
     if(sitesDictionary) {
-        NSArray * sites = [sitesDictionary objectForKey:@"api_sites"];
+        NSArray * sites = [sitesDictionary objectForKey:@"items"];
         
         for (NSDictionary * siteDictionary in sites) {
             SKSite *thisSite = NSAllocateObject([SKSite class], 0, NULL);
@@ -82,10 +104,7 @@
             [thisSite release];
         }
     }
-	
-	[[SKSite fetchLock] unlock];
 	[pool drain];
-
 }
 
 #pragma mark -
@@ -93,25 +112,31 @@
 
 - (NSArray*) knownSites
 {
-    [[SKSite fetchLock] lock];
-    NSArray *sites = _knownSites;
-    [[SKSite fetchLock] unlock];
+    __block NSArray *sites = nil;
+    dispatch_sync(_knownSitesQueue, ^{
+        sites = [_knownSites copy]; 
+    });
     
-    return sites; 
+    return [sites autorelease]; 
 }  
 
 - (SKSite*) siteWithAPIURL:(NSURL *)aURL
 {
-    NSString * apiHost = [aURL host];
-    for (SKSite * aSite in [self knownSites]) {
-        NSURL * siteAPIURL = [aSite apiURL];
-        if ([[siteAPIURL host] isEqual:apiHost]) {
-            return aSite;
+    __block SKSite *returnValue = nil;
+    
+    dispatch_sync(_knownSitesQueue, ^{
+        NSString * apiHost = [aURL host];
+        for (SKSite * aSite in _knownSites) {
+            NSURL * siteAPIURL = [aSite apiURL];
+            if ([[siteAPIURL host] isEqual:apiHost]) {
+                returnValue = aSite;
+                break;
+            }
         }
-    }
+    });
     
     //only return an SKSite that points to a valid StackAuth site
-    return nil;
+    return returnValue;
 }
 
 - (SKSite*) stackOverflowSite {

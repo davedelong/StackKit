@@ -29,9 +29,6 @@
 #import "SKTag.h"
 #import "SKPost.h"
 
-extern NSLock *fetchLock;
-extern NSArray *_skKnownSites;
-
 @interface SKSite ()
 
 - (NSManagedObjectContext *) managedObjectContext;
@@ -40,7 +37,6 @@ extern NSArray *_skKnownSites;
 
 @interface SKSite (Private)
 
-+ (NSLock*) fetchLock;
 - (void) mergeInformationFromDictionary:(NSDictionary *)dictionary;
 
 @end

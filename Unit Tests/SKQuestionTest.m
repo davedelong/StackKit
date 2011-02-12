@@ -30,7 +30,7 @@
 @implementation SKQuestionTest
 
 - (void) testSingleQuestion {
-	SKSite * site = [SKSite stackOverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -59,7 +59,7 @@
 }
 
 - (void) testMultipleQuestions {
-	SKSite * site = [SKSite stackOverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	NSArray* questionsToFetch = [NSArray arrayWithObjects:
 								 @"4729906",
@@ -99,7 +99,7 @@
 }
 
 - (void) testTaggedQuestions {
-	SKSite * s = [SKSite stackOverflowSite];
+	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -116,7 +116,7 @@
 }
 
 - (void) testQuestionSearch {
-	SKSite * s = [SKSite stackOverflowSite];
+	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -135,7 +135,7 @@
 }
 
 - (void) testAllQuestions {
-	SKSite * s = [SKSite stackOverflowSite];
+	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -158,7 +158,7 @@
 }
 
 - (void) testUnansweredTaggedQuestions {
-	SKSite * s = [SKSite stackOverflowSite];
+	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
@@ -181,7 +181,7 @@
 }
 
 - (void) testAsynchronousQuestion {
-	SKSite * s = [SKSite stackOverflowSite];
+	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];

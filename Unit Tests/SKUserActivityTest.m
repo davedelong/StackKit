@@ -29,7 +29,7 @@
 @implementation SKUserActivityTest
 
 - (void) testUserActivity {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKUserActivity class]];
@@ -45,7 +45,7 @@
 }
 
 - (void) testUserActivityBetweenDates {
-	SKSite * site = [SKSite stackoverflowSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKUserActivity class]];
