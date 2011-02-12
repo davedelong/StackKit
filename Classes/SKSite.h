@@ -75,16 +75,6 @@ extern NSString * const SKSiteAPIKey;
 
 @property NSTimeInterval timeoutInterval;
 
-+ (NSArray *) knownSites;
-
-+ (id) siteWithAPIURL:(NSURL *)aURL;
-
-+ (id) stackOverflowSite;
-+ (id) metaStackOverflowSite;
-+ (id) stackAppsSite;
-+ (id) serverFaultSite;
-+ (id) superUserSite;
-
 - (SKSite *) mainSite;
 - (SKSite *) metaSite;
 - (SKSite *) companionSite;

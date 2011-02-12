@@ -12,53 +12,18 @@
 #import "SKFunctions.h"
 
 NSLock * fetchLock = nil;
-NSArray * _skKnownSites = nil;
 
 @implementation SKSite (Private)
 
 + (void) initialize {
 	if (self == [SKSite class]) {
 		fetchLock = [[NSLock alloc] init];
-		_skKnownSites = [[NSMutableArray alloc] init];
-		[self performSelectorInBackground:@selector(fetchSites) withObject:nil];
 	}
 }
 
 + (id) allocWithZone:(NSZone *)zone {
 	NSLog(@"You may not allocate an SKSite object");
 	return nil;
-}
-
-+ (void) fetchSites {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[fetchLock lock];
-	
-	
-	NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://stackauth.com/sites"]];
-	
-	NSHTTPURLResponse * response = nil;
-	NSError * error = nil;
-	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	
-	if (error == nil && data != nil) {		
-		NSString * dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-		NSDictionary * sitesDictionary = [dataString JSONValue];
-		[dataString release];
-		
-		if (sitesDictionary != nil) {
-			NSArray * sites = [sitesDictionary objectForKey:@"api_sites"];
-			
-			for (NSDictionary * siteDictionary in sites) {
-				SKSite *thisSite = NSAllocateObject([SKSite class], 0, NULL);
-				[thisSite mergeInformationFromDictionary:siteDictionary];
-				[(NSMutableArray *)_skKnownSites addObject:thisSite];
-				[thisSite release];
-			}
-		}
-	}
-	
-	[fetchLock unlock];
-	[pool drain];
 }
 
 #pragma mark -
@@ -123,6 +88,14 @@ NSArray * _skKnownSites = nil;
 	[cache release];
 	
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark Locks
+
++ (NSLock*) fetchLock
+{
+    return fetchLock;
 }
 
 @end

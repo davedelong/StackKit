@@ -40,6 +40,7 @@ extern NSArray *_skKnownSites;
 
 @interface SKSite (Private)
 
++ (NSLock*) fetchLock;
 - (void) mergeInformationFromDictionary:(NSDictionary *)dictionary;
 
 @end

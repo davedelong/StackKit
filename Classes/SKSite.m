@@ -27,6 +27,9 @@
 #import "SKSite+Private.h"
 #import "SKSite+Caching.h"
 
+#import "SKSiteManager.h"
+#import "SKSiteManager+Private.h"
+
 #import "SKConstants.h"
 #import "SKFetchRequest.h"
 #import "SKFetchRequest+Private.h"
@@ -57,50 +60,6 @@ NSString * const SKSiteAPIKey = @"key";
 @synthesize linkColor;
 @synthesize tagForegroundColor, tagBackgroundColor;
 
-#pragma mark Site Constructors
-
-+ (NSArray *) knownSites {
-	[fetchLock lock];
-	NSArray *sites = _skKnownSites;
-	[fetchLock unlock];
-	return sites;
-}
-
-#pragma mark -
-
-+ (id) siteWithAPIURL:(NSURL *)aURL {
-	NSString * apiHost = [aURL host];
-	for (SKSite * aSite in [[self class] knownSites]) {
-		NSURL * siteAPIURL = [aSite apiURL];
-		if ([[siteAPIURL host] isEqual:apiHost]) {
-			return aSite;
-		}
-	}
-	
-	//only return an SKSite that points to a valid StackAuth site
-	return nil;
-}
-
-+ (id) stackOverflowSite {
-	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.stackoverflow.com"]];
-}
-
-+ (id) metaStackOverflowSite {
-	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.meta.stackoverflow.com"]];
-}
-
-+ (id) stackAppsSite {
-	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.stackapps.com"]];
-}
-
-+ (id) serverFaultSite {
-	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.serverfault.com"]];
-}
-
-+ (id) superUserSite {
-	return [self siteWithAPIURL:[NSURL URLWithString:@"http://api.superuser.com"]];
-}
-
 #pragma mark -
 #pragma mark Accessors
 
@@ -109,59 +68,15 @@ NSString * const SKSiteAPIKey = @"key";
 }
 
 - (SKSite *) mainSite {
-	NSString * host = [[self apiURL] host];
-	NSArray * originalHostComponents = [host componentsSeparatedByString:@"."];
-	if ([originalHostComponents containsObject:@"meta"] == NO) { return self; }
-	
-	NSMutableArray * newHostComponents = [originalHostComponents mutableCopy];
-	[newHostComponents removeObject:@"meta"];
-	
-	NSString * qaHost = [newHostComponents componentsJoinedByString:@"."];
-	[newHostComponents release];
-	
-	for (SKSite * potentialSite in [[self class] knownSites]) {
-		if ([[[potentialSite apiURL] host] isEqual:qaHost]) {
-			return potentialSite;
-		}		
-	}
-	return nil;
+	return [[SHSiteManager sharedManager] mainSiteForSite:self];
 }
 
 - (SKSite *) metaSite {
-	//takes an API URL (api.somesite.com) and transforms it into (api.meta.somesite.com)
-	//and then looks for a known site that has the same hostname
-	
-	NSString * host = [[self apiURL] host];
-	
-	NSArray * originalHostComponents = [host componentsSeparatedByString:@"."];
-	//if we are a meta site, return ourself
-	if ([originalHostComponents containsObject:@"meta"]) { return self; }
-	
-	NSMutableArray * newHostComponents = [originalHostComponents mutableCopy];
-	if ([[newHostComponents objectAtIndex:0] isEqual:@"api"]) {
-		[newHostComponents insertObject:@"meta" atIndex:1];
-	} else {
-		[newHostComponents insertObject:@"meta" atIndex:0];
-	}
-	NSString * metaHost = [newHostComponents componentsJoinedByString:@"."];
-	[newHostComponents release];
-	
-	for (SKSite * potentialSite in [[self class] knownSites]) {
-		if ([[[potentialSite apiURL] host] isEqual:metaHost]) {
-			return potentialSite;
-		}
-	}
-	
-	return nil;
+	return [[SHSiteManager sharedManager] metaSiteForSite:self];
 }
 
 - (SKSite *) companionSite {
-	//if this is a meta site, return the QA site (and vice versa)
-	if ([[[self apiURL] host] rangeOfString:@".meta."].location != NSNotFound) {
-		return [self mainSite];
-	} else {
-		return [self metaSite];
-	}
+    return [[SHSiteManager sharedManager] companionSiteForSite:self];
 }
 
 #pragma mark -
