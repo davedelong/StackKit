@@ -166,7 +166,7 @@
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		D238770D1306943B00D160DE /* SKSiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D238770B1306943B00D160DE /* SKSiteManager.m */; };
 		D238770F1306958200D160DE /* SKSiteManager+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D238770E1306958100D160DE /* SKSiteManager+Private.h */; };
-		D238771E13069BE700D160DE /* SKSiteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D238770A1306943B00D160DE /* SKSiteManager.h */; };
+		D238771E13069BE700D160DE /* SKSiteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D238770A1306943B00D160DE /* SKSiteManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2C43352116B0E76002F2AEE /* SKUserActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C2410C116ADF71009064EE /* SKUserActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -854,6 +854,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A2E4E2110E36550038E510 /* SKSite.h in Headers */,
+				D238771E13069BE700D160DE /* SKSiteManager.h in Headers */,
 				55A2E551110E4FE00038E510 /* StackKit.h in Headers */,
 				55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */,
 				55A2E5CD110E5EE00038E510 /* SKUserTest.h in Headers */,
@@ -862,7 +863,6 @@
 				55A2E60D110E623C0038E510 /* NSObject+SKJSON.h in Headers */,
 				55A2E60F110E623C0038E510 /* NSString+SKJSON.h in Headers */,
 				55A2E611110E623C0038E510 /* SKJsonBase.h in Headers */,
-				D238771E13069BE700D160DE /* SKSiteManager.h in Headers */,
 				55A2E613110E623C0038E510 /* SKJsonParser.h in Headers */,
 				55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */,
 				55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */,
