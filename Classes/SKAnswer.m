@@ -25,7 +25,7 @@
     if (!mapping) {
         mapping = [[super APIAttributeToPropertyMapping] mutableCopy];
         [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"postID", SKAPIPost_ID, // inherited from SKPost
+                                                                  @"postID", SKAPIAnswer_ID, // inherited from SKPost
                                                                   @"accepted", SKAPIAccepted,
                                                                   @"question", SKAPIQuestion_ID,
                                                                   nil]];
@@ -38,7 +38,7 @@
 }
 
 + (NSString *) apiResponseUniqueIDKey {
-	return SKAPIPost_ID;
+	return SKAPIAnswer_ID;
 }
 
 - (NSNumber *) answerID {

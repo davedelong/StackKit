@@ -117,6 +117,8 @@ extern NSString * const SKAPIUser_Type;
 extern NSString * const SKAPIView_Count;
 extern NSString * const SKAPIWebsite_URL;
 
+// placeholder
+extern NSString * const SKAPIFavorited_Date;
 
 #ifndef SKLog
 #define SKLog(format,...) \

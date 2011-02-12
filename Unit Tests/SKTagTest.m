@@ -51,7 +51,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagCount ascending:NO] autorelease]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"numberOfTaggedQuestions" ascending:NO] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
@@ -71,7 +71,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKTagName ascending:YES] autorelease]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
@@ -110,7 +110,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKTagName, @"iphone"]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"name CONTAINS %@", @"iphone"]];
 	
 	NSError * error = nil;
 	NSArray * tags = [site executeSynchronousFetchRequest:r error:&error];

@@ -92,6 +92,7 @@ extern NSString * const SKSiteAPIKey;
 - (BOOL) isEqualToSite:(SKSite*)anotherSite;
 
 - (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestHandler)handler;
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error;
 
 - (void) requestStatisticsWithCompletionHandler:(SKStatisticsHandler)handler;
 

@@ -22,6 +22,7 @@
 @dynamic favoriteCount;
 @dynamic answers;
 @dynamic tags;
+@dynamic favoritedByUsers;
 
 + (NSString *) entityName {
     return @"SKQuestion";
@@ -32,7 +33,7 @@
     if (!mapping) {
         mapping = [[super APIAttributeToPropertyMapping] mutableCopy];
         [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"postID", SKAPIPost_ID, // inherited from SKPost
+                                                                  @"postID", SKAPIQuestion_ID, // inherited from SKPost
                                                                   @"closeDate", SKAPIClosed_Date,
                                                                   @"bountyAmount", SKAPIBounty_Amount,
                                                                   @"bountyCloseDate", SKAPIBounty_Closes_Date,
@@ -50,7 +51,7 @@
 }
 
 + (NSString *)apiResponseUniqueIDKey {
-    return SKQuestionID;
+    return SKAPIQuestion_ID;
 }
 
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {

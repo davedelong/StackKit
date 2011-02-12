@@ -34,7 +34,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgeTagBased, [NSNumber numberWithBool:NO]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"tagBased = %@", [NSNumber numberWithBool:NO]]];
 
 	NSError * error = nil;
 	NSArray * badges = [site executeSynchronousFetchRequest:r error:&error];
@@ -52,7 +52,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgeTagBased, [NSNumber numberWithBool:YES]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"tagBased = %@", [NSNumber numberWithBool:YES]]];
 	
 	NSError * error = nil;
 	NSArray * badges = [site executeSynchronousFetchRequest:r error:&error];
@@ -70,7 +70,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [NSNumber numberWithInt:115730]]];
 	
 	NSArray * badges = [site executeSynchronousFetchRequest:r error:nil];
 	[r release];
@@ -92,7 +92,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKBadgesAwardedToUser, [NSNumber numberWithInt:115730]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"awards.user CONTAINS %@", [NSNumber numberWithInt:115730]]];
 	NSArray * badges = [site executeSynchronousFetchRequest:r error:nil];
 	[r release];
 	

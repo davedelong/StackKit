@@ -36,7 +36,7 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSNumber numberWithInt:115730]]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [NSNumber numberWithInt:115730]]];
 	
 	NSError * error = nil;
 	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
@@ -54,7 +54,7 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [NSArray arrayWithObjects:[NSNumber numberWithInt:115730],[NSNumber numberWithInt:382190],nil]]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [NSArray arrayWithObjects:[NSNumber numberWithInt:115730],[NSNumber numberWithInt:382190],nil]]];
 	
 	NSError * error = nil;
 	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
@@ -76,7 +76,7 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKUserCreationDate ascending:YES] autorelease]];
+	[request setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES] autorelease]];
 	[request setFetchLimit:10];
 	
 	NSError * error = nil;
@@ -88,7 +88,7 @@
 	
 	STAssertNil(error, @"error should be nil: %@", error);
 	
-	NSArray * returnedCreationDates = [users valueForKey:SKUserCreationDate];
+	NSArray * returnedCreationDates = [users valueForKey:@"creationDate"];
 	
 	NSDate * previousDate = nil;
 	for (NSDate * date in returnedCreationDates) {
@@ -104,7 +104,7 @@
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKUserDisplayName, @"Dave DeLong"]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"displayName CONTAINS %@", @"Dave DeLong"]];
 	
 	NSError * error = nil;
 	NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
@@ -139,7 +139,7 @@
 		}
 		
 		if (count == NSUIntegerMax) {
-			count = [[request fetchTotal] unsignedIntegerValue];
+			count = [request fetchTotal];
 		}
 	}
 	[request release];
@@ -155,12 +155,12 @@
 	
 	request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKUser class]];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKUserID, [favoriteCounts valueForKey:@"user"]]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [favoriteCounts valueForKey:@"user"]]];
 	
 	NSArray * users = [site executeSynchronousFetchRequest:request error:nil];
 	[request release];
 	
-	NSDictionary * userMapping = [NSDictionary dictionaryWithObjects:users forKeys:[users valueForKey:SKUserID]];
+	NSDictionary * userMapping = [NSDictionary dictionaryWithObjects:users forKeys:[users valueForKey:@"userID"]];
 	
 	for (NSDictionary * top in favoriteCounts) {
 		SKUser * user = [userMapping objectForKey:[top objectForKey:@"user"]];

@@ -29,20 +29,12 @@
 
 @implementation SKQuestionTest
 
-- (void) setUp {
-	didReceiveCallback = NO;
-}
-
-- (void) tearDown {
-	didReceiveCallback = NO;
-}
-
 - (void) testSingleQuestion {
 	SKSite * site = [SKSite stackOverflowSite];
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKQuestionID, 1283419]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %d", 1283419]];
 	
 	NSError * e = nil;
 	NSArray * matches = [site executeSynchronousFetchRequest:r error:&e];
@@ -62,7 +54,7 @@
 	STAssertNotNil([q body], @"question body shouldn't be nil");
 	
 	NSSet * expectedTagNames = [NSSet setWithObjects:@"objective-c",@"properties",@"accessors",@"initialization",@"dealloc", nil];
-	NSSet * actualTagNames = [NSSet setWithArray:[[q tags] valueForKey:SKTagName]];
+	NSSet * actualTagNames = [NSSet setWithArray:[[q tags] valueForKey:@"name"]];
 	STAssertEqualObjects(expectedTagNames, actualTagNames, @"unexpected tags.  Expected %@, given %@", expectedTagNames, actualTagNames);
 }
 
@@ -77,7 +69,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKQuestionID, questionsToFetch]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %@", questionsToFetch]];
 	
 	NSError * e = nil;
 	NSArray * matches = [site executeSynchronousFetchRequest:r error:&e];
@@ -102,7 +94,7 @@
 	STAssertNotNil([q body], @"question body shouldn't be nil");
 	
 	NSSet * expectedTagNames = [NSSet setWithObjects:@"objective-c",@"properties",@"accessors",@"initialization",@"dealloc", nil];
-	NSSet * actualTagNames = [NSSet setWithArray:[[q tags] valueForKey:SKTagName]];
+	NSSet * actualTagNames = [NSSet setWithArray:[[q tags] valueForKey:@"name"]];
 	STAssertEqualObjects(expectedTagNames, actualTagNames, @"unexpected tags.  Expected %@, given %@", expectedTagNames, actualTagNames);
 }
 
@@ -111,14 +103,14 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKQuestionTags, @"cocoa"]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"tags CONTAINS %@", @"cocoa"]];
 	
 	NSError * e = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
 	[r release];
 	
 	for (SKQuestion * q in results) {
-		NSSet * questionTags = [[q tags] valueForKey:SKTagName];
+		NSSet * questionTags = [[q tags] valueForKey:@"name"];
 		STAssertTrue([questionTags containsObject:@"cocoa"], @"Question (%@) is not tagged with \"cocoa\": %@", q, [q tags]);
 	}
 }
@@ -128,7 +120,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K CONTAINS %@", SKQuestionTitle, @"Constants by another name"]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"title CONTAINS %@", @"Constants by another name"]];
 	
 	NSError * e = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
@@ -147,7 +139,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKQuestionCreationDate ascending:NO] autorelease]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO] autorelease]];
 	[r setFetchLimit:10];
 	
 	NSError * e = nil;
@@ -170,7 +162,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = 0 AND %K CONTAINS (%@)", SKQuestionAnswerCount, SKQuestionTags, @"iphone"]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"answers.@count = 0 AND tags CONTAINS (%@)", @"iphone"]];
 	
 	NSError * e = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
@@ -183,7 +175,7 @@
             STAssertTrue([[answer score] intValue] == 0, @"question should have 0 answers.  has: %@", [answer score]);
         }
 		
-		NSArray * tagNames = [[question tags] valueForKey:SKTagName];
+		NSArray * tagNames = [[question tags] valueForKey:@"name"];
 		STAssertTrue([tagNames containsObject:@"iphone"], @"questions should have \"iphone\" tag");
 	}
 }
@@ -193,9 +185,11 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKQuestion class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKQuestionID, 3145955]];
-	[r setDelegate:self];
-	[s executeFetchRequest:r];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %d", 3145955]];
+    
+    [s executeFetchRequest:r withCompletionHandler:^(NSArray *objects) {
+        didReceiveCallback = YES;
+    }];
 	
 	while (didReceiveCallback == NO) {
 		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
@@ -204,14 +198,6 @@
 	STAssertNil([r error], @"Fetch request error should be nil: %@", [r error]);
 	
 	[r release];
-}
-
-- (void)fetchRequest:(SKFetchRequest *)request didFailWithError:(NSError *)error {
-	didReceiveCallback = YES;
-}
-
-- (void) fetchRequest:(SKFetchRequest *)request didReturnResults:(NSArray *)results {
-	didReceiveCallback = YES;
 }
 
 @end

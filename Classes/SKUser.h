@@ -33,6 +33,7 @@
 @property (nonatomic, readonly) NSSet * awardedBadges;
 @property (nonatomic, readonly) NSSet * directedComments;
 @property (nonatomic, readonly) NSSet * posts;
+@property (nonatomic, readonly) NSSet * favoritedQuestions;
 
 @property (nonatomic, readonly) NSURL * gravatarIconURL;
 

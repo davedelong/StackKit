@@ -22,6 +22,7 @@
 
 @property (nonatomic, readonly) NSSet* answers;
 @property (nonatomic, readonly) NSSet* tags;
+@property (nonatomic, readonly) NSSet* favoritedByUsers;
 
 @end
 

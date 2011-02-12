@@ -218,6 +218,24 @@ NSString * const SKSiteAPIKey = @"key";
     [op release];
 }
 
+- (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest error:(NSError **)error {
+    __block NSArray *returnResults = nil;
+    SKFetchRequestHandler b = ^(NSArray *results) {
+        returnResults = [results retain];
+    };
+    
+    Class operationClass = [[fetchRequest class] operationClass];
+    SKFetchOperation *op = [[operationClass alloc] initWithSite:self fetchRequest:fetchRequest];
+    [op setHandler:b];
+    [requestQueue addOperation:op];
+    
+    [op waitUntilFinished];
+    
+    [op release];
+    
+    return [returnResults autorelease];
+}
+
 #pragma mark Site information
 
 - (void)requestStatisticsWithCompletionHandler:(SKStatisticsHandler)handler {

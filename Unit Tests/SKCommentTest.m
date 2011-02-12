@@ -34,7 +34,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKCommentID, 3056814]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %d", 3056814]];
 	
 	NSError * error = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
@@ -53,7 +53,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKCommentID, [NSArray arrayWithObjects:@"3056814",@"2520617", nil]]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %@", [NSArray arrayWithObjects:@"3056814",@"2520617", nil]]];
 	
 	NSError * error = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
@@ -77,7 +77,7 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d", SKPostOwner, 115730]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d", 115730]];
 	
 	NSError * error = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
@@ -100,8 +100,8 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d AND %K >= %@ AND %K <= %@", SKCommentOwner, 115730, SKCommentCreationDate, fromDate, SKCommentCreationDate, toDate]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKCommentCreationDate ascending:YES] autorelease]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d AND creationDate >= %@ AND creationDate <= %@", 115730, fromDate, toDate]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
@@ -125,8 +125,8 @@
 	
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKComment class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %d AND %K >= %d AND %K <= %d", SKCommentOwner, 115730, SKCommentScore, lowerScore, SKCommentScore, higherScore]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:SKCommentScore ascending:NO] autorelease]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d AND score >= %d AND score <= %d", 115730, lowerScore, higherScore]];
+	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"score" ascending:NO] autorelease]];
 	
 	NSError * error = nil;
 	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];

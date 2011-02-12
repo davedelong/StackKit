@@ -65,3 +65,6 @@ NSString * const SKAPIUser_ID = @"user_id";
 NSString * const SKAPIUser_Type = @"user_type";
 NSString * const SKAPIView_Count = @"view_count";
 NSString * const SKAPIWebsite_URL = @"website_url";
+
+// placeholder
+NSString * const SKAPIFavorited_Date;

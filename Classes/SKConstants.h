@@ -56,6 +56,10 @@ extern NSString * const SKStatsSiteInfoDescription;
 extern NSString * const SKStatsSiteInfoIconURL;
 
 #pragma mark -
+#pragma mark Placeholders
+extern NSString * const SKTagsParticipatedInByUser;
+
+#pragma mark -
 #pragma mark Error Constants
 extern NSString * const SKErrorDomain;
 extern NSString * const SKExceptionInvalidHandler;

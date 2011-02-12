@@ -35,18 +35,18 @@
 
 + (NSDictionary *) recognizedPredicateKeyPaths {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			SK_BOX(NSEqualToPredicateOperatorType, NSInPredicateOperatorType), SKQuestionsFavoritedByUser,
+			SK_BOX(NSContainsPredicateOperatorType), @"favoritedByUsers.user",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"viewCount",
-			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), SKQuestionFavoritedDate,
+			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"favoritedByUsers.favoritedDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
 			nil];
 }
 
 + (NSSet *) requiredPredicateKeyPaths {
 	return [NSSet setWithObjects:
-			SKQuestionsFavoritedByUser,
+			@"favoritedByUsers.user",
 			nil];
 }
 
@@ -55,7 +55,7 @@
 			SKSortCreation, @"creationDate",
 			SKSortActivity, @"lastActivityDate",
 			SKSortViews, @"viewCount",
-			SKSortAdded, SKQuestionFavoritedDate,
+			SKSortAdded, @"favoritedByUsers.favoritedDate",
 			SKSortVotes, @"score",
 			nil];
 }
@@ -64,7 +64,7 @@
 	NSPredicate * p = [self requestPredicate];
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 	
-	id questionIDs = [p constantValueForLeftKeyPath:SKQuestionsFavoritedByUser];
+	id questionIDs = [p constantValueForLeftKeyPath:@"favoritedByUsers.user"];
 	[self setPath:[NSString stringWithFormat:@"/users/%@/favorites", SKExtractQuestionID(questionIDs)]];
 	
 	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];

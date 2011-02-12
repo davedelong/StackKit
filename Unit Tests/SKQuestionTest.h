@@ -26,9 +26,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import <StackKit/StackKit.h>
 
-@protocol SKFetchRequestDelegate;
-
-@interface SKQuestionTest : SenTestCase <SKFetchRequestDelegate> {
+@interface SKQuestionTest : SenTestCase {
 	BOOL didReceiveCallback;
 }
 

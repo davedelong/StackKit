@@ -39,6 +39,7 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 @dynamic awardedBadges;
 @dynamic directedComments;
 @dynamic posts;
+@dynamic favoritedQuestions;
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;

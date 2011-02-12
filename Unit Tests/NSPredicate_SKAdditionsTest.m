@@ -30,14 +30,14 @@
 @implementation NSPredicate_SKAdditionsTest
 
 - (void) testValueForLeftExpression {
-	NSPredicate * p = [NSPredicate predicateWithFormat:@"%K = 42", SKUserID];
-	NSExpression * l = [NSExpression expressionForKeyPath:SKUserID];
+	NSPredicate * p = [NSPredicate predicateWithFormat:@"userID = 42"];
+	NSExpression * l = [NSExpression expressionForKeyPath:@"userID"];
 	
 	id value = [p constantValueForLeftExpression:l];
 	STAssertNotNil(value, @"value should not be nil");
 	STAssertEqualObjects(value, [NSNumber numberWithInt:42], @"value should be 42");
 	
-	p = [NSPredicate predicateWithFormat:@"(Foo = 13 AND Bar = \"Foo\") OR (%K = 42)", SKUserID];
+	p = [NSPredicate predicateWithFormat:@"(Foo = 13 AND Bar = \"Foo\") OR (userID = 42)"];
 	value = [p constantValueForLeftExpression:l];
 	STAssertNotNil(value, @"value should not be nil");
 	STAssertEqualObjects(value, [NSNumber numberWithInt:42], @"value should be 42");

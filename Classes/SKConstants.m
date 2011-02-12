@@ -60,6 +60,10 @@ NSString * const SKStatsSiteInfoDescription = @"description";
 NSString * const SKStatsSiteInfoIconURL = @"icon_url";
 
 #pragma mark -
+#pragma mark Placeholders
+NSString * const SKTagsParticipatedInByUser = @"user_tags";
+
+#pragma mark -
 #pragma mark Error Constants
 NSString * const SKErrorDomain = @"com.stackkit";
 NSString * const SKExceptionInvalidHandler = @"com.stackkit.skfetchrequest.handler";
