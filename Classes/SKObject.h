@@ -7,6 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "SKDefinitions.h"
 
 @class SKSite;
 
@@ -16,6 +17,12 @@
 }
 
 @property (nonatomic, retain, readonly) SKSite * site;
+
+/**
+ request that the object refresh itself from the API site.
+ only valid for SKUser, SKQuestion, SKAnswer, and SKComment objects
+ **/
+- (void) requestFullMergeWithCompletionHandler:(SKActionBlock)completion;
 
 @end
 

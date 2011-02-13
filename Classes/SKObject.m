@@ -10,6 +10,7 @@
 #import "SKObject+Private.h"
 #import "SKSite+Private.h"
 #import "SKSite+Caching.h"
+#import "SKFetchOperation.h"
 #import "SKFunctions.h"
 
 #pragma mark Private methods
@@ -36,7 +37,7 @@
 }
 
 + (NSString*)entityName {
-	return nil;
+	return NSStringFromClass(self);
 }
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
@@ -112,6 +113,29 @@
 	[object mergeInformationFromAPIResponseDictionary:dictionary];
 	
 	return object;
+}
+
+- (SKFetchRequest *) mergeRequest {
+    return nil;
+}
+
+- (void) requestFullMergeWithCompletionHandler:(SKActionBlock)completion {
+    SKFetchRequest *mergeRequest = [self mergeRequest];
+    
+    if (mergeRequest != nil) {
+        SKFetchOperation *mergeOperation = [[SKFetchOperation alloc] initWithSite:[self site] fetchRequest:mergeRequest];
+        SKActionBlock b = [completion copy];
+        SKRequestHandler handler = ^(NSArray * results) {
+            b();
+        };
+        [b release];
+        
+        [mergeOperation setHandler:handler];
+        [[[self site] requestQueue] addOperation:mergeOperation];
+        [mergeOperation release];
+    } else {
+        completion();
+    }
 }
 
 - (id) transformValueToMerge:(id)value forProperty:(NSString *)property {

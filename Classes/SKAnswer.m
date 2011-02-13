@@ -16,10 +16,6 @@
 @dynamic accepted;
 @dynamic question;
 
-+ (NSString *) entityName {
-    return @"SKAnswer";
-}
-
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;
     if (!mapping) {

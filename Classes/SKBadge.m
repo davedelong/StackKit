@@ -28,10 +28,6 @@
     return @"badges";
 }
 
-+ (NSString *) entityName {
-    return @"SKBadge";
-}
-
 + (NSString *) apiResponseUniqueIDKey {
     return SKAPIBadge_ID;
 }

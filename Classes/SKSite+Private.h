@@ -32,6 +32,7 @@
 @interface SKSite ()
 
 - (NSManagedObjectContext *) managedObjectContext;
+- (NSOperationQueue *) requestQueue;
 
 @end
 

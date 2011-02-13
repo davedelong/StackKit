@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
+#import "SKFetchRequest.h"
 
 @interface SKObject ()
 
@@ -17,6 +18,8 @@
 
 + (id) objectMergedWithDictionary:(NSDictionary *)dictionary inSite:(SKSite *)site;
 - (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary;
+
+- (SKFetchRequest *) mergeRequest;
 
 // used in valueForKey:
 + (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;

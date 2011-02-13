@@ -31,10 +31,6 @@
 	return @"tags";
 }
 
-+ (NSString *) entityName {
-    return @"SKTag";
-}
-
 + (NSString *) apiResponseUniqueIDKey {
     return SKAPIName;
 }

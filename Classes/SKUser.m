@@ -75,6 +75,14 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     return mapping;
 }
 
+- (SKFetchRequest *) mergeRequest {
+    SKFetchRequest *r = [[SKFetchRequest alloc] init];
+    [r setEntity:[SKUser class]];
+    [r setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [self userID]]];
+    
+    return [r autorelease];
+}
+
 - (id) transformValueToMerge:(id)value forProperty:(NSString *)property {
     if ([property isEqualToString:@"userType"]) {
         
@@ -91,10 +99,6 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     
     // super will convert dates and URLs for us
     return [super transformValueToMerge:value forProperty:property];
-}
-
-+ (NSString*)entityName {
-    return @"SKUser";
 }
 
 + (NSString *)apiResponseUniqueIDKey {

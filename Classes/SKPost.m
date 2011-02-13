@@ -33,6 +33,14 @@
     return mapping;
 }
 
+- (SKFetchRequest *) mergeRequest {
+    SKFetchRequest *r = [[SKFetchRequest alloc] init];
+    [r setEntity:[self class]];
+    [r setPredicate:[NSPredicate predicateWithFormat:@"postID = %@", [self postID]]];
+    
+    return [r autorelease];
+}
+
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
     if ([relationship isEqual:@"owner"]) {
         return [SKUser objectMergedWithDictionary:value inSite:[self site]];

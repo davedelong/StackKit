@@ -24,10 +24,6 @@
 @dynamic tags;
 @dynamic favoritedByUsers;
 
-+ (NSString *) entityName {
-    return @"SKQuestion";
-}
-
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;
     if (!mapping) {

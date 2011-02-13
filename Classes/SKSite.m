@@ -98,6 +98,10 @@ NSString * const SKSiteAPIKey = @"key";
     return [NSString stringWithFormat:@"%@(%@)", [super description], [self apiURL]];
 }
 
+- (NSOperationQueue *) requestQueue {
+    return requestQueue;
+}
+
 #pragma mark -
 #pragma mark Fetch Requests
 
@@ -206,17 +210,8 @@ NSString * const SKSiteAPIKey = @"key";
         return nil;
     }
 	
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *applicationSupportDirectory = [[SKSiteManager sharedManager] applicationSupportDirectory];
     NSError *error = nil;
-    
-    if ( ![fileManager fileExistsAtPath:applicationSupportDirectory isDirectory:NULL] ) {
-		if (![fileManager createDirectoryAtPath:applicationSupportDirectory withIntermediateDirectories:NO attributes:nil error:&error]) {
-            NSAssert(NO, ([NSString stringWithFormat:@"Failed to create App Support directory %@ : %@", applicationSupportDirectory,error]));
-            NSLog(@"Error creating application support directory at %@ : %@",applicationSupportDirectory,error);
-            return nil;
-		}
-    }
     
 	NSString *storeFileName = [NSString stringWithFormat:@"%@.db", [[self apiURL] host]];
     NSURL *url = [NSURL fileURLWithPath:[applicationSupportDirectory stringByAppendingPathComponent:storeFileName]];

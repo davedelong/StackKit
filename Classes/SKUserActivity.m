@@ -158,12 +158,4 @@ NSString * const SKUserActivityToDateKey = @"todate";
 	[super dealloc];
 }
 
-- (BOOL) isEqual:(id)object {
-	if ([object isKindOfClass:[self class]] == NO) { return NO; }
-	return ([self type] == [(SKUserActivity *)object type] &&
-			[self action] == [(SKUserActivity *)object action] &&
-			[[self creationDate] isEqualToDate:[object creationDate]]			
-			);
-}
-
 @end

@@ -242,10 +242,22 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
 - (NSString *)applicationSupportDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+    
 #ifdef StackKitMac
     // alter basePath to point at the App's specific support dir, and not ~/Library/App Support
 #endif
-    return [basePath stringByAppendingPathComponent:@"StackKit"];
+    
+    NSString *asd = [basePath stringByAppendingPathComponent:@"StackKit"];
+    
+    BOOL isDir = NO;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:asd isDirectory:&isDir] == NO || isDir == NO) {
+        NSError *error = nil;
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:asd withIntermediateDirectories:YES attributes:nil error:&error]) {   
+            NSLog(@"Error creating application support directory at %@ : %@", asd, error);
+        }
+    }
+    
+    return asd;
 }
 
 - (NSString*)cachedSitesFilename
@@ -259,8 +271,14 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
     NSDictionary *cacheDictionary = [NSDictionary dictionaryWithContentsOfFile:[self cachedSitesFilename]];
     NSDate *cacheDate = [cacheDictionary objectForKey:@"cacheDate"];
     
+    NSDateComponents * oneDay = [[NSDateComponents alloc] init];
+    [oneDay setDay:1];
+    
+    NSDate *cacheInvalidationDate = [[NSCalendar currentCalendar] dateByAddingComponents:oneDay toDate:cacheDate options:0];
+    [oneDay release];
+    
     //Return nil if the cache is out of date
-    if(([cacheDate timeIntervalSinceNow]*-1)>=(3600*24)) {
+    if ([[cacheInvalidationDate laterDate:cacheDate] isEqualToDate:cacheInvalidationDate]) {
         return nil;
     }
     
