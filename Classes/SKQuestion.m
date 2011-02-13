@@ -63,4 +63,13 @@
     return [self postID];
 }
 
+SK_GETTER(NSDate *, closeDate);
+SK_GETTER(NSNumber *, bountyAmount);
+SK_GETTER(NSDate *, bountyCloseDate);
+SK_GETTER(NSString *, closeReason);
+SK_GETTER(NSNumber *, favoriteCount);
+SK_GETTER(NSSet*, answers);
+SK_GETTER(NSSet*, tags);
+SK_GETTER(NSSet*, favoritedByUsers);
+
 @end

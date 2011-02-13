@@ -105,6 +105,10 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
     return SKAPIUser_ID;
 }
 
++ (NSString *) apiResponseDataKey {
+    return @"users";
+}
+
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
     // override for the sake of completeness
     return [super transformValueToMerge:value forRelationship:relationship];
@@ -121,6 +125,39 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 	if (dimension > 512) { dimension = 512; }
 	
 	return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=%d", [self emailHash], dimension]];
+}
+
+SK_GETTER(NSString *, aboutMe);
+SK_GETTER(NSNumber *, acceptRate);
+SK_GETTER(NSNumber *, age);
+SK_GETTER(NSString *, associationID);
+SK_GETTER(NSDate *, creationDate);
+SK_GETTER(NSString *, displayName);
+SK_GETTER(NSNumber *, downVotes);
+SK_GETTER(NSString *, emailHash);
+SK_GETTER(NSDate *, lastAccessDate);
+SK_GETTER(NSString *, location);
+SK_GETTER(NSNumber *, reputation);
+SK_GETTER(NSNumber *, upVotes);
+SK_GETTER(NSNumber *, userID);
+SK_GETTER(NSNumber *, userType);
+SK_GETTER(NSNumber *, viewCount);
+SK_GETTER(NSURL *, websiteURL);
+SK_GETTER(NSSet *, awardedBadges);
+SK_GETTER(NSSet *, directedComments);
+SK_GETTER(NSSet *, posts);
+SK_GETTER(NSSet *, favoritedQuestions);
+
+- (NSSet *) questions {
+    return [[self posts] filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"entity.name = 'SKQuestion'"]];
+}
+
+- (NSSet *) answers {
+    return [[self posts] filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"entity.name = 'SKAnswer'"]];
+}
+
+- (NSSet *) comments {
+    return [[self posts] filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"entity.name = 'SKComment'"]];
 }
 
 @end

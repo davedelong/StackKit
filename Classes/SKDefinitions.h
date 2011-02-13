@@ -105,5 +105,11 @@ typedef enum {
 #endif
 
 #ifndef SK_GETTER
-#define SK_GETTER(t,n) -(t) n { return [self valueForKey:@"n"]; }
+#define SK_GETTER(t,n) -(t) n { \
+NSString *k = @"" #n; \
+[self willAccessValueForKey:k]; \
+t _r = [self primitiveValueForKey:k]; \
+[self didAccessValueForKey:k]; \
+return _r; \
+}
 #endif

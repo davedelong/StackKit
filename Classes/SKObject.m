@@ -171,7 +171,10 @@
             newValue = [self transformValueToMerge:newValue forProperty:propertyName];
             if (newValue == nil) { continue; }
             
-            [self setValue:newValue forKey:propertyName];
+            [self willChangeValueForKey:propertyName];
+            [self setPrimitiveValue:newValue forKey:propertyName];
+            [self didChangeValueForKey:propertyName];
+            
         } else if ([propertyDescription isKindOfClass:[NSRelationshipDescription class]]) {
             // relationship. transform and merge
             NSRelationshipDescription *relationship = (NSRelationshipDescription *)propertyDescription;
@@ -195,8 +198,11 @@
                 }
                 
                 // merge in the objects
-                NSMutableSet *destination = [self mutableSetValueForKey:propertyName];
-                [destination unionSet:mergingObjects];
+                
+                [self willChangeValueForKey:propertyName withSetMutation:NSKeyValueUnionSetMutation usingObjects:mergingObjects];
+                [[self primitiveValueForKey:propertyName] unionSet:mergingObjects];
+                [self didChangeValueForKey:propertyName withSetMutation:NSKeyValueUnionSetMutation usingObjects:mergingObjects];
+                
             } else {
                 // to-one relationship.  the value to transform must be a dictionary
                 if (SKIsVectorClass(newValue)) {
@@ -204,7 +210,10 @@
                     continue;
                 }
                 newValue = [self transformValueToMerge:newValue forRelationship:propertyName];
-                [self setValue:newValue forKey:propertyName];
+                
+                [self willChangeValueForKey:propertyName];
+                [self setPrimitiveValue:newValue forKey:propertyName];
+                [self didChangeValueForKey:propertyName];
             }
         }
     }

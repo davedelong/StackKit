@@ -37,6 +37,10 @@
 
 @property (nonatomic, readonly) NSURL * gravatarIconURL;
 
+@property (nonatomic, readonly) NSSet * questions;
+@property (nonatomic, readonly) NSSet * answers;
+@property (nonatomic, readonly) NSSet * comments;
+
 - (NSURL *) gravatarIconURLForSize:(CGSize)size;
 
 @end

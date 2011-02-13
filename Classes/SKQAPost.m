@@ -50,4 +50,14 @@
     return [super transformValueToMerge:value forRelationship:relationship];
 }
 
+SK_GETTER(NSNumber *, communityOwned);
+SK_GETTER(NSNumber *, downVotes);
+SK_GETTER(NSDate *, lastActivityDate);
+SK_GETTER(NSDate *, lastEditDate);
+SK_GETTER(NSDate *, lockedDate);
+SK_GETTER(NSString *, title);
+SK_GETTER(NSNumber *, upVotes);
+SK_GETTER(NSNumber *, viewCount);
+SK_GETTER(NSSet*, comments);
+
 @end

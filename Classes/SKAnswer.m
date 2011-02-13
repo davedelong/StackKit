@@ -48,4 +48,7 @@
     return [super transformValueToMerge:value forRelationship:relationship];
 }
 
+SK_GETTER(NSNumber *, accepted);
+SK_GETTER(SKQuestion *, question);
+
 @end

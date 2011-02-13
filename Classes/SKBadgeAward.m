@@ -14,4 +14,8 @@
 @dynamic user;
 @dynamic numberOfTimesAwarded;
 
+SK_GETTER(NSNumber *, numberOfTimesAwarded);
+SK_GETTER(SKUser *, user);
+SK_GETTER(SKBadge *, badge);
+
 @end

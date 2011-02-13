@@ -39,4 +39,8 @@
     return [super transformValueToMerge:value forRelationship:relationship];
 }
 
+SK_GETTER(NSDate *, favoritedDate);
+SK_GETTER(SKUser *, user);
+SK_GETTER(SKQuestion *, question);
+
 @end

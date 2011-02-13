@@ -51,4 +51,8 @@
     return [self postID];
 }
 
+SK_GETTER(NSNumber *, editCount);
+SK_GETTER(SKQAPost *, post);
+SK_GETTER(SKUser *, directedToUser);
+
 @end

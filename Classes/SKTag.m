@@ -17,7 +17,7 @@
 @dynamic questions;
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
-	static NSDictionary * mapping = nil;
+    static NSDictionary * mapping = nil;
 	if (!mapping) {
 		mapping = [[NSDictionary alloc] initWithObjectsAndKeys:
                     @"name", SKAPIName,
@@ -34,5 +34,9 @@
 + (NSString *) apiResponseUniqueIDKey {
     return SKAPIName;
 }
+
+SK_GETTER(NSString *, name);
+SK_GETTER(NSNumber *, numberOfTaggedQuestions);
+SK_GETTER(NSSet*, questions);
 
 @end

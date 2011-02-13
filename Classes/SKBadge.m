@@ -101,4 +101,12 @@
     return [super transformValueToMerge:value forRelationship:relationship];
 }
 
+SK_GETTER(NSNumber *, badgeID);
+SK_GETTER(NSString *, name);
+SK_GETTER(NSNumber *, numberAwarded);
+SK_GETTER(NSNumber *, rank);
+SK_GETTER(NSString *, summary);
+SK_GETTER(NSNumber *, tagBased);
+SK_GETTER(NSSet*, awards);
+
 @end

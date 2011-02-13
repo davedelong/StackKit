@@ -48,4 +48,11 @@
     return [super transformValueToMerge:value forRelationship:relationship];
 }
 
+SK_GETTER(NSString *, body);
+SK_GETTER(NSDate *, creationDate);
+SK_GETTER(NSNumber *, score);
+SK_GETTER(NSNumber *, postID);
+SK_GETTER(SKUser *, owner);
+SK_GETTER(NSSet*, postActivity);
+
 @end

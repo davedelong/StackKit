@@ -62,8 +62,8 @@
 	NSPredicate * p = [self requestPredicate];
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 	
-	id questionIDs = [p constantValueForLeftKeyPath:@"owner"];
-	[self setPath:[NSString stringWithFormat:@"/users/%@/questions", SKExtractQuestionID(questionIDs)]];
+	id userIDs = [p constantValueForLeftKeyPath:@"owner"];
+	[self setPath:[NSString stringWithFormat:@"/users/%@/questions", SKExtractUserID(userIDs)]];
 	
 	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {

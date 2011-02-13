@@ -31,15 +31,26 @@ int main(int argc, char* argv[]) {
 	
 	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
-	[r setEntity:[SKAnswer class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d", 115730]];
-	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES] autorelease]];
+	[r setEntity:[SKUser class]];
+	[r setPredicate:[NSPredicate predicateWithFormat:@"userID = %d", 115730]];
+
+    NSArray *users = [s executeSynchronousFetchRequest:r];
+    [r release];
     
-    NSArray *objects = [s executeSynchronousFetchRequest:r];
+    SKUser *davedelong = [users objectAtIndex:0];
+    
+    NSLog(@"%@", davedelong);
+    
+    r = [[SKFetchRequest alloc] init];
+    [r setEntity:[SKQuestion class]];
+    [r setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", davedelong]];
+    
+    NSArray *questions = [s executeSynchronousFetchRequest:r];
+    [r release];
+    
+    NSLog(@"%@", questions);
 	
 	[r release];
-    
-    NSLog(@"got: %@", objects);
 	
 	[pool drain];
 	return 0;
