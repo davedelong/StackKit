@@ -28,7 +28,7 @@
 - (void) main {
     
 	NSDictionary * queryDictionary = [NSDictionary dictionaryWithObject:[[self site] apiKey] forKey:SKSiteAPIKey];
-	NSString * statsPath = [NSString stringWithFormat:@"stats?%@", [queryDictionary queryString]];
+	NSString * statsPath = [NSString stringWithFormat:@"stats?%@", [queryDictionary sk_queryString]];
 	
 	NSString * statsCall = [[[[self site] apiURL] absoluteString] stringByAppendingPathComponent:statsPath];
 	

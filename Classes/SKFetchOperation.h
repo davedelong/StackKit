@@ -14,13 +14,13 @@
 
 @interface SKFetchOperation : SKOperation {
     SKFetchRequest *request;
-    SKFetchRequestHandler handler;
+    SKRequestHandler handler;
     SKActionBlock priorHandler;
     SKActionBlock afterHandler;
     NSError *error;
 }
 
-@property (nonatomic, copy) SKFetchRequestHandler handler;
+@property (nonatomic, copy) SKRequestHandler handler;
 @property (nonatomic, copy) SKActionBlock priorHandler;
 @property (nonatomic, copy) SKActionBlock afterHandler;
 @property (nonatomic, retain) NSError *error;

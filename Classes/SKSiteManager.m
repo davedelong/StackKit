@@ -14,6 +14,9 @@
 
 #import "SKConstants.h"
 
+#import "SKUser.h"
+#import "SKAssociatedUserOperation.h"
+
 #import "JSON.h"
 
 @interface SKSiteManager ()
@@ -53,6 +56,9 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
     dispatch_once(&onceToken, ^{
         _knownSitesQueue = dispatch_queue_create("com.stackkit.sites", 0);
         _knownSites = [[NSMutableArray alloc] init];
+        stackAuthQueue = [[NSOperationQueue alloc] init];
+        [stackAuthQueue setMaxConcurrentOperationCount:1];
+        
         dispatch_async(_knownSitesQueue, ^{
             [self fetchSites];
         });
@@ -67,6 +73,8 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
 - (void)dealloc {
     dispatch_release(_knownSitesQueue), _knownSitesQueue = nil;
     [_knownSites release], _knownSites = nil;
+    [stackAuthQueue cancelAllOperations];
+    [stackAuthQueue release], stackAuthQueue = nil;
     [super dealloc];
 }
 
@@ -123,19 +131,27 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
 - (SKSite*) siteWithAPIURL:(NSURL *)aURL
 {
     NSArray *knownSites = [self knownSites];
-    SKSite *returnValue = nil;
     
     NSString * apiHost = [aURL host];
     for (SKSite * aSite in knownSites) {
-        NSURL * siteAPIURL = [aSite apiURL];
-        if ([[siteAPIURL host] isEqual:apiHost]) {
-            returnValue = aSite;
-            break;
+        if ([[[aSite apiURL] host] isEqual:apiHost]) {
+            return aSite;
         }
     }
     
-    //only return an SKSite that points to a valid StackAuth site
-    return returnValue;
+    return nil;
+}
+
+- (SKSite *) siteWithName:(NSString *)name {
+    NSArray *knownSites = [self knownSites];
+    
+    for (SKSite * aSite in knownSites) {
+        if ([[aSite name] isEqualToString:name]) {
+            return aSite;
+        }
+    }
+    
+    return nil;
 }
 
 - (SKSite*) stackOverflowSite {
@@ -258,6 +274,20 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
     [cacheDictionary setObject:[NSDate date] forKey:@"cacheDate"];
      
     [cacheDictionary writeToFile:[self cachedSitesFilename] atomically:NO];
+}
+
+#pragma mark -
+#pragma mark Associated Users
+
+- (void) requestAssociatedUsersForUser:(SKUser *)user completionHandler:(SKRequestHandler)handler {
+    if (user == nil) { return; }
+    if (handler == nil) { return; }
+    
+    SKAssociatedUserOperation *op = [[SKAssociatedUserOperation alloc] initWithUser:user handler:handler];
+    if (op == nil) { return; }
+    
+    [stackAuthQueue addOperation:op];
+    [op release];
 }
 
 @end

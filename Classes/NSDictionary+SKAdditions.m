@@ -30,7 +30,7 @@
 
 @implementation NSDictionary (SKAdditions)
 
-- (NSString *) queryString {
+- (NSString *) sk_queryString {
 	if ([[self allKeys] count] == 0) { return @""; }
 	NSMutableArray * queryArray = [NSMutableArray array];
 	for (NSString * key in self) {

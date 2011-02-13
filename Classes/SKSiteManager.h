@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SKDefinitions.h"
 
 @class SKSite;
+@class SKUser;
 
 @interface SKSiteManager : NSObject {
     dispatch_queue_t _knownSitesQueue;
     NSMutableArray *_knownSites;
+    NSOperationQueue *stackAuthQueue;
 }
 
 + (id)sharedManager;
@@ -27,5 +30,6 @@
 - (SKSite*) serverFaultSite;
 - (SKSite*) superUserSite;
 
+- (void) requestAssociatedUsersForUser:(SKUser *)user completionHandler:(SKRequestHandler)handler;
 
 @end

@@ -108,7 +108,7 @@
 	NSString * urlBase = [apiURL absoluteString];
 	NSString * apiPath = [NSString stringWithFormat:@"%@?%@", 
 						  ([self path] ? [self path] : @""), 
-						  [query queryString]];
+						  [query sk_queryString]];
 	
 	NSString * fullAPIString = [urlBase stringByAppendingString:apiPath];
 	

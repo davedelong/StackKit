@@ -9,6 +9,7 @@
 #import "SKUser.h"
 #import "SKObject+Private.h"
 #import "SKConstants_Internal.h"
+#import "SKSiteManager+Private.h"
 #import "SKDefinitions.h"
 
 // used internally
@@ -40,6 +41,14 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 @dynamic directedComments;
 @dynamic posts;
 @dynamic favoritedQuestions;
+
++ (id) userWithAssociationInformation:(NSDictionary *)information {
+    NSString *siteName = [information objectForKey:@"site_name"];
+    SKSite *site = [[SKSiteManager sharedManager] siteWithName:siteName];
+    if (site == nil) { return nil; }
+    
+    return [SKUser objectMergedWithDictionary:information inSite:site];
+}
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;

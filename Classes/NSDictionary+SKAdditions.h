@@ -28,6 +28,6 @@
 
 @interface NSDictionary (SKAdditions)
 
-- (NSString *) queryString;
+- (NSString *) sk_queryString;
 
 @end

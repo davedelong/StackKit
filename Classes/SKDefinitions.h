@@ -38,7 +38,7 @@ typedef NSColor SKColor;
 @class SKSiteStatistics;
 
 typedef void(^SKStatisticsHandler)(SKSiteStatistics *);
-typedef void(^SKFetchRequestHandler)(NSArray *);
+typedef void(^SKRequestHandler)(NSArray *);
 typedef void(^SKActionBlock)(void);
 
 typedef id (*SKExtractor)(id);

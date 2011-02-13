@@ -27,7 +27,7 @@
         objects = nil;
     }
     
-    SKFetchRequestHandler h = [self handler];
+    SKRequestHandler h = [self handler];
     dispatch_async(dispatch_get_main_queue(), ^{
         h(objects); 
     });

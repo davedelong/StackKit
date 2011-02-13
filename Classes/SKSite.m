@@ -122,7 +122,7 @@ NSString * const SKSiteAPIKey = @"key";
     return [objects objectAtIndex:0];
 }
 
-- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKFetchRequestHandler)handler {
+- (void) executeFetchRequest:(SKFetchRequest *)fetchRequest withCompletionHandler:(SKRequestHandler)handler {
 	if (handler == nil) {
 		@throw [NSException exceptionWithName:SKExceptionInvalidHandler reason:@"CompletionHandler cannot be nil" userInfo:nil];
 	}
@@ -139,7 +139,7 @@ NSString * const SKSiteAPIKey = @"key";
 
 - (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest {
     __block NSArray *returnResults = nil;
-    SKFetchRequestHandler b = ^(NSArray *results) {
+    SKRequestHandler b = ^(NSArray *results) {
         NSLog(@"executing callback: %@", results);
         returnResults = [results retain];
     };
