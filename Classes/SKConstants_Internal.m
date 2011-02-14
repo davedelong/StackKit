@@ -8,6 +8,35 @@
 
 #import "SKConstants_Internal.h"
 
+NSString * const SKFrameworkAPIKey = @"hqh1uqA-AkeM48lxWWPeWA";
+
+#pragma mark -
+#pragma mark Statistics Keys
+NSString * const SKStatsTotalQuestions = @"total_questions";
+NSString * const SKStatsTotalUnansweredQuestions = @"total_unanswered";
+NSString * const SKStatsTotalAcceptedAnswers = @"total_accepted";
+NSString * const SKStatsTotalAnswers = @"total_answers";
+NSString * const SKStatsTotalComments = @"total_comments";
+NSString * const SKStatsTotalVotes = @"total_votes";
+NSString * const SKStatsTotalBadges = @"total_badges";
+NSString * const SKStatsTotalUsers = @"total_users";
+NSString * const SKStatsQuestionsPerMinute = @"questions_per_minute";
+NSString * const SKStatsAnswersPerMinute = @"answers_per_minute";
+NSString * const SKStatsBadgesPerMinute = @"badges_per_minute";
+NSString * const SKStatsViewsPerDay = @"views_per_day";
+
+NSString * const SKStatsAPIInfo = @"api_version";
+NSString * const SKStatsAPIInfoVersion = @"version";
+NSString * const SKStatsAPIInfoRevision = @"revision";	
+
+NSString * const SKStateSiteInfo = @"site";
+NSString * const SKStatsSiteInfoName = @"name";
+NSString * const SKStatsSiteInfoLogoURL = @"logo_url";
+NSString * const SKStatsSiteInfoAPIURL = @"api_endpoint";
+NSString * const SKStatsSiteInfoSiteURL = @"site_url";
+NSString * const SKStatsSiteInfoDescription = @"description";
+NSString * const SKStatsSiteInfoIconURL = @"icon_url";
+
 NSString * const SKAPIAbout_Me = @"about_me";
 NSString * const SKAPIAccept_Rate = @"accept_rate";
 NSString * const SKAPIAccepted = @"accepted";
@@ -68,3 +97,42 @@ NSString * const SKAPIWebsite_URL = @"website_url";
 
 // placeholder
 NSString * const SKAPIFavorited_Date;
+
+#pragma mark -
+#pragma mark Sorting Keys
+
+
+NSString * const SKSortCreation = @"creation";
+NSString * const SKSortActivity = @"activity";
+NSString * const SKSortVotes = @"votes";
+NSString * const SKSortViews = @"views";
+NSString * const SKSortNewest = @"newest";
+NSString * const SKSortFeatured = @"featured";
+NSString * const SKSortHot = @"hot";
+NSString * const SKSortWeek = @"week";
+NSString * const SKSortMonth = @"month";
+NSString * const SKSortAdded = @"added";
+NSString * const SKSortPopular = @"popular";
+NSString * const SKSortReputation = @"reputation";
+NSString * const SKSortName = @"name";
+
+#pragma mark Query Keys
+
+NSString * const SKQueryTrue = @"true";
+NSString * const SKQueryFalse = @"false";
+
+NSString * const SKQueryFromDate = @"fromdate";
+NSString * const SKQueryToDate = @"todate";
+NSString * const SKQueryMinSort = @"min";
+NSString * const SKQueryMaxSort = @"max";
+NSString * const SKQueryPage = @"page";
+NSString * const SKQueryPageSize = @"pagesize";
+NSString * const SKQuerySort = @"sort";
+NSString * const SKQuerySortOrder = @"order";
+NSString * const SKQueryFilter = @"filter";
+NSString * const SKQueryBody = @"body";
+NSString * const SKQueryTagged = @"tagged";
+NSString * const SKQueryNotTagged = @"nottagged";
+NSString * const SKQueryInTitle = @"intitle";
+NSString * const SKQueryAnswers = @"answers";
+NSString * const SKQueryComments = @"comments";

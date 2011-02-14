@@ -7,7 +7,7 @@
 //
 
 #import "SKSiteStatistics.h"
-
+#import "SKConstants_Internal.h"
 
 @implementation SKSiteStatistics
 
@@ -26,22 +26,22 @@
     self = [super init];
     if (self) {
         _site = [site retain];
-        _totalQuestions = [[responseDictionary objectForKey:@"total_questions"] retain];
-        _totalUnansweredQuestions = [[responseDictionary objectForKey:@"total_unanswered"] retain];
-        _totalAcceptedAnswers = [[responseDictionary objectForKey:@"total_accepted"] retain];
-        _totalAnswers = [[responseDictionary objectForKey:@"total_answers"] retain];
-        _totalComments = [[responseDictionary objectForKey:@"total_comments"] retain];
-        _totalVotes = [[responseDictionary objectForKey:@"total_votes"] retain];
-        _totalBadges = [[responseDictionary objectForKey:@"total_badges"] retain];
-        _totalUsers = [[responseDictionary objectForKey:@"total_users"] retain];
-        _questionsPerMinute = [[responseDictionary objectForKey:@"questions_per_minute"] retain];
-        _answersPerMinute = [[responseDictionary objectForKey:@"answers_per_minute"] retain];
-        _badgesPerMinute = [[responseDictionary objectForKey:@"badges_per_minute"] retain];
-        _viewsPerDay = [[responseDictionary objectForKey:@"views_per_day"] retain];
+        _totalQuestions = [[responseDictionary objectForKey:SKStatsTotalQuestions] retain];
+        _totalUnansweredQuestions = [[responseDictionary objectForKey:SKStatsTotalUnansweredQuestions] retain];
+        _totalAcceptedAnswers = [[responseDictionary objectForKey:SKStatsTotalAcceptedAnswers] retain];
+        _totalAnswers = [[responseDictionary objectForKey:SKStatsTotalAnswers] retain];
+        _totalComments = [[responseDictionary objectForKey:SKStatsTotalComments] retain];
+        _totalVotes = [[responseDictionary objectForKey:SKStatsTotalVotes] retain];
+        _totalBadges = [[responseDictionary objectForKey:SKStatsTotalBadges] retain];
+        _totalUsers = [[responseDictionary objectForKey:SKStatsTotalUsers] retain];
+        _questionsPerMinute = [[responseDictionary objectForKey:SKStatsQuestionsPerMinute] retain];
+        _answersPerMinute = [[responseDictionary objectForKey:SKStatsAnswersPerMinute] retain];
+        _badgesPerMinute = [[responseDictionary objectForKey:SKStatsBadgesPerMinute] retain];
+        _viewsPerDay = [[responseDictionary objectForKey:SKStatsViewsPerDay] retain];
         
-        NSDictionary *apiInfo = [responseDictionary objectForKey:@"api_version"];
-        _apiVersion = [[apiInfo objectForKey:@"version"] retain];
-        _apiRevision = [[apiInfo objectForKey:@"revision"] retain];
+        NSDictionary *apiInfo = [responseDictionary objectForKey:SKStatsAPIInfo];
+        _apiVersion = [[apiInfo objectForKey:SKStatsAPIInfoVersion] retain];
+        _apiRevision = [[apiInfo objectForKey:SKStatsAPIInfoRevision] retain];
     }
     
     return self;

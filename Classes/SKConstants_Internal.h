@@ -27,6 +27,35 @@
 
 extern NSString * const SKFrameworkAPIKey;
 
+#pragma mark -
+#pragma mark Statistics Keys
+extern NSString * const SKStatsTotalQuestions;
+extern NSString * const SKStatsTotalUnansweredQuestions;
+extern NSString * const SKStatsTotalAcceptedAnswers;
+extern NSString * const SKStatsTotalAnswers;
+extern NSString * const SKStatsTotalComments;
+extern NSString * const SKStatsTotalVotes;
+extern NSString * const SKStatsTotalBadges;
+extern NSString * const SKStatsTotalUsers;
+extern NSString * const SKStatsQuestionsPerMinute;
+extern NSString * const SKStatsAnswersPerMinute;
+extern NSString * const SKStatsBadgesPerMinute;
+extern NSString * const SKStatsViewsPerDay;
+
+extern NSString * const SKStatsAPIInfo;
+extern NSString * const SKStatsAPIInfoVersion;
+extern NSString * const SKStatsAPIInfoRevision;
+
+extern NSString * const SKStateSiteInfo;
+extern NSString * const SKStatsSiteInfoName;
+extern NSString * const SKStatsSiteInfoLogoURL;
+extern NSString * const SKStatsSiteInfoAPIURL;
+extern NSString * const SKStatsSiteInfoSiteURL;
+extern NSString * const SKStatsSiteInfoDescription;
+extern NSString * const SKStatsSiteInfoIconURL;
+
+#pragma mark -
+
 extern NSString * const SKSortCreation;
 extern NSString * const SKSortActivity;
 extern NSString * const SKSortVotes;

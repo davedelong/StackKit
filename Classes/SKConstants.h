@@ -25,35 +25,9 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const SKAPIKey;
 extern NSString * const SKAPIVersion;
 
 extern NSUInteger const SKPageSizeLimitMax;
-
-#pragma mark -
-#pragma mark Statistics Keys
-extern NSString * const SKStatsTotalQuestions;
-extern NSString * const SKStatsTotalUnansweredQuestions;
-extern NSString * const SKStatsTotalAnswers;
-extern NSString * const SKStatsTotalComments;
-extern NSString * const SKStatsTotalVotes;
-extern NSString * const SKStatsTotalBadges;
-extern NSString * const SKStatsTotalUsers;
-extern NSString * const SKStatsQuestionsPerMinute;
-extern NSString * const SKStatsAnswersPerMinutes;
-extern NSString * const SKStatsBadgesPerMinute;
-
-extern NSString * const SKStatsAPIInfo;
-extern NSString * const SKStatsAPIInfoVersion;
-extern NSString * const SKStatsAPIInfoRevision;
-
-extern NSString * const SKStateSiteInfo;
-extern NSString * const SKStatsSiteInfoName;
-extern NSString * const SKStatsSiteInfoLogoURL;
-extern NSString * const SKStatsSiteInfoAPIURL;
-extern NSString * const SKStatsSiteInfoSiteURL;
-extern NSString * const SKStatsSiteInfoDescription;
-extern NSString * const SKStatsSiteInfoIconURL;
 
 #pragma mark -
 #pragma mark Placeholders
