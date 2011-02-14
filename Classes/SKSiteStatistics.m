@@ -7,6 +7,7 @@
 //
 
 #import "SKSiteStatistics.h"
+#import "SKSiteStatistics+Private.h"
 #import "SKConstants_Internal.h"
 
 @implementation SKSiteStatistics
@@ -17,6 +18,16 @@
 @synthesize questionsPerMinute = _questionsPerMinute, answersPerMinute = _answersPerMinute, badgesPerMinute = _badgesPerMinute;
 @synthesize viewsPerDay = _viewsPerDay;
 @synthesize apiVersion=_apiVersion, apiRevision=_apiRevision;
+
+#pragma mark -
+#pragma mark Instantiating
+
++ (id)statsForSite:(SKSite*)site withResponseDictionary:(NSDictionary*)responseDictionary
+{
+    SKSiteStatistics *stats = [[SKSiteStatistics alloc] initWithSite:site responseDictionary:responseDictionary];
+    
+    return [stats autorelease];
+}
 
 #pragma mark - 
 #pragma mark Init/Dealloc
@@ -66,16 +77,6 @@
     [_apiRevision release];
     
     [super dealloc];
-}
-
-#pragma mark -
-#pragma mark Instantiating
-
-+ (id)statsForSite:(SKSite*)site withResponseDictionary:(NSDictionary*)responseDictionary
-{
-    SKSiteStatistics *stats = [[SKSiteStatistics alloc] initWithSite:site responseDictionary:responseDictionary];
-    
-    return [stats autorelease];
 }
 
 @end

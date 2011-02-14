@@ -131,6 +131,7 @@
 		55C952D612F5331700B1E546 /* SKSite+Caching.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C952D412F5331700B1E546 /* SKSite+Caching.h */; };
 		55C952D712F5331700B1E546 /* SKSite+Caching.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C952D512F5331700B1E546 /* SKSite+Caching.m */; };
 		55CC231C1308715F004C2397 /* SKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CC231B1308715E004C2397 /* SKMacros.h */; };
+		55CC231E1308C7DF004C2397 /* SKSiteStatistics+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CC231D1308C7DE004C2397 /* SKSiteStatistics+Private.h */; };
 		55E5BB7A12F1133500092A8D /* SKSite+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5BB7912F1133500092A8D /* SKSite+Private.m */; };
 		55E5BBED12F27D1200092A8D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E5BBEC12F27D1200092A8D /* CoreData.framework */; };
 		55E5BC0412F284EB00092A8D /* SKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E5BC0212F284EB00092A8D /* SKUser.h */; };
@@ -346,6 +347,7 @@
 		55C952D412F5331700B1E546 /* SKSite+Caching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Caching.h"; sourceTree = "<group>"; };
 		55C952D512F5331700B1E546 /* SKSite+Caching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKSite+Caching.m"; sourceTree = "<group>"; };
 		55CC231B1308715E004C2397 /* SKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMacros.h; sourceTree = "<group>"; };
+		55CC231D1308C7DE004C2397 /* SKSiteStatistics+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSiteStatistics+Private.h"; sourceTree = "<group>"; };
 		55E5BB7912F1133500092A8D /* SKSite+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "SKSite+Private.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		55E5BBEC12F27D1200092A8D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		55E5BC0212F284EB00092A8D /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 				D238770E1306958100D160DE /* SKSiteManager+Private.h */,
 				D23877491306D5FE00D160DE /* SKSiteStatistics.h */,
 				D238774A1306D60D00D160DE /* SKSiteStatistics.m */,
+				55CC231D1308C7DE004C2397 /* SKSiteStatistics+Private.h */,
 				D23877051306940400D160DE /* Caching */,
 				550369AE1302F84400D20ECB /* Operations */,
 			);
@@ -956,6 +959,7 @@
 				556081A813072D2000D1506E /* SKAssociatedUserOperation.h in Headers */,
 				556081AB130748FF00D1506E /* SKUser+Private.h in Headers */,
 				55CC231C1308715F004C2397 /* SKMacros.h in Headers */,
+				55CC231E1308C7DF004C2397 /* SKSiteStatistics+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

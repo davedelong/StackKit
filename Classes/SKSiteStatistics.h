@@ -50,6 +50,4 @@
 @property (readonly) NSString *apiVersion;
 @property (readonly) NSString *apiRevision;
 
-+ (id)statsForSite:(SKSite*)site withResponseDictionary:(NSDictionary*)responseDictionary;
-
 @end

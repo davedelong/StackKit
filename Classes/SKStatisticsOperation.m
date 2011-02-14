@@ -11,6 +11,7 @@
 #import "JSON.h"
 
 #import "SKSiteStatistics.h"
+#import "SKSiteStatistics+Private.h"
 
 #import <dispatch/dispatch.h>
 
