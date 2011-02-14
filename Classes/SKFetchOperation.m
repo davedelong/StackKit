@@ -14,6 +14,7 @@
 #import "SKSite+Private.h"
 #import "SKConstants.h"
 #import "JSON.h"
+#import "SKMacros.h"
 
 NSString * SKFetchTotalKey = @"total";
 
@@ -102,7 +103,10 @@ NSString * SKErrorMessageKey = @"message";
 	NSMutableArray * objects = [[NSMutableArray alloc] init];	
 	
 	//parse the response into objects
-    [[[self site] managedObjectContext] lock];
+    
+    NSManagedObjectContext *context = [[self site] managedObjectContext];
+    
+    [context lock];
 	if ([dataObject isKindOfClass:[NSArray class]]) {
 		for (NSDictionary * dataDictionary in dataObject) {
 			SKObject *object = [entity objectMergedWithDictionary:dataDictionary inSite:[self site]];
@@ -112,7 +116,12 @@ NSString * SKErrorMessageKey = @"message";
 		SKObject *object = [entity objectMergedWithDictionary:dataObject inSite:[self site]];
 		[objects addObject:object];
 	}
-    [[[self site] managedObjectContext] unlock];
+    [context unlock];
+    
+    NSError *saveError = nil;
+    if (![context save:&saveError]) {
+        SKLog(@"error saving context: %@", saveError);
+    }
 	
 	return [objects autorelease];
 }
@@ -132,7 +141,7 @@ NSString * SKErrorMessageKey = @"message";
 	NSError * requestBuilderError = nil;
 	NSURL * builderURL = [SKRequestBuilder URLForFetchRequest:request error:&requestBuilderError];
 	
-	NSLog(@"buildURL: %@ (%@)", builderURL, requestBuilderError);
+	SKLog(@"buildURL: %@ (%@)", builderURL, requestBuilderError);
 	
 	if (requestBuilderError != nil) {
 		[self setError:requestBuilderError];

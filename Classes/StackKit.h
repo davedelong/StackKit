@@ -35,24 +35,26 @@
 
 #endif
 
-#import "SKObject.h"
+#import "SKSiteManager.h"
+#import "SKSite.h"
+#import "SKSiteStatistics.h"
 
 #import "SKFetchRequest.h"
 #import "SKLocalFetchRequest.h"
 
-#import "SKSiteManager.h"
-#import "SKSite.h"
-
 #import "SKObject.h"
+
 #import "SKUser.h"
+#import "SKUserActivity.h"
 #import "SKTag.h"
 #import "SKBadge.h"
-#import "SKUserActivity.h"
+#import "SKBadgeAward.h"
+
 #import "SKPost.h"
 #import "SKQAPost.h"
 #import "SKQuestion.h"
 #import "SKAnswer.h"
 #import "SKComment.h"
+
 #import "SKConstants.h"
 #import "SKDefinitions.h"
-#import "SKSiteStatistics.h"

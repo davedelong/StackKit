@@ -150,13 +150,3 @@ extern NSString * const SKAPIWebsite_URL;
 
 // placeholder
 extern NSString * const SKAPIFavorited_Date;
-
-#ifndef SKLog
-#define SKLog(format,...) \
-{ \
-NSString *file = [[NSString alloc] initWithUTF8String:__FILE__]; \
-printf("[%s:%d] ", [[file lastPathComponent] UTF8String], __LINE__); \
-[file release]; \
-SKQLog((format),##__VA_ARGS__); \
-}
-#endif

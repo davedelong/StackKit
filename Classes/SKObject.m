@@ -12,13 +12,7 @@
 #import "SKSite+Caching.h"
 #import "SKFetchOperation.h"
 #import "SKFunctions.h"
-
-#pragma mark Private methods
-@interface SKObject ()
-
-@property (nonatomic, retain) SKSite * site;
-
-@end
+#import "SKMacros.h"
 
 #pragma mark Main Implementation
 
@@ -150,7 +144,7 @@
 }
 
 - (id)transformValueToMerge:(id)value forRelationship:(NSString *)relationship {
-    NSLog(@"ERROR: unable to transform for -[%@ %@]: %@", NSStringFromClass([self class]), relationship, value);
+    SKLog(@"ERROR: unable to transform for -[%@ %@]: %@", NSStringFromClass([self class]), relationship, value);
     return nil;
 }
 
@@ -181,7 +175,7 @@
             if ([relationship isToMany]) {
                 // to-many relationship. the value to transform can be a dictionary or collection
                 if ([newValue isKindOfClass:[NSDictionary class]] == NO && SKIsVectorClass(newValue) == NO) {
-                    NSLog(@"ERROR: cannot handle non-collection merge information for %@ relationship: %@", propertyName, newValue);
+                    SKLog(@"ERROR: cannot handle non-collection merge information for %@ relationship: %@", propertyName, newValue);
                     continue;
                 }
                 // transform the dictionary into appropriate objects:
@@ -206,7 +200,7 @@
             } else {
                 // to-one relationship.  the value to transform must be a dictionary
                 if (SKIsVectorClass(newValue)) {
-                    NSLog(@"ERROR: cannot handle collection merge information for %@ relationship: %@", propertyName, newValue);
+                    SKLog(@"ERROR: cannot handle collection merge information for %@ relationship: %@", propertyName, newValue);
                     continue;
                 }
                 newValue = [self transformValueToMerge:newValue forRelationship:propertyName];
@@ -219,14 +213,12 @@
     }
 }
 
-//- (BOOL) isEqual:(id)object {
-//    if ([object isKindOfClass:[self class]] == NO) { return NO; }
-//    NSString * uniquePropertyName = [[self class] uniqueIDKey];
-//    id myUniqueValue = [self valueForKey:uniquePropertyName];
-//    id theirUniqueValue = [object valueForKey:uniquePropertyName];
-//    
-//    return [myUniqueValue isEqual:theirUniqueValue];
-//}
+- (void) setSite:(SKSite *)aSite {
+    if (site != aSite) {
+        [site release];
+        site = [aSite retain];
+    }
+}
 
 #pragma mark -
 #pragma mark KVC Compliance

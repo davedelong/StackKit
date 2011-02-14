@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SKObject.h"
 #import "SKFetchRequest.h"
+#import "SKSite.h"
 
 @interface SKObject ()
 
@@ -20,6 +21,7 @@
 - (void) mergeInformationFromAPIResponseDictionary:(NSDictionary *)dictionary;
 
 - (SKFetchRequest *) mergeRequest;
+- (void) setSite:(SKSite *)aSite;
 
 // used in valueForKey:
 + (NSString *) propertyKeyFromAPIAttributeKey:(NSString *)key;

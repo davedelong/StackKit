@@ -16,7 +16,7 @@
     SKSite *site;
 }
 
-@property (nonatomic, retain, readonly) SKSite * site;
+@property (nonatomic, readonly) SKSite * site;
 
 /**
  request that the object refresh itself from the API site.

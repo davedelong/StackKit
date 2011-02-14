@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SKFunctions.h"
 
 #pragma mark -
 #pragma mark Helpher Macros
@@ -38,5 +39,15 @@ NSString *k = @"" #n; \
 t _r = [self primitiveValueForKey:k]; \
 [self didAccessValueForKey:k]; \
 return _r; \
+}
+#endif
+
+#ifndef SKLog
+#define SKLog(format,...) \
+{ \
+NSString *file = [[NSString alloc] initWithUTF8String:__FILE__]; \
+printf("[%s:%d] ", [[file lastPathComponent] UTF8String], __LINE__); \
+[file release]; \
+SKQLog((format),##__VA_ARGS__); \
 }
 #endif

@@ -11,11 +11,12 @@
 #import "SKConstants.h"
 #import "SKConstants_Internal.h"
 #import "SKFunctions.h"
+#import "SKMacros.h"
 
 @implementation SKSite (Private)
 
 + (id) allocWithZone:(NSZone *)zone {
-	NSLog(@"You may not allocate an SKSite object");
+	SKLog(@"You may not allocate an SKSite object");
 	return nil;
 }
 

@@ -13,6 +13,7 @@
 #import "SKSite+Private.h"
 
 #import "SKConstants.h"
+#import "SKMacros.h"
 
 #import "SKUser.h"
 #import "SKAssociatedUserOperation.h"
@@ -66,7 +67,7 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
 }
 
 + (id) allocWithZone:(NSZone *)zone {
-    NSLog(@"you may not allocate an SKSiteManager object");
+    SKLog(@"you may not allocate an SKSiteManager object");
     return nil;
 }
 
@@ -253,7 +254,7 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
     if ([[NSFileManager defaultManager] fileExistsAtPath:asd isDirectory:&isDir] == NO || isDir == NO) {
         NSError *error = nil;
         if (![[NSFileManager defaultManager] createDirectoryAtPath:asd withIntermediateDirectories:YES attributes:nil error:&error]) {   
-            NSLog(@"Error creating application support directory at %@ : %@", asd, error);
+            SKLog(@"Error creating application support directory at %@ : %@", asd, error);
         }
     }
     

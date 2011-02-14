@@ -154,7 +154,7 @@
 		url = [successfulBuilder URL];
 		
 		if ([successfulBuilders count] > 1) {
-			NSLog(@"multiple URLs built: %@", [successfulBuilders valueForKey:@"URL"]);
+			SKLog(@"multiple URLs built: %@", [successfulBuilders valueForKey:@"URL"]);
 		}
 	} else if ([failedBuilders count] > 0) {
 		//nothing succeeded and something failed
@@ -164,13 +164,13 @@
 	} else {
 		//nothing succeeded and nothing failed
 		//this should be impossible
-		NSLog(@"Impossible branch reached!");
+		SKLog(@"Impossible branch reached!");
 	}
 	
 errorExit:
 	[builders release];
 	if (buildError != nil) {
-		NSLog(@"build error: %@", buildError);
+		SKLog(@"build error: %@", buildError);
 		if (error != nil) {
 			*error = buildError;
 		}

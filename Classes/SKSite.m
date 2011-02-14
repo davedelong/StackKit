@@ -26,6 +26,7 @@
 #import "SKSite.h"
 #import "SKSite+Private.h"
 #import "SKSite+Caching.h"
+#import "SKMacros.h"
 
 #import "SKSiteManager.h"
 #import "SKSiteManager+Private.h"
@@ -144,7 +145,7 @@ NSString * const SKSiteAPIKey = @"key";
 - (NSArray *) executeSynchronousFetchRequest:(SKFetchRequest *)fetchRequest {
     __block NSArray *returnResults = nil;
     SKRequestHandler b = ^(NSArray *results) {
-        NSLog(@"executing callback: %@", results);
+        SKLog(@"executing callback: %@", results);
         returnResults = [results retain];
     };
     
@@ -206,7 +207,7 @@ NSString * const SKSiteAPIKey = @"key";
     NSManagedObjectModel *mom = [self managedObjectModel];
     if (!mom) {
         NSAssert(NO, @"Managed object model is nil");
-        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
+        SKLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
         return nil;
     }
 	
@@ -221,7 +222,7 @@ NSString * const SKSiteAPIKey = @"key";
 															URL:url 
 														options:nil 
 														  error:&error]){
-		NSLog(@"Error creating persistent store: %@", error);
+		SKLog(@"Error creating persistent store: %@", error);
         [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
         return nil;
     }    
@@ -235,7 +236,7 @@ NSString * const SKSiteAPIKey = @"key";
 	
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (!coordinator) {
-		NSLog(@"FAILED TO INITIALIZE STORE");
+		SKLog(@"FAILED TO INITIALIZE STORE");
         return nil;
     }
     managedObjectContext = [[NSManagedObjectContext alloc] init];
@@ -257,7 +258,7 @@ NSString * const SKSiteAPIKey = @"key";
 	NSError *error = nil;
 	[[self managedObjectContext] obtainPermanentIDsForObjects:objectIDs error:&error];
 	if (error != nil) {
-		NSLog(@"error retrieving permanent ids: %@", error);
+		SKLog(@"error retrieving permanent ids: %@", error);
 	}
 }
 
