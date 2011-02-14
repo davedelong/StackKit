@@ -25,6 +25,7 @@
 
 #import "SKRequestBuilder.h"
 #import "_SKConcreteRequestBuilder.h"
+#import "SKMacros.h"
 #import <objc/runtime.h>
 
 @implementation SKRequestBuilder

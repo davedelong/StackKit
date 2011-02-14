@@ -9,12 +9,9 @@
 #import "SKTag.h"
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
+#import "SKMacros.h"
 
 @implementation SKTag 
-
-@dynamic name;
-@dynamic numberOfTaggedQuestions;
-@dynamic questions;
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
     static NSDictionary * mapping = nil;

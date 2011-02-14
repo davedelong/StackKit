@@ -10,15 +10,9 @@
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
 #import "SKUser.h"
+#import "SKMacros.h"
 
 @implementation SKPost 
-
-@dynamic body;
-@dynamic creationDate;
-@dynamic score;
-@dynamic postID;
-@dynamic owner;
-@dynamic postActivity;
 
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;

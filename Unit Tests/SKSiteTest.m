@@ -32,10 +32,9 @@
 - (void) testStatistics {
 	SKSite * site = [[SKSiteManager sharedManager] stackOverflowSite];
 	
-	NSDictionary * stats = [site statistics];
+	SKSiteStatistics * stats = [site statistics];
 	
-	NSString * apiVersion = [[stats objectForKey:SKStatsAPIInfo] objectForKey:SKStatsAPIInfoVersion];
-	STAssertEqualObjects(apiVersion, SKAPIVersion, @"API versions do not match!");
+	STAssertEqualObjects([stats apiVersion], SKAPIVersion, @"API versions do not match!");
 }
 
 - (void) testMetaSite {

@@ -7,12 +7,9 @@
 //
 
 #import "SKBadgeAward.h"
+#import "SKMacros.h"
 
 @implementation SKBadgeAward 
-
-@dynamic badge;
-@dynamic user;
-@dynamic numberOfTimesAwarded;
 
 SK_GETTER(NSNumber *, numberOfTimesAwarded);
 SK_GETTER(SKUser *, user);

@@ -16,6 +16,7 @@
 @synthesize totalAnswers = _totalAnswers, totalComments = _totalComments, totalVotes = _totalVotes, totalBadges = _totalBadges, totalUsers = _totalUsers;
 @synthesize questionsPerMinute = _questionsPerMinute, answersPerMinute = _answersPerMinute, badgesPerMinute = _badgesPerMinute;
 @synthesize viewsPerDay = _viewsPerDay;
+@synthesize apiVersion=_apiVersion, apiRevision=_apiRevision;
 
 #pragma mark - 
 #pragma mark Init/Dealloc
@@ -37,6 +38,10 @@
         _answersPerMinute = [[responseDictionary objectForKey:@"answers_per_minute"] retain];
         _badgesPerMinute = [[responseDictionary objectForKey:@"badges_per_minute"] retain];
         _viewsPerDay = [[responseDictionary objectForKey:@"views_per_day"] retain];
+        
+        NSDictionary *apiInfo = [responseDictionary objectForKey:@"api_version"];
+        _apiVersion = [[apiInfo objectForKey:@"version"] retain];
+        _apiRevision = [[apiInfo objectForKey:@"revision"] retain];
     }
     
     return self;
@@ -57,6 +62,8 @@
     [_answersPerMinute release];
     [_badgesPerMinute release];
     [_viewsPerDay release];
+    [_apiVersion release];
+    [_apiRevision release];
     
     [super dealloc];
 }

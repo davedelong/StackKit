@@ -36,12 +36,11 @@
 	[r setEntity:[SKQuestion class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %d", 1283419]];
 	
-	NSError * e = nil;
-	NSArray * matches = [site executeSynchronousFetchRequest:r error:&e];
-	[r release];
+	NSArray * matches = [site executeSynchronousFetchRequest:r];
 	
 	STAssertTrue([matches count] > 0, @"Expecting 1 question");
-	STAssertNil(e, @"Expecting nil error: %@", e);
+	STAssertNil([r error], @"Expecting nil error: %@", [r error]);
+	[r release];
 	
 	SKQuestion * q = [matches objectAtIndex:0];
 	
@@ -71,12 +70,11 @@
 	[r setEntity:[SKQuestion class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %@", questionsToFetch]];
 	
-	NSError * e = nil;
-	NSArray * matches = [site executeSynchronousFetchRequest:r error:&e];
-	[r release];
+	NSArray * matches = [site executeSynchronousFetchRequest:r];
 	
 	STAssertTrue([matches count] == 3, @"Expecting 3 questions");
-	STAssertNil(e, @"Expecting nil error: %@", e);
+	STAssertNil([r error], @"Expecting nil error: %@", [r error]);
+	[r release];
 	
 	SKQuestion * q = [matches objectAtIndex:0];
 	STAssertTrue([[q questionID] isEqualToNumber:[NSNumber numberWithInt:4729906]], @"Unexpected question returned at index 0");
@@ -105,14 +103,13 @@
 	[r setEntity:[SKQuestion class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"tags CONTAINS %@", @"cocoa"]];
 	
-	NSError * e = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
 	for (SKQuestion * q in results) {
 		NSSet * questionTags = [[q tags] valueForKey:@"name"];
 		STAssertTrue([questionTags containsObject:@"cocoa"], @"Question (%@) is not tagged with \"cocoa\": %@", q, [q tags]);
 	}
+	[r release];
 }
 
 - (void) testQuestionSearch {
@@ -122,12 +119,11 @@
 	[r setEntity:[SKQuestion class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"title CONTAINS %@", @"Constants by another name"]];
 	
-	NSError * e = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(e, @"Error should be nil: %@", e);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
 	STAssertTrue([results count] > 0, @"expecting at least 1 result");
+	[r release];
 	
 	SKQuestion * q = [results objectAtIndex:0];
 	
@@ -142,12 +138,11 @@
 	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO] autorelease]];
 	[r setFetchLimit:10];
 	
-	NSError * e = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(e, @"Error should be nil: %@", e);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
 	STAssertTrue([results count] == 10, @"expecting 10 results; got %d", [results count]);
+	[r release];
 	
 	NSDate * previous = [NSDate distantFuture];
 	for (SKQuestion * q in results) {
@@ -164,11 +159,10 @@
 	[r setEntity:[SKQuestion class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"answers.@count = 0 AND tags CONTAINS (%@)", @"iphone"]];
 	
-	NSError * e = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&e];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(e, @"Error should be nil: %@", e);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
+	[r release];
 	
 	for (SKQuestion * question in results) {
         for (SKAnswer *answer in [question answers]) {

@@ -34,11 +34,10 @@
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKTag class]];
 
-	NSError * error = nil;
-	NSArray * recent = [site executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * recent = [site executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"error should be nil: %@", error);
+	STAssertNil([r error], @"error should be nil: %@", [r error]);
+	[r release];
 	
 	/**
 	 There's really no way we can verify that these are accurate results without more information returned by the SO API
@@ -53,11 +52,10 @@
 	[r setEntity:[SKTag class]];
 	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"numberOfTaggedQuestions" ascending:NO] autorelease]];
 	
-	NSError * error = nil;
-	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * popular = [site executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"error should be nil: %@", error);
+	STAssertNil([r error], @"error should be nil: %@", [r error]);
+	[r release];
 	
 	NSNumber * previousCount = [NSNumber numberWithInt:INT_MAX];
 	for (SKTag * tag in popular) {
@@ -73,11 +71,10 @@
 	[r setEntity:[SKTag class]];
 	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES] autorelease]];
 	
-	NSError * error = nil;
-	NSArray * popular = [site executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * popular = [site executeSynchronousFetchRequest:r];
 	
-	STAssertTrue(error == nil, @"error should be nil: %@", error);
+	STAssertTrue([r error] == nil, @"error should be nil: %@", [r error]);
+	[r release];
 	
 	NSString * previousName = nil;
 	for (SKTag * tag in popular) {
@@ -95,11 +92,10 @@
 	[r setEntity:[SKTag class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", SKTagsParticipatedInByUser, [NSNumber numberWithInt:115730]]];
 	
-	NSError * error = nil;
-	NSArray * userTags = [site executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * userTags = [site executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"error should be nil: %@", error);
+	STAssertNil([r error], @"error should be nil: %@", [r error]);
+	[r release];
 	
 	//even though user #115730 has been active in more than 100 tags, only 100 are returned at a time (by default, max is 100)
 	STAssertTrue([userTags count] == 100, @"incorrect number of badges (%ld)", [userTags count]);
@@ -112,11 +108,10 @@
 	[r setEntity:[SKTag class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"name CONTAINS %@", @"iphone"]];
 	
-	NSError * error = nil;
-	NSArray * tags = [site executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * tags = [site executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"error should be nil: %@", error);
+	STAssertNil([r error], @"error should be nil: %@", [r error]);
+	[r release];
 	
 	STAssertTrue([tags count] > 0, @"expected some tags returned");
 	for (SKTag * tag in tags) {

@@ -8,13 +8,11 @@
 
 #import "SKAnswer.h"
 #import "SKConstants_Internal.h"
+#import "SKMacros.h"
 #import "SKObject+Private.h"
 #import "SKQuestion.h"
 
 @implementation SKAnswer 
-
-@dynamic accepted;
-@dynamic question;
 
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;

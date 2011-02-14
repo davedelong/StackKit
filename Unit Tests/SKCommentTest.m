@@ -36,16 +36,15 @@
 	[r setEntity:[SKComment class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %d", 3056814]];
 	
-	NSError * error = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"Error should be nil: %@", error);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
 	STAssertTrue([results count] == 1, @"Unexpected number of results: %@", results);
 	
 	SKComment * comment = [results objectAtIndex:0];
 	
 	STAssertEqualObjects([[comment owner] userID], [NSNumber numberWithInt:115730], @"Unexpected post owner: %@", [[comment owner] userID]);
+	[r release];
 }
 
 - (void) testMultipleComments {
@@ -55,12 +54,11 @@
 	[r setEntity:[SKComment class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"postID = %@", [NSArray arrayWithObjects:@"3056814",@"2520617", nil]]];
 	
-	NSError * error = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"Error should be nil: %@", error);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
 	STAssertTrue([results count] == 2, @"Unexpected number of results: %@", results);
+	[r release];
 	
 	SKComment * comment = [results objectAtIndex:0];
 	
@@ -79,17 +77,16 @@
 	[r setEntity:[SKComment class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d", 115730]];
 	
-	NSError * error = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"Error should be nil: %@", error);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
 	STAssertTrue([results count] > 0, @"Unexpected number of results: %@", results);
 	
 	NSNumber * user = [NSNumber numberWithInt:115730];
 	for (SKComment * comment in results) {
 		STAssertEqualObjects([[comment owner] userID], user, @"Unexpected post owner: %@", [[comment owner] userID]);
 	}
+	[r release];
 }
 
 - (void) testUserCommentsInDateRange {
@@ -103,11 +100,9 @@
 	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d AND creationDate >= %@ AND creationDate <= %@", 115730, fromDate, toDate]];
 	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES] autorelease]];
 	
-	NSError * error = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"Error should be nil: %@", error);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
 	STAssertTrue([results count] > 0, @"Unexpected number of results: %@", results);
 	
 	for (SKComment * comment in results) {
@@ -115,6 +110,7 @@
 		STAssertTrue([[commentDate earlierDate:fromDate] isEqualToDate:fromDate], @"Unexpected creation date: %@", commentDate);
 		STAssertTrue([[commentDate earlierDate:toDate] isEqualToDate:commentDate], @"Unexpected creation date: %@", commentDate);
 	}
+	[r release];
 }
 
 - (void) testUserCommentsInScoreRange {
@@ -128,11 +124,9 @@
 	[r setPredicate:[NSPredicate predicateWithFormat:@"owner = %d AND score >= %d AND score <= %d", 115730, lowerScore, higherScore]];
 	[r setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"score" ascending:NO] autorelease]];
 	
-	NSError * error = nil;
-	NSArray * results = [s executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * results = [s executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"Error should be nil: %@", error);
+	STAssertNil([r error], @"Error should be nil: %@", [r error]);
 	STAssertTrue([results count] > 0, @"Unexpected number of results: %@", results);
 	
 	for (SKComment * comment in results) {
@@ -140,6 +134,7 @@
 		STAssertTrue([score intValue] >= lowerScore, @"Unexpected score: %@", score);
 		STAssertTrue([score intValue] <= higherScore, @"Unexpected score: %@", score);
 	}
+	[r release];
 }
 
 @end

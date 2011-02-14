@@ -36,11 +36,10 @@
 	[r setEntity:[SKBadge class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"tagBased = %@", [NSNumber numberWithBool:NO]]];
 
-	NSError * error = nil;
-	NSArray * badges = [site executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * badges = [site executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"error should be nil");
+	STAssertNil([r error], @"error should be nil");
+	[r release];
 	
 	for (SKBadge * badge in badges) {
 		STAssertFalse([[badge tagBased] boolValue], @"Unexpected tag-based badge: %@", badge);
@@ -54,11 +53,10 @@
 	[r setEntity:[SKBadge class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"tagBased = %@", [NSNumber numberWithBool:YES]]];
 	
-	NSError * error = nil;
-	NSArray * badges = [site executeSynchronousFetchRequest:r error:&error];
-	[r release];
+	NSArray * badges = [site executeSynchronousFetchRequest:r];
 	
-	STAssertNil(error, @"error should be nil");
+	STAssertNil([r error], @"error should be nil");
+	[r release];
 	
 	for (SKBadge * badge in badges) {
 		STAssertTrue([[badge tagBased] boolValue], @"badge %@ should be tag-based", [badge name]);
@@ -72,7 +70,7 @@
 	[r setEntity:[SKBadge class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [NSNumber numberWithInt:115730]]];
 	
-	NSArray * badges = [site executeSynchronousFetchRequest:r error:nil];
+	NSArray * badges = [site executeSynchronousFetchRequest:r];
 	[r release];
 	
 	int badgeCount[3] = {0, 0, 0};
@@ -93,7 +91,7 @@
 	SKFetchRequest * r = [[SKFetchRequest alloc] init];
 	[r setEntity:[SKBadge class]];
 	[r setPredicate:[NSPredicate predicateWithFormat:@"awards.user CONTAINS %@", [NSNumber numberWithInt:115730]]];
-	NSArray * badges = [site executeSynchronousFetchRequest:r error:nil];
+	NSArray * badges = [site executeSynchronousFetchRequest:r];
 	[r release];
 	
 	int badgeCount[3] = {0, 0, 0};

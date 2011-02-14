@@ -10,19 +10,9 @@
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
 #import "SKComment.h"
+#import "SKMacros.h"
 
-@implementation SKQAPost 
-
-@dynamic communityOwned;
-@dynamic downVotes;
-@dynamic lastActivityDate;
-@dynamic lastEditDate;
-@dynamic lockedDate;
-@dynamic title;
-@dynamic upVotes;
-@dynamic viewCount;
-
-@dynamic comments;
+@implementation SKQAPost
 
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;

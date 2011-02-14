@@ -31,6 +31,7 @@
 #import "SKConstants.h"
 #import "NSPredicate+SKAdditions.h"
 #import "SKConstants_Internal.h"
+#import "SKMacros.h"
 
 @interface _SKConcreteRequestBuilder : NSObject {
 	@private

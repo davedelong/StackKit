@@ -29,6 +29,9 @@
     NSNumber *_badgesPerMinute;
     
     NSNumber *_viewsPerDay;
+    
+    NSString *_apiVersion;
+    NSString *_apiRevision;
 }
 
 @property (readonly) SKSite *site;
@@ -44,6 +47,8 @@
 @property (readonly) NSNumber *answersPerMinute;
 @property (readonly) NSNumber *badgesPerMinute;
 @property (readonly) NSNumber *viewsPerDay;
+@property (readonly) NSString *apiVersion;
+@property (readonly) NSString *apiRevision;
 
 + (id)statsForSite:(SKSite*)site withResponseDictionary:(NSDictionary*)responseDictionary;
 

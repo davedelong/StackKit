@@ -11,12 +11,9 @@
 #import "SKQAPost.h"
 #import "SKUser.h"
 #import "SKConstants_Internal.h"
+#import "SKMacros.h"
 
 @implementation SKComment 
-
-@dynamic editCount;
-@dynamic post;
-@dynamic directedToUser;
 
 + (NSString *) apiResponseDataKey {
 	return @"comments";

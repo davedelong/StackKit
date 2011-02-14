@@ -38,8 +38,7 @@
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [NSNumber numberWithInt:115730]]];
 	
-	NSError * error = nil;
-	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
+	NSArray * results = [site executeSynchronousFetchRequest:request];
 	STAssertTrue([results count] == 1, @"request should return 1 object");
 	
 	SKUser * davedelong = [results objectAtIndex:0];
@@ -56,8 +55,7 @@
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [NSArray arrayWithObjects:[NSNumber numberWithInt:115730],[NSNumber numberWithInt:382190],nil]]];
 	
-	NSError * error = nil;
-	NSArray * results = [site executeSynchronousFetchRequest:request error:&error];
+	NSArray * results = [site executeSynchronousFetchRequest:request];
 	STAssertTrue([results count] == 2, @"request should return 2 objects");
 	
 	SKUser * davedelong = [results objectAtIndex:0];
@@ -79,14 +77,13 @@
 	[request setSortDescriptor:[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES] autorelease]];
 	[request setFetchLimit:10];
 	
-	NSError * error = nil;
-	NSArray * users = [site executeSynchronousFetchRequest:request error:&error];
-	NSLog(@"%@", error);
-	[request release];
+	NSArray * users = [site executeSynchronousFetchRequest:request];
+	NSLog(@"%@", [request error]);
 	
 	STAssertTrue([users count] == 10, @"only 10 users should've been fetched: %@", users);
 	
-	STAssertNil(error, @"error should be nil: %@", error);
+	STAssertNil([request error], @"error should be nil: %@", [request error]);
+	[request release];
 	
 	NSArray * returnedCreationDates = [users valueForKey:@"creationDate"];
 	
@@ -107,7 +104,7 @@
 	[request setPredicate:[NSPredicate predicateWithFormat:@"displayName CONTAINS %@", @"Dave DeLong"]];
 	
 	NSError * error = nil;
-	NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
+	NSArray * matches = [site executeSynchronousFetchRequest:request];
 	[request release];
 	
 	NSLog(@"%@", matches);
@@ -120,7 +117,7 @@
 }
 
 - (void) testUsersWithMostFavoritedQuestions {
-	SKSite * site = [SKSite stackAppsSite];
+	SKSite * site = [[SKSiteManager sharedManager] stackAppsSite];
 	
 	SKFetchRequest * request = [[SKFetchRequest alloc] init];
 	[request setEntity:[SKQuestion class]];
@@ -131,8 +128,7 @@
 	for (NSUInteger offset = 0; offset < count; offset += 100) {
 		[request setFetchOffset:offset];
 		
-		NSError * error = nil;
-		NSArray * matches = [site executeSynchronousFetchRequest:request error:&error];
+		NSArray * matches = [site executeSynchronousFetchRequest:request];
 		for (SKQuestion * question in matches) {
 			NSUInteger count = [[question favoriteCount] unsignedIntegerValue];
 			for (int i = 0; i < count; ++i) { [counts addObject:[[question owner] userID]]; }
@@ -157,7 +153,7 @@
 	[request setEntity:[SKUser class]];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"userID = %@", [favoriteCounts valueForKey:@"user"]]];
 	
-	NSArray * users = [site executeSynchronousFetchRequest:request error:nil];
+	NSArray * users = [site executeSynchronousFetchRequest:request];
 	[request release];
 	
 	NSDictionary * userMapping = [NSDictionary dictionaryWithObjects:users forKeys:[users valueForKey:@"userID"]];

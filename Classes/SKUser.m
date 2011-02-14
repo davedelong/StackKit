@@ -11,6 +11,7 @@
 #import "SKConstants_Internal.h"
 #import "SKSiteManager+Private.h"
 #import "SKDefinitions.h"
+#import "SKMacros.h"
 
 // used internally
 NSString * const SKUserAccountTypeAnonymous = @"anonymous";
@@ -19,28 +20,6 @@ NSString * const SKUserAccountTypeRegistered = @"registered";
 NSString * const SKUserAccountTypeModerator = @"moderator";
 
 @implementation SKUser 
-
-@dynamic aboutMe;
-@dynamic acceptRate;
-@dynamic age;
-@dynamic associationID;
-@dynamic creationDate;
-@dynamic displayName;
-@dynamic downVotes;
-@dynamic emailHash;
-@dynamic lastAccessDate;
-@dynamic location;
-@dynamic reputation;
-@dynamic upVotes;
-@dynamic userID;
-@dynamic userType;
-@dynamic viewCount;
-@dynamic websiteURL;
-
-@dynamic awardedBadges;
-@dynamic directedComments;
-@dynamic posts;
-@dynamic favoritedQuestions;
 
 + (id) userWithAssociationInformation:(NSDictionary *)information {
     NSString *siteName = [information objectForKey:@"site_name"];

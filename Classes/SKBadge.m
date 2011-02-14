@@ -12,17 +12,9 @@
 #import "SKDefinitions.h"
 #import "SKUser.h"
 #import "SKBadgeAward.h"
+#import "SKMacros.h"
 
 @implementation SKBadge 
-
-@dynamic badgeID;
-@dynamic name;
-@dynamic numberAwarded;
-@dynamic rank;
-@dynamic summary;
-@dynamic tagBased;
-
-@dynamic awards;
 
 + (NSString *) apiResponseDataKey {
     return @"badges";

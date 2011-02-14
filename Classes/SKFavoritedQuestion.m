@@ -11,12 +11,9 @@
 #import "SKUser.h"
 #import "SKObject+Private.h"
 #import "SKConstants_Internal.h"
+#import "SKMacros.h"
 
 @implementation SKFavoritedQuestion
-
-@dynamic favoritedDate;
-@dynamic user;
-@dynamic question;
 
 + (NSDictionary *) APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;

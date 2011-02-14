@@ -9,20 +9,12 @@
 #import "SKQuestion.h"
 #import "SKConstants_Internal.h"
 #import "SKObject+Private.h"
+#import "SKMacros.h"
 
 #import "SKTag.h"
 #import "SKAnswer.h"
 
 @implementation SKQuestion 
-
-@dynamic closeDate;
-@dynamic bountyAmount;
-@dynamic bountyCloseDate;
-@dynamic closeReason;
-@dynamic favoriteCount;
-@dynamic answers;
-@dynamic tags;
-@dynamic favoritedByUsers;
 
 + (NSDictionary *)APIAttributeToPropertyMapping {
     static NSDictionary *mapping = nil;
