@@ -13,6 +13,8 @@
 #import "SKSite+Private.h"
 
 #import "SKConstants.h"
+#import "SKConstants_Internal.h"
+#import "NSDictionary+SKAdditions.h"
 #import "SKMacros.h"
 
 #import "SKUser.h"
@@ -24,6 +26,11 @@
 
 - (void)_performInitialSetup;
 - (void)fetchSites;
+
+- (NSString*)cachedSitesFilename;
+
+- (NSArray *)cachedSites;
+- (void)cacheSites:(NSArray *)sites;
 
 @end
 
@@ -84,28 +91,59 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
 
 - (void)fetchSites {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSDictionary *sitesDictionary = [self cachedSitesDictionary];
+    NSArray *sites = [self cachedSites];
     
-    if(!sitesDictionary) {
-        NSString * urlString = [NSString stringWithFormat:@"http://stackauth.com/%@/sites", SKAPIVersion];
-        NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    if(!sites) {
+        NSUInteger total = NSUIntegerMax;
+        NSMutableArray *allItems = [NSMutableArray array];
+        NSUInteger currentPage = 1;
+        NSUInteger lastCount = NSUIntegerMax;
         
-        NSHTTPURLResponse * response = nil;
-        NSError * error = nil;
-        NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        if (error == nil && data != nil) {	
-            NSString * dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            sitesDictionary = [dataString JSONValue];
-            [dataString release];
+        while ([allItems count] < total) {
+            NSMutableDictionary *query = [NSMutableDictionary dictionary];
+            [query setObject:[NSNumber numberWithUnsignedInteger:currentPage] forKey:SKQueryPage];
+            [query setObject:[NSNumber numberWithUnsignedInteger:SKPageSizeLimitMax] forKey:SKQueryPageSize];
             
-            [self cacheSitesWithDictionary:sitesDictionary];
+            NSString *url = [NSString stringWithFormat:@"http://stackauth.com/%@/sites?%@", SKAPIVersion, [query sk_queryString]];
+            
+            NSURL *requestURL = [NSURL URLWithString:url];
+            NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+            
+            NSURLResponse * response = nil;
+            NSError * connectionError = nil;
+            NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&connectionError];
+            
+            NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+            
+            NSDictionary * responseObjects = [responseString JSONValue];
+            if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
+                allItems = nil;
+                break;
+            }
+            
+            NSNumber *totalNumberOfItems = [responseObjects objectForKey:@"total"];
+            if (total != [totalNumberOfItems unsignedIntegerValue]) {
+                total = [totalNumberOfItems unsignedIntegerValue];
+            }
+            
+            NSArray *items = [responseObjects objectForKey:@"items"];
+            [allItems addObjectsFromArray:items];
+            
+            //also break if we didn't get any objects on this loop
+            NSUInteger currentCount = [allItems count];
+            if (currentCount == lastCount) {
+                break;
+            }
+            
+            lastCount = [allItems count];
+            currentPage++;
         }
+        
+        [self cacheSites:allItems];
+        sites = allItems;
     }
     
-    if(sitesDictionary) {
-        NSArray * sites = [sitesDictionary objectForKey:@"items"];
-        
+    if(sites) {
         for (NSDictionary * siteDictionary in sites) {
             SKSite *thisSite = NSAllocateObject([SKSite class], 0, NULL);
             [thisSite mergeInformationFromDictionary:siteDictionary];
@@ -266,7 +304,7 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
     return [[self applicationSupportDirectory] stringByAppendingPathComponent:@"sites.db"];
 }
 
-- (NSDictionary*)cachedSitesDictionary
+- (NSArray *)cachedSites
 {
     //Only re-request the dictionary if it is older than a day (following SO API guidelines)
     NSDictionary *cacheDictionary = [NSDictionary dictionaryWithContentsOfFile:[self cachedSitesFilename]];
@@ -286,10 +324,10 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
     return [cacheDictionary objectForKey:@"sites"];
 }
 
-- (void)cacheSitesWithDictionary:(NSDictionary*)siteDictionary
+- (void)cacheSites:(NSArray *)sites
 {
     NSMutableDictionary *cacheDictionary = [NSMutableDictionary dictionary];
-    [cacheDictionary setObject:siteDictionary forKey:@"sites"];
+    [cacheDictionary setObject:sites forKey:@"sites"];
     [cacheDictionary setObject:[NSDate date] forKey:@"cacheDate"];
      
     [cacheDictionary writeToFile:[self cachedSitesFilename] atomically:NO];

@@ -16,9 +16,5 @@
 - (SKSite*)companionSiteForSite:(SKSite*)aSite;
 
 - (NSString *)applicationSupportDirectory;
-- (NSString*)cachedSitesFilename;
-
-- (NSDictionary*)cachedSitesDictionary;
-- (void)cacheSitesWithDictionary:(NSDictionary*)siteDictionary;
 
 @end
