@@ -25,6 +25,7 @@
 
 #import "NSPredicate+SKAdditions.h"
 #import "SKFunctions.h"
+#import "SKMacros.h"
 
 enum {
 	SKAnyPredicateOperator = NSUIntegerMax
@@ -32,7 +33,7 @@ enum {
 
 @implementation NSPredicate (SKAdditions)
 
-- (BOOL) isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType {
+- (BOOL) sk_isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType {
 	if ([self isKindOfClass:[NSComparisonPredicate class]] == NO) { return NO; }
 	NSComparisonPredicate * comp = (NSComparisonPredicate *)self;
 	
@@ -74,7 +75,7 @@ enum {
 	return nil;
 }
 
-- (NSArray *) subPredicatesWithLeftKeyPath:(NSString *)left {
+- (NSArray *) sk_subPredicatesWithLeftKeyPath:(NSString *)left {
 	return [self sk_subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:left]];
 }
 
@@ -98,7 +99,7 @@ enum {
 	return [self constantValueForLeftExpression:[NSExpression expressionForKeyPath:left]];
 }
 
-- (id) constantValueForOperator:(NSPredicateOperatorType)operator {
+- (id) sk_constantValueForOperator:(NSPredicateOperatorType)operator {
 	if ([self isKindOfClass:[NSComparisonPredicate class]] == NO) { return nil; }
 	NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
 	if ([comparison predicateOperatorType] != operator) { return nil; }
@@ -107,10 +108,10 @@ enum {
 	return [rightExpression constantValue];
 }
 
-- (id) constantValueForOneOfOperators:(NSArray *)operators {
+- (id) sk_constantValueForOneOfOperators:(NSArray *)operators {
 	for (NSNumber * op in operators) {
 		NSPredicateOperatorType operator = [op unsignedIntegerValue];
-		id value = [self constantValueForOperator:operator];
+		id value = [self sk_constantValueForOperator:operator];
 		if (value) { return value; }
 	}
 	return nil;
@@ -132,29 +133,23 @@ enum {
 
 - (SKRange) sk_rangeOfConstantValuesForLeftKeyPath:(NSString *)left {
 	SKRange result = SKRangeNotFound;
-	if ([self isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:left] 
+	if ([self sk_isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:left] 
 										   operator:SKAnyPredicateOperator
 								rightExpressionType:NSConstantValueExpressionType]) {
 		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
-		
-		id upperValue = [comparison constantValueForOneOfOperators:[NSArray arrayWithObjects:
-																	[NSNumber numberWithUnsignedInteger:NSLessThanPredicateOperatorType],
-																	[NSNumber numberWithUnsignedInteger:NSLessThanOrEqualToPredicateOperatorType],
-																	nil]];
+
+		id upperValue = [comparison sk_constantValueForOneOfOperators:SK_BOX(NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType)];
 		if (upperValue) {
 			result.upper = upperValue;
 		}
 		
-		id lowerValue = [comparison constantValueForOneOfOperators:[NSArray arrayWithObjects:
-																	[NSNumber numberWithUnsignedInteger:NSGreaterThanPredicateOperatorType],
-																	[NSNumber numberWithUnsignedInteger:NSGreaterThanOrEqualToPredicateOperatorType],
-																	nil]];
+		id lowerValue = [comparison sk_constantValueForOneOfOperators:SK_BOX(NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType)];
 		if (lowerValue) {
 			result.lower = lowerValue;
 		}
 	} else if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
-		NSArray * subpredicates = [compound subPredicatesWithLeftKeyPath:left];
+		NSArray * subpredicates = [compound sk_subPredicatesWithLeftKeyPath:left];
 		for (NSPredicate * predicate in subpredicates) {
 			SKRange subpredicateRange = [predicate sk_rangeOfConstantValuesForLeftKeyPath:left];
 			if (result.lower == SKNotFound && subpredicateRange.lower != SKNotFound) {
@@ -190,7 +185,7 @@ enum {
 	BOOL matches = YES;
 	for (NSString * keyPath in keyPaths) {
 		NSArray * allowedOperatorsForKeyPath = [keyPaths objectForKey:keyPath];
-		NSArray * subPredicatesUsingKeyPath = [self subPredicatesWithLeftKeyPath:keyPath];
+		NSArray * subPredicatesUsingKeyPath = [self sk_subPredicatesWithLeftKeyPath:keyPath];
 		for (NSComparisonPredicate * subPredicate in subPredicatesUsingKeyPath) {
 			NSPredicateOperatorType operator = [subPredicate predicateOperatorType];
 			NSNumber * boxed = [NSNumber numberWithUnsignedInteger:operator];
