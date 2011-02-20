@@ -28,19 +28,6 @@
 
 @implementation NSDate (SKAdditions)
 
-+ (NSDate *) dateWithJSONString:(NSString *)json {
-	//assumes the string is in the format /Date(####)/
-	if ([json isKindOfClass:[NSNull class]]) {
-		return nil;
-	}
-	NSString * substring = [json substringWithRange:NSMakeRange(6, [json length] - 8)];
-	NSNumber * n = [[NSNumberFormatter basicFormatter] numberFromString:substring];
-	
-	NSTimeInterval secondsSince1970 = [n floatValue]/1000;
-	
-	return [NSDate dateWithTimeIntervalSince1970:secondsSince1970];
-}
-
 - (NSString *) sk_queryString {
 	NSNumber * n = [NSNumber numberWithDouble:[self timeIntervalSince1970]];
 	return [n sk_queryString];

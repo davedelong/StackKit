@@ -61,11 +61,11 @@
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
 	
-	id users = [p constantValueForLeftKeyPath:@"owner"];
+	id users = [p sk_constantValueForLeftKeyPath:@"owner"];
 	[self setPath:[NSString stringWithFormat:@"/users/%@/answers", SKExtractUserID(users)]];
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
+	SKRange dateRange = [p sk_rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -74,7 +74,7 @@
 	}
 	
 	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
-		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		SKRange sortRange = [p sk_rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
 		}

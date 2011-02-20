@@ -57,7 +57,7 @@
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id answerCount = [p constantValueForLeftKeyPath:@"answers.score"];
+	id answerCount = [p sk_constantValueForLeftKeyPath:@"answers.score"];
 	if (answerCount == nil || [answerCount isKindOfClass:[NSNumber class]] == NO || [answerCount intValue] != 0) {
 		[self setError:SK_PREDERROR(@"Requesting unanswered questions must have 'ALL answers.score = 0' in predicate")];
 		return;
@@ -65,14 +65,14 @@
 	
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 	
-	id tags = [p constantValueForLeftKeyPath:@"tags"];
+	id tags = [p sk_constantValueForLeftKeyPath:@"tags"];
 	if (tags != nil) {
 		[[self query] setObject:SKExtractTagName(tags) forKey:SKQueryTagged];
 	}
 	
 	[self setPath:@"/questions/unanswered"];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
+	SKRange dateRange = [p sk_rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -81,7 +81,7 @@
 	}
 	
 	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
-		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		SKRange sortRange = [p sk_rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
 		}

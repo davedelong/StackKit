@@ -81,7 +81,7 @@
 	}
 	
 	if ([fetchRequest predicate] != nil) {
-		if ([[fetchRequest predicate] isKindOfClass:[NSCompoundPredicate class]] && [[fetchRequest predicate] isSimpleAndPredicate] == NO) {
+		if ([[fetchRequest predicate] isKindOfClass:[NSCompoundPredicate class]] && [[fetchRequest predicate] sk_isSimpleAndPredicate] == NO) {
 			buildError = SK_PREDERROR(@"Only comparison predicates and AND predicates with no compound subpredicates are recognized");
 			goto errorExit;
 		}
@@ -93,7 +93,7 @@
 			goto errorExit;
 		}
 		
-		NSSet * leftKeyPaths = [[fetchRequest predicate] leftKeyPaths];
+		NSSet * leftKeyPaths = [[fetchRequest predicate] sk_leftKeyPaths];
 		
 		//the predicate must only use recognized keypaths
 		p = [NSPredicate predicateWithFormat:@"recognizedPredicateKeyPaths.@count == 0 OR ALL %@ IN recognizedPredicateKeyPaths.@allKeys", leftKeyPaths];

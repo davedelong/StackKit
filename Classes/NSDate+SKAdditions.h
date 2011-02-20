@@ -28,7 +28,6 @@
 
 @interface NSDate (SKAdditions)
 
-+ (NSDate *) dateWithJSONString:(NSString *)json;
 - (NSString *) sk_queryString;
 
 @end

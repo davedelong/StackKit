@@ -56,8 +56,8 @@
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
 	
-	id inTitle = [p constantValueForLeftKeyPath:@"title"];
-	id tagged = [p constantValueForLeftKeyPath:@"tags"];
+	id inTitle = [p sk_constantValueForLeftKeyPath:@"title"];
+	id tagged = [p sk_constantValueForLeftKeyPath:@"tags"];
 	
 	if (inTitle == nil && tagged == nil) {
 		[self setError:SK_PREDERROR(@"Searching requires a title or tag predicate")];
@@ -79,7 +79,7 @@
 	[self setPath:@"/search"];
 	
 	if ([self requestSortDescriptor] != nil) {
-		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		SKRange sortRange = [p sk_rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
 		}

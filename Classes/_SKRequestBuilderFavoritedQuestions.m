@@ -64,10 +64,10 @@
 	NSPredicate * p = [self requestPredicate];
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 	
-	id questionIDs = [p constantValueForLeftKeyPath:@"favoritedByUsers.user"];
+	id questionIDs = [p sk_constantValueForLeftKeyPath:@"favoritedByUsers.user"];
 	[self setPath:[NSString stringWithFormat:@"/users/%@/favorites", SKExtractQuestionID(questionIDs)]];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
+	SKRange dateRange = [p sk_rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -76,7 +76,7 @@
 	}
 	
 	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
-		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		SKRange sortRange = [p sk_rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
 		}

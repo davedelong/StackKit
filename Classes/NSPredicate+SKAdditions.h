@@ -26,35 +26,16 @@
 #import <Foundation/Foundation.h>
 #import "SKDefinitions.h"
 
-enum {
-	SKAnyPredicateOperator = NSUIntegerMax
-};
-
 @interface NSPredicate (SKAdditions)
 
-- (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left;
-- (NSPredicate *) subPredicateForLeftKeyPath:(NSString *)left;
+- (id) sk_constantValueForLeftKeyPath:(NSString *)left; //OK
 
-- (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left;
-- (NSArray *) subPredicatesWithLeftKeyPath:(NSString *)left;
+- (BOOL) sk_isSimpleAndPredicate; //OK
 
-- (id) constantValueForLeftExpression:(NSExpression *)left;
-- (id) constantValueForLeftKeyPath:(NSString *)left;
+- (SKRange) sk_rangeOfConstantValuesForLeftKeyPath:(NSString *)left; //OK
 
-- (id) constantValueForOperator:(NSPredicateOperatorType)operator;
-- (id) constantValueForOneOfOperators:(NSArray *)operators;
+- (NSSet *) sk_leftKeyPaths; //OK
 
-- (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left;
-- (NSPredicate *) predicateByReplacingLeftKeyPathsFromMapping:(NSDictionary *)mapping;
-
-- (BOOL) isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType;
-- (BOOL) isPredicateWithConstantValueEqualToLeftKeyPath:(NSString *)leftKeyPath;
-- (BOOL) isSimpleAndPredicate;
-
-- (SKRange) rangeOfConstantValuesForLeftKeyPath:(NSString *)left;
-
-- (NSSet *) leftKeyPaths;
-
-- (NSNumber *) sk_matchesRecognizedKeyPathsAndOperators:(NSDictionary *)keyPaths;
+- (NSNumber *) sk_matchesRecognizedKeyPathsAndOperators:(NSDictionary *)keyPaths; //OK
 
 @end

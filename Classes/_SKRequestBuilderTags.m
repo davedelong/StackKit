@@ -52,13 +52,13 @@
 	NSPredicate *p = [self requestPredicate];
 	[self setPath:@"/tags"];
 	
-	id filter = [p constantValueForLeftKeyPath:@"name"];
+	id filter = [p sk_constantValueForLeftKeyPath:@"name"];
 	if (filter) {
 		[[self query] setObject:filter forKey:SKQueryFilter];
 	}
 	
 	if ([self requestSortDescriptor] != nil) {
-		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		SKRange sortRange = [p sk_rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
 		}

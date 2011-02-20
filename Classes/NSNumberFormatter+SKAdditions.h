@@ -28,6 +28,6 @@
 
 @interface NSNumberFormatter (SKAdditions)
 
-+ (NSNumberFormatter *) basicFormatter;
++ (NSNumberFormatter *) sk_basicFormatter;
 
 @end

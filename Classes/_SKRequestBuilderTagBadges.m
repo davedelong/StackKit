@@ -55,7 +55,7 @@
 		[self setError:SK_SORTERROR(@"badges can only be requested in ascending order")];
 	}
 	
-	id tagBased = [[self requestPredicate] constantValueForLeftKeyPath:@"tagBased"];
+	id tagBased = [[self requestPredicate] sk_constantValueForLeftKeyPath:@"tagBased"];
 	if ([tagBased isKindOfClass:[NSNumber class]] == NO || [tagBased boolValue] == NO) {
 		[self setError:SK_PREDERROR(@"Invalid predicate for fetching tag badges")];
 	}

@@ -8,6 +8,7 @@
 
 #import "SKJSONParser.h"
 #import "SKMacros.h"
+#import "NSNumberFormatter+SKAdditions.h"
 
 #define OBJECT_START @"{"
 #define OBJECT_END @"}"
@@ -176,15 +177,7 @@ NSDictionary* _SKParseDictionary(SKJSON *json) {
     return d;
 }
 
-NSNumberFormatter *sk_numberFormatter = nil;
-
 NSNumber* _SKParseNumber(SKJSON *json) {
-    static dispatch_once_t _initializeNumberFormatter;
-    dispatch_once(&_initializeNumberFormatter, ^{
-        sk_numberFormatter = [[NSNumberFormatter alloc] init];
-        [sk_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        [sk_numberFormatter setGeneratesDecimalNumbers:YES];
-    });
     
     NSMutableString *s = [NSMutableString string];
     NSNumber *lastGoodNumber = nil;
@@ -192,7 +185,7 @@ NSNumber* _SKParseNumber(SKJSON *json) {
         NSString *peek = _SKParsePeekNextChar(json);
         [s appendString:peek];
         
-        NSNumber *thisNumber = [sk_numberFormatter numberFromString:s];
+        NSNumber *thisNumber = [[NSNumberFormatter sk_basicFormatter] numberFromString:s];
         if (thisNumber != nil) {
             _SKParseNextChar(json); // consume the characters
             lastGoodNumber = thisNumber;
@@ -246,14 +239,7 @@ NSNumber* _SKParseFalse(SKJSON *json) {
     return [NSNumber numberWithBool:NO];
 }
 
-NSSet *sk_specialCharacters = nil;
-
-NSString* _SKParseString(SKJSON *json) {
-    static dispatch_once_t _initializeSpecialCharacters;
-    dispatch_once(&_initializeSpecialCharacters, ^{
-        sk_specialCharacters = [[NSSet alloc] initWithObjects:@"b", @"f", @"n", @"r", @"t", nil];
-    });
-    
+NSString* _SKParseString(SKJSON *json) {    
     NSMutableString *s = [NSMutableString string];
     _SKParseNextChar(json); // consume the "
     
@@ -304,5 +290,6 @@ NSString* _SKParseString(SKJSON *json) {
 }
 
 NSString* _SKParseUnicodeCharacter(SKJSON *json) {
-    
+    SKLog(@"executing unfinished function: %s", __PRETTY_FUNCTION__);
+    return nil;
 }

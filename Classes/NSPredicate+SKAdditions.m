@@ -26,6 +26,10 @@
 #import "NSPredicate+SKAdditions.h"
 #import "SKFunctions.h"
 
+enum {
+	SKAnyPredicateOperator = NSUIntegerMax
+};
+
 @implementation NSPredicate (SKAdditions)
 
 - (BOOL) isComparisonPredicateWithLeftKeyPaths:(NSArray *)leftKeyPaths operator:(NSPredicateOperatorType)operator rightExpressionType:(NSExpressionType)rightType {
@@ -49,20 +53,14 @@
 	return YES;
 }
 
-- (BOOL) isPredicateWithConstantValueEqualToLeftKeyPath:(NSString *)leftKeyPath {
-	return [self isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:leftKeyPath] 
-											  operator:NSEqualToPredicateOperatorType 
-								   rightExpressionType:NSConstantValueExpressionType];
-}
-
-- (NSArray *) subPredicatesWithLeftExpression:(NSExpression *)left {
+- (NSArray *) sk_subPredicatesWithLeftExpression:(NSExpression *)left {
 	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
 		NSArray * subPredicates = [compound subpredicates];
 		
 		NSMutableArray * matches = [NSMutableArray array];
 		for (NSPredicate * subPredicate in subPredicates) {
-			NSArray * subPredicateMatches = [subPredicate subPredicatesWithLeftExpression:left];
+			NSArray * subPredicateMatches = [subPredicate sk_subPredicatesWithLeftExpression:left];
 			[matches addObjectsFromArray:subPredicateMatches];
 		}
 		return matches;
@@ -77,30 +75,26 @@
 }
 
 - (NSArray *) subPredicatesWithLeftKeyPath:(NSString *)left {
-	return [self subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:left]];
+	return [self sk_subPredicatesWithLeftExpression:[NSExpression expressionForKeyPath:left]];
 }
 
-- (NSPredicate *) subPredicateForLeftExpression:(NSExpression *)left {
-	NSArray * matches = [self subPredicatesWithLeftExpression:left];
+- (NSPredicate *) sk_subPredicateForLeftExpression:(NSExpression *)left {
+	NSArray * matches = [self sk_subPredicatesWithLeftExpression:left];
 	if ([matches count] > 0) {
 		return [matches objectAtIndex:0];
 	}
 	return nil;
 }
 
-- (NSPredicate *) subPredicateForLeftKeyPath:(NSString *)left {
-	return [self subPredicateForLeftExpression:[NSExpression expressionForKeyPath:left]];
-}
-
 - (id) constantValueForLeftExpression:(NSExpression *)left {
-	NSComparisonPredicate * comparison = (NSComparisonPredicate *)[self subPredicateForLeftExpression:left];
+	NSComparisonPredicate * comparison = (NSComparisonPredicate *)[self sk_subPredicateForLeftExpression:left];
 	if (comparison == nil) { return nil; }
 	if ([[comparison rightExpression] expressionType] != NSConstantValueExpressionType) { return nil; }
 	
 	return [[comparison rightExpression] constantValue];
 }
 
-- (id) constantValueForLeftKeyPath:(NSString *)left {
+- (id) sk_constantValueForLeftKeyPath:(NSString *)left {
 	return [self constantValueForLeftExpression:[NSExpression expressionForKeyPath:left]];
 }
 
@@ -122,73 +116,7 @@
 	return nil;
 }
 
-- (NSPredicate *) predicateByRemovingSubPredicateWithLeftExpression:(NSExpression *)left {
-	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
-		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
-		NSMutableArray * newSubpredicates = [NSMutableArray array];
-		NSArray * currentSubpredicates = [compound subpredicates];
-		
-		for (NSPredicate * subPredicate in currentSubpredicates) {
-			NSPredicate * newVersion = [subPredicate predicateByRemovingSubPredicateWithLeftExpression:left];
-			if (newVersion != nil) {
-				[newSubpredicates addObject:newVersion];
-			}
-		}
-		
-		if ([newSubpredicates count] > 0) {
-			NSCompoundPredicate * newCompound = [[NSCompoundPredicate alloc] initWithType:[compound compoundPredicateType] subpredicates:newSubpredicates];
-			return [newCompound autorelease];
-		} else {
-			return nil;
-		}
-	} else if ([self isKindOfClass:[NSComparisonPredicate class]]) {
-		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;
-		NSExpression * leftExpression = [comparison leftExpression];
-		if ([leftExpression isEqual:left]) {
-			return nil;
-		}
-		return comparison;
-	}
-	return nil;
-}
-
-- (NSPredicate *) predicateByReplacingLeftKeyPathsFromMapping:(NSDictionary *)mapping {
-	if ([self isKindOfClass:[NSComparisonPredicate class]]) {
-		NSComparisonPredicate * compP = (NSComparisonPredicate *)self;
-		NSExpression * left = [compP leftExpression];
-		if ([left expressionType] == NSKeyPathExpressionType) {
-			NSString * keyPath = [left keyPath];
-			NSString * mappedKeyPath = [mapping objectForKey:keyPath];
-			if (mappedKeyPath != nil) {
-				NSComparisonPredicate * translated = [[NSComparisonPredicate alloc] initWithLeftExpression:[NSExpression expressionForKeyPath:mappedKeyPath] 
-																						   rightExpression:[compP rightExpression] 
-																								  modifier:[compP comparisonPredicateModifier] 
-																									  type:[compP predicateOperatorType] 
-																								   options:[compP options]];
-				return [translated autorelease];
-			}
-		}
-	} else if ([self isKindOfClass:[NSCompoundPredicate class]]) {
-		NSCompoundPredicate * compoundP = (NSCompoundPredicate *)self;
-		NSArray * subpredicates = [compoundP subpredicates];
-		NSMutableArray * translated = [NSMutableArray array];
-		for (NSPredicate * subpredicate in subpredicates) {
-			NSPredicate * newSubpredicate = [subpredicate predicateByReplacingLeftKeyPathsFromMapping:mapping];
-			if (newSubpredicate != nil) {
-				[translated addObject:newSubpredicate];
-			}
-		}
-		if ([translated count] == 0) { return nil; }
-		NSCompoundPredicate * newCompound = [[NSCompoundPredicate alloc] initWithType:[compoundP compoundPredicateType] 
-																		subpredicates:translated];
-		return [newCompound autorelease];
-	} else {
-		return nil;
-	}
-	return self;
-}
-
-- (BOOL) isSimpleAndPredicate {
+- (BOOL) sk_isSimpleAndPredicate {
 	if ([self isKindOfClass:[NSCompoundPredicate class]] == NO) { return NO; }
 	NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
 	if ([compound compoundPredicateType] != NSAndPredicateType) { return NO; }
@@ -202,7 +130,7 @@
 	return ok;
 }
 
-- (SKRange) rangeOfConstantValuesForLeftKeyPath:(NSString *)left {
+- (SKRange) sk_rangeOfConstantValuesForLeftKeyPath:(NSString *)left {
 	SKRange result = SKRangeNotFound;
 	if ([self isComparisonPredicateWithLeftKeyPaths:[NSArray arrayWithObject:left] 
 										   operator:SKAnyPredicateOperator
@@ -228,7 +156,7 @@
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
 		NSArray * subpredicates = [compound subPredicatesWithLeftKeyPath:left];
 		for (NSPredicate * predicate in subpredicates) {
-			SKRange subpredicateRange = [predicate rangeOfConstantValuesForLeftKeyPath:left];
+			SKRange subpredicateRange = [predicate sk_rangeOfConstantValuesForLeftKeyPath:left];
 			if (result.lower == SKNotFound && subpredicateRange.lower != SKNotFound) {
 				result.lower = subpredicateRange.lower;
 			}
@@ -241,12 +169,12 @@
 	return result;
 }
 
-- (NSSet *) leftKeyPaths {
+- (NSSet *) sk_leftKeyPaths {
 	NSMutableSet * paths = [NSMutableSet set];
 	if ([self isKindOfClass:[NSCompoundPredicate class]]) {
 		NSCompoundPredicate * compound = (NSCompoundPredicate *)self;
 		for (NSPredicate * subpredicate in [compound subpredicates]) {
-			[paths unionSet:[subpredicate leftKeyPaths]];
+			[paths unionSet:[subpredicate sk_leftKeyPaths]];
 		}
 	} else {
 		NSComparisonPredicate * comparison = (NSComparisonPredicate *)self;

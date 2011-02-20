@@ -57,7 +57,7 @@
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id userType = [p constantValueForLeftKeyPath:@"userType"];
+	id userType = [p sk_constantValueForLeftKeyPath:@"userType"];
 	if ([userType respondsToSelector:@selector(intValue)]) {
 		int type = [userType intValue];
 		if (type != SKUserTypeModerator) {
@@ -66,14 +66,14 @@
 		}
 	}
 	
-	id filter = [p constantValueForLeftKeyPath:@"displayName"];
+	id filter = [p sk_constantValueForLeftKeyPath:@"displayName"];
 	if (filter != nil) {
 		[[self query] setObject:filter forKey:SKQueryFilter];
 	}
 	
 	[self setPath:@"/users/moderators"];
 	
-	SKRange dateRange = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
+	SKRange dateRange = [p sk_rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (dateRange.lower != SKNotFound) {
 		[[self query] setObject:dateRange.lower forKey:SKQueryFromDate];
 	}
@@ -82,7 +82,7 @@
 	}
 	
 	if ([self requestSortDescriptor] != nil && ![[[self requestSortDescriptor] key] isEqual:@"creationDate"]) {
-		SKRange sortRange = [p rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
+		SKRange sortRange = [p sk_rangeOfConstantValuesForLeftKeyPath:[[self requestSortDescriptor] key]];
 		if (sortRange.lower != SKNotFound) {
 			[[self query] setObject:sortRange.lower forKey:SKQueryMinSort];
 		}

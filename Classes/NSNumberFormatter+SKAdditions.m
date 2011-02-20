@@ -28,13 +28,16 @@
 
 @implementation NSNumberFormatter (SKAdditions)
 
-+ (NSNumberFormatter *) basicFormatter {
-	static NSNumberFormatter * basicFormatter = nil;
-	if (basicFormatter == nil) {
-		basicFormatter = [[NSNumberFormatter alloc] init];
-		[basicFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-	}
-	return basicFormatter;
++ (NSNumberFormatter *) sk_basicFormatter {
+	static NSNumberFormatter * sk_basicFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+		sk_basicFormatter = [[NSNumberFormatter alloc] init];
+		[sk_basicFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [sk_basicFormatter setGeneratesDecimalNumbers:YES];
+    });
+    
+	return sk_basicFormatter;
 }
 
 @end

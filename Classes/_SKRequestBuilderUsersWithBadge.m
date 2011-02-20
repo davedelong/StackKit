@@ -51,10 +51,10 @@
 
 - (void) buildURL {
 	NSPredicate * p = [self requestPredicate];
-	id badges = [p constantValueForLeftKeyPath:@"awardedBadges.badges"];
+	id badges = [p sk_constantValueForLeftKeyPath:@"awardedBadges.badges"];
 	[self setPath:[NSString stringWithFormat:@"/badges/%@", SKExtractBadgeID(badges)]];
 	
-	SKRange r = [p rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
+	SKRange r = [p sk_rangeOfConstantValuesForLeftKeyPath:@"creationDate"];
 	if (r.lower != SKNotFound) {
 		[[self query] setObject:r.lower forKey:SKQueryFromDate];
 	}
