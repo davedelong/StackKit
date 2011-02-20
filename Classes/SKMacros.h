@@ -1,10 +1,8 @@
-//
-//  SKMacros.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/13/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** Helper Macros
+ 
+ These are the macros used by StackKit for brevity.
+ 
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKFunctions.h"

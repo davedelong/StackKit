@@ -1,10 +1,7 @@
-//
-//  SKSiteManager.h
-//  StackKit
-//
-//  Created by Alex Rozanski on 12/02/2011.
-//  Copyright 2011 Alex Rozanski. All rights reserved.
-//
+/** Container class for all known SKSite objects.
+ 
+ This is the class by which you can retrieve an SKSite object.  It is roughly equivalent in purpose to the http://stackauth.com domain.  The SKSiteManager is also the means by which you can retrieve a user's associated accounts across the entire StackExchange network.
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKDefinitions.h"

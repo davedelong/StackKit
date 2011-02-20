@@ -1,10 +1,7 @@
-//
-//  SKSiteStats.h
-//  StackKit
-//
-//  Created by Alex Rozanski on 12/02/2011.
-//  Copyright 2011 Alex Rozanski. All rights reserved.
-//
+/** Site Statistics
+ 
+ A simple object for containing the statistics of an site on the SE network.  This is retrieved via -[SKSite statistics] or -[SKSite requestStatisticsWithCompletionHandler:]
+ */
 
 #import <Foundation/Foundation.h>
 

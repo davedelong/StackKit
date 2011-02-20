@@ -1,10 +1,7 @@
-//
-//  SKOperation.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/9/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** A generic asynchronous operation
+ 
+ A subclass of NSOperation used by all requests to the StackExchange API.
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKSite.h"

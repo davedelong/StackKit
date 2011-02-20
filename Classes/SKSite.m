@@ -36,12 +36,14 @@
 #import "SKFetchRequest+Private.h"
 #import "SKLocalFetchRequest.h"
 #import "SKFetchRequest+Private.h"
-#import "JSON.h"
+#import "SKJSONParser.h"
 
 #import "NSDictionary+SKAdditions.h"
 
 #import "SKFetchOperation.h"
 #import "SKStatisticsOperation.h"
+
+#import "SKUser.h"
 
 NSString * const SKSiteAPIKey = @"key";
 

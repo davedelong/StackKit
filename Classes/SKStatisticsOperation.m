@@ -8,7 +8,7 @@
 
 #import "SKStatisticsOperation.h"
 #import "NSDictionary+SKAdditions.h"
-#import "JSON.h"
+#import "SKJSONParser.h"
 
 #import "SKSiteStatistics.h"
 #import "SKSiteStatistics+Private.h"
@@ -43,7 +43,7 @@
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
 	SKSiteStatistics *stats = nil;
-    NSDictionary *responseDictionary = [responseString JSONValue];
+    NSDictionary *responseDictionary = SKParseJSON(responseString);
     
 	if ([responseDictionary isKindOfClass:[NSDictionary class]] && !error) {
         NSDictionary *dictionary = nil;

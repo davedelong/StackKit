@@ -1,10 +1,7 @@
-//
-//  SKObject+Private.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/5/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** Private base class functionality
+ 
+ Much of the construction of SKObject subclasses is automated.  These methods help define the automation information
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKObject.h"

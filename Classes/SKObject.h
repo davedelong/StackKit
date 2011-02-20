@@ -1,10 +1,7 @@
-//
-//  SKObject.h
-//  StackKit
-//
-//  Created by Dave DeLong on 1/28/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** The base class
+ 
+ This file contains the definition of SKObject, the base class of all objects returned by the StackKit API
+ */
 
 #import <CoreData/CoreData.h>
 #import "SKDefinitions.h"

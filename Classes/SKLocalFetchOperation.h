@@ -1,10 +1,7 @@
-//
-//  SKLocalFetchOperation.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/9/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** An operation for executing a local request
+ 
+ A subclass of SKFetchOperation for executing an SKFetchRequest against the locally cached SKObjects.
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKFetchOperation.h"

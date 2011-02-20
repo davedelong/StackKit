@@ -7,7 +7,7 @@
 //
 
 #import "SKSite+Private.h"
-#import "JSON.h"
+#import "SKJSONParser.h"
 #import "SKConstants.h"
 #import "SKConstants_Internal.h"
 #import "SKFunctions.h"

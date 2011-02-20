@@ -1,10 +1,7 @@
-//
-//  SKAssociatedUserOperation.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/12/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** An operation for requesting associated user accounts
+ 
+ A subclass of SKOperation for request the associated accounts of a particular SKUser.
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKOperation.h"

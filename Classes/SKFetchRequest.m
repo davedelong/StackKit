@@ -29,7 +29,7 @@
 #import "SKConstants.h"
 #import "SKRequestBuilder.h"
 #import "SKSite+Private.h"
-#import "JSON.h"
+#import "SKJSONParser.h"
 #import "SKFetchOperation.h"
 
 @implementation SKFetchRequest

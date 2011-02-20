@@ -1,10 +1,8 @@
-//
-//  SKSiteManager+Private.h
-//  StackKit
-//
-//  Created by Alex Rozanski on 12/02/2011.
-//  Copyright 2011 Alex Rozanski. All rights reserved.
-//
+/** Private SKSiteManager functionality
+ 
+ Private methods for use internally.
+ */
+
 #import "SKSiteManager.h"
 
 @interface SKSiteManager ()

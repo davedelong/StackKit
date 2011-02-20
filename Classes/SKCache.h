@@ -1,10 +1,7 @@
-//
-//  SKCache.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/1/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** An object for caching objects
+ 
+ This is a wrapper around NSCache.  It adds the ability to request all objects in the cache.
+ */
 
 #import <Foundation/Foundation.h>
 

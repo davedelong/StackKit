@@ -1,10 +1,7 @@
-//
-//  SKSite+Caching.h
-//  StackKit
-//
-//  Created by Dave DeLong on 1/29/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** SKSite Caching functionality
+ 
+ A method on SKSite for accessing the cache of a specific kind of SKObject.
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKSite.h"

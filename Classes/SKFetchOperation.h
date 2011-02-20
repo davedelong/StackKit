@@ -1,10 +1,7 @@
-//
-//  SKFetchOperation.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/9/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** An operation for accessing the SE API
+ 
+ This operation is for executing a remote request against the StackExchange API.  It will lock the -[SKSite managedObjectContext].
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKOperation.h"

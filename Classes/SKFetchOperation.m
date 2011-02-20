@@ -13,7 +13,7 @@
 #import "SKObject+Private.h"
 #import "SKSite+Private.h"
 #import "SKConstants.h"
-#import "JSON.h"
+#import "SKJSONParser.h"
 #import "SKMacros.h"
 
 NSString * SKFetchTotalKey = @"total";
@@ -75,7 +75,7 @@ NSString * SKErrorMessageKey = @"message";
 	//handle the response
 	NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
-	NSDictionary * responseObjects = [responseString JSONValue];
+	NSDictionary * responseObjects = SKParseJSON(responseString);
 	if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
 		[self setError:[NSError errorWithDomain:SKErrorDomain code:SKErrorCodeUnknownError userInfo:nil]];
 		return nil;

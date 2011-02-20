@@ -25,32 +25,37 @@
 
 #import <Foundation/Foundation.h>
 #import <StackKit/StackKit.h>
+#import "SKJSONParser.h"
 
 int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    NSString *test = [NSString stringWithContentsOfFile:@"/Users/dave/Desktop/test.json" encoding:NSUTF8StringEncoding error:nil];
+    id value = SKParseJSON(test);
+    NSLog(@"%@", value);
 	
-	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
-	SKFetchRequest * r = [[SKFetchRequest alloc] init];
-	[r setEntity:[SKUser class]];
-	[r setPredicate:[NSPredicate predicateWithFormat:@"userID = %d", 115730]];
-
-    NSArray *users = [s executeSynchronousFetchRequest:r];
-    [r release];
-    
-    SKUser *davedelong = [users objectAtIndex:0];
-    
-    NSLog(@"%@", davedelong);
-    
-    r = [[SKFetchRequest alloc] init];
-    [r setEntity:[SKQuestion class]];
-    [r setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", davedelong]];
-    
-    NSArray *questions = [s executeSynchronousFetchRequest:r];
-    [r release];
-    
-    NSLog(@"%@", questions);
-	
-	[r release];
+//	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
+//	SKFetchRequest * r = [[SKFetchRequest alloc] init];
+//	[r setEntity:[SKUser class]];
+//	[r setPredicate:[NSPredicate predicateWithFormat:@"userID = %d", 115730]];
+//
+//    NSArray *users = [s executeSynchronousFetchRequest:r];
+//    [r release];
+//    
+//    SKUser *davedelong = [users objectAtIndex:0];
+//    
+//    NSLog(@"%@", davedelong);
+//    
+//    r = [[SKFetchRequest alloc] init];
+//    [r setEntity:[SKQuestion class]];
+//    [r setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", davedelong]];
+//    
+//    NSArray *questions = [s executeSynchronousFetchRequest:r];
+//    [r release];
+//    
+//    NSLog(@"%@", questions);
+//	
+//	[r release];
 	
 	[pool drain];
 	return 0;

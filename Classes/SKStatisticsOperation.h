@@ -1,10 +1,7 @@
-//
-//  SKStatisticsOperation.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/9/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** Statistics Requesting
+ 
+ An SKOperation subclass for requesting statistics about an SKSite.
+ */
 
 #import <Foundation/Foundation.h>
 #import "SKDefinitions.h"

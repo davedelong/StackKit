@@ -101,19 +101,6 @@
 		55A2E551110E4FE00038E510 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E550110E4FE00038E510 /* StackKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E55A110E513E0038E510 /* SKSite+Private.h */; settings = {ATTRIBUTES = (); }; };
 		55A2E5CF110E5EE80038E510 /* SKUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E5CC110E5EE00038E510 /* SKUserTest.m */; };
-		55A2E60A110E623C0038E510 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E5FD110E623C0038E510 /* JSON.h */; };
-		55A2E60B110E623C0038E510 /* SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E5FE110E623C0038E510 /* SKJSON.h */; };
-		55A2E60C110E623C0038E510 /* SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E5FF110E623C0038E510 /* SKJSON.m */; };
-		55A2E60D110E623C0038E510 /* NSObject+SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E600110E623C0038E510 /* NSObject+SKJSON.h */; };
-		55A2E60E110E623C0038E510 /* NSObject+SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E601110E623C0038E510 /* NSObject+SKJSON.m */; };
-		55A2E60F110E623C0038E510 /* NSString+SKJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E602110E623C0038E510 /* NSString+SKJSON.h */; };
-		55A2E610110E623C0038E510 /* NSString+SKJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E603110E623C0038E510 /* NSString+SKJSON.m */; };
-		55A2E611110E623C0038E510 /* SKJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E604110E623C0038E510 /* SKJsonBase.h */; };
-		55A2E612110E623C0038E510 /* SKJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E605110E623C0038E510 /* SKJsonBase.m */; };
-		55A2E613110E623C0038E510 /* SKJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E606110E623C0038E510 /* SKJsonParser.h */; };
-		55A2E614110E623C0038E510 /* SKJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E607110E623C0038E510 /* SKJsonParser.m */; };
-		55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E608110E623C0038E510 /* SKJsonWriter.h */; };
-		55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E609110E623C0038E510 /* SKJsonWriter.m */; };
 		55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */; };
 		55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */; };
 		55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */; };
@@ -125,6 +112,8 @@
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
 		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
+		55C7FD91130E2000005FD04E /* SKJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C7FD8F130E2000005FD04E /* SKJSONParser.h */; };
+		55C7FD92130E2000005FD04E /* SKJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C7FD90130E2000005FD04E /* SKJSONParser.m */; };
 		55C952D612F5331700B1E546 /* SKSite+Caching.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C952D412F5331700B1E546 /* SKSite+Caching.h */; };
 		55C952D712F5331700B1E546 /* SKSite+Caching.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C952D512F5331700B1E546 /* SKSite+Caching.m */; };
 		55CC231C1308715F004C2397 /* SKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CC231B1308715E004C2397 /* SKMacros.h */; };
@@ -307,19 +296,6 @@
 		55A2E55A110E513E0038E510 /* SKSite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Private.h"; sourceTree = "<group>"; };
 		55A2E5CB110E5EE00038E510 /* SKUserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserTest.h; sourceTree = "<group>"; };
 		55A2E5CC110E5EE00038E510 /* SKUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SKUserTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		55A2E5FD110E623C0038E510 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		55A2E5FE110E623C0038E510 /* SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJSON.h; sourceTree = "<group>"; };
-		55A2E5FF110E623C0038E510 /* SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJSON.m; sourceTree = "<group>"; };
-		55A2E600110E623C0038E510 /* NSObject+SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SKJSON.h"; sourceTree = "<group>"; };
-		55A2E601110E623C0038E510 /* NSObject+SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSObject+SKJSON.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		55A2E602110E623C0038E510 /* NSString+SKJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SKJSON.h"; sourceTree = "<group>"; };
-		55A2E603110E623C0038E510 /* NSString+SKJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+SKJSON.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		55A2E604110E623C0038E510 /* SKJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonBase.h; sourceTree = "<group>"; };
-		55A2E605110E623C0038E510 /* SKJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonBase.m; sourceTree = "<group>"; };
-		55A2E606110E623C0038E510 /* SKJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonParser.h; sourceTree = "<group>"; };
-		55A2E607110E623C0038E510 /* SKJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SKJsonParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		55A2E608110E623C0038E510 /* SKJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJsonWriter.h; sourceTree = "<group>"; };
-		55A2E609110E623C0038E510 /* SKJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJsonWriter.m; sourceTree = "<group>"; };
 		55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+SKAdditions.h"; sourceTree = "<group>"; };
 		55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+SKAdditions.m"; sourceTree = "<group>"; };
 		55A2E70E110EBAA60038E510 /* SKQuestionTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestionTest.h; sourceTree = "<group>"; };
@@ -341,6 +317,8 @@
 		55C2410D116ADF71009064EE /* SKUserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserActivity.m; sourceTree = "<group>"; };
 		55C24144116AF72E009064EE /* SKUserActivityTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserActivityTest.h; sourceTree = "<group>"; };
 		55C24145116AF72E009064EE /* SKUserActivityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SKUserActivityTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		55C7FD8F130E2000005FD04E /* SKJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKJSONParser.h; sourceTree = "<group>"; };
+		55C7FD90130E2000005FD04E /* SKJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKJSONParser.m; sourceTree = "<group>"; };
 		55C952D412F5331700B1E546 /* SKSite+Caching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKSite+Caching.h"; sourceTree = "<group>"; };
 		55C952D512F5331700B1E546 /* SKSite+Caching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKSite+Caching.m"; sourceTree = "<group>"; };
 		55CC231B1308715E004C2397 /* SKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMacros.h; sourceTree = "<group>"; };
@@ -473,11 +451,6 @@
 				55C23E2D116A8FA4009064EE /* Object Base */,
 				55C23E2E116A8FAC009064EE /* Site */,
 				55C23E2C116A8F9E009064EE /* Fetch Request */,
-				55C23E2F116A8FB4009064EE /* User */,
-				55C23E31116A8FBE009064EE /* Badge */,
-				55C23E30116A8FBB009064EE /* Tag */,
-				55A2E52B110E44030038E510 /* Posts */,
-				55FF3A8812D859C500CC4B9D /* Request Builder */,
 				55C23E2B116A8F94009064EE /* Categories */,
 			);
 			path = Classes;
@@ -697,30 +670,9 @@
 			name = Posts;
 			sourceTree = "<group>";
 		};
-		55A2E59B110E5C7E0038E510 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				55A2E5FD110E623C0038E510 /* JSON.h */,
-				55A2E5FE110E623C0038E510 /* SKJSON.h */,
-				55A2E5FF110E623C0038E510 /* SKJSON.m */,
-				55A2E600110E623C0038E510 /* NSObject+SKJSON.h */,
-				55A2E601110E623C0038E510 /* NSObject+SKJSON.m */,
-				55A2E602110E623C0038E510 /* NSString+SKJSON.h */,
-				55A2E603110E623C0038E510 /* NSString+SKJSON.m */,
-				55A2E604110E623C0038E510 /* SKJsonBase.h */,
-				55A2E605110E623C0038E510 /* SKJsonBase.m */,
-				55A2E606110E623C0038E510 /* SKJsonParser.h */,
-				55A2E607110E623C0038E510 /* SKJsonParser.m */,
-				55A2E608110E623C0038E510 /* SKJsonWriter.h */,
-				55A2E609110E623C0038E510 /* SKJsonWriter.m */,
-			);
-			path = JSON;
-			sourceTree = "<group>";
-		};
 		55C23E2B116A8F94009064EE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				55A2E59B110E5C7E0038E510 /* JSON */,
 				55A2E6B4110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h */,
 				55A2E6B5110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m */,
 				55A2E743110EC29A0038E510 /* NSDate+SKAdditions.h */,
@@ -733,6 +685,8 @@
 				55FADE1712E3F25D00CFA69E /* NSString+SKAdditions.m */,
 				55FADE1A12E3F43B00CFA69E /* NSNumber+SKAdditions.h */,
 				55FADE1B12E3F43B00CFA69E /* NSNumber+SKAdditions.m */,
+				55C7FD8F130E2000005FD04E /* SKJSONParser.h */,
+				55C7FD90130E2000005FD04E /* SKJSONParser.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -745,6 +699,7 @@
 				550369A6130245A700D20ECB /* SKLocalFetchRequest.h */,
 				550369A7130245A700D20ECB /* SKLocalFetchRequest.m */,
 				55FA95601161345C003A9CD7 /* SKFetchRequest+Private.h */,
+				55FF3A8812D859C500CC4B9D /* Request Builder */,
 			);
 			name = "Fetch Request";
 			sourceTree = "<group>";
@@ -756,6 +711,10 @@
 				55E5BD7512F3F6BE00092A8D /* SKObject.m */,
 				5559421812FE2C23002A28BE /* SKObject+Private.h */,
 				555E06E612ECAD7100172646 /* StackKit.xcdatamodel */,
+				55C23E2F116A8FB4009064EE /* User */,
+				55C23E31116A8FBE009064EE /* Badge */,
+				55C23E30116A8FBB009064EE /* Tag */,
+				55A2E52B110E44030038E510 /* Posts */,
 			);
 			name = "Object Base";
 			sourceTree = "<group>";
@@ -892,14 +851,7 @@
 				55A2E551110E4FE00038E510 /* StackKit.h in Headers */,
 				55A2E55B110E513E0038E510 /* SKSite+Private.h in Headers */,
 				D238774B1306D62600D160DE /* SKSiteStatistics.h in Headers */,
-				55A2E60A110E623C0038E510 /* JSON.h in Headers */,
-				55A2E60B110E623C0038E510 /* SKJSON.h in Headers */,
-				55A2E60D110E623C0038E510 /* NSObject+SKJSON.h in Headers */,
-				55A2E60F110E623C0038E510 /* NSString+SKJSON.h in Headers */,
-				55A2E611110E623C0038E510 /* SKJsonBase.h in Headers */,
-				55A2E613110E623C0038E510 /* SKJsonParser.h in Headers */,
 				5506C7ED11ACF12300C47C1B /* SKFunctions.h in Headers */,
-				55A2E615110E623C0038E510 /* SKJsonWriter.h in Headers */,
 				55A2E6B6110EB1B10038E510 /* NSNumberFormatter+SKAdditions.h in Headers */,
 				55A2E745110EC29A0038E510 /* NSDate+SKAdditions.h in Headers */,
 				55FA955E116132E3003A9CD7 /* SKFetchRequest.h in Headers */,
@@ -954,6 +906,7 @@
 				556081AB130748FF00D1506E /* SKUser+Private.h in Headers */,
 				55CC231C1308715F004C2397 /* SKMacros.h in Headers */,
 				55CC231E1308C7DF004C2397 /* SKSiteStatistics+Private.h in Headers */,
+				55C7FD91130E2000005FD04E /* SKJSONParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1089,12 +1042,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A2E4E3110E36550038E510 /* SKSite.m in Sources */,
-				55A2E60C110E623C0038E510 /* SKJSON.m in Sources */,
-				55A2E60E110E623C0038E510 /* NSObject+SKJSON.m in Sources */,
-				55A2E610110E623C0038E510 /* NSString+SKJSON.m in Sources */,
-				55A2E612110E623C0038E510 /* SKJsonBase.m in Sources */,
-				55A2E614110E623C0038E510 /* SKJsonParser.m in Sources */,
-				55A2E616110E623C0038E510 /* SKJsonWriter.m in Sources */,
 				55A2E6B7110EB1B10038E510 /* NSNumberFormatter+SKAdditions.m in Sources */,
 				55A2E746110EC29A0038E510 /* NSDate+SKAdditions.m in Sources */,
 				55FA955F116132E3003A9CD7 /* SKFetchRequest.m in Sources */,
@@ -1159,6 +1106,7 @@
 				D238770D1306943B00D160DE /* SKSiteManager.m in Sources */,
 				D238774C1306D62600D160DE /* SKSiteStatistics.m in Sources */,
 				556081A913072D2000D1506E /* SKAssociatedUserOperation.m in Sources */,
+				55C7FD92130E2000005FD04E /* SKJSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@
 #import "SKUser.h"
 #import "SKAssociatedUserOperation.h"
 
-#import "JSON.h"
+#import "SKJSONParser.h"
 
 @interface SKSiteManager ()
 
@@ -115,7 +115,7 @@ __attribute__((destructor)) void SKSiteManager_destruct() {
             
             NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
             
-            NSDictionary * responseObjects = [responseString JSONValue];
+            NSDictionary * responseObjects = SKParseJSON(responseString);
             if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
                 allItems = nil;
                 break;

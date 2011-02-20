@@ -11,7 +11,7 @@
 #import "SKConstants_Internal.h"
 #import "SKUser+Private.h"
 #import "NSDictionary+SKAdditions.h"
-#import "JSON.h"
+#import "SKJSONParser.h"
 
 @implementation SKAssociatedUserOperation
 @synthesize handler;
@@ -61,7 +61,7 @@
         
         NSString * responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
         
-        NSDictionary * responseObjects = [responseString JSONValue];
+        NSDictionary * responseObjects = SKParseJSON(responseString);
         if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
             objects = nil;
             break;

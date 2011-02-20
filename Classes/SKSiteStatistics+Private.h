@@ -1,10 +1,7 @@
-//
-//  SKSiteStatistics+Private.h
-//  StackKit
-//
-//  Created by Dave DeLong on 2/13/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/** Private SKSiteStatistics functionality
+ 
+ Private methods for use internally.
+ */
 
 #import <Foundation/Foundation.h>
 
