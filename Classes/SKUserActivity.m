@@ -92,7 +92,7 @@ NSString * const SKUserActivityToDateKey = @"todate";
 }
 
 + (NSPredicate *) updatedPredicateForFetchRequest:(SKFetchRequest *)request {
-	return [[request predicate] predicateByRemovingSubPredicateWithLeftExpression:[NSExpression expressionForKeyPath:SKUserID]];
+	return [[request predicate] predicateByRemovingSubPredicateWithLeftExpression:[NSExpression expressionForKeyPath:@"userID"]];
 }
 
 - (id) initWithSite:(SKSite *)aSite dictionaryRepresentation:(NSDictionary *)dictionary {
