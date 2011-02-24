@@ -31,8 +31,9 @@
 @implementation SKRequestBuilder
 
 + (NSArray *) _requestBuilders {
+    static dispatch_once_t onceToken;
 	static NSMutableArray * _requestBuilderClasses = nil;
-	if (_requestBuilderClasses == nil) {
+    dispatch_once(&onceToken, ^{
 		//autodiscover all subclasses of "SKRequestBuilder"
 		_requestBuilderClasses = [[NSMutableArray alloc] init];
 		
@@ -55,7 +56,8 @@
 			}
 			free(allClasses);
 		}
-	}
+    });
+    
 	return _requestBuilderClasses;
 }
 

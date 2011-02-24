@@ -26,3 +26,13 @@
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
 #endif
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
+#define StackKitMobile 
+
+#else
+
+#define StackKitMac 
+
+#endif
