@@ -185,12 +185,16 @@ NSNumber* _SKParseNumber(SKJSON *json) {
         NSString *peek = _SKParsePeekNextChar(json);
         [s appendString:peek];
         
-        NSNumber *thisNumber = [[NSNumberFormatter sk_basicFormatter] numberFromString:s];
-        if (thisNumber != nil) {
-            _SKParseNextChar(json); // consume the characters
-            lastGoodNumber = thisNumber;
+        if ([s isEqualToString:@"-"] == NO && [s isEqualToString:@"."] == NO) {
+            NSNumber *thisNumber = [[NSNumberFormatter sk_basicFormatter] numberFromString:s];
+            if (thisNumber != nil) {
+                _SKParseNextChar(json); // consume the characters
+                lastGoodNumber = thisNumber;
+            } else {
+                break;
+            }
         } else {
-            break;
+            _SKParseNextChar(json);
         }
     } while(1);
     
