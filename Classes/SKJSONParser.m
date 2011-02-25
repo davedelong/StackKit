@@ -258,7 +258,9 @@ NSString* _SKParseString(SKJSON *json) {
                 NSString *peek = [json->json substringWithRange:peekRange];
                 
                 BOOL consume = YES;
-                if ([peek isEqualToString:@"n"]) {
+				if ([peek isEqualToString:@"\""]) {
+					character = @"\\\""; // @"\\\"" equals \"
+				} else if ([peek isEqualToString:@"n"]) {
                     character = @"\n";
                 } else if ([peek isEqualToString:@"r"]) {
                     character = @"\r";
