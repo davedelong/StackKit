@@ -243,45 +243,34 @@ NSString* _SKParseString(SKJSON *json) {
     NSMutableString *s = [NSMutableString string];
     _SKParseNextChar(json); // consume the "
     
-    BOOL escaping = NO;
     do {
         // can't use PeekNextChar and NextChar because those skip whitespace
         NSRange charRange = _SKParseRangeOfNextChar(json, NO);
         NSString *character = [json->json substringWithRange:charRange];
         json->currentIndex = charRange.location+charRange.length;
         
-        if (escaping == YES) {
-            escaping = NO;
-        } else {
-            if ([character isEqualToString:@"\\"]) {
-                NSRange peekRange = _SKParseRangeOfNextChar(json, NO);
-                NSString *peek = [json->json substringWithRange:peekRange];
-                
-                BOOL consume = YES;
-				if ([peek isEqualToString:@"\""]) {
-					character = @"\\\""; // @"\\\"" equals \"
-				} else if ([peek isEqualToString:@"n"]) {
-                    character = @"\n";
-                } else if ([peek isEqualToString:@"r"]) {
-                    character = @"\r";
-                } else if ([peek isEqualToString:@"t"]) {
-                    character = @"\t";
-                } else if ([peek isEqualToString:@"u"]) {
-                    character = character; // TODO: consume 4 bytes with the proper encoding
-                } else if ([peek isEqualToString:@"x"]) {
-                    character = character; // TODO: consume 2 hex bytes
-                } else if ([peek isEqualToString:@"b"]) {
-                    character = @"\b";
-                } else {
-                    consume = NO;
-                }
-                
-                if (consume == YES) {
-                    json->currentIndex = peekRange.location+peekRange.length;
-                }
-            } else if ([character isEqualToString:STRING_END]) {
-                break;
+        if ([character isEqualToString:@"\\"]) {
+            // we're escaping something. throw away the \ and replace it with the next character
+            // in some cases, substitute in a special sequence.
+            NSRange nextRange = _SKParseRangeOfNextChar(json, NO);
+            character = [json->json substringWithRange:nextRange];
+            json->currentIndex = nextRange.location+nextRange.length;
+            
+            if ([character isEqualToString:@"n"]) {
+                character = @"\n";
+            } else if ([character isEqualToString:@"r"]) {
+                character = @"\r";
+            } else if ([character isEqualToString:@"t"]) {
+                character = @"\t";
+            } else if ([character isEqualToString:@"u"]) {
+                // TODO: consume 4 hex characters with the proper encoding
+            } else if ([character isEqualToString:@"x"]) {
+                // TODO: consume 2 hex characters
+            } else if ([character isEqualToString:@"b"]) {
+                character = @"\b";
             }
+        } else if ([character isEqualToString:STRING_END]) {
+            break;
         }
         
         [s appendString:character];
