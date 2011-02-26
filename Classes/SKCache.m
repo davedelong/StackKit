@@ -24,7 +24,7 @@
 
 - (void) setObject:(id)object forKey:(id)key {
 	[cache setObject:object forKey:key];
-	[objects addObject:key];
+	[objects addObject:object];
 }
 
 - (void) removeObjectForKey:(id)key {

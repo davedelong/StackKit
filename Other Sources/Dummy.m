@@ -33,6 +33,13 @@ int main(int argc, char* argv[]) {
     NSString *test = [NSString stringWithContentsOfFile:@"/Users/dave/Desktop/test.json" encoding:NSUTF8StringEncoding error:nil];
     id value = SKParseJSON(test);
     NSLog(@"%@", value);
+    
+    SKFetchRequest *request = [[SKFetchRequest alloc] init];
+    [request setEntity:[SKQuestion class]];
+    [request setFetchLimit:25];
+    NSArray *results = [[[SKSiteManager sharedManager] stackOverflowSite] executeSynchronousFetchRequest:request];
+
+    NSLog(@"%@", results);
 	
 //	SKSite * s = [[SKSiteManager sharedManager] stackOverflowSite];
 //	SKFetchRequest * r = [[SKFetchRequest alloc] init];

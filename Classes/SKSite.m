@@ -250,18 +250,18 @@ NSString * const SKSiteAPIKey = @"key";
 }
 
 - (void) contextWillSave:(NSNotification *)notification {
-	NSMutableArray *objectIDs = [NSMutableArray array];
-	for (NSString *entityName in cache) {
-		SKCache *entityCache = [cache objectForKey:entityName];
-		[objectIDs addObjectsFromArray:[entityCache allObjects]];
-	}
-	[objectIDs filterUsingPredicate:[NSPredicate predicateWithFormat:@"isTemporaryID = YES"]];
-	
-	NSError *error = nil;
-	[[self managedObjectContext] obtainPermanentIDsForObjects:objectIDs error:&error];
-	if (error != nil) {
-		SKLog(@"error retrieving permanent ids: %@", error);
-	}
+//	NSMutableArray *objectIDs = [NSMutableArray array];
+//	for (NSString *entityName in cache) {
+//		SKCache *entityCache = [cache objectForKey:entityName];
+//		[objectIDs addObjectsFromArray:[entityCache allObjects]];
+//	}
+//	[objectIDs filterUsingPredicate:[NSPredicate predicateWithFormat:@"isTemporaryID = YES"]];
+//	
+//	NSError *error = nil;
+//	[[self managedObjectContext] obtainPermanentIDsForObjects:objectIDs error:&error];
+//	if (error != nil) {
+//		SKLog(@"error retrieving permanent ids: %@", error);
+//	}
 }
 
 @end
