@@ -23,6 +23,8 @@
         [(NSMutableDictionary *)mapping addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                   @"postID", SKAPIQuestion_ID, // inherited from SKPost
                                                                   @"closeDate", SKAPIClosed_Date,
+																  @"acceptedAnswerID", SKAPIAccepted_Answer_ID,
+																  @"answerCount", SKAPIAnswer_Count,
                                                                   @"bountyAmount", SKAPIBounty_Amount,
                                                                   @"bountyCloseDate", SKAPIBounty_Closes_Date,
                                                                   @"closeReason", SKAPIClosed_Reason,
@@ -55,6 +57,8 @@
     return [self postID];
 }
 
+SK_GETTER(NSNumber *, acceptedAnswerID);
+SK_GETTER(NSNumber *, answerCount);
 SK_GETTER(NSDate *, closeDate);
 SK_GETTER(NSNumber *, bountyAmount);
 SK_GETTER(NSDate *, bountyCloseDate);

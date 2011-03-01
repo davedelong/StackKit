@@ -15,6 +15,8 @@
 
 @property (nonatomic, readonly) NSNumber * questionID;
 @property (nonatomic, readonly) NSDate * closeDate;
+@property (nonatomic, readonly) NSNumber * acceptedAnswerID;
+@property (nonatomic, readonly) NSNumber * answerCount;
 @property (nonatomic, readonly) NSNumber * bountyAmount;
 @property (nonatomic, readonly) NSDate * bountyCloseDate;
 @property (nonatomic, readonly) NSString * closeReason;
