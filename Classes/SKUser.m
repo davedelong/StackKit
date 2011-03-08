@@ -12,6 +12,7 @@
 #import "SKSiteManager+Private.h"
 #import "SKDefinitions.h"
 #import "SKMacros.h"
+#import "SKConstants.h"
 
 // used internally
 NSString * const SKUserAccountTypeAnonymous = @"anonymous";
@@ -22,7 +23,12 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 @implementation SKUser 
 
 + (id) userWithAssociationInformation:(NSDictionary *)information {
-    NSString *siteName = [information objectForKey:@"site_name"];
+	NSString *siteName;
+	if ([SKAssociationAPIVersion isEqualToString:@"1.0"]) {
+		siteName = [[information objectForKey:@"on_site"] objectForKey:@"name"];
+	} else {
+		siteName = [information objectForKey:@"site_name"];
+	}
     SKSite *site = [[SKSiteManager sharedManager] siteWithName:siteName];
     if (site == nil) { return nil; }
     

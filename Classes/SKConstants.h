@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const SKAPIVersion;
+extern NSString * const SKAssociationAPIVersion;
 
 extern NSUInteger const SKPageSizeLimitMax;
 
