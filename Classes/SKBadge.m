@@ -32,7 +32,7 @@
                    @"name", SKAPIName,
                    @"numberAwarded", SKAPIAward_Count,
                    @"rank", SKAPIRank,
-                   @"summary", SKAPISummary,
+                   @"summary", SKAPIDescription,
                    @"tagBased", SKAPITag_Based,
                    @"awards", @"awards",
                    nil];
