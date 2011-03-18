@@ -36,20 +36,6 @@ extern NSString * const SKStatsSiteInfoIconURL;
 
 #pragma mark -
 
-extern NSString * const SKSortCreation;
-extern NSString * const SKSortActivity;
-extern NSString * const SKSortVotes;
-extern NSString * const SKSortViews;
-extern NSString * const SKSortNewest;
-extern NSString * const SKSortFeatured;
-extern NSString * const SKSortHot;
-extern NSString * const SKSortWeek;
-extern NSString * const SKSortMonth;
-extern NSString * const SKSortAdded;
-extern NSString * const SKSortPopular;
-extern NSString * const SKSortReputation;
-extern NSString * const SKSortName;
-
 extern NSString * const SKQueryTrue;
 extern NSString * const SKQueryFalse;
 
