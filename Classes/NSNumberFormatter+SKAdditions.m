@@ -35,6 +35,7 @@
 		sk_basicFormatter = [[NSNumberFormatter alloc] init];
 		[sk_basicFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         [sk_basicFormatter setGeneratesDecimalNumbers:YES];
+        [sk_basicFormatter setDecimalSeparator:@"."];
     });
     
 	return sk_basicFormatter;
