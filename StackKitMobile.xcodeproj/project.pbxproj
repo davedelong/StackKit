@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184B8EC7131C161100C2CA7D /* SKUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5557F62B1316FCC70054CB59 /* SKUserActivity.m */; };
+		18AAAD90131C20B500E7720E /* StackKit.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 18AAAD8F131C20B500E7720E /* StackKit.xcdatamodel */; };
 		5557F75C1316FCC70054CB59 /* StackKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5557F6161316FCC70054CB59 /* StackKit.h */; };
 		5557F75D1316FCC70054CB59 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5557F6181316FCC70054CB59 /* SKConstants.h */; };
 		5557F75E1316FCC70054CB59 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5557F6191316FCC70054CB59 /* SKConstants.m */; };
@@ -20,7 +22,6 @@
 		5557F7661316FCC70054CB59 /* SKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5557F6221316FCC70054CB59 /* SKObject.h */; };
 		5557F7671316FCC70054CB59 /* SKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5557F6231316FCC70054CB59 /* SKObject.m */; };
 		5557F7681316FCC70054CB59 /* SKObject+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5557F6241316FCC70054CB59 /* SKObject+Private.h */; };
-		5557F7691316FCC70054CB59 /* StackKit.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5557F6251316FCC70054CB59 /* StackKit.xcdatamodel */; };
 		5557F76A1316FCC70054CB59 /* SKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5557F6271316FCC70054CB59 /* SKUser.h */; };
 		5557F76B1316FCC70054CB59 /* SKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5557F6281316FCC70054CB59 /* SKUser.m */; };
 		5557F76C1316FCC70054CB59 /* SKUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5557F6291316FCC70054CB59 /* SKUser+Private.h */; };
@@ -151,6 +152,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18AAAD8F131C20B500E7720E /* StackKit.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
 		5557F6161316FCC70054CB59 /* StackKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackKit.h; sourceTree = "<group>"; };
 		5557F6181316FCC70054CB59 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
 		5557F6191316FCC70054CB59 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
@@ -164,7 +166,6 @@
 		5557F6221316FCC70054CB59 /* SKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKObject.h; sourceTree = "<group>"; };
 		5557F6231316FCC70054CB59 /* SKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKObject.m; sourceTree = "<group>"; };
 		5557F6241316FCC70054CB59 /* SKObject+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKObject+Private.h"; sourceTree = "<group>"; };
-		5557F6251316FCC70054CB59 /* StackKit.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
 		5557F6271316FCC70054CB59 /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
 		5557F6281316FCC70054CB59 /* SKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUser.m; sourceTree = "<group>"; };
 		5557F6291316FCC70054CB59 /* SKUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKUser+Private.h"; sourceTree = "<group>"; };
@@ -382,7 +383,7 @@
 				5557F6221316FCC70054CB59 /* SKObject.h */,
 				5557F6231316FCC70054CB59 /* SKObject.m */,
 				5557F6241316FCC70054CB59 /* SKObject+Private.h */,
-				5557F6251316FCC70054CB59 /* StackKit.xcdatamodel */,
+				18AAAD8F131C20B500E7720E /* StackKit.xcdatamodel */,
 			);
 			name = "Object Base";
 			sourceTree = "<group>";
@@ -813,7 +814,6 @@
 				5557F7621316FCC70054CB59 /* SKDefinitions.m in Sources */,
 				5557F7641316FCC70054CB59 /* SKFunctions.m in Sources */,
 				5557F7671316FCC70054CB59 /* SKObject.m in Sources */,
-				5557F7691316FCC70054CB59 /* StackKit.xcdatamodel in Sources */,
 				5557F76B1316FCC70054CB59 /* SKUser.m in Sources */,
 				5557F7701316FCC70054CB59 /* SKFavoritedQuestion.m in Sources */,
 				5557F7721316FCC70054CB59 /* SKBadge.m in Sources */,
@@ -874,6 +874,8 @@
 				5557F7E31316FCC70054CB59 /* NSString+SKAdditions.m in Sources */,
 				5557F7E51316FCC70054CB59 /* NSNumber+SKAdditions.m in Sources */,
 				5557F7E71316FCC70054CB59 /* SKJSONParser.m in Sources */,
+				184B8EC7131C161100C2CA7D /* SKUserActivity.m in Sources */,
+				18AAAD90131C20B500E7720E /* StackKit.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

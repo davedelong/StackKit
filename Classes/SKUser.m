@@ -12,6 +12,7 @@
 #import "SKSiteManager+Private.h"
 #import "SKDefinitions.h"
 #import "SKMacros.h"
+#import "SKConstants.h"
 
 // used internally
 NSString * const SKUserAccountTypeAnonymous = @"anonymous";
@@ -22,7 +23,12 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
 @implementation SKUser 
 
 + (id) userWithAssociationInformation:(NSDictionary *)information {
-    NSString *siteName = [information objectForKey:@"site_name"];
+	NSString *siteName;
+	if ([SKAssociationAPIVersion isEqualToString:@"1.0"]) {
+		siteName = [[information objectForKey:@"on_site"] objectForKey:@"name"];
+	} else {
+		siteName = [information objectForKey:@"site_name"];
+	}
     SKSite *site = [[SKSiteManager sharedManager] siteWithName:siteName];
     if (site == nil) { return nil; }
     
@@ -48,6 +54,8 @@ NSString * const SKUserAccountTypeModerator = @"moderator";
                    @"userID", SKAPIUser_ID,
                    @"userType", SKAPIUser_Type,
                    @"viewCount", SKAPIView_Count,
+				   @"answerCount", SKAPIAnswer_Count,
+				   @"questionCount", SKAPIQuestion_Count,
                    @"websiteURL", SKAPIWebsite_URL,
                    nil];
     }
@@ -121,6 +129,8 @@ SK_GETTER(NSNumber *, upVotes);
 SK_GETTER(NSNumber *, userID);
 SK_GETTER(NSNumber *, userType);
 SK_GETTER(NSNumber *, viewCount);
+SK_GETTER(NSNumber *, answerCount);
+SK_GETTER(NSNumber *, questionCount);
 SK_GETTER(NSURL *, websiteURL);
 SK_GETTER(NSSet *, awardedBadges);
 SK_GETTER(NSSet *, directedComments);

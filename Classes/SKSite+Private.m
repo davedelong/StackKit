@@ -34,6 +34,11 @@
 	siteURL = [[NSURL alloc] initWithString:[mainSiteDictionary objectForKey:@"site_url"]];
 	summary = [[mainSiteDictionary objectForKey:@"description"] retain];
 	iconURL = [[NSURL alloc] initWithString:[mainSiteDictionary objectForKey:@"icon_url"]];
+    
+    creationDate = [[NSDate dateWithTimeIntervalSince1970:[[mainSiteDictionary objectForKey:@"creation_date"] doubleValue]] retain];
+    
+    twitterAccount = [[mainSiteDictionary objectForKey:@"twitter_account"] retain];
+    
 	aliases = [[NSMutableArray alloc] init];
 	NSArray * potentialAliases = [mainSiteDictionary objectForKey:@"aliases"];
 	for (NSString * alias in potentialAliases) {
@@ -71,7 +76,9 @@
 	[summary release];
 	[iconURL release];
 	[aliases release];
-	
+	[creationDate release];
+    [twitterAccount release];
+    
 	[linkColor release];
 	[tagForegroundColor release];
 	[tagBackgroundColor release];

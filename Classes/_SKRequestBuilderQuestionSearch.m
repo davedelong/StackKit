@@ -37,6 +37,7 @@
 	return [NSDictionary dictionaryWithObjectsAndKeys:
 			SK_BOX(NSContainsPredicateOperatorType), @"title",
 			SK_BOX(NSContainsPredicateOperatorType), @"tags",
+            SK_BOX(NSContainsPredicateOperatorType), @"nottags",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"viewCount",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"creationDate",
@@ -58,11 +59,15 @@
 	
 	id inTitle = [p sk_constantValueForLeftKeyPath:@"title"];
 	id tagged = [p sk_constantValueForLeftKeyPath:@"tags"];
-	
-	if (inTitle == nil && tagged == nil) {
-		[self setError:SK_PREDERROR(@"Searching requires a title or tag predicate")];
+	id nottagged = [p sk_constantValueForLeftKeyPath:@"nottags"];
+    
+	if (inTitle == nil && tagged == nil && nottagged == nil) {
+		[self setError:SK_PREDERROR(@"Searching requires a title, tags or nottags predicate")];
 		return;
 	}
+    if (nottagged != nil && tagged == nil) {
+        [self setError:SK_PREDERROR(@"Searching with nottags predicate requies tags predicate")];
+    }
 	
 	if (inTitle != nil) {
 		[[self query] setObject:inTitle forKey:SKQueryInTitle];
@@ -71,8 +76,11 @@
 	if (tagged != nil) {
 		[[self query] setObject:SKExtractTagName(tagged) forKey:SKQueryTagged];
 	}
-	
+    
 	//TODO: nottagged?
+    if (nottagged != nil) {
+        [[self query] setObject:SKExtractTagName(nottagged) forKey:SKQueryNotTagged];
+    }
 	
 	[[self query] setObject:SKQueryTrue forKey:SKQueryBody];
 	

@@ -59,6 +59,8 @@ NSString * const SKSiteAPIKey = @"key";
 @synthesize iconURL;
 @synthesize aliases;
 @synthesize summary;
+@synthesize creationDate;
+@synthesize twitterAccount;
 @synthesize state;
 @synthesize linkColor;
 @synthesize tagForegroundColor, tagBackgroundColor;

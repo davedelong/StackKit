@@ -98,24 +98,6 @@ NSString * const SKAPIWebsite_URL = @"website_url";
 // placeholder
 NSString * const SKAPIFavorited_Date;
 
-#pragma mark -
-#pragma mark Sorting Keys
-
-
-NSString * const SKSortCreation = @"creation";
-NSString * const SKSortActivity = @"activity";
-NSString * const SKSortVotes = @"votes";
-NSString * const SKSortViews = @"views";
-NSString * const SKSortNewest = @"newest";
-NSString * const SKSortFeatured = @"featured";
-NSString * const SKSortHot = @"hot";
-NSString * const SKSortWeek = @"week";
-NSString * const SKSortMonth = @"month";
-NSString * const SKSortAdded = @"added";
-NSString * const SKSortPopular = @"popular";
-NSString * const SKSortReputation = @"reputation";
-NSString * const SKSortName = @"name";
-
 #pragma mark Query Keys
 
 NSString * const SKQueryTrue = @"true";

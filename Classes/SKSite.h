@@ -23,7 +23,9 @@ extern NSString * const SKSiteAPIKey;
 	NSURL * iconURL;
 	NSString * summary;
 	NSMutableArray * aliases;
-	
+	NSDate * creationDate;
+    NSString *twitterAccount;
+    
 	SKSiteState state;
 	SKColor * linkColor;
 	SKColor * tagBackgroundColor;
@@ -49,6 +51,8 @@ extern NSString * const SKSiteAPIKey;
 @property (readonly) NSURL * logoURL;
 @property (readonly) NSURL * iconURL;
 @property (readonly) NSString * summary;
+@property (readonly) NSDate *creationDate;
+@property (readonly) NSString *twitterAccount;
 @property (readonly) SKSiteState state;
 @property (readonly) SKColor * linkColor;
 @property (readonly) SKColor * tagBackgroundColor;

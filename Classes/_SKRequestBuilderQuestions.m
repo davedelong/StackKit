@@ -38,10 +38,6 @@
 			SK_BOX(NSContainsPredicateOperatorType), @"tags",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"lastActivityDate",
 			SK_BOX(NSGreaterThanOrEqualToPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType), @"score",
-//			SKQuestionIsFeatured,
-//			SKQuestionIsHot,
-//			SKQuestionWeek,
-//			SKQuestionMonth,
 			nil];
 }
 
@@ -50,10 +46,8 @@
 			SKSortActivity, @"lastActivityDate",
 			SKSortCreation, @"creationDate",
 			SKSortVotes, @"score",
-//			SKQuestionIsFeatured,
-//			SKQuestionIsHot,
-//			SKQuestionWeek,
-//			SKQuestionMonth,
+			SKSortFeatured, @"bountyAmount",
+			SKSortHot, @"viewCount",
 			nil];
 }
 
