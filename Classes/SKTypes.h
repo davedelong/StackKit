@@ -9,3 +9,4 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^SKSomething)(NSArray *);
+typedef void(^SKErrorHandler)(NSError *);

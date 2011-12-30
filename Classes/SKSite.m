@@ -12,10 +12,10 @@
 
 dispatch_queue_t SKSiteQueue();
 
-static NSArray *SKGetSites();
+static NSArray *SKGetSites(NSError **error);
 
 static NSMutableArray *SKSites();
-void SKFetchSites();
+void SKFetchSites(NSError **error);
 
 static NSString *SKSiteCacheKeyDate = @"cacheDate";
 static NSString *SKSiteCacheKeyObjects = @"objects";
@@ -36,17 +36,25 @@ void SKSetCachedSites(NSArray *sitesJSON);
 @dynamic iconURL;
 @dynamic faviconURL;
 
-+ (void)requestSitesWithCompletionHandler:(SKSomething)handler {
++ (void)requestSitesWithCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)error {
     handler = [handler copy];
+    error = [error copy];
     
     dispatch_async(SKSiteQueue(), ^{
         
-        NSArray *result = SKGetSites();
+        NSError *err = nil;
+        NSArray *result = SKGetSites(&err);
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            handler(result);
+            if (err != nil) {
+                error(err);
+            } else {
+                handler(result);
+            }
         });
     });
     
+    [error release];
     [handler release];
 }
 
@@ -140,9 +148,9 @@ void SKSetCachedSites(NSArray *sitesJSON);
 
 @end
 
-static NSArray *SKGetSites() {
+static NSArray *SKGetSites(NSError **error) {
     if ([SKSites() count] == 0) {
-        SKFetchSites();
+        SKFetchSites(error);
     }
     
     return [[SKSites() copy] autorelease];
@@ -195,7 +203,7 @@ void SKSetCachedSites(NSArray *sitesJSON) {
     [d writeToFile:SKSiteCachePath() atomically:YES];
 }
 
-void SKFetchSites() {
+void SKFetchSites(NSError **error) {
     // this function will:
     // 1. fetch all data from stackauth
     // 2. cache the json
@@ -216,24 +224,19 @@ void SKFetchSites() {
                                           nil];
             
             NSURL *requestURL = SKConstructAPIURL(@"sites", query);
-            NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+            id response = SKExecuteAPICall(requestURL, error);
             
-            NSURLResponse * response = nil;
-            NSError * connectionError = nil;
-            NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&connectionError];
-            
-            NSDictionary *responseObjects = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
+            if ([response isKindOfClass:[NSDictionary class]] == NO) {
                 allItems = nil;
                 break;
             }
             
-            NSArray *items = [responseObjects objectForKey:@"items"];
+            NSArray *items = [response objectForKey:SKResponseKeys.items];
             [allItems addObjectsFromArray:items];
             
             currentPage++;
             
-            NSNumber *keepGoingNumber = [responseObjects objectForKey:@"has_more"];
+            NSNumber *keepGoingNumber = [response objectForKey:SKResponseKeys.hasMore];
             keepGoing = [keepGoingNumber boolValue];
         }
         [pool release];

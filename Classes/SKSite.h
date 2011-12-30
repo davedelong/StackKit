@@ -10,7 +10,7 @@
 
 @interface SKSite : NSObject
 
-+ (void)requestSitesWithCompletionHandler:(SKSomething)handler;
++ (void)requestSitesWithCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)error;
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *audience;

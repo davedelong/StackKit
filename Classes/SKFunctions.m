@@ -118,3 +118,15 @@ NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query) {
     
     return url;
 }
+
+id SKExecuteAPICall(NSURL *url, NSError **error) {
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLResponse *response = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
+    if (data == nil) { return nil; }
+    
+    NSDictionary *responseObjects = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
+    return responseObjects;
+
+}
