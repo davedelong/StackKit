@@ -8,6 +8,7 @@
 
 #import "SKSite.h"
 #import <StackKit/StackKit_Internal.h>
+#import <objc/runtime.h>
 
 dispatch_queue_t SKSiteQueue();
 
@@ -22,7 +23,18 @@ NSString* SKSiteCachePath();
 NSArray* SKGetCachedSites();
 void SKSetCachedSites(NSArray *sitesJSON);
 
-@implementation SKSite
+@implementation SKSite {
+    NSDictionary *_info;
+}
+
+@dynamic name;
+@dynamic audience;
+@dynamic launchDate;
+
+@dynamic logoURL;
+@dynamic siteURL;
+@dynamic iconURL;
+@dynamic faviconURL;
 
 + (void)requestSitesWithCompletionHandler:(SKSomething)handler {
     handler = [handler copy];
@@ -41,6 +53,37 @@ void SKSetCachedSites(NSArray *sitesJSON);
 #pragma mark -
 #pragma mark SKSite Instance Stuff
 
++ (NSDictionary *)APIToObjectMappping {
+    static dispatch_once_t onceToken;
+    static NSDictionary *map = nil;
+    dispatch_once(&onceToken, ^{
+        map = [[NSDictionary alloc] initWithObjectsAndKeys:
+               @"name", SKResponseKeys.site.name,
+               @"audience", SKResponseKeys.site.audience,
+               @"launchDate", SKResponseKeys.site.launchDate,
+               @"logoURL", SKResponseKeys.site.logoURL,
+               @"siteURL", SKResponseKeys.site.siteURL,
+               @"iconURL", SKResponseKeys.site.iconURL,
+               @"faviconURL", SKResponseKeys.site.faviconURL,
+               nil];
+    });
+    return map;
+}
+
++ (NSDictionary *)objectToAPIMapping {
+    static dispatch_once_t onceToken;
+    static NSDictionary *map = nil;
+    dispatch_once(&onceToken, ^{
+        NSDictionary *otherMap = [self APIToObjectMappping];
+        NSArray *keys = [otherMap allKeys];
+        NSArray *values = [otherMap objectsForKeys:keys notFoundMarker:[NSNull null]];
+        
+        // the keys from the other map become the objects in this map
+        map = [[NSDictionary alloc] initWithObjects:keys forKeys:values];
+    });
+    return map;
+}
+
 + (id)allocWithZone:(NSZone *)zone {
     [NSException raise:NSInternalInconsistencyException format:@"You may not allocate an SKSite object"];
     return nil;
@@ -49,9 +92,50 @@ void SKSetCachedSites(NSArray *sitesJSON);
 - (id)_initWithInfo:(NSDictionary *)info {
     self = [super init];
     if (self) {
-        SKLog(@"info: %@", info);
+        _info = [info retain];
     }
     return self;
+}
+
+- (void)dealloc {
+    [_info release];
+    [super dealloc];
+}
+
++ (BOOL)resolveInstanceMethod:(SEL)sel {
+    objc_property_t property = class_getProperty(self, sel_getName(sel));
+    if (property == NULL) { return NO; }
+    
+    char *value = property_copyAttributeValue(property, "T");
+    int length = strlen(value);
+    
+    NSString *apiKey = [[self objectToAPIMapping] objectForKey:NSStringFromSelector(sel)];
+    
+    Class returnType = [NSString class];
+    
+    if (length > 3) {
+        NSString *className = [[NSString alloc] initWithBytes:value+2 length:length-3 encoding:NSUTF8StringEncoding];
+        returnType = NSClassFromString(className);
+        [className release];
+    }
+    
+    id(^impBlock)(SKSite *) = ^(SKSite *_s){
+        NSDictionary *info = _s->_info;
+        id value = [info objectForKey:apiKey];
+        
+        if (returnType == [NSURL class]) {
+            value = [NSURL URLWithString:value];
+        } else if (returnType == [NSDate class]) {
+            value = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
+        }
+        
+        return value;
+    };
+    
+    IMP newIMP = imp_implementationWithBlock((void *)impBlock);
+    class_addMethod(self, sel, newIMP, "@@:");
+    
+    return YES;
 }
 
 @end

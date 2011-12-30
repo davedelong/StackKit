@@ -31,6 +31,8 @@ int main(int argc, char* argv[]) {
     
     [SKSite requestSitesWithCompletionHandler:^(NSArray *sites) {
         NSLog(@"%@", sites);
+        
+        NSLog(@"%@", [[sites lastObject] siteURL]);
     }];
     
     [[NSRunLoop currentRunLoop] run];

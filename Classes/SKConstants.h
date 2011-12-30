@@ -27,4 +27,30 @@ extern const struct SKResponseKeysStruct {
     NSString *quotaRemaining;
     NSString *total;
     NSString *type;
+    struct {
+        NSString *siteType;
+        NSString *name;
+        NSString *logoURL;
+        NSString *apiSiteParameter;
+        NSString *siteURL;
+        NSString *audience;
+        NSString *iconURL;
+        NSString *aliases;
+        NSString *siteState;
+        NSString *styling;
+        struct {
+            NSString *linkColor;
+            NSString *tagForegroundColor;
+            NSString *tagBackgroundColor;
+        } stylingKeys;
+        NSString *launchDate;
+        NSString *faviconURL;
+        NSString *relatedSites;
+        struct {
+            NSString *name;
+            NSString *siteURL;
+            NSString *relation;
+        } relatedSiteKeys;
+        NSString *markdownExtensions;
+    } site;
 } SKResponseKeys;
