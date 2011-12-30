@@ -6,8 +6,10 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-
+#import <StackKit/SKTypes.h>
 
 @interface SKSite : NSObject
+
++ (void)requestSitesWithCompletionHandler:(SKSomething)handler;
 
 @end
