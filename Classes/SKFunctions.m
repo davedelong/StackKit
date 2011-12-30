@@ -119,7 +119,7 @@ NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query) {
     return url;
 }
 
-id SKExecuteAPICall(NSURL *url, NSError **error) {
+NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error) {
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     NSURLResponse *response = nil;
@@ -127,6 +127,43 @@ id SKExecuteAPICall(NSURL *url, NSError **error) {
     if (data == nil) { return nil; }
     
     NSDictionary *responseObjects = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
+    if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
+        if (error) {
+            NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"JSON response not a dictionary", NSLocalizedDescriptionKey,
+                                  *error, NSUnderlyingErrorKey,
+                                  nil];
+            *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInternalError userInfo:info];
+        }
+        responseObjects = nil;
+    }
     return responseObjects;
 
+}
+
+BOOL SKExtractError(NSDictionary* response, NSError **error) {
+    if (response && [response objectForKey:SKResponseKeys.errorID] == nil) { return NO; }
+    
+    NSInteger code = SKErrorCodeInternalError;
+    NSString *description = @"An unknown error occurred. Check the NSUnderlyingErrorKey for more information.";
+    
+    if ([response objectForKey:SKResponseKeys.errorID]) {
+        code = [[response objectForKey:SKResponseKeys.errorID] integerValue];
+    }
+    if ([response objectForKey:SKResponseKeys.errorMessage]) {
+        description = [response objectForKey:SKResponseKeys.errorMessage];
+    }
+    
+    if (error) {
+        NSMutableDictionary *info = [NSMutableDictionary dictionary];
+        [info setObject:description forKey:NSLocalizedDescriptionKey];
+        
+        if (*error != nil) {
+            [info setObject:*error forKey:NSUnderlyingErrorKey];
+        }
+        
+        *error = [NSError errorWithDomain:SKErrorDomain code:code userInfo:info];
+    }
+    
+    return YES;
 }

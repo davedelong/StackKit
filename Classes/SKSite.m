@@ -111,6 +111,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
 }
 
 + (BOOL)resolveInstanceMethod:(SEL)sel {
+    // wooo handle the @dynamic properties!
     objc_property_t property = class_getProperty(self, sel_getName(sel));
     if (property == NULL) { return NO; }
     
@@ -225,8 +226,7 @@ void SKFetchSites(NSError **error) {
             
             NSURL *requestURL = SKConstructAPIURL(@"sites", query);
             id response = SKExecuteAPICall(requestURL, error);
-            
-            if ([response isKindOfClass:[NSDictionary class]] == NO) {
+            if (SKExtractError(response, error)) {
                 allItems = nil;
                 break;
             }
@@ -243,7 +243,9 @@ void SKFetchSites(NSError **error) {
     }
     
     // 2: cache the json
-    SKSetCachedSites(allItems);
+    if (allItems) {
+        SKSetCachedSites(allItems);
+    }
     
     // 3: convert the json to SKSite objects
     NSMutableArray *sites = SKSites();

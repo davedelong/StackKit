@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <StackKit/StackKit.h>
 #import <StackKit/SKMacros.h>
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKConstants.h>

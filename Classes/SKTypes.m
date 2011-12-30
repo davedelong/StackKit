@@ -7,3 +7,5 @@
 //
 
 #import "SKTypes.h"
+
+NSString *const SKErrorDomain = @"com.davedelong.stackkit";

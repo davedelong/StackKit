@@ -15,4 +15,5 @@ extern void SKQLog(NSString *format, ...);
 extern NSString* SKQueryString(id object);
 
 extern NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query);
-extern id SKExecuteAPICall(NSURL *url, NSError **error);
+extern NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error);
+extern BOOL SKExtractError(NSDictionary* response, NSError **error);

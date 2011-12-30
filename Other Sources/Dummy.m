@@ -33,6 +33,8 @@ int main(int argc, char* argv[]) {
         NSLog(@"%@", sites);
         
         NSLog(@"%@", [[sites lastObject] siteURL]);
+    } errorHandler:^(NSError *error) {
+        NSLog(@"error: %@", error);
     }];
     
     [[NSRunLoop currentRunLoop] run];
