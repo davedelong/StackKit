@@ -7,6 +7,8 @@
 //
 
 #import <StackKit/SKStackExchangeStore.h>
+#import <StackKit/SKFetchRequest_Internal.h>
+#import <StackKit/SKFunctions.h>
 
 static NSString * _SKStackExchangeStoreType = @"SKStackExchangeStore";
 
@@ -72,7 +74,16 @@ NSString * SKStoreType(void) {
     } else {
         if([request isKindOfClass:[NSFetchRequest class]]) {
             //Do something with fetchRequest...
-            NSLog(@"got a request: %@", request);
+            SKFetchRequest *seRequest = [(NSFetchRequest *)request stackKitFetchRequest];
+            NSURL *apiCall = [seRequest _apiURLWithSite:[self site]];
+            NSLog(@"request: %@", apiCall);
+            NSDictionary *response = SKExecuteAPICall(apiCall, error);
+            
+            if (response && SKExtractError(response, error)) {
+                return nil;
+            }
+            
+            NSLog(@"got: %@", response);
         }
     }
     return nil;

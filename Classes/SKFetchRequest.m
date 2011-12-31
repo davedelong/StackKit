@@ -9,6 +9,7 @@
 #import <StackKit/SKFetchRequest_Internal.h>
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKFunctions.h>
+#import <StackKit/SKSite_Internal.h>
 
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKUser.h>
@@ -40,6 +41,12 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 }
 
 - (NSFetchRequest *)_generatedFetchRequest {
+    [NSException raise:NSInternalInconsistencyException 
+                format:@"-%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
+    return nil;
+}
+
+- (NSURL *)_apiURLWithSite:(SKSite *)site {
     [NSException raise:NSInternalInconsistencyException 
                 format:@"-%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
     return nil;
@@ -174,6 +181,35 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     
     [r setStackKitFetchRequest:self];
     return [r autorelease];
+}
+
+- (NSURL *)_apiURLWithSite:(SKSite *)site {
+    NSString *path = @"users";
+    
+    NSMutableDictionary *query = [NSMutableDictionary dictionary];
+    [query setObject:[site APISiteParameter] forKey:SKQueryKeys.site];
+    
+    if ([_userIDs count] > 0) {
+        path = [NSString stringWithFormat:@"users/%@", SKQueryString(_userIDs)];
+    } else if ([_nameContains length] > 0) {
+        [query setObject:SKQueryString(_nameContains) forKey:SKQueryKeys.user.nameContains];
+    }
+    
+    if ([_sortKey length] > 0) {
+        [query setObject:_sortKey forKey:SKQueryKeys.sort];
+    }
+    
+    [query setObject:(_ascending ? SKQueryKeys.sortOrder.ascending : SKQueryKeys.sortOrder.descending) forKey:SKQueryKeys.order];
+    
+    if (_minDate) {
+        [query setObject:SKQueryString(_minDate) forKey:SKQueryKeys.fromDate];
+    }
+    
+    if (_maxDate) {
+        [query setObject:SKQueryString(_maxDate) forKey:SKQueryKeys.toDate];
+    }
+    
+    return SKConstructAPIURL(path, query);
 }
 
 @end

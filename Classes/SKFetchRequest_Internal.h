@@ -10,6 +10,8 @@
 #import <StackKit/SKFetchRequest.h>
 #import <CoreData/CoreData.h>
 
+@class SKSite;
+
 @interface NSFetchRequest (StackKit)
 
 @property (nonatomic, retain) SKFetchRequest *stackKitFetchRequest;
@@ -19,6 +21,7 @@
 @interface SKFetchRequest ()
 
 - (NSFetchRequest *)_generatedFetchRequest;
+- (NSURL *)_apiURLWithSite:(SKSite *)site;
 
 @end
 

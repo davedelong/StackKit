@@ -93,6 +93,13 @@ NSString* SKQueryString(id object) {
         }
         result = [values componentsJoinedByString:@";"];
         [values release];
+    } else if ([object isKindOfClass:[NSIndexSet class]]) {
+        NSMutableArray *values = [[NSMutableArray alloc] init];
+        [object enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            [values addObject:[NSString stringWithFormat:@"%lu", idx]];
+        }];
+        result = SKQueryString(values);
+        [values release];
     } else if ([object isKindOfClass:[NSNumber class]]) {
         result = [NSString stringWithFormat:@"%ld", [object integerValue]];
     } else if ([object isKindOfClass:[NSDate class]]) {

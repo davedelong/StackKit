@@ -29,6 +29,7 @@
 		557B138E14AF962100BD2DFD /* SKFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 557B138C14AF962100BD2DFD /* SKFetchRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		557B138F14AF962100BD2DFD /* SKFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 557B138D14AF962100BD2DFD /* SKFetchRequest.m */; };
 		557B139114AF9BC200BD2DFD /* SKFetchRequest_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		557B139514AFCB6400BD2DFD /* SKSite_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 557B139414AFCB6400BD2DFD /* SKSite_Internal.h */; };
 		5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E70F110EBAA60038E510 /* SKQuestionTest.m */; };
 		5592AD9B14AAC96A007D4734 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 5592AD9914AAC96A007D4734 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5592AD9C14AAC96A007D4734 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592AD9A14AAC96A007D4734 /* SKSite.m */; };
@@ -109,6 +110,7 @@
 		557B138C14AF962100BD2DFD /* SKFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequest.h; sourceTree = "<group>"; };
 		557B138D14AF962100BD2DFD /* SKFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFetchRequest.m; sourceTree = "<group>"; };
 		557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequest_Internal.h; sourceTree = "<group>"; };
+		557B139414AFCB6400BD2DFD /* SKSite_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite_Internal.h; sourceTree = "<group>"; };
 		5592AD9914AAC96A007D4734 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
 		5592AD9A14AAC96A007D4734 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
 		5592AD9D14AAC9BD007D4734 /* SKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTypes.h; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				557B138314AEF13F00BD2DFD /* SKObject_Internal.h */,
 				557B138014AEEFDD00BD2DFD /* SKObject.m */,
 				5592AD9914AAC96A007D4734 /* SKSite.h */,
+				557B139414AFCB6400BD2DFD /* SKSite_Internal.h */,
 				5592AD9A14AAC96A007D4734 /* SKSite.m */,
 				557B138C14AF962100BD2DFD /* SKFetchRequest.h */,
 				557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */,
@@ -339,6 +342,7 @@
 				5253028714AF6AAA000AECB4 /* SKStackExchangeStoreNode.h in Headers */,
 				557B138E14AF962100BD2DFD /* SKFetchRequest.h in Headers */,
 				557B139114AF9BC200BD2DFD /* SKFetchRequest_Internal.h in Headers */,
+				557B139514AFCB6400BD2DFD /* SKSite_Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,10 +8,24 @@
 
 #import "SKConstants.h"
 
-const struct SKQueryParametersStruct SKQueryParameters = {
+const struct SKQueryKeysStruct SKQueryKeys = {
     .pageSize   = @"pagesize",
     .page       = @"page",
-    .site       = @"site"
+    .site       = @"site",
+    .min        = @"min",
+    .max        = @"max",
+    .fromDate   = @"fromdate",
+    .toDate     = @"todate",
+    .sort       = @"sort",
+    .sortOrder  = {
+        .ascending = @"asc",
+        .descending = @"desc"
+    },
+    .order      = @"order",
+    .filter     = @"filter",
+    .user       = {
+        .nameContains = @"inname"
+    }
 };
 
 

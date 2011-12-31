@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SKSite.h"
+#import <StackKit/SKSite_Internal.h>
 #import <CoreData/CoreData.h>
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKFunctions.h>
@@ -47,6 +47,8 @@ void SKSetCachedSites(NSArray *sitesJSON);
 @dynamic siteURL;
 @dynamic iconURL;
 @dynamic faviconURL;
+
+@dynamic APISiteParameter;
 
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -118,6 +120,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
                  SKAPIKeys.site.iconURL,
                  SKAPIKeys.site.faviconURL,
                  SKAPIKeys.site.siteState,
+                 SKAPIKeys.site.apiSiteParameter,
                  nil];
     });
     return array;
@@ -344,8 +347,8 @@ void SKFetchSites(NSError **error) {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         {
             NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                          [NSNumber numberWithUnsignedInteger:currentPage], SKQueryParameters.page,
-                                          [NSNumber numberWithUnsignedInteger:pageSize], SKQueryParameters.pageSize,
+                                          [NSNumber numberWithUnsignedInteger:currentPage], SKQueryKeys.page,
+                                          [NSNumber numberWithUnsignedInteger:pageSize], SKQueryKeys.pageSize,
                                           nil];
             
             NSURL *requestURL = SKConstructAPIURL(@"sites", query);

@@ -8,11 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-extern const struct SKQueryParametersStruct {
+extern const struct SKQueryKeysStruct {
     NSString *pageSize;
     NSString *page;
     NSString *site;
-} SKQueryParameters;
+    NSString *min;
+    NSString *max;
+    NSString *fromDate;
+    NSString *toDate;
+    NSString *sort;
+    NSString *order;
+    struct {
+        NSString *ascending;
+        NSString *descending;
+    } sortOrder;
+    NSString *filter;
+    struct {
+        NSString *nameContains;
+    } user;
+} SKQueryKeys;
 
 extern const struct SKAPIKeysStruct {
     NSString *backOff;
