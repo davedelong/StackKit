@@ -47,6 +47,10 @@ void SKSetCachedSites(NSArray *sitesJSON);
 @dynamic iconURL;
 @dynamic faviconURL;
 
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 + (void)requestSitesWithCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)error {
     handler = [handler copy];
     error = [error copy];
@@ -162,6 +166,9 @@ void SKSetCachedSites(NSArray *sitesJSON);
 }
 
 - (void)dealloc {
+    [_managedObjectModel release];
+    [_managedObjectContext release];
+    [_persistentStoreCoordinator release];
     [_info release];
     [super dealloc];
 }
@@ -233,22 +240,18 @@ void SKSetCachedSites(NSArray *sitesJSON);
 
 #pragma mark Core Data stack
 
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
--(NSURL *)dataModelURL {
+- (NSURL *)dataModelURL {
     return [SKBundle() URLForResource:@"StackKit" withExtension:@"momd"];
 }
 
--(NSManagedObjectModel *)managedObjectModel {
+- (NSManagedObjectModel *)managedObjectModel {
     if(_managedObjectModel == nil) {
         _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[self dataModelURL]];
     }
     return _managedObjectModel;
 }
 
--(NSManagedObjectContext *)managedObjectContext {
+- (NSManagedObjectContext *)managedObjectContext {
     if(_managedObjectContext == nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
@@ -257,7 +260,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
     return _managedObjectContext;
 }
 
--(NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if(_persistentStoreCoordinator == nil) {
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
