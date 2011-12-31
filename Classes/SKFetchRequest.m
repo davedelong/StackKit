@@ -95,12 +95,12 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return self;
 }
 
-- (id)sortedInAscendingOrder {
+- (id)inAscendingOrder {
     [self setAscending:YES];
     return self;
 }
 
-- (id)sortedInDescendingOrder {
+- (id)inDescendingOrder {
     [self setAscending:NO];
     return self;
 }

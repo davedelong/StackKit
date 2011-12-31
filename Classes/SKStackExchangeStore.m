@@ -41,7 +41,7 @@ NSString * SKStoreType(void) {
     //is essentially a no-op if the class is already registered.
     
     [NSPersistentStoreCoordinator registerStoreClass:[self class]
-                                        forStoreType:_SKStackExchangeStoreType];
+                                        forStoreType:SKStoreType()];
 }
 
 //TODO: Fill in these methods:
@@ -57,9 +57,9 @@ NSString * SKStoreType(void) {
 }
 
 -(void)dealloc {
-    [super dealloc];
     
     //...
+    [super dealloc];
 }
 
 -(BOOL)loadMetadata:(NSError **)error {
@@ -72,6 +72,7 @@ NSString * SKStoreType(void) {
     } else {
         if([request isKindOfClass:[NSFetchRequest class]]) {
             //Do something with fetchRequest...
+            NSLog(@"got a request: %@", request);
         }
     }
     return nil;

@@ -214,22 +214,9 @@
 			isa = PBXGroup;
 			children = (
 				5592ADA114AAC9ED007D4734 /* StackKit.h */,
-				5592ADAE14AACBBD007D4734 /* Internal */,
-				5592AD9D14AAC9BD007D4734 /* SKTypes.h */,
-				5592AD9E14AAC9BD007D4734 /* SKTypes.m */,
-				557B137F14AEEFDD00BD2DFD /* SKObject.h */,
-				557B138014AEEFDD00BD2DFD /* SKObject.m */,
-				5592AD9914AAC96A007D4734 /* SKSite.h */,
-				5592AD9A14AAC96A007D4734 /* SKSite.m */,
-				557B137B14AEE9A900BD2DFD /* SKUser.h */,
-				557B137C14AEE9A900BD2DFD /* SKUser.m */,
-				5253027314AF2624000AECB4 /* SKStackExchangeStore.h */,
-				5253027414AF2625000AECB4 /* SKStackExchangeStore.m */,
-				5253028514AF6AA9000AECB4 /* SKStackExchangeStoreNode.h */,
-				5253028614AF6AAA000AECB4 /* SKStackExchangeStoreNode.m */,
-				557B138C14AF962100BD2DFD /* SKFetchRequest.h */,
-				557B138D14AF962100BD2DFD /* SKFetchRequest.m */,
-				557B137814AED74900BD2DFD /* StackKit.xcdatamodeld */,
+				5592ADAE14AACBBD007D4734 /* Support */,
+				557B139314AFBA5700BD2DFD /* Objects */,
+				557B139214AFBA3100BD2DFD /* Core Data stuff */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -261,7 +248,36 @@
 			path = "Other Sources";
 			sourceTree = "<group>";
 		};
-		5592ADAE14AACBBD007D4734 /* Internal */ = {
+		557B139214AFBA3100BD2DFD /* Core Data stuff */ = {
+			isa = PBXGroup;
+			children = (
+				557B137814AED74900BD2DFD /* StackKit.xcdatamodeld */,
+				5253027314AF2624000AECB4 /* SKStackExchangeStore.h */,
+				5253027414AF2625000AECB4 /* SKStackExchangeStore.m */,
+				5253028514AF6AA9000AECB4 /* SKStackExchangeStoreNode.h */,
+				5253028614AF6AAA000AECB4 /* SKStackExchangeStoreNode.m */,
+			);
+			name = "Core Data stuff";
+			sourceTree = "<group>";
+		};
+		557B139314AFBA5700BD2DFD /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				557B137F14AEEFDD00BD2DFD /* SKObject.h */,
+				557B138314AEF13F00BD2DFD /* SKObject_Internal.h */,
+				557B138014AEEFDD00BD2DFD /* SKObject.m */,
+				5592AD9914AAC96A007D4734 /* SKSite.h */,
+				5592AD9A14AAC96A007D4734 /* SKSite.m */,
+				557B138C14AF962100BD2DFD /* SKFetchRequest.h */,
+				557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */,
+				557B138D14AF962100BD2DFD /* SKFetchRequest.m */,
+				557B137B14AEE9A900BD2DFD /* SKUser.h */,
+				557B137C14AEE9A900BD2DFD /* SKUser.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		5592ADAE14AACBBD007D4734 /* Support */ = {
 			isa = PBXGroup;
 			children = (
 				550D448014AE1FC700AD6022 /* SKMacros.h */,
@@ -269,10 +285,10 @@
 				5592ADB014AACBD3007D4734 /* SKFunctions.m */,
 				550D447C14AE1BBF00AD6022 /* SKConstants.h */,
 				550D447D14AE1BBF00AD6022 /* SKConstants.m */,
-				557B138314AEF13F00BD2DFD /* SKObject_Internal.h */,
-				557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */,
+				5592AD9D14AAC9BD007D4734 /* SKTypes.h */,
+				5592AD9E14AAC9BD007D4734 /* SKTypes.m */,
 			);
-			name = Internal;
+			name = Support;
 			sourceTree = "<group>";
 		};
 		55A2E507110E400A0038E510 /* Unit Tests */ = {

@@ -26,8 +26,8 @@
 - (id)sortedByReputation;
 - (id)sortedByLastModifiedDate;
 
-- (id)sortedInAscendingOrder;
-- (id)sortedInDescendingOrder;
+- (id)inAscendingOrder;
+- (id)inDescendingOrder;
 
 - (id)whoseDisplayNameContains:(NSString *)name;
 - (id)withIDs:(NSUInteger)userID,... NS_REQUIRES_NIL_TERMINATION;
