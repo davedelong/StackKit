@@ -7,6 +7,7 @@
 //
 
 #import <StackKit/SKObject_Internal.h>
+#import <objc/runtime.h>
 
 @implementation SKObject {
     // _info will be either an NSDictionary or NSManagedObject, depending on the subclass
@@ -19,8 +20,8 @@
     return nil;
 }
 
-+ (NSString *)_infoKeyForProperty:(objc_property_t)property{
-    return [NSString stringWithUTF8String:property_getName(property)];
++ (NSString *)_infoKeyForSelector:(SEL)selector {
+    return NSStringFromSelector(selector);
 }
 
 + (id)_transformValue:(id)value forReturnType:(Class)returnType {
@@ -32,7 +33,7 @@
     objc_property_t property = class_getProperty(self, sel_getName(sel));
     if (property == NULL) { return NO; }
     
-    NSString *key = [self _infoKeyForProperty:property];
+    NSString *key = [self _infoKeyForSelector:sel];
     
     char *value = property_copyAttributeValue(property, "T");
     int length = strlen(value);

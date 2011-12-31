@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <StackKit/SKObject.h>
-#import <objc/runtime.h>
 
 @interface SKObject ()
 
-+ (NSString *)_infoKeyForProperty:(objc_property_t)property;
++ (NSString *)_infoKeyForSelector:(SEL)selector;
 + (id)_transformValue:(id)value forReturnType:(Class)returnType;
 
 - (id)_initWithInfo:(id)info;

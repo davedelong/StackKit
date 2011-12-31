@@ -8,7 +8,6 @@
 
 #import "SKSite.h"
 #import <StackKit/StackKit_Internal.h>
-#import <objc/runtime.h>
 #import <CoreData/CoreData.h>
 
 dispatch_queue_t SKSiteQueue();
@@ -164,9 +163,8 @@ void SKSetCachedSites(NSArray *sitesJSON);
             [self siteURL]];
 }
 
-+ (NSString *)_infoKeyForProperty:(objc_property_t)property {
-    NSString *name = [NSString stringWithUTF8String:property_getName(property)];
-    return [[self objectToAPIMapping] objectForKey:name];
++ (NSString *)_infoKeyForSelector:(SEL)selector {
+    return [[self objectToAPIMapping] objectForKey:NSStringFromSelector(selector)];
 }
 
 + (id)_transformValue:(id)value forReturnType:(Class)returnType {
