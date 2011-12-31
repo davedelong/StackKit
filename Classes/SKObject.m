@@ -53,9 +53,9 @@
     };
     
     IMP newIMP = imp_implementationWithBlock((void *)impBlock);
-    class_addMethod(self, sel, newIMP, "@@:");
+    BOOL added = class_addMethod(self, sel, newIMP, "@@:");
     
-    return YES;
+    return added;
 }
 
 - (id)_initWithInfo:(id)info {
