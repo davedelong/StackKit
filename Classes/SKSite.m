@@ -58,6 +58,34 @@ void SKSetCachedSites(NSArray *sitesJSON);
     [handler release];
 }
 
++ (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler errorHandler:(SKErrorHandler)error {
+    handler = [handler copy];
+    
+    NSArray *words = [name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    SKSomething block = ^(NSArray *sites) {
+        // this will be called on the main thread
+        NSPredicate *template = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] $word OR audience CONTAINS[cd] $word"];
+        
+        for (NSString *word in words) {
+            if ([word length] == 0) { continue; }
+            NSPredicate *p = [template predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:word forKey:@"word"]];
+            sites = [sites filteredArrayUsingPredicate:p];
+        }
+        
+        SKSite *match = nil;
+        if ([sites count] > 0) {
+            match = [sites objectAtIndex:0];
+        }
+        
+        handler(match);
+    };
+    
+    [SKSite requestSitesWithCompletionHandler:block errorHandler:error];
+    
+    [handler release];
+}
+
 #pragma mark -
 #pragma mark SKSite Instance Stuff
 
@@ -73,6 +101,8 @@ void SKSetCachedSites(NSArray *sitesJSON);
                @"siteURL", SKResponseKeys.site.siteURL,
                @"iconURL", SKResponseKeys.site.iconURL,
                @"faviconURL", SKResponseKeys.site.faviconURL,
+               @"siteState", SKResponseKeys.site.siteState,
+               
                nil];
     });
     return map;
@@ -110,6 +140,13 @@ void SKSetCachedSites(NSArray *sitesJSON);
     [super dealloc];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ {name = %@, url = %@}", 
+            [super description],
+            [self name],
+            [self siteURL]];
+}
+
 + (BOOL)resolveInstanceMethod:(SEL)sel {
     // wooo handle the @dynamic properties!
     objc_property_t property = class_getProperty(self, sel_getName(sel));
@@ -145,6 +182,21 @@ void SKSetCachedSites(NSArray *sitesJSON);
     class_addMethod(self, sel, newIMP, "@@:");
     
     return YES;
+}
+
+// this has a non-object return type, so we'll override the getter manually
+- (SKSiteState)siteState {
+    NSString *value = [_info objectForKey:SKResponseKeys.site.siteState];
+    SKSiteState s = SKSiteStateNormal;
+
+    if ([value isEqualToString:@"linked_meta"]) {
+        s = SKSiteStateLinkedMeta;
+    } else if ([value isEqualToString:@"open_beta"]) {
+        s = SKSiteStateOpenBeta;
+    } else if ([value isEqualToString:@"closed_beta"]) {
+        s = SKSiteStateClosedBeta;
+    }
+    return s;
 }
 
 @end

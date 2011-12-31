@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class SKSite;
+
 typedef void(^SKSomething)(NSArray *);
 typedef void(^SKErrorHandler)(NSError *);
+typedef void(^SKSiteHandler)(SKSite *);
 
 extern NSString *const SKErrorDomain;
 
@@ -24,3 +27,10 @@ typedef enum {
     SKErrorCodeThrottleViolation = 502,
     SKErrorCodeInternalError = 500
 } SKErrorCode;
+
+typedef enum {
+	SKSiteStateNormal = 0,
+	SKSiteStateLinkedMeta = 1,
+	SKSiteStateOpenBeta = 2,
+	SKSiteStateClosedBeta = 3
+} SKSiteState;
