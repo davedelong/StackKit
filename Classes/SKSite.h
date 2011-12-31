@@ -9,6 +9,8 @@
 #import <StackKit/SKTypes.h>
 #import <StackKit/SKObject.h>
 
+@class SKFetchRequest;
+
 @interface SKSite : SKObject
 
 + (void)requestSitesWithCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)error;
@@ -23,6 +25,8 @@
 @property (nonatomic, readonly) NSURL *logoURL;
 @property (nonatomic, readonly) NSURL *iconURL;
 @property (nonatomic, readonly) NSURL *faviconURL;
+
+- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)errorHandler;
 
 
 @end

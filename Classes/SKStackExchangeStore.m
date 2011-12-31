@@ -7,7 +7,6 @@
 //
 
 #import <StackKit/SKStackExchangeStore.h>
-#import <StackKit/StackKit_Internal.h>
 
 static NSString * _SKStackExchangeStoreType = @"SKStackExchangeStore";
 

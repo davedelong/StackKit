@@ -14,6 +14,7 @@
 
 @dynamic userID;
 @dynamic creationDate;
+@dynamic lastModifiedDate;
 
 @dynamic displayName;
 @dynamic about;

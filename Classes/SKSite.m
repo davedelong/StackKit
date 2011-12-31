@@ -8,7 +8,10 @@
 
 #import "SKSite.h"
 #import <CoreData/CoreData.h>
-#import <StackKit/StackKit_Internal.h>
+#import <StackKit/SKConstants.h>
+#import <StackKit/SKFunctions.h>
+#import <StackKit/SKObject_Internal.h>
+#import <StackKit/SKStackExchangeStore.h>
 
 dispatch_queue_t SKSiteQueue();
 
@@ -193,6 +196,11 @@ void SKSetCachedSites(NSArray *sitesJSON);
 }
 
 #pragma mark Core Data stack
+
+
+- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)errorHandler {
+    NSLog(@"implement me! %s", __PRETTY_FUNCTION__);
+}
 
 - (NSURL *)dataModelURL {
     return [SKBundle() URLForResource:@"StackKit" withExtension:@"momd"];

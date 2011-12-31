@@ -14,6 +14,7 @@
 
 @property (nonatomic, readonly) NSUInteger userID;
 @property (nonatomic, readonly) NSDate *creationDate;
+@property (nonatomic, readonly) NSDate *lastModifiedDate;
 @property (nonatomic, readonly) NSUInteger reputation;
 @property (nonatomic, readonly) SKUserType userType;
 

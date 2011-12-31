@@ -6,7 +6,10 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <StackKit/StackKit_Internal.h>
+#import <StackKit/SKMacros.h>
+#import <StackKit/SKFunctions.h>
+#import <StackKit/SKConstants.h>
+#import <StackKit/SKTypes.h>
 
 NSString* SKApplicationSupportDirectory() {
     static dispatch_once_t onceToken;
@@ -200,4 +203,18 @@ NSString *SKInferPropertyNameFromAPIKey(NSString *APIKey) {
         [bits addObject:SKCapitalizeStringForProperty(word, NO)];
     }
     return [bits componentsJoinedByString:@""];
+}
+
+NSString *SKInferAPIKeyFromPropertyName(NSString *propertyName) {
+    NSString *lower = [propertyName lowercaseString];
+    NSMutableString *key = [NSMutableString string];
+    for (NSUInteger i = 0; i < [propertyName length]; ++i) {
+        unichar character = [propertyName characterAtIndex:i];
+        if ([[NSCharacterSet uppercaseLetterCharacterSet] characterIsMember:character]) {
+            character = [lower characterAtIndex:i];
+            [key appendString:@"_"];
+        }
+        [key appendFormat:@"%C", character];
+    }
+    return key;
 }

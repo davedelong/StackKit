@@ -53,5 +53,34 @@ const struct SKResponseKeysStruct SKResponseKeys = {
             .relation = @"relation"
         },
         .markdownExtensions = @"markdown_extensions"
+    },
+    .user = {
+        .aboutMe = @"about_me",
+        .accountId = @"account_id",
+        .age = @"age",
+        .answerCount = @"answer_count",
+        .badgeCounts = @"badge_counts",
+        .creationDate = @"creation_date",
+        .displayName = @"display_name",
+        .downVoteCount = @"down_vote_count",
+        .isEmployee = @"is_employee",
+        .lastAccessDate = @"last_access_date",
+        .lastModifiedDate = @"last_modified_date",
+        .link = @"link",
+        .location = @"location",
+        .profileImage = @"profile_image",
+        .questionCount = @"question_count",
+        .reputation = @"reputation",
+        .reputationChangeDay = @"reputation_change_day",
+        .reputationChangeMonth = @"reputation_change_month",
+        .reputationChangeQuarter = @"reputation_change_quarter",
+        .reputationChangeWeek = @"reputation_change_week",
+        .reputationChangeYear = @"reputation_change_year",
+        .timedPenaltyDate = @"timed_penalty_date",
+        .upVoteCount = @"up_vote_count",
+        .userID = @"user_id",
+        .userType = @"user_type",
+        .viewCount = @"view_count",
+        .websiteURL = @"website_url"
     }
 };

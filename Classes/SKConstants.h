@@ -53,4 +53,34 @@ extern const struct SKResponseKeysStruct {
         } relatedSiteKeys;
         NSString *markdownExtensions;
     } site;
+    
+    struct {
+        NSString *aboutMe;
+        NSString *accountId;
+        NSString *age;
+        NSString *answerCount;
+        NSString *badgeCounts;
+        NSString *creationDate;
+        NSString *displayName;
+        NSString *downVoteCount;
+        NSString *isEmployee;
+        NSString *lastAccessDate;
+        NSString *lastModifiedDate;
+        NSString *link;
+        NSString *location;
+        NSString *profileImage;
+        NSString *questionCount;
+        NSString *reputation;
+        NSString *reputationChangeDay;
+        NSString *reputationChangeMonth;
+        NSString *reputationChangeQuarter;
+        NSString *reputationChangeWeek;
+        NSString *reputationChangeYear;
+        NSString *timedPenaltyDate;
+        NSString *upVoteCount;
+        NSString *userID;
+        NSString *userType;
+        NSString *viewCount;
+        NSString *websiteURL;
+    } user;
 } SKResponseKeys;

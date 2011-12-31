@@ -7,7 +7,6 @@
 //
 
 #import <StackKit/SKStackExchangeStoreNode.h>
-#import <StackKit/StackKit_Internal.h>
 
 @interface SKStackExchangeStoreNode ()
 

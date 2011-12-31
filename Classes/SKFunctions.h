@@ -20,3 +20,4 @@ extern NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error);
 extern BOOL SKExtractError(NSDictionary* response, NSError **error);
 
 extern NSString *SKInferPropertyNameFromAPIKey(NSString *APIKey);
+extern NSString *SKInferAPIKeyFromPropertyName(NSString *propertyName);
