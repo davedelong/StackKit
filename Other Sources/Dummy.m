@@ -29,7 +29,7 @@
 int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
-    [SKSite requestSiteWithNameLike:@"Meta Stack Overflow" completionHandler:^(SKSite *site) {
+    [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site) {
         NSLog(@"site: %@", site);
     } errorHandler:^(NSError *error) {
         NSLog(@"error: %@", error);

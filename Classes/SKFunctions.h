@@ -17,3 +17,5 @@ extern NSString* SKQueryString(id object);
 extern NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query);
 extern NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error);
 extern BOOL SKExtractError(NSDictionary* response, NSError **error);
+
+extern NSString *SKInferPropertyNameFromAPIKey(NSString *APIKey);

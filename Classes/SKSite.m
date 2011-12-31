@@ -65,7 +65,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
     
     SKSomething block = ^(NSArray *sites) {
         // this will be called on the main thread
-        NSPredicate *template = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] $word OR audience CONTAINS[cd] $word"];
+        NSPredicate *template = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] $word OR audience CONTAINS[cd] $word or siteURL.absoluteString CONTAINS[cd] $word"];
         
         for (NSString *word in words) {
             if ([word length] == 0) { continue; }
@@ -89,21 +89,36 @@ void SKSetCachedSites(NSArray *sitesJSON);
 #pragma mark -
 #pragma mark SKSite Instance Stuff
 
++ (NSArray *)APIKeysBackingProperties {
+    static dispatch_once_t onceToken;
+    static NSArray *array = nil;
+    dispatch_once(&onceToken, ^{
+        array = [[NSArray alloc] initWithObjects:
+                 SKResponseKeys.site.name,
+                 SKResponseKeys.site.audience,
+                 SKResponseKeys.site.launchDate,
+                 SKResponseKeys.site.logoURL,
+                 SKResponseKeys.site.siteURL,
+                 SKResponseKeys.site.iconURL,
+                 SKResponseKeys.site.faviconURL,
+                 SKResponseKeys.site.siteState,
+                 nil];
+    });
+    return array;
+}
+
 + (NSDictionary *)APIToObjectMappping {
     static dispatch_once_t onceToken;
     static NSDictionary *map = nil;
     dispatch_once(&onceToken, ^{
-        map = [[NSDictionary alloc] initWithObjectsAndKeys:
-               @"name", SKResponseKeys.site.name,
-               @"audience", SKResponseKeys.site.audience,
-               @"launchDate", SKResponseKeys.site.launchDate,
-               @"logoURL", SKResponseKeys.site.logoURL,
-               @"siteURL", SKResponseKeys.site.siteURL,
-               @"iconURL", SKResponseKeys.site.iconURL,
-               @"faviconURL", SKResponseKeys.site.faviconURL,
-               @"siteState", SKResponseKeys.site.siteState,
-               
-               nil];
+        NSArray *apiKeys = [self APIKeysBackingProperties];
+        NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
+        for (NSString *apiKey in apiKeys) {
+            NSString *propertyName = SKInferPropertyNameFromAPIKey(apiKey);
+            [d setObject:propertyName forKey:apiKey];
+        }
+        map = [d copy];
+        [d release];
     });
     return map;
 }
@@ -147,6 +162,10 @@ void SKSetCachedSites(NSArray *sitesJSON);
             [self siteURL]];
 }
 
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"%@ %@", [super description], _info];
+}
+
 + (BOOL)resolveInstanceMethod:(SEL)sel {
     // wooo handle the @dynamic properties!
     objc_property_t property = class_getProperty(self, sel_getName(sel));
@@ -160,6 +179,8 @@ void SKSetCachedSites(NSArray *sitesJSON);
     Class returnType = [NSString class];
     
     if (length > 3) {
+        // the type is of the form @"ClassName"
+        // this will create a string skipping the leading @" and trailing "
         NSString *className = [[NSString alloc] initWithBytes:value+2 length:length-3 encoding:NSUTF8StringEncoding];
         returnType = NSClassFromString(className);
         [className release];

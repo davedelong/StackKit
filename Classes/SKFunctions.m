@@ -167,3 +167,28 @@ BOOL SKExtractError(NSDictionary* response, NSError **error) {
     
     return YES;
 }
+
+// assumes the "string" parameter is all lowercase
+NSString *SKCapitalizeStringForProperty(NSString *string, BOOL wouldBeFirst) {
+    if ([string isEqualToString:@"api"]) { return @"API"; }
+    if ([string isEqualToString:@"url"]) { return @"URL"; }
+    
+    if (wouldBeFirst) { return string; }
+    
+    return [string capitalizedString];
+}
+
+// "api_site_parameter" => "APISiteParameter"
+// "launch_date" => "launchDate"
+// etc
+NSString *SKInferPropertyNameFromAPIKey(NSString *APIKey) {
+    NSArray *words = [[APIKey lowercaseString] componentsSeparatedByString:@"_"];
+    
+    NSString *first = SKCapitalizeStringForProperty([words objectAtIndex:0], YES);
+    NSMutableArray *bits = [NSMutableArray arrayWithObject:first];
+    for (NSUInteger i = 1; i < [words count]; ++i) {
+        NSString *word = [words objectAtIndex:i];
+        [bits addObject:SKCapitalizeStringForProperty(word, NO)];
+    }
+    return [bits componentsJoinedByString:@""];
+}
