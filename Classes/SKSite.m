@@ -9,6 +9,7 @@
 #import "SKSite.h"
 #import <StackKit/StackKit_Internal.h>
 #import <objc/runtime.h>
+#import <CoreData/CoreData.h>
 
 dispatch_queue_t SKSiteQueue();
 
@@ -22,6 +23,16 @@ static NSString *SKSiteCacheKeyObjects = @"objects";
 NSString* SKSiteCachePath();
 NSArray* SKGetCachedSites();
 void SKSetCachedSites(NSArray *sitesJSON);
+
+@interface SKSite()
+
+-(NSURL *)dataModelURL;
+
+@property (nonatomic, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@end
 
 @implementation SKSite {
     NSDictionary *_info;
@@ -218,6 +229,53 @@ void SKSetCachedSites(NSArray *sitesJSON);
         s = SKSiteStateClosedBeta;
     }
     return s;
+}
+
+#pragma mark Core Data stack
+
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+-(NSURL *)dataModelURL {
+    return [SKBundle() URLForResource:@"StackKit" withExtension:@"momd"];
+}
+
+-(NSManagedObjectModel *)managedObjectModel {
+    if(_managedObjectModel == nil) {
+        _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[self dataModelURL]];
+    }
+    return _managedObjectModel;
+}
+
+-(NSManagedObjectContext *)managedObjectContext {
+    if(_managedObjectContext == nil) {
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_managedObjectContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+    }
+    
+    return _managedObjectContext;
+}
+
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if(_persistentStoreCoordinator == nil) {
+        _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+
+        NSError *error = nil;
+        [_persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType
+                                                  configuration:nil
+                                                            URL:nil
+                                                        options:nil
+                                                          error:&error];
+        if(error != nil) {
+            NSLog(@"Cannot add the in-memory store type to the persistent store coordinator (%@), error: %@", _persistentStoreCoordinator, [error localizedDescription]);
+            
+            [_persistentStoreCoordinator release];
+            _persistentStoreCoordinator = nil;
+        }
+    }
+    
+    return _persistentStoreCoordinator;
 }
 
 @end
