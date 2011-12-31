@@ -14,6 +14,7 @@
 		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
 		5547A6B511C8281000CE89E1 /* StackKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */; };
+		557B137A14AED74900BD2DFD /* StackKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 557B137814AED74900BD2DFD /* StackKit.xcdatamodeld */; };
 		5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E70F110EBAA60038E510 /* SKQuestionTest.m */; };
 		5592AD9B14AAC96A007D4734 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 5592AD9914AAC96A007D4734 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5592AD9C14AAC96A007D4734 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592AD9A14AAC96A007D4734 /* SKSite.m */; };
@@ -81,6 +82,7 @@
 		5533AA1E12DA432600F755F7 /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		5547A6FD11C82F5F00CE89E1 /* SKCommentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCommentTest.h; sourceTree = "<group>"; };
 		5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCommentTest.m; sourceTree = "<group>"; };
+		557B137914AED74900BD2DFD /* StackKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
 		5592AD9914AAC96A007D4734 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
 		5592AD9A14AAC96A007D4734 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
 		5592AD9D14AAC9BD007D4734 /* SKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTypes.h; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				5592AD9E14AAC9BD007D4734 /* SKTypes.m */,
 				5592AD9914AAC96A007D4734 /* SKSite.h */,
 				5592AD9A14AAC96A007D4734 /* SKSite.m */,
+				557B137814AED74900BD2DFD /* StackKit.xcdatamodeld */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				5592ADA014AAC9BD007D4734 /* SKTypes.m in Sources */,
 				5592ADB214AACBD3007D4734 /* SKFunctions.m in Sources */,
 				550D447F14AE1BBF00AD6022 /* SKConstants.m in Sources */,
+				557B137A14AED74900BD2DFD /* StackKit.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +667,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		557B137814AED74900BD2DFD /* StackKit.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				557B137914AED74900BD2DFD /* StackKit.xcdatamodel */,
+			);
+			currentVersion = 557B137914AED74900BD2DFD /* StackKit.xcdatamodel */;
+			path = StackKit.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
 }
