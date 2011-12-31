@@ -7,8 +7,9 @@
 //
 
 #import <StackKit/SKTypes.h>
+#import <StackKit/SKObject.h>
 
-@interface SKSite : NSObject
+@interface SKSite : SKObject
 
 + (void)requestSitesWithCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)error;
 + (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler errorHandler:(SKErrorHandler)error;

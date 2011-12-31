@@ -11,3 +11,5 @@
 #import <StackKit/SKMacros.h>
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKConstants.h>
+
+#import <StackKit/SKObject_Internal.h>

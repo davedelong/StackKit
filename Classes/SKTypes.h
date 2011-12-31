@@ -34,3 +34,10 @@ typedef enum {
 	SKSiteStateOpenBeta = 2,
 	SKSiteStateClosedBeta = 3
 } SKSiteState;
+
+typedef enum {
+	SKUserTypeAnonymous = 0,
+	SKUserTypeUnregistered = 1,
+	SKUserTypeRegistered = 2,
+	SKUserTypeModerator = 3
+} SKUserType;

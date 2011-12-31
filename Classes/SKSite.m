@@ -34,9 +34,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
 
 @end
 
-@implementation SKSite {
-    NSDictionary *_info;
-}
+@implementation SKSite
 
 @dynamic name;
 @dynamic audience;
@@ -152,24 +150,10 @@ void SKSetCachedSites(NSArray *sitesJSON);
     return map;
 }
 
-+ (id)allocWithZone:(NSZone *)zone {
-    [NSException raise:NSInternalInconsistencyException format:@"You may not allocate an SKSite object"];
-    return nil;
-}
-
-- (id)_initWithInfo:(NSDictionary *)info {
-    self = [super init];
-    if (self) {
-        _info = [info retain];
-    }
-    return self;
-}
-
 - (void)dealloc {
     [_managedObjectModel release];
     [_managedObjectContext release];
     [_persistentStoreCoordinator release];
-    [_info release];
     [super dealloc];
 }
 
@@ -180,52 +164,24 @@ void SKSetCachedSites(NSArray *sitesJSON);
             [self siteURL]];
 }
 
-- (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"%@ %@", [super description], _info];
++ (NSString *)_infoKeyForProperty:(objc_property_t)property {
+    NSString *name = [NSString stringWithUTF8String:property_getName(property)];
+    return [[self objectToAPIMapping] objectForKey:name];
 }
 
-+ (BOOL)resolveInstanceMethod:(SEL)sel {
-    // wooo handle the @dynamic properties!
-    objc_property_t property = class_getProperty(self, sel_getName(sel));
-    if (property == NULL) { return NO; }
-    
-    char *value = property_copyAttributeValue(property, "T");
-    int length = strlen(value);
-    
-    NSString *apiKey = [[self objectToAPIMapping] objectForKey:NSStringFromSelector(sel)];
-    
-    Class returnType = [NSString class];
-    
-    if (length > 3) {
-        // the type is of the form @"ClassName"
-        // this will create a string skipping the leading @" and trailing "
-        NSString *className = [[NSString alloc] initWithBytes:value+2 length:length-3 encoding:NSUTF8StringEncoding];
-        returnType = NSClassFromString(className);
-        [className release];
++ (id)_transformValue:(id)value forReturnType:(Class)returnType {
+    if (returnType == [NSURL class]) {
+        value = [NSURL URLWithString:value];
+    } else if (returnType == [NSDate class]) {
+        value = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
     }
     
-    id(^impBlock)(SKSite *) = ^(SKSite *_s){
-        NSDictionary *info = _s->_info;
-        id value = [info objectForKey:apiKey];
-        
-        if (returnType == [NSURL class]) {
-            value = [NSURL URLWithString:value];
-        } else if (returnType == [NSDate class]) {
-            value = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
-        }
-        
-        return value;
-    };
-    
-    IMP newIMP = imp_implementationWithBlock((void *)impBlock);
-    class_addMethod(self, sel, newIMP, "@@:");
-    
-    return YES;
+    return value;
 }
 
 // this has a non-object return type, so we'll override the getter manually
 - (SKSiteState)siteState {
-    NSString *value = [_info objectForKey:SKResponseKeys.site.siteState];
+    NSString *value = [self _valueForInfoKey:SKResponseKeys.site.siteState];
     SKSiteState s = SKSiteStateNormal;
 
     if ([value isEqualToString:@"linked_meta"]) {
