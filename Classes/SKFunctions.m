@@ -40,6 +40,15 @@ NSString* SKApplicationSupportDirectory() {
     return asd;
 }
 
+NSBundle* SKBundle() {
+    static dispatch_once_t onceToken;
+    static NSBundle *stackKitBundle = nil;
+    dispatch_once(&onceToken, ^{
+        stackKitBundle = [[NSBundle bundleForClass:NSClassFromString(@"SKSite")] retain];
+    });
+    return stackKitBundle;
+}
+
 void SKQLog(NSString *format, ...) {
 	if (format == nil) {
 		printf("(null)\n");

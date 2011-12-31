@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString* SKApplicationSupportDirectory();
+extern NSBundle* SKBundle();
 
 extern void SKQLog(NSString *format, ...);
 
