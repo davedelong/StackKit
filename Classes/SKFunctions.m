@@ -154,16 +154,16 @@ NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error) {
 }
 
 BOOL SKExtractError(NSDictionary* response, NSError **error) {
-    if (response && [response objectForKey:SKResponseKeys.errorID] == nil) { return NO; }
+    if (response && [response objectForKey:SKAPIKeys.errorID] == nil) { return NO; }
     
     NSInteger code = SKErrorCodeInternalError;
     NSString *description = @"An unknown error occurred. Check the NSUnderlyingErrorKey for more information.";
     
-    if ([response objectForKey:SKResponseKeys.errorID]) {
-        code = [[response objectForKey:SKResponseKeys.errorID] integerValue];
+    if ([response objectForKey:SKAPIKeys.errorID]) {
+        code = [[response objectForKey:SKAPIKeys.errorID] integerValue];
     }
-    if ([response objectForKey:SKResponseKeys.errorMessage]) {
-        description = [response objectForKey:SKResponseKeys.errorMessage];
+    if ([response objectForKey:SKAPIKeys.errorMessage]) {
+        description = [response objectForKey:SKAPIKeys.errorMessage];
     }
     
     if (error) {

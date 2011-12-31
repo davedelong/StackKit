@@ -11,6 +11,8 @@
 
 @interface SKObject ()
 
++ (NSString *)_entityName;
+
 + (NSString *)_infoKeyForSelector:(SEL)selector;
 + (id)_transformValue:(id)value forReturnType:(Class)returnType;
 

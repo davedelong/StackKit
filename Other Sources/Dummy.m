@@ -30,9 +30,17 @@ int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
     [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site) {
-        NSLog(@"site: %@", site);
+        
+        SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:115730, nil];
+        
+        [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
+            NSLog(@"got user(s): %@", users);
+        } errorHandler:^(NSError *error) {
+            NSLog(@"error executing: %@", error);
+        }];
+        
     } errorHandler:^(NSError *error) {
-        NSLog(@"error: %@", error);
+        NSLog(@"error getting site: %@", error);
     }];
     
     [[NSRunLoop currentRunLoop] run];

@@ -109,14 +109,14 @@ void SKSetCachedSites(NSArray *sitesJSON);
     static NSArray *array = nil;
     dispatch_once(&onceToken, ^{
         array = [[NSArray alloc] initWithObjects:
-                 SKResponseKeys.site.name,
-                 SKResponseKeys.site.audience,
-                 SKResponseKeys.site.launchDate,
-                 SKResponseKeys.site.logoURL,
-                 SKResponseKeys.site.siteURL,
-                 SKResponseKeys.site.iconURL,
-                 SKResponseKeys.site.faviconURL,
-                 SKResponseKeys.site.siteState,
+                 SKAPIKeys.site.name,
+                 SKAPIKeys.site.audience,
+                 SKAPIKeys.site.launchDate,
+                 SKAPIKeys.site.logoURL,
+                 SKAPIKeys.site.siteURL,
+                 SKAPIKeys.site.iconURL,
+                 SKAPIKeys.site.faviconURL,
+                 SKAPIKeys.site.siteState,
                  nil];
     });
     return array;
@@ -182,7 +182,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
 
 // this has a non-object return type, so we'll override the getter manually
 - (SKSiteState)siteState {
-    NSString *value = [self _valueForInfoKey:SKResponseKeys.site.siteState];
+    NSString *value = [self _valueForInfoKey:SKAPIKeys.site.siteState];
     SKSiteState s = SKSiteStateNormal;
 
     if ([value isEqualToString:@"linked_meta"]) {
@@ -334,12 +334,12 @@ void SKFetchSites(NSError **error) {
                 break;
             }
             
-            NSArray *items = [response objectForKey:SKResponseKeys.items];
+            NSArray *items = [response objectForKey:SKAPIKeys.items];
             [allItems addObjectsFromArray:items];
             
             currentPage++;
             
-            NSNumber *keepGoingNumber = [response objectForKey:SKResponseKeys.hasMore];
+            NSNumber *keepGoingNumber = [response objectForKey:SKAPIKeys.hasMore];
             keepGoing = [keepGoingNumber boolValue];
         }
         [pool release];

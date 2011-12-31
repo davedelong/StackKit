@@ -14,7 +14,7 @@ extern const struct SKQueryParametersStruct {
     NSString *site;
 } SKQueryParameters;
 
-extern const struct SKResponseKeysStruct {
+extern const struct SKAPIKeysStruct {
     NSString *backOff;
     NSString *errorID;
     NSString *errorMessage;
@@ -83,4 +83,4 @@ extern const struct SKResponseKeysStruct {
         NSString *viewCount;
         NSString *websiteURL;
     } user;
-} SKResponseKeys;
+} SKAPIKeys;

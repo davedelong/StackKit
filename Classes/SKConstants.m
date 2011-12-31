@@ -15,7 +15,7 @@ const struct SKQueryParametersStruct SKQueryParameters = {
 };
 
 
-const struct SKResponseKeysStruct SKResponseKeys = {
+const struct SKAPIKeysStruct SKAPIKeys = {
     .backOff            = @"backoff",
     .errorID            = @"error_id",
     .errorMessage       = @"error_message",

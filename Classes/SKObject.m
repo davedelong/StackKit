@@ -20,6 +20,10 @@
     return nil;
 }
 
++ (NSString *)_entityName {
+    return NSStringFromClass(self);
+}
+
 + (NSString *)_infoKeyForSelector:(SEL)selector {
     return NSStringFromSelector(selector);
 }
