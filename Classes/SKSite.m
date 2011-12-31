@@ -7,8 +7,8 @@
 //
 
 #import "SKSite.h"
-#import <StackKit/StackKit_Internal.h>
 #import <CoreData/CoreData.h>
+#import <StackKit/StackKit_Internal.h>
 
 dispatch_queue_t SKSiteQueue();
 
@@ -218,17 +218,24 @@ void SKSetCachedSites(NSArray *sitesJSON);
     if(_persistentStoreCoordinator == nil) {
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
+        //Since the SE API is readonly, the store should be as well.
+        NSDictionary *storeOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
+                                                                 forKey:NSReadOnlyPersistentStoreOption];
+
         NSError *error = nil;
-        [_persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType
-                                                  configuration:nil
-                                                            URL:nil
-                                                        options:nil
-                                                          error:&error];
+        SKStackExchangeStore *store = (SKStackExchangeStore*)[_persistentStoreCoordinator addPersistentStoreWithType:SKStoreType()
+                                                                                                       configuration:nil
+                                                                                                                 URL:[self siteURL]
+                                                                                                             options:storeOptions
+                                                                                                               error:&error];
         if(error != nil) {
             NSLog(@"Cannot add the in-memory store type to the persistent store coordinator (%@), error: %@", _persistentStoreCoordinator, [error localizedDescription]);
             
             [_persistentStoreCoordinator release];
             _persistentStoreCoordinator = nil;
+        } else {
+            //Set ourselves as the site associated with the SKStackExchangeStore.
+            [store setSite:self];
         }
     }
     

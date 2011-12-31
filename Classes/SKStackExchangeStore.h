@@ -8,6 +8,12 @@
 
 #import <CoreData/CoreData.h>
 
+extern NSString * SKStoreType(void);
+
+@class SKSite;
+
 @interface SKStackExchangeStore : NSIncrementalStore
+
+@property (nonatomic, weak) SKSite *site;
 
 @end
