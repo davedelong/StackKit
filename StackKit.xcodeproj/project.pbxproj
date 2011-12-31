@@ -14,7 +14,6 @@
 		5253027F14AF3062000AECB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5253027B14AF302D000AECB4 /* CoreData.framework */; };
 		5253028714AF6AAA000AECB4 /* SKStackExchangeStoreNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 5253028514AF6AA9000AECB4 /* SKStackExchangeStoreNode.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5253028814AF6AAA000AECB4 /* SKStackExchangeStoreNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253028614AF6AAA000AECB4 /* SKStackExchangeStoreNode.m */; };
-		5253028914AF6AAA000AECB4 /* SKStackExchangeStoreNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253028614AF6AAA000AECB4 /* SKStackExchangeStoreNode.m */; };
 		550D447E14AE1BBF00AD6022 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 550D447C14AE1BBF00AD6022 /* SKConstants.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		550D447F14AE1BBF00AD6022 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550D447D14AE1BBF00AD6022 /* SKConstants.m */; };
 		550D448114AE1FC700AD6022 /* SKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 550D448014AE1FC700AD6022 /* SKMacros.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -456,7 +455,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5533AA1F12DA432600F755F7 /* Dummy.m in Sources */,
-				5253028914AF6AAA000AECB4 /* SKStackExchangeStoreNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

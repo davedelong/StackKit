@@ -136,8 +136,10 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     
     NSFetchRequest *r = [[NSFetchRequest alloc] initWithEntityName:[SKUser _entityName]];
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:SKInferPropertyNameFromAPIKey(_sortKey) ascending:_ascending];
-    [r setSortDescriptors:[NSArray arrayWithObject:sort]];
+    if ([_sortKey length] > 0) {
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:SKInferPropertyNameFromAPIKey(_sortKey) ascending:_ascending];
+        [r setSortDescriptors:[NSArray arrayWithObject:sort]];
+    }
     
     NSMutableArray *subpredicates = [NSMutableArray array];
     if ([_nameContains length] > 0) {

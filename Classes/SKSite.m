@@ -12,6 +12,7 @@
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKStackExchangeStore.h>
+#import <StackKit/SKFetchRequest_Internal.h>
 
 dispatch_queue_t SKSiteQueue();
 
@@ -199,7 +200,27 @@ void SKSetCachedSites(NSArray *sitesJSON);
 
 
 - (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)errorHandler {
-    NSLog(@"implement me! %s", __PRETTY_FUNCTION__);
+    
+    handler = [handler copy];
+    errorHandler = [errorHandler copy];
+    
+    // YES this introduces a retain cycle on self
+    // deal with it.
+    [[self managedObjectContext] performBlock:^{
+        NSManagedObjectContext *context = [self managedObjectContext];
+        NSFetchRequest *fetchRequest = [request _generatedFetchRequest];
+        
+        NSError *error = nil;
+        NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
+        if (!objects) {
+            errorHandler(error);
+        } else {
+            handler(objects);
+        }
+    }];
+    
+    [handler release];
+    [errorHandler release];
 }
 
 - (NSURL *)dataModelURL {
