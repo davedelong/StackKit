@@ -71,6 +71,14 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 @synthesize userIDs=_userIDs;
 @synthesize ascending=_ascending;
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        _userIDs = [[NSMutableIndexSet alloc] init];
+    }
+    return self;
+}
+
 - (void)dealloc {
     [_minDate release];
     [_maxDate release];
@@ -126,22 +134,18 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 }
 
 - (id)withIDs:(NSUInteger)userID,... {
-    NSMutableIndexSet *ids = [NSMutableIndexSet indexSet];
-    
     if (userID > 0) {
-        [ids addIndex:userID];
+        [_userIDs addIndex:userID];
         va_list list;
         va_start(list, userID);
         
         NSUInteger nextID = 0;
         while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [ids addIndex:nextID];
+            [_userIDs addIndex:nextID];
         }
         
         va_end(list);
     }
-    
-    [self setUserIDs:ids];
     return self;
 }
 

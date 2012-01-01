@@ -31,11 +31,12 @@ int main(int argc, char* argv[]) {
     
     [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site) {
         
-        SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:115730, nil];
+        SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:115730, 220819, nil];
         
         [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
-            NSLog(@"got user(s): %@", users);
-            NSLog(@"%@", [[users lastObject] displayName]);
+            for (SKUser *user in users) {
+                NSLog(@"found: %@", [user displayName]);
+            }
         } errorHandler:^(NSError *error) {
             NSLog(@"error executing: %@", error);
         }];

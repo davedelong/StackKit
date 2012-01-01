@@ -83,19 +83,17 @@ NSString * SKStoreType(void) {
             //Do something with fetchRequest...
             SKFetchRequest *seRequest = [fetchRequest stackKitFetchRequest];
             NSURL *apiCall = [seRequest _apiURLWithSite:[self site]];
-            NSLog(@"request: %@", apiCall);
+
             NSDictionary *response = SKExecuteAPICall(apiCall, error);
             
             if (response && !SKExtractError(response, error)) {
-                NSLog(@"got: %@", response);
-            }
-            
-            if ([fetchRequest resultType] == NSCountResultType) {
-                
-            } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
-                returnValue = [self _buildObjectsFromResponse:response originalRequest:fetchRequest context:context];
-            } else {
-                *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
+                if ([fetchRequest resultType] == NSCountResultType) {
+                    
+                } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
+                    returnValue = [self _buildObjectsFromResponse:response originalRequest:fetchRequest context:context];
+                } else {
+                    *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
+                }
             }
         }
     } else {

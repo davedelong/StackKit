@@ -32,7 +32,7 @@
 @property (nonatomic, copy) NSDate *maxDate;
 @property (nonatomic, copy) NSString *sortKey;
 @property (nonatomic, copy) NSString *nameContains;
-@property (nonatomic, copy) NSIndexSet *userIDs;
+@property (nonatomic, retain) NSMutableIndexSet *userIDs;
 @property (nonatomic, assign) BOOL ascending;
 
 @end
