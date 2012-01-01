@@ -12,6 +12,10 @@
 @interface SKObject ()
 
 + (NSString *)_entityName;
++ (NSArray *)APIKeysBackingProperties;
+
++ (NSDictionary *)APIKeysToPropertyMapping;
++ (NSDictionary *)propertyToAPIKeysMapping;
 
 + (NSString *)_infoKeyForSelector:(SEL)selector;
 + (id)_transformValue:(id)value forReturnType:(Class)returnType;

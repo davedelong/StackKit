@@ -126,36 +126,6 @@ void SKSetCachedSites(NSArray *sitesJSON);
     return array;
 }
 
-+ (NSDictionary *)APIToObjectMappping {
-    static dispatch_once_t onceToken;
-    static NSDictionary *map = nil;
-    dispatch_once(&onceToken, ^{
-        NSArray *apiKeys = [self APIKeysBackingProperties];
-        NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-        for (NSString *apiKey in apiKeys) {
-            NSString *propertyName = SKInferPropertyNameFromAPIKey(apiKey);
-            [d setObject:propertyName forKey:apiKey];
-        }
-        map = [d copy];
-        [d release];
-    });
-    return map;
-}
-
-+ (NSDictionary *)objectToAPIMapping {
-    static dispatch_once_t onceToken;
-    static NSDictionary *map = nil;
-    dispatch_once(&onceToken, ^{
-        NSDictionary *otherMap = [self APIToObjectMappping];
-        NSArray *keys = [otherMap allKeys];
-        NSArray *values = [otherMap objectsForKeys:keys notFoundMarker:[NSNull null]];
-        
-        // the keys from the other map become the objects in this map
-        map = [[NSDictionary alloc] initWithObjects:keys forKeys:values];
-    });
-    return map;
-}
-
 - (void)dealloc {
     [_managedObjectModel release];
     [_managedObjectContext release];
@@ -168,10 +138,6 @@ void SKSetCachedSites(NSArray *sitesJSON);
             [super description],
             [self name],
             [self siteURL]];
-}
-
-+ (NSString *)_infoKeyForSelector:(SEL)selector {
-    return [[self objectToAPIMapping] objectForKey:NSStringFromSelector(selector)];
 }
 
 + (id)_transformValue:(id)value forReturnType:(Class)returnType {

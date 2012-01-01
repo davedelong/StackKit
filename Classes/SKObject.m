@@ -7,6 +7,7 @@
 //
 
 #import <StackKit/SKObject_Internal.h>
+#import <StackKit/SKFunctions.h>
 #import <objc/runtime.h>
 
 @implementation SKObject {
@@ -24,7 +25,42 @@
     return NSStringFromClass(self);
 }
 
++ (NSArray *)APIKeysBackingProperties {
+    [NSException raise:NSInternalInconsistencyException format:@"%s must be overridden", __PRETTY_FUNCTION__];
+    return nil;
+}
+
++ (NSDictionary *)APIKeysToPropertyMapping {
+    NSDictionary *mapping = objc_getAssociatedObject(self, _cmd);
+    if (mapping == nil) {
+        NSArray *apiKeys = [self APIKeysBackingProperties];
+        NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
+        for (NSString *apiKey in apiKeys) {
+            NSString *propertyName = SKInferPropertyNameFromAPIKey(apiKey);
+            [d setObject:propertyName forKey:apiKey];
+        }
+        objc_setAssociatedObject(self, _cmd, d, OBJC_ASSOCIATION_COPY);
+        mapping = [d autorelease];
+    }
+    return mapping;
+}
+
++ (NSDictionary *)propertyToAPIKeysMapping {
+    NSDictionary *mapping = objc_getAssociatedObject(self, _cmd);
+    if (mapping == nil) {
+        NSDictionary *otherMap = [self APIKeysToPropertyMapping];
+        NSArray *keys = [otherMap allKeys];
+        NSArray *values = [otherMap objectsForKeys:keys notFoundMarker:[NSNull null]];
+        
+        // the keys from the other map become the objects in this map
+        mapping = [NSDictionary dictionaryWithObjects:keys forKeys:values];
+        objc_setAssociatedObject(self, _cmd, mapping, OBJC_ASSOCIATION_COPY);
+    }
+    return mapping;
+}
+
 + (NSString *)_infoKeyForSelector:(SEL)selector {
+    return [[self propertyToAPIKeysMapping] objectForKey:NSStringFromSelector(selector)];
     return NSStringFromSelector(selector);
 }
 

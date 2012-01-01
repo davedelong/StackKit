@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
         
         [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
             NSLog(@"got user(s): %@", users);
+            NSLog(@"%@", [[users lastObject] displayName]);
         } errorHandler:^(NSError *error) {
             NSLog(@"error executing: %@", error);
         }];

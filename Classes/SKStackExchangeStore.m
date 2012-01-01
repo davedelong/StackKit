@@ -110,7 +110,11 @@ NSString * SKStoreType(void) {
 }
 
 -(NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
-    return nil;
+    
+    NSDictionary *d = [self referenceObjectForObjectID:objectID];
+    
+    NSIncrementalStoreNode *node = [[NSIncrementalStoreNode alloc]initWithObjectID:objectID withValues:d version:1];
+    return node;
 }
 
 -(id)newValueForRelationship:(NSRelationshipDescription *)relationship forObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
