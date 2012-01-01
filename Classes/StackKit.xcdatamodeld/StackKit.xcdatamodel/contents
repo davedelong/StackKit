@@ -9,10 +9,10 @@
         <attribute name="profile_image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reputation" attributeType="Integer 64" defaultValueString="1" syncable="YES"/>
         <attribute name="user_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="user_type" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="user_type" attributeType="String" syncable="YES"/>
         <attribute name="website_url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SKUser" positionX="-1710" positionY="-2448" width="128" height="195"/>
+        <element name="SKUser" positionX="-1710" positionY="-2466" width="128" height="195"/>
     </elements>
 </model>
