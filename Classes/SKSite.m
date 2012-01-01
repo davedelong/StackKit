@@ -218,6 +218,18 @@ void SKSetCachedSites(NSArray *sitesJSON);
         if (!objects) {
             errorHandler(error);
         } else {
+            if (NO) {
+                // TODO: this is the case where they only requested the count
+            } else {
+                NSMutableArray *finalObjects = [NSMutableArray array];
+                for (NSManagedObject *object in objects) {
+                    SKObject *objectWrapper = NSAllocateObject([[request class] _targetClass], 0, nil);
+                    [objectWrapper _initWithInfo:object];
+                    [finalObjects addObject:objectWrapper];
+                    [objectWrapper release];
+                }
+                objects = finalObjects;
+            }
             handler(objects);
         }
     }];

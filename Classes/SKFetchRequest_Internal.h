@@ -20,6 +20,7 @@
 
 @interface SKFetchRequest ()
 
++ (Class)_targetClass;
 - (NSFetchRequest *)_generatedFetchRequest;
 - (NSURL *)_apiURLWithSite:(SKSite *)site;
 

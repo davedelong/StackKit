@@ -40,6 +40,12 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return [[[SKUserFetchRequest alloc] init] autorelease];
 }
 
++ (Class)_targetClass {
+    [NSException raise:NSInternalInconsistencyException 
+                format:@"+%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
+    return nil;
+}
+
 - (NSFetchRequest *)_generatedFetchRequest {
     [NSException raise:NSInternalInconsistencyException 
                 format:@"-%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
@@ -55,6 +61,8 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 @end
 
 @implementation SKUserFetchRequest
+
++ (Class)_targetClass { return [SKUser class]; }
 
 @synthesize minDate=_minDate;
 @synthesize maxDate=_maxDate;
@@ -178,6 +186,8 @@ static void *NSFetchRequestStackKitFetchRequestKey;
         NSPredicate *p = [NSCompoundPredicate andPredicateWithSubpredicates:subpredicates];
         [r setPredicate:p];
     }
+    
+    [r setResultType:NSManagedObjectResultType];
     
     [r setStackKitFetchRequest:self];
     return [r autorelease];

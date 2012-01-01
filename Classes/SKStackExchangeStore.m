@@ -9,6 +9,8 @@
 #import <StackKit/SKStackExchangeStore.h>
 #import <StackKit/SKFetchRequest_Internal.h>
 #import <StackKit/SKFunctions.h>
+#import <StackKit/SKTypes.h>
+#import <StackKit/SKConstants.h>
 
 static NSString * _SKStackExchangeStoreType = @"SKStackExchangeStore";
 
@@ -22,6 +24,8 @@ NSString * SKStoreType(void) {
 }
 
 @interface SKStackExchangeStore ()
+
+- (NSArray *)_buildObjectsFromResponse:(NSDictionary *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context;
 
 @end
 
@@ -69,24 +73,40 @@ NSString * SKStoreType(void) {
 }
 
 -(id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError **)error {
-    if([request requestType] == NSSaveRequestType) {
+    id returnValue = nil;
+    
+    if ([request requestType] == NSSaveRequestType) {
         
-    } else {
+    } else if ([request requestType] == NSFetchRequestType) {
         if([request isKindOfClass:[NSFetchRequest class]]) {
+            NSFetchRequest *fetchRequest = (NSFetchRequest *)request;
             //Do something with fetchRequest...
-            SKFetchRequest *seRequest = [(NSFetchRequest *)request stackKitFetchRequest];
+            SKFetchRequest *seRequest = [fetchRequest stackKitFetchRequest];
             NSURL *apiCall = [seRequest _apiURLWithSite:[self site]];
             NSLog(@"request: %@", apiCall);
             NSDictionary *response = SKExecuteAPICall(apiCall, error);
             
-            if (response && SKExtractError(response, error)) {
-                return nil;
+            if (response && !SKExtractError(response, error)) {
+                NSLog(@"got: %@", response);
             }
             
-            NSLog(@"got: %@", response);
+            if ([fetchRequest resultType] == NSCountResultType) {
+                
+            } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
+                returnValue = [self _buildObjectsFromResponse:response originalRequest:fetchRequest context:context];
+            } else {
+                *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
+            }
         }
+    } else {
+        *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
     }
-    return nil;
+    
+    if (!returnValue && error && !*error) {
+        *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInternalError userInfo:nil];
+    }
+    
+    return returnValue;
 }
 
 -(NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
@@ -101,5 +121,17 @@ NSString * SKStoreType(void) {
     return nil;
 }
 
+- (NSArray *)_buildObjectsFromResponse:(NSDictionary *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context {
+    NSArray *items = [response objectForKey:SKAPIKeys.items];
+    
+    NSMutableArray *objects = [NSMutableArray array];
+    for (NSDictionary *d in items) {
+        NSManagedObjectID *objectID = [self newObjectIDForEntity:[request entity] referenceObject:d];
+        NSManagedObject *object = [context objectWithID:objectID];
+
+        [objects addObject:object];
+    }
+    return objects;
+}
 
 @end
