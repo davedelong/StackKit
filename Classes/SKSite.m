@@ -13,6 +13,7 @@
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKStackExchangeStore.h>
 #import <StackKit/SKFetchRequest_Internal.h>
+#import <StackKit/SKCache.h>
 
 dispatch_queue_t SKSiteQueue();
 
@@ -37,7 +38,9 @@ void SKSetCachedSites(NSArray *sitesJSON);
 
 @end
 
-@implementation SKSite
+@implementation SKSite {
+    SKCache *_uniquedSKObjects;
+}
 
 @dynamic name;
 @dynamic audience;
@@ -126,10 +129,19 @@ void SKSetCachedSites(NSArray *sitesJSON);
     return array;
 }
 
+- (id)_initWithInfo:(id)info {
+    self = [super _initWithInfo:info];
+    if (self) {
+        _uniquedSKObjects = [[SKCache cacheWithWeakToWeakObjects] retain];
+    }
+    return self;
+}
+
 - (void)dealloc {
     [_managedObjectModel release];
     [_managedObjectContext release];
     [_persistentStoreCoordinator release];
+    [_uniquedSKObjects release];
     [super dealloc];
 }
 
@@ -189,10 +201,13 @@ void SKSetCachedSites(NSArray *sitesJSON);
             } else {
                 NSMutableArray *finalObjects = [NSMutableArray array];
                 for (NSManagedObject *object in objects) {
-                    SKObject *objectWrapper = NSAllocateObject([request _targetClass], 0, nil);
-                    [objectWrapper _initWithInfo:object];
+                    SKObject *objectWrapper = [_uniquedSKObjects cachedObjectForKey:object];
+                    if (!objectWrapper) {
+                        objectWrapper = [[NSAllocateObject([request _targetClass], 0, nil) _initWithInfo:object] autorelease];
+                        
+                        [_uniquedSKObjects cacheObject:objectWrapper forKey:object];
+                    }
                     [finalObjects addObject:objectWrapper];
-                    [objectWrapper release];
                 }
                 objects = finalObjects;
             }

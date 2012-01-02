@@ -35,11 +35,14 @@ int main(int argc, char* argv[]) {
         
         [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
             for (SKUser *user in users) {
-                NSLog(@"found: %@", [user displayName]);
+                NSLog(@"found: %@ (%p)", [user displayName], user);
             }
             
             [site executeFetchRequest:fr withCompletionHandler:^(NSArray *moreUsers) {
-                NSLog(@"more users: %@", [moreUsers valueForKey:@"displayName"]);
+                NSLog(@"============");
+                for (SKUser *user in users) {
+                    NSLog(@"found: %@ (%p)", [user displayName], user);
+                }
             } errorHandler:nil];
         } errorHandler:nil];
         
