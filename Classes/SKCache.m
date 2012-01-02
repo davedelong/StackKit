@@ -26,24 +26,28 @@
 
 @implementation SKCache {
     BOOL retainsKeys;
+    BOOL retainsValues;
     
     CFMutableDictionaryRef cache;
 }
 
-- (id)initAndRetainsKeys:(BOOL)retains {
+- (id)initAndRetainsKeys:(BOOL)keys retainsValues:(BOOL)values {
     self = [super init];
     if (self) {
-        retainsKeys = retains;
+        retainsKeys = keys;
+        retainsValues = values;
         
         CFDictionaryKeyCallBacks keyCallbacks = kCFTypeDictionaryKeyCallBacks;
         CFDictionaryValueCallBacks valueCallbacks = kCFTypeDictionaryValueCallBacks;
         
-        valueCallbacks.retain = NULL;
-        valueCallbacks.release = NULL;
-        
         if (!retainsKeys) {
             keyCallbacks.retain = NULL;
             keyCallbacks.release = NULL;
+        }
+        
+        if (!retainsValues) {
+            valueCallbacks.retain = NULL;
+            valueCallbacks.release = NULL;
         }
         
         cache = CFDictionaryCreateMutable(NULL, 42, &keyCallbacks, &valueCallbacks);
@@ -56,8 +60,10 @@
     [super dealloc];
 }
 
-+ (id)cacheWithStrongToWeakObjects { return [[[SKCache alloc] initAndRetainsKeys:YES] autorelease]; }
-+ (id)cacheWithWeakToWeakObjects { return [[[SKCache alloc] initAndRetainsKeys:NO] autorelease]; }
++ (id)cacheWithStrongToWeakObjects { return [[[SKCache alloc] initAndRetainsKeys:YES retainsValues:NO] autorelease]; }
++ (id)cacheWithWeakToWeakObjects { return [[[SKCache alloc] initAndRetainsKeys:NO retainsValues:NO] autorelease]; }
++ (id)cacheWithWeakToStrongObjects { return [[[SKCache alloc] initAndRetainsKeys:NO retainsValues:YES] autorelease]; }
++ (id)cacheWithStrongToStrongObjects { return [[[SKCache alloc] initAndRetainsKeys:YES retainsValues:YES] autorelease]; }
 
 - (void)_objectDeallocated:(id)value wasKey:(BOOL)wasKey {
     if (wasKey) {
@@ -65,7 +71,7 @@
         CFDictionaryRemoveValue(cache, (const void *)value);
     } else {
         // the value was removed
-        NSArray *keys = [(NSDictionary *)cache allKeysForObject:value];
+        NSArray *keys = [(NSDictionary *)cache allKeysForObject:value]; // dirty dirty
         id key = [keys objectAtIndex:0];
         CFDictionaryRemoveValue(cache, (const void *)key);
     }
@@ -87,16 +93,22 @@
 }
 
 - (void)cacheObject:(id)object forKey:(id)key {
+    if (key == nil) { return; }
+    
     if (object == nil) {
         CFDictionaryRemoveValue(cache, (const void *)key);
         return;
     }
     
     if (!retainsKeys) {
+        // the keys aren't retained, so we need to know when the key is deallocated
         [self _observeDeallocationOfObject:key isKey:YES];
     }
     
-    [self _observeDeallocationOfObject:object isKey:NO];
+    if (!retainsValues) {
+        // the values aren't retained, so we need to know when the value is deallocated
+        [self _observeDeallocationOfObject:object isKey:NO];
+    }
     
     CFDictionarySetValue(cache, (const void *)key, (const void *)object);
 }

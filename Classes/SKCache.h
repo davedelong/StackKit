@@ -12,6 +12,8 @@
 
 + (id)cacheWithStrongToWeakObjects;
 + (id)cacheWithWeakToWeakObjects;
++ (id)cacheWithWeakToStrongObjects;
++ (id)cacheWithStrongToStrongObjects;
 
 - (void)cacheObject:(id)object forKey:(id)key;
 - (id)cachedObjectForKey:(id)key;
