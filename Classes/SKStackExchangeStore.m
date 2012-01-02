@@ -29,7 +29,9 @@ NSString * SKStoreType(void) {
 
 @end
 
-@implementation SKStackExchangeStore
+@implementation SKStackExchangeStore {
+    NSMutableDictionary *_caches;
+}
 
 @synthesize site = _site;
 
@@ -50,29 +52,30 @@ NSString * SKStoreType(void) {
                                         forStoreType:SKStoreType()];
 }
 
-//TODO: Fill in these methods:
-
--(id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options {
-    
-    self = [super initWithPersistentStoreCoordinator:root configurationName:name URL:url options:options];
-    if(self) {
-        //...
-    }
-    
-    return self;
-}
-
--(void)dealloc {
-    
-    //...
+- (void)dealloc {
+    [_caches release];
     [super dealloc];
 }
 
--(BOOL)loadMetadata:(NSError **)error {
+- (NSCache *)_cacheForClass:(Class)class {
+    if (_caches == nil) {
+        _caches = [[NSMutableDictionary alloc] init];
+    }
+    
+    NSCache *cache = [_caches objectForKey:class];
+    if (cache == nil) {
+        cache = [[[NSCache alloc] init] autorelease];
+        [_caches setObject:cache forKey:class];
+    }
+    
+    return cache;
+}
+
+- (BOOL)loadMetadata:(NSError **)error {
     return YES;
 }
 
--(id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError **)error {
+- (id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError **)error {
     id returnValue = nil;
     
     if ([request requestType] != NSFetchRequestType) {
@@ -114,20 +117,12 @@ NSString * SKStoreType(void) {
     return returnValue;
 }
 
--(NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
+- (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
     
     NSDictionary *d = [self referenceObjectForObjectID:objectID];
     
-    NSIncrementalStoreNode *node = [[NSIncrementalStoreNode alloc]initWithObjectID:objectID withValues:d version:1];
+    NSIncrementalStoreNode *node = [[NSIncrementalStoreNode alloc] initWithObjectID:objectID withValues:d version:1];
     return node;
-}
-
--(id)newValueForRelationship:(NSRelationshipDescription *)relationship forObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
-    return nil;
-}
-
--(NSArray *)obtainPermanentIDsForObjects:(NSArray *)array error:(NSError **)error {
-    return nil;
 }
 
 - (NSArray *)_buildObjectsFromResponse:(NSDictionary *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context {
@@ -141,6 +136,14 @@ NSString * SKStoreType(void) {
         [objects addObject:object];
     }
     return objects;
+}
+
+- (id)newValueForRelationship:(NSRelationshipDescription *)relationship forObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
+    return nil;
+}
+
+- (NSArray *)obtainPermanentIDsForObjects:(NSArray *)array error:(NSError **)error {
+    return nil;
 }
 
 @end
