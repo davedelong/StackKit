@@ -129,7 +129,6 @@ NSString * SKStoreType(void) {
 }
 
 - (NSArray *)_buildObjectsFromResponse:(NSDictionary *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context {
-    static int runCount = 0;
     NSArray *items = [response objectForKey:SKAPIKeys.items];
     
     Class targetClass = [[request stackKitFetchRequest] _targetClass];
@@ -139,11 +138,6 @@ NSString * SKStoreType(void) {
     
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; {
         for (NSDictionary *d in items) {
-            if (runCount == 1) {
-                NSMutableDictionary *e = [NSMutableDictionary dictionaryWithDictionary:d];
-                [e setObject:@"Foo" forKey:@"display_name"];
-                d = e;
-            }
             id uniqueValue = [d objectForKey:uniqueIdentifierKey];
             NSString *uniqueID = [NSString stringWithFormat:@"%@:%@", uniqueIdentifierKey, uniqueValue];
             
@@ -173,7 +167,6 @@ NSString * SKStoreType(void) {
         }
     } [pool drain];
     
-    runCount++;
     return objects;
 }
 
