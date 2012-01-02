@@ -13,6 +13,7 @@
 
 + (NSString *)_entityName;
 + (NSArray *)APIKeysBackingProperties;
++ (NSString *)_uniquelyIdentifyingAPIKey;
 
 + (NSDictionary *)APIKeysToPropertyMapping;
 + (NSDictionary *)propertyToAPIKeysMapping;

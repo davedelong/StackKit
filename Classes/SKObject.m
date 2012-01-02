@@ -21,6 +21,10 @@
     return nil;
 }
 
++ (NSString *)_uniquelyIdentifyingAPIKey {
+    return @"OMGWTFBBQ";
+}
+
 + (NSString *)_entityName {
     return NSStringFromClass(self);
 }

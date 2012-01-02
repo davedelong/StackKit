@@ -23,6 +23,8 @@
 @property (nonatomic, assign) BOOL ascending;
 
 + (Class)_targetClass;
+- (Class)_targetClass;
+
 - (NSFetchRequest *)_generatedFetchRequest;
 - (NSURL *)_apiURLWithSite:(SKSite *)site;
 

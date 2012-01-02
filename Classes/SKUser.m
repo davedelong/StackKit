@@ -22,6 +22,10 @@
 @dynamic location;
 @dynamic websiteURL;
 
++ (NSString *)_uniquelyIdentifyingAPIKey {
+    return SKAPIKeys.user.userID;
+}
+
 + (NSArray *)APIKeysBackingProperties {
     static dispatch_once_t onceToken;
     static NSArray *keys = nil;

@@ -48,6 +48,10 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return nil;
 }
 
+- (Class)_targetClass {
+    return [[self class] _targetClass];
+}
+
 - (NSFetchRequest *)_generatedFetchRequest {
     [NSException raise:NSInternalInconsistencyException 
                 format:@"-%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];

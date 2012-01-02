@@ -45,6 +45,8 @@
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
 		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
+		55DC06ED14B188F10060BF49 /* SKCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 55DC06EB14B188F10060BF49 /* SKCache.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		55DC06EE14B188F10060BF49 /* SKCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC06EC14B188F10060BF49 /* SKCache.m */; };
 		55FA956C11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA956B11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
@@ -130,6 +132,8 @@
 		55C23E59116A9BA9009064EE /* SKTagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagTest.m; sourceTree = "<group>"; };
 		55C24144116AF72E009064EE /* SKUserActivityTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserActivityTest.h; sourceTree = "<group>"; };
 		55C24145116AF72E009064EE /* SKUserActivityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserActivityTest.m; sourceTree = "<group>"; };
+		55DC06EB14B188F10060BF49 /* SKCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCache.h; sourceTree = "<group>"; };
+		55DC06EC14B188F10060BF49 /* SKCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCache.m; sourceTree = "<group>"; };
 		55FA956A11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPredicate_SKAdditionsTest.h; sourceTree = "<group>"; };
 		55FA956B11613C54003A9CD7 /* NSPredicate_SKAdditionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPredicate_SKAdditionsTest.m; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Other Sources/Info.plist"; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				557B137814AED74900BD2DFD /* StackKit.xcdatamodeld */,
 				5253027314AF2624000AECB4 /* SKStackExchangeStore.h */,
 				5253027414AF2625000AECB4 /* SKStackExchangeStore.m */,
+				55DC06EB14B188F10060BF49 /* SKCache.h */,
+				55DC06EC14B188F10060BF49 /* SKCache.m */,
 			);
 			name = "Core Data stuff";
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 				557B138E14AF962100BD2DFD /* SKFetchRequest.h in Headers */,
 				557B139114AF9BC200BD2DFD /* SKFetchRequest_Internal.h in Headers */,
 				557B139514AFCB6400BD2DFD /* SKSite_Internal.h in Headers */,
+				55DC06ED14B188F10060BF49 /* SKCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +506,7 @@
 				557B138214AEEFDD00BD2DFD /* SKObject.m in Sources */,
 				5253027614AF2626000AECB4 /* SKStackExchangeStore.m in Sources */,
 				557B138F14AF962100BD2DFD /* SKFetchRequest.m in Sources */,
+				55DC06EE14B188F10060BF49 /* SKCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

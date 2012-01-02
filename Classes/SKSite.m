@@ -189,7 +189,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
             } else {
                 NSMutableArray *finalObjects = [NSMutableArray array];
                 for (NSManagedObject *object in objects) {
-                    SKObject *objectWrapper = NSAllocateObject([[request class] _targetClass], 0, nil);
+                    SKObject *objectWrapper = NSAllocateObject([request _targetClass], 0, nil);
                     [objectWrapper _initWithInfo:object];
                     [finalObjects addObject:objectWrapper];
                     [objectWrapper release];
@@ -205,7 +205,8 @@ void SKSetCachedSites(NSArray *sitesJSON);
 }
 
 - (NSURL *)dataModelURL {
-    return [SKBundle() URLForResource:@"StackKit" withExtension:@"momd"];
+    NSString *path = [SKBundle() pathForResource:@"StackKit.momd" ofType:nil inDirectory:nil];
+    return [NSURL fileURLWithPath:path];
 }
 
 - (NSManagedObjectModel *)managedObjectModel {

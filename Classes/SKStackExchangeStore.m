@@ -11,6 +11,8 @@
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKTypes.h>
 #import <StackKit/SKConstants.h>
+#import <StackKit/SKObject_Internal.h>
+#import <StackKit/SKCache.h>
 
 static NSString * _SKStackExchangeStoreType = @"SKStackExchangeStore";
 
@@ -30,7 +32,8 @@ NSString * SKStoreType(void) {
 @end
 
 @implementation SKStackExchangeStore {
-    NSMutableDictionary *_caches;
+    SKCache *_uniqueIDToObjectIDCache;
+    SKCache *_objectIDToNodeCache;
 }
 
 @synthesize site = _site;
@@ -52,23 +55,19 @@ NSString * SKStoreType(void) {
                                         forStoreType:SKStoreType()];
 }
 
-- (void)dealloc {
-    [_caches release];
-    [super dealloc];
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options {
+    self = [super initWithPersistentStoreCoordinator:root configurationName:name URL:url options:options];
+    if (self) {
+        _uniqueIDToObjectIDCache = [[SKCache cacheWithStrongToWeakObjects] retain];
+        _objectIDToNodeCache = [[SKCache cacheWithWeakToWeakObjects] retain];
+    }
+    return self;
 }
 
-- (NSCache *)_cacheForClass:(Class)class {
-    if (_caches == nil) {
-        _caches = [[NSMutableDictionary alloc] init];
-    }
-    
-    NSCache *cache = [_caches objectForKey:class];
-    if (cache == nil) {
-        cache = [[[NSCache alloc] init] autorelease];
-        [_caches setObject:cache forKey:class];
-    }
-    
-    return cache;
+- (void)dealloc {
+    [_uniqueIDToObjectIDCache release];
+    [_objectIDToNodeCache release];
+    [super dealloc];
 }
 
 - (BOOL)loadMetadata:(NSError **)error {
@@ -119,22 +118,62 @@ NSString * SKStoreType(void) {
 
 - (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
     
+    [_objectIDToNodeCache cacheObject:nil forKey:objectID];
+    
     NSDictionary *d = [self referenceObjectForObjectID:objectID];
     
     NSIncrementalStoreNode *node = [[NSIncrementalStoreNode alloc] initWithObjectID:objectID withValues:d version:1];
+    // cache the node keyed off the objectID
+    [_objectIDToNodeCache cacheObject:node forKey:objectID];
     return node;
 }
 
 - (NSArray *)_buildObjectsFromResponse:(NSDictionary *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context {
+    static int runCount = 0;
     NSArray *items = [response objectForKey:SKAPIKeys.items];
     
+    Class targetClass = [[request stackKitFetchRequest] _targetClass];
+    NSString *uniqueIdentifierKey = [targetClass _uniquelyIdentifyingAPIKey];
+    
     NSMutableArray *objects = [NSMutableArray array];
-    for (NSDictionary *d in items) {
-        NSManagedObjectID *objectID = [self newObjectIDForEntity:[request entity] referenceObject:d];
-        NSManagedObject *object = [context objectWithID:objectID];
-        
-        [objects addObject:object];
-    }
+    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; {
+        for (NSDictionary *d in items) {
+            if (runCount == 1) {
+                NSMutableDictionary *e = [NSMutableDictionary dictionaryWithDictionary:d];
+                [e setObject:@"Foo" forKey:@"display_name"];
+                d = e;
+            }
+            id uniqueValue = [d objectForKey:uniqueIdentifierKey];
+            NSString *uniqueID = [NSString stringWithFormat:@"%@:%@", uniqueIdentifierKey, uniqueValue];
+            
+            NSManagedObjectID *objectID = nil;
+            NSManagedObject *object = nil;
+            
+            if (uniqueID != nil) {
+                // look up in the uniqueID => objectID cache
+                objectID = [_uniqueIDToObjectIDCache cachedObjectForKey:uniqueID];
+                if (objectID) {
+                    // look up in the objectID => incStoreNode cache
+                    NSIncrementalStoreNode *node = [_objectIDToNodeCache cachedObjectForKey:objectID];
+                    if (node) {
+                        [node updateWithValues:d version:[node version]+1];
+                    }
+                }
+            }
+            
+            objectID = [[self newObjectIDForEntity:[request entity] referenceObject:d] autorelease];
+            
+            // cache uniqueID => objectID
+            [_uniqueIDToObjectIDCache cacheObject:objectID forKey:uniqueID];
+            
+            object = [context objectWithID:objectID];
+            
+            [objects addObject:object];
+        }
+    } [pool drain];
+    
+    runCount++;
     return objects;
 }
 
