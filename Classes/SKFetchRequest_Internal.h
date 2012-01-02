@@ -20,9 +20,14 @@
 
 @interface SKFetchRequest ()
 
+@property (nonatomic, assign) BOOL ascending;
+
 + (Class)_targetClass;
 - (NSFetchRequest *)_generatedFetchRequest;
 - (NSURL *)_apiURLWithSite:(SKSite *)site;
+
+- (NSMutableDictionary *)_queryDictionary;
+- (NSString *)_path;
 
 @end
 
@@ -33,6 +38,5 @@
 @property (nonatomic, copy) NSString *sortKey;
 @property (nonatomic, copy) NSString *nameContains;
 @property (nonatomic, retain) NSMutableIndexSet *userIDs;
-@property (nonatomic, assign) BOOL ascending;
 
 @end

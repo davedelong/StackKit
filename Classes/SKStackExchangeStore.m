@@ -38,9 +38,9 @@ NSString * SKStoreType(void) {
     //At the point that -[NSPersistentStoreCoordinator addPersistentStoreWithType:...]
     //is invoked, there is zero expectation that the above condition (sending a message to [self class]) has been met.
     //Therefore, +load is the way to go.
-
+    
     //Obvious side effect here is that when this class is loaded, the NSPersistentStoreCoordinator class will be loaded.
-
+    
     //Add this store class to the NSPersistentStoreCoordinator's store registry.
     //We don't need a dispatch_once here because +load is guaranteed to
     //be invoked only once per class,  not to mention that registerStoreClass:forStoreType:
@@ -75,29 +75,36 @@ NSString * SKStoreType(void) {
 -(id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError **)error {
     id returnValue = nil;
     
-    if ([request requestType] == NSSaveRequestType) {
-        
-    } else if ([request requestType] == NSFetchRequestType) {
-        if([request isKindOfClass:[NSFetchRequest class]]) {
-            NSFetchRequest *fetchRequest = (NSFetchRequest *)request;
-            //Do something with fetchRequest...
-            SKFetchRequest *seRequest = [fetchRequest stackKitFetchRequest];
-            NSURL *apiCall = [seRequest _apiURLWithSite:[self site]];
-
-            NSDictionary *response = SKExecuteAPICall(apiCall, error);
-            
-            if (response && !SKExtractError(response, error)) {
-                if ([fetchRequest resultType] == NSCountResultType) {
-                    
-                } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
-                    returnValue = [self _buildObjectsFromResponse:response originalRequest:fetchRequest context:context];
-                } else {
-                    *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
-                }
-            }
+    if ([request requestType] != NSFetchRequestType) {
+        if (error) {
+            *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
         }
-    } else {
-        *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
+        return nil;
+    }
+    
+    if (![request isKindOfClass:[NSFetchRequest class]]) {
+        if (error) {
+            *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInternalError userInfo:nil];
+        }
+        return nil;
+    }
+    
+    NSFetchRequest *fetchRequest = (NSFetchRequest *)request;
+    //Do something with fetchRequest...
+    SKFetchRequest *seRequest = [fetchRequest stackKitFetchRequest];
+    NSURL *apiCall = [seRequest _apiURLWithSite:[self site]];
+    
+    NSDictionary *response = SKExecuteAPICall(apiCall, error);
+    
+    if (response && !SKExtractError(response, error)) {
+        if ([fetchRequest resultType] == NSCountResultType) {
+            
+        } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
+            returnValue = [self _buildObjectsFromResponse:response originalRequest:fetchRequest context:context];
+        } else {
+            *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
+            return nil;
+        }
     }
     
     if (!returnValue && error && !*error) {
@@ -130,7 +137,7 @@ NSString * SKStoreType(void) {
     for (NSDictionary *d in items) {
         NSManagedObjectID *objectID = [self newObjectIDForEntity:[request entity] referenceObject:d];
         NSManagedObject *object = [context objectWithID:objectID];
-
+        
         [objects addObject:object];
     }
     return objects;

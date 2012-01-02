@@ -14,20 +14,20 @@
 
 + (SKUserFetchRequest *)requestForFetchingUsers;
 
+- (id)inAscendingOrder;
+- (id)inDescendingOrder;
+
 @end
 
 @interface SKUserFetchRequest : SKFetchRequest
 
-- (id)createdSince:(NSDate *)date;
+- (id)createdAfter:(NSDate *)date;
 - (id)createdBefore:(NSDate *)date;
 
 - (id)sortedByCreationDate;
 - (id)sortedByName;
 - (id)sortedByReputation;
 - (id)sortedByLastModifiedDate;
-
-- (id)inAscendingOrder;
-- (id)inDescendingOrder;
 
 - (id)whoseDisplayNameContains:(NSString *)name;
 - (id)withIDs:(NSUInteger)userID,... NS_REQUIRES_NIL_TERMINATION;

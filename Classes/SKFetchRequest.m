@@ -31,6 +31,8 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 
 @implementation SKFetchRequest
 
+@synthesize ascending=_ascending;
+
 + (SKUserFetchRequest *)requestForFetchingUsers {
     if (self != [SKFetchRequest class]) {
         [NSException raise:NSInternalInconsistencyException 
@@ -52,10 +54,37 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return nil;
 }
 
-- (NSURL *)_apiURLWithSite:(SKSite *)site {
+- (NSString *)_path {
     [NSException raise:NSInternalInconsistencyException 
                 format:@"-%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
     return nil;
+}
+
+- (NSMutableDictionary *)_queryDictionary {
+    NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    
+    [d setObject:(_ascending ? SKQueryKeys.sortOrder.ascending : SKQueryKeys.sortOrder.descending) forKey:SKQueryKeys.order];
+    
+    return d;
+}
+
+- (NSURL *)_apiURLWithSite:(SKSite *)site {
+    NSMutableDictionary *query = [self _queryDictionary];
+    [query setObject:[site APISiteParameter] forKey:SKQueryKeys.site];
+    
+    NSString *path = [self _path];
+    
+    return SKConstructAPIURL(path, query);
+}
+
+- (id)inAscendingOrder {
+    [self setAscending:YES];
+    return self;
+}
+
+- (id)inDescendingOrder {
+    [self setAscending:NO];
+    return self;
 }
 
 @end
@@ -69,7 +98,6 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 @synthesize sortKey=_sortKey;
 @synthesize nameContains=_nameContains;
 @synthesize userIDs=_userIDs;
-@synthesize ascending=_ascending;
 
 - (id)init {
     self = [super init];
@@ -88,7 +116,7 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     [super dealloc];
 }
 
-- (id)createdSince:(NSDate *)date {
+- (id)createdAfter:(NSDate *)date {
     [self setMinDate:date];
     return self;
 }
@@ -115,16 +143,6 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 
 - (id)sortedByLastModifiedDate {
     [self setSortKey:SKAPIKeys.user.lastModifiedDate];
-    return self;
-}
-
-- (id)inAscendingOrder {
-    [self setAscending:YES];
-    return self;
-}
-
-- (id)inDescendingOrder {
-    [self setAscending:NO];
     return self;
 }
 
@@ -156,7 +174,7 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     NSFetchRequest *r = [[NSFetchRequest alloc] initWithEntityName:[SKUser _entityName]];
     
     if ([_sortKey length] > 0) {
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:SKInferPropertyNameFromAPIKey(_sortKey) ascending:_ascending];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:SKInferPropertyNameFromAPIKey(_sortKey) ascending:[self ascending]];
         [r setSortDescriptors:[NSArray arrayWithObject:sort]];
     }
     
@@ -197,33 +215,34 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return [r autorelease];
 }
 
-- (NSURL *)_apiURLWithSite:(SKSite *)site {
-    NSString *path = @"users";
-    
-    NSMutableDictionary *query = [NSMutableDictionary dictionary];
-    [query setObject:[site APISiteParameter] forKey:SKQueryKeys.site];
-    
+- (NSString *)_path {
+    NSString *p = @"users";
     if ([_userIDs count] > 0) {
-        path = [NSString stringWithFormat:@"users/%@", SKQueryString(_userIDs)];
-    } else if ([_nameContains length] > 0) {
-        [query setObject:SKQueryString(_nameContains) forKey:SKQueryKeys.user.nameContains];
+        p = [NSString stringWithFormat:@"users/%@", SKQueryString(_userIDs)];        
     }
+    return p;
+}
+
+- (NSMutableDictionary *)_queryDictionary {
+    NSMutableDictionary *d = [super _queryDictionary];
     
     if ([_sortKey length] > 0) {
-        [query setObject:_sortKey forKey:SKQueryKeys.sort];
+        [d setObject:_sortKey forKey:SKQueryKeys.sort];
     }
     
-    [query setObject:(_ascending ? SKQueryKeys.sortOrder.ascending : SKQueryKeys.sortOrder.descending) forKey:SKQueryKeys.order];
-    
     if (_minDate) {
-        [query setObject:SKQueryString(_minDate) forKey:SKQueryKeys.fromDate];
+        [d setObject:SKQueryString(_minDate) forKey:SKQueryKeys.fromDate];
     }
     
     if (_maxDate) {
-        [query setObject:SKQueryString(_maxDate) forKey:SKQueryKeys.toDate];
+        [d setObject:SKQueryString(_maxDate) forKey:SKQueryKeys.toDate];
     }
     
-    return SKConstructAPIURL(path, query);
+    if ([_userIDs count] == 0 && [_nameContains length] > 0) {
+        [d setObject:SKQueryString(_nameContains) forKey:SKQueryKeys.user.nameContains];
+    }
+    
+    return d;
 }
 
 @end
