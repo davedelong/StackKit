@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="SKBadge" syncable="YES">
+        <attribute name="badge_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="badge_type" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="rank" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="SKTag" syncable="YES">
         <attribute name="count" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="is_moderator_only" attributeType="Boolean" syncable="YES"/>
@@ -19,7 +25,8 @@
         <attribute name="website_url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SKUser" positionX="-2000" positionY="-2511" width="128" height="195"/>
+        <element name="SKUser" positionX="-1710" positionY="-2511" width="128" height="195"/>
         <element name="SKTag" positionX="-1854" positionY="-2511" width="128" height="105"/>
+        <element name="SKBadge" positionX="-2000" positionY="-2511" width="128" height="105"/>
     </elements>
 </model>

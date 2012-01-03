@@ -41,3 +41,9 @@ typedef enum {
 	SKUserTypeRegistered = 2,
 	SKUserTypeModerator = 3
 } SKUserType;
+
+typedef enum {
+    SKBadgeRankGold = 0,
+    SKBadgeRankSilver = 1,
+    SKBadgeRankBronze = 2
+} SKBadgeRank;

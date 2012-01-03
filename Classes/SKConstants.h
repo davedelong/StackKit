@@ -108,4 +108,15 @@ extern const struct SKAPIKeysStruct {
         NSString *isModeratorOnly;
     } tag;
     
+    struct {
+        NSString *badgeID;
+        NSString *rank;
+        NSString *name;
+        NSString *description;
+        NSString *awardCount;
+        NSString *badgeType;
+        NSString *user;
+        NSString *link;
+    } badge;
+    
 } SKAPIKeys;

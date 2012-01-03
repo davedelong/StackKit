@@ -105,5 +105,15 @@ const struct SKAPIKeysStruct SKAPIKeys = {
         .count = @"count",
         .isRequired = @"is_required",
         .isModeratorOnly = @"is_moderator_only"
+    },
+    .badge = {
+        .badgeID = @"badge_id",
+        .rank = @"rank",
+        .name = @"name",
+        .description = @"description",
+        .awardCount = @"awardCount",
+        .badgeType = @"badge_type",
+        .user = @"user",
+        .link = @"link"
     }
 };
