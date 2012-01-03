@@ -12,5 +12,6 @@
 #import <StackKit/SKObject.h>
 #import <StackKit/SKSite.h>
 #import <StackKit/SKUser.h>
+#import <StackKit/SKTag.h>
 
 #import <StackKit/SKFetchRequest.h>

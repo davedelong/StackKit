@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @class SKUserFetchRequest;
+@class SKTagFetchRequest;
+@class SKUser;
 
 @interface SKFetchRequest : NSObject
 
 + (SKUserFetchRequest *)requestForFetchingUsers;
++ (SKTagFetchRequest*)requestForFetchingTags;
 
 - (id)inAscendingOrder;
 - (id)inDescendingOrder;
@@ -31,5 +34,21 @@
 
 - (id)whoseDisplayNameContains:(NSString *)name;
 - (id)withIDs:(NSUInteger)userID,... NS_REQUIRES_NIL_TERMINATION;
+
+@end
+
+@interface SKTagFetchRequest : SKFetchRequest
+
+- (id)whoseNameContains:(NSString *)name;
+
+- (id)sortedByPopularity;
+- (id)sortedByLastUsedDate;
+- (id)sortedByName;
+
+- (id)usedOnQuestionsCreatedAfter:(NSDate *)date;
+- (id)usedOnQuestionsCreatedBefore:(NSDate *)date;
+
+- (id)usedByUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)usedByUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

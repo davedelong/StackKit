@@ -34,14 +34,13 @@ int main(int argc, char* argv[]) {
         SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:115730, nil];
         
         [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
-            for (SKUser *user in users) {
-                NSLog(@"found: %@ (%p)", [user displayName], user);
-            }
+            SKUser *user = [users lastObject];
+            SKTagFetchRequest *tr = [[SKFetchRequest requestForFetchingTags] usedByUsers:user, nil];
             
-            [site executeFetchRequest:fr withCompletionHandler:^(NSArray *moreUsers) {
+            [site executeFetchRequest:tr withCompletionHandler:^(NSArray *tags) {
                 NSLog(@"============");
-                for (SKUser *user in users) {
-                    NSLog(@"found: %@ (%p)", [user displayName], user);
+                for (SKTag *tag in tags) {
+                    NSLog(@"found: %@ (%p)", [tag name], tag);
                 }
             } errorHandler:nil];
         } errorHandler:nil];

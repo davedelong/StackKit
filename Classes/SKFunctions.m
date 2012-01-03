@@ -191,6 +191,7 @@ BOOL SKExtractError(NSDictionary* response, NSError **error) {
 NSString *SKCapitalizeStringForProperty(NSString *string, BOOL wouldBeFirst) {
     if ([string isEqualToString:@"api"]) { return @"API"; }
     if ([string isEqualToString:@"url"]) { return @"URL"; }
+    if ([string isEqualToString:@"id"]) { return @"ID"; }
     
     if (wouldBeFirst) { return string; }
     

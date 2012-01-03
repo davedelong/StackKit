@@ -26,6 +26,9 @@ extern const struct SKQueryKeysStruct {
     struct {
         NSString *nameContains;
     } user;
+    struct {
+        NSString *nameContains;
+    } tag;
 } SKQueryKeys;
 
 extern const struct SKAPIKeysStruct {
@@ -97,4 +100,12 @@ extern const struct SKAPIKeysStruct {
         NSString *viewCount;
         NSString *websiteURL;
     } user;
+    
+    struct {
+        NSString *name;
+        NSString *count;
+        NSString *isRequired;
+        NSString *isModeratorOnly;
+    } tag;
+    
 } SKAPIKeys;

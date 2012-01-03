@@ -54,13 +54,18 @@
     return [NSURL URLWithString:[self _valueForInfoKey:SKAPIKeys.user.profileImage]];
 }
 
+- (NSUInteger)userID {
+    id value = [self _valueForInfoKey:SKAPIKeys.user.userID];
+    return [value unsignedIntegerValue];
+}
+
 - (NSUInteger)reputation {
-    id value = [self _valueForInfoKey:NSStringFromSelector(_cmd)];
+    id value = [self _valueForInfoKey:SKAPIKeys.user.reputation];
     return [value unsignedIntegerValue];
 }
 
 - (SKUserType)userType {
-    id value = [self _valueForInfoKey:NSStringFromSelector(_cmd)];
+    id value = [self _valueForInfoKey:SKAPIKeys.user.userType];
     
     SKUserType t = SKUserTypeRegistered;
     if ([value isEqual:@"moderator"]) {

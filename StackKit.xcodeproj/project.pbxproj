@@ -12,6 +12,8 @@
 		5253027D14AF303B000AECB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5253027B14AF302D000AECB4 /* CoreData.framework */; };
 		5253027E14AF305D000AECB4 /* StackKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5253027F14AF3062000AECB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5253027B14AF302D000AECB4 /* CoreData.framework */; };
+		550C66F214B2761F0000B216 /* SKTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 550C66F014B2761F0000B216 /* SKTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		550C66F314B2761F0000B216 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 550C66F114B2761F0000B216 /* SKTag.m */; };
 		550D447E14AE1BBF00AD6022 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 550D447C14AE1BBF00AD6022 /* SKConstants.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		550D447F14AE1BBF00AD6022 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550D447D14AE1BBF00AD6022 /* SKConstants.m */; };
 		550D448114AE1FC700AD6022 /* SKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 550D448014AE1FC700AD6022 /* SKMacros.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -92,6 +94,8 @@
 		5253027314AF2624000AECB4 /* SKStackExchangeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKStackExchangeStore.h; sourceTree = "<group>"; };
 		5253027414AF2625000AECB4 /* SKStackExchangeStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKStackExchangeStore.m; sourceTree = "<group>"; };
 		5253027B14AF302D000AECB4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		550C66F014B2761F0000B216 /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
+		550C66F114B2761F0000B216 /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
 		550D447C14AE1BBF00AD6022 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
 		550D447D14AE1BBF00AD6022 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
 		550D448014AE1FC700AD6022 /* SKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMacros.h; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				557B138D14AF962100BD2DFD /* SKFetchRequest.m */,
 				557B137B14AEE9A900BD2DFD /* SKUser.h */,
 				557B137C14AEE9A900BD2DFD /* SKUser.m */,
+				550C66F014B2761F0000B216 /* SKTag.h */,
+				550C66F114B2761F0000B216 /* SKTag.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -343,6 +349,7 @@
 				557B139114AF9BC200BD2DFD /* SKFetchRequest_Internal.h in Headers */,
 				557B139514AFCB6400BD2DFD /* SKSite_Internal.h in Headers */,
 				55DC06ED14B188F10060BF49 /* SKCache.h in Headers */,
+				550C66F214B2761F0000B216 /* SKTag.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +514,7 @@
 				5253027614AF2626000AECB4 /* SKStackExchangeStore.m in Sources */,
 				557B138F14AF962100BD2DFD /* SKFetchRequest.m in Sources */,
 				55DC06EE14B188F10060BF49 /* SKCache.m in Sources */,
+				550C66F314B2761F0000B216 /* SKTag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

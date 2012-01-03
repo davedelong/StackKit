@@ -13,6 +13,7 @@
 
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKUser.h>
+#import <StackKit/SKTag.h>
 #import <objc/runtime.h>
 
 static void *NSFetchRequestStackKitFetchRequestKey;
@@ -31,6 +32,7 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 
 @implementation SKFetchRequest
 
+@synthesize sortKey=_sortKey;
 @synthesize ascending=_ascending;
 
 + (SKUserFetchRequest *)requestForFetchingUsers {
@@ -40,6 +42,15 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     }
     
     return [[[SKUserFetchRequest alloc] init] autorelease];
+}
+
++ (SKTagFetchRequest *)requestForFetchingTags {
+    if (self != [SKFetchRequest class]) {
+        [NSException raise:NSInternalInconsistencyException 
+                    format:@"+%@ may only be invoked on SKFetchRequest", NSStringFromSelector(_cmd)];
+    }
+    
+    return [[[SKTagFetchRequest alloc] init] autorelease];
 }
 
 + (Class)_targetClass {
@@ -53,9 +64,19 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 }
 
 - (NSFetchRequest *)_generatedFetchRequest {
-    [NSException raise:NSInternalInconsistencyException 
-                format:@"-%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
-    return nil;
+    NSFetchRequest *r = [[NSFetchRequest alloc] initWithEntityName:[[self _targetClass] _entityName]];
+    
+    if ([_sortKey length] > 0) {
+        NSString *property = SKInferPropertyNameFromAPIKey(_sortKey);
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:property ascending:_ascending];
+        [r setSortDescriptors:[NSArray arrayWithObject:sort]];
+    }
+    
+    [r setResultType:NSManagedObjectResultType];
+    
+    [r setStackKitFetchRequest:self];
+    
+    return [r autorelease];
 }
 
 - (NSString *)_path {
@@ -68,6 +89,10 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
     
     [d setObject:(_ascending ? SKQueryKeys.sortOrder.ascending : SKQueryKeys.sortOrder.descending) forKey:SKQueryKeys.order];
+    
+    if ([_sortKey length] > 0) {
+        [d setObject:_sortKey forKey:SKQueryKeys.sort];
+    }
     
     return d;
 }
@@ -91,6 +116,11 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return self;
 }
 
+- (void)dealloc {
+    [_sortKey release];
+    [super dealloc];
+}
+
 @end
 
 @implementation SKUserFetchRequest
@@ -99,7 +129,6 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 
 @synthesize minDate=_minDate;
 @synthesize maxDate=_maxDate;
-@synthesize sortKey=_sortKey;
 @synthesize nameContains=_nameContains;
 @synthesize userIDs=_userIDs;
 
@@ -114,7 +143,6 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 - (void)dealloc {
     [_minDate release];
     [_maxDate release];
-    [_sortKey release];
     [_nameContains release];
     [_userIDs release];
     [super dealloc];
@@ -175,10 +203,10 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     // why bother to generate a proper NSFetchRequest?
     // for consistency, i suppose
     
-    NSFetchRequest *r = [[NSFetchRequest alloc] initWithEntityName:[SKUser _entityName]];
+    NSFetchRequest *r = [super _generatedFetchRequest];
     
-    if ([_sortKey length] > 0) {
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:SKInferPropertyNameFromAPIKey(_sortKey) ascending:[self ascending]];
+    if ([[self sortKey] length] > 0) {
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:SKInferPropertyNameFromAPIKey([self sortKey]) ascending:[self ascending]];
         [r setSortDescriptors:[NSArray arrayWithObject:sort]];
     }
     
@@ -212,11 +240,7 @@ static void *NSFetchRequestStackKitFetchRequestKey;
         NSPredicate *p = [NSCompoundPredicate andPredicateWithSubpredicates:subpredicates];
         [r setPredicate:p];
     }
-    
-    [r setResultType:NSManagedObjectResultType];
-    
-    [r setStackKitFetchRequest:self];
-    return [r autorelease];
+    return r;
 }
 
 - (NSString *)_path {
@@ -230,10 +254,6 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 - (NSMutableDictionary *)_queryDictionary {
     NSMutableDictionary *d = [super _queryDictionary];
     
-    if ([_sortKey length] > 0) {
-        [d setObject:_sortKey forKey:SKQueryKeys.sort];
-    }
-    
     if (_minDate) {
         [d setObject:SKQueryString(_minDate) forKey:SKQueryKeys.fromDate];
     }
@@ -244,6 +264,120 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     
     if ([_userIDs count] == 0 && [_nameContains length] > 0) {
         [d setObject:SKQueryString(_nameContains) forKey:SKQueryKeys.user.nameContains];
+    }
+    
+    return d;
+}
+
+@end
+
+@implementation SKTagFetchRequest
+
+@synthesize minDate=_minDate;
+@synthesize maxDate=_maxDate;
+@synthesize nameContains=_nameContains;
+@synthesize userIDs=_userIDs;
+
++ (Class)_targetClass { return [SKTag class]; }
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        _userIDs = [[NSMutableIndexSet alloc] init];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [_minDate release];
+    [_maxDate release];
+    [_nameContains release];
+    [_userIDs release];
+    [super dealloc];
+}
+
+- (id)whoseNameContains:(NSString *)name {
+    [self setNameContains:name];
+    return self;
+}
+
+- (id)sortedByPopularity {
+    [self setSortKey:@"count"];
+    return self;
+}
+
+- (id)sortedByLastUsedDate {
+    [self setSortKey:@"activity"];
+    return self;
+}
+
+- (id)sortedByName {
+    [self setSortKey:SKAPIKeys.tag.name];
+    return self;
+}
+
+- (id)usedOnQuestionsCreatedAfter:(NSDate *)date {
+    [self setMinDate:date];
+    return self;
+}
+
+- (id)usedOnQuestionsCreatedBefore:(NSDate *)date {
+    [self setMaxDate:date];
+    return self;
+}
+
+- (id)usedByUsers:(SKUser *)user, ... {
+    if (user != nil) {
+        [_userIDs addIndex:[user userID]];
+        va_list list;
+        va_start(list, user);
+        
+        while((user = va_arg(list, SKUser*)) != nil) {
+            [_userIDs addIndex:[user userID]];
+        }
+        
+        va_end(list);
+    }
+    return self;
+}
+
+- (id)usedByUsersWithIDs:(NSUInteger)userID, ... {
+    if (userID > 0) {
+        [_userIDs addIndex:userID];
+        va_list list;
+        va_start(list, userID);
+        
+        NSUInteger nextID = 0;
+        while ((nextID = va_arg(list, NSUInteger)) != 0) {
+            [_userIDs addIndex:nextID];
+        }
+        
+        va_end(list);
+    }
+    return self;
+}
+
+- (NSString *)_path {
+    NSString *p = @"tags";
+    if ([_userIDs count] > 0) {
+        p = [NSString stringWithFormat:@"users/%@/tags", SKQueryString(_userIDs)];        
+    }
+    return p;
+}
+
+- (NSMutableDictionary *)_queryDictionary {
+    NSMutableDictionary *d = [super _queryDictionary];
+    
+    if (_minDate) {
+        [d setObject:SKQueryString(_minDate) forKey:SKQueryKeys.fromDate];
+    }
+    
+    if (_maxDate) {
+        [d setObject:SKQueryString(_maxDate) forKey:SKQueryKeys.toDate];
+    }
+    
+    if ([_userIDs count] == 0 && [_nameContains length] > 0) {
+        [d setObject:SKQueryString(_nameContains) forKey:SKQueryKeys.tag.nameContains];
     }
     
     return d;

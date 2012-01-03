@@ -20,6 +20,7 @@
 
 @interface SKFetchRequest ()
 
+@property (nonatomic, copy) NSString *sortKey;
 @property (nonatomic, assign) BOOL ascending;
 
 + (Class)_targetClass;
@@ -37,7 +38,15 @@
 
 @property (nonatomic, copy) NSDate *minDate;
 @property (nonatomic, copy) NSDate *maxDate;
-@property (nonatomic, copy) NSString *sortKey;
+@property (nonatomic, copy) NSString *nameContains;
+@property (nonatomic, retain) NSMutableIndexSet *userIDs;
+
+@end
+
+@interface SKTagFetchRequest()
+
+@property (nonatomic, copy) NSDate *minDate;
+@property (nonatomic, copy) NSDate *maxDate;
 @property (nonatomic, copy) NSString *nameContains;
 @property (nonatomic, retain) NSMutableIndexSet *userIDs;
 

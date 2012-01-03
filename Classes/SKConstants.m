@@ -25,6 +25,9 @@ const struct SKQueryKeysStruct SKQueryKeys = {
     .filter     = @"filter",
     .user       = {
         .nameContains = @"inname"
+    },
+    .tag        = {
+        .nameContains = @"inname"
     }
 };
 
@@ -96,5 +99,11 @@ const struct SKAPIKeysStruct SKAPIKeys = {
         .userType = @"user_type",
         .viewCount = @"view_count",
         .websiteURL = @"website_url"
+    },
+    .tag = {
+        .name = @"name",
+        .count = @"count",
+        .isRequired = @"is_required",
+        .isModeratorOnly = @"is_moderator_only"
     }
 };
