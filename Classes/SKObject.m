@@ -118,7 +118,9 @@
     };
     
     IMP newIMP = imp_implementationWithBlock((void *)impBlock);
-    BOOL added = class_addMethod(self, sel, newIMP, "@@:");
+    
+    NSString *methodSignature = [NSString stringWithFormat:@"%c@:", value[0]];
+    BOOL added = class_addMethod(self, sel, newIMP, [methodSignature cStringUsingEncoding:NSASCIIStringEncoding]);
     
     return added;
 }

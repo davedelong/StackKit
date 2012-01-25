@@ -35,6 +35,10 @@ int main(int argc, char* argv[]) {
         
         [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
             SKUser *user = [users lastObject];
+            
+            NSLog(@"id: %lu", [user userID]);
+            NSLog(@"rep: %lu", [user reputation]);
+            
             SKTagFetchRequest *tr = [[SKFetchRequest requestForFetchingTags] usedByUsers:user, nil];
             
             [site executeFetchRequest:tr withCompletionHandler:^(NSArray *tags) {
