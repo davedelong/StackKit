@@ -13,6 +13,7 @@
 @implementation SKBadge
 
 @dynamic name;
+@dynamic badgeID;
 
 + (NSString *)_uniquelyIdentifyingAPIKey {
     return SKAPIKeys.badge.badgeID;
@@ -30,11 +31,6 @@
                 nil];
     });
     return keys;
-}
-
-- (NSUInteger)badgeID {
-    NSNumber *value = [self _valueForInfoKey:SKAPIKeys.badge.badgeID];
-    return [value unsignedIntegerValue];
 }
 
 - (SKBadgeRank)rank {

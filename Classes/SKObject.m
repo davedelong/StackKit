@@ -82,17 +82,38 @@
     char *value = property_copyAttributeValue(property, "T");
     int length = strlen(value);
     Class returnType = [NSString class];
+    SEL valueSelector = nil;
     if (length > 3) {
         // the type is of the form @"ClassName"
         // this will create a string skipping the leading @" and trailing "
         NSString *className = [[NSString alloc] initWithBytes:value+2 length:length-3 encoding:NSUTF8StringEncoding];
         returnType = NSClassFromString(className);
         [className release];
+    } else {
+        if (value[0] == '@') {
+            // the return type is an object, but we don't know what class
+            
+        } else if (strcmp(value, @encode(NSUInteger)) == 0) {
+            // it's an NSUInteger
+            valueSelector = @selector(unsignedIntegerValue);
+        } else if (strcmp(value, @encode(BOOL)) == 0) {
+            // it's a BOOL
+            valueSelector = @selector(boolValue);
+        } else if (strcmp(value, @encode(int)) == 0) {
+            // it's an int (or some typedef'd enum)
+            valueSelector = @selector(intValue);
+        }
     }
+    
+    
     
     id(^impBlock)(SKObject *) = ^(SKObject *_s){
         id value = [_s _valueForInfoKey:key];
-        value = [[_s class] _transformValue:value forReturnType:returnType];        
+        if (valueSelector == nil || ![value isKindOfClass:[NSNumber class]]) {
+            value = [[_s class] _transformValue:value forReturnType:returnType];  
+        } else {
+            value = [value performSelector:valueSelector];
+        }
         return value;
     };
     
@@ -121,6 +142,22 @@
 
 - (NSString *)debugDescription {
     return [NSString stringWithFormat:@"%@ %@", [super description], _info];
+}
+
+- (BOOL)isEqual:(id)object {
+    if (![object isKindOfClass:[self class]]) { return NO; }
+    
+    NSString *myIdentifierKey = [[self class] _uniquelyIdentifyingAPIKey];
+    NSString *otherIdentifierKey = [[object class] _uniquelyIdentifyingAPIKey];
+    
+    id value = [self _valueForInfoKey:myIdentifierKey];
+    id otherValue = [object _valueForInfoKey:otherIdentifierKey];
+    
+    if (value && otherValue) {
+        return [value isEqual:otherValue];
+    }
+    
+    return [super isEqual:object];
 }
 
 @end

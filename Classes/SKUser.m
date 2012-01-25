@@ -16,6 +16,7 @@
 @dynamic userID;
 @dynamic creationDate;
 @dynamic lastModifiedDate;
+@dynamic reputation;
 
 @dynamic displayName;
 @dynamic about;
@@ -34,6 +35,7 @@
                 SKAPIKeys.user.userID,
                 SKAPIKeys.user.creationDate,
                 SKAPIKeys.user.lastModifiedDate,
+                SKAPIKeys.user.reputation,
                 
                 SKAPIKeys.user.displayName,
                 SKAPIKeys.user.aboutMe,
@@ -52,16 +54,6 @@
 // thus it's done manually
 - (NSURL *)profileImageURL {
     return [NSURL URLWithString:[self _valueForInfoKey:SKAPIKeys.user.profileImage]];
-}
-
-- (NSUInteger)userID {
-    id value = [self _valueForInfoKey:SKAPIKeys.user.userID];
-    return [value unsignedIntegerValue];
-}
-
-- (NSUInteger)reputation {
-    id value = [self _valueForInfoKey:SKAPIKeys.user.reputation];
-    return [value unsignedIntegerValue];
 }
 
 - (SKUserType)userType {

@@ -13,6 +13,9 @@
 @implementation SKTag
 
 @dynamic name;
+@dynamic count;
+@dynamic required;
+@dynamic moderatorOnly;
 
 + (NSString *)_uniquelyIdentifyingAPIKey {
     return SKAPIKeys.tag.name;
@@ -30,18 +33,6 @@
                 nil];
     });
     return keys;
-}
-
-- (NSUInteger)count {
-    return [[self _valueForInfoKey:SKAPIKeys.tag.count] unsignedIntegerValue];
-}
-
-- (BOOL)isRequired {
-    return [[self _valueForInfoKey:SKAPIKeys.tag.isRequired] boolValue];
-}
-
-- (BOOL)isModeratorOnly {
-    return [[self _valueForInfoKey:SKAPIKeys.tag.isModeratorOnly] boolValue];
 }
 
 @end
