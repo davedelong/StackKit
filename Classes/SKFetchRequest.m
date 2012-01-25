@@ -53,6 +53,15 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return [[[SKTagFetchRequest alloc] init] autorelease];
 }
 
++ (SKBadgeFetchRequest *)requestForFetchingBadges {
+    if (self != [SKFetchRequest class]) {
+        [NSException raise:NSInternalInconsistencyException 
+                    format:@"+%@ may only be invoked on SKFetchRequest", NSStringFromSelector(_cmd)];
+    }
+    
+    return [[[SKBadgeFetchRequest alloc] init] autorelease];
+}
+
 + (Class)_targetClass {
     [NSException raise:NSInternalInconsistencyException 
                 format:@"+%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
@@ -382,5 +391,25 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     
     return d;
 }
+
+@end
+
+
+@implementation SKBadgeFetchRequest
+
+- (id)sortedByRank {
+    return self;
+}
+
+- (id)sortedByName { return self; }
+- (id)sortedByTagBased { return self; }
+
+- (id)onlyTagBased { return self; }
+- (id)onlyNonTagBased { return self; }
+
+- (id)withIDs:(NSUInteger)badgeID, ... { return self; }
+
+- (id)usedByUsers:(SKUser *)user, ...  { return self; }
+- (id)usedByUsersWithIDs:(NSUInteger)userID, ...  { return self; }
 
 @end
