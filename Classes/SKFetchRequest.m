@@ -14,6 +14,7 @@
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKUser.h>
 #import <StackKit/SKTag.h>
+#import <StackKit/SKBadge.h>
 #import <objc/runtime.h>
 
 static void *NSFetchRequestStackKitFetchRequestKey;
@@ -395,21 +396,134 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 @end
 
 
-@implementation SKBadgeFetchRequest
+@implementation SKBadgeFetchRequest {
+    BOOL _onlyNonTagBased;
+    BOOL _onlyTagBased;
 
-- (id)sortedByRank {
+    NSMutableIndexSet *_userIDs;
+    NSMutableIndexSet *_badgeIDs;
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        _userIDs  = [[NSMutableIndexSet alloc] init];
+        _badgeIDs = [[NSMutableIndexSet alloc] init];
+    }
     return self;
 }
 
-- (id)sortedByName { return self; }
-- (id)sortedByTagBased { return self; }
+- (void)dealloc {
+    [_userIDs release];
+    _userIDs = nil;
+    
+    [_badgeIDs release];
+    _badgeIDs = nil;
+    
+    [super dealloc];
+}
 
-- (id)onlyTagBased { return self; }
-- (id)onlyNonTagBased { return self; }
+- (Class) _targetClass {
+    return [SKBadge class];
+}
 
-- (id)withIDs:(NSUInteger)badgeID, ... { return self; }
+- (NSMutableDictionary *)_queryDictionary {
+    if(_onlyTagBased || _onlyNonTagBased) {
+        [self setSortKey:@"type"];
+    }
 
-- (id)usedByUsers:(SKUser *)user, ...  { return self; }
-- (id)usedByUsersWithIDs:(NSUInteger)userID, ...  { return self; }
+    NSMutableDictionary *d = [super _queryDictionary];
+    if(_onlyTagBased) {
+        [d setObject:SKQueryString(SKQueryKeys.badge.badgeType.tagBased) forKey:SKQueryKeys.min];
+    } else if(_onlyNonTagBased) {
+        id namedKey = SKQueryString(SKQueryKeys.badge.badgeType.named);
+        [d setObject:namedKey forKey:SKQueryKeys.max];
+        [d setObject:namedKey forKey:SKQueryKeys.min];
+    }
+    
+    return d;
+}
+
+- (NSString *)_path {
+    NSString *p = @"badges";
+    if([_userIDs count] > 0) {
+        p = [NSString stringWithFormat:@"users/%@/badges", SKQueryString(_userIDs)];
+    } else if([_badgeIDs count] > 0) {
+        p = [p stringByAppendingFormat:@"/%@", SKQueryString(_badgeIDs)];
+    }
+    return p;
+}
+
+- (id)sortedByRank {
+    [self setSortKey:SKAPIKeys.badge.rank];
+    return self;
+}
+
+- (id)sortedByName { 
+    [self setSortKey:SKAPIKeys.badge.name];
+    return self;
+}
+
+- (id)sortedByTagBased {
+    //Hmm...?
+    return self;
+}
+
+- (id)onlyTagBased {
+    _onlyTagBased = YES;
+    _onlyNonTagBased = NO;
+    return self;
+}
+
+- (id)onlyNonTagBased {
+    _onlyNonTagBased = YES;
+    _onlyTagBased = NO;
+    return self;
+}
+
+- (id)withIDs:(NSUInteger)badgeID, ... { 
+    if(badgeID > 0) {
+        va_list list;
+        va_start(list, badgeID);
+        
+        NSUInteger nextBadgeID = badgeID;
+        do {
+            [_badgeIDs addIndex:nextBadgeID];
+        } while((nextBadgeID = va_arg(list, NSUInteger)) != 0);
+
+        va_end(list);
+    }
+    return self; 
+}
+
+- (id)usedByUsers:(SKUser *)user, ...  { 
+    if(user != nil) {
+        va_list list;
+        va_start(list, user);
+        
+        SKUser *nextUser = user;
+        do {
+            [_userIDs addIndex:nextUser.userID];
+        } while((nextUser = va_arg(list, SKUser *)) != nil);
+        
+        va_end(list);
+    }
+    return self;
+}
+
+- (id)usedByUsersWithIDs:(NSUInteger)userID, ...  { 
+    if(userID != 0) {
+        va_list list;
+        va_start(list, userID);
+        
+        NSUInteger nextUserID = userID;
+        do {
+            [_userIDs addIndex:nextUserID];
+        } while((nextUserID = va_arg(list, NSUInteger)) != 0);
+
+        va_end(list);
+    }
+    return self;
+}
 
 @end

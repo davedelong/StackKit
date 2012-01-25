@@ -31,14 +31,14 @@ int main(int argc, char* argv[]) {
     
     [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site) {
         
-        SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:115730, nil];
+        SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:220819, nil];
         
         [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
             SKUser *user = [users lastObject];
             
             NSLog(@"id: %lu", [user userID]);
             NSLog(@"rep: %lu", [user reputation]);
-            
+        
             SKTagFetchRequest *tr = [[SKFetchRequest requestForFetchingTags] usedByUsers:user, nil];
             
             [site executeFetchRequest:tr withCompletionHandler:^(NSArray *tags) {
@@ -46,6 +46,15 @@ int main(int argc, char* argv[]) {
                 for (SKTag *tag in tags) {
                     NSLog(@"found: %@ (%p)", [tag name], tag);
                 }
+                
+                SKBadgeFetchRequest *br = [[[SKFetchRequest requestForFetchingBadges] usedByUsersWithIDs:220819, 115730, nil] onlyTagBased];
+                [site executeFetchRequest:br withCompletionHandler:^(NSArray *badges) {
+                    NSLog(@"============== Badges ===================");
+                    for(SKBadge *badge in badges) {
+                        NSLog(@"found badge (%p) {name: %@, rank: %u, tag based: %@}", badge, [badge name], [badge rank], [badge isTagBased] ? @"YES" : @"NO");
+                    }
+                    NSLog(@"=========================================");
+                } errorHandler:nil];
             } errorHandler:nil];
         } errorHandler:nil];
         

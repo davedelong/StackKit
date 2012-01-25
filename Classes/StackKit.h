@@ -13,5 +13,6 @@
 #import <StackKit/SKSite.h>
 #import <StackKit/SKUser.h>
 #import <StackKit/SKTag.h>
+#import <StackKit/SKBadge.h>
 
 #import <StackKit/SKFetchRequest.h>

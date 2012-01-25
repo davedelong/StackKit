@@ -29,6 +29,12 @@ extern const struct SKQueryKeysStruct {
     struct {
         NSString *nameContains;
     } tag;
+    struct {
+        struct {
+            NSString *tagBased;
+            NSString *named;
+        } badgeType;
+    } badge;
 } SKQueryKeys;
 
 extern const struct SKAPIKeysStruct {

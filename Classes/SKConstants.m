@@ -28,6 +28,12 @@ const struct SKQueryKeysStruct SKQueryKeys = {
     },
     .tag        = {
         .nameContains = @"inname"
+    },
+    .badge      = {
+        .badgeType = {
+            .tagBased = @"tag_based",
+            .named    = @"named"
+        }
     }
 };
 
