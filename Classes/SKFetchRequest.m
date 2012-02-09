@@ -7,6 +7,7 @@
 //
 
 #import <StackKit/SKFetchRequest_Internal.h>
+#import <StackKit/SKMacros.h>
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKSite_Internal.h>
@@ -37,35 +38,31 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 @synthesize ascending=_ascending;
 
 + (SKUserFetchRequest *)requestForFetchingUsers {
-    if (self != [SKFetchRequest class]) {
-        [NSException raise:NSInternalInconsistencyException 
-                    format:@"+%@ may only be invoked on SKFetchRequest", NSStringFromSelector(_cmd)];
-    }
+    REQUIRE_CLASS([SKFetchRequest class]);
     
     return [[[SKUserFetchRequest alloc] init] autorelease];
 }
 
 + (SKTagFetchRequest *)requestForFetchingTags {
-    if (self != [SKFetchRequest class]) {
-        [NSException raise:NSInternalInconsistencyException 
-                    format:@"+%@ may only be invoked on SKFetchRequest", NSStringFromSelector(_cmd)];
-    }
+    REQUIRE_CLASS([SKFetchRequest class]);
     
     return [[[SKTagFetchRequest alloc] init] autorelease];
 }
 
 + (SKBadgeFetchRequest *)requestForFetchingBadges {
-    if (self != [SKFetchRequest class]) {
-        [NSException raise:NSInternalInconsistencyException 
-                    format:@"+%@ may only be invoked on SKFetchRequest", NSStringFromSelector(_cmd)];
-    }
+    REQUIRE_CLASS([SKFetchRequest class]);
     
     return [[[SKBadgeFetchRequest alloc] init] autorelease];
 }
 
++ (SKAnswerFetchRequest *)requestForFetchingAnswers {
+    REQUIRE_CLASS([SKFetchRequest class]);
+    
+    return [[[SKAnswerFetchRequest alloc] init] autorelease];
+}
+
 + (Class)_targetClass {
-    [NSException raise:NSInternalInconsistencyException 
-                format:@"+%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
+    REQUIRE_OVERRIDE;
     return nil;
 }
 
@@ -90,8 +87,7 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 }
 
 - (NSString *)_path {
-    [NSException raise:NSInternalInconsistencyException 
-                format:@"-%@ must be overridden by subclasses", NSStringFromSelector(_cmd)];
+    REQUIRE_OVERRIDE;
     return nil;
 }
 

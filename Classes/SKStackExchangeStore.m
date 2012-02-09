@@ -16,7 +16,7 @@
 
 static NSString * _SKStackExchangeStoreType = @"SKStackExchangeStore";
 
-NSString * SKStoreType(void) {
+NSString* SKStoreType(void) {
     //Make sure that the class is loaded prior to returning the store type string.
     if(!NSClassFromString(_SKStackExchangeStoreType)) {
         [NSException raise:NSInternalInconsistencyException format:@"Could not load the SKStackExchangeStore class."];

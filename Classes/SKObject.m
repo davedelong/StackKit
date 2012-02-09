@@ -8,6 +8,7 @@
 
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKFunctions.h>
+#import <StackKit/SKMacros.h>
 #import <objc/runtime.h>
 
 @implementation SKObject {
@@ -22,7 +23,8 @@
 }
 
 + (NSString *)_uniquelyIdentifyingAPIKey {
-    return @"OMGWTFBBQ";
+    REQUIRE_OVERRIDE;
+    return nil;
 }
 
 + (NSDictionary *)_mutateResponseDictionary:(NSDictionary *)d {
@@ -34,7 +36,7 @@
 }
 
 + (NSArray *)APIKeysBackingProperties {
-    [NSException raise:NSInternalInconsistencyException format:@"%s must be overridden", __PRETTY_FUNCTION__];
+    REQUIRE_OVERRIDE;
     return nil;
 }
 

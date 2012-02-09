@@ -34,6 +34,31 @@ extern const struct SKQueryKeysStruct {
     } badge;
 } SKQueryKeys;
 
+extern const struct SKSortValuesStruct {
+    struct {
+        NSString *creationDate;
+        NSString *name;
+        NSString *reputation;
+        NSString *lastModifiedDate;
+    } user;
+    struct {
+        NSString *popularity;
+        NSString *lastUsedDate;
+        NSString *name;
+    } tag;
+    struct {
+        NSString *rank;
+        NSString *name;
+        NSString *type;
+    } badge;
+    struct {
+        NSString *score;
+        NSString *lastActivityDate;
+        NSString *creationDate;
+    } answer;
+    
+} SKSortValues;
+
 extern const struct SKAPIKeysStruct {
     NSString *backOff;
     NSString *errorID;

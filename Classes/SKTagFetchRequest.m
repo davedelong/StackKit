@@ -43,17 +43,17 @@
 }
 
 - (id)sortedByPopularity {
-    [self setSortKey:@"count"];
+    [self setSortKey:SKSortValues.tag.popularity];
     return self;
 }
 
 - (id)sortedByLastUsedDate {
-    [self setSortKey:@"activity"];
+    [self setSortKey:SKSortValues.tag.lastUsedDate];
     return self;
 }
 
 - (id)sortedByName {
-    [self setSortKey:SKAPIKeys.tag.name];
+    [self setSortKey:SKSortValues.tag.name];
     return self;
 }
 

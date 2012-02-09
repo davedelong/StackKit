@@ -38,16 +38,16 @@
 }
 
 - (id)sortedByRank {
-    [self setSortKey:SKAPIKeys.badge.rank];
+    [self setSortKey:SKSortValues.badge.rank];
     return self;
 }
 
 - (id)sortedByName {
-    [self setSortKey:SKAPIKeys.badge.name];
+    [self setSortKey:SKSortValues.badge.name];
     return self;
 }
 - (id)sortedByTagBased {
-    [self setSortKey:@"type"];
+    [self setSortKey:SKSortValues.badge.type];
     return self;
 }
 

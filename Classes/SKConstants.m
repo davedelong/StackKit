@@ -33,7 +33,29 @@ const struct SKQueryKeysStruct SKQueryKeys = {
         .nameContains = @"inname"
     }
 };
-
+const struct SKSortValuesStruct SKSortValues = {
+    .user = {
+        .creationDate = @"creation",
+        .name = @"name",
+        .reputation = @"reputation",
+        .lastModifiedDate = @"modified"
+    },
+    .tag = {
+        .popularity = @"popular",
+        .lastUsedDate = @"activity",
+        .name = @"name"
+    },
+    .badge = {
+        .rank = @"rank",
+        .name = @"name",
+        .type = @"type"
+    },
+    .answer = {
+        .score = @"votes",
+        .lastActivityDate = @"activity",
+        .creationDate = @"creation"
+    }
+};
 
 const struct SKAPIKeysStruct SKAPIKeys = {
     .backOff            = @"backoff",

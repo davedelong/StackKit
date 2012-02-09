@@ -32,3 +32,13 @@ SKQLog((format),##__VA_ARGS__); \
 
 // totally cribbed from https://github.com/uliwitness/UliKit/blob/master/UKHelperMacros.h
 #define PROPERTY(propName)	NSStringFromSelector(@selector(propName))
+
+#define REQUIRE_CLASS(_c) { \
+if (self != (_c)) { \
+[NSException raise:NSInternalInconsistencyException format:@"%s may only be invoked on %@", __PRETTY_FUNCTION__, (_c)]; \
+} \
+}
+
+#define REQUIRE_OVERRIDE { \
+[NSException raise:NSInternalInconsistencyException format:@"%s must be overridden by subclasses", __PRETTY_FUNCTION__]; \
+}

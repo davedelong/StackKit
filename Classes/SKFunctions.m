@@ -86,7 +86,9 @@ NSString* SKQueryString(id object) {
         result = [pairs componentsJoinedByString:@"&"];
         
         [pairs release];
-    } else if ([object isKindOfClass:[NSArray class]]) {
+    } else if ([object conformsToProtocol:@protocol(NSFastEnumeration)]) {
+        // any sort of collection of objects (NSSet, NSOrderedSet, NSArray, etc)
+        
         NSMutableArray *values = [[NSMutableArray alloc] init];
         for (id obj in object) {
             [values addObject:SKQueryString(obj)];

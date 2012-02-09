@@ -47,22 +47,22 @@
 }
 
 - (id)sortedByCreationDate {
-    [self setSortKey:SKAPIKeys.user.creationDate];
+    [self setSortKey:SKSortValues.user.creationDate];
     return self;
 }
 
 - (id)sortedByName {
-    [self setSortKey:SKAPIKeys.user.displayName];
+    [self setSortKey:SKSortValues.user.name];
     return self;
 }
 
 - (id)sortedByReputation {
-    [self setSortKey:SKAPIKeys.user.reputation];
+    [self setSortKey:SKSortValues.user.reputation];
     return self;
 }
 
 - (id)sortedByLastModifiedDate {
-    [self setSortKey:SKAPIKeys.user.lastModifiedDate];
+    [self setSortKey:SKSortValues.user.lastModifiedDate];
     return self;
 }
 
