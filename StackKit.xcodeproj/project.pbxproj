@@ -39,7 +39,7 @@
 		55910F9614E384D3008AAE44 /* SKTagFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910F9414E384D3008AAE44 /* SKTagFetchRequest.m */; };
 		55910F9914E38560008AAE44 /* SKBadgeFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910F9714E38560008AAE44 /* SKBadgeFetchRequest.h */; };
 		55910F9A14E38560008AAE44 /* SKBadgeFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910F9814E38560008AAE44 /* SKBadgeFetchRequest.m */; };
-		55910FB314E391E6008AAE44 /* SKAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910FB114E391E6008AAE44 /* SKAnswer.h */; };
+		55910FB314E391E6008AAE44 /* SKAnswer.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910FB114E391E6008AAE44 /* SKAnswer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55910FB414E391E6008AAE44 /* SKAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910FB214E391E6008AAE44 /* SKAnswer.m */; };
 		5592AD9B14AAC96A007D4734 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 5592AD9914AAC96A007D4734 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5592AD9C14AAC96A007D4734 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592AD9A14AAC96A007D4734 /* SKSite.m */; };
