@@ -29,3 +29,6 @@ printf("[%s:%d] ", [[file lastPathComponent] UTF8String], __LINE__); \
 SKQLog((format),##__VA_ARGS__); \
 }
 #endif
+
+// totally cribbed from https://github.com/uliwitness/UliKit/blob/master/UKHelperMacros.h
+#define PROPERTY(propName)	NSStringFromSelector(@selector(propName))

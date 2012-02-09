@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKConstants.h>
+#import <StackKit/SKMacros.h>
 
 @implementation SKUser
 
@@ -22,9 +23,17 @@
 @dynamic about;
 @dynamic location;
 @dynamic websiteURL;
+@dynamic profileImageURL;
 
 + (NSString *)_uniquelyIdentifyingAPIKey {
     return SKAPIKeys.user.userID;
+}
+
++ (NSString *)inferredPropertyNameFromAPIKey:(NSString *)apiKey {
+    if ([apiKey isEqualToString:SKAPIKeys.user.profileImage]) {
+        return PROPERTY(profileImageURL);
+    }
+    return [super inferredPropertyNameFromAPIKey:apiKey];
 }
 
 + (NSArray *)APIKeysBackingProperties {
@@ -45,15 +54,6 @@
                 nil];
     });
     return keys;
-}
-
-// why isn't this @dynamic'd?
-// because "profile_image" => "profileImage" implies an NS/UIImage return type
-// but the type is actually a URL
-// and there's no easy way to infer that
-// thus it's done manually
-- (NSURL *)profileImageURL {
-    return [NSURL URLWithString:[self _valueForInfoKey:SKAPIKeys.user.profileImage]];
 }
 
 - (SKUserType)userType {

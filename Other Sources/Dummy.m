@@ -38,6 +38,8 @@ int main(int argc, char* argv[]) {
             
             NSLog(@"id: %lu", [user userID]);
             NSLog(@"rep: %lu", [user reputation]);
+            id piURL = [user profileImageURL];
+            NSLog(@"%@ (%@)", piURL, [piURL class]);
         
             SKTagFetchRequest *tr = [[SKFetchRequest requestForFetchingTags] usedByUsers:user, nil];
             

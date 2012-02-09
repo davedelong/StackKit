@@ -16,6 +16,7 @@
 + (NSString *)_uniquelyIdentifyingAPIKey;
 + (NSDictionary *)_mutateResponseDictionary:(NSDictionary *)d;
 
++ (NSString *)inferredPropertyNameFromAPIKey:(NSString *)apiKey;
 + (NSDictionary *)APIKeysToPropertyMapping;
 + (NSDictionary *)propertyToAPIKeysMapping;
 

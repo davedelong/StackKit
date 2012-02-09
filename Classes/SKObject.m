@@ -38,13 +38,17 @@
     return nil;
 }
 
++ (NSString *)inferredPropertyNameFromAPIKey:(NSString *)apiKey {
+    return SKInferPropertyNameFromAPIKey(apiKey);
+}
+
 + (NSDictionary *)APIKeysToPropertyMapping {
     NSDictionary *mapping = objc_getAssociatedObject(self, _cmd);
     if (mapping == nil) {
         NSArray *apiKeys = [self APIKeysBackingProperties];
         NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
         for (NSString *apiKey in apiKeys) {
-            NSString *propertyName = SKInferPropertyNameFromAPIKey(apiKey);
+            NSString *propertyName = [self inferredPropertyNameFromAPIKey:apiKey];
             [d setObject:propertyName forKey:apiKey];
         }
         objc_setAssociatedObject(self, _cmd, d, OBJC_ASSOCIATION_COPY);
@@ -69,7 +73,6 @@
 
 + (NSString *)_infoKeyForSelector:(SEL)selector {
     return [[self propertyToAPIKeysMapping] objectForKey:NSStringFromSelector(selector)];
-    return NSStringFromSelector(selector);
 }
 
 + (id)_transformValue:(id)value forReturnType:(Class)returnType {
