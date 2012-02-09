@@ -152,16 +152,6 @@ void SKSetCachedSites(NSArray *sitesJSON);
             [self siteURL]];
 }
 
-+ (id)_transformValue:(id)value forReturnType:(Class)returnType {
-    if (returnType == [NSURL class]) {
-        value = [NSURL URLWithString:value];
-    } else if (returnType == [NSDate class]) {
-        value = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
-    }
-    
-    return value;
-}
-
 // this has a non-object return type, so we'll override the getter manually
 - (SKSiteState)siteState {
     NSString *value = [self _valueForInfoKey:SKAPIKeys.site.siteState];

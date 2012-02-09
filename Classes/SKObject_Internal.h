@@ -14,6 +14,7 @@
 + (NSString *)_entityName;
 + (NSArray *)APIKeysBackingProperties;
 + (NSString *)_uniquelyIdentifyingAPIKey;
++ (NSDictionary *)_mutateResponseDictionary:(NSDictionary *)d;
 
 + (NSDictionary *)APIKeysToPropertyMapping;
 + (NSDictionary *)propertyToAPIKeysMapping;

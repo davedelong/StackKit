@@ -118,5 +118,21 @@ const struct SKAPIKeysStruct SKAPIKeys = {
         .badgeType = @"badge_type",
         .user = @"user",
         .link = @"link"
+    },
+    .answer = {
+        .questionID = @"question_id",
+        .answerID = @"answer_id",
+        .lockedDate = @"locked_date",
+        .creationDate = @"creation_date",
+        .lastEditDate = @"last_edit_date",
+        .lastActivityDate = @"last_activity_date",
+        .score = @"score",
+        .communityOwnedDate = @"community_owned_date",
+        .isAccepted = @"is_accepted",
+        .body = @"body",
+        .owner = @"owner",
+        .title = @"title",
+        .upVoteCount = @"up_vote_count",
+        .downVoteCount = @"down_vote_count"
     }
 };

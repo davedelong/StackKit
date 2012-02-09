@@ -138,6 +138,7 @@ NSString * SKStoreType(void) {
     
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; {
         for (NSDictionary *d in items) {
+            d = [targetClass _mutateResponseDictionary:d];
             id uniqueValue = [d objectForKey:uniqueIdentifierKey];
             NSString *uniqueID = [NSString stringWithFormat:@"%@:%@", uniqueIdentifierKey, uniqueValue];
             

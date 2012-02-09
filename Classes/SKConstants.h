@@ -122,4 +122,21 @@ extern const struct SKAPIKeysStruct {
         NSString *link;
     } badge;
     
+    struct {
+        NSString *questionID;
+        NSString *answerID;
+        NSString *lockedDate;
+        NSString *creationDate;
+        NSString *lastEditDate;
+        NSString *lastActivityDate;
+        NSString *score;
+        NSString *communityOwnedDate;
+        NSString *isAccepted;
+        NSString *body;
+        NSString *owner;
+        NSString *title;
+        NSString *upVoteCount;
+        NSString *downVoteCount;
+    } answer;
+    
 } SKAPIKeys;

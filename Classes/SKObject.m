@@ -25,6 +25,10 @@
     return @"OMGWTFBBQ";
 }
 
++ (NSDictionary *)_mutateResponseDictionary:(NSDictionary *)d {
+    return d;
+}
+
 + (NSString *)_entityName {
     return NSStringFromClass(self);
 }
@@ -69,6 +73,12 @@
 }
 
 + (id)_transformValue:(id)value forReturnType:(Class)returnType {
+    if (returnType == [NSURL class]) {
+        value = [NSURL URLWithString:value];
+    } else if (returnType == [NSDate class]) {
+        value = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
+    }
+    
     return value;
 }
 

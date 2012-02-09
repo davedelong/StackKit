@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11D50" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="SKAnswer" syncable="YES">
+        <attribute name="answer_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="community_owned_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="creation_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="down_vote_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="is_accepted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="last_activity_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="last_edit_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="locked_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="owner_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="question_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="up_vote_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="SKBadge" syncable="YES">
         <attribute name="badge_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="badge_type" attributeType="String" syncable="YES"/>
@@ -25,8 +41,9 @@
         <attribute name="website_url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SKUser" positionX="-1710" positionY="-2511" width="128" height="195"/>
-        <element name="SKTag" positionX="-1854" positionY="-2511" width="128" height="105"/>
         <element name="SKBadge" positionX="-2000" positionY="-2511" width="128" height="105"/>
+        <element name="SKTag" positionX="-1854" positionY="-2511" width="128" height="105"/>
+        <element name="SKUser" positionX="-1710" positionY="-2511" width="128" height="195"/>
+        <element name="SKAnswer" positionX="-2232" positionY="-2466" width="128" height="255"/>
     </elements>
 </model>
