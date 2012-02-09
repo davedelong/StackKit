@@ -30,10 +30,7 @@ extern const struct SKQueryKeysStruct {
         NSString *nameContains;
     } tag;
     struct {
-        struct {
-            NSString *tagBased;
-            NSString *named;
-        } badgeType;
+        NSString *nameContains;
     } badge;
 } SKQueryKeys;
 

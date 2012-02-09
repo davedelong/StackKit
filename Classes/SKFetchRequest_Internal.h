@@ -33,21 +33,3 @@
 - (NSString *)_path;
 
 @end
-
-@interface SKUserFetchRequest ()
-
-@property (nonatomic, copy) NSDate *minDate;
-@property (nonatomic, copy) NSDate *maxDate;
-@property (nonatomic, copy) NSString *nameContains;
-@property (nonatomic, retain) NSMutableIndexSet *userIDs;
-
-@end
-
-@interface SKTagFetchRequest()
-
-@property (nonatomic, copy) NSDate *minDate;
-@property (nonatomic, copy) NSDate *maxDate;
-@property (nonatomic, copy) NSString *nameContains;
-@property (nonatomic, retain) NSMutableIndexSet *userIDs;
-
-@end

@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
                     NSLog(@"found: %@ (%p)", [tag name], tag);
                 }
                 
-                SKBadgeFetchRequest *br = [[[SKFetchRequest requestForFetchingBadges] usedByUsersWithIDs:220819, 115730, nil] onlyTagBased];
+                SKBadgeFetchRequest *br = [[[SKFetchRequest requestForFetchingBadges] usedByUsersWithIDs:220819, 115730, nil] tagBasedOnly];
                 [site executeFetchRequest:br withCompletionHandler:^(NSArray *badges) {
                     NSLog(@"============== Badges ===================");
                     for(SKBadge *badge in badges) {

@@ -30,10 +30,7 @@ const struct SKQueryKeysStruct SKQueryKeys = {
         .nameContains = @"inname"
     },
     .badge      = {
-        .badgeType = {
-            .tagBased = @"tag_based",
-            .named    = @"named"
-        }
+        .nameContains = @"inname"
     }
 };
 

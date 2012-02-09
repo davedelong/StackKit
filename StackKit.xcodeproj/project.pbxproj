@@ -33,6 +33,12 @@
 		557B139114AF9BC200BD2DFD /* SKFetchRequest_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		557B139514AFCB6400BD2DFD /* SKSite_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 557B139414AFCB6400BD2DFD /* SKSite_Internal.h */; };
 		5580C25811BAE79B0056E17C /* SKQuestionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2E70F110EBAA60038E510 /* SKQuestionTest.m */; };
+		55910F9014E383D5008AAE44 /* SKUserFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910F8E14E383D5008AAE44 /* SKUserFetchRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		55910F9114E383D5008AAE44 /* SKUserFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910F8F14E383D5008AAE44 /* SKUserFetchRequest.m */; };
+		55910F9514E384D3008AAE44 /* SKTagFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910F9314E384D3008AAE44 /* SKTagFetchRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		55910F9614E384D3008AAE44 /* SKTagFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910F9414E384D3008AAE44 /* SKTagFetchRequest.m */; };
+		55910F9914E38560008AAE44 /* SKBadgeFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910F9714E38560008AAE44 /* SKBadgeFetchRequest.h */; };
+		55910F9A14E38560008AAE44 /* SKBadgeFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910F9814E38560008AAE44 /* SKBadgeFetchRequest.m */; };
 		5592AD9B14AAC96A007D4734 /* SKSite.h in Headers */ = {isa = PBXBuildFile; fileRef = 5592AD9914AAC96A007D4734 /* SKSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5592AD9C14AAC96A007D4734 /* SKSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592AD9A14AAC96A007D4734 /* SKSite.m */; };
 		5592AD9F14AAC9BD007D4734 /* SKTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5592AD9D14AAC9BD007D4734 /* SKTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -117,6 +123,12 @@
 		557B138D14AF962100BD2DFD /* SKFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKFetchRequest.m; sourceTree = "<group>"; };
 		557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKFetchRequest_Internal.h; sourceTree = "<group>"; };
 		557B139414AFCB6400BD2DFD /* SKSite_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite_Internal.h; sourceTree = "<group>"; };
+		55910F8E14E383D5008AAE44 /* SKUserFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserFetchRequest.h; sourceTree = "<group>"; };
+		55910F8F14E383D5008AAE44 /* SKUserFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserFetchRequest.m; sourceTree = "<group>"; };
+		55910F9314E384D3008AAE44 /* SKTagFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagFetchRequest.h; sourceTree = "<group>"; };
+		55910F9414E384D3008AAE44 /* SKTagFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagFetchRequest.m; sourceTree = "<group>"; };
+		55910F9714E38560008AAE44 /* SKBadgeFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBadgeFetchRequest.h; sourceTree = "<group>"; };
+		55910F9814E38560008AAE44 /* SKBadgeFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBadgeFetchRequest.m; sourceTree = "<group>"; };
 		5592AD9914AAC96A007D4734 /* SKSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSite.h; sourceTree = "<group>"; };
 		5592AD9A14AAC96A007D4734 /* SKSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSite.m; sourceTree = "<group>"; };
 		5592AD9D14AAC9BD007D4734 /* SKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTypes.h; sourceTree = "<group>"; };
@@ -279,9 +291,7 @@
 				5592AD9914AAC96A007D4734 /* SKSite.h */,
 				557B139414AFCB6400BD2DFD /* SKSite_Internal.h */,
 				5592AD9A14AAC96A007D4734 /* SKSite.m */,
-				557B138C14AF962100BD2DFD /* SKFetchRequest.h */,
-				557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */,
-				557B138D14AF962100BD2DFD /* SKFetchRequest.m */,
+				55910F9214E383DB008AAE44 /* Fetch Requests */,
 				557B137B14AEE9A900BD2DFD /* SKUser.h */,
 				557B137C14AEE9A900BD2DFD /* SKUser.m */,
 				550C66F014B2761F0000B216 /* SKTag.h */,
@@ -290,6 +300,22 @@
 				550C66F514B2A01C0000B216 /* SKBadge.m */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		55910F9214E383DB008AAE44 /* Fetch Requests */ = {
+			isa = PBXGroup;
+			children = (
+				557B138C14AF962100BD2DFD /* SKFetchRequest.h */,
+				557B139014AF9BC200BD2DFD /* SKFetchRequest_Internal.h */,
+				557B138D14AF962100BD2DFD /* SKFetchRequest.m */,
+				55910F8E14E383D5008AAE44 /* SKUserFetchRequest.h */,
+				55910F8F14E383D5008AAE44 /* SKUserFetchRequest.m */,
+				55910F9314E384D3008AAE44 /* SKTagFetchRequest.h */,
+				55910F9414E384D3008AAE44 /* SKTagFetchRequest.m */,
+				55910F9714E38560008AAE44 /* SKBadgeFetchRequest.h */,
+				55910F9814E38560008AAE44 /* SKBadgeFetchRequest.m */,
+			);
+			name = "Fetch Requests";
 			sourceTree = "<group>";
 		};
 		5592ADAE14AACBBD007D4734 /* Support */ = {
@@ -357,6 +383,9 @@
 				55DC06ED14B188F10060BF49 /* SKCache.h in Headers */,
 				550C66F214B2761F0000B216 /* SKTag.h in Headers */,
 				550C66F614B2A01C0000B216 /* SKBadge.h in Headers */,
+				55910F9014E383D5008AAE44 /* SKUserFetchRequest.h in Headers */,
+				55910F9514E384D3008AAE44 /* SKTagFetchRequest.h in Headers */,
+				55910F9914E38560008AAE44 /* SKBadgeFetchRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +552,9 @@
 				55DC06EE14B188F10060BF49 /* SKCache.m in Sources */,
 				550C66F314B2761F0000B216 /* SKTag.m in Sources */,
 				550C66F714B2A01C0000B216 /* SKBadge.m in Sources */,
+				55910F9114E383D5008AAE44 /* SKUserFetchRequest.m in Sources */,
+				55910F9614E384D3008AAE44 /* SKTagFetchRequest.m in Sources */,
+				55910F9A14E38560008AAE44 /* SKBadgeFetchRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -61,8 +61,10 @@
 - (id)sortedByName;
 - (id)sortedByTagBased;
 
-- (id)onlyTagBased;
-- (id)onlyNonTagBased;
+- (id)tagBasedOnly;
+- (id)namedOnly;
+
+- (id)whoseNameContains:(NSString *)name;
 
 - (id)withIDs:(NSUInteger)badgeID, ... NS_REQUIRES_NIL_TERMINATION;
 
