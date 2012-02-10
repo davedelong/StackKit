@@ -113,7 +113,7 @@
     return self;
 }
 
-- (id)mentioningUsers:(SKUser *)user, ... {
+- (id)inReplyToUsers:(SKUser *)user, ... {
     if (user != nil) {
         [_replyIDs addIndex:[user userID]];
         va_list list;
@@ -128,7 +128,7 @@
     return self;
 }
 
-- (id)mentioningUsersWithIDs:(NSUInteger)userID, ... {
+- (id)inReplyToUsersWithIDs:(NSUInteger)userID, ... {
     if (userID > 0) {
         [_replyIDs addIndex:userID];
         va_list list;

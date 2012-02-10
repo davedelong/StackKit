@@ -31,6 +31,11 @@ int main(int argc, char* argv[]) {
     
     [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site) {
         
+        SKCommentFetchRequest *comments = [[[[SKFetchRequest requestForFetchingComments] inReplyToUsersWithIDs:115730, nil] sortedByCreationDate] inDescendingOrder];
+        [site executeFetchRequest:comments withCompletionHandler:^(NSArray *comments) {
+            NSLog(@"comments: %@", comments);
+        } errorHandler:nil];
+        
         SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:220819, nil];
         
         [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {

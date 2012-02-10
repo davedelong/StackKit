@@ -110,7 +110,7 @@
 - (id)postedByUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)postedByUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
 
-- (id)mentioningUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
-- (id)mentioningUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)inReplyToUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)inReplyToUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end
