@@ -13,8 +13,8 @@
 
 @interface SKSite : SKObject
 
-+ (void)requestSitesWithCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)error;
-+ (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler errorHandler:(SKErrorHandler)error;
++ (void)requestSitesWithCompletionHandler:(SKSomething)handler;
++ (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler;
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *audience;
@@ -26,7 +26,7 @@
 @property (nonatomic, readonly) NSURL *iconURL;
 @property (nonatomic, readonly) NSURL *faviconURL;
 
-- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)errorHandler;
+- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler;
 
 
 @end

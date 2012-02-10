@@ -57,9 +57,8 @@ void SKSetCachedSites(NSArray *sitesJSON);
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-+ (void)requestSitesWithCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)error {
++ (void)requestSitesWithCompletionHandler:(SKSomething)handler {
     handler = [handler copy];
-    error = [error copy];
     
     dispatch_async(SKSiteQueue(), ^{
         
@@ -68,41 +67,44 @@ void SKSetCachedSites(NSArray *sitesJSON);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (err != nil) {
-                error(err);
+                handler(nil,err);
             } else {
-                handler(result);
+                handler(result,nil);
             }
         });
     });
     
-    [error release];
     [handler release];
 }
 
-+ (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler errorHandler:(SKErrorHandler)error {
++ (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler {
     handler = [handler copy];
     
     NSArray *words = [name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    SKSomething block = ^(NSArray *sites) {
+    SKSomething block = ^(NSArray *sites, NSError *error) {
         // this will be called on the main thread
-        NSPredicate *template = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] $word OR audience CONTAINS[cd] $word or siteURL.absoluteString CONTAINS[cd] $word"];
-        
-        for (NSString *word in words) {
-            if ([word length] == 0) { continue; }
-            NSPredicate *p = [template predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:word forKey:@"word"]];
-            sites = [sites filteredArrayUsingPredicate:p];
+        if (sites) {
+            NSPredicate *template = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] $word OR audience CONTAINS[cd] $word or siteURL.absoluteString CONTAINS[cd] $word"];
+            
+            for (NSString *word in words) {
+                if ([word length] == 0) { continue; }
+                NSPredicate *p = [template predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:word forKey:@"word"]];
+                sites = [sites filteredArrayUsingPredicate:p];
+            }
+            
+            SKSite *match = nil;
+            if ([sites count] > 0) {
+                match = [sites objectAtIndex:0];
+            }
+            
+            handler(match, nil);
+        } else {
+            handler(nil, error);
         }
-        
-        SKSite *match = nil;
-        if ([sites count] > 0) {
-            match = [sites objectAtIndex:0];
-        }
-        
-        handler(match);
     };
     
-    [SKSite requestSitesWithCompletionHandler:block errorHandler:error];
+    [SKSite requestSitesWithCompletionHandler:block];
     
     [handler release];
 }
@@ -170,10 +172,9 @@ void SKSetCachedSites(NSArray *sitesJSON);
 #pragma mark Core Data stack
 
 
-- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler errorHandler:(SKErrorHandler)errorHandler {
+- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler {
     
     handler = [handler copy];
-    errorHandler = [errorHandler copy];
     
     // YES this introduces a retain cycle on self
     // deal with it.
@@ -184,7 +185,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
         NSError *error = nil;
         NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
         if (!objects) {
-            errorHandler(error);
+            handler(nil, error);
         } else {
             if (NO) {
                 // TODO: this is the case where they only requested the count
@@ -201,12 +202,11 @@ void SKSetCachedSites(NSArray *sitesJSON);
                 }
                 objects = finalObjects;
             }
-            handler(objects);
+            handler(objects, nil);
         }
     }];
     
     [handler release];
-    [errorHandler release];
 }
 
 - (NSURL *)dataModelURL {

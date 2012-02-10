@@ -29,16 +29,16 @@
 int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
-    [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site) {
+    [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site, NSError *error) {
         
         SKCommentFetchRequest *comments = [[[[SKFetchRequest requestForFetchingComments] inReplyToUsersWithIDs:115730, nil] sortedByCreationDate] inDescendingOrder];
-        [site executeFetchRequest:comments withCompletionHandler:^(NSArray *comments) {
+        [site executeFetchRequest:comments withCompletionHandler:^(NSArray *comments, NSError *error) {
             NSLog(@"comments: %@", comments);
-        } errorHandler:nil];
+        }];
         
         SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:220819, nil];
         
-        [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users) {
+        [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users, NSError *error) {
             SKUser *user = [users lastObject];
             
             NSLog(@"id: %lu", [user userID]);
@@ -48,25 +48,23 @@ int main(int argc, char* argv[]) {
         
             SKTagFetchRequest *tr = [[SKFetchRequest requestForFetchingTags] usedByUsers:user, nil];
             
-            [site executeFetchRequest:tr withCompletionHandler:^(NSArray *tags) {
+            [site executeFetchRequest:tr withCompletionHandler:^(NSArray *tags, NSError *error) {
                 NSLog(@"============");
                 for (SKTag *tag in tags) {
                     NSLog(@"found: %@ (%p)", [tag name], tag);
                 }
                 
                 SKBadgeFetchRequest *br = [[[SKFetchRequest requestForFetchingBadges] usedByUsersWithIDs:220819, 115730, nil] tagBasedOnly];
-                [site executeFetchRequest:br withCompletionHandler:^(NSArray *badges) {
+                [site executeFetchRequest:br withCompletionHandler:^(NSArray *badges, NSError *error) {
                     NSLog(@"============== Badges ===================");
                     for(SKBadge *badge in badges) {
                         NSLog(@"found badge (%p) {name: %@, rank: %u, tag based: %@}", badge, [badge name], [badge rank], [badge isTagBased] ? @"YES" : @"NO");
                     }
                     NSLog(@"=========================================");
-                } errorHandler:nil];
-            } errorHandler:nil];
-        } errorHandler:nil];
+                }];
+            }];
+        }];
         
-    } errorHandler:^(NSError *error) {
-        NSLog(@"error getting site: %@", error);
     }];
     
     [[NSRunLoop currentRunLoop] run];

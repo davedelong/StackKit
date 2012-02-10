@@ -10,9 +10,8 @@
 
 @class SKSite;
 
-typedef void(^SKSomething)(NSArray *);
-typedef void(^SKErrorHandler)(NSError *);
-typedef void(^SKSiteHandler)(SKSite *);
+typedef void(^SKSomething)(NSArray *, NSError *);
+typedef void(^SKSiteHandler)(SKSite *, NSError *);
 
 extern NSString *const SKErrorDomain;
 
