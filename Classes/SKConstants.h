@@ -56,6 +56,10 @@ extern const struct SKSortValuesStruct {
         NSString *lastActivityDate;
         NSString *creationDate;
     } answer;
+    struct {
+        NSString *score;
+        NSString *creationDate;
+    } comment;
     
 } SKSortValues;
 
@@ -163,5 +167,17 @@ extern const struct SKAPIKeysStruct {
         NSString *upVoteCount;
         NSString *downVoteCount;
     } answer;
+    
+    struct {
+        NSString *commentID;
+        NSString *postID;
+        NSString *creationDate;
+        NSString *postType;
+        NSString *score;
+        NSString *edited;
+        NSString *body;
+        NSString *owner;
+        NSString *replyToUser;
+    } comment;
     
 } SKAPIKeys;

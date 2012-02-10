@@ -54,6 +54,10 @@ const struct SKSortValuesStruct SKSortValues = {
         .score = @"votes",
         .lastActivityDate = @"activity",
         .creationDate = @"creation"
+    },
+    .comment = {
+        .score = @"votes",
+        .creationDate = @"creation"
     }
 };
 
@@ -156,5 +160,16 @@ const struct SKAPIKeysStruct SKAPIKeys = {
         .title = @"title",
         .upVoteCount = @"up_vote_count",
         .downVoteCount = @"down_vote_count"
+    },
+    .comment = {
+        .commentID = @"comment_id",
+        .postID = @"post_id",
+        .creationDate = @"creation_date",
+        .postType = @"post_type",
+        .score = @"score",
+        .edited = @"edited",
+        .body = @"body",
+        .owner = @"owner",
+        .replyToUser = @"reply_to_user"
     }
 };

@@ -47,3 +47,9 @@ typedef enum {
     SKBadgeRankSilver = 1,
     SKBadgeRankBronze = 2
 } SKBadgeRank;
+
+typedef enum {
+    SKPostTypeAnswer,
+    SKPostTypeQuestion,
+    SKPostTypeComment
+} SKPostType;

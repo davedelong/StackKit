@@ -62,7 +62,7 @@
     NSDictionary *owner = [d objectForKey:SKAPIKeys.answer.owner];
     if (owner) {
         NSMutableDictionary *md = [d mutableCopy];
-        id userID = [md objectForKey:SKAPIKeys.user.userID];
+        id userID = [owner objectForKey:SKAPIKeys.user.userID];
         [md setObject:userID forKey:@"owner_id"];
         
         d = [md autorelease];

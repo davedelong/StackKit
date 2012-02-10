@@ -22,6 +22,17 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="rank" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="SKComment" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="creation_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="edited" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="owner_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="post_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="post_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reply_to_user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="SKTag" syncable="YES">
         <attribute name="count" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="is_moderator_only" attributeType="Boolean" syncable="YES"/>
@@ -45,5 +56,6 @@
         <element name="SKTag" positionX="-1854" positionY="-2511" width="128" height="105"/>
         <element name="SKUser" positionX="-1710" positionY="-2511" width="128" height="195"/>
         <element name="SKAnswer" positionX="-2232" positionY="-2466" width="128" height="255"/>
+        <element name="SKComment" positionX="-1998" positionY="-2376" width="128" height="180"/>
     </elements>
 </model>

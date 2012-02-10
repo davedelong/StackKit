@@ -15,5 +15,6 @@
 #import <StackKit/SKTag.h>
 #import <StackKit/SKBadge.h>
 #import <StackKit/SKAnswer.h>
+#import <StackKit/SKComment.h>
 
 #import <StackKit/SKFetchRequest.h>
