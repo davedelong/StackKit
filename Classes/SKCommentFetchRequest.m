@@ -164,4 +164,12 @@
     return @"comments";
 }
 
+- (NSMutableDictionary *)_queryDictionary {
+    NSMutableDictionary *d = [super _queryDictionary];
+    
+    // I don't believe anything needs to be modified here
+    
+    return d;
+}
+
 @end
