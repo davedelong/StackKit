@@ -171,5 +171,29 @@ const struct SKAPIKeysStruct SKAPIKeys = {
         .body = @"body",
         .owner = @"owner",
         .replyToUser = @"reply_to_user"
+    },
+    .question = {
+        .questionID = @"question_id",
+        .lastEditDate = @"last_edit_date",
+        .creationDate = @"creation_date",
+        .lastActivityDate = @"last_activity_date",
+        .lockedDate = @"locked_date",
+        .score = @"score",
+        .communityOwnedDate = @"community_owned_date",
+        .answerCount = @"answer_count",
+        .acceptedAnswerID = @"accepted_answer_id",
+        .bountyClosesDate = @"bounty_closes_date",
+        .bountyAmount = @"bounty_amount",
+        .closedDate = @"closed_date",
+        .protectedDate = @"protected_date",
+        .body = @"body",
+        .title = @"title",
+        .closedReason = @"closed_reason",
+        .upVoteCount = @"up_vote_count",
+        .downVoteCount = @"down_vote_count",
+        .favoriteCount = @"favorite_count",
+        .viewCount = @"view_count",
+        .owner = @"owner",
+        .isAnswered = @"is_answered"
     }
 };

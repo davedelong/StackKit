@@ -180,4 +180,29 @@ extern const struct SKAPIKeysStruct {
         NSString *replyToUser;
     } comment;
     
+    struct {
+        NSString *questionID;
+        NSString *lastEditDate;
+        NSString *creationDate;
+        NSString *lastActivityDate;
+        NSString *lockedDate;
+        NSString *score;
+        NSString *communityOwnedDate;
+        NSString *answerCount;
+        NSString *acceptedAnswerID;
+        NSString *bountyClosesDate;
+        NSString *bountyAmount;
+        NSString *closedDate;
+        NSString *protectedDate;
+        NSString *body;
+        NSString *title;
+        NSString *closedReason;
+        NSString *upVoteCount;
+        NSString *downVoteCount;
+        NSString *favoriteCount;
+        NSString *viewCount;
+        NSString *owner;
+        NSString *isAnswered;
+    } question;
+    
 } SKAPIKeys;
