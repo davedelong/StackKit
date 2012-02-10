@@ -149,6 +149,10 @@
         return [NSString stringWithFormat:@"comments/%@", SKQueryString(_commentIDs)];
     }
     
+    if ([_postIDs count] > 0) {
+        return [NSString stringWithFormat:@"posts/%@/comments", SKQueryString(_commentIDs)];
+    }
+    
     if ([_userIDs count] > 0) {
         if ([_replyIDs count] > 0) {
             return [NSString stringWithFormat:@"users/%@/comments/%lu", SKQueryString(_userIDs), [_replyIDs firstIndex]];
