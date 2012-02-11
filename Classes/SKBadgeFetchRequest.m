@@ -82,7 +82,7 @@
     return self;
 }
 
-- (id)usedByUsers:(SKUser *)user, ...  {
+- (id)awardedToUsers:(SKUser *)user, ...  {
     if (user != nil) {
         [_userIDs addIndex:[user userID]];
         va_list list;
@@ -97,7 +97,7 @@
     return self;
 }
 
-- (id)usedByUsersWithIDs:(NSUInteger)userID, ...  {
+- (id)awardedToUsersWithIDs:(NSUInteger)userID, ...  {
     if (userID > 0) {
         [_userIDs addIndex:userID];
         va_list list;

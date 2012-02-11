@@ -12,6 +12,7 @@
 #import <StackKit/SKAnswer.h>
 #import <StackKit/SKUser.h>
 #import <StackKit/SKTag.h>
+#import <StackKit/SKQuestion.h>
 
 @implementation SKAnswerFetchRequest
 
@@ -100,6 +101,37 @@
         va_end(list);
     }
     return self;    
+}
+
+- (id)postedOnQuestions:(SKQuestion *)question, ... {
+    if (question != nil) {
+        [_questionIDs addIndex:[question postID]];
+        va_list list;
+        va_start(list, question);
+        
+        while((question = va_arg(list, SKQuestion*)) != nil) {
+            [_questionIDs addIndex:[question postID]];
+        }
+        
+        va_end(list);
+    }
+    return self;
+}
+
+- (id)postedOnQuestionsWithIDs:(NSUInteger)questionID, ... {
+    if (questionID > 0) {
+        [_questionIDs addIndex:questionID];
+        va_list list;
+        va_start(list, questionID);
+        
+        NSUInteger nextID = 0;
+        while ((nextID = va_arg(list, NSUInteger)) != 0) {
+            [_questionIDs addIndex:nextID];
+        }
+        
+        va_end(list);
+    }
+    return self;
 }
 
 - (id)postedByUsers:(SKUser *)user, ...  {

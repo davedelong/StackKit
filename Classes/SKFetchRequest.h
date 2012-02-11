@@ -16,6 +16,7 @@
 
 @class SKUser;
 @class SKTag;
+@class SKQuestion;
 
 @interface SKFetchRequest : NSObject
 
@@ -74,8 +75,8 @@
 
 - (id)withIDs:(NSUInteger)badgeID, ... NS_REQUIRES_NIL_TERMINATION;
 
-- (id)usedByUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
-- (id)usedByUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)awardedToUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)awardedToUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end
 
@@ -93,8 +94,8 @@
 - (id)postedByUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)postedByUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
 
-//- (id)postedOnQuestions:(SKQuestion *)question, ... NS_REQUIRES_NIL_TERMINATION;
-//- (id)postedOnQuestionsWithIDs:(NSUInteger)questionID, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)postedOnQuestions:(SKQuestion *)question, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)postedOnQuestionsWithIDs:(NSUInteger)questionID, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end
 
