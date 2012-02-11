@@ -11,9 +11,9 @@
 
 @interface SKBadge : SKObject
 
-@property (nonatomic, readonly) NSUInteger badgeID;
-@property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) SKBadgeRank rank;
-@property (nonatomic, readonly, getter=isTagBased) BOOL tagBased;
+@property (readonly) NSUInteger badgeID;
+@property (readonly) NSString *name;
+@property (readonly) SKBadgeRank rank;
+@property (readonly, getter=isTagBased) BOOL tagBased;
 
 @end

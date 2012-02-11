@@ -12,7 +12,8 @@
 
 @implementation SKQuestion
 
-@dynamic questionID;
+@dynamic postID;
+
 @dynamic lastEditDate;
 @dynamic creationDate;
 @dynamic lastActivityDate;
@@ -44,12 +45,16 @@
     static NSArray *keys = nil;
     dispatch_once(&onceToken, ^{
         keys = [[NSArray alloc] initWithObjects:
-                SKAPIKeys.question.questionID,
+                
+                SKAPIKeys.post.postID,
+                SKAPIKeys.post.body,
+                SKAPIKeys.post.score,
+                SKAPIKeys.post.creationDate,
+                SKAPIKeys.post.ownerID,
+                
                 SKAPIKeys.question.lastEditDate,
-                SKAPIKeys.question.creationDate,
                 SKAPIKeys.question.lastActivityDate,
                 SKAPIKeys.question.lockedDate,
-                SKAPIKeys.question.score,
                 SKAPIKeys.question.communityOwnedDate,
                 SKAPIKeys.question.answerCount,
                 SKAPIKeys.question.acceptedAnswerID,
@@ -57,14 +62,12 @@
                 SKAPIKeys.question.bountyAmount,
                 SKAPIKeys.question.closedDate,
                 SKAPIKeys.question.protectedDate,
-                SKAPIKeys.question.body,
                 SKAPIKeys.question.title,
                 SKAPIKeys.question.closedReason,
                 SKAPIKeys.question.upVoteCount,
                 SKAPIKeys.question.downVoteCount,
                 SKAPIKeys.question.favoriteCount,
                 SKAPIKeys.question.viewCount,
-                @"owner_id",
                 SKAPIKeys.question.isAnswered,
                 nil];
     });
@@ -72,18 +75,22 @@
 }
 
 + (NSDictionary *)_mutateResponseDictionary:(NSDictionary *)d {
+    NSMutableDictionary *md = [d mutableCopy];
+    [md setObject:[md objectForKey:SKAPIKeys.question.questionID] forKey:SKAPIKeys.post.postID];
+    
     NSDictionary *owner = [d objectForKey:SKAPIKeys.question.owner];
     if (owner) {
-        NSMutableDictionary *md = [d mutableCopy];
-        
         id userID = [owner objectForKey:SKAPIKeys.user.userID];
         if (userID) {
-            [md setObject:userID forKey:@"owner_id"];
+            [md setObject:userID forKey:SKAPIKeys.post.ownerID];
         }
-        
-        d = [md autorelease];
     }
-    return d;
+    
+    return [md autorelease];
+}
+
+- (SKPostType)postType {
+    return SKPostTypeQuestion;
 }
 
 @end

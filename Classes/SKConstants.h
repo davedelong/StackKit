@@ -205,4 +205,18 @@ extern const struct SKAPIKeysStruct {
         NSString *isAnswered;
     } question;
     
+    struct {
+        NSString *parentPostID;
+        NSString *parentPostType;
+    } childPost;
+    
+    struct {
+        NSString *postID;
+        NSString *postType;
+        NSString *body;
+        NSString *creationDate;
+        NSString *ownerID;
+        NSString *score;
+    } post;
+    
 } SKAPIKeys;

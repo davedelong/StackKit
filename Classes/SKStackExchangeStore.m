@@ -104,7 +104,9 @@ NSString* SKStoreType(void) {
         } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
             returnValue = [self _buildObjectsFromResponse:response originalRequest:fetchRequest context:context];
         } else {
-            *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
+            if (error) {
+                *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
+            }
             return nil;
         }
     }

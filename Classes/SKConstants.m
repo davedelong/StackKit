@@ -195,5 +195,17 @@ const struct SKAPIKeysStruct SKAPIKeys = {
         .viewCount = @"view_count",
         .owner = @"owner",
         .isAnswered = @"is_answered"
+    },
+    .childPost = {
+        .parentPostID = @"parent_id",
+        .parentPostType = @"parent_type"
+    },
+    .post = {
+        .postID = @"post_id",
+        .postType = @"post_type",
+        .ownerID = @"owner_id",
+        .body = @"body",
+        .creationDate = @"creation_date",
+        .score = @"score"
     }
 };

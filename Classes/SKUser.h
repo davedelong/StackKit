@@ -12,16 +12,16 @@
 
 @interface SKUser : SKObject
 
-@property (nonatomic, readonly) NSUInteger userID;
-@property (nonatomic, readonly) NSDate *creationDate;
-@property (nonatomic, readonly) NSDate *lastModifiedDate;
-@property (nonatomic, readonly) NSUInteger reputation;
-@property (nonatomic, readonly) SKUserType userType;
+@property (readonly) NSUInteger userID;
+@property (readonly) NSDate *creationDate;
+@property (readonly) NSDate *lastModifiedDate;
+@property (readonly) NSUInteger reputation;
+@property (readonly) SKUserType userType;
 
-@property (nonatomic, readonly) NSString *displayName;
-@property (nonatomic, readonly) NSString *about;
-@property (nonatomic, readonly) NSString *location;
-@property (nonatomic, readonly) NSURL *profileImageURL;
-@property (nonatomic, readonly) NSURL *websiteURL;
+@property (readonly) NSString *displayName;
+@property (readonly) NSString *about;
+@property (readonly) NSString *location;
+@property (readonly) NSURL *profileImageURL;
+@property (readonly) NSURL *websiteURL;
 
 @end

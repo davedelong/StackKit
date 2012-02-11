@@ -11,10 +11,9 @@
 #import <StackKit/SKObject_Internal.h>
 
 @implementation SKAnswer
-
-@dynamic answerID;
-@dynamic questionID;
+@dynamic postID;
 @dynamic ownerID;
+@dynamic parentPostID;
 
 @dynamic title;
 @dynamic body;
@@ -39,35 +38,51 @@
     static NSArray *keys = nil;
     dispatch_once(&onceToken, ^{
         keys = [[NSArray alloc] initWithObjects:
-                SKAPIKeys.answer.answerID,
-                SKAPIKeys.answer.questionID,
+                SKAPIKeys.post.postID,
+                SKAPIKeys.post.body,
+                SKAPIKeys.post.ownerID,
+                SKAPIKeys.post.score,
+                SKAPIKeys.post.creationDate,
+                
                 SKAPIKeys.answer.title,
-                SKAPIKeys.answer.body,
                 SKAPIKeys.answer.isAccepted,
-                SKAPIKeys.answer.score,
                 SKAPIKeys.answer.upVoteCount,
                 SKAPIKeys.answer.downVoteCount,
-                SKAPIKeys.answer.creationDate,
                 SKAPIKeys.answer.lockedDate,
                 SKAPIKeys.answer.lastEditDate,
                 SKAPIKeys.answer.lastActivityDate,
                 SKAPIKeys.answer.communityOwnedDate,
-                @"owner_id",
+                
+                SKAPIKeys.childPost.parentPostID,
                 nil];
     });
     return keys;
 }
 
 + (NSDictionary *)_mutateResponseDictionary:(NSDictionary *)d {
+    NSMutableDictionary *md = [d mutableCopy];
+    
+    id answerID = [md objectForKey:SKAPIKeys.answer.answerID];
+    [md setObject:answerID forKey:SKAPIKeys.post.postID];
+    
+    id questionID = [md objectForKey:SKAPIKeys.answer.questionID];
+    [md setObject:questionID forKey:SKAPIKeys.childPost.parentPostID];
+    
     NSDictionary *owner = [d objectForKey:SKAPIKeys.answer.owner];
     if (owner) {
-        NSMutableDictionary *md = [d mutableCopy];
         id userID = [owner objectForKey:SKAPIKeys.user.userID];
-        [md setObject:userID forKey:@"owner_id"];
-        
-        d = [md autorelease];
+        [md setObject:userID forKey:SKAPIKeys.post.ownerID];
     }
-    return d;
+    
+    return [md autorelease];
+}
+
+- (SKPostType)postType {
+    return SKPostTypeAnswer;
+}
+
+- (SKPostType)parentPostType {
+    return SKPostTypeQuestion;
 }
 
 @end

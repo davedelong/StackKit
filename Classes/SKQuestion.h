@@ -7,30 +7,26 @@
 //
 
 #import <StackKit/SKObject.h>
+#import <StackKit/SKPost.h>
 
-@interface SKQuestion : SKObject
+@interface SKQuestion : SKObject <SKPost>
 
-@property (nonatomic, readonly) NSUInteger questionID;
-@property (nonatomic, readonly) NSDate *lastEditDate;
-@property (nonatomic, readonly) NSDate *creationDate;
-@property (nonatomic, readonly) NSDate *lastActivityDate;
-@property (nonatomic, readonly) NSDate *lockedDate;
-@property (nonatomic, readonly) NSUInteger score;
-@property (nonatomic, readonly) NSDate *communityOwnedDate;
-@property (nonatomic, readonly) NSUInteger answerCount;
-@property (nonatomic, readonly) NSUInteger acceptedAnswerID;
-@property (nonatomic, readonly) NSDate *bountyClosesDate;
-@property (nonatomic, readonly) NSUInteger bountyAmount;
-@property (nonatomic, readonly) NSDate *closedDate;
-@property (nonatomic, readonly) NSDate *protectedDate;
-@property (nonatomic, readonly) NSString *body;
-@property (nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) NSString *closedReason;
-@property (nonatomic, readonly) NSUInteger upVoteCount;
-@property (nonatomic, readonly) NSUInteger downVoteCount;
-@property (nonatomic, readonly) NSUInteger favoriteCount;
-@property (nonatomic, readonly) NSUInteger viewCount;
-@property (nonatomic, readonly) NSUInteger ownerID;
-@property (nonatomic, readonly) BOOL isAnswered;
+@property (readonly) NSDate *lastEditDate;
+@property (readonly) NSDate *lastActivityDate;
+@property (readonly) NSDate *lockedDate;
+@property (readonly) NSDate *communityOwnedDate;
+@property (readonly) NSUInteger answerCount;
+@property (readonly) NSUInteger acceptedAnswerID;
+@property (readonly) NSDate *bountyClosesDate;
+@property (readonly) NSUInteger bountyAmount;
+@property (readonly) NSDate *closedDate;
+@property (readonly) NSDate *protectedDate;
+@property (readonly) NSString *title;
+@property (readonly) NSString *closedReason;
+@property (readonly) NSUInteger upVoteCount;
+@property (readonly) NSUInteger downVoteCount;
+@property (readonly) NSUInteger favoriteCount;
+@property (readonly) NSUInteger viewCount;
+@property (readonly) BOOL isAnswered;
 
 @end

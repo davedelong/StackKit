@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11D50" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="SKAnswer" syncable="YES">
-        <attribute name="answer_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="community_owned_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="creation_date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -11,7 +10,8 @@
         <attribute name="last_edit_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="locked_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="owner_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="question_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="parent_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="post_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="up_vote_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -24,12 +24,12 @@
     </entity>
     <entity name="SKComment" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="comment_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="creation_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="owner_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="post_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="post_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parent_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="parent_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="reply_to_user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -50,8 +50,8 @@
         <attribute name="last_edit_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="locked_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="owner_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="post_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="protected_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="question_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="up_vote_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -76,11 +76,11 @@
         <attribute name="website_url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SKBadge" positionX="-2000" positionY="-2511" width="128" height="105"/>
-        <element name="SKTag" positionX="-1854" positionY="-2511" width="128" height="105"/>
-        <element name="SKUser" positionX="-1710" positionY="-2511" width="128" height="195"/>
         <element name="SKAnswer" positionX="-1854" positionY="-2394" width="128" height="255"/>
+        <element name="SKBadge" positionX="-2000" positionY="-2511" width="128" height="105"/>
         <element name="SKComment" positionX="-1998" positionY="-2394" width="128" height="180"/>
         <element name="SKQuestion" positionX="-2142" positionY="-2511" width="128" height="375"/>
+        <element name="SKTag" positionX="-1854" positionY="-2511" width="128" height="105"/>
+        <element name="SKUser" positionX="-1710" positionY="-2511" width="128" height="195"/>
     </elements>
 </model>

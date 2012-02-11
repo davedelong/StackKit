@@ -12,7 +12,6 @@
 
 @implementation SKComment
 
-@dynamic commentID;
 @dynamic creationDate;
 @dynamic score;
 @dynamic edited;
@@ -20,7 +19,7 @@
 @dynamic ownerID;
 @dynamic inReplyToUserID;
 @dynamic postID;
-@dynamic postType;
+@dynamic parentPostID;
 
 + (NSString *)_uniquelyIdentifyingAPIKey {
     return SKAPIKeys.comment.commentID;
@@ -31,14 +30,20 @@
     static NSArray *keys = nil;
     dispatch_once(&onceToken, ^{
         keys = [[NSArray alloc] initWithObjects:
-                SKAPIKeys.comment.commentID,
-                SKAPIKeys.comment.creationDate,
-                SKAPIKeys.comment.score,
+                // SKPost attributes
+                SKAPIKeys.post.creationDate,
+                SKAPIKeys.post.score,
+                SKAPIKeys.post.body,
+                
+                SKAPIKeys.post.postID,
+                SKAPIKeys.post.ownerID,
+                
+                // SKChildPost attributes
+                SKAPIKeys.childPost.parentPostID,
+                SKAPIKeys.childPost.parentPostType,
+                
+                // SKComment attributes
                 SKAPIKeys.comment.edited,
-                SKAPIKeys.comment.body,
-                SKAPIKeys.comment.postID,
-                SKAPIKeys.comment.postType,
-                @"owner_id",
                 @"in_reply_to_user_id",
                 nil];
     });
@@ -46,28 +51,40 @@
 }
 
 + (NSDictionary *)_mutateResponseDictionary:(NSDictionary *)d {
-    NSDictionary *owner = [d objectForKey:SKAPIKeys.comment.owner];
-    NSDictionary *reply = [d objectForKey:SKAPIKeys.comment.replyToUser];
-    if (owner || reply) {
-        NSMutableDictionary *md = [d mutableCopy];
-        
+    NSMutableDictionary *md = [d mutableCopy];
+    [md setObject:[md objectForKey:SKAPIKeys.comment.commentID] forKey:SKAPIKeys.post.postID];
+    
+    NSDictionary *owner = [d objectForKey:SKAPIKeys.question.owner];
+    if (owner) {
         id userID = [owner objectForKey:SKAPIKeys.user.userID];
         if (userID) {
-            [md setObject:userID forKey:@"owner_id"];
+            [md setObject:userID forKey:SKAPIKeys.post.ownerID];
         }
-        
-        id replyID = [reply objectForKey:SKAPIKeys.user.userID];
-        if (replyID) {
-            [md setObject:replyID forKey:@"in_reply_to_user_id"];
-        }
-        
-        d = [md autorelease];
     }
-    return d;
+    
+    NSDictionary *reply = [md objectForKey:SKAPIKeys.comment.replyToUser];
+    if (reply) {
+        id userID = [reply objectForKey:SKAPIKeys.user.userID];
+        if (userID) {
+            [md setObject:userID forKey:@"in_reply_to_user_id"];
+        }
+    }
+    
+    id parentID = [md objectForKey:SKAPIKeys.comment.postID];
+    [md setObject:parentID forKey:SKAPIKeys.childPost.parentPostID];
+    
+    id parentType = [md objectForKey:SKAPIKeys.comment.postType];
+    [md setObject:parentType forKey:SKAPIKeys.childPost.parentPostType];
+    
+    return [md autorelease];
 }
 
 - (SKPostType)postType {
-    NSString *type = [self _valueForInfoKey:SKAPIKeys.comment.postType];
+    return SKPostTypeComment;
+}
+
+- (SKPostType)parentPostType {
+    NSString *type = [self _valueForInfoKey:SKAPIKeys.childPost.parentPostType];
     if ([type isEqualToString:@"question"]) {
         return SKPostTypeQuestion;
     }

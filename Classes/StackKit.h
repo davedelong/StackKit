@@ -14,7 +14,10 @@
 #import <StackKit/SKUser.h>
 #import <StackKit/SKTag.h>
 #import <StackKit/SKBadge.h>
+
+#import <StackKit/SKPost.h>
 #import <StackKit/SKAnswer.h>
 #import <StackKit/SKComment.h>
+#import <StackKit/SKQuestion.h>
 
 #import <StackKit/SKFetchRequest.h>

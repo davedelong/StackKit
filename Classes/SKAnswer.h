@@ -7,25 +7,19 @@
 //
 
 #import <StackKit/SKObject.h>
+#import <StackKit/SKPost.h>
 
-@interface SKAnswer : SKObject
+@interface SKAnswer : SKObject <SKChildPost>
 
-@property (nonatomic, readonly) NSUInteger answerID;
-@property (nonatomic, readonly) NSUInteger questionID;
-@property (nonatomic, readonly) NSUInteger ownerID;
+@property (readonly) NSString *title;
+@property (readonly) BOOL isAccepted;
 
-@property (nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) NSString *body;
-@property (nonatomic, readonly) BOOL isAccepted;
+@property (readonly) NSUInteger upVoteCount;
+@property (readonly) NSUInteger downVoteCount;
 
-@property (nonatomic, readonly) NSUInteger score;
-@property (nonatomic, readonly) NSUInteger upVoteCount;
-@property (nonatomic, readonly) NSUInteger downVoteCount;
-
-@property (nonatomic, readonly) NSDate *creationDate;
-@property (nonatomic, readonly) NSDate *lockedDate;
-@property (nonatomic, readonly) NSDate *lastEditDate;
-@property (nonatomic, readonly) NSDate *lastActivityDate;
-@property (nonatomic, readonly) NSDate *communityOwnedDate;
+@property (readonly) NSDate *lockedDate;
+@property (readonly) NSDate *lastEditDate;
+@property (readonly) NSDate *lastActivityDate;
+@property (readonly) NSDate *communityOwnedDate;
 
 @end

@@ -16,15 +16,15 @@
 + (void)requestSitesWithCompletionHandler:(SKSomething)handler;
 + (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler;
 
-@property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) NSString *audience;
-@property (nonatomic, readonly) NSDate *launchDate;
-@property (nonatomic, readonly) SKSiteState siteState;
+@property (readonly) NSString *name;
+@property (readonly) NSString *audience;
+@property (readonly) NSDate *launchDate;
+@property (readonly) SKSiteState siteState;
 
-@property (nonatomic, readonly) NSURL *siteURL;
-@property (nonatomic, readonly) NSURL *logoURL;
-@property (nonatomic, readonly) NSURL *iconURL;
-@property (nonatomic, readonly) NSURL *faviconURL;
+@property (readonly) NSURL *siteURL;
+@property (readonly) NSURL *logoURL;
+@property (readonly) NSURL *iconURL;
+@property (readonly) NSURL *faviconURL;
 
 - (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler;
 

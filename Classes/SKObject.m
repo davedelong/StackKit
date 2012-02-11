@@ -10,6 +10,7 @@
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKMacros.h>
 #import <objc/runtime.h>
+#import <CoreData/CoreData.h>
 
 @implementation SKObject {
     // _info will be either an NSDictionary or NSManagedObject, depending on the subclass
@@ -154,7 +155,16 @@
 }
 
 - (id)_valueForInfoKey:(NSString *)key {
-    return [_info valueForKey:key];
+    __block id value = nil;
+    if ([_info isKindOfClass:[NSManagedObject class]]) {
+        NSManagedObjectContext *moc = [_info managedObjectContext];
+        [moc performBlockAndWait:^{
+            value = [_info valueForKey:key];
+        }];
+    } else {
+        value = [_info valueForKey:key];
+    }
+    return value;
 }
 
 - (NSString *)debugDescription {

@@ -350,7 +350,7 @@ void SKFetchSites(NSError **error) {
             NSNumber *keepGoingNumber = [response objectForKey:SKAPIKeys.hasMore];
             keepGoing = [keepGoingNumber boolValue];
         }
-        [pool release];
+        [pool drain];
     }
     
     // 2: cache the json

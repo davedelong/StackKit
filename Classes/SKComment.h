@@ -8,19 +8,11 @@
 
 #import <StackKit/SKObject.h>
 #import <StackKit/SKTypes.h>
+#import <StackKit/SKPost.h>
 
-@interface SKComment : SKObject
+@interface SKComment : SKObject <SKChildPost>
 
-@property (nonatomic, readonly) NSUInteger commentID;
-@property (nonatomic, readonly) NSDate *creationDate;
-@property (nonatomic, readonly) NSUInteger score;
-@property (nonatomic, readonly) BOOL edited;
-@property (nonatomic, readonly) NSString *body;
-
-@property (nonatomic, readonly) NSUInteger ownerID;
-@property (nonatomic, readonly) NSUInteger inReplyToUserID;
-
-@property (nonatomic, readonly) NSUInteger postID;
-@property (nonatomic, readonly) SKPostType postType;
+@property (readonly) BOOL edited;
+@property (readonly) NSUInteger inReplyToUserID;
 
 @end
