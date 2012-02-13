@@ -10,9 +10,9 @@
 
 @interface SKAnswerFetchRequest ()
 
-@property (nonatomic, retain) NSMutableIndexSet *answerIDs;
-@property (nonatomic, retain) NSMutableOrderedSet *tagNames;
-@property (nonatomic, retain) NSMutableIndexSet *userIDs;
-@property (nonatomic, retain) NSMutableIndexSet *questionIDs;
+@property (readonly) NSMutableIndexSet *answerIDs;
+@property (readonly) NSMutableOrderedSet *tagNames;
+@property (readonly) NSMutableIndexSet *userIDs;
+@property (readonly) NSMutableIndexSet *questionIDs;
 
 @end

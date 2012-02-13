@@ -10,6 +10,7 @@
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKUser.h>
+#import <StackKit/SKMacros.h>
 
 @implementation SKUserFetchRequest
 
@@ -72,18 +73,7 @@
 }
 
 - (id)withIDs:(NSUInteger)userID,... {
-    if (userID > 0) {
-        [_userIDs addIndex:userID];
-        va_list list;
-        va_start(list, userID);
-        
-        NSUInteger nextID = 0;
-        while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [_userIDs addIndex:nextID];
-        }
-        
-        va_end(list);
-    }
+    INTEGER_LIST(_userIDs, userID);
     return self;
 }
 

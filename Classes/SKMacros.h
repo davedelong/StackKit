@@ -42,3 +42,32 @@ if (self != (_c)) { \
 #define REQUIRE_OVERRIDE { \
 [NSException raise:NSInternalInconsistencyException format:@"%s must be overridden by subclasses", __PRETTY_FUNCTION__]; \
 }
+
+#define INTEGER_LIST(_l, _a) { \
+if ((_a) > 0) { \
+[(_l) addIndex:(_a)]; \
+va_list list; \
+va_start(list, (_a)); \
+\
+NSUInteger nextID = 0; \
+while ((nextID = va_arg(list, NSUInteger)) != 0) { \
+    [(_l) addIndex:nextID]; \
+} \
+\
+va_end(list); \
+} \
+}
+
+#define OBJECT_LIST(_l, _o, _s) { \
+if ((_o) != nil) { \
+[(_l) addIndex:[(_o) _s]]; \
+va_list list; \
+va_start(list, (_o)); \
+\
+while(((_o) = va_arg(list, id)) != nil) { \
+    [(_l) addIndex:[(_o) _s]]; \
+} \
+\
+va_end(list); \
+} \
+}

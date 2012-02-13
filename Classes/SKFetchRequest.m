@@ -67,6 +67,12 @@ static void *NSFetchRequestStackKitFetchRequestKey;
     return [[[SKCommentFetchRequest alloc] init] autorelease];    
 }
 
++ (SKQuestionFetchRequest *)requestForFetchingQuestions {
+    REQUIRE_CLASS([SKFetchRequest class]);
+    
+    return [[[SKQuestionFetchRequest alloc] init] autorelease];    
+}
+
 + (Class)_targetClass {
     REQUIRE_OVERRIDE;
     return nil;

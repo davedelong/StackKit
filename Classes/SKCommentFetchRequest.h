@@ -10,9 +10,9 @@
 
 @interface SKCommentFetchRequest ()
 
-@property (nonatomic, retain) NSMutableIndexSet *commentIDs;
-@property (nonatomic, retain) NSMutableIndexSet *postIDs;
-@property (nonatomic, retain) NSMutableIndexSet *userIDs;
-@property (nonatomic, retain) NSMutableIndexSet *replyIDs;
+@property (readonly) NSMutableIndexSet *commentIDs;
+@property (readonly) NSMutableIndexSet *postIDs;
+@property (readonly) NSMutableIndexSet *userIDs;
+@property (readonly) NSMutableIndexSet *replyIDs;
 
 @end

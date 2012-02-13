@@ -13,7 +13,7 @@
 
 @interface SKSite : SKObject
 
-+ (void)requestSitesWithCompletionHandler:(SKSomething)handler;
++ (void)requestSitesWithCompletionHandler:(SKRequestHandler)handler;
 + (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler;
 
 @property (readonly) NSString *name;
@@ -26,7 +26,7 @@
 @property (readonly) NSURL *iconURL;
 @property (readonly) NSURL *faviconURL;
 
-- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler;
+- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKRequestHandler)handler;
 
 
 @end

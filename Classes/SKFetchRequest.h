@@ -13,6 +13,7 @@
 @class SKBadgeFetchRequest;
 @class SKAnswerFetchRequest;
 @class SKCommentFetchRequest;
+@class SKQuestionFetchRequest;
 
 @class SKUser;
 @class SKTag;
@@ -25,6 +26,7 @@
 + (SKBadgeFetchRequest *)requestForFetchingBadges;
 + (SKAnswerFetchRequest *)requestForFetchingAnswers;
 + (SKCommentFetchRequest *)requestForFetchingComments;
++ (SKQuestionFetchRequest *)requestForFetchingQuestions;
 
 - (id)inAscendingOrder;
 - (id)inDescendingOrder;
@@ -113,5 +115,27 @@
 
 - (id)inReplyToUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)inReplyToUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
+
+@end
+
+@interface SKQuestionFetchRequest : SKFetchRequest
+
+- (id)sortedByCreationDate;
+- (id)sortedByScore;
+- (id)sortedByLastActivityDate;
+
+- (id)withIDs:(NSUInteger)questionID, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)linkedFromQuestionsWithIDs:(NSUInteger)questionID, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)relatedToQuestionsWithIDs:(NSUInteger)questionID, ... NS_REQUIRES_NIL_TERMINATION;
+
+- (id)thatAreInsufficientlyAnswered;
+- (id)thatHaveNoAnswers;
+- (id)thatHaveNoAcceptedAnswer;
+
+- (id)favoritedByUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)favoritedByUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
+
+- (id)postedByUsers:(SKUser *)user, ... NS_REQUIRES_NIL_TERMINATION;
+- (id)postedByUsersWithIDs:(NSUInteger)userID, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

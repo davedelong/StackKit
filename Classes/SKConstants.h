@@ -55,6 +55,11 @@ extern const struct SKSortValuesStruct {
         NSString *score;
         NSString *lastActivityDate;
         NSString *creationDate;
+    } question;
+    struct {
+        NSString *score;
+        NSString *lastActivityDate;
+        NSString *creationDate;
     } answer;
     struct {
         NSString *score;

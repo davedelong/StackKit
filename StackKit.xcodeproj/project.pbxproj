@@ -20,6 +20,8 @@
 		550D447F14AE1BBF00AD6022 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550D447D14AE1BBF00AD6022 /* SKConstants.m */; };
 		550D448114AE1FC700AD6022 /* SKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 550D448014AE1FC700AD6022 /* SKMacros.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
+		554158D714E7357500379B45 /* SKQuestionFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 554158D514E7357500379B45 /* SKQuestionFetchRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		554158D814E7357500379B45 /* SKQuestionFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 554158D614E7357500379B45 /* SKQuestionFetchRequest.m */; };
 		5547A6B511C8281000CE89E1 /* StackKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* StackKit.framework */; };
 		5547A6FF11C82F5F00CE89E1 /* SKCommentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */; };
 		557B137A14AED74900BD2DFD /* StackKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 557B137814AED74900BD2DFD /* StackKit.xcdatamodeld */; };
@@ -45,7 +47,7 @@
 		55910FB914E42046008AAE44 /* SKAnswerFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910FB714E42046008AAE44 /* SKAnswerFetchRequest.m */; };
 		55910FBC14E4A9FF008AAE44 /* SKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910FBA14E4A9FF008AAE44 /* SKComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55910FBD14E4A9FF008AAE44 /* SKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910FBB14E4A9FF008AAE44 /* SKComment.m */; };
-		55910FC014E4AC0B008AAE44 /* SKCommentFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910FBE14E4AC0A008AAE44 /* SKCommentFetchRequest.h */; };
+		55910FC014E4AC0B008AAE44 /* SKCommentFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910FBE14E4AC0A008AAE44 /* SKCommentFetchRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		55910FC114E4AC0B008AAE44 /* SKCommentFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910FBF14E4AC0A008AAE44 /* SKCommentFetchRequest.m */; };
 		55910FC414E4DF07008AAE44 /* SKQuestion.h in Headers */ = {isa = PBXBuildFile; fileRef = 55910FC214E4DF06008AAE44 /* SKQuestion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55910FC514E4DF07008AAE44 /* SKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55910FC314E4DF06008AAE44 /* SKQuestion.m */; };
@@ -122,6 +124,8 @@
 		550D448014AE1FC700AD6022 /* SKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMacros.h; sourceTree = "<group>"; };
 		5533AA1312DA430900F755F7 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		5533AA1E12DA432600F755F7 /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
+		554158D514E7357500379B45 /* SKQuestionFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestionFetchRequest.h; sourceTree = "<group>"; };
+		554158D614E7357500379B45 /* SKQuestionFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestionFetchRequest.m; sourceTree = "<group>"; };
 		5547A6FD11C82F5F00CE89E1 /* SKCommentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCommentTest.h; sourceTree = "<group>"; };
 		5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCommentTest.m; sourceTree = "<group>"; };
 		557B137914AED74900BD2DFD /* StackKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 				55910FB714E42046008AAE44 /* SKAnswerFetchRequest.m */,
 				55910FBE14E4AC0A008AAE44 /* SKCommentFetchRequest.h */,
 				55910FBF14E4AC0A008AAE44 /* SKCommentFetchRequest.m */,
+				554158D514E7357500379B45 /* SKQuestionFetchRequest.h */,
+				554158D614E7357500379B45 /* SKQuestionFetchRequest.m */,
 			);
 			name = "Fetch Requests";
 			sourceTree = "<group>";
@@ -441,6 +447,7 @@
 				55910FC014E4AC0B008AAE44 /* SKCommentFetchRequest.h in Headers */,
 				55910FC414E4DF07008AAE44 /* SKQuestion.h in Headers */,
 				55910FC714E56CBB008AAE44 /* SKPost.h in Headers */,
+				554158D714E7357500379B45 /* SKQuestionFetchRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +622,7 @@
 				55910FBD14E4A9FF008AAE44 /* SKComment.m in Sources */,
 				55910FC114E4AC0B008AAE44 /* SKCommentFetchRequest.m in Sources */,
 				55910FC514E4DF07008AAE44 /* SKQuestion.m in Sources */,
+				554158D814E7357500379B45 /* SKQuestionFetchRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

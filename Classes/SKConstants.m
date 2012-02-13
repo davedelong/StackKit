@@ -50,6 +50,11 @@ const struct SKSortValuesStruct SKSortValues = {
         .name = @"name",
         .type = @"type"
     },
+    .question = {
+        .score = @"votes",
+        .lastActivityDate = @"activity",
+        .creationDate = @"creation"
+    },
     .answer = {
         .score = @"votes",
         .lastActivityDate = @"activity",

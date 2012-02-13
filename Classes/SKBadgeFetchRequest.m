@@ -11,6 +11,7 @@
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKBadge.h>
 #import <StackKit/SKUser.h>
+#import <StackKit/SKMacros.h>
 
 @implementation SKBadgeFetchRequest
 
@@ -52,12 +53,12 @@
 }
 
 - (id)tagBasedOnly {
-    [self setRequestedType:_SKBadgeTypeTag];
+    _requestedType = _SKBadgeTypeTag;
     return self;
 }
 
 - (id)namedOnly {
-    [self setRequestedType:_SKBadgeTypeNamed];
+    _requestedType = _SKBadgeTypeNamed;
     return self;
 }
 
@@ -67,49 +68,17 @@
 }
 
 - (id)withIDs:(NSUInteger)badgeID, ... {
-    if (badgeID > 0) {
-        [_badgeIDs addIndex:badgeID];
-        va_list list;
-        va_start(list, badgeID);
-        
-        NSUInteger nextID = 0;
-        while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [_badgeIDs addIndex:nextID];
-        }
-        
-        va_end(list);
-    }
+    INTEGER_LIST(_badgeIDs, badgeID);
     return self;
 }
 
 - (id)awardedToUsers:(SKUser *)user, ...  {
-    if (user != nil) {
-        [_userIDs addIndex:[user userID]];
-        va_list list;
-        va_start(list, user);
-        
-        while((user = va_arg(list, SKUser*)) != nil) {
-            [_userIDs addIndex:[user userID]];
-        }
-        
-        va_end(list);
-    }
+    OBJECT_LIST(_userIDs, user, userID);
     return self;
 }
 
 - (id)awardedToUsersWithIDs:(NSUInteger)userID, ...  {
-    if (userID > 0) {
-        [_userIDs addIndex:userID];
-        va_list list;
-        va_start(list, userID);
-        
-        NSUInteger nextID = 0;
-        while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [_userIDs addIndex:nextID];
-        }
-        
-        va_end(list);
-    }
+    INTEGER_LIST(_userIDs, userID);
     return self;
 }
 

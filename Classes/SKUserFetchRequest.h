@@ -10,9 +10,9 @@
 
 @interface SKUserFetchRequest ()
 
-@property (nonatomic, copy) NSDate *minDate;
-@property (nonatomic, copy) NSDate *maxDate;
-@property (nonatomic, copy) NSString *nameContains;
-@property (nonatomic, retain) NSMutableIndexSet *userIDs;
+@property (copy) NSDate *minDate;
+@property (copy) NSDate *maxDate;
+@property (copy) NSString *nameContains;
+@property (readonly) NSMutableIndexSet *userIDs;
 
 @end

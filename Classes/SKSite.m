@@ -57,7 +57,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-+ (void)requestSitesWithCompletionHandler:(SKSomething)handler {
++ (void)requestSitesWithCompletionHandler:(SKRequestHandler)handler {
     handler = [handler copy];
     
     dispatch_async(SKSiteQueue(), ^{
@@ -82,7 +82,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
     
     NSArray *words = [name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    SKSomething block = ^(NSArray *sites, NSError *error) {
+    SKRequestHandler block = ^(NSArray *sites, NSError *error) {
         // this will be called on the main thread
         if (sites) {
             NSPredicate *template = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] $word OR audience CONTAINS[cd] $word or siteURL.absoluteString CONTAINS[cd] $word"];
@@ -172,7 +172,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
 #pragma mark Core Data stack
 
 
-- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKSomething)handler {
+- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKRequestHandler)handler {
     
     handler = [handler copy];
     

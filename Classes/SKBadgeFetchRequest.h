@@ -16,9 +16,9 @@ typedef enum {
 
 @interface SKBadgeFetchRequest ()
 
-@property (nonatomic, retain) NSMutableIndexSet *userIDs;
-@property (nonatomic, retain) NSMutableIndexSet *badgeIDs;
-@property (nonatomic, assign) _SKBadgeType requestedType;
-@property (nonatomic, copy) NSString *nameContains;
+@property (readonly) NSMutableIndexSet *userIDs;
+@property (readonly) NSMutableIndexSet *badgeIDs;
+@property (readonly) _SKBadgeType requestedType;
+@property (copy) NSString *nameContains;
 
 @end

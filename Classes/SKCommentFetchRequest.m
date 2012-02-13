@@ -11,6 +11,7 @@
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKComment.h>
 #import <StackKit/SKUser.h>
+#import <StackKit/SKMacros.h>
 
 @implementation SKCommentFetchRequest
 
@@ -51,96 +52,32 @@
 }
 
 - (id)withIDs:(NSUInteger)commentID, ... {
-    if (commentID > 0) {
-        [_commentIDs addIndex:commentID];
-        va_list list;
-        va_start(list, commentID);
-        
-        NSUInteger nextID = 0;
-        while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [_commentIDs addIndex:nextID];
-        }
-        
-        va_end(list);
-    }
+    INTEGER_LIST(_commentIDs, commentID);
     return self;    
 }
 
 - (id)postedOnPostsWithIDs:(NSUInteger)postID, ... {
-    if (postID > 0) {
-        [_postIDs addIndex:postID];
-        va_list list;
-        va_start(list, postID);
-        
-        NSUInteger nextID = 0;
-        while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [_postIDs addIndex:nextID];
-        }
-        
-        va_end(list);
-    }
+    INTEGER_LIST(_postIDs, postID);
     return self;  
 }
 
 - (id)postedByUsers:(SKUser *)user, ...  {
-    if (user != nil) {
-        [_userIDs addIndex:[user userID]];
-        va_list list;
-        va_start(list, user);
-        
-        while((user = va_arg(list, SKUser*)) != nil) {
-            [_userIDs addIndex:[user userID]];
-        }
-        
-        va_end(list);
-    }
+    OBJECT_LIST(_userIDs, user, userID);
     return self;
 }
 
 - (id)postedByUsersWithIDs:(NSUInteger)userID, ...  {
-    if (userID > 0) {
-        [_userIDs addIndex:userID];
-        va_list list;
-        va_start(list, userID);
-        
-        NSUInteger nextID = 0;
-        while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [_userIDs addIndex:nextID];
-        }
-        
-        va_end(list);
-    }
+    INTEGER_LIST(_userIDs, userID);
     return self;
 }
 
 - (id)inReplyToUsers:(SKUser *)user, ... {
-    if (user != nil) {
-        [_replyIDs addIndex:[user userID]];
-        va_list list;
-        va_start(list, user);
-        
-        while((user = va_arg(list, SKUser*)) != nil) {
-            [_replyIDs addIndex:[user userID]];
-        }
-        
-        va_end(list);
-    }
+    OBJECT_LIST(_replyIDs, user, userID);
     return self;
 }
 
 - (id)inReplyToUsersWithIDs:(NSUInteger)userID, ... {
-    if (userID > 0) {
-        [_replyIDs addIndex:userID];
-        va_list list;
-        va_start(list, userID);
-        
-        NSUInteger nextID = 0;
-        while ((nextID = va_arg(list, NSUInteger)) != 0) {
-            [_replyIDs addIndex:nextID];
-        }
-        
-        va_end(list);
-    }
+    INTEGER_LIST(_replyIDs, userID);
     return self;
 }
 
