@@ -109,6 +109,20 @@ void SKSetCachedSites(NSArray *sitesJSON);
     [handler release];
 }
 
++ (void)requestSitesWithNames:(NSArray *)names completionHandler:(SKRequestHandler)handler {
+    handler = [handler copy];
+    [self requestSitesWithCompletionHandler:^(NSArray *sites, NSError *error) {
+        NSArray *filtered = nil;
+        if (sites) {
+            NSArray *siteNames = [sites valueForKey:@"name"];
+            NSDictionary *map = [NSDictionary dictionaryWithObjects:sites forKeys:siteNames];
+            filtered = [map objectsForKeys:names notFoundMarker:[NSNull null]];
+        }
+        handler(filtered,error);
+    }];
+    [handler release];
+}
+
 #pragma mark -
 #pragma mark SKSite Instance Stuff
 

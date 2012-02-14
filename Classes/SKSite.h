@@ -15,6 +15,7 @@
 
 + (void)requestSitesWithCompletionHandler:(SKRequestHandler)handler;
 + (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler;
++ (void)requestSitesWithNames:(NSArray *)names completionHandler:(SKRequestHandler)handler;
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *audience;

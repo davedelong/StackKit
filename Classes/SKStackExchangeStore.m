@@ -14,15 +14,14 @@
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKCache.h>
 
-static NSString * _SKStackExchangeStoreType = @"SKStackExchangeStore";
-
 NSString* SKStoreType(void) {
     //Make sure that the class is loaded prior to returning the store type string.
-    if(!NSClassFromString(_SKStackExchangeStoreType)) {
+    Class c = [SKStackExchangeStore class];
+    if(c == nil) {
         [NSException raise:NSInternalInconsistencyException format:@"Could not load the SKStackExchangeStore class."];
     }
     
-    return _SKStackExchangeStoreType;
+    return NSStringFromClass(c);
 }
 
 @interface SKStackExchangeStore ()
@@ -38,18 +37,8 @@ NSString* SKStoreType(void) {
 
 @synthesize site = _site;
 
-+(void)load {
-    //We can't use +initialize because it only gets invoked when the first message is sent to a class.
-    //At the point that -[NSPersistentStoreCoordinator addPersistentStoreWithType:...]
-    //is invoked, there is zero expectation that the above condition (sending a message to [self class]) has been met.
-    //Therefore, +load is the way to go.
-    
-    //Obvious side effect here is that when this class is loaded, the NSPersistentStoreCoordinator class will be loaded.
-    
-    //Add this store class to the NSPersistentStoreCoordinator's store registry.
-    //We don't need a dispatch_once here because +load is guaranteed to
-    //be invoked only once per class,  not to mention that registerStoreClass:forStoreType:
-    //is essentially a no-op if the class is already registered.
++(void)initialize {
+    //It turns out using +initialize is just fine.
     
     [NSPersistentStoreCoordinator registerStoreClass:[self class]
                                         forStoreType:SKStoreType()];

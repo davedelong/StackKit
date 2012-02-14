@@ -74,7 +74,9 @@
     [md setObject:parentID forKey:SKAPIKeys.childPost.parentPostID];
     
     id parentType = [md objectForKey:SKAPIKeys.comment.postType];
-    [md setObject:parentType forKey:SKAPIKeys.childPost.parentPostType];
+    if (parentType) {
+        [md setObject:parentType forKey:SKAPIKeys.childPost.parentPostType];
+    }
     
     return [md autorelease];
 }
