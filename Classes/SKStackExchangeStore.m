@@ -31,8 +31,8 @@ NSString* SKStoreType(void) {
 @end
 
 @implementation SKStackExchangeStore {
-    SKCache *_uniqueIDToObjectIDCache;
-    SKCache *_objectIDToNodeCache;
+    SKCache *_referenceObjectToNodeCache;
+    SKCache *_referenceObjectToValuesCache;
 }
 
 @synthesize site = _site;
@@ -47,15 +47,15 @@ NSString* SKStoreType(void) {
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options {
     self = [super initWithPersistentStoreCoordinator:root configurationName:name URL:url options:options];
     if (self) {
-        _uniqueIDToObjectIDCache = [[SKCache cacheWithStrongToWeakObjects] retain];
-        _objectIDToNodeCache = [[SKCache cacheWithWeakToWeakObjects] retain];
+        _referenceObjectToValuesCache = [[SKCache cacheWithStrongToStrongObjects] retain];
+        _referenceObjectToNodeCache = [[SKCache cacheWithStrongToWeakObjects] retain];
     }
     return self;
 }
 
 - (void)dealloc {
-    [_uniqueIDToObjectIDCache release];
-    [_objectIDToNodeCache release];
+    [_referenceObjectToValuesCache release];
+    [_referenceObjectToNodeCache release];
     [super dealloc];
 }
 
@@ -108,14 +108,13 @@ NSString* SKStoreType(void) {
 }
 
 - (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError **)error {
+    NSString *uniqueID = [self referenceObjectForObjectID:objectID];
+    NSDictionary *values = [_referenceObjectToValuesCache cachedObjectForKey:uniqueID];
     
-    [_objectIDToNodeCache cacheObject:nil forKey:objectID];
+    NSIncrementalStoreNode *node = [[NSIncrementalStoreNode alloc] initWithObjectID:objectID withValues:values version:1];
+    // cache the node keyed off the uniqueID
+    [_referenceObjectToNodeCache cacheObject:node forKey:uniqueID];
     
-    NSDictionary *d = [self referenceObjectForObjectID:objectID];
-    
-    NSIncrementalStoreNode *node = [[NSIncrementalStoreNode alloc] initWithObjectID:objectID withValues:d version:1];
-    // cache the node keyed off the objectID
-    [_objectIDToNodeCache cacheObject:node forKey:objectID];
     return node;
 }
 
@@ -134,26 +133,24 @@ NSString* SKStoreType(void) {
             NSString *uniqueID = [NSString stringWithFormat:@"%@:%@", uniqueIdentifierKey, uniqueValue];
             
             NSManagedObjectID *objectID = nil;
-            NSManagedObject *object = nil;
+            NSIncrementalStoreNode *node = [_referenceObjectToNodeCache cachedObjectForKey:uniqueID];
             
-            if (uniqueID != nil) {
-                // look up in the uniqueID => objectID cache
-                objectID = [_uniqueIDToObjectIDCache cachedObjectForKey:uniqueID];
-                if (objectID) {
-                    // look up in the objectID => incStoreNode cache
-                    NSIncrementalStoreNode *node = [_objectIDToNodeCache cachedObjectForKey:objectID];
-                    if (node) {
-                        [node updateWithValues:d version:[node version]+1];
-                    }
-                }
+            if (node) {
+                NSMutableDictionary *newValues = [[_referenceObjectToValuesCache cachedObjectForKey:uniqueID] mutableCopy];
+                [newValues addEntriesFromDictionary:d];
+                d = [newValues autorelease];
+                
+                [node updateWithValues:d version:[node version]+1];
+                objectID = [node objectID];
             }
             
-            objectID = [[self newObjectIDForEntity:[request entity] referenceObject:d] autorelease];
+            if (objectID == nil) {
+                objectID = [[self newObjectIDForEntity:[request entity] referenceObject:uniqueID] autorelease];
+            }
             
-            // cache uniqueID => objectID
-            [_uniqueIDToObjectIDCache cacheObject:objectID forKey:uniqueID];
+            [_referenceObjectToValuesCache cacheObject:d forKey:uniqueID];
             
-            object = [context objectWithID:objectID];
+            NSManagedObject *object = [context objectWithID:objectID];
             
             [objects addObject:object];
         }
