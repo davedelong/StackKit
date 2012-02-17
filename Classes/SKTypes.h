@@ -24,7 +24,10 @@ typedef enum {
     SKErrorCodeAccessTokenInvalid = 402,
     SKErrorCodeAccessTokenCompromised = 406,
     SKErrorCodeThrottleViolation = 502,
-    SKErrorCodeInternalError = 500
+    SKErrorCodeInternalError = 500,
+    
+    SKErrorCodeAuthenticationInProgress = 1000,
+    SKErrorCodeAuthenticationCancelled = 1001,
 } SKErrorCode;
 
 typedef enum {

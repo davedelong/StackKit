@@ -8,15 +8,13 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-#ifndef StackKitMobile
-#define StackKitMobile 
-#endif
+#define StackKitMobile 1
+#define StackKitMac 0
 
 #else
 
-#ifndef StackKitMac
-#define StackKitMac 
-#endif
+#define StackKitMac 1
+#define StackKitMobile 0
 
 #endif
 

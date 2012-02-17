@@ -21,3 +21,4 @@
 #import <StackKit/SKQuestion.h>
 
 #import <StackKit/SKFetchRequest.h>
+#import <StackKit/SKAuthenticator.h>

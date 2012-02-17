@@ -18,7 +18,7 @@ NSString* SKApplicationSupportDirectory() {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
         NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
         
-#ifdef StackKitMac
+#if StackKitMac
         NSString *executableName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
         if ([executableName length] == 0) {
             executableName = [[NSProcessInfo processInfo] processName];
