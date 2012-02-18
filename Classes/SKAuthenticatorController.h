@@ -18,11 +18,13 @@ typedef void(^STSheetCompletionHandler)(NSInteger code);
 
 @interface SKAuthenticatorController : NSWindowController <SKWebViewDelegate>
 
+@property (nonatomic, assign) IBOutlet NSProgressIndicator *progressIndicator;
 #elif StackKitMobile
 
 #import <UIKit/UIKit.h>
 @interface SKAuthenticatorController : UIViewController <SKWebViewDelegate>
 
+@property (nonatomic, assign) IBOutlet UIActivityIndicatorView *progressIndicator;
 #endif
 @property (nonatomic, assign) IBOutlet SKWebView *webView;
 @property (nonatomic, retain) NSError *error;

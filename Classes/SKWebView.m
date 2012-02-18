@@ -49,13 +49,13 @@
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame {
     if (frame == [self mainFrame]) {
-        NSLog(@"started loading");
+        [_webDelegate webViewDidStartLoading:self];
     }
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
     if (frame == [self mainFrame]) {
-        NSLog(@"finished loading");
+        [_webDelegate webViewDidFinishLoading:self];
     }
 }
 

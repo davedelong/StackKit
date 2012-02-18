@@ -13,6 +13,10 @@
 @protocol SKWebViewDelegate <NSObject>
 
 - (BOOL)webView:(SKWebView *)webView shouldLoadRequest:(NSURLRequest *)request;
+
+- (void)webViewDidStartLoading:(SKWebView *)webView;
+- (void)webViewDidFinishLoading:(SKWebView *)webView;
+
 - (void)webView:(SKWebView *)webView didReceiveResponse:(NSURLResponse *)response;
 
 @end

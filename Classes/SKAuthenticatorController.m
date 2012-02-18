@@ -11,13 +11,6 @@
 #import <StackKit/SKTypes.h>
 #import <StackKit/SKFunctions.h>
 
-#if StackKitMac
-@interface WebView (StackKitHacks)
-- (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
-- (void)unscheduleFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
-@end
-#endif
-
 NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success";
 
 @implementation SKAuthenticatorController {
@@ -29,6 +22,7 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
 
 @synthesize webView=_webView;
 @synthesize error=_error;
+@synthesize progressIndicator=_progressIndicator;
 
 - (NSString *)windowNibName {
     return @"SKAuthenticator_Mac";
@@ -40,7 +34,6 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     _handler(_returnCode);
     
 #if StackKitMac
-    [_webView unscheduleFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSModalPanelRunLoopMode];
     [[self window] orderOut:self];
 #endif
     
@@ -83,20 +76,14 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     while (result == NSRunContinuesResponse)
     {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        
-        // Run the window modally until there are no events to process:
         result = [NSApp runModalSession:session];
-        
-        // Give the main loop some time:
-//        [[NSRunLoop currentRunLoop] limitDateForMode:NSDefaultRunLoopMode];
-//        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
-//        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];        
-        // Drain pool to avoid memory getting clogged:
+        // spinning in the default mode allows the webview to render
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];        
         [pool drain];
     }
     
     [NSApp endModalSession:session];
+    [self didEndSheet:nil returnCode:0 contextInfo:NULL];
 }
 #endif
 
@@ -108,14 +95,9 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     _returnCode = NSNotFound;
     
 #if StackKitMac
-    
     [self didAppear:nil];
-    NSRunLoop *current = [NSRunLoop currentRunLoop];
-    [_webView scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSModalPanelRunLoopMode];
     if (_isModal) {
-        // this re-enters the runloop
         [self runModal];
-        [self didEndSheet:[self window] returnCode:0 contextInfo:NULL];
     } else {
         [NSApp beginSheet:[self window] 
            modalForWindow:_context 
@@ -139,7 +121,7 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     _returnCode = code;
 #if StackKitMac
     if (_isModal) {
-        [NSApp stopModalWithCode:code];
+        [NSApp stopModalWithCode:NSRunStoppedResponse];
     } else {
         [NSApp endSheet:[self window] returnCode:code];        
     }
@@ -176,10 +158,28 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     return YES;
 }
 
+- (void)webViewDidStartLoading:(SKWebView *)webView {
+#if StackKitMac
+    [_progressIndicator setUsesThreadedAnimation:YES];
+    [_progressIndicator startAnimation:nil];
+#elif StackKitMobile
+    [_progressIndicator startAnimation];
+#endif
+}
+
+- (void)webViewDidFinishLoading:(SKWebView *)webView {
+#if StackKitMac
+    [_progressIndicator stopAnimation:nil];
+#elif StackKitMobile
+    [_progressIndicator stopAnimation];
+#endif
+}
+
 - (id)init {
     self = [super init];
     if (self) {
 #if StackKitMac
+        [self window];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAppear:) name:NSWindowDidBecomeKeyNotification object:[self window]];  
 #endif
     }
