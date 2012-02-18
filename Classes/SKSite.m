@@ -186,7 +186,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
 #pragma mark Core Data stack
 
 
-- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKRequestHandler)handler {
+- (void)executeFetchRequest:(SKFetchRequest *)request completionHandler:(SKRequestHandler)handler {
     
     handler = [handler copy];
     

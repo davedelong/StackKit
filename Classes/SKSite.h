@@ -27,7 +27,7 @@
 @property (readonly) NSURL *iconURL;
 @property (readonly) NSURL *faviconURL;
 
-- (void)executeFetchRequest:(SKFetchRequest *)request withCompletionHandler:(SKRequestHandler)handler;
+- (void)executeFetchRequest:(SKFetchRequest *)request completionHandler:(SKRequestHandler)handler;
 
 
 @end

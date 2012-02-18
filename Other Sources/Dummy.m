@@ -32,13 +32,13 @@ int main(int argc, char* argv[]) {
     [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site, NSError *error) {
         
         SKCommentFetchRequest *comments = [[[[SKFetchRequest requestForFetchingComments] inReplyToUsersWithIDs:115730, nil] sortedByCreationDate] inDescendingOrder];
-        [site executeFetchRequest:comments withCompletionHandler:^(NSArray *comments, NSError *error) {
+        [site executeFetchRequest:comments completionHandler:^(NSArray *comments, NSError *error) {
             NSLog(@"comments: %@", comments);
         }];
         
         SKUserFetchRequest *fr = [[SKFetchRequest requestForFetchingUsers] withIDs:220819, nil];
         
-        [site executeFetchRequest:fr withCompletionHandler:^(NSArray *users, NSError *error) {
+        [site executeFetchRequest:fr completionHandler:^(NSArray *users, NSError *error) {
             SKUser *user = [users lastObject];
             
             NSLog(@"id: %lu", [user userID]);
@@ -48,14 +48,14 @@ int main(int argc, char* argv[]) {
         
             SKTagFetchRequest *tr = [[SKFetchRequest requestForFetchingTags] usedByUsers:user, nil];
             
-            [site executeFetchRequest:tr withCompletionHandler:^(NSArray *tags, NSError *error) {
+            [site executeFetchRequest:tr completionHandler:^(NSArray *tags, NSError *error) {
                 NSLog(@"============");
                 for (SKTag *tag in tags) {
                     NSLog(@"found: %@ (%p)", [tag name], tag);
                 }
                 
                 SKBadgeFetchRequest *br = [[[SKFetchRequest requestForFetchingBadges] awardedToUsersWithIDs:220819, 115730, nil] tagBasedOnly];
-                [site executeFetchRequest:br withCompletionHandler:^(NSArray *badges, NSError *error) {
+                [site executeFetchRequest:br completionHandler:^(NSArray *badges, NSError *error) {
                     NSLog(@"============== Badges ===================");
                     for(SKBadge *badge in badges) {
                         NSLog(@"found badge (%p) {name: %@, rank: %u, tag based: %@}", badge, [badge name], [badge rank], [badge isTagBased] ? @"YES" : @"NO");
