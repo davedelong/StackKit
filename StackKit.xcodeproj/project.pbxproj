@@ -138,7 +138,6 @@
 		554158D614E7357500379B45 /* SKQuestionFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKQuestionFetchRequest.m; sourceTree = "<group>"; };
 		5547A6FD11C82F5F00CE89E1 /* SKCommentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCommentTest.h; sourceTree = "<group>"; };
 		5547A6FE11C82F5F00CE89E1 /* SKCommentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCommentTest.m; sourceTree = "<group>"; };
-		556EE41114EDEB7400825506 /* SKAuthenticator_iOS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKAuthenticator_iOS.xib; sourceTree = "<group>"; };
 		557B137914AED74900BD2DFD /* StackKit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackKit.xcdatamodel; sourceTree = "<group>"; };
 		557B137B14AEE9A900BD2DFD /* SKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUser.h; sourceTree = "<group>"; };
 		557B137C14AEE9A900BD2DFD /* SKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUser.m; sourceTree = "<group>"; };
@@ -445,7 +444,6 @@
 				55AD68E514EC918B004DDBBB /* SKWebView.h */,
 				55AD68E614EC918B004DDBBB /* SKWebView.m */,
 				55AD68EB14EC9791004DDBBB /* SKAuthenticator_Mac.xib */,
-				556EE41114EDEB7400825506 /* SKAuthenticator_iOS.xib */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";

@@ -112,7 +112,7 @@ NSString *const SKAuthenticationExpiresKey = @"expires";
     
 #if StackKitMac
     
-    [_controller presentInContext:_context handler:^(NSInteger code) {
+    [_controller presentInContext:_context scopeOptions:_options handler:^(NSInteger code) {
         [self _invokeHandler];        
         _presenting = NO;
     }];
@@ -133,7 +133,7 @@ NSString *const SKAuthenticationExpiresKey = @"expires";
         
         NSString *expiresValue = [information objectForKey:SKAuthenticationExpiresKey];
         if (expiresValue != nil) {
-            NSDate *d = [NSDate dateWithTimeIntervalSince1970:[expiresValue doubleValue]];
+            NSDate *d = [NSDate dateWithTimeIntervalSinceNow:[expiresValue doubleValue]];
             [self setExpiryDate:d];
         }
         

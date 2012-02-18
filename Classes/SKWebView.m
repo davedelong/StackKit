@@ -16,6 +16,8 @@
 #if StackKitMac
     [super setFrameLoadDelegate:self];
     [super setPolicyDelegate:self];
+#elif StackKitMobile
+    [self setDelegate:self];
 #endif
 }
 
@@ -71,6 +73,20 @@
 
 - (void)setFrameLoadDelegate:(id)delegate {
     NSAssert(NO, @"yo dawg what you tryin' to do?");
+}
+
+#elif StackKitMobile
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [_webDelegate webViewDidStartLoading:self];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [_webDelegate webViewDidFinishLoading:self];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    return [_webDelegate webView:self shouldLoadRequest:request];
 }
 
 #endif

@@ -17,8 +17,6 @@
 - (void)webViewDidStartLoading:(SKWebView *)webView;
 - (void)webViewDidFinishLoading:(SKWebView *)webView;
 
-- (void)webView:(SKWebView *)webView didReceiveResponse:(NSURLResponse *)response;
-
 @end
 
 #if StackKitMac
@@ -29,7 +27,7 @@
 
 #elif StackKitMobile
 
-@interface SKWebView : UIWebView
+@interface SKWebView : UIWebView <UIWebViewDelegate>
 
 #endif
 

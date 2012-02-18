@@ -8,6 +8,7 @@
 
 #import <StackKit/SKMacros.h>
 #import <StackKit/SKWebView.h>
+#import <StackKit/SKAuthenticator.h>
 
 #if StackKitMac
 
@@ -22,7 +23,7 @@ typedef void(^STSheetCompletionHandler)(NSInteger code);
 #elif StackKitMobile
 
 #import <UIKit/UIKit.h>
-@interface SKAuthenticatorController : UIViewController <SKWebViewDelegate>
+@interface SKAuthenticatorController : UINavigationController <SKWebViewDelegate>
 
 @property (nonatomic, assign) IBOutlet UIActivityIndicatorView *progressIndicator;
 #endif
@@ -32,7 +33,7 @@ typedef void(^STSheetCompletionHandler)(NSInteger code);
 
 - (IBAction)cancel:(id)sender;
 
-- (void)presentInContext:(id)context handler:(STSheetCompletionHandler)handler;
+- (void)presentInContext:(id)context scopeOptions:(SKAuthenticationOption)options handler:(STSheetCompletionHandler)handler;
 
 
 @end

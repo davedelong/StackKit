@@ -14,11 +14,11 @@
 NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success";
 
 @implementation SKAuthenticatorController {
-    BOOL _isModal;
     STSheetCompletionHandler _handler;
     NSInteger _returnCode;
     NSDictionary *_accessInformation;
     id _context;
+    SKAuthenticationOption _scopeOptions;
 }
 
 @synthesize webView=_webView;
@@ -40,8 +40,8 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
 #endif
     
     _context = nil;
-    _isModal = NO;
     _returnCode = NSNotFound;
+    _scopeOptions = 0;
     [_handler release], _handler = nil;
     [_accessInformation release], _accessInformation = nil;
     [self setError:nil];
@@ -49,13 +49,24 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
 }
 
 - (void)didAppear:(id)sender {
-    NSString *scope = @"read_inbox,no_expiry";
-    NSString *clientID = @"asdf";
+    NSMutableArray *scopes = [NSMutableArray array];
+    if (_scopeOptions & SKAuthenticationOptionAccessInbox) {
+        [scopes addObject:@"read_inbox"];
+    }
+    if (_scopeOptions & SKAuthenticationOptionNoExpiry) {
+        [scopes addObject:@"no_expiry"];
+    }
+    
+    NSString *clientID = @"50";
     
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
     [d setObject:SKRedirectURI forKey:@"redirect_uri"];
-    [d setObject:scope forKey:@"scope"];
     [d setObject:clientID forKey:@"client_id"];
+    
+    if ([scopes count] > 0) {
+        NSString *scope = [scopes componentsJoinedByString:@","];
+        [d setObject:scope forKey:@"scope"];
+    }
     
     NSString *query = SKQueryString(d);
     NSString *urlString = [NSString stringWithFormat:@"https://stackexchange.com/oauth/dialog?%@", query];
@@ -66,49 +77,21 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     [_webView loadRequest:request];
 }
 
-#if StackKitMac
-- (void)runModal {
-    // WebView doesn't work in a regular modal session.
-    // thus we have to spin the runloop manually. Yuck!
-    // got this here: http://stackoverflow.com/a/4164446/115730
-    NSModalSession session = [NSApp beginModalSessionForWindow:[self window]];
-    NSInteger result = NSRunContinuesResponse;
-    
-    // Loop until some result other than continues:
-    while (result == NSRunContinuesResponse)
-    {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        result = [NSApp runModalSession:session];
-        // spinning in the default mode allows the webview to render
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];        
-        [pool drain];
-    }
-    
-    [NSApp endModalSession:session];
-    [self didEndSheet:nil returnCode:0 contextInfo:NULL];
-}
-#endif
-
-- (void)presentInContext:(id)context handler:(STSheetCompletionHandler)handler {
+- (void)presentInContext:(id)context scopeOptions:(SKAuthenticationOption)options handler:(STSheetCompletionHandler)handler {
     _context = context;
-    _isModal = (_context == nil);
-    
+    _scopeOptions = options;
     _handler = [handler copy];
     _returnCode = NSNotFound;
     
 #if StackKitMac
     [self didAppear:nil];
-    if (_isModal) {
-        [self runModal];
-    } else {
-        [NSApp beginSheet:[self window] 
-           modalForWindow:_context 
-            modalDelegate:self 
-           didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) 
-              contextInfo:NULL];
-    }
+    [NSApp beginSheet:[self window] 
+       modalForWindow:_context 
+        modalDelegate:self 
+       didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) 
+          contextInfo:NULL];
 #elif StackKitMobile
-    if (_isModal) {
+    if (_context == nil) {
         _context = [[UIApplication keyWindow] rootViewController];
     }
     NSAssert(_context != nil, @"the key window must have a rootViewController");
@@ -122,11 +105,7 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
 - (void)endWithCode:(NSInteger)code {
     _returnCode = code;
 #if StackKitMac
-    if (_isModal) {
-        [NSApp stopModalWithCode:NSRunStoppedResponse];
-    } else {
-        [NSApp endSheet:[self window] returnCode:code];        
-    }
+    [NSApp endSheet:[self window] returnCode:code];
 #elif StackKitMobile
     [_context dismissModalViewControllerAnimated:YES];
     [self didEndSheet:nil returnCode:0 contextInfo:NULL];
@@ -140,10 +119,6 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     [_webView stopLoading];
     
     [self endWithCode:NSCancelButton];
-}
-
-- (void)webView:(SKWebView *)webView didReceiveResponse:(NSURLResponse *)response {
-    
 }
 
 - (BOOL)webView:(SKWebView *)webView shouldLoadRequest:(NSURLRequest *)request {
@@ -195,6 +170,26 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     if (self) {
 #if StackKitMac
         [self window];
+#elif StackKitMobile
+        SKWebView *webView = [[SKWebView alloc] initWithFrame:CGRectMake(0,0,320,480)];
+        [webView setWebDelegate:self];
+        
+        UIViewController *root = [[UIViewController alloc] init];
+        [root setView:webView];
+        [webView release];
+        
+        [root setTitle:@"Log In"];
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+        [[root navigationItem] setLeftBarButtonItem:cancelButton];
+        [cancelButton release];
+        
+        _progressIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorStyleWhite] autorelease];
+        UIBarButtonItem *progressItem = [[UIBarButtonItem alloc] initWithCustomView:_progressIndicator];
+        [[root navigationItem] setRightBarButtonItem:progressItem];
+        [progressItem release];
+        
+        [self pushViewController:root animated:NO];
+        [root release];
 #endif
     }
     return self;
