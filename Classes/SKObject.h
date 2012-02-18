@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class SKSite;
+
 @interface SKObject : NSObject
+
+@property (nonatomic, readonly) SKSite *site;
 
 @end

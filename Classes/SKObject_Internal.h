@@ -23,7 +23,7 @@
 + (NSString *)_infoKeyForSelector:(SEL)selector;
 + (id)_transformValue:(id)value forReturnType:(Class)returnType;
 
-- (id)_initWithInfo:(id)info;
+- (id)_initWithInfo:(id)info site:(SKSite *)site;
 - (id)_valueForInfoKey:(NSString *)key;
 
 @end

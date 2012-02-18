@@ -16,7 +16,10 @@
     // _info will be either an NSDictionary or NSManagedObject, depending on the subclass
     // either way, it'll respond to -valueForKey:
     id _info;
+    SKSite *_site;
 }
+
+@synthesize site=_site;
 
 + (id)allocWithZone:(NSZone *)zone {
     [NSException raise:NSInternalInconsistencyException format:@"You may not allocate instances of %@", NSStringFromClass(self)];
@@ -141,10 +144,11 @@
     return added;
 }
 
-- (id)_initWithInfo:(id)info {
+- (id)_initWithInfo:(id)info site:(SKSite *)site {
     self = [super init];
     if (self) {
         _info = [info retain];
+        _site = site;
     }
     return self;
 }

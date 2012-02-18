@@ -145,8 +145,8 @@ void SKSetCachedSites(NSArray *sitesJSON);
     return array;
 }
 
-- (id)_initWithInfo:(id)info {
-    self = [super _initWithInfo:info];
+- (id)_initWithInfo:(id)info site:(SKSite *)site {
+    self = [super _initWithInfo:info site:nil];
     if (self) {
         _uniquedSKObjects = [[SKCache cacheWithWeakToWeakObjects] retain];
     }
@@ -183,6 +183,10 @@ void SKSetCachedSites(NSArray *sitesJSON);
     return s;
 }
 
+- (SKSite *)site {
+    return self;
+}
+
 #pragma mark Core Data stack
 
 
@@ -208,7 +212,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
                 for (NSManagedObject *object in objects) {
                     SKObject *objectWrapper = [_uniquedSKObjects cachedObjectForKey:object];
                     if (!objectWrapper) {
-                        objectWrapper = [[NSAllocateObject([request _targetClass], 0, nil) _initWithInfo:object] autorelease];
+                        objectWrapper = [[NSAllocateObject([request _targetClass], 0, nil) _initWithInfo:object site:self] autorelease];
                         
                         [_uniquedSKObjects cacheObject:objectWrapper forKey:object];
                     }
@@ -376,7 +380,7 @@ void SKFetchSites(NSError **error) {
     NSMutableArray *sites = SKSites();
     for (NSDictionary *item in allItems) {
         SKSite *site = NSAllocateObject([SKSite class], 0, nil);
-        [site _initWithInfo:item];
+        [site _initWithInfo:item site:nil];
         
         // 4: save the SKSites into the SKSites() array
         [sites addObject:site];
