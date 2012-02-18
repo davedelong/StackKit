@@ -59,7 +59,6 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     
     NSString *query = SKQueryString(d);
     NSString *urlString = [NSString stringWithFormat:@"https://stackexchange.com/oauth/dialog?%@", query];
-    NSLog(@"loading: %@", urlString);
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];

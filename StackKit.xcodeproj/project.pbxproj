@@ -19,6 +19,7 @@
 		550D447E14AE1BBF00AD6022 /* SKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 550D447C14AE1BBF00AD6022 /* SKConstants.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		550D447F14AE1BBF00AD6022 /* SKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 550D447D14AE1BBF00AD6022 /* SKConstants.m */; };
 		550D448114AE1FC700AD6022 /* SKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 550D448014AE1FC700AD6022 /* SKMacros.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		551FC33714EF667F00819CF0 /* SKAuthenticator_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 551FC33614EF665D00819CF0 /* SKAuthenticator_Internal.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
 		554158D714E7357500379B45 /* SKQuestionFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 554158D514E7357500379B45 /* SKQuestionFetchRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		554158D814E7357500379B45 /* SKQuestionFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 554158D614E7357500379B45 /* SKQuestionFetchRequest.m */; };
@@ -130,6 +131,7 @@
 		550D447C14AE1BBF00AD6022 /* SKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstants.h; sourceTree = "<group>"; };
 		550D447D14AE1BBF00AD6022 /* SKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKConstants.m; sourceTree = "<group>"; };
 		550D448014AE1FC700AD6022 /* SKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMacros.h; sourceTree = "<group>"; };
+		551FC33614EF665D00819CF0 /* SKAuthenticator_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAuthenticator_Internal.h; sourceTree = "<group>"; };
 		5533AA1312DA430900F755F7 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		5533AA1E12DA432600F755F7 /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		554158D514E7357500379B45 /* SKQuestionFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestionFetchRequest.h; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				55ECC9F814E96C3B0031C976 /* SKAuthenticator.h */,
+				551FC33614EF665D00819CF0 /* SKAuthenticator_Internal.h */,
 				55ECC9F914E96C3C0031C976 /* SKAuthenticator.m */,
 				55AD68EF14EC98EB004DDBBB /* SKAuthenticatorController.h */,
 				55AD68F014EC98EB004DDBBB /* SKAuthenticatorController.m */,
@@ -486,6 +489,7 @@
 				55ECC9FA14E96C3C0031C976 /* SKAuthenticator.h in Headers */,
 				55AD68E714EC918B004DDBBB /* SKWebView.h in Headers */,
 				55AD68F114EC98EB004DDBBB /* SKAuthenticatorController.h in Headers */,
+				551FC33714EF667F00819CF0 /* SKAuthenticator_Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

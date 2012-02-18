@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "SKAuthenticator.h"
+#import <StackKit/SKAuthenticator_Internal.h>
 #import <StackKit/SKMacros.h>
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKTypes.h>
@@ -19,6 +19,9 @@
 #import <UIKit/UIKit.h>
 #endif
 
+NSString *const SKAuthenticationAccessTokenKey = @"access_token";
+NSString *const SKAuthenticationExpiresKey = @"expires";
+
 @interface SKAuthenticator ()
 
 - (id)_init;
@@ -27,6 +30,9 @@
 @property (copy) SKAuthenticationHandler handler;
 @property (assign) SKAuthenticationOption options;
 @property (assign) id context;
+
+@property (copy) NSString *accessToken;
+@property (retain) NSDate *expiryDate;
 
 - (void)present;
 
@@ -64,6 +70,17 @@
 @synthesize handler=_handler;
 @synthesize options=_options;
 @synthesize context=_context;
+@synthesize accessToken=_accessToken;
+@synthesize expiryDate=_expiryDate;
+
+- (NSString *)accessToken {
+    if (_expiryDate && [_expiryDate timeIntervalSinceReferenceDate] < [NSDate timeIntervalSinceReferenceDate]) {
+        // the token has expired
+        [self setAccessToken:nil];
+        return nil;
+    }
+    return _accessToken;
+}
 
 - (id)_init {
     self = [super init];
@@ -96,18 +113,37 @@
 #if StackKitMac
     
     [_controller presentInContext:_context handler:^(NSInteger code) {
-        if (code == NSOKButton) {
-            _handler(nil);
-        } else {
-            _handler([_controller error]);
-        }
-        
+        [self _invokeHandler];        
         _presenting = NO;
     }];
     
 #elif StackKitMobile
     
 #endif
+    
+}
+
+- (void)_invokeHandler {
+    NSError *e = [_controller error];
+    
+    if (e == nil) {
+        NSDictionary *information = [_controller accessInformation];
+        [self setAccessToken:[information objectForKey:SKAuthenticationAccessTokenKey]];
+        [self setExpiryDate:nil];
+        
+        NSString *expiresValue = [information objectForKey:SKAuthenticationExpiresKey];
+        if (expiresValue != nil) {
+            NSDate *d = [NSDate dateWithTimeIntervalSince1970:[expiresValue doubleValue]];
+            [self setExpiryDate:d];
+        }
+        
+        if ([self accessToken] == nil) {
+            e = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeAccessTokenMissing userInfo:nil];
+        }
+    }
+    
+    _handler(e);
+
     
 }
 
