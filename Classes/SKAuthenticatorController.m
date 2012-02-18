@@ -17,12 +17,14 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     BOOL _isModal;
     STSheetCompletionHandler _handler;
     NSInteger _returnCode;
+    NSDictionary *_accessInformation;
     id _context;
 }
 
 @synthesize webView=_webView;
 @synthesize error=_error;
 @synthesize progressIndicator=_progressIndicator;
+@synthesize accessInformation=_accessInformation;
 
 - (NSString *)windowNibName {
     return @"SKAuthenticator_Mac";
@@ -41,13 +43,14 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     _isModal = NO;
     _returnCode = NSNotFound;
     [_handler release], _handler = nil;
+    [_accessInformation release], _accessInformation = nil;
     [self setError:nil];
     
 }
 
 - (void)didAppear:(id)sender {
     NSString *scope = @"read_inbox,no_expiry";
-    NSString *clientID = @"50";
+    NSString *clientID = @"asdf";
     
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
     [d setObject:SKRedirectURI forKey:@"redirect_uri"];
@@ -145,13 +148,26 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
 }
 
 - (BOOL)webView:(SKWebView *)webView shouldLoadRequest:(NSURLRequest *)request {
-    NSURL *url = [[request URL] absoluteURL];
-    NSString *path = [url path];
-    NSLog(@"attempting to load %@", path);
+    NSURL *redirectURL = [NSURL URLWithString:SKRedirectURI];
     
-    if ([path isEqualToString:SKRedirectURI]) {
-        NSLog(@"hash: %@", [url fragment]);
-        NSLog(@"%@", url);
+    NSURL *url = [[request URL] absoluteURL];
+    
+    if ([[url path] isEqualToString:[redirectURL path]] && [[url host] isEqualToString:[redirectURL host]]) {
+        NSString *fragment = [url fragment];
+        NSArray *values = [fragment componentsSeparatedByString:@"&"];
+        NSMutableDictionary *pairs = [NSMutableDictionary dictionary];
+        for (NSString *pair in values) {
+            NSArray *bits = [pair componentsSeparatedByString:@"="];
+            if ([bits count] != 2) { continue; }
+            
+            NSString *key = [[bits objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+            NSString *value = [[bits objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+            
+            [pairs setObject:value forKey:key];
+        }
+        
+        _accessInformation = [pairs copy];
+        [self endWithCode:NSOKButton];
         return NO;
     }
     
@@ -180,7 +196,6 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     if (self) {
 #if StackKitMac
         [self window];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAppear:) name:NSWindowDidBecomeKeyNotification object:[self window]];  
 #endif
     }
     return self;

@@ -28,6 +28,7 @@ typedef void(^STSheetCompletionHandler)(NSInteger code);
 #endif
 @property (nonatomic, assign) IBOutlet SKWebView *webView;
 @property (nonatomic, retain) NSError *error;
+@property (nonatomic, readonly) NSDictionary *accessInformation;
 
 - (IBAction)cancel:(id)sender;
 

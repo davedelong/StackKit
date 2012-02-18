@@ -15,6 +15,7 @@
 - (void)_initialSetup {
 #if StackKitMac
     [super setFrameLoadDelegate:self];
+    [super setPolicyDelegate:self];
 #endif
 }
 
