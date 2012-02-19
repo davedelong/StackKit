@@ -41,6 +41,12 @@ if (self != (_c)) { \
 [NSException raise:NSInternalInconsistencyException format:@"%s must be overridden by subclasses", __PRETTY_FUNCTION__]; \
 }
 
+#define REQUIRE_MAINTHREAD { \
+if ([NSThread currentThread] != [NSThread mainThread]) { \
+[NSException raise:NSInternalInconsistencyException format:@"%s must only be invoked from the main thread", __PRETTY_FUNCTION__]; \
+} \
+}
+
 #define INTEGER_LIST(_l, _a) { \
 if ((_a) > 0) { \
 [(_l) addIndex:(_a)]; \

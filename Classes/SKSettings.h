@@ -28,9 +28,17 @@ typedef NSInteger SKAuthenticationScope;
 
 @property (copy) NSString *clientID;
 
-// since this presents a UI, it should only be invoked from the main thread
-// the context may be an NSWindow, a UIViewController, or nil
+// Must be called from the main thread
+// The context may be an NSWindow, a UIViewController, or nil
 - (void)requestAuthenticationScope:(SKAuthenticationScope)scope presentingFromContext:(id)context completionHandler:(SKErrorHandler)handler;
+
+// Invalidation causes the access token to be destroyed.
+// Subsequent attempts to request authentication should not require the user to re-approve access
+- (void)requestAccessInvalidationWithCompletionHandler:(SKErrorHandler)handler;
+
+// Deauthorization causes the access token to be destoryed and the app to be removed from the user's list of approved apps
+// Subsequent attempts to request authentication will require the user to re-approve access
+- (void)requestAccessDeauthorizationWithCompletionHandler:(SKErrorHandler)handler;
 
 - (void)requestUsersForAuthenticatedUser:(SKRequestHandler)handler;
 

@@ -12,6 +12,7 @@
 #import <StackKit/SKAuthenticator.h>
 
 @implementation SKSettings {
+    BOOL _isAuthenticating;
     dispatch_queue_t settingsQueue;
 }
 
@@ -162,12 +163,23 @@
 #pragma mark -
 
 - (void)requestAuthenticationScope:(SKAuthenticationScope)scope presentingFromContext:(id)context completionHandler:(SKErrorHandler)handler {
+    REQUIRE_MAINTHREAD;
+    
+    if ([self clientID] == nil) {
+        [NSException raise:NSInternalInconsistencyException format:@"Cannot request authentication without a client ID"];
+    }
+    
     if ([self isAuthenticated]) {
-        NSError *e = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeAuthenticatedAlready userInfo:nil];
-        handler(e);
+        handler(nil);
         return;
     }
     
+    if (_isAuthenticating) {
+        NSError *e = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeAuthenticationInProgress userInfo:nil];
+        handler(e);
+    }
+    
+    _isAuthenticating = YES;
     handler = [handler copy];
     SKAuthenticator *auth = [SKAuthenticator sharedAuthenticator];
     [auth requestAuthenticationWithOptions:scope presentingFrom:context completionHandler:^(NSError *error) {
@@ -190,7 +202,60 @@
         }
         
         handler(error);
+        _isAuthenticating = NO;
     }];
+    [handler release];
+}
+
+- (void)requestAccessInvalidationWithCompletionHandler:(SKErrorHandler)handler {
+    REQUIRE_MAINTHREAD;
+    
+    if (_isAuthenticating) {
+        NSError *e = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeAuthenticationInProgress userInfo:nil];
+        handler(e);
+    }
+    
+    _isAuthenticating = YES;
+    
+    handler = [handler copy];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *path = [NSString stringWithFormat:@"access-tokens/%@/invalidate", [self accessToken]];
+        NSURL *url = SKConstructAPIURL(path, nil);
+        
+        NSError *error = nil;
+        SKExecuteAPICall(url, &error);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            handler(error);
+            _isAuthenticating = NO;
+        });
+    });
+    [handler release];
+}
+
+- (void)requestAccessDeauthorizationWithCompletionHandler:(SKErrorHandler)handler {
+    REQUIRE_MAINTHREAD;
+    
+    if (_isAuthenticating) {
+        NSError *e = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeAuthenticationInProgress userInfo:nil];
+        handler(e);
+    }
+    
+    _isAuthenticating = YES;
+    
+    handler = [handler copy];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *path = [NSString stringWithFormat:@"access-tokens/%@/de-authenticate", [self accessToken]];
+        NSURL *url = SKConstructAPIURL(path, nil);
+        
+        NSError *error = nil;
+        SKExecuteAPICall(url, &error);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            handler(error);
+            _isAuthenticating = NO;
+        });
+    });
     [handler release];
 }
 
