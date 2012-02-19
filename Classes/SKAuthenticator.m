@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <StackKit/SKAuthenticator_Internal.h>
+#import "SKAuthenticator.h"
 #import <StackKit/SKMacros.h>
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKTypes.h>
@@ -27,11 +27,11 @@ NSString *const SKAuthenticationExpiresKey = @"expires";
 - (id)_init;
 
 @property (assign,getter=isPresenting) BOOL presenting;
-@property (copy) SKAuthenticationHandler handler;
-@property (assign) SKAuthenticationOption options;
+@property (copy) SKErrorHandler handler;
+@property (assign) SKAuthenticationScope scope;
 @property (assign) id context;
 
-@property (copy) NSString *accessToken;
+@property (nonatomic, copy) NSString *accessToken;
 @property (retain) NSDate *expiryDate;
 
 - (void)present;
@@ -42,7 +42,7 @@ NSString *const SKAuthenticationExpiresKey = @"expires";
     SKAuthenticatorController *_controller;
 }
 
-+ (id)_sharedAuthenticator {
++ (id)sharedAuthenticator {
     static dispatch_once_t onceToken;
     static SKAuthenticator *authenticator = nil;
     dispatch_once(&onceToken, ^{
@@ -51,24 +51,22 @@ NSString *const SKAuthenticationExpiresKey = @"expires";
     return authenticator;
 }
 
-+ (void)requestAuthenticationWithOptions:(SKAuthenticationOption)options presentingFrom:(id)window completionHandler:(SKAuthenticationHandler)handler {
-    SKAuthenticator *auth = [SKAuthenticator _sharedAuthenticator];
-    
-    if ([auth isPresenting]) {
+- (void)requestAuthenticationWithOptions:(SKAuthenticationScope)options presentingFrom:(id)window completionHandler:(SKErrorHandler)handler {
+    if ([self isPresenting]) {
         NSError *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeAuthenticationInProgress userInfo:nil];
         handler(error);
     } else {
-        [auth setHandler:handler];
-        [auth setOptions:options];
-        [auth setContext:window];
+        [self setHandler:handler];
+        [self setScope:options];
+        [self setContext:window];
         
-        [auth present];
+        [self present];
     }
 }
 
 @synthesize presenting=_presenting;
 @synthesize handler=_handler;
-@synthesize options=_options;
+@synthesize scope=_scope;
 @synthesize context=_context;
 @synthesize accessToken=_accessToken;
 @synthesize expiryDate=_expiryDate;
@@ -112,7 +110,7 @@ NSString *const SKAuthenticationExpiresKey = @"expires";
     
 #if StackKitMac
     
-    [_controller presentInContext:_context scopeOptions:_options handler:^(NSInteger code) {
+    [_controller presentInContext:_context scope:_scope handler:^(NSInteger code) {
         [self _invokeHandler];        
         _presenting = NO;
     }];

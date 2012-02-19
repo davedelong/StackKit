@@ -130,6 +130,21 @@ NSString* SKQueryString(id object) {
     return result;
 }
 
+NSDictionary* SKDictionaryFromQueryString(NSString *query) {
+    NSArray *values = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *pairs = [NSMutableDictionary dictionary];
+    for (NSString *pair in values) {
+        NSArray *bits = [pair componentsSeparatedByString:@"="];
+        if ([bits count] != 2) { continue; }
+        
+        NSString *key = [[bits objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+        NSString *value = [[bits objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+        
+        [pairs setObject:value forKey:key];
+    }
+    return pairs;
+}
+
 NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query) {
     NSString *queryString = SKQueryString(query);
     

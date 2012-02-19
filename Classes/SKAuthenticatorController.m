@@ -18,7 +18,7 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     NSInteger _returnCode;
     NSDictionary *_accessInformation;
     id _context;
-    SKAuthenticationOption _scopeOptions;
+    SKAuthenticationScope _scopeOptions;
 }
 
 @synthesize webView=_webView;
@@ -50,14 +50,14 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
 
 - (void)didAppear:(id)sender {
     NSMutableArray *scopes = [NSMutableArray array];
-    if (_scopeOptions & SKAuthenticationOptionAccessInbox) {
+    if (_scopeOptions & SKAuthenticationScopeReadInbox) {
         [scopes addObject:@"read_inbox"];
     }
-    if (_scopeOptions & SKAuthenticationOptionNoExpiry) {
+    if (_scopeOptions & SKAuthenticationScopeNoExpiration) {
         [scopes addObject:@"no_expiry"];
     }
     
-    NSString *clientID = @"50";
+    NSString *clientID = [[SKSettings sharedSettings] clientID];
     
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
     [d setObject:SKRedirectURI forKey:@"redirect_uri"];
@@ -77,9 +77,9 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     [_webView loadRequest:request];
 }
 
-- (void)presentInContext:(id)context scopeOptions:(SKAuthenticationOption)options handler:(STSheetCompletionHandler)handler {
+- (void)presentInContext:(id)context scope:(SKAuthenticationScope)scope handler:(STSheetCompletionHandler)handler {
     _context = context;
-    _scopeOptions = options;
+    _scopeOptions = scope;
     _handler = [handler copy];
     _returnCode = NSNotFound;
     
@@ -128,19 +128,7 @@ NSString *const SKRedirectURI = @"https://stackexchange.com/oauth/login_success"
     
     if ([[url path] isEqualToString:[redirectURL path]] && [[url host] isEqualToString:[redirectURL host]]) {
         NSString *fragment = [url fragment];
-        NSArray *values = [fragment componentsSeparatedByString:@"&"];
-        NSMutableDictionary *pairs = [NSMutableDictionary dictionary];
-        for (NSString *pair in values) {
-            NSArray *bits = [pair componentsSeparatedByString:@"="];
-            if ([bits count] != 2) { continue; }
-            
-            NSString *key = [[bits objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-            NSString *value = [[bits objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-            
-            [pairs setObject:value forKey:key];
-        }
-        
-        _accessInformation = [pairs copy];
+        _accessInformation = [SKDictionaryFromQueryString(fragment) retain];
         [self endWithCode:NSOKButton];
         return NO;
     }

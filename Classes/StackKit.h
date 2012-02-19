@@ -8,17 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+#import <StackKit/SKSettings.h>
+
 #import <StackKit/SKTypes.h>
+
 #import <StackKit/SKObject.h>
 #import <StackKit/SKSite.h>
 #import <StackKit/SKUser.h>
 #import <StackKit/SKTag.h>
 #import <StackKit/SKBadge.h>
-
 #import <StackKit/SKPost.h>
 #import <StackKit/SKAnswer.h>
 #import <StackKit/SKComment.h>
 #import <StackKit/SKQuestion.h>
 
 #import <StackKit/SKFetchRequest.h>
-#import <StackKit/SKAuthenticator.h>

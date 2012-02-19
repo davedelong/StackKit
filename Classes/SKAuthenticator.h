@@ -7,17 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
-enum {
-    SKAuthenticationOptionDefault = 0,
-    SKAuthenticationOptionAccessInbox = 1 << 0,
-    SKAuthenticationOptionNoExpiry = 1 << 1
-};
-
-typedef NSUInteger SKAuthenticationOption;
-typedef void(^SKAuthenticationHandler)(NSError *);
+#import <StackKit/SKSettings.h>
 
 @interface SKAuthenticator : NSObject
+
+@property (nonatomic, readonly, copy) NSString *accessToken;
+@property (readonly, retain) NSDate *expiryDate;
+@property (readonly, assign) SKAuthenticationScope scope;
+
++ (id)sharedAuthenticator;
 
 /**
  if "window" is an NSWindow, then a sheet will be displayed
@@ -25,6 +23,6 @@ typedef void(^SKAuthenticationHandler)(NSError *);
  if "window" is nil, then a panel (Mac) or a modal viewController (iOS) will be presented
  anything else will fail
  **/
-+ (void)requestAuthenticationWithOptions:(SKAuthenticationOption)options presentingFrom:(id)window completionHandler:(SKAuthenticationHandler)handler;
+- (void)requestAuthenticationWithOptions:(SKAuthenticationScope)options presentingFrom:(id)window completionHandler:(SKErrorHandler)handler;
 
 @end

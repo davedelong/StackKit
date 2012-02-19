@@ -33,7 +33,7 @@ typedef void(^STSheetCompletionHandler)(NSInteger code);
 
 - (IBAction)cancel:(id)sender;
 
-- (void)presentInContext:(id)context scopeOptions:(SKAuthenticationOption)options handler:(STSheetCompletionHandler)handler;
+- (void)presentInContext:(id)context scope:(SKAuthenticationScope)scope handler:(STSheetCompletionHandler)handler;
 
 
 @end

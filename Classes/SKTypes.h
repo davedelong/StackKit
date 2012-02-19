@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class SKSite;
+@class SKObject, SKSite;
 
 typedef void(^SKRequestHandler)(NSArray *, NSError *);
+typedef void(^SKObjectHandler)(SKObject *, NSError *);
 typedef void(^SKSiteHandler)(SKSite *, NSError *);
+typedef void(^SKErrorHandler)(NSError *);
 
 extern NSString *const SKErrorDomain;
 
@@ -28,6 +30,7 @@ typedef enum {
     
     SKErrorCodeAuthenticationInProgress = 1000,
     SKErrorCodeAuthenticationCancelled = 1001,
+    SKErrorCodeAuthenticatedAlready = 1002
 } SKErrorCode;
 
 typedef enum {

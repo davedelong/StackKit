@@ -14,6 +14,7 @@ extern NSBundle* SKBundle();
 extern void SKQLog(NSString *format, ...);
 
 extern NSString* SKQueryString(id object);
+extern NSDictionary* SKDictionaryFromQueryString(NSString *query);
 
 extern NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query);
 extern NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error);
