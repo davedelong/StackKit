@@ -30,7 +30,9 @@ typedef enum {
     
     SKErrorCodeAuthenticationInProgress = 1000,
     SKErrorCodeAuthenticationCancelled = 1001,
-    SKErrorCodeAuthenticatedAlready = 1002
+    SKErrorCodeAuthenticatedAlready = 1002,
+    
+    SKErrorCodeInvalidObject = 1010
 } SKErrorCode;
 
 typedef enum {

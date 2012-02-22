@@ -9,6 +9,7 @@
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKMacros.h>
+#import <StackKit/SKSite.h>
 #import <objc/runtime.h>
 #import <CoreData/CoreData.h>
 
@@ -173,6 +174,28 @@
 
 - (id)_info {
     return _info;
+}
+
+- (SKFetchRequest *)_fullObjectRequest {
+    return nil;
+}
+
+- (void)requestFullObjectWithCompletionHandler:(SKErrorHandler)handler {
+    handler = [handler copy];
+    SKFetchRequest *request = [self _fullObjectRequest];
+    if (request == nil) {
+        NSString *description = [NSString stringWithFormat:@"%@ cannot request a full object", [self class]];
+        NSError *e = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidObject userInfo:[NSDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey]];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            handler(e);
+        });
+    } else {
+        [[self site] executeFetchRequest:request completionHandler:^(NSArray *objects, NSError *error) {
+            handler(error);
+        }];
+    }
+    [handler release];
 }
 
 - (NSString *)debugDescription {

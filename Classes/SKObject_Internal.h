@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <StackKit/SKObject.h>
 
+@class SKFetchRequest;
+
 @interface SKObject ()
 
 + (NSString *)_entityName;
@@ -26,5 +28,7 @@
 - (id)_initWithInfo:(id)info site:(SKSite *)site;
 - (id)_valueForInfoKey:(NSString *)key;
 - (id)_info;
+
+- (SKFetchRequest *)_fullObjectRequest;
 
 @end

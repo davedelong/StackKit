@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <StackKit/SKTypes.h>
 
 @class SKSite;
 
 @interface SKObject : NSObject
 
 @property (nonatomic, readonly) SKSite *site;
+
+- (void)requestFullObjectWithCompletionHandler:(SKErrorHandler)handler;
 
 @end
