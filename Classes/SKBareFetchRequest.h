@@ -12,4 +12,6 @@
 
 @property (nonatomic, retain) NSURL *url;
 
++ (id)bareFetchRequestWithURL:(NSURL *)url;
+
 @end

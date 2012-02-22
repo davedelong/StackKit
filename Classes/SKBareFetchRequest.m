@@ -14,6 +14,17 @@
 
 @synthesize url=_url;
 
++ (id)bareFetchRequestWithURL:(NSURL *)url {
+    SKBareFetchRequest *r = [[SKBareFetchRequest alloc] init];
+    [r setUrl:url];
+    return [r autorelease];
+}
+
+- (void)dealloc {
+    [_url release];
+    [super dealloc];
+}
+
 - (NSString *)_path {
     return [_url path];
 }

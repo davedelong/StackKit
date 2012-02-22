@@ -23,6 +23,8 @@
 		551FC33B14F031BD00819CF0 /* SKBareFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FC33914F031BD00819CF0 /* SKBareFetchRequest.m */; };
 		551FC33E14F0461000819CF0 /* SKSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 551FC33C14F0460F00819CF0 /* SKSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		551FC33F14F0461000819CF0 /* SKSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FC33D14F0461000819CF0 /* SKSettings.m */; };
+		551FC34714F3FE6000819CF0 /* SKSiteCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 551FC34514F3FE6000819CF0 /* SKSiteCache.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		551FC34814F3FE6000819CF0 /* SKSiteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FC34614F3FE6000819CF0 /* SKSiteCache.m */; };
 		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
 		554158D714E7357500379B45 /* SKQuestionFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 554158D514E7357500379B45 /* SKQuestionFetchRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		554158D814E7357500379B45 /* SKQuestionFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 554158D614E7357500379B45 /* SKQuestionFetchRequest.m */; };
@@ -138,6 +140,8 @@
 		551FC33914F031BD00819CF0 /* SKBareFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBareFetchRequest.m; sourceTree = "<group>"; };
 		551FC33C14F0460F00819CF0 /* SKSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSettings.h; sourceTree = "<group>"; };
 		551FC33D14F0461000819CF0 /* SKSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettings.m; sourceTree = "<group>"; };
+		551FC34514F3FE6000819CF0 /* SKSiteCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteCache.h; sourceTree = "<group>"; };
+		551FC34614F3FE6000819CF0 /* SKSiteCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSiteCache.m; sourceTree = "<group>"; };
 		5533AA1312DA430900F755F7 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		5533AA1E12DA432600F755F7 /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		554158D514E7357500379B45 /* SKQuestionFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestionFetchRequest.h; sourceTree = "<group>"; };
@@ -324,6 +328,18 @@
 			path = "Other Sources";
 			sourceTree = "<group>";
 		};
+		551FC34414F3FE4F00819CF0 /* Sites */ = {
+			isa = PBXGroup;
+			children = (
+				5592AD9914AAC96A007D4734 /* SKSite.h */,
+				557B139414AFCB6400BD2DFD /* SKSite_Internal.h */,
+				5592AD9A14AAC96A007D4734 /* SKSite.m */,
+				551FC34514F3FE6000819CF0 /* SKSiteCache.h */,
+				551FC34614F3FE6000819CF0 /* SKSiteCache.m */,
+			);
+			name = Sites;
+			sourceTree = "<group>";
+		};
 		557B139214AFBA3100BD2DFD /* Core Data stuff */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,9 +358,7 @@
 				557B137F14AEEFDD00BD2DFD /* SKObject.h */,
 				557B138314AEF13F00BD2DFD /* SKObject_Internal.h */,
 				557B138014AEEFDD00BD2DFD /* SKObject.m */,
-				5592AD9914AAC96A007D4734 /* SKSite.h */,
-				557B139414AFCB6400BD2DFD /* SKSite_Internal.h */,
-				5592AD9A14AAC96A007D4734 /* SKSite.m */,
+				551FC34414F3FE4F00819CF0 /* Sites */,
 				55AD68E414EC164C004DDBBB /* Authentication */,
 				55910FB514E39673008AAE44 /* Data Objects */,
 				55910F9214E383DB008AAE44 /* Fetch Requests */,
@@ -498,6 +512,7 @@
 				55AD68F114EC98EB004DDBBB /* SKAuthenticatorController.h in Headers */,
 				551FC33A14F031BD00819CF0 /* SKBareFetchRequest.h in Headers */,
 				551FC33E14F0461000819CF0 /* SKSettings.h in Headers */,
+				551FC34714F3FE6000819CF0 /* SKSiteCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +694,7 @@
 				55AD68F214EC98EB004DDBBB /* SKAuthenticatorController.m in Sources */,
 				551FC33B14F031BD00819CF0 /* SKBareFetchRequest.m in Sources */,
 				551FC33F14F0461000819CF0 /* SKSettings.m in Sources */,
+				551FC34814F3FE6000819CF0 /* SKSiteCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

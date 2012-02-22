@@ -14,19 +14,7 @@
 #import <StackKit/SKStackExchangeStore.h>
 #import <StackKit/SKFetchRequest_Internal.h>
 #import <StackKit/SKCache.h>
-
-dispatch_queue_t SKSiteQueue();
-
-static NSArray *SKGetSites(NSError **error);
-
-static NSMutableArray *SKSites();
-void SKFetchSites(NSError **error);
-
-static NSString *SKSiteCacheKeyDate = @"cacheDate";
-static NSString *SKSiteCacheKeyObjects = @"objects";
-NSString* SKSiteCachePath();
-NSArray* SKGetCachedSites();
-void SKSetCachedSites(NSArray *sitesJSON);
+#import <StackKit/SKSiteCache.h>
 
 @interface SKSite()
 
@@ -58,23 +46,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 + (void)requestSitesWithCompletionHandler:(SKRequestHandler)handler {
-    handler = [handler copy];
-    
-    dispatch_async(SKSiteQueue(), ^{
-        
-        NSError *err = nil;
-        NSArray *result = SKGetSites(&err);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (err != nil) {
-                handler(nil,err);
-            } else {
-                handler(result,nil);
-            }
-        });
-    });
-    
-    [handler release];
+    [[SKSiteCache sharedSiteCache] requestAllSitesWithCompletionHandler:handler];
 }
 
 + (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler {
@@ -104,7 +76,7 @@ void SKSetCachedSites(NSArray *sitesJSON);
         }
     };
     
-    [SKSite requestSitesWithCompletionHandler:block];
+    [self requestSitesWithCompletionHandler:block];
     
     [handler release];
 }
@@ -143,6 +115,15 @@ void SKSetCachedSites(NSArray *sitesJSON);
                  nil];
     });
     return array;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    NSDictionary *info = [aDecoder decodeObjectForKey:@"info"];
+    return [self _initWithInfo:info site:nil];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:[self _info] forKey:@"info"];
 }
 
 - (id)_initWithInfo:(id)info site:(SKSite *)site {
@@ -277,113 +258,3 @@ void SKSetCachedSites(NSArray *sitesJSON);
 }
 
 @end
-
-static NSArray *SKGetSites(NSError **error) {
-    if ([SKSites() count] == 0) {
-        SKFetchSites(error);
-    }
-    
-    return [[SKSites() copy] autorelease];
-}
-
-dispatch_queue_t SKSiteQueue() {
-    static dispatch_once_t onceToken;
-    static dispatch_queue_t siteQueue;
-    dispatch_once(&onceToken, ^{
-        siteQueue = dispatch_queue_create("com.davedelong.stackkit.sksite", 0);
-    });
-    return siteQueue;
-}
-
-NSMutableArray *SKSites() {
-    static dispatch_once_t onceToken;
-    static NSMutableArray *sites = nil;
-    dispatch_once(&onceToken, ^{
-        sites = [[NSMutableArray alloc] init];
-    });
-    return sites;
-}
-
-NSString* SKSiteCachePath() {
-    return [SKApplicationSupportDirectory() stringByAppendingPathComponent:@"sites.plist"];
-}
-
-NSArray* SKGetCachedSites() {
-    NSString *cacheFile = SKSiteCachePath();
-    NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile:cacheFile];
-    NSDate *cacheDate = [d objectForKey:SKSiteCacheKeyDate];
-    
-    NSTimeInterval cacheInterval = [cacheDate timeIntervalSinceReferenceDate];
-    NSTimeInterval nowInterval = [NSDate timeIntervalSinceReferenceDate];
-    
-    // go with approximately a day
-    if (fabs(cacheInterval - nowInterval) > 86400) {
-        d = nil;
-    }
-    
-    return [d objectForKey:SKSiteCacheKeyObjects];
-}
-
-void SKSetCachedSites(NSArray *sitesJSON) {
-    NSDictionary *d = [NSDictionary dictionaryWithObjectsAndKeys:
-                       sitesJSON, SKSiteCacheKeyObjects,
-                       [NSDate date], SKSiteCacheKeyDate, 
-                       nil];
-    
-    [d writeToFile:SKSiteCachePath() atomically:YES];
-}
-
-void SKFetchSites(NSError **error) {
-    // this function will:
-    // 1. fetch all data from stackauth
-    // 2. cache the json
-    // 3. convert the json to SKSite objects
-    // 4. save the SKSite objects into the SKSites() array
-    
-    NSMutableArray *allItems = [NSMutableArray array];
-    NSUInteger currentPage = 1;
-    NSUInteger pageSize = 100;
-    BOOL keepGoing = YES;
-    
-    while (keepGoing) {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        {
-            NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                          [NSNumber numberWithUnsignedInteger:currentPage], SKQueryKeys.page,
-                                          [NSNumber numberWithUnsignedInteger:pageSize], SKQueryKeys.pageSize,
-                                          nil];
-            
-            NSURL *requestURL = SKConstructAPIURL(@"sites", query);
-            id response = SKExecuteAPICall(requestURL, error);
-            if (SKExtractError(response, error)) {
-                allItems = nil;
-                break;
-            }
-            
-            NSArray *items = [response objectForKey:SKAPIKeys.items];
-            [allItems addObjectsFromArray:items];
-            
-            currentPage++;
-            
-            NSNumber *keepGoingNumber = [response objectForKey:SKAPIKeys.hasMore];
-            keepGoing = [keepGoingNumber boolValue];
-        }
-        [pool drain];
-    }
-    
-    // 2: cache the json
-    if (allItems) {
-        SKSetCachedSites(allItems);
-    }
-    
-    // 3: convert the json to SKSite objects
-    NSMutableArray *sites = SKSites();
-    for (NSDictionary *item in allItems) {
-        SKSite *site = NSAllocateObject([SKSite class], 0, nil);
-        [site _initWithInfo:item site:nil];
-        
-        // 4: save the SKSites into the SKSites() array
-        [sites addObject:site];
-        [site release];
-    }
-}

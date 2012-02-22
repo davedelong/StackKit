@@ -47,6 +47,10 @@ if ([NSThread currentThread] != [NSThread mainThread]) { \
 } \
 }
 
+#define REQUIRE_QUEUE(_q) { \
+NSAssert(dispatch_get_current_queue() == (_q), @"%s may only be invoked from %s", __PRETTY_FUNCTION__, #_q); \
+}
+
 #define INTEGER_LIST(_l, _a) { \
 if ((_a) > 0) { \
 [(_l) addIndex:(_a)]; \

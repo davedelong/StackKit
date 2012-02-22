@@ -23,6 +23,7 @@ const struct SKQueryKeysStruct SKQueryKeys = {
     },
     .order      = @"order",
     .filter     = @"filter",
+    .accessToken = @"access_token",
     .user       = {
         .nameContains = @"inname"
     },

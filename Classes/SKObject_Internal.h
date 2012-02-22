@@ -25,5 +25,6 @@
 
 - (id)_initWithInfo:(id)info site:(SKSite *)site;
 - (id)_valueForInfoKey:(NSString *)key;
+- (id)_info;
 
 @end

@@ -18,6 +18,7 @@ extern const struct SKQueryKeysStruct {
     NSString *toDate;
     NSString *sort;
     NSString *order;
+    NSString *accessToken;
     struct {
         NSString *ascending;
         NSString *descending;

@@ -8,7 +8,7 @@
 
 #import <StackKit/SKSite.h>
 
-@interface SKSite ()
+@interface SKSite () <NSCoding>
 
 @property (nonatomic, readonly) NSString *APISiteParameter;
 

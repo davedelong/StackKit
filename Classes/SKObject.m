@@ -171,6 +171,10 @@
     return value;
 }
 
+- (id)_info {
+    return _info;
+}
+
 - (NSString *)debugDescription {
     return [NSString stringWithFormat:@"%@ %@", [super description], _info];
 }
