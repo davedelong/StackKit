@@ -7,27 +7,18 @@
 //
 
 #import <StackKit/SKSite_Internal.h>
-#import <CoreData/CoreData.h>
 #import <StackKit/SKConstants.h>
-#import <StackKit/SKFunctions.h>
 #import <StackKit/SKObject_Internal.h>
-#import <StackKit/SKStackExchangeStore.h>
-#import <StackKit/SKFetchRequest_Internal.h>
 #import <StackKit/SKCache.h>
 #import <StackKit/SKSiteCache.h>
+#import <StackKit/SKRequestManager.h>
 
 @interface SKSite()
-
--(NSURL *)dataModelURL;
-
-@property (nonatomic, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
 @implementation SKSite {
-    SKCache *_uniquedSKObjects;
+    SKRequestManager *_requestManager;
 }
 
 @dynamic name;
@@ -40,10 +31,6 @@
 @dynamic faviconURL;
 
 @dynamic APISiteParameter;
-
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 + (void)requestSitesWithCompletionHandler:(SKRequestHandler)handler {
     [[SKSiteCache sharedSiteCache] requestAllSitesWithCompletionHandler:handler];
@@ -129,16 +116,13 @@
 - (id)_initWithInfo:(id)info site:(SKSite *)site {
     self = [super _initWithInfo:info site:nil];
     if (self) {
-        _uniquedSKObjects = [[SKCache cacheWithWeakToWeakObjects] retain];
+        _requestManager = [[SKRequestManager requestManagerWithSite:self] retain];
     }
     return self;
 }
 
 - (void)dealloc {
-    [_managedObjectModel release];
-    [_managedObjectContext release];
-    [_persistentStoreCoordinator release];
-    [_uniquedSKObjects release];
+    [_requestManager release];
     [super dealloc];
 }
 
@@ -168,93 +152,8 @@
     return self;
 }
 
-#pragma mark Core Data stack
-
-
 - (void)executeFetchRequest:(SKFetchRequest *)request completionHandler:(SKRequestHandler)handler {
-    
-    handler = [handler copy];
-    
-    // YES this introduces a retain cycle on self
-    // deal with it.
-    [[self managedObjectContext] performBlock:^{
-        NSManagedObjectContext *context = [self managedObjectContext];
-        NSFetchRequest *fetchRequest = [request _generatedFetchRequest];
-        
-        NSError *error = nil;
-        NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
-        if (!objects) {
-            handler(nil, error);
-        } else {
-            if (NO) {
-                // TODO: this is the case where they only requested the count
-            } else {
-                NSMutableArray *finalObjects = [NSMutableArray array];
-                for (NSManagedObject *object in objects) {
-                    SKObject *objectWrapper = [_uniquedSKObjects cachedObjectForKey:object];
-                    if (!objectWrapper) {
-                        objectWrapper = [[NSAllocateObject([request _targetClass], 0, nil) _initWithInfo:object site:self] autorelease];
-                        
-                        [_uniquedSKObjects cacheObject:objectWrapper forKey:object];
-                    }
-                    [finalObjects addObject:objectWrapper];
-                }
-                objects = finalObjects;
-            }
-            handler(objects, nil);
-        }
-    }];
-    
-    [handler release];
-}
-
-- (NSURL *)dataModelURL {
-    NSString *path = [SKBundle() pathForResource:@"StackKit.momd" ofType:nil inDirectory:nil];
-    return [NSURL fileURLWithPath:path];
-}
-
-- (NSManagedObjectModel *)managedObjectModel {
-    if(_managedObjectModel == nil) {
-        _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[self dataModelURL]];
-    }
-    return _managedObjectModel;
-}
-
-- (NSManagedObjectContext *)managedObjectContext {
-    if(_managedObjectContext == nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        [_managedObjectContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
-    }
-    
-    return _managedObjectContext;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if(_persistentStoreCoordinator == nil) {
-        _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-
-        //Since the SE API is readonly, the store should be as well.
-        NSDictionary *storeOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
-                                                                 forKey:NSReadOnlyPersistentStoreOption];
-
-        NSError *error = nil;
-        SKStackExchangeStore *store = (SKStackExchangeStore*)[_persistentStoreCoordinator addPersistentStoreWithType:SKStoreType()
-                                                                                                       configuration:nil
-                                                                                                                 URL:[self siteURL]
-                                                                                                             options:storeOptions
-                                                                                                               error:&error];
-        if(error != nil) {
-            NSLog(@"Cannot add the in-memory store type to the persistent store coordinator (%@), error: %@", _persistentStoreCoordinator, [error localizedDescription]);
-            
-            [_persistentStoreCoordinator release];
-            _persistentStoreCoordinator = nil;
-        } else {
-            //Set ourselves as the site associated with the SKStackExchangeStore.
-            [store setSite:self];
-        }
-    }
-    
-    return _persistentStoreCoordinator;
+    [_requestManager executeRequest:request asynchronously:YES completionHandler:handler];
 }
 
 @end

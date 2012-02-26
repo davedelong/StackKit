@@ -47,6 +47,7 @@ NSString* SKStoreType(void) {
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options {
     self = [super initWithPersistentStoreCoordinator:root configurationName:name URL:url options:options];
     if (self) {
+        [self setReadOnly:YES];
         _referenceObjectToValuesCache = [[SKCache cacheWithStrongToStrongObjects] retain];
         _referenceObjectToNodeCache = [[SKCache cacheWithStrongToWeakObjects] retain];
     }

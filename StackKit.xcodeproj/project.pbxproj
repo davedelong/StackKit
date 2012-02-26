@@ -25,6 +25,8 @@
 		551FC33F14F0461000819CF0 /* SKSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FC33D14F0461000819CF0 /* SKSettings.m */; };
 		551FC34714F3FE6000819CF0 /* SKSiteCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 551FC34514F3FE6000819CF0 /* SKSiteCache.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		551FC34814F3FE6000819CF0 /* SKSiteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FC34614F3FE6000819CF0 /* SKSiteCache.m */; };
+		551FC35214F6A0D900819CF0 /* SKRequestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 551FC35014F6A0D900819CF0 /* SKRequestManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		551FC35314F6A0D900819CF0 /* SKRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FC35114F6A0D900819CF0 /* SKRequestManager.m */; };
 		5533AA1F12DA432600F755F7 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5533AA1E12DA432600F755F7 /* Dummy.m */; };
 		554158D714E7357500379B45 /* SKQuestionFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 554158D514E7357500379B45 /* SKQuestionFetchRequest.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		554158D814E7357500379B45 /* SKQuestionFetchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 554158D614E7357500379B45 /* SKQuestionFetchRequest.m */; };
@@ -142,6 +144,8 @@
 		551FC33D14F0461000819CF0 /* SKSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettings.m; sourceTree = "<group>"; };
 		551FC34514F3FE6000819CF0 /* SKSiteCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSiteCache.h; sourceTree = "<group>"; };
 		551FC34614F3FE6000819CF0 /* SKSiteCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSiteCache.m; sourceTree = "<group>"; };
+		551FC35014F6A0D900819CF0 /* SKRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKRequestManager.h; sourceTree = "<group>"; };
+		551FC35114F6A0D900819CF0 /* SKRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKRequestManager.m; sourceTree = "<group>"; };
 		5533AA1312DA430900F755F7 /* Dummy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dummy; sourceTree = BUILT_PRODUCTS_DIR; };
 		5533AA1E12DA432600F755F7 /* Dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		554158D514E7357500379B45 /* SKQuestionFetchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKQuestionFetchRequest.h; sourceTree = "<group>"; };
@@ -428,6 +432,8 @@
 				550D447D14AE1BBF00AD6022 /* SKConstants.m */,
 				5592AD9D14AAC9BD007D4734 /* SKTypes.h */,
 				5592AD9E14AAC9BD007D4734 /* SKTypes.m */,
+				551FC35014F6A0D900819CF0 /* SKRequestManager.h */,
+				551FC35114F6A0D900819CF0 /* SKRequestManager.m */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -513,6 +519,7 @@
 				551FC33A14F031BD00819CF0 /* SKBareFetchRequest.h in Headers */,
 				551FC33E14F0461000819CF0 /* SKSettings.h in Headers */,
 				551FC34714F3FE6000819CF0 /* SKSiteCache.h in Headers */,
+				551FC35214F6A0D900819CF0 /* SKRequestManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +702,7 @@
 				551FC33B14F031BD00819CF0 /* SKBareFetchRequest.m in Sources */,
 				551FC33F14F0461000819CF0 /* SKSettings.m in Sources */,
 				551FC34814F3FE6000819CF0 /* SKSiteCache.m in Sources */,
+				551FC35314F6A0D900819CF0 /* SKRequestManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

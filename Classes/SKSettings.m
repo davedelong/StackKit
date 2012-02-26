@@ -260,7 +260,11 @@
 }
 
 - (void)requestUsersForAuthenticatedUser:(SKRequestHandler)handler {
-
+    if ([self isAuthenticated] == NO) {
+        NSError *e = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeAccessTokenMissing userInfo:nil];
+        handler(nil, e);
+        return;
+    }
 }
 
 @end
