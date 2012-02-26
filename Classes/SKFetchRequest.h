@@ -31,6 +31,8 @@
 - (id)inAscendingOrder;
 - (id)inDescendingOrder;
 
+- (id)onlyFetchingCachedResults;
+
 @end
 
 @interface SKUserFetchRequest : SKFetchRequest

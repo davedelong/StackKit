@@ -36,6 +36,7 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 
 @synthesize sortKey=_sortKey;
 @synthesize ascending=_ascending;
+@synthesize wantsLocalResults=_wantsLocalResults;
 
 + (SKUserFetchRequest *)requestForFetchingUsers {
     REQUIRE_CLASS([SKFetchRequest class]);
@@ -131,6 +132,11 @@ static void *NSFetchRequestStackKitFetchRequestKey;
 
 - (id)inDescendingOrder {
     [self setAscending:NO];
+    return self;
+}
+
+- (id)onlyFetchingCachedResults {
+    [self setWantsLocalResults:YES];
     return self;
 }
 

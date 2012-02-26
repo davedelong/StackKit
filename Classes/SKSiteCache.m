@@ -54,16 +54,23 @@ static NSString *SKSiteCacheKeyObjects = @"objects";
     REQUIRE_QUEUE(requestQueue);
     
     NSString *cacheFile = [self cacheFile];
-    NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile:cacheFile];
-    NSDate *cacheDate = [d objectForKey:SKSiteCacheKeyDate];
-    NSArray *sites = [d objectForKey:SKSiteCacheKeyObjects];
     
-    if (cacheDate != nil && sites != nil) {
-        [lastFetchDate release];
-        lastFetchDate = [cacheDate retain];
+    NSError *cacheError = nil;
+    NSData *cacheData = [NSData dataWithContentsOfFile:cacheFile options:0 error:&cacheError];
+    if (cacheData) {
+        NSDictionary *d = [NSKeyedUnarchiver unarchiveObjectWithData:cacheData];
+        NSDate *cacheDate = [d objectForKey:SKSiteCacheKeyDate];
+        NSArray *sites = [d objectForKey:SKSiteCacheKeyObjects];
         
-        [allSites removeAllObjects];
-        [allSites addObjectsFromArray:sites];
+        if (cacheDate != nil && sites != nil) {
+            [lastFetchDate release];
+            lastFetchDate = [cacheDate retain];
+            
+            [allSites removeAllObjects];
+            [allSites addObjectsFromArray:sites];
+        }
+    } else {
+        NSLog(@"error reading cache: %@", cacheError);
     }
 }
 
@@ -122,7 +129,12 @@ static NSString *SKSiteCacheKeyObjects = @"objects";
                                allSites, SKSiteCacheKeyObjects, 
                                lastFetchDate, SKSiteCacheKeyDate,
                                nil];
-    [cacheData writeToFile:[self cacheFile] atomically:YES];
+    
+    NSData *serializedData = [NSKeyedArchiver archivedDataWithRootObject:cacheData];
+    NSError *cacheError = nil;
+    if (![serializedData writeToFile:[self cacheFile] options:NSDataWritingAtomic error:&cacheError]) {
+        NSLog(@"error writing data: %@", cacheError);
+    }
 }
 
 #pragma mark -

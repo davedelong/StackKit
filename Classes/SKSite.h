@@ -17,6 +17,8 @@
 + (void)requestSiteWithNameLike:(NSString *)name completionHandler:(SKSiteHandler)handler;
 + (void)requestSitesWithNames:(NSArray *)names completionHandler:(SKRequestHandler)handler;
 
+@property BOOL cachesDataLocally;
+
 @property (readonly) NSString *name;
 @property (readonly) NSString *audience;
 @property (readonly) NSDate *launchDate;

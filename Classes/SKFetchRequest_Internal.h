@@ -22,6 +22,7 @@
 
 @property (nonatomic, copy) NSString *sortKey;
 @property (nonatomic, assign) BOOL ascending;
+@property (nonatomic, assign) BOOL wantsLocalResults;
 
 + (Class)_targetClass;
 - (Class)_targetClass;

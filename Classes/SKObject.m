@@ -23,6 +23,9 @@
 @synthesize site=_site;
 
 + (id)allocWithZone:(NSZone *)zone {
+    if (self == [SKSite class]) {
+        return [super allocWithZone:zone];
+    }
     [NSException raise:NSInternalInconsistencyException format:@"You may not allocate instances of %@", NSStringFromClass(self)];
     return nil;
 }

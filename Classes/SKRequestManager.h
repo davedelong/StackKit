@@ -13,6 +13,8 @@
 
 @interface SKRequestManager : NSObject
 
+@property (nonatomic) BOOL shouldCacheDataLocally;
+
 + (id)requestManagerWithSite:(SKSite *)site;
 
 - (void)executeRequest:(SKFetchRequest *)request asynchronously:(BOOL)async completionHandler:(SKRequestHandler)handler;

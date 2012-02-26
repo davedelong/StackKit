@@ -106,11 +106,16 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     NSDictionary *info = [aDecoder decodeObjectForKey:@"info"];
-    return [self _initWithInfo:info site:nil];
+    self = [self _initWithInfo:info site:nil];
+    if (self) {
+        [self setCachesDataLocally:[aDecoder decodeBoolForKey:@"cachesLocally"]];
+    }
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:[self _info] forKey:@"info"];
+    [aCoder encodeBool:[self cachesDataLocally] forKey:@"cachesLocally"];
 }
 
 - (id)_initWithInfo:(id)info site:(SKSite *)site {
@@ -124,6 +129,14 @@
 - (void)dealloc {
     [_requestManager release];
     [super dealloc];
+}
+
+- (void)setCachesDataLocally:(BOOL)cachesDataLocally {
+    [_requestManager setShouldCacheDataLocally:cachesDataLocally];
+}
+
+- (BOOL)cachesDataLocally {
+    return [_requestManager shouldCacheDataLocally];
 }
 
 - (NSString *)description {

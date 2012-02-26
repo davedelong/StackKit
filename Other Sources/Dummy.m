@@ -30,6 +30,7 @@ int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
     [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site, NSError *error) {
+        [site setCachesDataLocally:YES];
         
         SKCommentFetchRequest *comments = [[[[SKFetchRequest requestForFetchingComments] inReplyToUsersWithIDs:115730, nil] sortedByCreationDate] inDescendingOrder];
         [site executeFetchRequest:comments completionHandler:^(NSArray *comments, NSError *error) {

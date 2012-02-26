@@ -28,6 +28,10 @@
 @implementation SKRequestManager {
     SKSite *_site;
     SKCache *_uniquedSKObjects;
+    
+    // assign references
+    NSPersistentStore *stackExchangeStore;
+    NSPersistentStore *sqliteStore;
 }
 
 @synthesize managedObjectModel = _managedObjectModel;
@@ -56,6 +60,33 @@
     [super dealloc];
 }
 
+- (BOOL)shouldCacheDataLocally {
+    return (sqliteStore != nil);
+}
+
+- (void)setShouldCacheDataLocally:(BOOL)shouldCacheDataLocally {
+    BOOL isCaching = [self shouldCacheDataLocally];
+    
+    if (shouldCacheDataLocally != isCaching) {
+        
+        NSError *error = nil;
+        if (isCaching) {
+            [[self persistentStoreCoordinator] removePersistentStore:sqliteStore error:&error];
+            sqliteStore = nil;
+        } else {
+            NSString *storeName = [NSString stringWithFormat:@"%@.skcache", [_site name]];
+            NSString *cachePath = [SKApplicationSupportDirectory() stringByAppendingPathComponent:storeName];
+            NSURL *cachingURL = [NSURL fileURLWithPath:cachePath];
+            sqliteStore = [[self persistentStoreCoordinator] addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:cachingURL options:nil error:&error];
+        }
+        
+        if (error != nil) {
+            NSLog(@"error altering local caching settings: %@", error);
+            sqliteStore = nil;
+        }
+    }
+}
+
 - (SKObject *)_objectOfType:(Class)skclass forManagedObject:(NSManagedObject *)object {
     SKObject *wrapper = [_uniquedSKObjects cachedObjectForKey:object];
     if (wrapper == nil) {
@@ -67,6 +98,11 @@
 }
 
 - (void)executeRequest:(SKFetchRequest *)request asynchronously:(BOOL)async completionHandler:(SKRequestHandler)handler {
+    if ([request wantsLocalResults] && [self shouldCacheDataLocally] == NO) {
+        [NSException raise:NSInternalInconsistencyException format:@"can't fetch local results if there is no local cache"];
+        return;
+    }
+    
     handler = [handler copy];
     
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -74,6 +110,12 @@
     dispatch_block_t executionBlock = ^{
         @autoreleasepool {
             NSFetchRequest *fetchRequest = [request _generatedFetchRequest];
+            
+            if ([request wantsLocalResults]) {
+                [fetchRequest setAffectedStores:[NSArray arrayWithObject:sqliteStore]];
+            } else {
+                [fetchRequest setAffectedStores:[NSArray arrayWithObject:stackExchangeStore]];
+            }
             
             NSError *error = nil;
             NSArray *objects = [context executeFetchRequest:fetchRequest error:&error];
@@ -96,6 +138,14 @@
                 } else {
                     error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidRequest userInfo:nil];
                 }
+                
+                if (results != nil && [self shouldCacheDataLocally]) {
+                    NSError *saveError = nil;
+                    if (![context save:&saveError]) {
+                        NSLog(@"error saving: %@", saveError);
+                    }
+                }
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     handler(results, error);
                 });
@@ -157,6 +207,7 @@
         } else {
             //Set ourselves as the site associated with the SKStackExchangeStore.
             [store setSite:_site];
+            stackExchangeStore = store;
         }
     }
     
