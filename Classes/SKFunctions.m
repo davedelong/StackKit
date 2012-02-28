@@ -147,7 +147,9 @@ NSDictionary* SKDictionaryFromQueryString(NSString *query) {
 }
 
 NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query) {
-    NSString *queryString = SKQueryString(query);
+    NSMutableDictionary *queryWithFilter = [NSMutableDictionary dictionaryWithObject:@"!6W.6d3ciLKGQI" forKey:SKQueryKeys.filter];
+    [queryWithFilter addEntriesFromDictionary:query];
+    NSString *queryString = SKQueryString(queryWithFilter);
     
     NSString *urlString = [NSString stringWithFormat:@"http://api.stackexchange.com/2.0/%@?%@", path, queryString];
     
