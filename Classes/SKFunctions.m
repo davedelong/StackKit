@@ -10,6 +10,7 @@
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKTypes.h>
+#import <StackKit/SKResponse.h>
 
 NSString* SKApplicationSupportDirectory() {
     static dispatch_once_t onceToken;
@@ -155,53 +156,31 @@ NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query) {
     return url;
 }
 
-NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error) {
+SKResponse* SKExecuteAPICall(NSURL *url) {
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
+    NSError *error = nil;
+    
     NSURLResponse *response = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     if (data == nil) { return nil; }
     
-    NSDictionary *responseObjects = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
+    NSDictionary *responseObjects = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
     if ([responseObjects isKindOfClass:[NSDictionary class]] == NO) {
         if (error) {
             NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                                   @"JSON response not a dictionary", NSLocalizedDescriptionKey,
-                                  *error, NSUnderlyingErrorKey,
+                                  error, NSUnderlyingErrorKey,
                                   nil];
-            *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInternalError userInfo:info];
+            error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInternalError userInfo:info];
         }
         responseObjects = nil;
     }
-    return responseObjects;
+    
+    if (responseObjects == nil) { return nil; }
+    
+    return [SKResponse responseFromJSON:responseObjects error:error];
 
-}
-
-BOOL SKExtractError(NSDictionary* response, NSError **error) {
-    if (response && [response objectForKey:SKAPIKeys.errorID] == nil) { return NO; }
-    
-    NSInteger code = SKErrorCodeInternalError;
-    NSString *description = @"An unknown error occurred. Check the NSUnderlyingErrorKey for more information.";
-    
-    if ([response objectForKey:SKAPIKeys.errorID]) {
-        code = [[response objectForKey:SKAPIKeys.errorID] integerValue];
-    }
-    if ([response objectForKey:SKAPIKeys.errorMessage]) {
-        description = [response objectForKey:SKAPIKeys.errorMessage];
-    }
-    
-    if (error) {
-        NSMutableDictionary *info = [NSMutableDictionary dictionary];
-        [info setObject:description forKey:NSLocalizedDescriptionKey];
-        
-        if (*error != nil) {
-            [info setObject:*error forKey:NSUnderlyingErrorKey];
-        }
-        
-        *error = [NSError errorWithDomain:SKErrorDomain code:code userInfo:info];
-    }
-    
-    return YES;
 }
 
 // assumes the "string" parameter is all lowercase

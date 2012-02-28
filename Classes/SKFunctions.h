@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class SKResponse;
+
 extern NSString* SKApplicationSupportDirectory();
 extern NSBundle* SKBundle();
 
@@ -17,8 +19,7 @@ extern NSString* SKQueryString(id object);
 extern NSDictionary* SKDictionaryFromQueryString(NSString *query);
 
 extern NSURL* SKConstructAPIURL(NSString *path, NSDictionary *query);
-extern NSDictionary* SKExecuteAPICall(NSURL *url, NSError **error);
-extern BOOL SKExtractError(NSDictionary* response, NSError **error);
+extern SKResponse* SKExecuteAPICall(NSURL *url);
 
 extern NSString *SKInferPropertyNameFromAPIKey(NSString *APIKey);
 extern NSString *SKInferAPIKeyFromPropertyName(NSString *propertyName);

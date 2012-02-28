@@ -82,6 +82,8 @@
 		55C23A8511693FE1009064EE /* SKBadgeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23A8411693FE1009064EE /* SKBadgeTest.m */; };
 		55C23C9211699C40009064EE /* SKTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23C9111699C40009064EE /* SKTestConstants.m */; };
 		55C23E5A116A9BA9009064EE /* SKTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C23E59116A9BA9009064EE /* SKTagTest.m */; };
+		55CB085C14FC659D006E3479 /* SKResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB085A14FC659D006E3479 /* SKResponse.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		55CB085D14FC659D006E3479 /* SKResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB085B14FC659D006E3479 /* SKResponse.m */; };
 		55DC06ED14B188F10060BF49 /* SKCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 55DC06EB14B188F10060BF49 /* SKCache.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		55DC06EE14B188F10060BF49 /* SKCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC06EC14B188F10060BF49 /* SKCache.m */; };
 		55ECC9FA14E96C3C0031C976 /* SKAuthenticator.h in Headers */ = {isa = PBXBuildFile; fileRef = 55ECC9F814E96C3B0031C976 /* SKAuthenticator.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -208,6 +210,8 @@
 		55C23E59116A9BA9009064EE /* SKTagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagTest.m; sourceTree = "<group>"; };
 		55C24144116AF72E009064EE /* SKUserActivityTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUserActivityTest.h; sourceTree = "<group>"; };
 		55C24145116AF72E009064EE /* SKUserActivityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUserActivityTest.m; sourceTree = "<group>"; };
+		55CB085A14FC659D006E3479 /* SKResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKResponse.h; sourceTree = "<group>"; };
+		55CB085B14FC659D006E3479 /* SKResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKResponse.m; sourceTree = "<group>"; };
 		55DC06EB14B188F10060BF49 /* SKCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCache.h; sourceTree = "<group>"; };
 		55DC06EC14B188F10060BF49 /* SKCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCache.m; sourceTree = "<group>"; };
 		55ECC9F814E96C3B0031C976 /* SKAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAuthenticator.h; sourceTree = "<group>"; };
@@ -434,6 +438,8 @@
 				5592AD9E14AAC9BD007D4734 /* SKTypes.m */,
 				551FC35014F6A0D900819CF0 /* SKRequestManager.h */,
 				551FC35114F6A0D900819CF0 /* SKRequestManager.m */,
+				55CB085A14FC659D006E3479 /* SKResponse.h */,
+				55CB085B14FC659D006E3479 /* SKResponse.m */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -520,6 +526,7 @@
 				551FC33E14F0461000819CF0 /* SKSettings.h in Headers */,
 				551FC34714F3FE6000819CF0 /* SKSiteCache.h in Headers */,
 				551FC35214F6A0D900819CF0 /* SKRequestManager.h in Headers */,
+				55CB085C14FC659D006E3479 /* SKResponse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,6 +710,7 @@
 				551FC33F14F0461000819CF0 /* SKSettings.m in Sources */,
 				551FC34814F3FE6000819CF0 /* SKSiteCache.m in Sources */,
 				551FC35314F6A0D900819CF0 /* SKRequestManager.m in Sources */,
+				55CB085D14FC659D006E3479 /* SKResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

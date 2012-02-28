@@ -10,6 +10,7 @@
 #import <StackKit/SKFunctions.h>
 #import <StackKit/SKMacros.h>
 #import <StackKit/SKAuthenticator.h>
+#import <StackKit/SKResponse.h>
 
 @implementation SKSettings {
     BOOL _isAuthenticating;
@@ -222,11 +223,10 @@
         NSString *path = [NSString stringWithFormat:@"access-tokens/%@/invalidate", [self accessToken]];
         NSURL *url = SKConstructAPIURL(path, nil);
         
-        NSError *error = nil;
-        SKExecuteAPICall(url, &error);
+        SKResponse *r = SKExecuteAPICall(url);
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            handler(error);
+            handler([r error]);
             _isAuthenticating = NO;
         });
     });
@@ -248,11 +248,10 @@
         NSString *path = [NSString stringWithFormat:@"access-tokens/%@/de-authenticate", [self accessToken]];
         NSURL *url = SKConstructAPIURL(path, nil);
         
-        NSError *error = nil;
-        SKExecuteAPICall(url, &error);
+        SKResponse *r = SKExecuteAPICall(url);
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            handler(error);
+            handler([r error]);
             _isAuthenticating = NO;
         });
     });

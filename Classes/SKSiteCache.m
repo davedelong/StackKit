@@ -12,6 +12,7 @@
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKSite.h>
 #import <StackKit/SKMacros.h>
+#import <StackKit/SKResponse.h>
 
 static NSString *SKSiteCacheKeyDate = @"cacheDate";
 static NSString *SKSiteCacheKeyObjects = @"objects";
@@ -99,19 +100,21 @@ static NSString *SKSiteCacheKeyObjects = @"objects";
                                           nil];
             
             NSURL *requestURL = SKConstructAPIURL(@"sites", query);
-            id response = SKExecuteAPICall(requestURL, error);
-            if (SKExtractError(response, error)) {
+            SKResponse *response = SKExecuteAPICall(requestURL);
+            if ([response error]) {
+                if (error) {
+                    *error = [response error];
+                }
                 allItems = nil;
                 break;
             }
             
-            NSArray *items = [response objectForKey:SKAPIKeys.items];
+            NSArray *items = [response items];
             [allItems addObjectsFromArray:items];
             
             currentPage++;
             
-            NSNumber *keepGoingNumber = [response objectForKey:SKAPIKeys.hasMore];
-            keepGoing = [keepGoingNumber boolValue];
+            keepGoing = [response hasMore];
         }
         [pool drain];
     }

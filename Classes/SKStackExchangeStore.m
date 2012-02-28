@@ -13,6 +13,7 @@
 #import <StackKit/SKConstants.h>
 #import <StackKit/SKObject_Internal.h>
 #import <StackKit/SKCache.h>
+#import <StackKit/SKResponse.h>
 
 NSString* SKStoreType(void) {
     //Make sure that the class is loaded prior to returning the store type string.
@@ -26,7 +27,7 @@ NSString* SKStoreType(void) {
 
 @interface SKStackExchangeStore ()
 
-- (NSArray *)_buildObjectsFromResponse:(NSDictionary *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context;
+- (NSArray *)_buildObjectsFromResponse:(SKResponse *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context;
 
 @end
 
@@ -86,19 +87,23 @@ NSString* SKStoreType(void) {
     SKFetchRequest *seRequest = [fetchRequest stackKitFetchRequest];
     NSURL *apiCall = [seRequest _apiURLWithSite:[self site]];
     
-    NSDictionary *response = SKExecuteAPICall(apiCall, error);
+    SKResponse *response = SKExecuteAPICall(apiCall);
     
-    if (response && !SKExtractError(response, error)) {
+    if ([response error] == nil) {
         if ([fetchRequest resultType] == NSCountResultType) {
             
         } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
             returnValue = [self _buildObjectsFromResponse:response originalRequest:fetchRequest context:context];
+        } else if ([fetchRequest resultType] == NSDictionaryResultType) {
+            returnValue = [response items];
         } else {
             if (error) {
                 *error = [NSError errorWithDomain:SKErrorDomain code:SKErrorCodeInvalidMethod userInfo:nil];
             }
             return nil;
         }
+    } else if (error) {
+        *error = [response error];
     }
     
     if (!returnValue && error && !*error) {
@@ -119,8 +124,8 @@ NSString* SKStoreType(void) {
     return node;
 }
 
-- (NSArray *)_buildObjectsFromResponse:(NSDictionary *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context {
-    NSArray *items = [response objectForKey:SKAPIKeys.items];
+- (NSArray *)_buildObjectsFromResponse:(SKResponse *)response originalRequest:(NSFetchRequest *)request context:(NSManagedObjectContext *)context {
+    NSArray *items = [response items];
     
     Class targetClass = [[request stackKitFetchRequest] _targetClass];
     NSString *uniqueIdentifierKey = [targetClass _uniquelyIdentifyingAPIKey];

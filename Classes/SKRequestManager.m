@@ -87,8 +87,12 @@
     }
 }
 
-- (SKObject *)_objectOfType:(Class)skclass forManagedObject:(NSManagedObject *)object {
-    SKObject *wrapper = [_uniquedSKObjects cachedObjectForKey:object];
+- (SKObject *)_objectOfType:(Class)skclass forInfoObject:(id)object {
+    SKObject *wrapper = nil;
+    
+    if ([object isKindOfClass:[NSManagedObject class]]) {
+        [_uniquedSKObjects cachedObjectForKey:object];
+    }
     if (wrapper == nil) {
         wrapper = [NSAllocateObject(skclass, 0, nil) _initWithInfo:object site:_site];
         [_uniquedSKObjects cacheObject:wrapper forKey:object];
@@ -98,7 +102,8 @@
 }
 
 - (void)executeRequest:(SKFetchRequest *)request asynchronously:(BOOL)async completionHandler:(SKRequestHandler)handler {
-    if ([request wantsLocalResults] && [self shouldCacheDataLocally] == NO) {
+    NSFetchRequest *fetchRequest = [request _generatedFetchRequest];
+    if ([request wantsLocalResults] && ([self shouldCacheDataLocally] == NO || [fetchRequest requestType] == NSDictionaryResultType)) {
         [NSException raise:NSInternalInconsistencyException format:@"can't fetch local results if there is no local cache"];
         return;
     }
@@ -109,7 +114,6 @@
     
     dispatch_block_t executionBlock = ^{
         @autoreleasepool {
-            NSFetchRequest *fetchRequest = [request _generatedFetchRequest];
             
             if ([request wantsLocalResults]) {
                 [fetchRequest setAffectedStores:[NSArray arrayWithObject:sqliteStore]];
@@ -126,12 +130,10 @@
             } else {
                 NSArray *results = nil;
                 error = nil;
-                if ([fetchRequest resultType] == NSDictionaryResultType) {
-                    results = objects;
-                } else if ([fetchRequest resultType] == NSManagedObjectResultType) {
+                if ([fetchRequest resultType] == NSDictionaryResultType || [fetchRequest resultType] == NSManagedObjectResultType) {
                     NSMutableArray *finalObjects = [NSMutableArray array];
-                    for (NSManagedObject *object in objects) {
-                        SKObject *objectWrapper = [self _objectOfType:[request _targetClass] forManagedObject:object];
+                    for (id object in objects) {
+                        SKObject *objectWrapper = [self _objectOfType:[request _targetClass] forInfoObject:object];
                         [finalObjects addObject:objectWrapper];
                     }
                     results = finalObjects;
