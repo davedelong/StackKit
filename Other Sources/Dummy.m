@@ -25,9 +25,13 @@
 
 #import <Foundation/Foundation.h>
 #import "StackKit.h"
+#import "SKAPI.h"
 
 int main(int argc, char* argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    NSArray *entities = [[SKAPI api] entities];
+    NSLog(@"%@", [entities objectAtIndex:0]);
     
     [SKSite requestSiteWithNameLike:@"stackoverflow" completionHandler:^(SKSite *site, NSError *error) {
         [site setCachesDataLocally:YES];

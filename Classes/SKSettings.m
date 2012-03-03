@@ -43,16 +43,7 @@
     if (self) {
         settingsQueue = dispatch_queue_create("com.davedelong.stackkit.settings", 0);
         dispatch_async(settingsQueue, ^{
-            NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[self _cacheFile]];
-            if (settings) {
-                _isAuthenticated = [[settings objectForKey:PROPERTY(isAuthenticated)] boolValue];
-                _authenticationScope = [[settings objectForKey:PROPERTY(authenticationScope)] integerValue];
-                _authenticationExpirationDate = [[settings objectForKey:PROPERTY(authenticationExpirationDate)] retain];
-                _accessToken = [[settings objectForKey:PROPERTY(accessToken)] retain];
-                _clientID = [[settings objectForKey:PROPERTY(clientID)] retain];
-                
-                [self _validateSettings];
-            }
+            [self _loadSettings];
         });
     }
     return self;
@@ -63,7 +54,7 @@
 }
 
 - (void)_validateSettings {
-    NSAssert(dispatch_get_current_queue() == settingsQueue, @"%@ invoked on invalid queue", NSStringFromSelector(_cmd));
+    REQUIRE_QUEUE(settingsQueue);
     BOOL settingsAreValid = YES;
     
     if (_accessToken != nil) {
@@ -85,7 +76,7 @@
 }
 
 - (void)_saveSettings {
-    NSAssert(dispatch_get_current_queue() == settingsQueue, @"%@ invoked on invalid queue", NSStringFromSelector(_cmd));
+    REQUIRE_QUEUE(settingsQueue);
     [self _validateSettings];
     
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
@@ -103,6 +94,19 @@
     }
     
     [d writeToFile:[self _cacheFile] atomically:YES];
+}
+
+- (void)_loadSettings {
+    REQUIRE_QUEUE(settingsQueue);
+    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[self _cacheFile]];
+    if (settings) {
+        _isAuthenticated = [[settings objectForKey:PROPERTY(isAuthenticated)] boolValue];
+        _authenticationScope = [[settings objectForKey:PROPERTY(authenticationScope)] integerValue];
+        _authenticationExpirationDate = [[settings objectForKey:PROPERTY(authenticationExpirationDate)] retain];
+        _accessToken = [[settings objectForKey:PROPERTY(accessToken)] retain];
+        _clientID = [[settings objectForKey:PROPERTY(clientID)] retain];
+    }
+    [self _validateSettings];
 }
 
 #pragma mark -
