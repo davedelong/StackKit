@@ -50,7 +50,7 @@
         [query setObject:[NSNumber numberWithUnsignedInteger:currentPage] forKey:SKQueryPage];
         [query setObject:[NSNumber numberWithUnsignedInteger:SKPageSizeLimitMax] forKey:SKQueryPageSize];
         
-        NSString *url = [NSString stringWithFormat:@"http://stackauth.com/%@/users/%@/associated?%@", SKAPIVersion, [baseUser associationID], [query sk_queryString]];
+        NSString *url = [NSString stringWithFormat:@"http://stackauth.com/%@/users/%@/associated?%@", SKAssociationAPIVersion, [baseUser associationID], [query sk_queryString]];
         
         NSURL *requestURL = [NSURL URLWithString:url];
         NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
@@ -66,13 +66,24 @@
             objects = nil;
             break;
         }
-        
-        NSNumber *totalNumberOfItems = [responseObjects objectForKey:@"total"];
+		
+		//this because the 1.1 stackauth api methods aren't great, 1.0 returns more detail
+        NSNumber *totalNumberOfItems;
+        if ([SKAssociationAPIVersion isEqualToString:@"1.0"]) {
+			totalNumberOfItems = [NSNumber numberWithInt:[[responseObjects objectForKey:@"associated_users"] count]];
+		} else {
+			totalNumberOfItems = [responseObjects objectForKey:@"total"];
+		}
         if (total != [totalNumberOfItems unsignedIntegerValue]) {
             total = [totalNumberOfItems unsignedIntegerValue];
         }
-        
-        NSArray *items = [responseObjects objectForKey:@"items"];
+        NSArray *items;
+        if ([SKAssociationAPIVersion isEqualToString:@"1.0"]) {
+			items = [responseObjects objectForKey:@"associated_users"];
+		} else {
+			items = [responseObjects objectForKey:@"items"];
+		}
+			 
         for (NSDictionary *item in items) {
             SKUser *user = [SKUser userWithAssociationInformation:item];
             if (user != nil) {
